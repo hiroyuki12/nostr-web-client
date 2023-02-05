@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
-import { convertASCIItoHex } from "@/utils/converToHex";
-import PostButton from "@/components/postButton";
+import PostButton from "@/components/PostButton";
 import { nip19 } from "nostr-tools";
 
 const Test = () => {
