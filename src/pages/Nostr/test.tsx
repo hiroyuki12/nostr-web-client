@@ -8,7 +8,9 @@ const Test = () => {
 
   const { events } = useNostrEvents({
     filter: {
-      since: dateToUnix(now.current), // all new events from now
+      //since: dateToUnix(now.current), // all new events from now
+      since: 1679413822, // 1679413822 2023/03/22 0:50
+      //since: 1679409822, //
       kinds: [1],
     },
   });
@@ -21,6 +23,8 @@ const Test = () => {
     pubkey: npub.toString(),
   });
   console.log(isLoading);
+  //console.log(dateToUnix(now.current));
+  //console.log({event.pubkey});
 
   return (
     <>
@@ -36,7 +40,7 @@ const Test = () => {
         {userData ? (
           events.map((event) => (
             <p key={event.id}>
-              {event.pubkey} posted: {event.content}
+              posted: {event.content}
             </p>
           ))
         ) : (
