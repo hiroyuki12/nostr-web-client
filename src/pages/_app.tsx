@@ -3,9 +3,13 @@ import type { AppProps } from "next/app";
 import { NostrProvider } from "nostr-react";
 
 const relayUrls = [
-  "wss://relay.damus.io",
-  "wss://nostr-pub.wellorder.net",
-  // "wss://relay.nostr.ch",
+  //"wss://relay.damus.io",
+
+  "wss://relay-jp.nostr.wirednet.jp",
+  "wss://nostr.h3z.jp",
+  //"wss://nostr.fediverse.jp",
+  //"wss://nostr.holybea.com",
+  //"wss://nostr.wine",
 ];
 
 export default function App({ Component, pageProps }: AppProps) {

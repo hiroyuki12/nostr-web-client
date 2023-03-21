@@ -14,7 +14,7 @@ const Test = () => {
   });
 
   const { data: npub } = nip19.decode(
-    "npub1afn5vtgrygclqkpl573qcnukuyfzcnw3vg799pqw9fqtzx7dl8gseltyrs"
+    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"
   );
 
   const { data: userData, isLoading } = useProfile({
