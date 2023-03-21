@@ -40,7 +40,7 @@ const Test = () => {
         {userData ? (
           events.map((event) => (
             <p key={event.id}>
-              posted: {event.content}
+              posted: {event.content}  {event.created_at}
             </p>
           ))
         ) : (
