@@ -7,9 +7,12 @@ const relayUrls = [
 
   "wss://relay-jp.nostr.wirednet.jp",
   "wss://nostr.h3z.jp",
-  //"wss://nostr.fediverse.jp",
-  //"wss://nostr.holybea.com",
-  //"wss://nostr.wine",
+  "wss://nostr.fediverse.jp",
+  "wss://nostr.holybea.com",
+  "wss://universe.nostrich.land?lang=zh&lang=ja",
+  "wss://universe.nostrich.land?lang=ja",
+  "wss://nostr-paid.h3z.jp",
+  "wss://nostr.wine",
 ];
 
 export default function App({ Component, pageProps }: AppProps) {
