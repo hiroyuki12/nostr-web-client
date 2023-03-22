@@ -9,8 +9,8 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       //since: dateToUnix(now.current), // all new events from now
-      since: 1679413822, // 1679413822 2023/03/22 0:50
-      //since: 1679409822, //
+      //since: 1679413822, // 1679413822 2023/03/22 0:50
+      since: 1679479111,
       kinds: [1],
     },
   });
@@ -23,8 +23,23 @@ const Test = () => {
     pubkey: npub.toString(),
   });
   console.log(isLoading);
-  //console.log(dateToUnix(now.current));
+  console.log(dateToUnix(now.current));
   //console.log({event.pubkey});
+
+  const renderImageList = (list) => {
+    const posts = events.map((event, index) => {
+      return (
+        <li className="item" key={index}>
+          <div className="card-container">
+            <div className="card-text">
+              {event.pubkey} {event.content} {event.created_at}
+            </div>
+          </div>
+        </li>
+      );
+    });
+    return posts;
+  }
 
   return (
     <>
@@ -37,15 +52,7 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
-        {userData ? (
-          events.map((event) => (
-            <p key={event.id}>
-              posted: {event.content}  {event.created_at}
-            </p>
-          ))
-        ) : (
-          <></>
-        )}
+        <ul>{renderImageList(events)}</ul>
       </div>
     </>
   );
