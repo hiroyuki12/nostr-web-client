@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import { nip19 } from "nostr-tools";
+import moment from 'moment';
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
@@ -28,11 +29,15 @@ const Test = () => {
 
   const renderImageList = (list) => {
     const posts = events.map((event, index) => {
+      let dateTime = new Date(event.created_at * 1000);
+      let createdDate = dateTime.toLocaleDateString('ja-JP');
+      let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              {event.pubkey} {event.content} {event.created_at}
+              {event.pubkey} {event.content} {moment(createdTime).fromNow()}
             </div>
           </div>
         </li>
