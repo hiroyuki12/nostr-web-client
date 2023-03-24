@@ -3,6 +3,8 @@ import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import { nip19 } from "nostr-tools";
 import moment from 'moment';
+import Students from "./Students";
+import Pictures from "./Pictures";
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
@@ -26,6 +28,30 @@ const Test = () => {
   //console.log({event.pubkey});
 
   const renderImageList = (list) => {
+    const posts = Students.students.map((event, index) => {
+      //const tmp = event.tags[0][1];  //hex
+      const pic = Pictures.pictures.map((event2, index2) => {
+        if(event.name == event2.npub) {
+          return event2.pic;
+        }
+      });
+
+      return (
+        <li className="item" key={index}>
+          <div className="card-container">
+            <div className="card-text">
+              Following List::::::::::::::::::::::::::::::::::::::<br />
+              {event.name}<br />
+              {pic}<br />
+            </div>
+          </div>
+        </li>
+      );
+    });
+    return posts;
+  }
+
+  const renderImageList2 = (list) => {
     const followList = events.tags;  // event[0].tags
     const followList2 = list.tags;  // list[0].tags
     const posts = events.map((event, index) => {
