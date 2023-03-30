@@ -12,6 +12,7 @@ const Test = () => {
     filter: {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       //authors: '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906', // maya
+      //authors: '846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca', //
       kinds: [1],
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
@@ -21,7 +22,7 @@ const Test = () => {
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28-1970/1/1
-      //until: 1676200000, // 2023/2/12-2022/12/19,   +1,200,000, limit 100
+      until: 1676200000, // 2023/2/12-2022/12/19,   +1,200,000, limit 100
       //until: 1676300000, // 2023/2/13-2023/2/6,       +100,000, limit 100
       //until: 1676350000, // 2023/2/14 13-2023/2/7,   , +50,000, limit 100
       //until: 1676400000, // 2023/2/15 3-2023/2/14 12,, +50,000, limit 100
@@ -49,26 +50,33 @@ const Test = () => {
       //until: 1676680000, // 2023/2/18 9-2023/2/17 23,  +10,000, limit 100
       //until: 1676700000, // 2023/2/18 14-2023/2/17 23, +20,000, limit 100
       //until: 1676720000, // 2023/2/18 20-2023/2/17 23, +20,000, limit 100
-      //until: 1676750000, // 2023/2/19  -2023/2/17   ,  +30,000, limit 100, nostr-tools
-      //until: 1676800000, // 2023/2/19  -2023/2/17   ,  +50,000, limit 100
-      //until: 1676850000, // 2023/2/20  -2023/2/17   ,  +50,000, limit 100
-      //until: 1676900000, // 2023/2/20  -2023/2/20   ,  +50,000, limit 100
-      //until: 1676950000, // 2023/2/21  -2023/2/     ,  +50,000, limit 100
-      //until: 1677000000, // 2023/2/22  -2023/2/21   , +100,000, limit 100
-      //until: 1677100000, // 2023/2/23-, +100,000, limit 100
-      //until: 1677200000, // 2023/2/24-, +100,000, limit 100
-      //until: 1677300000, // 2023/2/25-, +100,000, limit 100
-      //until: 1677400000, // 2023/2/26-, +100,000, limit 100
-      //until: 1677500000, // 2023/2/27-, +100,000, limit 100
-      //until: 1677600000, // 2023/3/1-,  +100,000, limit 100
-      //until: 1677700000, // 2023/3/2-,  +100,000, limit 100
-      //until: 1677800000, // 2023/3/3-,  +100,000, limit 100
-      //until: 1677900000, // 2023/3/4-2023/3/4, +100,000, limit 100
-      //until: 1678000000, // 2023/3/5-2023/3/5, +100,000, limit 100
-      //until: 1678100000, // 2023/3/6-2023/3/6, +100,000, limit 100
-      //until: 1678200000, // 2023/3/7-2023/3/7, +100,000, limit 100
+      //until: 1676750000, // 2023/2/19 4-2023/2/17   ,  +30,000, limit 100, nostr-tools
+      //until: 1676800000, // 2023/2/19 18-2023/2/17  ,  +50,000, limit 100
+      //until: 1676850000, // 2023/2/20 8-2023/2/17   ,  +50,000, limit 100
+      //until: 1676900000, // 2023/2/20 22-2023/2/20  ,  +50,000, limit 100
+      //until: 1676950000, // 2023/2/21 12-2023/2/    ,  +50,000, limit 100
+      //until: 1677000000, // 2023/2/22 2-2023/2/21   , +100,000, limit 100
+      //until: 1677100000, // 2023/2/23 6-, +100,000, limit 100
+      //until: 1677200000, // 2023/2/24 9-, +100,000, limit 100
+      //until: 1677300000, // 2023/2/25 13-, +100,000, limit 100
+      //until: 1677400000, // 2023/2/26 17-, +100,000, limit 100
+      //until: 1677500000, // 2023/2/27 21-, +100,000, limit 100
+      //until: 1677600000, // 2023/3/1 0-,  +100,000, limit 100
+      //until: 1677700000, // 2023/3/2 4-,  +100,000, limit 100
+      //until: 1677800000, // 2023/3/3 8-,  +100,000, limit 100
+      //until: 1677900000, // 2023/3/4 12-2023/3/4, +100,000, limit 100
+      //until: 1678000000, // 2023/3/5 16-2023/3/5, +100,000, limit 100
+      //until: 1678100000, // 2023/3/6 19-2023/3/6, +100,000, limit 100
+      //until: 1678200000, // 2023/3/7 23-2023/3/7, +100,000, limit 100
 
-      until: dateToUnix(now.current), // all new events from now
+      //until: 1678800000, // 2023/3/14 22-2023/3/14 21, +100,000, limit 100
+      //until: 1678860000, // 2023/3/15 14-2023/3/15 10, +100,000, limit 100, broccoli
+      //until: 1678900000, // 2023/3/16 2-2023/3/15 20, +100,000, limit 100
+      //until: 1679000000, // 2023/3/17 5-2023/3/17 1, +100,000, limit 100
+
+      //until: 1679900000, // 2023/3/27 15-
+
+      //until: dateToUnix(now.current), // all new events from now
     },
   });
 
@@ -107,7 +115,7 @@ const Test = () => {
                 {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
-                -{npub}-{note.pubkey}
+                <font color="black">-{npub}-{note.pubkey}</font>
             </div>
           </div>
         </li>
@@ -125,6 +133,81 @@ const Test = () => {
       if (pubkey == '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == 'f5142896ed33a06299797864338779ba229a476693ca037a3a57f25440f94d11') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_3d83e82e7cb18822133d34cc0002cc874862562e872aad6ee02ad8cf55958a26.jpeg'
+      }
+      else if (pubkey == '8e4cdaca2afb6765f3c18d5d5c41ca9e1502e0816e96e8df4fc779e031030d4a') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/qchan.png'
+      }
+      else if (pubkey == '9b840e12109a3ed2d54c75e872246e76d96a45fcdd6b171dc723eeac7232e29b') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/nostaro.png'
+      }
+      else if (pubkey == '5f010febe730be42d18c3bf9bf3a135f90621dc572175b5c357119533ae9756b') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1353298673933799425/gLMl43fA_400x400.jpg'
+      }
+      else if (pubkey == '07804b786c6a3b400b7b20d9bfc945035f3ad213da797b0c50954767c375c543') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://avatars.githubusercontent.com/u/2363?v=4'
+      }
+      else if (pubkey == 'e013e2d0a59e17688690f32364af5f21203007938ce1a30a3665dfb328406112') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://cdn.discordapp.com/attachments/1082553832371921066/1083400228931129495/tobipen.gif'
+      }
+      else if (pubkey == 'd3c06b47f17d28f46422f05dcf053d391a000b64dfe56963f2f0eed2ad3b8309') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://randomsoft.com/damus/prof.png'
+      }
+      else if (pubkey == 'd7b50f8d6d772f9014138ca63b7df0cd6815b1f7d8ce3c81bb3e9284d4e72896') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://gravatar.com/avatar/f5c4bc5f41ae0e84ec112cc1cd71d418'
+      }
+      else if (pubkey == '2d6967dca8c29c5a58fe088591f4073afaceceedd20227f2b6559d4763253a39') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1384131342091243526/spVaX9SR_400x400.jpg'
+      }
+      else if (pubkey == 'b757d9f550dbe0a5261d9d28d3fc8e3bba09a5e8dd9621a1e0dbec9368a98319') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://avatars.githubusercontent.com/u/104398899?v=4'
+      }
+      else if (pubkey == 'f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMzksMjE3LDEpOyBzdHJva2U6cmdiYSgzOCwzOSwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      }
+      else if (pubkey == '9cf9b6087934351e408b971d3d4d7824503ac81b8e6d45e010e25440594db487') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/kojiranyan.png'
+      }
+      else if (pubkey == '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1509474712543399940/qaT7nqqS.jpg'
+      }
+      else if (pubkey == '7dc1677112f05eaf49547806543b1c006ce3257278e52b1c9abff63270ed704f') {
+        image = 'https://i.imgur.com/WgIkvHL.jpg'
+      }
+      else if (pubkey == 'f03f2244d27bfd41e4de902fcc8744bcc1a425b466b3d6057e30d2ca31275430') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://teraminato.com/apple-touch-icon-precomposed.png'
+      }
+      else if (pubkey == '4620592dc7b3c7e13f14177b9089db2efd91021604a74d41c827c99f1f9128fc') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://ukadon.shillest.net/system/accounts/avatars/109/373/509/477/597/895/original/5e11247f0d9ea4de.png'
+      }
+      else if (pubkey == '45180424f24e5df50d387a9fbff5c028fc81db14eb44c1776cd5fa3dedcc26d8') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1541807671019352064/tfk6aKlu_400x400.jpg'
+      }
+      else if (pubkey == '18403a91191feb1a7bf09bd583e367002ab6528be867bdce1ffb63e08ed808c5') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://void.cat/d/FWb9CRejdKG9MJcPfef3K4.webp'
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
       }
       else if (pubkey == '') {
         image = ''
@@ -424,7 +507,7 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1591957540249784321/8FGXWVF5.jpg'
       }
       else if (pubkey == '139b1ed03764c10e796b902d36b55d182016f963fadd4548c998c21872f66b28') {
-        image = 'http://x123.x0.to/~traininfo/area04.svg'
+        image = 'https://imgproxy.iris.to/insecure/plain/https://utubo.github.io/nostr-bot-traininfo/img/area04.svg'
       }
       else if (pubkey == '614aee83d7eaffc7bc6bbf02feda0cc53e7f97eeceac08a897c4cea3c023b804') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_7494c2c95277dcf39f3cddb224a4340f8de13b8c357313d595040e7585068735.jpeg'
@@ -814,7 +897,7 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://dl.openseauserdata.com/cache/originImage/files/9a41b261b7e7cab272fe9cb460ab22d6.png'
       }
       else if (pubkey == '83d52b4363d2d1bc5a098de7be67c120bfb7c0cee8efefd8eb6e42372af24689') {
-        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1596544054942371842/yYCwsXQD_400x400.jpg'
+        image = 'https://imgproxy.iris.to/insecure/plain/https://avatars.githubusercontent.com/u/1297512?v=4'
       }
       else if (pubkey == '1f25ce2fe11194fa0c4584dd10a71d2bb0d3459c7000c7f7e6df7db61f1f4d9a') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://blog.rujuu.com/wp-content/uploads/2023/02/image0-scaled-e1676052189310.jpg'
@@ -1016,9 +1099,6 @@ const Test = () => {
       }
       else if (pubkey == '7361ca9132d428cb62cb4995ff10ab6046986dc1a532a44a860ab5a4252fce6d') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_852276b6cefd2e683a076a17cd53cc4ab787562ae8788035b5e35447cfaf612a.jpeg'
-      }
-      else if (pubkey == '18403a91191feb1a7bf09bd583e367002ab6528be867bdce1ffb63e08ed808c5') {
-        image = 'npub1rpqr4ygerl4357lsn02c8cm8qq4tv55tapnmmnslld37prkcprzs0flhga'
       }
       else if (pubkey == 'e9fa79c94723d815f6a9660ca15e8fa63f3b459c6cfd6d285c9eb3b669ead84a') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1547394799552327681/Z5xF77J0_400x400.jpg'
@@ -1396,7 +1476,7 @@ const Test = () => {
         image = 'https://pbs.twimg.com/profile_images/1559219223863316481/6418TZ5B_400x400.jpg'
       }
       else if (pubkey == '634bd19e5c87db216555c814bf88e66ace175805291a6be90b15ac3b2247da9b') {
-        image = 'https://nostr.build/i/p/nostr.build_e98eb6df11ddc1157b402a58634fa6e9cb11bb5b9e86189437033344b63e0d9e.png'
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1568747937513222144/VneRfcSu_400x400.jpg'
       }
       else if (pubkey == '898f59d12df63f89d85167c89adc5aefa3ab7f6b299d17a4113c4e269ec8a6f3') {
         image = 'https://cdn.gudako.net/social/rita_mascot_ph_rev2.jpg'
@@ -1516,7 +1596,7 @@ const Test = () => {
       }
       else if (pubkey == '510e0096e4e622e9f2877af7e7af979ac2fdf50702b9cd77021658344d1a682c') {
         // Moonlotus
-        image = 'https://nostr.build/i/nostr.build_f7c7face2810230bdb3aec449aafd802efdb72e5579afca9c4b45d77dcbe1083.jpg'
+        image='https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_bb16b1cd4cb050fa586426e0f7b2371eee1946512ce135d99ff98a61a73dfa52.png'
       }
       else if (pubkey == '75f457569d7027f819de92e8bb13795c0febe9750dc3fb1b5c42aeb502d0841d') {
         // yutaro
