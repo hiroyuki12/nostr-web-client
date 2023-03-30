@@ -98,6 +98,7 @@ const Test = () => {
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
 
       const npub = nip19.npubEncode(note.pubkey)
+      const url = "https://nostter.vercel.app/" + npub
 
       let imageURL2 = getImageURL(note.pubkey);
 
@@ -111,7 +112,7 @@ const Test = () => {
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <img src={imageURL2} width="50" height="50" />
+              <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
                 {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
