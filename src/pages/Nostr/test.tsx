@@ -158,7 +158,7 @@ const Test = () => {
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
 
       const hex = nip19.npubEncode(note.pubkey)
-      const url = "https://nostter.vercel.app/" + npub
+      const url = "https://nostter.vercel.app/" + hex
 
       let imageURL2 = getImageURL(note.pubkey);
 
