@@ -136,9 +136,9 @@ const Test = () => {
       //until: 1680340000, // 2023/4/1 18- 2023/4/1 15,  +10,000
       //until: 1680350000, // 2023/4/1 20- 2023/4/1 17,  +10,000
       //until: 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
-      until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
+      //until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
 
-      //until: dateToUnix(now.current), // all new events from now
+      until: dateToUnix(now.current), // all new events from now
     },
   });
 
@@ -178,7 +178,7 @@ const Test = () => {
                 {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
-                <font color="black">-{npub}-{note.pubkey}</font>
+                <font color="black">-{npub}-{note.pubkey}-</font>{index}
             </div>
           </div>
         </li>
@@ -287,8 +287,8 @@ const Test = () => {
       else if (pubkey == '401d9cc33c48e3b2d57fe02b1b46c3823432e658603665d851a0c9e09e5f4abd') {
         image = 'https://void.cat/d/QQgTv9ZfJ7weZzsSMuFXmk'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'b4638bc717a9b48d4771d4f7008e6d4ab39e9d32c95fa0caa7fff951e3c725e4') {
+        image = 'https://ki-chi.jp/me.jpg'
       }
       else if (pubkey == '') {
         image = ''
