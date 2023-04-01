@@ -150,8 +150,6 @@ const Test = () => {
     pubkey: npub.toString(),
   });
   console.log(isLoading);
-  console.log(dateToUnix(now.current));
-  //console.log({event.pubkey});
 
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
@@ -159,7 +157,7 @@ const Test = () => {
       let createdDate = dateTime.toLocaleDateString('ja-JP');
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
 
-      const npub = nip19.npubEncode(note.pubkey)
+      const hex = nip19.npubEncode(note.pubkey)
       const url = "https://nostter.vercel.app/" + npub
 
       let imageURL2 = getImageURL(note.pubkey);
@@ -170,15 +168,22 @@ const Test = () => {
         }
       });
 
+      let reply = "";
+      if(note.tags[0] != undefined) {
+        if(note.tags[0].includes("e")) {
+          reply = "[Reply]";
+        }
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
-                {note.content}
+                {reply} {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
-                <font color="black">-{npub}-{note.pubkey}-</font>{index}
+                <font color="black">-{hex}-{note.pubkey}-</font>{index}
             </div>
           </div>
         </li>
