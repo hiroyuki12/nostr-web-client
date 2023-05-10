@@ -7,12 +7,12 @@ const relayUrls = [
 
   "wss://relay-jp.nostr.wirednet.jp",  //jp
 
-  "wss://nostr.h3z.jp",  //jp
-  "wss://nostr-paid.h3z.jp",  //jp
+  //"wss://nostr.h3z.jp",  //jp
+  //"wss://nostr-paid.h3z.jp",  //jp
 
-  "wss://nostr.holybea.com",  //jp
+  //"wss://nostr.holybea.com",  //jp
 
-  "wss://nostr.fediverse.jp",  //jp
+  //"wss://nostr.fediverse.jp",  //jp
 
   //"wss://universe.nostrich.land?lang=zh&lang=ja",  //eng
   //"wss://universe.nostrich.land?lang=ja",  //eng
