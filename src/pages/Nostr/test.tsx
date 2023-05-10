@@ -295,6 +295,143 @@ const Test = () => {
       else if (pubkey == 'b4638bc717a9b48d4771d4f7008e6d4ab39e9d32c95fa0caa7fff951e3c725e4') {
         image = 'https://ki-chi.jp/me.jpg'
       }
+      else if (pubkey == 'e667831a5bae6533cc61891346aa9663f03bb20083e3545f428269e4bcd1142a') {
+        image = 'https://nostr.build/i/nostr.build_ae9603d235d3b08d173e71e88cd548ef8bb0f2abd56ae8cf56898eb53b85276d.jpg'
+      }
+      else if (pubkey == '062fd9857e8f2003bcab25030d179f31d448b73dfb2c8fd005af32643a5890e8') {
+        image = 'https://nostr.kojira.net/qchan.png'
+      }
+      else if (pubkey == '062fd9e9d1c452eec67ef3d4761e4046bfc98e795534ecaf661400ec0893adf8') {
+        image = 'https://nostr.kojira.net/qchan.png'
+      }
+      else if (pubkey == '101b30ee88c27a13de68bf7c8c06368ea3e3e837641595c18675677d18a46a45') {
+        image = 'https://pbs.twimg.com/profile_images/791317461287133185/SaFYRRs8_400x400.jpg'
+      }
+      else if (pubkey == '99b3b70ce10f097232841cd89e95f7b69178f2450856fe1e7d144751ad8e51e1') {
+        image = 'https://nostr.build/i/nostr.build_66a9c54af88a3c6cf4eabebafb78477a8aca05925446aec9c3c6d78a508b6532.jpeg'
+        image = 'https://nostr.build/i/d7118b3e1997f328e8371afd05c4668918745e58a3c07c7e072670215af91bfa.jpg'
+      }
+      else if (pubkey == 'c3e12ba9c3117a14b33e24ed5506bcd9dafb39f6dc46e10c46a6e161c0b6626e') {
+        image = 'https://gist.githubusercontent.com/n0nakamura/83c6d1b7341027f414a44e7394f110eb/raw/332df8b0d2d236aad24efc409556a337e80f95fb/icon_n0nakamura.svg'
+      }
+      else if (pubkey == '1d685541f6cc1aace68403a927bd20e374cc85e895f0a706339103b5f0883831') {
+        image = 'https://pbs.twimg.com/profile_images/1523276896943112192/uqdtCSxS_400x400.jpg'
+      }
+      else if (pubkey == '67514144ab0069a89694f04138733094bcad917a431bf3cb8ac58809cfee2666') {
+        image = 'https://i.imgur.com/I4uNOM6.jpg'
+      }
+      else if (pubkey == '062fd9a466b33de0119b1888530ef327de5dcbc1f531815771a96046b89b3260') {
+        image = 'https://nostr.kojira.net/qchan.png'
+      }
+      else if (pubkey == '062fd9aede73eb9ad9c1afd6ff1f1baa2c7ab4a0e989bed905b10c7a6c2121da') {
+        image = 'https://nostr.kojira.net/qchan.png'
+      }
+      else if (pubkey == '0c04b0d72e1ce6bb40fecdec6cf186a583d80676f5f33868981c79ee05736c39') {
+        image = 'https://nostr.build/i/nostr.build_f1ebf1a9fa12d061e20d6c55ed7b0532fdb9babe2287db5df6ea58b47a43ed0e.png'
+      }
+      else if (pubkey == '9e89e8bfdf3cf5bd1473690edf596e48ec7369962e4a874541e35ccbb089d8a2') {
+        image = 'https://pbs.twimg.com/profile_images/3071292442/2d9097c18d71678987d35e9116a49318_400x400.jpeg'
+      }
+      else if (pubkey == 'dbf0becf24bf8dd7d779d7fb547e6112964ff042b77a42cc2d8488636eed9f5e') {
+        image = 'https://pbs.twimg.com/profile_images/855939144945508352/RuSlQohC_400x400.jpg'
+      }
+      else if (pubkey == 'e211323d410c5702ab2cf200b38360b52fd6c6b7a37bddb9890167935bc30957') {
+        image = 'https://ipfs.io/ipfs/QmbY4vSRbHXTrokEXuEVvs5ztjvYReyawNNqqYUys4yVRa'
+      }
+      else if (pubkey == 'f5d119e19bd7f4fc2a68374dd79ff343d640b7a1a4d55430dd2c37ea1dbb0641') {
+        image = 'https://s3.arkjp.net/misskey/63783963-f2c1-43e3-87e4-1335c5ef9748.png'
+      }
+      else if (pubkey == 'ac7d435496f83192948471b57d66e37d32bc6c99891f43b86229793e8b47ac6e') {
+        image = 'https://nostr.build/i/nostr.build_38a3ad1f64d4388a0f433466e1bf2a5b7e5910c096786e96b1043375b4f8f79b.png'
+      }
+      else if (pubkey == '214c1347a2e518043a28a23de5ff267ba23a5753c39cdf4147047a7cc4eface6') {
+        image = 'https://pbs.twimg.com/profile_images/1424027479056949254/carzUJK1_400x400.jpg'
+      }
+      else if (pubkey == 'e153d9d7551442bfb861264e93e0a1b5a30d587e8637864f1cb26fd274d6e8a9') {
+        image = 'https://nostr.build/i/nostr.build_56abb83a7e7e6006c96c43b66be47e1e1d08ead15e159036748a0d811cd4336a.jpg'
+      }
+      else if (pubkey == '949ddaa102f29159698c6bb9fd432b456ad7da6d9c66cf813ab0e7c1aa04c4a7') {
+        image = 'https://nostr.build/i/nostr.build_d1ee3e39c4daee87f80504fec938925c3b9703ceeb566f06976b16ce372eae89.jpg'
+      }
+      else if (pubkey == '33b59c03ad34cb88404bd3ff4b8440e46497a81dd131cdb9cfede294e1b96a0a') {
+        image = 'https://shin.blue/images/icon-anim.gif'
+      }
+      else if (pubkey == 'f6b21134171281c0a2d84e92dda61c50f0eae8abd2fcdae44c69295fca3af38c') {
+        image = 'https://pbs.twimg.com/profile_images/1648691552414486528/83rLDpz-.jpg'
+      }
+      else if (pubkey == 'bc883b6985f3d6c83ee212204b28447297f150d4be5a88bb1fc6941375a8398f') {
+        image = 'https://pbs.twimg.com/profile_images/1555583563273084928/eTIGHfO-_400x400.jpg'
+        image = 'https://pbs.twimg.com/profile_images/1654680191111946241/Jwjkt0XF_400x400.jpg'
+      }
+      else if (pubkey == 'beac82c02402277fe1dd3ad79a6e35c25523c45e9931b4a69299a6cee1b0ba20') {
+        image = 'https://nostr.build/i/nostr.build_5182f8896be522ff9d897987031be39d3c09404d842bf3f5d24efd99ece1cdd9.jpg'
+      }
+      else if (pubkey == 'b25e56b72c676daf2e12717d25990dbc94ace8912f34ddd0b6574cba0ffe4ee9') {
+        image = 'https://void.cat/d/6Keeg6s1NEDyx7fqdd3h8B.webp'
+      }
+      else if (pubkey == 'b3320cbc0e54ebf79e6eb877fa609c8d645d6722882dc6d961c6b21f0503a468') {
+        image = 'https://nostr.build/i/nostr.build_e9ab47cd02bce830593a5a7f9edc589034b3c510bcba3f86ddbe8359a190af23.jpg'
+      }
+      else if (pubkey == '38146101bd4309b7cb575ef13e6ebdb472c31865a20aeebdcbc7336ea75dd3e7') {
+        image = 'https://i.postimg.cc/HLTmKkGz/11-B403-B7-E37-B-4-ED2-A693-FC725623089-A.jpg'
+      }
+      else if (pubkey == '441ffc0a10cb50fc147ad628cf1a92b4e937245d7fd4a52632666d1d6367679b') {
+        image = 'https://nostr.build/i/nostr.build_acaac90108786a66a979562cae69d7ed4f5dbf22f4744de0943d1031605aa6b7.jpg'
+      }
+      else if (pubkey == '1bc70a0148b3f316da33fe3c89f23e3e71ac4ff998027ec712b905cd24f6a411') {
+        image = 'https://nostr.build/i/p/nostr.build_4fb6accf6b24cdb58be127d9a509c3acd3e859bbe24b5c194b82bf30bc1e511a.jpg'
+      }
+      else if (pubkey == 'bc8bc7232c15f7162bd2bc96965bad8a1b3eae26afe8bbe79b74011b8b482897') {
+        image = 'https://d33wubrfki0l68.cloudfront.net/7ddbd046d864aac2269662f3e87875098b678599/63781/assets/images/rai-237.png'
+      }
+      else if (pubkey == '68095cb37d18d8a75003e35bc361377bc35198abe6dbf7bd4f3cd2b202101786') {
+        image = 'https://nostr.build/i/9c56506abeedb48dc417b550490150e08490817ef8a8b1c8c3a5c1b0ebbe5abd.jpg'
+      }
+      else if (pubkey == 'b707d6be7fd9cc9e1aee83e81c3994156cfcf74ded5b09111930fdeeeb5a0c20') {
+        image = 'https://i.floppy.media/de3217a4ad02fdd17d2e1491cebef234.jpeg'
+      }
+      else if (pubkey == '6beb9b9791362595b2c39b8102253eae2b1e19a71d03a510104ad25c324a0939') {
+        image = 'https://awayuki.net/resource/badge-nostopus-xl.png'
+      }
+      else if (pubkey == 'f5f02030cb4b22ed15c3d7cc35ae616e6ce6bb3fa537f6e9e91aaa274b9cd716') {
+        image = 'https://i.gyazo.com/ac1045b91711694359cff4f66dcab3ae.png'
+      }
+      else if (pubkey == '89a0df6b5d372f0bb66416c9d902db1c0c78b397a9e98269920b5e82b49ee1e7') {
+        image = 'https://nostr.build/i/nostr.build_b264d91513eff77c3e859fedfbcd1a16a6c0beca17b9b4e0a8dd7c4c67ff7c06.jpg'
+      }
+      else if (pubkey == '2bed79f81439ff794cf5ac5f7bff9121e257f399829e472c7a14d3e86fe76984') {
+        image = 'https://void.cat/d/MbBpb41nt3UBw8fT9xAKm3.webp'
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
       else if (pubkey == '') {
         image = ''
       }
@@ -1523,6 +1660,7 @@ const Test = () => {
       }
       else if (pubkey == '84b0c46ab699ac35eb2ca286470b85e081db2087cdef63932236c397417782f5') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/Freest2022/images/icon.png'
+        image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
       }
       else if (pubkey == '55e15d51e5ea14ee1ee1098263a8579428c8073a9173869853b585dccec5ccde') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1354235589415997441/jai-ftL2_400x400.jpg'
@@ -1777,7 +1915,8 @@ const Test = () => {
         image = 'https://pbs.twimg.com/profile_images/1597458425348136960/eFew9Qt6_400x400.jpg'
       }
       else if (pubkey == '6b0a60cff3eca5a2b2505ccb3f7133d8422045cbef40f3d2c6189fb0b952e7d4') {
-        image = 'https://void.cat/d/XaXeo5TPvrWKMX1rPb1hrN.webp'
+        image = 'https://nostr.build/i/nostr.build_96de16125bf6fcf33c8e7aec18c1c9a043ec9f617148d3c7b9726c4fe5d17e74.jpeg'
+        //image = 'https://void.cat/d/XaXeo5TPvrWKMX1rPb1hrN.webp'
       }
       else if (pubkey == '32310997f6b37b6cd60bb15a28e9a14badddfbf0875a7de24c69123a0c1e64cc') {
         image = 'https://www.eonet.ne.jp/~mmaga/omake/hyutegaki.jpg'
@@ -1835,6 +1974,7 @@ const Test = () => {
       else if (pubkey == 'f40832e26b1d12f8a27717b606996baef68bc4b6b86c4a35ca827f6fbcbf511e') {
         // erechorse
         image = 'https://i.gyazo.com/0775dc06170f3a9385faf921c50d8d80.jpg'
+        image = 'https://i.gyazo.com/ee480a2fdfa15aae6c9a15d44225489f.jpg'
       }
       else if (pubkey == '4c5d5379a066339c88f6e101e3edb1fbaee4ede3eea35ffc6f1c664b3a4383ee') {
         // koteitan
@@ -1935,6 +2075,7 @@ const Test = () => {
       else if (pubkey == '0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0') {
         // shi_on_72
         image = 'https://nostr.build/i/nostr.build_0d82a5e17035a545e37c91def026c542a2fcc967f5a2adda881fe121de4098e2.jpg'
+        image = 'https://i.gyazo.com/74c608e1b67f7eec5f03150f53ac1ff5.jpg'
       }
       else if (pubkey == '96203d66276e3214ea93b6c78a577c3c9a7279f9ee7e51b22f3b8c17643a819c') {
         // syusui_s
