@@ -210,8 +210,13 @@ const Test = () => {
           else if(note.tags[3].includes("oyachemi")) {
             emojiURL = "https://ul.h3z.jp/YY4HlHnb.png";
           }
-          else {
-            //size = "0";
+        }
+      }
+      if(note.tags[0] != undefined) {
+        if(note.tags[0].includes("emoji")) {
+          emojiSize = "25";
+          if(note.tags[0].includes("unyowayo")) {
+            emojiURL = "https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo.gif";
           }
         }
       }
