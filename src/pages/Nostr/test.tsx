@@ -175,12 +175,30 @@ const Test = () => {
         }
       }
 
+      let emojiURL = "";
+      let size = "0"
+      if(note.tags[3] != undefined) {
+        if(note.tags[3].includes("emoji")) {
+          size = "25";
+          if(note.tags[3].includes("igyo")) {
+            emojiURL = "https://emoji.slack-edge.com/T03C4RC8V/igyo/9b2b9ef4c7930b9b.png";
+          }
+          else if(note.tags[3].includes("oyachemi")) {
+            emojiURL = "https://ul.h3z.jp/YY4HlHnb.png";
+          }
+          else {
+            //size = "0";
+          }
+        }
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
-                {reply} {note.content}
+                {reply} <img src={emojiURL} width={size} height="25" />
+                {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
                 <font color="black">-{hex}-{note.pubkey}-</font>{index}
