@@ -402,32 +402,32 @@ const Test = () => {
       else if (pubkey == '2bed79f81439ff794cf5ac5f7bff9121e257f399829e472c7a14d3e86fe76984') {
         image = 'https://void.cat/d/MbBpb41nt3UBw8fT9xAKm3.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'a76e45e4f2f0d1b12f5232bcd7981ff5f127a4a1d6415862dd8e8e9c756296d1') {
+        image = 'http://wbird.jp/wp/wp-content/uploads/2017/06/katsuface-268x300.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'c4081119f03614c5d5a1ee543f8ff3f20295268297040d0d6ba9bcc03ddeba47') {
+        image = 'https://nostr.build/i/nostr.build_63012a23c458ab0e50694225e53de19fcbbf65a60463a42cf7120597a53fd6e8.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'df21d556dd811d22411815b4359909a4acc3e0362ef2d5b185278c384c9fe7bd') {
+        image = 'https://nostr.build/i/nostr.build_494883eeb4b79c43714db79cca8e3c9871449ce0c25f2b2f53f71159df5dd6a1.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '5650178597525e90ea16a4d7a9e33700ac238a1be9dbf3f5093862929d9a1e60') {
+        image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/oknm.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0d1a48df0609c6df12723835030fe4a87abbfbd5f30b6c96bf56ab27958988f1') {
+        image = 'https://void.cat/d/4bYttFKUUVUjhRVQQ3pmfn.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0286a9da5c296cb8cfec4f17a116f6ff78291f9bde0a6a6ec0f0c90d78e87793') {
+        image = 'https://nostr.build/i/d5fcfe535533417a5a0d80859c6b52bc7bd61e5d6333de99a8771f14770ab817.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '2450d704c20605ae34023f243cd98a89ab067e167e046e0ac4a665f808ec15f0') {
+        image = 'https://nostr.build/i/0e7f0b7f07ab028e166a3bca72b2d493fb0b35ec1ac0cadfec3d33dbbeb81f88.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '781702d40a07a84ed3c53c883fd102010e61b969159eab254ac6ea0dade04d70') {
+        image = 'https://s3.arkjp.net/misskey/ca424969-c835-480c-8a17-526b27a33fa1.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'bcdcaf9070bca8e703f8d6dd092f64687ca63cf152a2fad97c98db1cdc9aca77') {
+        image = 'https://void.cat/d/G1f8d2G3UCGpaJh6KsS91E.webp'
       }
       else if (pubkey == '') {
         image = ''
@@ -1871,6 +1871,7 @@ const Test = () => {
       }
       else if (pubkey == '6c242404fb986d184cbea2eb9e94e8fe708a35fdbf5a02198caaeedede99bea1') {
         image = 'https://pbs.twimg.com/profile_images/1614398202056445952/lvcuUhKo_400x400.jpg'
+        image = 'https://void.cat/d/DZVjkrYbzowuqah1jSrbLy.webp'
       }
       else if (pubkey == '9b28524450acf0e76e7737598e9f15de48c4bea3a2e15a0cb6b855bb16178e13') {
         image = 'https://pbs.twimg.com/profile_images/1559219223863316481/6418TZ5B_400x400.jpg'
