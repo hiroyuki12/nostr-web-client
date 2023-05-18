@@ -169,17 +169,41 @@ const Test = () => {
       });
 
       let reply = "";
+      let replyToImageURL = "";
+      let replyToImageSize = "0"
       if(note.tags[0] != undefined) {
         if(note.tags[0].includes("e")) {
-          reply = "[Reply]";
+          // note.tags[0][0];  // e
+        
+          if(note.tags[1] != undefined && note.tags[1].includes("p")) {
+            // note.tags[1][0];  // p
+            reply = "To]";
+            //replyTo = note.tags[1][1];  // to id
+            replyToImageURL = getImageURL(note.tags[1][1]);
+            replyToImageSize = "25"
+          }
+          if(note.tags[2] != undefined && note.tags[2].includes("p")) {
+            // note.tags[2][0];  // p
+            reply = "To]";
+            //replyTo = note.tags[2][1];  // to id
+            replyToImageURL = getImageURL(note.tags[2][1]);
+            replyToImageSize = "25"
+          }
+          if(note.tags[3] != undefined && note.tags[3].includes("p")) {
+            // note.tags[2][0];  // p
+            reply = "To]";
+            //replyTo = note.tags[3][1];  // to id
+            replyToImageURL = getImageURL(note.tags[3][1]);
+            replyToImageSize = "25"
+          }
         }
       }
 
       let emojiURL = "";
-      let size = "0"
+      let emojiSize = "0"
       if(note.tags[3] != undefined) {
         if(note.tags[3].includes("emoji")) {
-          size = "25";
+          emojiSize = "25";
           if(note.tags[3].includes("igyo")) {
             emojiURL = "https://emoji.slack-edge.com/T03C4RC8V/igyo/9b2b9ef4c7930b9b.png";
           }
@@ -197,7 +221,8 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
-                {reply} <img src={emojiURL} width={size} height="25" />
+                {reply} <img src={replyToImageURL} width={replyToImageSize} height="25" />
+                <img src={emojiURL} width={emojiSize} height="25" />
                 {note.content}
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
