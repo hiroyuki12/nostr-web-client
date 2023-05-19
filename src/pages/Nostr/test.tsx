@@ -18,7 +18,7 @@ const Test = () => {
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
-      limit: 100,
+      limit: 10,
       //limit: 1,
       //until: 1679413822, // 2023/03/22 0:50
 
@@ -139,7 +139,15 @@ const Test = () => {
       //until: 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
       //until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
 
-      until: dateToUnix(now.current), // all new events from now
+      //until: dateToUnix(now.current), // all new events from now
+    },
+  });
+
+  const { events: events2 } = useNostrEvents({
+    filter: {
+      kinds: [1,6],  // 6:repost
+      authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // shino3
+      limit: 10,
     },
   });
 
@@ -2154,6 +2162,7 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
+        <ul>{renderImageList(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
       </div>
     </>
