@@ -11,9 +11,9 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
-      //authors: '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906', // maya
-      //authors: '846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca', //
-      authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
+      //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
+      //authors: ['846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca'], //
+      //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
       kinds: [1,6],  // 6:repost
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
