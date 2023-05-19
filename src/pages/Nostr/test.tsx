@@ -171,34 +171,36 @@ const Test = () => {
       let reply = "";
       let replyToImageURL = "";
       let replyToImageSize = "0"
-      if(note.tags[0] != undefined) {
-        if(note.tags[0].includes("e")) {
-          // note.tags[0][0];  // e
         
+          if(note.tags[0] != undefined && note.tags[0].includes("p")) {
+            // note.tags[0][0];  // p
+            reply = "Re]";
+            // note.tags[0][1];  // to id
+            replyToImageURL = getImageURL(note.tags[0][1]);
+            replyToImageSize = "25"
+          }
           if(note.tags[1] != undefined && note.tags[1].includes("p")) {
             // note.tags[1][0];  // p
-            reply = "To]";
-            //replyTo = note.tags[1][1];  // to id
+            reply = "Re]";
+            // note.tags[1][1];  // to id
             replyToImageURL = getImageURL(note.tags[1][1]);
             replyToImageSize = "25"
           }
           if(note.tags[2] != undefined && note.tags[2].includes("p")) {
             // note.tags[2][0];  // p
-            reply = "To]";
-            //replyTo = note.tags[2][1];  // to id
+            reply = "Re]";
+            // note.tags[2][1];  // to id
             replyToImageURL = getImageURL(note.tags[2][1]);
             replyToImageSize = "25"
           }
           if(note.tags[3] != undefined && note.tags[3].includes("p")) {
-            // note.tags[2][0];  // p
-            reply = "To]";
-            //replyTo = note.tags[3][1];  // to id
+            // note.tags[3][0];  // p
+            reply = "Re]";
+            // note.tags[3][1];  // to id
             replyToImageURL = getImageURL(note.tags[3][1]);
             replyToImageSize = "25"
           }
           if(note.kind == "6") { reply = "Repost]"; }
-        }
-      }
 
       let emojiURL = "";
       let emojiSize = "0"
