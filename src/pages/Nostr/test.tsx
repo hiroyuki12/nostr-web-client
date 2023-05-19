@@ -12,15 +12,12 @@ const Test = () => {
     filter: {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
-      //authors: ['846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca'], //
       //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
-      kinds: [1,6,7,42],  // 6:repost, 7:reaction, 42:channel message
+      kinds: [1,6,42],  // 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
       limit: 100,
-      //limit: 1,
-      //until: 1679413822, // 2023/03/22 0:50
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28- 1970/1/1
@@ -233,6 +230,21 @@ const Test = () => {
         }
       }
 
+      let inlineImageHeight = "0";
+      let content2 = note.content;
+      let words = note.content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+      if(words[1] != undefined && words[1].includes(".jpg")  ||
+         words[1] != undefined && words[1].includes(".jpeg") || 
+         words[1] != undefined && words[1].includes(".png")  || 
+         words[1] != undefined && words[1].includes(".gif")  || 
+         words[1] != undefined && words[1].includes(".svg")  || 
+         words[1] != undefined && words[1].includes(".ico")  || 
+         words[1] != undefined && words[1].includes(".bmp")  || 
+         words[1] != undefined && words[1].includes(".webp") ){
+        inlineImageHeight = "250";
+        content2 = note.content.replace(words[1],'');
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
@@ -240,7 +252,8 @@ const Test = () => {
               <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
                 {reply} <img src={replyToImageURL} width={replyToImageSize} height="25" />
                 <img src={emojiURL} width={emojiSize} height="25" />
-                {note.content}
+                {content2}<br />
+                <img src={words[1]} height={inlineImageHeight} />
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
                 <font color="black">-{hex}-{note.pubkey}-</font>{index}
@@ -271,11 +284,11 @@ const Test = () => {
       else if (pubkey == '') {
         image = ''
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'f52bbb0bdc1236c6bc81b1babb16a6a5fe5fbe0334c73e5d94fc730910713260') {
+        image = 'https://nostr.build/i/nostr.build_24db2d29dad9eddeabba3ade91b800815410253365dbdd76979933407af5fcb0.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'bcfca61028a50a76a41bf324b63e2cc7525a064f45d28a0ee63879f50202cf2b') {
+        image = 'https://utouto97.github.io/icon.png'
       }
       else if (pubkey == '') {
         image = ''
@@ -1153,6 +1166,7 @@ const Test = () => {
       }
       else if (pubkey == '148755e670adb36ebba529ff46b9f3580a499928249dd79a749b2853450c107f') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_6167a9d3b1e22cd4fd8110fdb28204729cfc602d8b27533e3b612722c07b5bf4.jpeg'
+        image = 'https://nostr.build/i/1157ac8075fea71d087ed51d82ccbbe534edb1b8732448de0af763a5cfdc2eff.jpg';
       }
       else if (pubkey == '8685f2e2e2792d392af9ea147695a0983c98afacea7fff25004bb50d025a117e') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://ja.gravatar.com/userimage/96575492/1a29d227f05f66c68176a6c334128d1d.jpg'
