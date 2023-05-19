@@ -13,7 +13,7 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       //authors: '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906', // maya
       //authors: '846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca', //
-      kinds: [1],
+      kinds: [1,6],  // repost
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
@@ -196,6 +196,7 @@ const Test = () => {
             replyToImageURL = getImageURL(note.tags[3][1]);
             replyToImageSize = "25"
           }
+          if(note.kind == "6") { reply = "Repost]"; }
         }
       }
 
@@ -477,23 +478,23 @@ const Test = () => {
       else if (pubkey == 'bcdcaf9070bca8e703f8d6dd092f64687ca63cf152a2fad97c98db1cdc9aca77') {
         image = 'https://void.cat/d/G1f8d2G3UCGpaJh6KsS91E.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'b6ac413652c8431478cb6177722f822f0f7af774a274fc5574872407834c3253') {
+        image = 'https://void.cat/d/Db3s38EJMXku8U1CBefkud.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'b6ad3d1301e1110bf60ecab2ea328a1c675d21bb2008d12964140363a03b1823') {
+        image = 'https://pbs.twimg.com/profile_images/1513873521147002884/Ys_LEXLC_400x400.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '4e86cdbb1ed747ff40c65303d1fc463e10aecb113049b05fc4317c29e31ccaaf') {
+        image = 'https://nostr.build/i/31fa98722a57f5ca1406bb1a5883fe61c92e9861b564d8adfab458f11045ca03.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '8c1bdf8eb87aa0ad42c5ae70d85921c24a7b2cf56278509e74f18a644c68050b') {
+        image = 'https://nostr.kojira.net/rabbit.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ebadc753f734c678485918f63d8e569efa095768721d0d10e7e2574870a8a763') {
+        image = 'https://nostr.build/i/nostr.build_0f96454f68c669988ebd00a96d66919bf58a253b4bf33671f1ca027298a989f9.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '2748ffc20bf0378ace2b32d4e9ca11fceb07fbef335a7124b5368b6338daf18b') {
+        image = 'https://void.cat/d/Vbfw7g23McAfY5Tmiewb6z.webp'
       }
       else if (pubkey == '') {
         image = ''
@@ -1114,6 +1115,7 @@ const Test = () => {
       }
       else if (pubkey == '2c7cc62a697ea3a7826521f3fd34f0cb273693cbe5e9310f35449f43622a5cdc') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://mattn.github.io/assets/image/logo-big.png'
+        image = 'https://void.cat/d/7hreyJ9qar2qxwUGBRgnax.webp';
       }
       else if (pubkey == 'c2966c63a212de44f9ce2230beb5e5862461af159f7f517f43971cd3cd2776ba') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1614671036313899011/xjAYrWcN_400x400.jpg'
