@@ -14,11 +14,11 @@ const Test = () => {
       //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
       //authors: ['846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca'], //
       //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
-      kinds: [1,6],  // 6:repost
+      kinds: [1,6,7],  // 6:repost, 7:reaction
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
-      limit: 10,
+      limit: 100,
       //limit: 1,
       //until: 1679413822, // 2023/03/22 0:50
 
@@ -265,6 +265,51 @@ const Test = () => {
       else if (pubkey == '') {
         image = ''
       }
+      else if (pubkey == 'dfe0818e534daed8fd75d76d94ca96a295db225345cc18cc6d8383ac19e51d81') {
+        image = 'https://void.cat/d/5kD2WdeFVR6BVqWjSEeddE.webp'
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
       else if (pubkey == '389806c9a166aab49efc5f479ec526aef6f36eb5f6e7b9c42b3c4cd4b3ef9c16') {
         image = 'https://nostr.build/i/nostr.build_e3190e5701ffbfa383e2f5c7dc6305dd884ad04dc281c0c758b5d2a84e607664.jpeg'
       }
@@ -507,11 +552,11 @@ const Test = () => {
       else if (pubkey == '2748ffc20bf0378ace2b32d4e9ca11fceb07fbef335a7124b5368b6338daf18b') {
         image = 'https://void.cat/d/Vbfw7g23McAfY5Tmiewb6z.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '510e0096e4e622e9f2877af7e7af979ac2fdf50702b9cd77021658344d1a682c') {
+        image = 'https://nostr.build/i/nostr.build_838f406ea64c1dc953b3204222622a3d008506deb496e6321573e142befb69f2.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ddd04270c95823371cbe8ce63856f6ef924da2bb3f0e635b55f56e3e46bd584a') {
+        image = 'https://pbs.twimg.com/profile_images/1577630845162381313/-Rirb1Ei_400x400.jpg'
       }
       else if (pubkey == '') {
         image = ''
@@ -2162,7 +2207,6 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
-        <ul>{renderImageList(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
       </div>
     </>
