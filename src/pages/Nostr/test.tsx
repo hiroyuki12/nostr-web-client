@@ -14,7 +14,7 @@ const Test = () => {
       //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
       //authors: ['846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca'], //
       //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
-      kinds: [1,6,7],  // 6:repost, 7:reaction
+      kinds: [1,6,7,42],  // 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
