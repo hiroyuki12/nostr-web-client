@@ -157,7 +157,10 @@ const Test = () => {
     filter: {
       kinds: [3],
       //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 following
-      authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+      //authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+      //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion
+      authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+      
       //since: 0,
       limit: 1000,
     },
@@ -167,20 +170,14 @@ const Test = () => {
 
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
-      followList2 = followList2 + event.tags[0][1];
-      followList2 = followList2 + event.tags[1][1];
-      followList2 = followList2 + event.tags[2][1];
-      followList2 = followList2 + event.tags[3][1];
-      followList2 = followList2 + event.tags[4][1];
-      followList2 = followList2 + event.tags[5][1];
-      followList2 = followList2 + event.tags[6][1];
-      followList2 = followList2 + event.tags[7][1];
-      followList2 = followList2 + event.tags[8][1];
-      followList2 = followList2 + event.tags[9][1];
-      followList2 = followList2 + event.tags[10][1];
+      for(let i=0; i<event.tags.length; i++) {
+        if(event.tags[i] == undefined) {
+	  break;
+	}
+        followList2 = followList2 + event.tags[i][1];
+      }
       return (
         <div>
-        {followList2}<br />
         <li className="item" key={index}>
           {event.tags[0][1]}<br />
         </li>
@@ -356,17 +353,17 @@ const Test = () => {
       else if (pubkey == '9e4414f242c3130eb6ade5bbae293be197d041c95f9c1a2d25c5151556079e8d') {
         image = 'https://pbs.twimg.com/media/C6kp7s2VoAAN-NB.jpg:medium'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'e9591428813ebd6916736c88bb95994496f647d6fe769ef8483697eab8d04d2d') {
+        image = 'https://pbs.twimg.com/profile_images/1685266254/nekoicon_400x400.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '25bc24d47b3cf70e5baf417f64043bfd70b6557c1150243f1e820d061a50ffad') {
+        image = 'https://nostr.build/i/nostr.build_6f2b1f8b144609df74e9c3f101ff3d402fe01b0dad34f3e051de614ef9bcb652.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '9f48f588c31853de68cf5a04c2f5b86577fa7cf6a7f7e9b326a2dfe93e890943') {
+        image = 'https://ul.h3z.jp/NDgLUflw.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0000005f87f64341c212cc93d6c266c03ae752c02660e78a6da1424f7b05c470') {
+        image = 'https://void.cat/d/FgRgcaCcnqhfwPfspKY5es'
       }
       else if (pubkey == '') {
         image = ''
@@ -1272,6 +1269,7 @@ const Test = () => {
       }
       else if (pubkey == '7fa56f5d6962ab1e3cd424e758c3002b8665f7b0d8dcee9fe9e288d7751ac194') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://void.cat/d/23pdoumyGXx7QniXPsyJih.webp'
+        image = 'https://void.cat/d/Mh8J1u64Bo9w8rBfhCVdGC.webp'
       }
       else if (pubkey == '148755e670adb36ebba529ff46b9f3580a499928249dd79a749b2853450c107f') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_6167a9d3b1e22cd4fd8110fdb28204729cfc602d8b27533e3b612722c07b5bf4.jpeg'
@@ -1883,6 +1881,7 @@ const Test = () => {
       }
       else if (pubkey == 'edc083016d344679566ae8205b362530ecbafc6e064e224a0c2df1850cecfb4a') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1587707705346920448/PunLtOLk_400x400.jpg'
+        image = 'https://nostr.build/i/nostr.build_b9fb5d34aeceb9ff115c0467ee7de46b5ea4ccacf8e9486a61ff312e27189126.png'
       }
       else if (pubkey == '670271501bd9073d64402c40988a73b73076ffefeaae4db8b952b479c799bc07') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://rdlf.jp/images/Nostr.png'
