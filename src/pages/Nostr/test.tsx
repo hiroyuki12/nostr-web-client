@@ -143,30 +143,8 @@ const Test = () => {
     },
   });
 
-  const { events: events2 } = useNostrEvents({
-    filter: {
-      authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],
-      //authors: '2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2',
-
-      //authors: '12d2c9f0c9eb8f8792b8ef8b509121859dd90a3779f1af308fba60bcb1d9e107',
-      //since: dateToUnix(now.current), // all new events from now
-      //since: 1679413822, // 1679413822 2023/03/22 0:50
-      //since: 1679479111,
-      since: 0,
-      limit: 10,
-    },
-  });
-
-  const { events: events3 } = useNostrEvents({
-    filter: {
-      kinds: [1],
-      authors: ['c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142'], // hyuki
-      limit: 3,
-    },
-  });
-
   const { data: npub } = nip19.decode(
-    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"
+    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
   );
 
   const { data: userData, isLoading } = useProfile({
@@ -174,11 +152,22 @@ const Test = () => {
   });
   console.log(isLoading);
 
+
+  const { events: events2 } = useNostrEvents({
+    filter: {
+      kinds: [3],
+      //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 following
+      authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+      //since: 0,
+      limit: 10,
+    },
+  });
+
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
       return (
         <li className="item" key={index}>
-          {event.tags[0]}<br />
+          {event.tags[0][1]}<br />
         </li>
       );
     });
