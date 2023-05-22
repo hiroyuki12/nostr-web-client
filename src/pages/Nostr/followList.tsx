@@ -10,7 +10,7 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       kinds: [3],
-      authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],
+      authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       //authors: '2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2',
 
       //authors: '12d2c9f0c9eb8f8792b8ef8b509121859dd90a3779f1af308fba60bcb1d9e107',
@@ -23,7 +23,7 @@ const Test = () => {
   });
 
   const { data: npub } = nip19.decode(
-    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"
+    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
   );
 
   const { data: userData, isLoading } = useProfile({
