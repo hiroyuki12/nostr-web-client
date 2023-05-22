@@ -12,6 +12,7 @@ const Test = () => {
     filter: {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
+      //authors: ['c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142'], // hyuki
       //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
       kinds: [1,6,42],  // 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
@@ -135,6 +136,8 @@ const Test = () => {
       //until: 1680350000, // 2023/4/1 20- 2023/4/1 17,  +10,000
       //until: 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
       //until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
+      
+      //until: 1684667029, // 2023/5/21 20:03 - 
 
       //until: dateToUnix(now.current), // all new events from now
     },
@@ -142,20 +145,45 @@ const Test = () => {
 
   const { events: events2 } = useNostrEvents({
     filter: {
-      kinds: [1,6],  // 6:repost
-      authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // shino3
+      authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],
+      //authors: '2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2',
+
+      //authors: '12d2c9f0c9eb8f8792b8ef8b509121859dd90a3779f1af308fba60bcb1d9e107',
+      //since: dateToUnix(now.current), // all new events from now
+      //since: 1679413822, // 1679413822 2023/03/22 0:50
+      //since: 1679479111,
+      since: 0,
       limit: 10,
     },
   });
 
+  const { events: events3 } = useNostrEvents({
+    filter: {
+      kinds: [1],
+      authors: ['c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142'], // hyuki
+      limit: 3,
+    },
+  });
+
   const { data: npub } = nip19.decode(
-    "npub17l0vmtyfqa77756064d4ljcmnpxgyp0sm248yzksgafpmmsqjgpq6ahnv0"
+    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"
   );
 
   const { data: userData, isLoading } = useProfile({
     pubkey: npub.toString(),
   });
   console.log(isLoading);
+
+  const renderImageList2 = (list) => {
+    const posts = list.map((event, index) => {
+      return (
+        <li className="item" key={index}>
+          {event.tags[0]}<br />
+        </li>
+      );
+    });
+    return posts;
+  }
 
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
@@ -221,19 +249,36 @@ const Test = () => {
           }
         }
       }
-      if(note.tags[0] != undefined) {
-        if(note.tags[0].includes("emoji")) {
-          emojiSize = "25";
-          if(note.tags[0].includes("unyowayo")) {
-            emojiURL = "https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo.gif";
-          }
-        }
+      if(note.tags[0] != undefined && note.tags[0][0] == "emoji") {
+        emojiSize = "25";
+        emojiURL = note.tags[0][2];
+        note.content = note.content.replace(":" + note.tags[0][1] + ":",'');
+      }
+      if(note.tags[3] != undefined && note.tags[3][0] == "emoji") {
+        emojiSize = "25";
+        emojiURL = note.tags[3][2];
+        //note.content = note.content.replace(":" + note.tags[3][1] + ":",'');
       }
 
-      let inlineImageHeight = "0";
-      let content2 = note.content;
+      let inlineImageHeight0 = "0";
+      let inlineImageHeight1 = "0";
+      let inlineImageHeight2 = "0";
+      let content = note.content;
       let words = note.content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
-      if(words[1] != undefined && words[1].includes(".jpg")  ||
+      if(words[0] != undefined && words[0].includes(".jpg")  ||
+         words[0] != undefined && words[0].includes(".jpeg") || 
+         words[0] != undefined && words[0].includes(".png")  || 
+         words[0] != undefined && words[0].includes(".gif")  || 
+         words[0] != undefined && words[0].includes(".svg")  || 
+         words[0] != undefined && words[0].includes(".ico")  || 
+         words[0] != undefined && words[0].includes(".bmp")  || 
+         words[0] != undefined && words[0].includes(".webp") ){
+        inlineImageHeight0 = "250";
+        content = content.replace(words[0],'');
+        //content = "Hello";
+        //note.content = note.content.replace(words[0],'');
+      }
+      else if(words[1] != undefined && words[1].includes(".jpg")  ||
          words[1] != undefined && words[1].includes(".jpeg") || 
          words[1] != undefined && words[1].includes(".png")  || 
          words[1] != undefined && words[1].includes(".gif")  || 
@@ -241,8 +286,17 @@ const Test = () => {
          words[1] != undefined && words[1].includes(".ico")  || 
          words[1] != undefined && words[1].includes(".bmp")  || 
          words[1] != undefined && words[1].includes(".webp") ){
-        inlineImageHeight = "250";
-        content2 = note.content.replace(words[1],'');
+        inlineImageHeight1 = "250";
+        content = content.replace(words[1],'');
+        //note.content = note.content.replace(words[1],'');
+      }
+
+      // nostr:note1, nostr:nevent1
+      if(words[1] != undefined && (words[1].includes("nostr:note1") || 
+        words[1].includes("nostr:nevent1"))) {
+        //content2 = "Hello";
+        //content2 = "<a href=\"https://www.google.com\">google</a>";
+        content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
       }
 
       return (
@@ -252,8 +306,9 @@ const Test = () => {
               <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
                 {reply} <img src={replyToImageURL} width={replyToImageSize} height="25" />
                 <img src={emojiURL} width={emojiSize} height="25" />
-                {content2}<br />
-                <img src={words[1]} height={inlineImageHeight} />
+                {content}
+                <img src={words[0]} height={inlineImageHeight0} />
+                <img src={words[1]} height={inlineImageHeight1} />
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
                 <font color="black">-{hex}-{note.pubkey}-</font>{index}
@@ -278,11 +333,59 @@ const Test = () => {
       else if (pubkey == '') {
         image = ''
       }
-      else if (pubkey == 'dfe0818e534daed8fd75d76d94ca96a295db225345cc18cc6d8383ac19e51d81') {
-        image = 'https://void.cat/d/5kD2WdeFVR6BVqWjSEeddE.webp'
+      else if (pubkey == '351905c5fdbd082958f3783dda59145c38f76122329e588bcf84b4cff8383992') {
+        image = 'https://i.gyazo.com/63b60e71019fc569f6fe4aa835cce9e5.jpg'
+      }
+      else if (pubkey == '2a2a5eead347862a443f99b030d8dfc2cc25582caa23ac4a5a783e60ca524b58') {
+        image = 'https://nostr.build/i/nostr.build_603383a02b8e36cfcf781dca59021de2b3bd7ebcde35045bee5e2ad9c5ae504d.jpeg'
+      }
+      else if (pubkey == '49544fbb0ed1902286400f1f55610fce5990783e69de74ca1e54fb5c399c817b') {
+        image = 'https://lh3.googleusercontent.com/pw/AMWts8AeNTuBEG6Kckyfdb_7GhT7dXUUAEjZEMZ5TvBK_nNM9-SMlM_Ofnxr0MJGsj3FU-85953-EpOCQD3iBfZPFXXMWSGSPCPd0ZHRCthmGEQTo3yzXX-4svU5oJaBWasjL2XX-A3nvGirGNBCZAvV2Nt6=s360-no?authuser=0'
       }
       else if (pubkey == '') {
         image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == 'dfe0818e534daed8fd75d76d94ca96a295db225345cc18cc6d8383ac19e51d81') {
+        image = 'https://void.cat/d/5kD2WdeFVR6BVqWjSEeddE.webp'
       }
       else if (pubkey == 'f52bbb0bdc1236c6bc81b1babb16a6a5fe5fbe0334c73e5d94fc730910713260') {
         image = 'https://nostr.build/i/nostr.build_24db2d29dad9eddeabba3ade91b800815410253365dbdd76979933407af5fcb0.jpg'
@@ -290,38 +393,32 @@ const Test = () => {
       else if (pubkey == 'bcfca61028a50a76a41bf324b63e2cc7525a064f45d28a0ee63879f50202cf2b') {
         image = 'https://utouto97.github.io/icon.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '6ae9bb93afcdeeccbe1ba66b392e13c01411d01deeb2b1077500b4fb663a658d') {
+        image = 'https://pbs.twimg.com/profile_images/1323614159724896257/55oHa1qN.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '3604e5abe728f8b4fef4ec734a00ed1ad8a0cac84576bef416928c90364408cb') {
+        image = 'https://pbs.twimg.com/profile_images/1605496327948800000/VKNezHgT_400x400.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'cedc685ffa8bcc29a61adac4963483aae5bdb7d10e2a4fd2cc560d0e00996e89') {
+        image = 'https://i.imgur.com/qVXWymH.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '2ad6b00d50754b17e4cdfcf9fbb53bb5410abf70564e2a1fd5eb72858e8e9a5b') {
+        image = 'https://pbs.twimg.com/profile_banners/881154370980560897/1637244135/1500x500'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '776ea4437354381f14a720be3c476937dce7257ed1073e54a192dbc99f3b7ecc') {
+        image = 'https://pbs.twimg.com/profile_images/3281775414/ad72851524c3d42859c39f146d4273ef_400x400.png'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '6a36c1a62cba047b1cdb93bef316c6617c79816e32b80166c471c30bdb77e526') {
+        image = 'https://nostr.build/i/9127cb93848b22344fcf93ae2674c5f2160fec9e88551815d520278832ad913b.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'e1b89ba9f8a3f2a23de3a28eba7d10bf4896509f4f91fced09dd4aeeda4859a2') {
+        image = 'https://nostr.build/i/df5b8a593730ac5121c11ef4eeaa7f6434424847a4a5081b3c8fb43865d652f1.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '74604f6bfa071f3bd852fefc5176614f80029e6a92517958b5fa71931c3f84b6') {
+        image = 'https://nostrcheck.me/media/kanako/avatar.webp'
       }
-      else if (pubkey == '') {
-        image = ''
-      }
-      else if (pubkey == '') {
-        image = ''
-      }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '8376344d4fce351efd75fd2e8e58eb67a9aa93c756387205b4ebdc6b3f63ab08') {
+        image = 'https://pbs.twimg.com/profile_images/1658312190334754816/IArLNhas_400x400.jpg'
       }
       else if (pubkey == '389806c9a166aab49efc5f479ec526aef6f36eb5f6e7b9c42b3c4cd4b3ef9c16') {
         image = 'https://nostr.build/i/nostr.build_e3190e5701ffbfa383e2f5c7dc6305dd884ad04dc281c0c758b5d2a84e607664.jpeg'
@@ -431,6 +528,7 @@ const Test = () => {
       }
       else if (pubkey == 'c3e12ba9c3117a14b33e24ed5506bcd9dafb39f6dc46e10c46a6e161c0b6626e') {
         image = 'https://gist.githubusercontent.com/n0nakamura/83c6d1b7341027f414a44e7394f110eb/raw/332df8b0d2d236aad24efc409556a337e80f95fb/icon_n0nakamura.svg'
+        image = 'https://nostr.build/i/0ad78feed267fb40b220a720768e811e702942463eef923d6db55c81f9a57838.gif'
       }
       else if (pubkey == '1d685541f6cc1aace68403a927bd20e374cc85e895f0a706339103b5f0883831') {
         image = 'https://pbs.twimg.com/profile_images/1523276896943112192/uqdtCSxS_400x400.jpg'
@@ -2221,6 +2319,7 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
+        <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
       </div>
     </>
