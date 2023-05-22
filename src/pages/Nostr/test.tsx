@@ -139,7 +139,7 @@ const Test = () => {
       
       //until: 1684667029, // 2023/5/21 20:03 - 
 
-      //until: dateToUnix(now.current), // all new events from now
+      until: dateToUnix(now.current), // all new events from now
     },
   });
 
@@ -159,16 +159,35 @@ const Test = () => {
       //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 following
       authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       //since: 0,
-      limit: 10,
+      limit: 1000,
     },
   });
 
+  var followList2 = "";
+
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
+      followList2 = followList2 + event.tags[0][1];
+      followList2 = followList2 + event.tags[1][1];
+      followList2 = followList2 + event.tags[2][1];
+      followList2 = followList2 + event.tags[3][1];
+      followList2 = followList2 + event.tags[4][1];
+      followList2 = followList2 + event.tags[5][1];
+      followList2 = followList2 + event.tags[6][1];
+      followList2 = followList2 + event.tags[7][1];
+      followList2 = followList2 + event.tags[8][1];
+      followList2 = followList2 + event.tags[9][1];
+      followList2 = followList2 + event.tags[10][1];
       return (
+        <div>
+        {followList2}<br />
         <li className="item" key={index}>
           {event.tags[0][1]}<br />
         </li>
+        <li className="item" key={index}>
+          {event.tags[1][1]}<br />
+        </li>
+        </div>
       );
     });
     return posts;
@@ -176,6 +195,9 @@ const Test = () => {
 
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
+      if(!followList2.includes(note.pubkey)) {
+        return;
+      }
       let dateTime = new Date(note.created_at * 1000);
       let createdDate = dateTime.toLocaleDateString('ja-JP');
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
@@ -292,7 +314,7 @@ const Test = () => {
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <a href={url} target="_blank"><img src={imageURL2} width="50" height="50" /></a>
+              <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
                 {reply} <img src={replyToImageURL} width={replyToImageSize} height="25" />
                 <img src={emojiURL} width={emojiSize} height="25" />
                 {content}
@@ -331,8 +353,8 @@ const Test = () => {
       else if (pubkey == '49544fbb0ed1902286400f1f55610fce5990783e69de74ca1e54fb5c399c817b') {
         image = 'https://lh3.googleusercontent.com/pw/AMWts8AeNTuBEG6Kckyfdb_7GhT7dXUUAEjZEMZ5TvBK_nNM9-SMlM_Ofnxr0MJGsj3FU-85953-EpOCQD3iBfZPFXXMWSGSPCPd0ZHRCthmGEQTo3yzXX-4svU5oJaBWasjL2XX-A3nvGirGNBCZAvV2Nt6=s360-no?authuser=0'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '9e4414f242c3130eb6ade5bbae293be197d041c95f9c1a2d25c5151556079e8d') {
+        image = 'https://pbs.twimg.com/media/C6kp7s2VoAAN-NB.jpg:medium'
       }
       else if (pubkey == '') {
         image = ''
@@ -2308,8 +2330,8 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
-        <ul>{renderImageList2(events2)}</ul>
-        <ul>{renderImageList(events)}</ul>
+        <ul>{isLoading ? "Loading..." : renderImageList2(events2)}</ul>
+        <ul>{isLoading ? "Loading..." : renderImageList(events)}</ul>
       </div>
     </>
   );
