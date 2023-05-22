@@ -18,7 +18,7 @@ const Test = () => {
       //since: 1679413822, // 1679413822 2023/03/22 0:50
       //since: 1679479111,
       since: 0,
-      //limit: 450,
+      limit: 2,
     },
   });
 
@@ -42,8 +42,6 @@ const Test = () => {
               Following List:::::::::<br />
               {event.tags[0][1]}<br />
               {event.tags[1][1]}<br />
-              {event.tags[2][1]}<br />
-              {event.tags[3][1]}<br />
             </div>
           </div>
         </li>
