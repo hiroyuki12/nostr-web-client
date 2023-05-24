@@ -6,12 +6,13 @@ const relayUrls = [
 
 
   "wss://relay-jp.nostr.wirednet.jp",  //jp, Will
-  "wss://yabu.me",  //jp, chy, takeshi, syui, yutaro
+  //"wss://yabu.me",  //jp, jack, chy, takeshi, syui, yutaro
+    //"wss://nostr.fediverse.jp",  //jp, takeshi, snowden
     //"wss://nostr-relay.nokotaro.com",  //jp en, aogi, karnage, nostr commits
     //"wss://relay.damus.io",  //en jp, Will, iefan, karnage, news, niwaken
 
   //"wss://nostr.h3z.jp",  //jp + jack
-  //"wss://nostr.fediverse.jp",  //jp, takeshi
+  //"wss://nostr.fediverse.jp",  //jp, takeshi, snowden
   //"wss://nostr-paid.h3z.jp",  //jp, yutaro
 
   //"wss://nostr.holybea.com",  //jp
@@ -31,7 +32,7 @@ const relayUrls = [
   //1j
   /*"wss://nostrja-kari.heguro.com",  //jp
   "wss://nostr.fediverse.jp",  //jp
-  "wss://nostr.wine",  //jp en
+  "wss://nostr.wine",  //jp en, Vitor, fiatjaf
   "wss://relay-jp.nostr.wirednet.jp",  //jp
   "wss://relay.damus.io",  //en jp
   "wss://universe.nostrich.land?lang=ja",  //jp
