@@ -14,7 +14,7 @@ const Test = () => {
       //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
       //authors: ['c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142'], // hyuki
       //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
-      kinds: [1,6,42],  // 6:repost, 7:reaction, 42:channel message
+      kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
@@ -153,9 +153,10 @@ const Test = () => {
   console.log(isLoading);*/
 
 
+  // following list
   const { events: events2 } = useNostrEvents({
     filter: {
-      kinds: [3],
+      kinds: [3],  // 3:following list
       //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 following
       //authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion
@@ -167,7 +168,7 @@ const Test = () => {
     },
   });
 
-  var followList2 = "";
+  var followList = "";
 
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
@@ -175,16 +176,10 @@ const Test = () => {
         if(event.tags[i] == undefined) {
 	  break;
 	}
-        followList2 = followList2 + event.tags[i][1] + ",";
+        followList = followList + event.tags[i][1] + ",";
       }
       return (
         <div>
-        <li className="item" key={index}>
-          {event.tags[0][1]}<br />
-        </li>
-        <li className="item" key={index}>
-          {event.tags[1][1]}<br />
-        </li>
         </div>
       );
     });
@@ -193,9 +188,12 @@ const Test = () => {
 
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
-      if(!followList2.includes(note.pubkey)) {
+
+      if(!followList.includes(note.pubkey)) {
+        // following filter
         //return;
       }
+
       let dateTime = new Date(note.created_at * 1000);
       let createdDate = dateTime.toLocaleDateString('ja-JP');
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
@@ -205,99 +203,86 @@ const Test = () => {
 
       let imageURL2 = getImageURL(note.pubkey);
 
-      let imageURL = Pictures.pictures.map((picture, index) => {
+      /*let imageURL = Pictures.pictures.map((picture, index) => {
         if(note.pubkey == picture.npub) {
           return picture.pic;
         }
-      });
+      });*/
+
 
       let reply = "";
       let replyToImageURL = "";
       let replyToImageSize = "0"
-        
-          if(note.tags[0] != undefined && note.tags[0].includes("p")) {
-            // note.tags[0][0];  // p
-            reply = "Re]";
-            // note.tags[0][1];  // to id
-            replyToImageURL = getImageURL(note.tags[0][1]);
-            replyToImageSize = "40"
-          }
-          if(note.tags[1] != undefined && note.tags[1].includes("p")) {
-            // note.tags[1][0];  // p
-            reply = "Re]";
-            // note.tags[1][1];  // to id
-            replyToImageURL = getImageURL(note.tags[1][1]);
-            replyToImageSize = "40"
-          }
-          if(note.tags[2] != undefined && note.tags[2].includes("p")) {
-            // note.tags[2][0];  // p
-            reply = "Re]";
-            // note.tags[2][1];  // to id
-            replyToImageURL = getImageURL(note.tags[2][1]);
-            replyToImageSize = "40"
-          }
-          if(note.tags[3] != undefined && note.tags[3].includes("p")) {
-            // note.tags[3][0];  // p
-            reply = "Re]";
-            // note.tags[3][1];  // to id
-            replyToImageURL = getImageURL(note.tags[3][1]);
-            replyToImageSize = "40"
-          }
-          if(note.kind == "6") { reply = "Repost]"; }
 
-      let emojiURL = "";
-      let emojiSize = "0"
-      if(note.tags[3] != undefined) {
-        if(note.tags[3].includes("emoji")) {
-          emojiSize = "25";
-          if(note.tags[3].includes("igyo")) {
-            emojiURL = "https://emoji.slack-edge.com/T03C4RC8V/igyo/9b2b9ef4c7930b9b.png";
-          }
-          else if(note.tags[3].includes("oyachemi")) {
-            emojiURL = "https://ul.h3z.jp/YY4HlHnb.png";
-          }
+      for(let i=0; i<4; i++) { 
+        if(note.tags[i] != undefined && note.tags[i][0].includes("p")) {
+          // note.tags[0][0];  // p
+          reply = "Re]";
+          // note.tags[0][1];  // to id
+          replyToImageURL = getImageURL(note.tags[i][1]);
+          replyToImageSize = "40"
         }
       }
-      if(note.tags[0] != undefined && note.tags[0][0] == "emoji") {
-        emojiSize = "25";
-        emojiURL = note.tags[0][2];
-        note.content = note.content.replace(":" + note.tags[0][1] + ":",'');
-      }
-      if(note.tags[3] != undefined && note.tags[3][0] == "emoji") {
-        emojiSize = "25";
-        emojiURL = note.tags[3][2];
-        //note.content = note.content.replace(":" + note.tags[3][1] + ":",'');
+      if(note.kind == "6") { reply = "Repost]"; }
+
+      let emoji1URL = "";
+      let emoji1Size = "0"
+      let emoji2URL = "";
+      let emoji2Size = "0"
+      let emoji3URL = "";
+      let emoji3Size = "0"
+      
+      for(let i=0; i<2; i++) {
+        if(note.tags[i] != undefined && note.tags[i][0] == "emoji") {
+          if(i==0) {
+            emoji1Size = "40";
+            emoji1URL = note.tags[i][2];
+            //note.content = note.content.replace(":" + note.tags[0][1] + ":",'');
+	  }
+          if(i==1) {
+            emoji2Size = "40";
+            emoji2URL = note.tags[i][2];
+            //note.content = note.content.replace(":" + note.tags[1][1] + ":",'');
+	  }
+          if(i==2) {
+            emoji3Size = "40";
+            emoji3URL = note.tags[i][2];
+            //note.content = note.content.replace(":" + note.tags[2][1] + ":",'');
+	  }
+        }
       }
 
       let inlineImageHeight0 = "0";
       let inlineImageHeight1 = "0";
       let inlineImageHeight2 = "0";
+      let inlineImageHeight3 = "0";
       let content = note.content;
       let words = note.content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
-      if(words[0] != undefined && words[0].includes(".jpg")  ||
-         words[0] != undefined && words[0].includes(".jpeg") || 
-         words[0] != undefined && words[0].includes(".png")  || 
-         words[0] != undefined && words[0].includes(".gif")  || 
-         words[0] != undefined && words[0].includes(".svg")  || 
-         words[0] != undefined && words[0].includes(".ico")  || 
-         words[0] != undefined && words[0].includes(".bmp")  || 
-         words[0] != undefined && words[0].includes(".webp") ){
-        inlineImageHeight0 = "250";
-        content = content.replace(words[0],'');
-        //content = "Hello";
-        //note.content = note.content.replace(words[0],'');
-      }
-      else if(words[1] != undefined && words[1].includes(".jpg")  ||
-         words[1] != undefined && words[1].includes(".jpeg") || 
-         words[1] != undefined && words[1].includes(".png")  || 
-         words[1] != undefined && words[1].includes(".gif")  || 
-         words[1] != undefined && words[1].includes(".svg")  || 
-         words[1] != undefined && words[1].includes(".ico")  || 
-         words[1] != undefined && words[1].includes(".bmp")  || 
-         words[1] != undefined && words[1].includes(".webp") ){
-        inlineImageHeight1 = "250";
-        content = content.replace(words[1],'');
-        //note.content = note.content.replace(words[1],'');
+
+      for(let i=0; i<4; i++) {
+        if(words[i] != undefined && words[i].includes(".jpg")  ||
+           words[i] != undefined && words[i].includes(".jpeg") || 
+           words[i] != undefined && words[i].includes(".png")  || 
+           words[i] != undefined && words[i].includes(".gif")  || 
+           words[i] != undefined && words[i].includes(".svg")  || 
+           words[i] != undefined && words[i].includes(".ico")  || 
+           words[i] != undefined && words[i].includes(".bmp")  || 
+           words[i] != undefined && words[i].includes(".webp") ){
+	  if(i==0) {
+            inlineImageHeight0 = "250";
+	  }
+	  else if(i==1) {
+            inlineImageHeight1 = "250";
+	  }
+	  else if(i==2) {
+            inlineImageHeight2 = "250";
+	  }
+	  else if(i==3) {
+            inlineImageHeight3 = "250";
+	  }
+          content = content.replace(words[i],'');  //5e
+          //note.content = note.content.replace(words[i],'');
+        }
       }
 
       // nostr:note1, nostr:nevent1
@@ -308,16 +293,43 @@ const Test = () => {
         content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
       }
 
+      // cpngirl  
+      if(content.includes("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl")) 
+      {
+        content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@cpngirl");
+      }
+      // cpngirl  
+      let cpngirlnpub = "f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd"
+      if(content.includes("#[0]") && note.tags[0].includes(cpngirlnpub) ) 
+      //if(content.includes("#[0]")) 
+      {
+        content = content.replace("#[0]","@cpngirl");
+      }
+      if(content.includes("#[1]") && note.tags[1].includes(cpngirlnpub) ) 
+      //if(content.includes("#[1]")) 
+      {
+        content = content.replace("#[1]","@cpngirl");
+      }
+      if(content.includes("#[2]") && note.tags[2].includes(cpngirlnpub) ) 
+      //if(content.includes("#[2]")) 
+      {
+        content = content.replace("#[2]","@cpngirl");
+      }
+      
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
                 {reply} <img src={replyToImageURL} width={replyToImageSize} height="40" />
-                <img src={emojiURL} width={emojiSize} height="25" />
+                <img src={emoji1URL} width={emoji1Size} height={emoji1Size} />
+                <img src={emoji2URL} width={emoji2Size} height={emoji2Size} />
+                <img src={emoji3URL} width={emoji3Size} height={emoji3Size} />
                 {content}
                 <img src={words[0]} height={inlineImageHeight0} />
                 <img src={words[1]} height={inlineImageHeight1} />
+                <img src={words[2]} height={inlineImageHeight2} />
+                <img src={words[3]} height={inlineImageHeight3} />
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}
                 <font color="black">-{hex}-{note.pubkey}-</font>{index}
@@ -392,6 +404,30 @@ const Test = () => {
       }
       else if (pubkey == '35cb2bc997fa37f27ec2a968866d77ecefc29d6b22f94e2eeb9d3963579e417b') {
         image = 'https://i.gyazo.com/75825ba5ac590f31f34992201d5dc336.jpg'
+      }
+      else if (pubkey == '6d365e45de4dd87cf73bb82c35ba66a16fc4e7761a42a08243c66a9dbc6ce628') {
+        image = 'https://nostr.build/i/718f8816d929887d381ec762c487a90bf16227be765d7ec5e23344cf4b198fce.jpg'
+      }
+      else if (pubkey == '1fa0679cb80e4a1378d3345102be87cf6aafad6c39979fa7386413749d0bcee4') {
+        image = 'https://nostr.build/i/0c56b00467291354e477521f49008f5eebd881a337f20e951d98de3e973690e9.jpg'
+      }
+      else if (pubkey == 'fe2b9fe2446a44dff5ebe744c32d27cef10f87f5b1ed374070bd6eb3749c06e5') {
+        image = 'https://nostr.build/i/1582a2a22093e053cd2c86bfbda5c48e2aa7c2c09fe75384387a2bde6a496a67.jpg'
+      }
+      else if (pubkey == '047a32b35da5372967e8fc52144011439cb5ea8dbb640e1d56e7790db91abf78') {
+        image = 'https://void.cat/d/PdFB24HyM77wfUB8u54ntC.webp'
+      }
+      else if (pubkey == '2717d9d9d3b6b5075ecf034957468bd8cc6687356d10ed6d5b29a0f5a474de69') {
+        image = 'https://s3.arkjp.net/misskey/e976a3fc-82b8-4a1b-9ca5-500532da4b17.jpeg'
+      }
+      else if (pubkey == '8b347916be2cb3ab9687c9eb78a8d05224c045bce5b416bdd50169965eb0f45c') {
+        image = 'https://nicecrew.digital/media/a96d278adecd64ca34842fdb3f0b2be5aa700d830e40258dbc55d1baee599f68.png'
+      }
+      else if (pubkey == 'a90e3bd20fc47523dd31709ba8869e5d2317c79a0077f203c52f79e66cb1f5ea') {
+        image = 'https://64.media.tumblr.com/85867932dcc24f3ac01f36c75b778b61/226ef8ef891a3d3a-93/s400x600/cf01f7f8084b01eb0583afba7ae2692117e00fea.jpg'
+      }
+      else if (pubkey == '') {
+        image = ''
       }
       else if (pubkey == '') {
         image = ''
@@ -1157,7 +1193,9 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_7494c2c95277dcf39f3cddb224a4340f8de13b8c357313d595040e7585068735.jpeg'
       }
       else if (pubkey == 'c81c7999f7276387317878e59d7c321093a433977ee6811ca76dc3a9738e1869') {
-        image = 'https://ul.h3z.jp/353dVxmE.png'}
+        image = 'https://ul.h3z.jp/353dVxmE.png'
+	image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAAAAXNSR0IArs4c6QAA%20AARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAA78SURBVHhe7Z09%20iBw5Fsc7nHBChxNeOOGGEzqcsMMJJ3TobEKHFzo0LBgbFjwcGBrMwcAmNixsLyyc%20WVgYWDDjjxuPsfc83l1/3GP0LLTV3fWhKuk9Pf1/dNCl6paqJP1UUpWqavYFgIqB%20AKBqIACoGggAqgYCgKqBAKBqIACoGggAqgYCgKqBAKBqIACoGggAqgYCgKqBAKBq%20IACoGggAqgYCgKqBAKBqIACoGggAqgYCgKqBAKBqIACoGggAqgYCgKqBAKBqrAmw%20WCx2dnZmm6G1t2/f5l+D6jElwJ07d7a3t7mmt3J0dMT/sQLte7v5DvjfwI4AVK5c%20yP24desW/7N8yGfeq96QCTdu3Dg7O+MoasWOANeuXeOync0ODw859O9cXl5ev37d%20/WZra4tDC2eo+Q3IBDp6cFz1YUcALs/ZjGo5B62D1vLvZkb23ZtPbnfu+8HBgftx%20iJm2IAKDAvDyZvh3vQXo070W7FvzFnSZ3+D4+Hh3d5f/uXlQRD9r33daS8fbk5MT%20/kNp1CgANXjul32GAYO61/nHFdSJ57SjDmg0DOA/b3Ag7Fj2QbAhiKNGAXyptx/6%20l8vl2g5DC+0Rdp6iDaFf9uma+32h5pyDhkAHDT8oIhoCU7vOKwbSc+M1YESAQQ0h%20lXr7QYDasEZNbe9ehxFu6ktQ7e95itbTrpPDt9DUV+GggYQONFL0/t+8eZODVqBm%20giRcFbvPxmvAiABDG8JNB4G13f3OwSXhIyQm6Us4aGPu3bvHUayDfxfV//HQ3nEs%20QTxh3+/x48cc2grFEx4zN7UFqjAiwNCGcG2RN84nUpz9h3dhO0qsHlh4xeZTtCGh%20TkTLNvAvxglA+COY2/IwK2i/3G96Em58/kHRUIwIwPk9pB7wH77+hTpRvhIQ8/m8%20s9VvEDrQOLAMHao2mlI6DmzaGP7FaAHCQyJtrW9Q+hz9GrTkg0IgAP/F1wDqRA0t%20cg/90UVCcNAVYeQc1AOqiH7YsPa44QepZAgHxUJbHvrvicuKTfmgEAsCDG1fHb68%20XVd1/GjS4SIhwrOB0ZHTmMT9cW1TSla4tS2D1P40+l0OXjcc/j8EyEBc+xqWN3VV%20+dvoAgvbUd8D5uWoyBuihniveg5SOyE/KQ9dnESf4comOAoIkJqw7z6ofaXDdNhV%20dV8IXh1L6JJvtnk5KvJQ1IYDHKqykvGWQYDUxDX/jrCr6oiIZJXVHjAvRNWGUFQi%20dICDIMAIihdgZN/d/dczcgDg4ehmM3dBlBdia0PDgVX4d5rgLYMAqeFsjs3osPND%20cOhofLSuF+S+E25tBC0OzOdz/pEmeOMgQGo4m2MzOuyyT1iTwmiXyyV/G1cbyIHV%20uUkR1yvywNsHAVLD2Twio90oYn9/f9qaRFXTbRjF7L4QvK4CeIchQFImvBI0OWHD%207+F11glnUnCQVsoukmmvBE1Oo8eis7OeAn9mQv8uly3A3t6ey+iprgRNS9hrV9tZ%20T4HbZUL/LhcpwMXFxdHRkZ+3TJ1sXgF04MqF4GXFFCaAq/rhnSX+aivQA5cNBJgW%20GlqtvamKVwMdxM1NlKKY2tO4W4X6P657PWbCFkjBmMkp+SlDgHDGG1X9Um64rpOp%20JpbnoQwB/OlOalTqOZdSKK6kCF7WTQFbSaNeztFCGpXK4aKCAJMw5u5sIAKXFgSY%20BN+hpNqPzk8RuPIieFk32reS87KEa4rAwQW2gR1lz04sRgBeBupp3GKxCSUmQAAw%20MeG9EJ007nLODwQA+aB+7Oo9PYTgtR0IAAQgExp3eErN6YIAQIbVowGvyAsEAMJw%20AUOAtXDeQAC7cAFDgLVw3kAAu3ABQ4C1cN5AALtwAUOAtXDeQAC7cAFDgLVw3kAA%20o/jnvxMclBcIAMQIJ7oTHJoXCABkaNR+qVtbIQAQIKz9shPdtVcsP7XQv20FlI6e%202k9oF8A/YgDP/zHAxcVF+MIbDTc5aReAMggHARs0Huuk5Ba/AvrW4UFA1c1EoA+N%2051g6lNR+ogABwoMAQbnJK4Bi1tZ7QnDq/1oKEIBo3GSk5G46EHJ6eko1++DgYLXS%20exQ+IrsMAQjKODpuckZOgbamSDmUVy01ux3NWV2MAAQ5sPaGumhwZqkndLzlLBtC%20EU1MSQI4ptWAIwWt+KcztUCtCR2iqbOq82Ulm6i0BnChQYB+cGZZfDoTBADd+LNw%201KsxdvoBAoBuwsu3hKUz0RAAdLM67jJzVR4CJOH4+NifNDTTbQjPRJs5gQYBpid8%20n40nRZO5WCxCzTKccyQHXHIEBxUOBJieRo/ZkaLJbJydzNMqc2IQoGi4DNOUYviS%20LGoy/dFg8rGjizbk8PCQjj+8Og2cEgQoGi7DNKXIUX+NPDwgTOsARzqbhUmQb0lH%20qJwMBCga3yovl0sOmg4XM+EWw7EjMWGKHOPV9an9/X1euCLdmUpOAAIUzXw+d6VI%209YaDJoIGpi5mgoOuHNjb23OBE6boIiTcIvW4dnd3OSiZAxw7BCgaaoa5GKfuN4cD%20Uw66IkxxkqpJkXB0fzctPNqkOAPLUUOA0mmZUUf1hqw4OTnhn/ajMWF49Tkfm1Kk%20f1EnfpCEYe2noxmHXtFwgJhWA44UApTOar95QhqV0rFaNVfpI0M4OZkipGh5xVco%20ZFW2qXpEHB0EsEGj3zwJLfc9ra2a0ayt/Z61aUUcbRpwRBDAMNRfp1oS9md6EnfL%20X7SEfdKi36wedra2tuI0uLi44CggAEhBfxn6P0tw7aFgPBx74UCAupiqy0dHFY6x%20cCBAjYzRgHqG+u/07Q8EAFVjRIA7v77fefBq9u1z+tAXWuQVALRiQYCjn965qu8/%20W3df8DoAWilegNu//K9R++lz+OQtrwaglbIFOHv/iRp7V+mv//vi8uNnXgFAP8oW%204MYP3PnZfXiO2g8iKFuAa9+9dAIc//aBgwAYQtkCuNpPH14GYCAQAFRNwQKcPP/D%201f6dB684CICBFCzA4ZO3ToCbP77jIAAGUrAAfgT8+OWfHATAQAoWwNV++vAyAMMp%20VYDl+V+u9m/ff8lBAAynVAH++R+eAbF/8oaDABhOqQJQvXcCkAkcBMBwihSA+j9+%20ChB951CQmMWzD3uPXhubal6eAJcfP+8+PHe1/5vFOYeC9LjTbsammpcngJ/9TyXx%209A2a/3y4bKcPL5ugPAH86f9bP//OQSALJrud5QngyoA+vAxyMf+eTzxYOvNWmABn%207z8NFcDk0E0Ef+2lf+brpzABwjtgOKgLk0M3KVzm04eXy6ckAcIbIPvfAWOvzASx%20l5klCRDR/BP2ykwQe5lZjABxzT9hr8wEsZeZxQgQ1/wT9spMEHuZWYYA0c0/Ya/M%20BLGXmWUIEN38E/bKTBB7mVmAAGOaf8JYmcle1jCWmUQBAoxp/gljZSZ7WcNYZhIF%20COAn/8Q9/cpYmcnujmzqKShAgJGZPvLv2pDdHdnUU2BcgIi5Q8qR3R3Z1FNgXICR%204weFjMmN8cimngLtAoxswkeOHxQyJjfGI5t6CrQLMKYJN/nsRLdH9OHlvMimngLt%20Aoxpwk0+O9HtEX14OS+yqadAuwD+EhgvD8HLY+nZiW6P4jJkPLKpp0C7ALd+/p2y%20O+6dX/ZKi5DdKdnUU6BdgDHYKy1CdqdkU08BBCgM2Z2STT0FECCSxbMPOw9e5X8p%20d9Kd6kQ29RRAgEio6rvIM89LS7pTncimngKzAoQv0OagSXGj83Txb0IkUY9s6ikw%20K4A/Bzr/PtVTnERqg0iiHtnUU2BWAH8BId0LtEVqg0iiHtnUU2BWgDEXEPogNc/C%20JUofXs6LbOopsDwITorUPAvZKiibegogQAzUrZKaZyFbBWVTTwEEiOHe6aWrB//4%201385KBeyVVA29RRAgBj2Hr129SD/G8pkq6Bs6imAAIN5+oafEr5198XZ+08cmgvZ%20KiibegogwGD8PToi74mQrYKyqacAAgxm+z4PfxfPBG6zlK2CsqmnAAIMQ/w2S9kq%20KJt6CiDAMMRvs5StgrKppwACDMNPApW6zVK2CsqmngIIMIDTdx9d8dMwgIOyI1sF%20ZVNPAQQYgJ9iLfieUNkqKJt6CiDAAKjeu+LPf/3LM+YxGeNxSUulngII0Jfl+V++%208gm+Kj31LNd2ZPVLAQToxeXHz7sPz13Zf7Mw8pjRCGT1SwEE6MXRT3z1l5rAp2/E%20mn8wORCgF37yMzWBHARMAAF64Wo/fXgZWAEC9AICWAUCdGPvNTPAAwG6sfeaGeCB%20AN2MeUcBUA4E6MbVfvrwMjAEBOgmjwDuFfC3fxGbZFEnEKCbPAL4ida41JATCNBN%20ngkwfqhNyXEQSA8E6CbPBJjLj5+dAPThIJAeCKAICJAfCKAICJAfCKAICJAfCKAI%20CJAfCKAICJAfCKAICJAfUwLc+fX93qPXmd9bOiEQID92BPDPLNm6+yLde8GSAgHy%20Y0cAP5Ug3WshUwMB8mNEAH/Pyvb9l4U2/wQEyI8RAY5/++CqDo0BOKhAIEB+jAjg%20H1ty4weZhzZPAgTIjxEB/EML751eclCBQID8GBHAv7Wl6KdWQYD8GBHARtWxsRdl%20AQEUoW0v3F2a5V5Y7AMEUIS2vXCPw7B9hxoEUIS2vdC2PSmAAIrQthfaticFEEAR%202vZC2/akAAIoQtteaNueFEAARWjbC23bkwIIoAhte6Fte1IAAbSweMbz+fTshbbt%20SYEFAU6e/+HKaefBKw4qEP8Maj0VTtv2pMCCAIdP3rpyuvmjhamget7B6DeJly1i%20QQDfdj5++ScHFYjC2qZwkybHggA2yknhXijcpMmBAFpQuBcKN2lyIIAWFO6Fwk2a%20HAigBYV7oXCTJgcCaCHPazgGYSNj27EggMKqE0Ge13AMwuVq6RnbjgUBFFYdG0AA%20UDUQAFQNBABVAwFA1UAAUDUQAFQNBABVAwFA1UAAUDU2LrG3AwHARmq4xA4BQNVA%20AFA1EABUDQQAVQMBQNVAAFA1EABUDQQAVQMBQNVAAFA1EABUDQQAVQMBQNVAAFA1%20EABUDQQAVQMBQNVAAFA1EABUDQQAVQMBQNVAAFA1EABUDQQAVQMBQNVAAFA1EABU%20DQQAVQMBQNVAAFA1EABUDQQAVQMBQNVAAFA1EABUzJcv/wcO2dFLStWamQAAAABJ%20RU5ErkJggg=='
+      }
       else if (pubkey == '5a462fa6044b4b8da318528a6987a45e3adf832bd1c64bd6910eacfecdf07541') {
         image = 'https://imgproxy.iris.to/insecure/plain/http://fiatjaf.com/static/favicon.jpg'
       }
@@ -2166,6 +2204,7 @@ const Test = () => {
       else if (pubkey == '6b0a60cff3eca5a2b2505ccb3f7133d8422045cbef40f3d2c6189fb0b952e7d4') {
         image = 'https://nostr.build/i/nostr.build_96de16125bf6fcf33c8e7aec18c1c9a043ec9f617148d3c7b9726c4fe5d17e74.jpeg'
         //image = 'https://void.cat/d/XaXeo5TPvrWKMX1rPb1hrN.webp'
+	image = 'https://nostr.build/i/nostr.build_a3d539ddaceeb6bcbdceab542208d346300f410b6227c0b278ae4f798666f04c.jpg'
       }
       else if (pubkey == '32310997f6b37b6cd60bb15a28e9a14badddfbf0875a7de24c69123a0c1e64cc') {
         image = 'https://www.eonet.ne.jp/~mmaga/omake/hyutegaki.jpg'
