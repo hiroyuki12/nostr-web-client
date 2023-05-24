@@ -160,6 +160,7 @@ const Test = () => {
       //authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion
       authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+      //authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
       
       //since: 0,
       limit: 1000,
@@ -174,7 +175,7 @@ const Test = () => {
         if(event.tags[i] == undefined) {
 	  break;
 	}
-        followList2 = followList2 + event.tags[i][1];
+        followList2 = followList2 + event.tags[i][1] + ",";
       }
       return (
         <div>
@@ -193,7 +194,7 @@ const Test = () => {
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
       if(!followList2.includes(note.pubkey)) {
-        return;
+        //return;
       }
       let dateTime = new Date(note.created_at * 1000);
       let createdDate = dateTime.toLocaleDateString('ja-JP');
@@ -219,28 +220,28 @@ const Test = () => {
             reply = "Re]";
             // note.tags[0][1];  // to id
             replyToImageURL = getImageURL(note.tags[0][1]);
-            replyToImageSize = "25"
+            replyToImageSize = "40"
           }
           if(note.tags[1] != undefined && note.tags[1].includes("p")) {
             // note.tags[1][0];  // p
             reply = "Re]";
             // note.tags[1][1];  // to id
             replyToImageURL = getImageURL(note.tags[1][1]);
-            replyToImageSize = "25"
+            replyToImageSize = "40"
           }
           if(note.tags[2] != undefined && note.tags[2].includes("p")) {
             // note.tags[2][0];  // p
             reply = "Re]";
             // note.tags[2][1];  // to id
             replyToImageURL = getImageURL(note.tags[2][1]);
-            replyToImageSize = "25"
+            replyToImageSize = "40"
           }
           if(note.tags[3] != undefined && note.tags[3].includes("p")) {
             // note.tags[3][0];  // p
             reply = "Re]";
             // note.tags[3][1];  // to id
             replyToImageURL = getImageURL(note.tags[3][1]);
-            replyToImageSize = "25"
+            replyToImageSize = "40"
           }
           if(note.kind == "6") { reply = "Repost]"; }
 
@@ -312,7 +313,7 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
-                {reply} <img src={replyToImageURL} width={replyToImageSize} height="25" />
+                {reply} <img src={replyToImageURL} width={replyToImageSize} height="40" />
                 <img src={emojiURL} width={emojiSize} height="25" />
                 {content}
                 <img src={words[0]} height={inlineImageHeight0} />
@@ -365,14 +366,32 @@ const Test = () => {
       else if (pubkey == '0000005f87f64341c212cc93d6c266c03ae752c02660e78a6da1424f7b05c470') {
         image = 'https://void.cat/d/FgRgcaCcnqhfwPfspKY5es'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'dbeef8065831054c1bac0ffadbb9d2a42cd0b8ceb2dc25fb321ea2571243496b') {
+        image = 'https://nostr.build/i/nostr.build_076e8a247c9cc6e1230b2e5dda24b9583b71332308686272fe9e661f6b7f7086.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'e89a2fa00302c33ca39831212a3d3074d18f663f100e1362b54efb38146b089f') {
+        image = 'https://pbs.twimg.com/profile_images/1653612992033067008/hnemCkgW.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'c6f7077f1699d50cf92a9652bfebffac05fc6842b9ee391089d959b8ad5d48fd') {
+        image = 'https://nostr.build/i/p/nostr.build_84564270e68935ec49a46d50d8abe13cfa52e2a973b9719dd5af9e2d4db1045f.jpg'
+      }
+      else if (pubkey == '389ca4957911b126093f42a0a90786515b59311dc5a942b404d7e16f17287828') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/108610db6f53aead2966ea7e5e9a590d5e958f9b3ba83982a3d6c43ddf51a791.jpg'
+      }
+      else if (pubkey == '6369fb82bec54226bf09bb365b6f0d71b16c41f56e7edfd4f97de23f9c3281da') {
+        image = 'https://nostr.build/i/nostr.build_e9120a1b32f992f44c55c0a8916428a9e17a0b1a73439ecd0731997e94a67001.bmp'
+      }
+      else if (pubkey == '90c8d4d3b7642832b2769a0f5e7d23115cb70b123d10d64701c888a16695a7ab') {
+        image = 'https://i.imgur.com/IkJE8yZ.jpg'
+      }
+      else if (pubkey == 'eeef8f1c33febecebc8fe0aabccf426685f56085ee8de10ebe9200aa8ae3f7ab') {
+        image = 'https://murachue.sytes.net/img/20120429.png'
+      }
+      else if (pubkey == 'efdd0a9fd46de7b9630902021a00e0dbce64f013a89da701084e285dbcda42f1') {
+        image = 'https://nostr.build/i/614c4c97dce02fbd380216290a7f2f7eacc3d2397398958179b944e29e76828e.jpg'
+      }
+      else if (pubkey == '35cb2bc997fa37f27ec2a968866d77ecefc29d6b22f94e2eeb9d3963579e417b') {
+        image = 'https://i.gyazo.com/75825ba5ac590f31f34992201d5dc336.jpg'
       }
       else if (pubkey == '') {
         image = ''
@@ -889,6 +908,7 @@ const Test = () => {
       }
       else if (pubkey == 'cb230a5e9341a1809c0d796ae4b63af1a513b735c49b8aa09278fd3414aed832') {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDY3LDEpOyBzdHJva2U6cmdiYSgzOCwyMTcsNjcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+	image = 'https://nostr.kojira.net/nostrchan2_new.png'
       }
       else if (pubkey == '1bdab038c79ce5fad6c2937a8ce720805de00288faa7d0a9df906bc1f7bffbc7') {
         image = 'https://media.mstdn.jp/accounts/avatars/000/868/408/original/301235090b57b4b4.png'
@@ -2260,6 +2280,7 @@ const Test = () => {
       else if (pubkey == 'af07786197826a2f1ebd71f19d137aeed74eb4c8e56cb32a3efee82f898e2714') {
         // mekamakrd
         image = 'https://void.cat/d/JWM33EgySUGtsbFL7GCLxx.webp'
+        image = 'https://nostr.build/i/nostr.build_d72bb9253c94ea74ee7f9f158aa7e26b5c48d51c3070165a5d0039b94df697f4.jpeg'
       }
       else if (pubkey == '26bb2ebed6c552d670c804b0d655267b3c662b21e026d6e48ac93a6070530958') {
         // ocknamo
@@ -2313,6 +2334,7 @@ const Test = () => {
       else if (pubkey == '846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca') {
         // caz0617
         image = 'https://www.tgkzmdd.help/nostrimg/profile/feelie.jpg'
+	image = 'https://tgkzmdd.help/nostrimg/profile/caz0617_malaysia_800x800.png'
       }
     return image;
   }
