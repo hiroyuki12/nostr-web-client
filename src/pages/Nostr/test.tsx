@@ -143,14 +143,14 @@ const Test = () => {
     },
   });
 
-  const { data: npub } = nip19.decode(
+  /*const { data: npub } = nip19.decode(
     "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
   );
 
   const { data: userData, isLoading } = useProfile({
     pubkey: npub.toString(),
   });
-  console.log(isLoading);
+  console.log(isLoading);*/
 
 
   const { events: events2 } = useNostrEvents({
@@ -2343,16 +2343,13 @@ const Test = () => {
     <>
       <div style={{ backgroundColor: "#222222", color: "#DDDDDD" }}>
         <div>
-          <p>Name: {isLoading ? "Loading..." : userData?.name}</p>
-          <p>Public key: {isLoading ? "Loading..." : userData?.npub}</p>
-          <p>Picture URL: {isLoading ? "Loading..." : userData?.picture}</p>
           <p>now:{dateToUnix(now.current)}</p>
         </div>
         <div>
           <PostButton />
         </div>
-        <ul>{isLoading ? "Loading..." : renderImageList2(events2)}</ul>
-        <ul>{isLoading ? "Loading..." : renderImageList(events)}</ul>
+        <ul>{renderImageList2(events2)}</ul>
+        <ul>{renderImageList(events)}</ul>
       </div>
     </>
   );
