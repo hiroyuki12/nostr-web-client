@@ -19,6 +19,8 @@ const Test = () => {
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
       limit: 100,
+      //"#t": ["nostter"],
+      //"#t": ["foodstr"],
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28- 1970/1/1
@@ -214,16 +216,33 @@ const Test = () => {
       let replyToImageURL = "";
       let replyToImageSize = "0"
 
-      for(let i=0; i<4; i++) { 
+      for(let i=0; i<note.tags.length; i++) { 
         if(note.tags[i] != undefined && note.tags[i][0].includes("p")) {
-          // note.tags[0][0];  // p
           reply = "Re]";
-          // note.tags[0][1];  // to id
-          replyToImageURL = getImageURL(note.tags[i][1]);
+          replyToImageURL = getImageURL(note.tags[i][1]);  // to user id
           replyToImageSize = "40"
         }
       }
-      if(note.kind == "6") { reply = "Repost]"; }
+
+      let content = note.content;
+      if(note.kind == "6") {
+        reply = "Repost]";
+        
+	let tmp = content.split(',');
+        for(let i=0; i<tmp.length; i++) {
+	  if(tmp[i] != undefined && tmp[i].includes("content")) {
+	    content = tmp[i].replace("\"content\":\"","");
+	    content = content.replace("\\n"," ");
+	    content = content.replace("\""," ");
+	    content = content.replace("{"," ");
+	  }
+	}
+	for(let i=0; i<note.tags.length; i++) {
+	  if(note.tags[i][0] == "e") {
+	    //content = note.tags[i][1] + "," + content;  // to eventId
+	  }
+	}
+      }
 
       let emoji1URL = "";
       let emoji1Size = "0"
@@ -256,7 +275,6 @@ const Test = () => {
       let inlineImageHeight1 = "0";
       let inlineImageHeight2 = "0";
       let inlineImageHeight3 = "0";
-      let content = note.content;
       let words = note.content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
 
       for(let i=0; i<4; i++) {
@@ -286,10 +304,11 @@ const Test = () => {
       }
 
       // nostr:note1, nostr:nevent1
-      if(words[1] != undefined && (words[1].includes("nostr:note1") || 
-        words[1].includes("nostr:nevent1"))) {
-        //content2 = "Hello";
-        //content2 = "<a href=\"https://www.google.com\">google</a>";
+      if(words[1] != undefined &&
+        (words[1].includes("nostr:note1") || 
+         words[1].includes("nostr:naddr1") || 
+         words[1].includes("nostr:nevent1"))
+	) {
         content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
       }
 
@@ -425,6 +444,42 @@ const Test = () => {
       }
       else if (pubkey == 'a90e3bd20fc47523dd31709ba8869e5d2317c79a0077f203c52f79e66cb1f5ea') {
         image = 'https://64.media.tumblr.com/85867932dcc24f3ac01f36c75b778b61/226ef8ef891a3d3a-93/s400x600/cf01f7f8084b01eb0583afba7ae2692117e00fea.jpg'
+      }
+      else if (pubkey == '3009318aa9544a2caf401ece529fd772e26cdd7e60349ec175423b302dafd521') {
+        image = 'https://nostr.build/i/07a19dfc04d25699043629ca08be5c7196dec77f30c547dcbc7eed1f586af33b.jpg'
+      }
+      else if (pubkey == '27a8b993069842712a29b03f534e85f1a3dfcdbe51cdd2c79232ccc30ecb66e8') {
+        image = 'https://pubimgs.c-stellar.net/valid_dachou.png'
+      }
+      else if (pubkey == 'fe09f1624ea39b93a79a5c0edc5ea25ca7b917aaac39b8e53e88ec7e15e2c34d') {
+        image = 'https://pbs.twimg.com/profile_images/1342909929321943041/vD3uteo-.jpg'
+      }
+      else if (pubkey == '9cbc09bec1547f50a77b266dbf8c22fc8fcc4c26bb7fdb083440645a97cba413') {
+        image = 'https://nostr.build/i/7bcbfacdd0321fe5213d723ee5964f6da0622ff1ee76cf01c17336c4138d1194.jpg'
+      }
+      else if (pubkey == 'e07bfc04ea87c72a9185b0891f055361e6492f259f81247683d6c9ccb2b651ed') {
+        image = 'https://nostr.build/i/p/nostr.build_af05b0b0fd9e87cff4f7c9b0f0ec62d33abaf617c55dcf0f49410307ac7eddf9.gif'
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
+      }
+      else if (pubkey == '') {
+        image = ''
       }
       else if (pubkey == '') {
         image = ''
