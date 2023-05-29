@@ -11,9 +11,6 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
-      //authors: ['43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906'], // maya
-      //authors: ['c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142'], // hyuki
-      //authors: ['fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'], // shino3, Lokuyow
       kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
@@ -24,10 +21,11 @@ const Test = () => {
       //"#t": ["illust"],
       //"#t": ["ロクヨウ画像"],
       //"#t": ["nosli"],
-
+      //"#t": ["cluster"],
+      //"#t": ["Amethyst"],
       
       until: dateToUnix(now.current), // all new events from now
-      //until: 1685199187,  // paging
+      //until: 1685371705,  //paging
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28- 1970/1/1
@@ -224,18 +222,26 @@ const Test = () => {
 
 
       let reply = "";
-      let replyToImageURL = "";
       let replyToHex = nip19.npubEncode(note.pubkey)
+      let replyToImageURL = getImageURL(note.pubkey);
       let replyToUrl = "https://nostter.vercel.app/" + hex
       let replyToImageSize = "0"
+      let motoHex = replyToHex
 
-      for(let i=0; i<note.tags.length; i++) { 
-        if(note.tags[i][0].includes("p")) {
-          reply = "Re]";
-          replyToImageURL = getImageURL(note.tags[i][1]);  // to user id
-	  replyToHex = nip19.npubEncode(note.tags[i][1]);
-	  replyToUrl = "https://nostter.vercel.app/" + replyToHex
+      for(let h=0; h<note.tags.length; h++)  {
+        if(note.tags[h][0].includes("p")) {  // mention
+          reply = "To]";
           replyToImageSize = "40"
+	  if(motoHex != nip19.npubEncode(note.tags[h][1])) {
+            replyToImageURL = getImageURL(note.tags[h][1]);  // to user id
+	    replyToHex = nip19.npubEncode(note.tags[h][1]);
+	    replyToUrl = "https://nostter.vercel.app/" + replyToHex
+	  }
+          for(let i=0; i<note.tags.length; i++) { 
+            if(note.tags[i][0].includes("e")) {  // re
+              reply = "Re]";
+            }
+          }
         }
       }
 
@@ -243,13 +249,29 @@ const Test = () => {
       if(note.kind == "6") {  // 6.repost
         reply = "Repost]";
         
-	let tmp = content.split(',');
+	let tmp = content.split('\",');  // ",
         for(let i=0; i<tmp.length; i++) {
 	  if(tmp[i].includes("\"content\"")) {
-	    content = tmp[i].replace("\"content\":\"","");
-	    content = content.replace("\\n"," ");
-	    content = content.replace("\""," ");
-	    content = content.replace("{"," ");
+	    let tmp2 = tmp[i].split('],');  // ],
+	    for(let j=0; j<tmp2.length; j++) {
+	      if(tmp2[j].includes("\"content\"")) {
+	        tmp[i] = tmp2[j];
+	      }
+	    }
+	    content = tmp[i];
+	    //content = content.replace("jpg",'');  //test
+	    
+            for(let j=0; j<20; j++) {
+	      content = content.replace("\\n"," ");
+	    }
+	    
+	    content = content.replace("{","");
+	    content = content.replace("\"content\":\"","");
+	    content = content.replace("\"","");
+
+            for(let j=0; j<11; j++) {
+	      content = content.replace("\\","");
+	    }
 	  }
 	}
 	for(let i=0; i<note.tags.length; i++) {
@@ -267,6 +289,8 @@ const Test = () => {
       let emoji3Size = "0"
       let emoji4URL = "";
       let emoji4Size = "0"
+      let emoji5URL = "";
+      let emoji5Size = "0"
       
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] == "emoji") {
@@ -290,15 +314,25 @@ const Test = () => {
             emoji4URL = note.tags[i][2];
             //note.content = note.content.replace(":" + note.tags[3][1] + ":",'');
 	  }
+          if(i==4) {
+            emoji5Size = "40";
+            emoji5URL = note.tags[i][2];
+            //note.content = note.content.replace(":" + note.tags[4][1] + ":",'');
+	  }
         }
       }
 
-      let inlineImageHeight0 = "0";
-      let inlineImageHeight1 = "0";
-      let inlineImageHeight2 = "0";
-      let inlineImageHeight3 = "0";
+      let inlineImage1Height = "0";
+      let inlineImage2Height = "0";
+      let inlineImage3Height = "0";
+      let inlineImage4Height = "0";
+      let image1Url = "";
+      let image2Url = "";
+      let image3Url = "";
+      let image4Url = "";
       let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
 
+      let imageCount = 0;
       for(let i=0; i<words.length; i++) {
         if(words[i].includes(".jpg")  ||
            words[i].includes(".jpeg") || 
@@ -308,30 +342,46 @@ const Test = () => {
            words[i].includes(".ico")  || 
            words[i].includes(".bmp")  || 
            words[i].includes(".webp") ){
-	  if(i==0) {
-            inlineImageHeight0 = "250";
+	  if(imageCount==0) {
+            inlineImage1Height = "250";
+	    image1Url = words[i];
 	  }
-	  else if(i==1) {
-            inlineImageHeight1 = "250";
+	  else if(imageCount==1) {
+            inlineImage2Height = "250";
+	    image2Url = words[i];
 	  }
-	  else if(i==2) {
-            inlineImageHeight2 = "250";
+	  else if(imageCount==2) {
+            inlineImage3Height = "250";
+	    image3Url = words[i];
 	  }
-	  else if(i==3) {
-            inlineImageHeight3 = "250";
+	  else if(imageCount==3) {
+            inlineImage4Height = "250";
+	    image4Url = words[i];
 	  }
+	  imageCount = imageCount + 1;
           content = content.replace(words[i],'');  //5e
           //note.content = note.content.replace(words[i],'');
         }
       }
 
-      // nostr:note1, nostr:nevent1
-      if(words[1] != undefined &&
-        (words[1].includes("nostr:note1") || 
-         words[1].includes("nostr:naddr1") || 
-         words[1].includes("nostr:nevent1"))
+      let note1LinkUrl = "";
+      let note1LinkText = "";
+      let note1LinkArrow = "";
+      // nostr:note1, nostr:naddr1, nostr:nevent1
+      if(content != undefined &&
+        (content.includes("nostr:note1") || 
+         content.includes("nostr:naddr1") || 
+         content.includes("nostr:nevent1"))
 	) {
-        content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
+	for(let i=0; i<words.length; i++) {
+	  if(words[i].includes("nostr:")) {
+            //content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
+	    content = content.replace(words[i],'');
+	    note1LinkUrl =  "https://nostter.vercel.app/" + words[i].replace("nostr:",'')
+	    content = content.replace(note1LinkUrl,'');
+            note1LinkText = "nostr:note1(quote)";
+	  }
+	}
       }
 
       // cpngirl  
@@ -347,16 +397,36 @@ const Test = () => {
         {
           content = content.replace("#[0]","@cpngirl");
         }
-        if(content.includes("#[1]") && note.tags[i].includes(cpngirlnpub) ) 
-        {
-          content = content.replace("#[1]","@cpngirl");
-        }
-        if(content.includes("#[2]") && note.tags[i].includes(cpngirlnpub) ) 
-        {
-          content = content.replace("#[2]","@cpngirl");
+      }
+
+      let linkUrl = "";  // #r
+      let linkUrlText = "";
+      let linkArrow = "";
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] == "r") {
+	  if(note.tags[i][1].includes("http")) {
+	    linkUrl = note.tags[i][1];
+	    linkUrlText = note.tags[i][1];
+	    content = content.replace(linkUrl,'');
+	    linkUrlText = "";
+	    linkArrow = "(#r)";
+	  }
         }
       }
-      
+
+      let contentLinkUrl = "";
+      let contentLinkArrow = "";
+
+      if(content.includes("https://")) {
+        for(let i=0; i<words.length; i++) {
+	  if(words[i].includes("https://")) {
+	    contentLinkUrl = words[i];
+	    content = content.replace(words[i],'');
+	  }
+        }
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
@@ -367,11 +437,15 @@ const Test = () => {
                 <img src={emoji2URL} width={emoji2Size} height={emoji2Size} />
                 <img src={emoji3URL} width={emoji3Size} height={emoji3Size} />
                 <img src={emoji4URL} width={emoji4Size} height={emoji4Size} />
+                <img src={emoji5URL} width={emoji5Size} height={emoji5Size} />
                 {content}
-                <img src={words[0]} height={inlineImageHeight0} />
-                <img src={words[1]} height={inlineImageHeight1} />
-                <img src={words[2]} height={inlineImageHeight2} />
-                <img src={words[3]} height={inlineImageHeight3} />
+		<a href={note1LinkUrl} target="_blank">{note1LinkText}</a>
+		<a href={linkUrl} target="_blank">{linkUrlText}{linkArrow}</a>
+		<a href={contentLinkUrl} target="_blank">{contentLinkUrl}</a>
+                <img src={image1Url} height={inlineImage1Height} />
+                <img src={image2Url} height={inlineImage2Height} />
+                <img src={image3Url} height={inlineImage3Height} />
+                <img src={image4Url} height={inlineImage4Height} />
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -{createdTime}-{note.created_at}
                 <font color="black">-{hex}-{note.pubkey}-</font>{index}
@@ -392,9 +466,21 @@ const Test = () => {
       if (pubkey == '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
-      }  // @a
+      }  // @@
       else if (pubkey == '') {
         image = ''
+      }
+      else if (pubkey == '1bbfc3c4c6958ada8c75558a6e28604b683bf4a2fb8d44037ec353c0f313fc60') {
+        image = 'https://i.imgur.com/qtPFODc.png'
+      }
+      else if (pubkey == '18aa2eb9e84956e19df84b8c3132f998f78fd4e257b6f6118a9819372d9fa507') {
+        image = 'https://nostr.build/i/fed49955161744d760ab6e0f410442f7e58e13d713726c08a42cea048a90a7b5.jpg'
+      }
+      else if (pubkey == 'b75b9a3131f4263add94ba20beb352a11032684f2dac07a7e1af827c6f3c1505') {
+        image = 'https://nostr.build/i/99994f37f1620ec3215fb037a33059e94df7e288b9ecfb9f67f70e0acda339ad.jpg'
+      }
+      else if (pubkey == '0559387898de5e583f0cfed3dc09bf4737997ac4f585921463ca3240ade4b38c') {
+        image = 'https://nostr.build/i/0c56b00467291354e477521f49008f5eebd881a337f20e951d98de3e973690e9.jpg'
       }
       else if (pubkey == '') {
         image = ''
@@ -413,6 +499,51 @@ const Test = () => {
       }
       else if (pubkey == '') {
         image = ''
+      }
+      else if (pubkey == 'b8af7fcb6a3cd93f5a298b9f47ad0b509765d34d8046442b88f7a5520d328242') {
+        image = 'https://nostr.build/i/nostr.build_50ddc4edbb6fe6d134f26815d4c1b27bef2181267741cc7110b77284d8a114f7.jpeg'
+      }
+      else if (pubkey == 'de081fdfe7ffdf51d9ce7ae5f66525541c26cdeae1da2944de6ee407a7f7b221') {
+        image = 'https://nostr.build/i/2dca1986f7ff1af941363392788bd6fdfaaa64eed2ed17fa9045c6fbf4b6f7f8.jpg'
+      }
+      else if (pubkey == '4ce23b20cb5ae9f4921bf7eda970603225affa504e56ee108698f5158b9b6f38') {
+        image = 'https://void.cat/d/4xGzrYXX3ieemep4KkvU61.webp'
+      }
+      else if (pubkey == '1624cdf57e5cb1e7f26259b519b79149a75bc8f2d5ce0d31ffcbb0bf933050b0') {
+        image = 'https://void.cat/d/XYSp8eDAEcSwpeqm534C7c.webp'
+      }
+      else if (pubkey == 'f0b852f5f23069e43efe63d9601a13b7dbe3bbc1b4a587e3b6153b0b5b002bad') {
+        image = 'https://nostr.build/i/c94c0c08ac3d769343155b17b44c08ab6c5ec3603ff6e1955f1aa40c571881dd.jpg'
+      }
+      else if (pubkey == '85563bdf8b7ec25abb0393fce1d6860fc2aac1237e00455a45b6e7c8717899c7') {
+        image = 'https://www.gravatar.com/avatar/eb90a61a5ac824e176da24a816692d6d'
+      }
+      else if (pubkey == '083c0089d506226c4e4399d63e38cc1022410195c0f412d9fd70841c998f50e6') {
+        image = 'https://4.bp.blogspot.com/-pZ8L7YRCwv8/U9y_V0YzUoI/AAAAAAAAjbA/H5rqx7UpKIo/s800/vegetable_taranome.png'
+      }
+      else if (pubkey == 'c04330adadd9508c1ad1c6ede0aed5d922a3657021937e2055a80c1b2865ccf7') {
+        image = 'https://chiezo.dev/images/chiezo.jpg'
+      }
+      else if (pubkey == '45cc5c949ac4fc658f46dd19b98076a77a3e516415634d3f26b4e74d1f88a5f9') {
+        image = 'https://nostr.build/i/nostr.build_875cd9c2adf3696ff0aef8130cb7163978dc02144e172dedcc22c63f3a3c5139.jpeg'
+      }
+      else if (pubkey == '82eb21b50f2936e6b45b0d77ed83f834f35a65e17df35e74237be74608598493') {
+        image = 'https://nostr.build/i/10eaf7029fe129f8e737f6a3b0cc4ec79d336c6f7f0ccf0d7a71e4783dc7b5b4.jpg'
+      }
+      else if (pubkey == '1d709fcffc239692a87ae22bf6c99a10f1a271a5ac5187adf2a6376355f49da5') {
+        image = 'https://nostr.kojira.net/will_neighbor.jpg'
+      }
+      else if (pubkey == 'cb8ea19233eed8c858b185f962ffa9aef8ee98ea46d30e0a7c9defe01c4cbaa9') {
+        image = 'https://nostr.build/i/e5d57c53905e7d62159e4b10c13e6c58ed9aae37f63adfc3e35cbd32c8d20b43.jpg'
+      }
+      else if (pubkey == '29b7ab632d365315454d5294893e0607cec8297c5910f482a2d1fd41261169fb') {
+        image = 'https://awayuki.net/resource/bot1-avatar.png'
+      }
+      else if (pubkey == 'b06e337d77fe68c0742de266822b8c97626d8f8ab6943641dedf8b88a3da4465') {
+        image = 'https://www.gravatar.com/avatar/432c2f8b29e49f8cde472c4115871770?s=300'
+      }
+      else if (pubkey == '13e033a79ed39e58a37c3795ddd3b8d93eada2c0a303790e4e366e26b343fb96') {
+        image = 'https://i.imgur.com/o5H14XH.png'
       }
       else if (pubkey == '6bee48034b01214acd4caadbc50aea4ab3ea1ed22b4754851860a21847e768b7') {
         image = 'https://i.gyazo.com/67215b59801192db1da599072bf09e4d.png'
@@ -575,6 +706,7 @@ const Test = () => {
       }
       else if (pubkey == '389ca4957911b126093f42a0a90786515b59311dc5a942b404d7e16f17287828') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/108610db6f53aead2966ea7e5e9a590d5e958f9b3ba83982a3d6c43ddf51a791.jpg'
+	image = 'https://pbs.twimg.com/profile_images/1311126856435814402/HqnsvcRT_400x400.jpg'
       }
       else if (pubkey == '6369fb82bec54226bf09bb365b6f0d71b16c41f56e7edfd4f97de23f9c3281da') {
         image = 'https://nostr.build/i/nostr.build_e9120a1b32f992f44c55c0a8916428a9e17a0b1a73439ecd0731997e94a67001.bmp'
@@ -2047,6 +2179,7 @@ const Test = () => {
       }
       else if (pubkey == 'eb119234c467ac9d2ffea5b7284f3a74bd04287a12cfd58a22d19626434cddf2') {
         image = 'https://void.cat/d/2627RwhfWjsFBzmpSqZDNC.webp'
+	image = 'https://nostr.build/i/0549fbcd7dfd6fa9a74579b7077f5a68eab73e112cf888463d4bd32fd4d3f252.jpg'
       }
       else if (pubkey == '5e0708079b7127b584ef197b9104ad13895dbfc535bbcc618961bd54a328e997') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://ihasq.com/image.webp'
