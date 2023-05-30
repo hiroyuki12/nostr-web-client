@@ -25,7 +25,7 @@ const Test = () => {
       //"#t": ["Amethyst"],
       
       until: dateToUnix(now.current), // all new events from now
-      //until: 1685371705,  //paging
+      until: 1685438287,  //paging
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28- 1970/1/1
@@ -232,10 +232,12 @@ const Test = () => {
         if(note.tags[h][0].includes("p")) {  // mention
           reply = "To]";
           replyToImageSize = "40"
-	  if(motoHex != nip19.npubEncode(note.tags[h][1])) {
-            replyToImageURL = getImageURL(note.tags[h][1]);  // to user id
-	    replyToHex = nip19.npubEncode(note.tags[h][1]);
-	    replyToUrl = "https://nostter.vercel.app/" + replyToHex
+	  if(!note.tags[h][1].includes("npub")) {  // not hex
+	    if(motoHex != nip19.npubEncode(note.tags[h][1])) {
+              replyToImageURL = getImageURL(note.tags[h][1]);  // to user id
+	      replyToHex = nip19.npubEncode(note.tags[h][1]);
+	      replyToUrl = "https://nostter.vercel.app/" + replyToHex
+	    }
 	  }
           for(let i=0; i<note.tags.length; i++) { 
             if(note.tags[i][0].includes("e")) {  // re
@@ -427,11 +429,22 @@ const Test = () => {
         }
       }
 
+      let contentWarning = "";
+      let contentWarningText = "";
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] == "content-warning") {  // NIP-36
+	  contentWarning = "[!!content-warning!!]";
+	  contentWarningText = note.tags[i][1];
+        }
+      }
+      
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+	        {contentWarning}{contentWarningText}{contentWarning}
                 {reply} <a href={replyToUrl} target="_blank"><img src={replyToImageURL} width={replyToImageSize} height="40" /></a>
                 <img src={emoji1URL} width={emoji1Size} height={emoji1Size} />
                 <img src={emoji2URL} width={emoji2Size} height={emoji2Size} />
@@ -482,8 +495,11 @@ const Test = () => {
       else if (pubkey == '0559387898de5e583f0cfed3dc09bf4737997ac4f585921463ca3240ade4b38c') {
         image = 'https://nostr.build/i/0c56b00467291354e477521f49008f5eebd881a337f20e951d98de3e973690e9.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '570cb51b147ea8265c6c44c5f1de4686a0466555f9cbc3ab811671db02fee24e') {
+        image = 'https://nostr.build/i/nostr.build_00d36a8f770fac5bdb5ca6ebc1d1346567a665ca729d2f5b97dfa31bb3600f1b.png'
+      }
+      else if (pubkey == 'e21a88fbfa177e3e38adc129274a4f86218482a7c9a436ba9a918cc7f2b31fe9') {
+        image = 'https://void.cat/d/WHC5YhS6mwiuLLogtkvGta.webp'
       }
       else if (pubkey == '') {
         image = ''
