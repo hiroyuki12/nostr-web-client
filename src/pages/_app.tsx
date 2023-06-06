@@ -6,10 +6,16 @@ const relayUrls = [
 
 
   "wss://relay-jp.nostr.wirednet.jp",  //jp, Will
-    //"wss://yabu.me",  //en, jp, jack, chy, takeshi, syui, yutaro
-    //"wss://nostr.fediverse.jp",  //jp, takeshi, snowden
-      //"wss://nostr-relay.nokotaro.com",  //jp en, aogi, karnage, nostr commits
-      //"wss://relay.damus.io",  //en jp, Will, iefan, karnage, news, niwaken
+      "wss://yabu.me",  //en, jp, jack, awoi, takeshi, syui, yutaro, verbiricha
+      "wss://nostr-relay.nokotaro.com",  //jp en, jack, awoi, syui, fiatjaf, karnage, nostr commits, kame3, verbiricha, Nostrchan2
+      "wss://nostr.wine",  //jp en, Vitor, fiatjaf, Terry
+      "wss://relay.nostr.band", //en jp, nachika, news, kaichiro
+      "wss://relay.damus.io",  //en jp, awoi, syui, Will, iefan, fiatjaf, karnage, news, niwaken, verbiricha
+      "wss://nostr.h3z.jp",  //en, jp + jack
+
+    //"wss://nostr.holybea.com",   //jp, awoi, syui, chy, furoya
+    //"wss://nostr.fediverse.jp",  //jp, awoi, syui, takeshi, snowden
+      //"wss://nos.lol",  //jp en,  news
 
   //"wss://nostr-paid.h3z.jp",  //jp, yutaro
   //"wss://nostr.h3z.jp",  //en, jp + jack
@@ -28,7 +34,12 @@ const relayUrls = [
   //"wss://universe.nostrich.land?lang=ja",  //jp
  
 
-  //1j
+  //1j  nostter
+  //"wss://universe.nostrich.land?lang=ja",  //jp
+  //"wss://relay.damus.io/",
+  //"wss://relay-jp.nostr.wirednet.jp",  //jp
+
+  //1j old
   /*"wss://nostrja-kari.heguro.com",  //jp
   "wss://nostr.fediverse.jp",  //jp
   "wss://nostr.wine",  //jp en, Vitor, fiatjaf
@@ -38,8 +49,8 @@ const relayUrls = [
   "wss://nostream.ocha.one",   //jp, ROBO358
   "wss://nostr-relay.nokotaro.com",  //jp en, aogi
   "wss://nostr.h3z.jp",  //jp + jack
-  "wss://nostr.holybea.com",  //jp, syui, chy  */
-
+  "wss://nostr.holybea.com",  //jp, syui, chy 
+  */
 
   
 
