@@ -10,6 +10,19 @@ const Test = () => {
 
   const { events } = useNostrEvents({
     filter: {
+      until: dateToUnix(now.current), // all new events from now
+      until: 1686048907,  //paging
+
+      //until: 1686034150,  //paging contentLink
+      //until: 1686038739,  //paging (#e)
+      //until: 1686041046,  //paging conteltLink
+      //until: 1686034209,  //about reverce
+      //until: 1685956335,  //reverce erechorse
+      //until: 1685891401,  //reverce rain
+      //until: 1685844995,  //reverce
+      //until: 1685844912,  //reverce
+      //until: 1685884961,  //reverce
+
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
       //since: dateToUnix(now.current), // all new events from now
@@ -23,9 +36,6 @@ const Test = () => {
       //"#t": ["nosli"],
       //"#t": ["cluster"],
       //"#t": ["Amethyst"],
-      
-      until: dateToUnix(now.current), // all new events from now
-      until: 1685438287,  //paging
 
       //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
       //until: 1675000000, // 2023/1/28- 1970/1/1
@@ -192,12 +202,15 @@ const Test = () => {
     return posts;
   }
 
+  var follow = "";
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
 
+      follow = "";
       if(!followList.includes(note.pubkey)) {
         // following filter
-        //return;
+	follow = "follow]";
+        return;
       }
 
       if(note.pubkey == '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')
@@ -209,10 +222,12 @@ const Test = () => {
       let createdDate = dateTime.toLocaleDateString('ja-JP');
       let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
 
-      const hex = nip19.npubEncode(note.pubkey)
-      const url = "https://nostter.vercel.app/" + hex
+      const npub = nip19.npubEncode(note.pubkey)
+      const url = "https://nostter.vercel.app/" + npub 
 
       let imageURL2 = getImageURL(note.pubkey);  // avator
+
+      let noteUrl = "https://nostter.vercel.app/search?q=" + note.id
 
       /*let imageURL = Pictures.pictures.map((picture, index) => {
         if(note.pubkey == picture.npub) {
@@ -222,28 +237,87 @@ const Test = () => {
 
 
       let reply = "";
-      let replyToHex = nip19.npubEncode(note.pubkey)
-      let replyToImageURL = getImageURL(note.pubkey);
-      let replyToUrl = "https://nostter.vercel.app/" + hex
-      let replyToImageSize = "0"
-      let motoHex = replyToHex
+      let replyToHex1 = nip19.npubEncode(note.pubkey)
+      let replyToHex2 = nip19.npubEncode(note.pubkey)
+      let replyToHex3 = nip19.npubEncode(note.pubkey)
+      let replyToImageURL1 = getImageURL(note.pubkey);
+      let replyToImageURL2 = getImageURL(note.pubkey);
+      let replyToImageURL3 = getImageURL(note.pubkey);
+      let replyToUrl1 = "https://nostter.vercel.app/" + npub 
+      let replyToUrl2 = "https://nostter.vercel.app/" + npub
+      let replyToUrl3 = "https://nostter.vercel.app/" + npub
+      let replyToImageSize1 = "0"
+      let replyToImageSize2 = "0"
+      let replyToImageSize3 = "0"
+      let motoHex = replyToHex1
+      let repHex = "";
+
+      let linkUrl1 = "";
+      let linkUrlText1 = "";  // #r 1
+      let linkUrl2 = "";
+      let linkUrlText2 = "";  // #r 2
+      let linkUrl3 = "";
+      let linkUrlText3 = "";  // #r 3
+      let linkUrl4 = "";
+      let linkUrlText4 = "";  // #r 4
+      let eventLinkUrl1 = "";
+      let eventLinkUrlText1 = "";  // #e 1
+      let eventLinkUrl2 = "";
+      let eventLinkUrlText2 = "";  // #e 2
 
       for(let h=0; h<note.tags.length; h++)  {
-        if(note.tags[h][0].includes("p")) {  // mention
+        if(note.tags[h][0] == "p") {  // mention
           reply = "To]";
-          replyToImageSize = "40"
 	  if(!note.tags[h][1].includes("npub")) {  // not hex
-	    if(motoHex != nip19.npubEncode(note.tags[h][1])) {
-              replyToImageURL = getImageURL(note.tags[h][1]);  // to user id
-	      replyToHex = nip19.npubEncode(note.tags[h][1]);
-	      replyToUrl = "https://nostter.vercel.app/" + replyToHex
+	    //if(motoHex != nip19.npubEncode(note.tags[h][1])) {  // not self
+	    if(replyToImageSize1 == "0") {
+              replyToImageSize1 = "40"
+              replyToImageURL1 = getImageURL(note.tags[h][1]);  // to user id
+	      if(replyToImageURL1 == "") {
+                replyToImageSize1 = "60"
+	      }
+		repHex = note.tags[h][1];
+	      replyToHex1 = nip19.npubEncode(note.tags[h][1]);
+	      replyToUrl1 = "https://nostter.vercel.app/" + replyToHex1
 	    }
+	    else if(replyToImageSize2 == "0") {
+	      replyToHex2 = nip19.npubEncode(note.tags[h][1]);
+	      if(replyToHex2 != replyToHex1) {
+                replyToImageSize2 = "40"
+                replyToImageURL2 = getImageURL(note.tags[h][1]);  // to user id
+	        replyToUrl2 = "https://nostter.vercel.app/" + replyToHex2
+	      }
+	    }
+	    else if(replyToImageSize3 == "0") {
+	      replyToHex3 = nip19.npubEncode(note.tags[h][1]);
+	      if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
+                replyToImageSize3 = "40"
+                replyToImageURL3 = getImageURL(note.tags[h][1]);  // to user id
+	        replyToUrl3 = "https://nostter.vercel.app/" + replyToHex3
+	      }
+	    }
+	    //}
 	  }
           for(let i=0; i<note.tags.length; i++) { 
-            if(note.tags[i][0].includes("e")) {  // re
+            if(note.tags[i][0] == "e") {  // re
               reply = "Re]";
             }
           }
+        }
+	else if(note.tags[h][0] == "e") {
+	  if(reply == "" || reply == "#e]") {
+	    reply = "#e]";
+	  }
+
+	  if(eventLinkUrlText1 == "") {
+            eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,7) + "(#e)";
+	    eventLinkUrl1 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
+	  }
+	  else if(eventLinkUrlText2 == "") {
+            eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,7) + "(#e 2)";
+	    eventLinkUrl2 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
+            eventLinkUrlText1  = eventLinkUrlText1.replace("#e","#e 1");
+	  }
         }
       }
 
@@ -277,8 +351,10 @@ const Test = () => {
 	  }
 	}
 	for(let i=0; i<note.tags.length; i++) {
-	  if(note.tags[i][0] == "e") {
-	    //content = note.tags[i][1] + "," + content;  // to eventId
+	  if(content == "") {
+	    if(note.tags[i][0] == "e") {
+	      //content = note.tags[i][1] + "," + content;  // to eventId
+	    }
 	  }
 	}
       }
@@ -332,10 +408,13 @@ const Test = () => {
       let image2Url = "";
       let image3Url = "";
       let image4Url = "";
-      let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+      //let words = content.split('\n');
+      //words = content.split(' ');
+      //words = content.split('\n\n');
+      let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
       let imageCount = 0;
-      for(let i=0; i<words.length; i++) {
+      for(let i=0; i<words .length; i++) {
         if(words[i].includes(".jpg")  ||
            words[i].includes(".jpeg") || 
            words[i].includes(".png")  || 
@@ -361,27 +440,32 @@ const Test = () => {
 	    image4Url = words[i];
 	  }
 	  imageCount = imageCount + 1;
-          content = content.replace(words[i],'');  //5e
-          //note.content = note.content.replace(words[i],'');
+          content = content.replace(words[i],'');
         }
       }
 
       let note1LinkUrl = "";
       let note1LinkText = "";
-      let note1LinkArrow = "";
+      let note1LinkUrl2 = "";
+      let note1LinkText2 = "";
+      let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       // nostr:note1, nostr:naddr1, nostr:nevent1
       if(content != undefined &&
         (content.includes("nostr:note1") || 
          content.includes("nostr:naddr1") || 
-         content.includes("nostr:nevent1"))
+         content.includes("nostr:nevent1") || 
+         content.includes("nostr:npub1"))
 	) {
-	for(let i=0; i<words.length; i++) {
-	  if(words[i].includes("nostr:")) {
-            //content = words[0] + " https://nostter.vercel.app/" + words[1].replace("nostr:",'');
-	    content = content.replace(words[i],'');
-	    note1LinkUrl =  "https://nostter.vercel.app/" + words[i].replace("nostr:",'')
+	for(let i=0; i<wordsNostr.length; i++) {
+	  if(wordsNostr[i].includes("nostr:")) {
+            //content = wordsNostr[0] + " https://nostter.vercel.app/" + wordsNostr[1].replace("nostr:",'');
+	    content = content.replace(wordsNostr[i],'');
+	    note1LinkUrl =  "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
 	    content = content.replace(note1LinkUrl,'');
-            note1LinkText = "nostr:note1(quote)";
+            note1LinkText = "__nostr:note1(quote)";
+	    if(note1LinkUrl.includes("npub")) {
+              note1LinkText = "(nostr:npub1)(to)";
+	    }
 	  }
 	}
       }
@@ -389,7 +473,7 @@ const Test = () => {
       // cpngirl  
       if(content.includes("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl")) 
       {
-        content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@cpngirl");
+        content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@ログボ(テスト運用中)");
       }
       // cpngirl  
       let cpngirlnpub = "f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd"
@@ -397,34 +481,95 @@ const Test = () => {
       {
         if(content.includes("#[0]") && note.tags[i].includes(cpngirlnpub) ) 
         {
-          content = content.replace("#[0]","@cpngirl");
+          content = content.replace("#[0]","@ログボちゃん(テスト運用中)");
         }
       }
 
-      let linkUrl = "";  // #r
-      let linkUrlText = "";
-      let linkArrow = "";
+      // #[0], #[1] (#p)
+      for(let i=0; i<note.tags.length; i++) {
+	let tmp = "#[" + String(i) + "]";
+        if(content.includes(tmp)) {
+          if(note.tags[i][0] == "p") {
+            const npub = nip19.npubEncode(note.tags[i][1])
+
+	    if(note1LinkUrl == "") {
+	      note1LinkUrl =  "https://nostter.vercel.app/" + npub
+	      note1LinkText = npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
+	    }
+	    else if(note1LinkUrl2 == "") {
+	      note1LinkUrl2 =  "https://nostter.vercel.app/" + npub
+	      note1LinkText2 = "__" + npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
+	    }
+          }
+	  else {
+            content = content + note.tags[i][1] + "(#[0] #" + note.tags[i][0] + ")";
+  	  }
+        }
+      }
+
 
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] == "r") {
 	  if(note.tags[i][1].includes("http")) {
-	    linkUrl = note.tags[i][1];
-	    linkUrlText = note.tags[i][1];
-	    content = content.replace(linkUrl,'');
-	    linkUrlText = "";
-	    linkArrow = "(#r)";
+	    if(linkUrl1 == "") {
+	      linkUrl1 = note.tags[i][1];
+	      //linkUrlText1 = note.tags[i][1];
+	      if(content != linkUrl1) {
+	        content = content.replace(linkUrl1,'');
+	      }
+	      linkUrlText1 = "__(#r)";
+	    }
+	    else if(linkUrl2 == "") {
+	      linkUrl2 = note.tags[i][1];
+	      content = content.replace(linkUrl2,'');
+	      linkUrlText2 = "(#r 2)";
+	      linkUrlText1 = "__(#r 1)";
+	    }
+	    else if(linkUrl3 == "") {
+	      linkUrl3 = note.tags[i][1];
+	      content = content.replace(linkUrl3,'');
+	      linkUrlText3 = "(#r 3)";
+	    }
+	    else if(linkUrl4 == "") {
+	      linkUrl4 = note.tags[i][1];
+	      content = content.replace(linkUrl4,'');
+	      linkUrlText4 = "(#r 4)";
+	    }
 	  }
         }
       }
 
-      let contentLinkUrl = "";
-      let contentLinkArrow = "";
+      let contentLinkUrlFront = "";   // link before content
+      let contentLinkUrlFront2 = "";  // link before content
+      let contentLinkUrlAfter = "";   // link after content
+      let contentLinkUrlAfter2 = "";  // link after content
+      let afterSpacer1 = "";
+      let afterSpacer2 = "";
+      let words2 = content.split(' ');
+      words2 = content.split('\n');
+      words2 = content.split(' ');  // zenkaku space
 
       if(content.includes("https://")) {
-        for(let i=0; i<words.length; i++) {
-	  if(words[i].includes("https://")) {
-	    contentLinkUrl = words[i];
-	    content = content.replace(words[i],'');
+        for(let i=0; i<words2.length; i++) {
+	  if(words2[i].includes("https://") && contentLinkUrlAfter == "") {
+	    if(i == 0) {
+	      afterSpacer1 = "__";
+	      contentLinkUrlFront = words2[i];
+	    }
+	    else if(i == 1 && words2[0] == "") {
+	      afterSpacer1 = "__";
+	      contentLinkUrlFront = words2[i];
+	    }
+	    else {
+	      afterSpacer1 = "__";
+	      contentLinkUrlAfter = words2[i];
+	    }
+	    content = content.replace(words2[i],'');
+	  }
+	  else if(words2[i].includes("https://") && contentLinkUrlAfter != "") {
+	    afterSpacer2 = "__";
+	    contentLinkUrlAfter2 = words2[i];
+	    content = content.replace(words2[i],'');
 	  }
         }
       }
@@ -444,24 +589,34 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+	        {follow}
 	        {contentWarning}{contentWarningText}{contentWarning}
-                {reply} <a href={replyToUrl} target="_blank"><img src={replyToImageURL} width={replyToImageSize} height="40" /></a>
+                {reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height="40" /></a> <a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height="40" /></a>  <a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height="40" /></a>
                 <img src={emoji1URL} width={emoji1Size} height={emoji1Size} />
                 <img src={emoji2URL} width={emoji2Size} height={emoji2Size} />
                 <img src={emoji3URL} width={emoji3Size} height={emoji3Size} />
                 <img src={emoji4URL} width={emoji4Size} height={emoji4Size} />
                 <img src={emoji5URL} width={emoji5Size} height={emoji5Size} />
+		<a href={contentLinkUrlFront} target="_blank">{contentLinkUrlFront}</a>
+		<a href={contentLinkUrlFront2} target="_blank">{contentLinkUrlFront2}</a>
                 {content}
 		<a href={note1LinkUrl} target="_blank">{note1LinkText}</a>
-		<a href={linkUrl} target="_blank">{linkUrlText}{linkArrow}</a>
-		<a href={contentLinkUrl} target="_blank">{contentLinkUrl}</a>
-                <img src={image1Url} height={inlineImage1Height} />
-                <img src={image2Url} height={inlineImage2Height} />
-                <img src={image3Url} height={inlineImage3Height} />
-                <img src={image4Url} height={inlineImage4Height} />
+		<a href={note1LinkUrl2} target="_blank">{note1LinkText2}</a>
+		<a href={eventLinkUrl1} target="_blank">{eventLinkUrlText1}</a>
+		<a href={eventLinkUrl2} target="_blank">{eventLinkUrlText2}</a>
+		<a href={linkUrl1} target="_blank">{linkUrlText1}</a>
+		<a href={linkUrl2} target="_blank">{linkUrlText2}</a>
+		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
+		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
+		<a href={contentLinkUrlAfter} target="_blank">{afterSpacer1}{contentLinkUrlAfter}</a>
+		<a href={contentLinkUrlAfter2} target="_blank">{afterSpacer2}{contentLinkUrlAfter2}</a>
+                <a href={image1Url} target="_blank"><img src={image1Url} height={inlineImage1Height} /></a>
+                <a href={image2Url} target="_blank"><img src={image2Url} height={inlineImage2Height} /></a>
+                <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
+                <a href={image4Url} target="_blank"><img src={image4Url} height={inlineImage4Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
-                -{createdTime}-{note.created_at}
-                <font color="black">-{hex}-{note.pubkey}-</font>{index}
+                -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
+                <font color="black">{repHex}-{note.pubkey}-</font>{index}
             </div>
           </div>
         </li>
@@ -479,9 +634,765 @@ const Test = () => {
       if (pubkey == '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
-      }  // @@
+      } // @@ 
       else if (pubkey == '') {
         image = ''
+      } 
+      else if (pubkey == '8be2fd2cf7cce65a56f0820b022125e9ab4044c7dc5e444e2c0c0eab7501b0d7') {
+        image = 'https://nostr.build/i/p/nostr.build_b16cd573515c070e7212b26225bcccc0e98070e5b7316ec2d500f5a6b1b0bf2e.gif'
+      } 
+      else if (pubkey == '2799e6c3966fded50d5588ee70c65ed47d4b3119e110b4a8228a2d0c44a0731d') {
+        image = 'https://void.cat/d/Xh3yKLJmhSevcy9RHecqz1.webp'
+      } 
+      else if (pubkey == 'd49a9023a21dba1b3c8306ca369bf3243d8b44b8f0b6d1196607f7b0990fa8df') {
+        image = 'https://files.coinfundit.com/accounts/avatars/109/877/596/919/114/210/original/89489e29ca22e54b.gif'
+      } 
+      else if (pubkey == 'a941f585754a6a95584606228f2021c5c89ec8ada5d37be15cec796a4b8a5e2c') {
+        image = 'https://nostr.build/i/6508778517517aa02b7686eb86ae3464712b10228472acc8b42e6a7b023e53db.jpg'
+      } 
+      else if (pubkey == 'a723805cda67251191c8786f4da58f797e6977582301354ba8e91bcb0342dc9c') {
+        image = 'https://nostr.build/i/p/nostr.build_984d249cca437a3352a7a8fcf184b2a75cfbafafc5d4dae6ace0db182b87c834.gif'
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '5144fe88ff4253c6408ee89ce7fae6f501d84599bc5bd14014d08e489587d5af') {
+        image = 'https://nostr.build/i/4aea777abc9af95b087911b4e6c59a5c503c13bf4d9a36b651daebf7b19beb87.jpg'
+      } 
+      else if (pubkey == '39e8b0dc9a4ce467659f61abf45b9b787900d6d4e52d75dd003d6a931f9a4d65') {
+        image = 'https://nostr.build/i/a5ef476287a1e46912767e385afb8b426f9f26e2389f9b25f8b5d6ab6a7338ba.jpg'
+      } 
+      else if (pubkey == 'e40bcc3e12921ec232fe66528e2ba5d5cd4e0688e4bfa083a486a97fdaadceaf') {
+        image = 'https://nostr.build/i/nostr.build_f29a8baa0075e1d05e27ca57500150af098e37afdb5636a448464b1021ca5be9.png'
+      } 
+      else if (pubkey == '0abb589750cfdf3ca88a62d722263f5082787fd8c19a8372cb27967db8ab42fb') {
+        image = 'https://www.conscious-alignment.com/wp-content/uploads/2022/12/gillian_nostr.jpg'
+      } 
+      else if (pubkey == '234c45ff85a31c19bf7108a747fa7be9cd4af95c7d621e07080ca2d663bb47d2') {
+        image = 'https://nostr.build/i/f452782aa056efa102f0d222e862df6ce65dda2316896a5f0c780c01bc23ec82.jpg'
+      } 
+      else if (pubkey == '55f04590674f3648f4cdc9dc8ce32da2a282074cd0b020596ee033d12d385185') {
+        image = 'https://pbs.twimg.com/profile_images/1617539351453335555/0wqTBSkD_400x400.jpg'
+      } 
+      else if (pubkey == '26bd32c67232bdf16d05e763ec67d883015eb99fd1269025224c20c6cfdb0158') {
+        image = 'https://nostr.build/i/nostr.build_18322f1f61c216039b9cd1001db7bd2ec6790c5692d4739cb95abd194c761e57.jpeg'
+      } 
+      else if (pubkey == 'cbf904c0702a361911c46d79379a6a502bc3bd0b4c56d25389e62d3ebf4a7db8') {
+        image = 'https://pbs.twimg.com/profile_images/1589856537828368386/jOVin3dh_400x400.jpg'
+      } 
+      else if (pubkey == '20986fb83e775d96d188ca5c9df10ce6d613e0eb7e5768a0f0b12b37cdac21b3') {
+        image = 'https://pbs.twimg.com/profile_images/1650865610061156353/Xxtar8Ra_400x400.jpg'
+      } 
+      else if (pubkey == '17538dc2a62769d09443f18c37cbe358fab5bbf981173542aa7c5ff171ed77c4') {
+        image = 'https://nostr.build/i/p/nostr.build_7b9579da60a52c32a61cfe48e7b55b9fbd58d389ca29128d6c6851b00bb23d0a.jpg'
+      } 
+      else if (pubkey == '826f532bec8d0997bb32b8851749eb76be0eae0dd9f2df917ea19c99c015f44b') {
+        image = 'https://raw.githubusercontent.com/hm0429/playground/master/chibi.jpg'
+      } 
+      else if (pubkey == 'd3070b8d93883c80d8a578387ca33ae064dc30218ad04e83bf4edb277c881fbf') {
+        image = 'https://doc.rust-lang.org/book/img/ferris/panics.svg'
+      } 
+      else if (pubkey == '7624500e209a16059ac048d8069ca9c9a2272b4901df251a01c3304a26565955') {
+        image = 'https://libertynode.net/system/accounts/avatars/106/552/717/291/762/874/original/8c1ebbc03b336cdc.jpeg'
+      } 
+      else if (pubkey == '5df413d4c5e5035ff508fd99b38b21ea9a0ac0b9ecc34f3312aba9aa2add4f5b') {
+        image = 'https://i.nostrimg.com/aa325f8a49a3f8b5c41d9c98beb959eeeba1962ec50690715f898d9517605ec3/file.jpeg'
+      } 
+      else if (pubkey == '7bdef7be22dd8e59f4600e044aa53a1cf975a9dc7d27df5833bc77db784a5805') {
+        image = 'https://avatars.githubusercontent.com/u/89577423'
+      } 
+      else if (pubkey == '44f2e5b74246580b5286a1528cd7a27342e8e8f155908ce1c33957136c8e65df') {
+        image = 'https://nostr.build/i/76a81d671a3fcd8b052bedceeda3324243ec604f43240322ac271fc3f66adcf5.jpg'
+      } 
+      else if (pubkey == '4fe05ede79699eb3727c655a248c2e99f12bce793664c183bd4775cc97c78ebd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDYxLDEpOyBzdHJva2U6cmdiYSgzOCwyMTcsNjEsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '0ffb0df6e0193519592e8fdc4e638bd560308c56dd1b3b3f83eea09f24d39020') {
+        image = 'https://nostr.build/i/nostr.build_81bd13a7c8e7db091c9010c5921b09b212d8e0476f64ae397626dfa410656a6f.png'
+      } 
+      else if (pubkey == 'f44fcbc65d464d61abce23bc171948b9cd31e136794260ac09d275d039634d2e') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMTM5LDIxNywxKTsgc3Ryb2tlOnJnYmEoMzgsMTM5LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '909efa6667b28627f107764ce3c28895c46fffd1811b7415dcab03f48c44b597') {
+        image = 'https://nostr.build/i/p/nostr.build_7a596b6ad995b5f5ea99495c7d092953af53bf838b7824a146ad1534d9b88790.jpeg'
+      } 
+      else if (pubkey == 'e4f695f05bb05b231255ccce3d471b8d79c64a65bccc014662d27f0f7e921092') {
+        image = 'https://ik.imagekit.io/pnbizia3c/tr:n-media_library_thumbnail/users/hIWsCYxdBJzlDvu5zpT3'
+      } 
+      else if (pubkey == '68eccd5f56afa114e2af4bee73d77a00d54d5983032f87874e58d05238255ae8') {
+        image = 'https://i.current.fyi/68eccd5f56afa114/profile/avatar_35893.png'
+      } 
+      else if (pubkey == '73923fd4c8d2a590fcadb3feb691cd6a80915872e947093993d1ff10452b3614') {
+        image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL8iHr7WdsLj5EKAcSS_h426UKyEqDJ7kP0Q&usqp=CAU'
+      } 
+      else if (pubkey == 'ce41c1698a8c042218bc586f0b9ec8d5bffa3dcbcea09bd59db9d0d92c3fc0b4') {
+        image = 'https://i0.wp.com/lightning.store/wp-content/uploads/2022/12/nostrlogo.gif?ssl=1&resize=320%2C320'
+      } 
+      else if (pubkey == 'd12139a475fa3313c8617856bf694edc983a089c0b180277b137cfdede571996') {
+        image = 'https://pbs.twimg.com/profile_images/682217238774992896/iLx69ewC_400x400.png'
+      } 
+      else if (pubkey == 'd7a7476b1253a1902f765685ffe3d351f8c2e2ac728f655aeb53f4c9a2f9a77d') {
+        image = 'https://pbs.twimg.com/profile_images/1636351292380442626/sqphEYFc_400x400.jpg'
+      } 
+      else if (pubkey == 'ec79b568bdea63ca6091f5b84b0c639c10a0919e175fa09a4de3154f82906f25') {
+        image = 'https://hodlr.rocks/wp-content/uploads/2023/01/chiefmonkey-laser-eyes.png'
+      } 
+      else if (pubkey == '07ecf9838136fe430fac43fa0860dbc62a0aac0729c5a33df1192ce75e330c9f') {
+        image = 'https://nostr.build/i/p/nostr.build_fd197559c0330e3030a0a7b098729bcb9459fa116cae232dc2248fb98c4b18ee.jpeg'
+      } 
+      else if (pubkey == 'cc8d072efdcc676fcbac14f6cd6825edc3576e55eb786a2a975ee034a6a026cb') {
+        image = 'https://nostr.build/i/nostr.build_374f05af8959162dc7345d21443e5274b7fa01d88aa8fb5fff9516e0ca70310e.jpeg'
+      } 
+      else if (pubkey == '955e5a041806dad5f8c088b926eab4c5545710588988c4761443ebb1c03b3cc3') {
+        image = 'https://nostr.build/i/8f358e7470b76c54677d8d779679483f82b8137b3aa1dfaddf69d01522e6c2ca.jpg'
+      } 
+      else if (pubkey == '4ef6ce33aa9770a21145c1547870e7b7111606cfb98ede0671d1c2487083214c') {
+        image = 'https://nostr.build/i/nostr.build_75b6cbdc693c6b28793c357635aca285abc7b3c5d7b38209b9f0b92f6238db8e.jpg'
+      } 
+      else if (pubkey == '7345d349c1b63627f06599e11feab4365224bb66c06183fe2647a0dd7174988a') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDQ5LDEpOyBzdHJva2U6cmdiYSgyMTcsMzgsNDksMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == 'df4f8a1b016e365d93e577aefc0f0d62422c071096f666d947c5e426825abfb4') {
+        image = 'https://nostr.build/i/b922b01acb6473154b2d07cf18b62374bf295e8a497abd8aa54e6ca3833bd8aa.jpg'
+      } 
+      else if (pubkey == '51a9b72f280dc89949bcaeb13daced57546e154c35e5fb540e5d7ce594e3bc7f') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTgwLDIxNywzOCwxKTsgc3Ryb2tlOnJnYmEoMTgwLDIxNywzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == 'c7c8f645fd45b09055fb6c26d148737ad7ed12ddecde0d4c877b88f8d4196865') {
+        image = 'https://nostr.build/i/9e62430b195fe1fb3641a9c756cdccecf1650d99cad038736845b97a5de897ed.jpg'
+      } 
+      else if (pubkey == '0f1b5961795de31168334c0131986126c55d47ba88a3ff10d309de62868242bd') {
+        image = 'https://nostr.build/i/nostr.build_0cef7999b096e3256a8137a019e87fe1654310f02831a3797c0fa54ef069bf26.jpg'
+      } 
+      else if (pubkey == '978c8f26ea9b3c58bfd4c8ddfde83741a6c2496fab72774109fe46819ca49708') {
+        image = 'https://nostr.build/i/nostr.build_f3dfac5e66005f1f97e60e63b9785b5241a8324c346863f633be7563a099bc8a.jpeg'
+      } 
+      else if (pubkey == '5507590febe5c6c1c6757f3a5fe97d3d11d661edb0fec3c1729f6d6e07fbab48') {
+        image = 'https://nostr.build/i/nostr.build_6efa90097971e3dc344249ee3b46034b33cab77a8558256eb43d4b76094ad702.png'
+      } 
+      else if (pubkey == '8867bed93e89c93d0d8ac98b2443c5554799edb9190346946b12e03f13664450') {
+        image = 'https://nostr.build/p/nb9628.gif'
+      } 
+      else if (pubkey == '72f9755501e1a4464f7277d86120f67e7f7ec3a84ef6813cc7606bf5e0870ff3') {
+        image = 'https://bucket.thesamecat.io/ShareX/2023/06/_bd42ae0e-45be-4e99-8ba9-c4bb778a3bb9.jpg'
+      } 
+      else if (pubkey == '9aa3a3ccc2ed8056b598e632bf98f55ce20a9e2494d5502149aeba838ad7a556') {
+        image = 'https://nostr.build/i/nostr.build_ab520f301d8bd8133ae3d694f56ccc7945f55c5b0157a7a58f721bffaa524bd8.jpeg'
+      } 
+      else if (pubkey == '381dbcc7138eab9a71e814c57837c9d623f4036ec0240ef302330684ffc8b38f') {
+        image = 'https://thewell.unc.edu/wp-content/uploads/sites/1007/2020/10/psychedelic-1.jpg'
+      } 
+      else if (pubkey == 'b708f7392f588406212c3882e7b3bc0d9b08d62f95fa170d099127ece2770e5e') {
+        image = 'https://nostr.build/i/p/nostr.build_f397bc98e30551103c3d91438a902c3d4a4bde231f225e00863228516040fa77.png'
+      } 
+      else if (pubkey == '2489d115ead3641ff3fefd1e98998c48349ef72193242a287dd26493798779b9') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTAwLDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMTAwLDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '9ce71f1506ccf4b99f234af49bd6202be883a80f95a155c6e9a1c36fd7e780c7') {
+        image = 'https://subco.nscio.us/system/accounts/avatars/109/644/296/008/899/114/original/23a86e8ef975b34f.jpeg'
+      } 
+      else if (pubkey == 'fd6389f914b3ef63c72ab151f958526e85c1279fb1f34850aa954c30a211515d') {
+        image = 'https://nostr.build/i/003a7307c5ae6758456242c1ec43e8b7ec586e2a609e577eb4273c0b80f9c968.gif'
+      } 
+      else if (pubkey == 'bfc058c9abb250a2f4f0f240210ae750221b614f19b9872ea8cdf59a69d68914') {
+        image = 'https://uncloud.tech/.well-known/bu5hm4nn_laser.png'
+      } 
+      else if (pubkey == 'eda96cb93aecdd61ade0c1f9d2bfdf95a7e76cf1ca89820c38e6e4cea55c0c05') {
+        image = 'https://void.cat/d/XLzqvHD3CfFDm4DWTrbn7w.webp'
+      } 
+      else if (pubkey == '3356de61b39647931ce8b2140b2bab837e0810c0ef515bbe92de0248040b8bdd') {
+        image = 'https://pbs.twimg.com/profile_images/1226556961434591233/nTJpWObI_400x400.jpg'
+      } 
+      else if (pubkey == '2609dca5273b841a456d07f2f6e55e2fe709ddb2cf840b81ffa710bfb9e03d4b') {
+        image = 'https://pbs.twimg.com/profile_images/1362791299053539328/3lmZBczq_400x400.jpg'
+      } 
+      else if (pubkey == '6389be6491e7b693e9f368ece88fcd145f07c068d2c1bbae4247b9b5ef439d32') {
+        image = 'https://i.imgur.com/w4EBN8d.png'
+      } 
+      else if (pubkey == 'cd6b7c099203261a42e62af7d0edd476805314ee68daaf9afb7260ddf134404a') {
+        image = 'https://nostr.build/i/4b7ee2949f0799c20759cc8d559b05b13d9222fe89bdc1cc83b8ae7a8d61bf8d.jpg'
+      } 
+      else if (pubkey == '7045f370648ff549e9407f08b9ddde7d9d5d638336b701a7814617acb8ed3ea2') {
+        image = 'https://nostr.build/i/db1c7a1c96cb108f018002468d42e4b30082667437c431ce83601aa28d740c71.jpg'
+      } 
+      else if (pubkey == 'e0f59d89047b868a188c5efd6b93dd8c16b65643b8718884dad8542386c60ddd') {
+        image = 'https://i.imgur.com/BpLGErr.jpeg'
+      } 
+      else if (pubkey == '7ca66d4166b16f54a16868191ba1c6386a976624f4634f3896d9b6740a388ca3') {
+        image = 'https://i.postimg.cc/9MKFy36F/0-D1-B767-B-CFE8-4-E1-D-AAB8-F2-EDA3-D2730-B.jpg'
+      } 
+      else if (pubkey == '5c10ed0678805156d39ef1ef6d46110fe1e7e590ae04986ccf48ba1299cb53e2') {
+        image = 'https://cdn.jb55.com/s/dave.png'
+      } 
+      else if (pubkey == 'd3f06d830e33927f422f9d00c5180b6a071f8e024573c5aad5c5a3f17ff53dc3') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_a7c2255cc4ee30fc85d6bda9eeb3cc1b5ac9dac1c26e153cf50b8e1080569233.jpeg'
+      } 
+      else if (pubkey == '7f5c2b4e48a0e9feca63a46b13cdb82489f4020398d60a2070a968caa818d75d') {
+        image = 'https://nostr.build/i/p/nostr.build_2234d34b3e590e20d8ab2342b01d8b979e620ef9ae263e1605b2f10a6180a22a.gif'
+      } 
+      else if (pubkey == 'e88a691e98d9987c964521dff60025f60700378a4879180dcbbb4a5027850411') {
+        image = 'https://void.cat/d/MreaerC65YkE8zeHvVv6XM.webp'
+      } 
+      else if (pubkey == 'baf27a4cc4da49913e7fdecc951fd3b971c9279959af62b02b761a043c33384c') {
+        image = 'https://nostr.build/i/8a0be1079b77d0ca2da35f529482252859bc1ecdf1629aa59c168c74ccaa5120.jpg'
+      } 
+      else if (pubkey == '021d7ef7aafc034a8fefba4de07622d78fd369df1e5f9dd7d41dc2cffa74ae02') {
+        image = 'https://i.nostrimg.com/b9e45a17.jpeg'
+      } 
+      else if (pubkey == '04c915daefee38317fa734444acee390a8269fe5810b2241e5e6dd343dfbecc9') {
+        image = 'https://werunbtc.com/p.webp'
+      } 
+      else if (pubkey == 'f271ce016005528d9f9895e722b84115a0af934ae714a0351bbc1d82a6cf2d1b') {
+        image = 'https://s3.arkjp.net/misskey/49275b46-b443-412a-a5fa-c11548a28aae.jpg'
+      } 
+      else if (pubkey == '0b17d13813be9e113219d401fdf62a7ff567acb648cd0f9a749a53eda1eb3b6d') {
+        image = 'https://i.postimg.cc/j5hLs3j4/CBD3-ABA4-A695-40-E5-9-A58-9-CD8552-EFBB1.jpg'
+      } 
+      else if (pubkey == '171ddd43dab1af0d1fb14029287152a4c89296890e0607cf5e7ba73c73fdf1a5') {
+        image = 'https://nostr.build/i/p/nostr.build_d0cbd064b003795578573262ebdec9540fb2a81f32c2890d762a58bcb5379f29.jpg'
+      } 
+      else if (pubkey == 'f728d9e6e7048358e70930f5ca64b097770d989ccd86854fe618eda9c8a38106') {
+        image = 'https://pbs.twimg.com/profile_images/1594137153625276416/t1RUP3yP_400x400.jpg'
+      } 
+      else if (pubkey == 'cfe3b4316d905335b6ce056ba0ec230b587a334381e82bf9a02a184f2d068f8d') {
+        image = 'https://pbs.twimg.com/profile_images/1631545297460670466/CZ74Dnl9_400x400.jpg'
+      } 
+      else if (pubkey == '27f211f4542fd89d673cfad15b6d838cc5d525615aae8695ed1dcebc39b2dadb') {
+        image = 'https://pbs.twimg.com/profile_images/1477702801962721285/KqnrA7oU_400x400.jpg'
+      } 
+      else if (pubkey == 'b5ba65fbb0221a32b6c14400f505cfdd3651d43938a248a9265a516ec0c54240') {
+        image = 'https://nostr.build/i/p/nostr.build_14ddd98234538d173d9371832728974b72cf8d151e80bb90e3d6aaeb53bec46a.gif'
+      } 
+      else if (pubkey == '3dcc157a0304ec26ea131a0f4e576e2da67ff5c66980949c55bd7f0bb1b5efa1') {
+        image = 'https://void.cat/d/D1FjFh5MkZLmD4U7YnbGHY'
+      } 
+      else if (pubkey == 'ff123fa7611698afbdc6f8c00ea2b47162c6b77dbac70aa1832df5db8c4a9e36') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDE3NiwzOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDE3NiwzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == 'ee6ea13ab9fe5c4a68eaf9b1a34fe014a66b40117c50ee2a614f4cda959b6e74') {
+        image = 'https://nostr.build/p/nb4316.gif'
+      } 
+      else if (pubkey == '5c0775b1ae0a5140da9599aa9cd1c5beea55c2d55a5d681808525eb5fce37b32') {
+        image = 'https://pbs.twimg.com/profile_images/1578709791786115072/c3c10bs2_400x400.jpg'
+      } 
+      else if (pubkey == '9479339eb118796a8d8e9b7c1ff6d34abf8cd0e4fe81b0d80372e2b1d2da7b12') {
+        image = 'https://social.mikutter.hachune.net/system/accounts/avatars/000/002/334/original/e8656ca209d8f82d.jpg'
+      } 
+      else if (pubkey == '605bf3430768ebba1dedac592adbafce9db82c4235d98c8f7ffdef4d948b9dda') {
+        image = 'https://nostr.build/i/p/nostr.build_e6a8a7c1b1516a99853386ad72a4819cef2329906af0a71c0c199a133707c324.gif'
+      } 
+      else if (pubkey == '28254652e6a543bf200b9d05dffd835e1414d77c6a184944c5217c842e193cf6') {
+        image = 'https://nostr.build/i/a766980fafdbc068ebd76d8644e551a43573ac0bfc24668dad5b6bc0c91ea342.jpg'
+      } 
+      else if (pubkey == 'feb4e6277e69aedd3b6c0f2c1904976397f30b8f003b201a4908ea3fa7a7bfe8') {
+        image = 'https://nostr.build/i/nostr.build_fae8b9094d6b061fdcb9ae35f4c7e0ef2d78b11c9e9061a9a01bb4aaf9cdfec5.png'
+      } 
+      else if (pubkey == '8b928bf75edb4ddffe2800557ffe7e5e2b07c5d5102f97d1955f921585938201') {
+        image = 'https://void.cat/d/TbvhoGzZnSGwQDitSkz2KP.webp'
+      } 
+      else if (pubkey == '0a26c28b057af50e8e5f3679790bad0c7990a771e94eb6c3a80287edd4b060c2') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDE2OCwzOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDE2OCwzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey == 'b726e71bce585201181ace89326ae428406cee071395f9bf12b62b62d0449b23') {
+        image = 'http://bl6pap003files.storage.live.com/y4m_ivY7sHya_d4JQAQUaqwhX1Q50bmAXyEkA9wWLK3NuCd6d9ZroEv-k_Dsnhg6jxR3gjY0Vphu5g31KKomPz441Ti5vZ33B-o9oAnVAvJQa7_UJXbssgH5riB0PmD5qIGjgmXSeeLr2PJNPk183W2sj1VXKfS9fzbX2-7G-llKyEyDye5ndu-1EmFZODw2dsi?width=600&height=600&cropmode=none'
+      } 
+      else if (pubkey == '0d06480b0c6e3be3c9a1a65d7e6bc2091227d55bf4c77eeb6037ba7776c300ec') {
+        image = 'https://nostr.build/i/nostr.build_f8806459055dc6a7e72c881ceac9a2a7dda7ea703afdf12c570be57a06498309.jpg'
+      } 
+      else if (pubkey == '619af6a60b3fe4c733aaca061c522cc9c7cf1d87ef4c908facc5ed936d3bdf23') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDE1MywxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDE1MywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '1afe0c74e3d7784eba93a5e3fa554a6eeb01928d12739ae8ba4832786808e36d') {
+        image = 'https://i.postimg.cc/yd4j6Znb/0-AE2325-A-C9-A0-475-C-8-ED3-F012-E5-E3-C426.gif'
+      } 
+      else if (pubkey == 'f901616f00a63f4f9c7881d4871a03df3d4cee7291eafd7adcbeea7c95c58e27') {
+        image = 'https://nostr.build/i/p/nostr.build_68aa363a420f42dada27965dc47bbf263ff58950ea14fe2227de7bdaa3d41d9d.png'
+      } 
+      else if (pubkey == '1247db629e52d5225a6c525615bc6c6342b60b9edfd45283dc4d4f001db0b213') {
+        image = 'https://nostr.build/i/c0c5820021490c3d864f1e3cf6375446eb6c9b0a8684018c4e792c09b8f5db4d.jpg'
+      } 
+      else if (pubkey == 'a55a26a692dae7013f05c50cd3fc5452adac5307f0e53f8a2d12daa32dfcc692') {
+        image = 'https://nostr.build/i/b1ee572ad3b722342035750c4459f14c585fa29fd694f2f6e66716d5787ef621.jpg'
+      } 
+      else if (pubkey == 'cd3e852cda5e61f14fae4d251aa96b59da1c2a7020cabb30a8844d3d89ea2ddc') {
+        image = 'https://pbs.twimg.com/profile_images/1410013383299153927/c-4BoFRj_400x400.jpg'
+      } 
+      else if (pubkey == '56899e6a55c14771a45a88cb90a802623a0e3211ea1447057e2c9871796ce57c') {
+        image = 'https://user-images.githubusercontent.com/99301796/219741736-3ce00069-9c6a-47f2-9c8b-108f3f40295b.png'
+      } 
+      else if (pubkey == '2e79dcc9aaf0b34c65cef08ef84b2ba3723016bb2e834bb385abd84f5c1dee1b') {
+        image = 'https://nostr.build/i/nostr.build_017a5018a27045b9838186a7b7f548342dbf7c60f4d794dab2dd7bfdc79b3aae.jpg'
+      } 
+      else if (pubkey == '72c5f0b04360a038bbc74ba1d9070fad4a0b270796b7d197a495cca43038d000') {
+        image = 'https://nostr.build/i/a5381dc9f6087c1062e8c771126480cee2303f064572f5685b59de7eb9cf28a5.jpg'
+      } 
+      else if (pubkey == '75bf23531ae9f98c62995ba07191e488ead475975371d63d7dfd46bde1bfa895') {
+        image = 'http://paynym.is/PM8TJXVwNbJb8MGphGbijWucP3fw9mkDZ9BQT3pGkCsdFK21cR6v5xKrart2oBsqDMkxtqMGgkoTgn1NAczLznUeTwa4BG2rs1zZDfEtKin7WuBcdvcK/avatar'
+      } 
+      else if (pubkey == '51bbb15e37e85b00d8a76837b6b6a3355d1dc5ec58bdd0f3808c9ad3b77a2290') {
+        image = 'https://nostr.build/i/3589dea710b3b8230495a56d99b7bfb780817f167ccd8569442b747f42d282b2.jpg'
+      } 
+      else if (pubkey == '21b419102da8fc0ba90484aec934bf55b7abcf75eedb39124e8d75e491f41a5e') {
+        image = 'https://avatars.githubusercontent.com/u/88121568?v=4'
+      } 
+      else if (pubkey == 'f2ff7ad4f08ad2d4a09bcdc0db36745761428203e99f32de870da95763602614') {
+        image = 'https://lnplus.s3-accelerate.amazonaws.com/52nk60717d9eg6facvzlrejbedtd'
+      } 
+      else if (pubkey == 'eeadea6cbb5018a190f0117857de513cc271d24c947d56cd82c54a6b64ae47a4') {
+        image = 'https://nostr.build/i/p/44053b950072c86e88e0e6eca2322187328ca9a2f08bbd39e7af9c483bf40c83.gif'
+      } 
+      else if (pubkey == '7ef5f1b156ea5e7e9f9b787f7951b2d101f77806167a8d44b11468a10e0fcd27') {
+        image = 'https://nostr.build/i/nostr.build_07a237022e7dbd7273dfb497e38ba4098305436652e8ba8fe4142edde3e88ae9.jpg'
+      } 
+      else if (pubkey == 'c3750212a078efd8d84d1288ea78ea254922c26c134e3c1a44d64b6fb71b0e78') {
+        image = 'https://nostr.build/i/nostr.build_be8a093eec9017f2f784886313c756f0ec592a4bbaff6a9712567d2db93beaa4.png'
+      } 
+      else if (pubkey == '46c7a8ee3df0867650c0ab03770aa9ad309cb2a45a3e03c762c978cee636be59') {
+        image = 'https://pbs.twimg.com/profile_images/1432266009776254977/mUKeRiir_400x400.jpg'
+      } 
+      else if (pubkey == '0b118e40d6f3dfabb17f21a94a647701f140d8b063a9e84fe6e483644edc09cb') {
+        image = 'https://nostr.build/i/p/nostr.build_15d3f5653f090ca5832c77f1583e9f698831d383862eaf1b535e7a4cb30b29ed.jpeg'
+      } 
+      else if (pubkey == '4408c00c1e9358c05ad11dbe2d3a1d4acb8c2b6dd6386e4e3da9e14bb06df42b') {
+        image = 'https://nostr.build/i/nostr.build_6136ed182b05f830ceb0fbc8cd9bf6b1a2879605ffd8911ebee6a51bbbeb8d2b.jpeg'
+      } 
+      else if (pubkey == '9c163c7351f8832b08b56cbb2e095960d1c5060dd6b0e461e813f0f07459119e') {
+        image = 'https://nostr.build/i/nostr.build_9027363fcece7cbf6eb086621a7bc8c9a6997c93de77e51a6bc4dc43fa935c16.png'
+      } 
+      else if (pubkey == '76c71aae3a491f1d9eec47cba17e229cda4113a0bbb6e6ae1776d7643e29cafa') {
+        image = 'https://nostr.build/i/nostr.build_95bb7ab1602652b152795511012747fafcbc040bf0adac220cd833cc5a0ff817.jpeg'
+      } 
+      else if (pubkey == '3944c69ce301854869182a9269290a909a26b9b6e2c2f9684a371fdd3ad42d3e') {
+        image = 'https://nostr.build/i/d9c527835776583f42253dced84e4b3911d587f52e73ab5cee226ffb8d58260d.jpg'
+      } 
+      else if (pubkey == '868d9200af6e6fe1604a28d587b30c2712100b0edab76982551d56ebc6ae061f') {
+        image = 'https://nostr.build/i/6db462ab2ed3e96d14373d2678d1687868092d7bbf39c8339536831084e3bd23.jpg'
+      } 
+      else if (pubkey == '416335ae6302946042249279d96cae8a33337baae859b6f962618d3c9e520a63') {
+        image = 'https://void.cat/d/XZk61uf8Pm6sVPepvKss6m.webp'
+      } 
+      else if (pubkey == '2250f69694c2a43929e77e5de0f6a61ae5e37a1ee6d6a3baef1706ed9901248b') {
+        image = 'https://pbs.twimg.com/profile_images/1640590604672573440/7FtQa-gW_400x400.jpg'
+      } 
+      else if (pubkey == '79c2cae114ea28a981e7559b4fe7854a473521a8d22a66bbab9fa248eb820ff6') {
+        image = 'https://media.gleasonator.com/9059767a327659dad5d43a2a7b3f048b7008cea76e58dc6ba79b3838feaf25e5.png'
+      } 
+      else if (pubkey == 'b8d3e350867211fd80c1eeb72aa1bec86ba37e080940bd3dff17ac4f43c4f391') {
+        image = 'https://nostr.build/i/6678c4c70e81af628f484a4912d0a5215d83234bb74fb299934578d5331c54fa.jpg'
+      } 
+      else if (pubkey == 'a4dbfdc6e7e27e33b04e8009cf15dd1df35d62a9b258e70c38166871a577c47a') {
+        image = 'https://nostr.build/i/nostr.build_72c1d71f29ff07a219e8a3338c52e398ffcac47d5541a07936e3caeecf25bd3d.jpeg'
+      } 
+      else if (pubkey == '657c0b37cb6eb5fa9b8ad5c4d94fc510bd540bce539dd9c1d3d1bab0171cbe04') {
+        image = 'https://nostr.build/i/fd4a48d235b3faa07d5a1b0b2dd6af55ea763065cdd8f1362bbfe057890a8d6b.jpg'
+      } 
+      else if (pubkey == '8d7e9c016e78dc20e48a7c384cf9123642a5c35fb833b0fb1515cd93ca12555c') {
+        image = 'https://nostr.build/i/nostr.build_51541b9b0358638bc0ad90622aed5c0336e7d0b5a25a3861847068e8e852986c.jpeg'
+      } 
+      else if (pubkey == 'b35ed551ddb3849494922072a805d78098e7f74833aee90c164902bb9e6fcd11') {
+        image = 'https://nostr.build/i/7fb1442c595a479b2561ead1075548bdaa9a9ee065d5c9fe5c3644db141e4913.jpg'
+      } 
+      else if (pubkey == 'cdec7517ea464c6f5aacb16967fee0caf330271811cc3b268c854a3e30a4aa83') {
+        image = 'https://nostr.build/i/e5d7125b8621fe8ab51b4ed03e278a21a1e7f7ca80c964dfc6c0730ac2913b99.jpg'
+      } 
+      else if (pubkey == '4f262f7f69377fc8151ea678e00aba505a8ca699b30eeb1882aca6f233f52695') {
+        image = 'https://nostr.build/i/6973a5172e30ea4f658394dffa43b69a1e7fc852d2891b271353394365ac949b.jpg'
+      } 
+      else if (pubkey == 'a05d4b701627f56efb90f71d21704a6949b70adec1a6b23210d7bb0a3a2ca6a9') {
+        image = 'https://nostr.build/i/p/nostr.build_968f7cc38af22b14063cba232aa0d979a204fa53754b8d7ab2364d41855da455.gif'
+      } 
+      else if (pubkey == 'c04a3449ffc2d097c5d3300ae188fb091aea8406bdb092c16489d0f15af62ab2') {
+        image = 'https://dl.openseauserdata.com/cache/originImage/files/b990a0f621f97137988da1c664babb8d.png'
+      } 
+      else if (pubkey == '50f1e4619bac816a6cfcaf613a2d5b501d4635deceaafe21ed917c66e24f6aff') {
+        image = 'https://void.cat/d/UMVFHLuvBkRY3LR5k5DA7N'
+      } 
+      else if (pubkey == '7cb276c9a7eac6b6af7de8dd4bdd67a4726b71535cd18ee0f956ce92a857ba7e') {
+        image = 'https://nostr.build/i/p/nostr.build_3e81771aac7b8b81bd1aaca83b755a37f6676762fa02208a69e9b88c38a40d1d.gif'
+      } 
+      else if (pubkey == 'ac3fb436a663b25893657f4b6a3d9d2f02d1974bb5ced603f4d0c8ee32d7e0a2') {
+        image = 'https://void.cat/d/6YqzrnABpjbEwcbc3qaDso'
+      } 
+      else if (pubkey == 'bc1c1cc604539bb408446967f38e2a463d3bdafa7af7f31723a35362f1e9abc1') {
+        image = 'https://void.cat/d/WymUbA2KHaDPcKCJAEtsWj.webp'
+      } 
+      else if (pubkey == '6d2a43408ee74c2e35fd7f4eb3288b73cfafd88cd2d059e6c05058e676fc5290') {
+        image = 'https://nostr.build/i/p/nostr.build_472a316e428764363dffb7461d53b2347fc580a120cc254cbdf87ad3d12c8d78.jpeg'
+      } 
+      else if (pubkey == '3f4d4ed0186c86cc7de9f66ff49ae4551c312a742fb885a00ef93b657d4c5717') {
+        image = 'https://nostr.build/i/84771bb65b71703e92169b41e0455462100dc5de9f0e9437b13580724d1a564f.jpg'
+      } 
+      else if (pubkey == '5be6446aa8a31c11b3b453bf8dafc9b346ff328d1fa11a0fa02a1e6461f6a9b1') {
+        image = 'https://tonygiorgio.com/content/images/2023/02/tony-giorgio-1.jpeg'
+      } 
+      else if (pubkey == '106af487eca6e7c9adcaeb3499fd27e05340279fda5fba1d94a48ac301e5e5bb') {
+        image = 'https://media.tenor.com/RG-yObB_TeQAAAAM/chill-cute.gif'
+      } 
+      else if (pubkey == 'f4db5270bd991b17bea1e6d035f45dee392919c29474bbac10342d223c74e0d0') {
+        image = 'https://picsur.thesamecat.io/i/1ec8ed4c-be36-4457-9c48-35b7e62b458e.jpg'
+      } 
+      else if (pubkey == 'baae543256e768aebbd3dbcfafea9e980604af46d5f019b98d40abc8c3339b85') {
+        image = 'https://nostr.build/i/fe12cdc6061bfb98adbe278293e253c99e8c20ad94900e548ec6000f84c82eb6.jpg'
+      } 
+      else if (pubkey == '2edbcea694d164629854a52583458fd6d965b161e3c48b57d3aff01940558884') {
+        image = 'https://nostr.build/i/p/nostr.build_2d40c82b0ea13e34069f1c934f39d9cbc33c999ab80824b5763a9ff451c5f82f.gif'
+      } 
+      else if (pubkey == 'a80455732d5bfa792f279011a8c871853182971994752b9cf1169611ff91a578') {
+        image = 'https://nostr.build/i/4d4128cb7a6e1ee9cd902587e96ed35863b23a425e4530a8fbafd59e2f555d48.jpg'
+      } 
+      else if (pubkey == '42d9955e6af7e477d447f4791c0e820be8a8d5e450284c44f5501a78af84f45f') {
+        image = 'https://nostr.build/i/79a429244819700f5863eacb0f63001acbb7e9fe3c20b9c6df3c2917d68cc0c5.jpg'
+      } 
+      else if (pubkey == '880f967145ab66b53d9dc279d44a9722ba875d232c73f3df4707d1e79c4336ce') {
+        image = 'https://i.postimg.cc/JzMptCQ8/605-B03-BA-DB64-4-A85-B8-BD-2-F160-F8-BC345.png'
+      } 
+      else if (pubkey == 'c037a6897df86bfd4df5496ca7e2318992b4766897fb18fbd1d347a4f4459f5e') {
+        image = 'https://pbs.twimg.com/profile_images/1568743166035070976/4MyKww8A_400x400.jpg'
+      } 
+      else if (pubkey == '71f40d6c85dfac90574135f322f34805e06eb0823503bf2161db96a9bcb413e7') {
+        image = 'https://nostr.build/i/nostr.build_21d4d0fe490e023f32cedd4114b0ea7dae634b24575a074594cead6d164e95bc.jpg'
+      } 
+      else if (pubkey == '516413d79d0feef05fc0adaff418b550f8532f527388fe13b64cae54a8c0e850') {
+        image = 'https://nostr.build/i/34f5b7d60a0acb8ec6fb7f667492ab3a2c563886fa85f8ad33a63cea045d227d.jpg'
+      } 
+      else if (pubkey == '717d4b62ed661dec51fb39962728a424dd00f8edb68da2c52851b79a0ad25465') {
+        image = 'https://pbs.twimg.com/profile_images/1632551261965893632/WThDhlfZ.jpg'
+      } 
+      else if (pubkey == '5b0183ab6c3e322bf4d41c6b3aef98562a144847b7499543727c5539a114563e') {
+        image = 'https://nostr.build/i/p/nostr.build_0e69671aba33808290112d47f133b7169d28e84bdd7dfdb88a517672d4c66ac2.gif'
+      } 
+      else if (pubkey == 'd902b843a62f946483ca5bfe41cacae81ce7608515116bdad2dffd2417e43df1') {
+        image = 'https://cdn.discordapp.com/attachments/1001069168847757355/1070896161906511902/PICT0143.jpg'
+      } 
+      else if (pubkey == '85a8679df872002a2701d93f908d9fa41d82c68a42a253ddb5b69c3881ad3f10') {
+        image = 'https://nos.re/EJcan'
+      } 
+      else if (pubkey == '0cb05e2faeb2925e0a3e84c022bddcf0a41d156669c09c6ffb9b444422f101a7') {
+        image = 'https://i.imgur.com/4kq83BM.jpg'
+      } 
+      else if (pubkey == 'f7fa0f1ba20ab52418d1a8e83f781685976277da10860f424b78c3aa885d7584') {
+        image = 'https://pbs.twimg.com/profile_images/1617515791389446146/P4FDVUPI_400x400.jpg'
+      } 
+      else if (pubkey == 'af9d70407464247d19fd243cf1bee81e6df1e639217dc66366bf37aa42d05d35') {
+        image = 'https://i.postimg.cc/mZtpWG1b/Shaun.jpg'
+      } 
+      else if (pubkey == '532d830dffe09c13e75e8b145c825718fc12b0003f61d61e9077721c7fff93cb') {
+        image = 'https://i.imgur.com/HTe4TAY.png'
+      } 
+      else if (pubkey == '8fb140b4e8ddef97ce4b821d247278a1a4353362623f64021484b372f948000c') {
+        image = 'https://i.nostrpix.com/fishcake/p/profile.png'
+      } 
+      else if (pubkey == 'cbb2f023b6aa09626d51d2f4ea99fa9138ea80ec7d5ffdce9feef8dcd6352031') {
+        image = 'https://nostr.build/i/4125362f1d873855cfee6e57952e990ec2142e346c78f45e5d3a12a21b7c1d37.gif'
+      } 
+      else if (pubkey == 'a8abe37636fec9ccc78807bb8a8aad7c1ff6801617e5805864a6882fc98ba023') {
+        image = 'https://bitcoin.clarkmoody.com/dashboard/img/touch-icon-192.png'
+      } 
+      else if (pubkey == '05933d8782d155d10cf8a06f37962f329855188063903d332714fbd881bac46e') {
+        image = 'https://snuploads.s3.amazonaws.com/53'
+      } 
+      else if (pubkey == '65594f279a789982b55c02a38c92a99b986f891d2814c5f553d1bbfe3e23853d') {
+        image = 'https://blixtwallet.github.io/assets/images/hampus.jpg'
+      } 
+      else if (pubkey == '5778420eb7247fe5137645a5c9f9c5a6621fea979066ffc7bc13445eb5f5cbb5') {
+        image = 'https://i.nostrimg.com/d7ba2158ca8ba939e2378057c3e53ac4982e4f4d2368b13a246fb5b8d6b3fbc4/file.jpeg'
+      } 
+      else if (pubkey == '693c2832de939b4af8ccd842b17f05df2edd551e59989d3c4ef9a44957b2f1fb') {
+        image = 'https://nostr.build/i/af437d1afe49ce1e493da37bc45f5f9329444cc759d207ffea7a7e0d318726ca.jpg'
+      } 
+      else if (pubkey == '1cb14ab335876fc9efc37d838ba287cf17e5adcccb20bf6d49f9da9695d52462') {
+        image = 'https://nostr.build/i/p/nostr.build_cf0c48164dd7e3dcdfbeee9c1e200d4611adfee40716251f4c677b5a25da736c.jpeg'
+      } 
+      else if (pubkey == 'b20a5e04d5980796673d854bf3798ddc1e29ea20f0a371d9167723150f58476f') {
+        image = 'https://pbs.twimg.com/profile_images/1510780910387539970/rXsjyBws.jpg'
+      } 
+      else if (pubkey == 'c43bbb58e2e6bc2f9455758257f6ba5329107bd4e8274068c2936c69d9980b7d') {
+        image = 'https://nostr.build/i/d9daf83c356717c24b0862d58cd8d036c1e9616744761499ab2d678baf0bd64d.jpg'
+      } 
+      else if (pubkey == '5f2c1dbef94018b2e84b021cceb46b69128ff86b899add248f9751dec3d0277b') {
+        image = 'https://nostr.build/i/a6db42991e866026d3878cdb3effc2175b149cb89b6c6c16c3efb735a31a950c.jpg'
+      } 
+      else if (pubkey == '54fc669ccc03a47b3d95a9111bfddc590863d26a398c7149d2d349683b8451c8') {
+        image = 'https://nostr.build/i/nostr.build_2bcb6ed8417586e6523b5f4dcadbec33224674225f84d1b756431b57a3b39151.png'
+      } 
+      else if (pubkey == '1e9d809ea96f8d7227f06025f4ea2dd41e9426c4276d96a70770987c8013d21c') {
+        image = 'https://pbs.twimg.com/profile_images/1618525184339714048/NitlGA6r_400x400.png'
+      } 
+      else if (pubkey == '7bfee43a17360e696ceb92e75fe292bab7cde94579cc59cf77847ba04261fae8') {
+        image = 'https://nostr.build/i/nostr.build_6ebff433c69d6f2044ac11156cfec706c604d5c4eba005319c84884d8fcd551d.jpg'
+      } 
+      else if (pubkey == '3afa9bf8de1bc112dc0f7a911693b352c6bd32e78cb356c650439e7a775f89f1') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDExOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDExOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '2bb2abbfc5892b7bda8f78d53682d913cc9a446b45e11929f0935d8fdfcb40bd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTc0LDIxNywzOCwxKTsgc3Ryb2tlOnJnYmEoMTc0LDIxNywzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '817148c3690155401b494580871fb0564a5faafb9454813ef295f2706bc93359') {
+        image = 'https://pic-1252521402.cos.ap-hongkong.myqcloud.com/favicon.ico'
+      } 
+      else if (pubkey == 'eae7edfdcb79f23157a1af919495464e49aa76a22e5a5667148f296c1585a879') {
+        image = 'https://pbs.twimg.com/profile_images/1597966465889718272/EQTVAbg5_400x400.jpg'
+      } 
+      else if (pubkey == 'bad9867380f6f2b8f50d3ff869aaf75dc998797204a7c85a4bf6f8bb9fc07078') {
+        image = 'https://pbs.twimg.com/profile_images/1554968843033919491/LO0Fbxph_400x400.jpg'
+      } 
+      else if (pubkey == '803a613997a26e8714116f99aa1f98e8589cb6116e1aaa1fc9c389984fcd9bb8') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_abcfd7383af9a1c8211a5ccbf37b387f2a65548e460963533329f4441f2f8448.jpg'
+      } 
+      else if (pubkey == 'a545cc25f32bfea4d3bf4a1cb8e1d9492ddf6928c7db210dfe9622983b6f3569') {
+        image = 'https://nostr.build/i/757e6ae3a0067bcf94b2fe17806f15d24b5d12241ef30154722422b58deb47ae.jpg'
+      } 
+      else if (pubkey == '762a3c15c6fa90911bf13d50fc3a29f1663dc1f04b4397a89eef604f622ecd60') {
+        image = 'https://nostr.build/i/nostr.build_dd4b60ba2ec3d6963ec3c791e702b68e56eb4119c906f5a7b04b4918ecbe8541.gif'
+      } 
+      else if (pubkey == '3cfa816bb4892fa6be993ac72a9fcdbb089bdea0c5d9011fd204d154545fa2d9') {
+        image = 'https://marco.barulli.it/Marco%20Barulli%20-%20bw%20500x500%20-%20no%20background.png'
+      } 
+      else if (pubkey == 'ff27d01cb1e56fb58580306c7ba76bb037bf211c5b573c56e4e70ca858755af0') {
+        image = 'https://cdn.satellite.earth/7e8a68c0e3b395af431a90b6b773feefab5608625120bfdd09a9148870d365f3.png'
+      } 
+      else if (pubkey == '25d79e7a6208be603bf5df286813d3906a782e23e20dde1e327e3e4e95ce633d') {
+        image = 'https://nostr.build/i/p/nostr.build_a0ce41cb67d329ebc104e765d5ee2059a6ea829922d15c0ee71e9daf774f9cc1.jpg'
+      } 
+      else if (pubkey == '20f4081c72b2a4d4f9048f718f8f36b2bb8526455b6f022f10e85217a7c3d2ad') {
+        image = 'https://nostr.build/i/9126574901ea801738770537f8111e5a3cde0b7c64479f0f0049de3b55525336.jpg'
+      } 
+      else if (pubkey == '15e53a82be489115846257cf98319f07b8e44a6199478faea249c150c3775fb3') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMTA4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMzgsMTA4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '1739d937dc8c0c7370aa27585938c119e25c41f6c441a5d34c6d38503e3136ef') {
+        image = 'https://nostr.build/i/798e0c80f65710954e80df161308fbbe4f4f39aee3530ce9ea5e3f119aabc2b6.jpg'
+      } 
+      else if (pubkey == 'b7ed68b062de6b4a12e51fd5285c1e1e0ed0e5128cda93ab11b4150b55ed32fc') {
+        image = 'https://towardsliberty.com/agora/s/Jqi4Xmja39xtzeG/preview'
+      } 
+      else if (pubkey == '6e468422dfb74a5738702a8823b9b28168abab8655faacb6853cd0ee15deee93') {
+        image = 'https://dergigi.com/assets/images/avatar-laser.jpg'
+      } 
+      else if (pubkey == '58ee1ae59943750475900a48b5a9ba929f07b786004cc0d8703fe59d796968c1') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDE1NCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDE1NCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '9989500413fb756d8437912cc32be0730dbe1bfc6b5d2eef759e1456c239f905') {
+        image = 'https://nostr.build/i/p/1.jpeg'
+      } 
+      else if (pubkey == '8ab46d8b770f3841f4f3dfabf117a382373177e6bd308e2eba1f626d81a7e012') {
+        image = 'https://nostr.build/i/nostr.build_0500b929438734a080ad3e0d13553c1fcfdcd50f59a6f77ee01eb8a6cb80ac95.jpg'
+      } 
+      else if (pubkey == '0c53d66e35ffd969c723ad31dbdd4ce3a4fff86edda7e05cd996d137c0628e25') {
+        image = 'https://i.imgur.com/QY5rT1v.jpg'
+      } 
+      else if (pubkey == 'ee11a5dff40c19a555f41fe42b48f00e618c91225622ae37b6c2bb67b76c4e49') {
+        image = 'https://avatars.githubusercontent.com/u/1669069'
+      } 
+      else if (pubkey == '9bfa99b42aeefeabcaf640eb0c8cbc32426ba1300159e8a4425acff2ec2326eb') {
+        image = 'https://nostr.build/i/nostr.build_976cb002609ebc9f591caf7df9cb59197defa78a37ad80eb95c31c8abca22ac5.jpeg'
+      } 
+      else if (pubkey == '7abafef00c26639e9388625c4ad7932febef2eb4e62c78282f3984145fc7af19') {
+        image = 'https://pbs.twimg.com/profile_images/1594930968325984256/TjMXaXBE_400x400.jpg'
+      } 
+      else if (pubkey == '544c4b256fb8b231071ec5dd30610184bef7414686843b70830a278fa324a77d') {
+        image = 'https://b.thumbs.redditmedia.com/4MWMNqIYV0AXaxwLIlpwnb0NDejDZ5QgW5nGqcYCeos.png'
+      } 
+      else if (pubkey == 'e2ccf7cf20403f3f2a4a55b328f0de3be38558a7d5f33632fdaaefc726c1c8eb') {
+        image = 'https://i.nostrimg.com/endorsed-generosity-calms.gif'
+      } 
+      else if (pubkey == 'a9f8b3f2ac19cc06d5194dd1ac9314d4741a09777444986553926d9165181647') {
+        image = 'https://21millonesbtc.com/wp-content/uploads/2022/07/BITCOIN-BEACH-1024x682.jpg'
+      } 
+      else if (pubkey == 'f4cc2d7c3dd519cd7f1d44e487aca8f7dbe65cb95bd980da297fdf1e8aa24111') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDE0MiwzOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDE0MiwzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      }
+      else if (pubkey == '662b0fe5b0d372dcc6d8be4ebfac34d7bc961ca24577e55fe24f2e87e3b057ff') {
+        image = 'https://syobon.net/img/avatar.avif'
+      }
+      else if (pubkey == 'a8171781fd9e90ede3ea44ddca5d3abf828fe8eedeb0f3abb0dd3e563562e1fc') {
+        image = 'https://void.cat/d/89RkBSRhMTwG3rFuPaAzpS.webp'
+      }
+      else if (pubkey == '4b6563e055f7c5bc0f99ecceac2789ca6c9aa25d2dc702bd642433bdd03e62fd') {
+        image = 'https://blowater.deno.dev/logo-white.png'
+      }
+      else if (pubkey == '97a58824eb1493260e410bad69c690634eb7f7567ba1c7d0337ad00ef65660b2') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTc4LDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMTc4LDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      }
+      else if (pubkey == 'f07e0b1af066b4838386360a1a2cbb374429a9fbaab593027f3fcd3bd3b5c367') {
+        image = 'https://nostr.build/i/p/nostr.build_cf4966bc801a4f01c1c37150ee45f9849b3501aa5ed1ae11d0de414336d12974.jpg'
+      }
+      else if (pubkey == 'ad8c68f4baa51a236d05a1491f986aca4bc05bbee92f0e413a9b994247a2b746') {
+        image = 'https://pbs.twimg.com/profile_images/1219756534/48587_1256800997_8531_q_400x400.jpg'
+      }
+      else if (pubkey == '915b010b4ed8ba3eb32428a049e66dc3fae8492fd3a055a6596b1757fec5bd93') {
+        image = 'https://nostr.build/i/nostr.build_1a0b3c872655f2d46610822402af0829fafb01f47bf78824fcb302cded897f5c.gif'
+      }
+      else if (pubkey == 'df5b6a8e3b10687a934ff9f92ba8d7240091cfd125d81816c119644c2fb17caf') {
+        image = 'https://nostr.build/i/nostr.build_d5f004326f9bb4d0d72a1d2a06754ba08e437a9bb5b09ba952f5c6ae236bd2ad.jpg'
+      }
+      else if (pubkey == '91e7934e16be971bbe215e235538253841bb37bfb17e82ee00cfa8c091cf198c') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDE4NSwzOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDE4NSwzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      }
+      else if (pubkey == '0899455651ebdaaa09bac33dd381aac7aa28012edf311e7d4e982802eb1ac068') {
+        image = 'https://nostr.build/i/c95023993e5fce039a81e01256e1e88e753465ebf5d844d090432fed6678f009.jpg'
+      }
+      else if (pubkey == '296842eaaed9be5ae0668da09fe48aac0521c4af859ad547d93145e5ac34c17e') {
+        image = 'https://nostr.build/i/91e320ffb8f213d60e7da1ff427debb0ef8dff73ab8b9cc5cd63bb204b47b2fb.jpg'
+      }
+      else if (pubkey == '63fe6318dc58583cfe16810f86dd09e18bfd76aabc24a0081ce2856f330504ed') {
+        image = 'https://void.cat/d/H6LtEtGVDotvT22tWnrtDm.avif'
+      }
+      else if (pubkey == '9936a53def39d712f886ac7e2ed509ce223b534834dd29d95caba9f6bc01ef35') {
+        image = 'https://nostr.build/i/nostr.build_5962732f29a2ab6a84ac9a6ac5cf5c421dea769b29decb66be0e7a7a24b50b48.png'
+      }
+      else if (pubkey == 'b176337e2602bd98c9ab325059ee2512ea2b26a906e955cd484e216067febf77') {
+        image = 'https://nostr.build/i/0b09d22d7a9eba49e23879e3f55ef0d8b8d4b44c13bbafe0b98be467dbc03c16.jpg'
+      }
+      else if (pubkey == '2f4fa408d85b962d1fe717daae148a4c98424ab2e10c7dd11927e101ed3257b2') {
+        image = 'https://pbs.twimg.com/profile_images/1599994711430742017/33zLk9Wi_400x400.jpg'
+      }
+      else if (pubkey == 'b88c7f007bbf3bc2fcaeff9e513f186bab33782c0baa6a6cc12add78b9110ba3') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDE0MCwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDE0MCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      }
+      else if (pubkey == '709bd2be88c1f020b36d0b1414fd92e7306e8b91612bef0b3e3e202189d608e0') {
+        image = 'https://media1.giphy.com/media/PcNcFbtK2nJlmHiPe7/giphy.gif?cid=5e21488671779875cd57a9afbbf3da736503a0020f3ef249&rid=giphy.gif&ct=s'
+      }
+      else if (pubkey == 'fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52') {
+        image = 'https://pablof7z.com/images/me.jpg'
+      }
+      else if (pubkey == 'a3dd67d1c57d9d1f8b3c79521f636dd68564acabda2d4de776c4221dfb7e24ae') {
+        image = 'https://nostr.kojira.net/blueskychan.jpg'
+      }
+      else if (pubkey == '971615b70ad9ec896f8d5ba0f2d01652f1dfe5f9ced81ac9469ca7facefad68b') {
+        image = 'https://nostr.build/i/p/nostr.build_9841ac0b1902a46e9ecae4cd72f9caa2c20216b43838d1fb7c8dcb113ac98258.gif'
+      }
+      else if (pubkey == 'f3f5992cdb39e6108768d543fbd384a11efc3713085617ee28932ebb1614e07c') {
+        image = 'https://harmonique.live/assets/img/hq-square-400-fs8.png'
+      }
+      else if (pubkey == 'f8e6c64342f1e052480630e27e1016dce35fc3a614e60434fef4aa2503328ca9') {
+        image = 'https://nostr.build/i/fd1bfeb75cddc1678bd5c7c01b057fa0c462ac2f07f47792daba63a8edd1b601.jpg'
+      }
+      else if (pubkey == 'f00ae576528b2a9845e7a82c63f67bd96f1fcb5fa7070b3c989f3d1a8b429b52') {
+        image = 'https://i.postimg.cc/0jPJW2Zn/F37-B583-B-304-C-4-BB3-A111-91-E9598-C381-A.jpg'
+      }
+      else if (pubkey == 'b481d853bdd549c8cad18dcc1fb1fc8dba6e96b60278fcec388bb15967f95a2d') {
+        image = 'https://pbs.twimg.com/profile_images/1398663793790574593/ED-oFT7S_400x400.jpg'
+      }
+      else if (pubkey == '6a867b81a295bf3f1fec70b0dd72189d8872a69b49c6f512e802c3c723328beb') {
+        image = 'https://nostr.build/i/d140554c03e7c886fc689b86119514b59119cb55eef156fc67473c9237a99afb.jpg'
+      }
+      else if (pubkey == '82d913d82bcdfd214b780d19c03f27307304e8e93beadac8cb01bbf7f5b14f1a') {
+        image = ''
+      }
+      else if (pubkey == 'd4b4cb892f81a3ce9d5f67b368fbcbaf097d3a23115143353fe9d95432acd282') {
+        image = ''
+      }
+      else if (pubkey == 'ca7e6cf15d806abbe882dedb9cc31c8cad7a66a3ca5d65c9f84059fd26394df7') {
+        image = 'https://nostr.build/i/9347abe30800e16ce20958019234234acc1ec70b28e9cef3d49084d132f87adb.jpg'
+      }
+      else if (pubkey == '08c98839fb7dae64ec07ae39ccf852aa2933706b4b326d9eb838bb30722f7135') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoOTcsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg5NywzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      }
+      else if (pubkey == '94bbca71dfce61f805678e0fb41a550bd4394b5313ee5ad833502c57e962f406') {
+        image = 'https://nostr.build/i/nostr.build_59564be847b6b388b5bb6b772646bf3c29c1021376fe4a5425613e7963bf4d43.jpg'
+      }
+      else if (pubkey == '38c4684e5f549b1059c25e517d2da02e250234c6261a65fa1890ddf3076b32c2') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsOTksMjE3LDEpOyBzdHJva2U6cmdiYSgzOCw5OSwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      }
+      else if (pubkey == 'd4338b7c3306491cfdf54914d1a52b80a965685f7361311eae5f3eaff1d23a5b') {
+        image = 'https://media.tenor.com/5lLcKZgmIhgAAAAM/american-psycho-patrick-bateman.gif'
+      }
+      else if (pubkey == 'deba271e547767bd6d8eec75eece5615db317a03b07f459134b03e7236005655') {
+        image = 'https://pbs.twimg.com/profile_images/1525266054506655744/6cQinZlr_400x400.jpg'
+      }
+      else if (pubkey == '23b26fea28700cd1e2e3a8acca5c445c37ab89acaad549a36d50e9c0eb0f5806') {
+        image = 'https://nostr.build/i/nostr.build_4ad1ae79c1429fb3464e891b46940e5bf9fe70064f9edb6558794e6ff9267e80.jpeg'
+      }
+      else if (pubkey == '4b76313b881dc6831e61d3497cf1b400b669d543ec1d871989a356feac626f9f') {
+        image = 'https://pbs.twimg.com/profile_images/1249729414390091777/tl6B60fz_400x400.jpg'
+      }
+      else if (pubkey == 'e2f44c2f16ab05d3c771f73c9a696c64641f89b0d6031a3483191e9fbfa16364') {
+        image = 'https://pbs.twimg.com/profile_images/554750725/tsukimi_400x400.jpg'
+      }
+      else if (pubkey == '99a153d51e12d8ed6e58b1b3ef9f430756989e33c561c6224770f012e41b4f99') {
+        image = 'https://showhyuga.pages.dev/nostricon/hyuneon.jpg'
+      }
+      else if (pubkey == '4ffc11bfa2f8516ae8bc7c6bf82275d358e47045446250be2d0e5612e2140828') {
+        image = 'https://nostr.build/i/nostr.build_57ea39dd716277c162d37ac657254640ce012186fcaaa95b7688c2dd703f7987.png'
+      }
+      else if (pubkey == 'c2622c916d9b90e10a81b2ba67b19bdfc5d6be26c25756d1f990d3785ce1361b') {
+        image = 'https://nostr.build/i/nostr.build_b7a24ab64b5deb9c20b89ddf95091016aa55998ea522cdde2a34c261294dc298.jpeg'
+      }
+      else if (pubkey == 'f9e24c0a9544d119b4f0e31ceac53d1b650c763e378541e1dfde402e350f5792') {
+        image = 'https://pbs.twimg.com/profile_images/1246958945723285504/tNQtVIC5_400x400.jpg'
+      }
+      else if (pubkey == '90b9bec74789688e515125596ab6350bfe646176ac75742275063922c5fea010') {
+        image = 'https://nostr.build/i/p/nostr.build_0886afe581289f0bb9b96ee677795933b94ba241922e2bb2400aba424942f430.gif'
+      }
+      else if (pubkey == '1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b') {
+        image = 'https://nostr.build/i/p/nostr.build_02aa45f76a9e0aa512677086dbbafbd8a219ed573d5055f8b9691a5e1ed87212.gif'
+      }
+      else if (pubkey == 'e8c1ca03a46d97184bfcd9125a5c9674a867bd1beaebe47c77d4eaec6c5ee874') {
+        image = 'https://nostr.build/i/nostr.build_cb33d736a8a8cb56248c80ba25f1da806ad73048f399139fada2d35620084f7a.jpg'
+      }
+      else if (pubkey == '63ee602bdb417251e180ca2189e6df10902ca64e16f9b16d3a8bb83fd0cad077') {
+        image = 'https://nostr.build/i/6eb7e7939f621f16ab47d70fd9d1c20d927b5ee53174e98f3d70e42b10d2b203.jpg'
+      }
+      else if (pubkey == 'ad06ef04aee0274312f9a1ab9615ba05d984541e96e7b64b938bdb2ecd0a3d85') {
+        image = 'https://nostr.build/i/73eb558d7206014095939733de2eb82825d6d7e4da784cd2a8e06d688177695c.jpg'
+      }
+      else if (pubkey == '0e2931e8ff64bc566b1b12b9fa70fec7067495667eaf157ae6cb6b22f43247f2') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTg2LDIxNywzOCwxKTsgc3Ryb2tlOnJnYmEoMTg2LDIxNywzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      }
+      else if (pubkey == '6a223aa5b05b6bf707a91b16e305615c8852d157fa90e139aa008bf7e06b08aa') {
+        image = 'https://www.j3s7m4n.com/media/j3s7m4n.jpg'
+      }
+      else if (pubkey == '97c70a44366a6535c145b333f973ea86dfdc2d7a99da618c40c64705ad98e322') {
+        image = 'https://us-southeast-1.linodeobjects.com/dufflepud/uploads/b2a7ef93-fa12-469b-bf3d-0f2654cab346.jpg'
+      }
+      else if (pubkey == 'bd1e19980e2c91e6dc657e92c25762ca882eb9272d2579e221f037f93788de91') {
+        image = 'https://nostr.build/i/bcff5c0d9ddf4ee12ebe87fcde08c650c596e6e510d8605a66a05644d3ebea7c.jpg'
+      }
+      else if (pubkey == 'd985010ea2036c261d7f9ae4b5a85762a33f25e9929e450053f12814e345c617') {
+        image = 'https://i2.wp.com/animales-itonids.com/wp-content/uploads/2017/11/Pudu-andino-2.jpg'
+      }
+      else if (pubkey == '3d353a9bd13bd007a2bb56f66dc0c3ac369e7159ab008788571f0a71f02c8200') {
+        image = 'https://nostr.build/i/48697ca784880835ae557a9e3c171e6ce8f9d24a5201ad378dd74c56767c43ca.jpg'
       }
       else if (pubkey == '1bbfc3c4c6958ada8c75558a6e28604b683bf4a2fb8d44037ec353c0f313fc60') {
         image = 'https://i.imgur.com/qtPFODc.png'
@@ -501,20 +1412,20 @@ const Test = () => {
       else if (pubkey == 'e21a88fbfa177e3e38adc129274a4f86218482a7c9a436ba9a918cc7f2b31fe9') {
         image = 'https://void.cat/d/WHC5YhS6mwiuLLogtkvGta.webp'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'bd8eedc9473daa7c8820c942b74476b6f98e6758d3d1028d72b69e95842501be') {
+        image = 'https://nostr.kojira.net/nostrchan0.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '2779f3d9f42c7dee17f0e6bcdcf89a8f9d592d19e3b1bbd27ef1cffd1a7f98d1') {
+        image = 'https://nostr.build/i/p/nostr.build_8156bdbedb3d551daaec740eda89e235816bfc20be5514d7781a848f7dcf960c.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0fef306d4bab7ddb6a682574300772506dae2dcc0930df708979fa26bf86259b') {
+        image = 'https://oransns.com/system/accounts/avatars/000/000/001/original/01e538156043b10c.gif'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'a123fe2b1696f3595b8706875c358216ffc1365e3120140809c513ded1fd1eab') {
+        image = 'https://pbs.twimg.com/profile_images/1615338920283361282/7FDgcfzz_400x400.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '547994b49353f4b33af366b5d3a6678a7e115eccfb31627edac3fb62e7d38626') {
+        image = 'https://i.imgur.com/M9waZSq.jpg'
       }
       else if (pubkey == 'b8af7fcb6a3cd93f5a298b9f47ad0b509765d34d8046442b88f7a5520d328242') {
         image = 'https://nostr.build/i/nostr.build_50ddc4edbb6fe6d134f26815d4c1b27bef2181267741cc7110b77284d8a114f7.jpeg'
@@ -554,6 +1465,7 @@ const Test = () => {
       }
       else if (pubkey == '29b7ab632d365315454d5294893e0607cec8297c5910f482a2d1fd41261169fb') {
         image = 'https://awayuki.net/resource/bot1-avatar.png'
+	image = 'https://awayuki.net/resource/bot1-avatar-2.png'
       }
       else if (pubkey == 'b06e337d77fe68c0742de266822b8c97626d8f8ab6943641dedf8b88a3da4465') {
         image = 'https://www.gravatar.com/avatar/432c2f8b29e49f8cde472c4115871770?s=300'
@@ -952,6 +1864,7 @@ const Test = () => {
       else if (pubkey == '101b30ee88c27a13de68bf7c8c06368ea3e3e837641595c18675677d18a46a45') {
         image = 'https://pbs.twimg.com/profile_images/791317461287133185/SaFYRRs8_400x400.jpg'
 	image = 'https://nostr.build/i/8fa3eca79682c72916ba1893e63e887b901c79da7c6ad83c1731ebf358567f4d.jpg'
+	image ='https://nostr.build/i/80b19e6b2d40da27f66ff137069a76dec31104f3b6f3327e2819202f0557e896.jpg'
       }
       else if (pubkey == '99b3b70ce10f097232841cd89e95f7b69178f2450856fe1e7d144751ad8e51e1') {
         image = 'https://nostr.build/i/nostr.build_66a9c54af88a3c6cf4eabebafb78477a8aca05925446aec9c3c6d78a508b6532.jpeg'
@@ -1210,6 +2123,7 @@ const Test = () => {
       }
       else if (pubkey == 'f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd') {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMzksMjE3LDEpOyBzdHJva2U6cmdiYSgzOCwzOSwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+	image = 'https://i.gyazo.com/fe5c0915065b515e509ef351c71b617a.jpg'
       }
       else if (pubkey == '9cf9b6087934351e408b971d3d4d7824503ac81b8e6d45e010e25440594db487') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/kojiranyan.png'
@@ -2196,6 +3110,7 @@ const Test = () => {
       else if (pubkey == 'eb119234c467ac9d2ffea5b7284f3a74bd04287a12cfd58a22d19626434cddf2') {
         image = 'https://void.cat/d/2627RwhfWjsFBzmpSqZDNC.webp'
 	image = 'https://nostr.build/i/0549fbcd7dfd6fa9a74579b7077f5a68eab73e112cf888463d4bd32fd4d3f252.jpg'
+	image = 'https://nostr.build/i/0785e2c1234d0c316bd26d03d06559f9f0e8dee1b9d8c77f24bc1a6f96e52803.jpg'
       }
       else if (pubkey == '5e0708079b7127b584ef197b9104ad13895dbfc535bbcc618961bd54a328e997') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://ihasq.com/image.webp'
@@ -2563,6 +3478,8 @@ const Test = () => {
       }
       else if (pubkey == 'cd408a69cc6c737ca1a76efc3fa247c6ca53ec807f6e7c9574164164797e8162') {
         image = 'https://awayuki.net/con/my/img/icon237.png'
+	image = 'https://awayuki.net/con/my/img/icon178.png'
+	image = 'https://awayuki.net/con/my/img/icon222.png'
       }
       else if (pubkey == '7aa090be3c66dbcc7c98ca17a22ed5daa2cea6f2b87df35cada814bb09e1e283') {
         image = 'https://pbs.twimg.com/profile_images/1445176476161114113/pWP6zWyX_400x400.jpg'
@@ -2609,6 +3526,7 @@ const Test = () => {
       else if (pubkey == '4d39c23b3b03bf99494df5f3a149c7908ae1bc7416807fdd6b34a31886eaae25') {
         // akiomik
         image = 'https://i.imgur.com/Me9P5y1.png'
+	image = 'https://i.nostrimg.com/553ce0727d62c08fe07f9d6d45c0e4daa4fb6debb505195575b365110f376ec0/file.webp'
       }
       else if (pubkey == '83409ce424d2dae116fc9d1596f076d1d65843e44e026fa52a6b67dca2f35500') {
         // saharu
