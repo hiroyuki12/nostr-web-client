@@ -11,17 +11,20 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       until: dateToUnix(now.current), // all new events from now
-      until: 1686048907,  //paging
+      until: 1686231999,  //paging
 
-      //until: 1686034150,  //paging contentLink
-      //until: 1686038739,  //paging (#e)
-      //until: 1686041046,  //paging conteltLink
-      //until: 1686034209,  //about reverce
-      //until: 1685956335,  //reverce erechorse
-      //until: 1685891401,  //reverce rain
-      //until: 1685844995,  //reverce
-      //until: 1685844912,  //reverce
-      //until: 1685884961,  //reverce
+//      until: 1686172323,  //contentLink
+      until: 1686224420,  //emoji
+//      until: 1686199783,  //emoji
+//      until: 1686148182,  //npub(to) 
+//      until: 1686181295,  //repost jpg fix
+//      until: 1686063586,  //npub(to) fix
+//      until: 1686052701,  //before 1 hour fix
+//      until: 1686034150,  //contentLink fix
+//      until: 1686041046,  //conteltLink fix
+//      until: 1686034209,  //about reverce
+//      until: 1686135829,  //U+202E (RTL)
+//      until: 1686051720,  //reverce
 
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
@@ -260,6 +263,8 @@ const Test = () => {
       let linkUrlText3 = "";  // #r 3
       let linkUrl4 = "";
       let linkUrlText4 = "";  // #r 4
+      let linkUrl5 = "";
+      let linkUrlText5 = "";  // #r 5
       let eventLinkUrl1 = "";
       let eventLinkUrlText1 = "";  // #e 1
       let eventLinkUrl2 = "";
@@ -310,11 +315,13 @@ const Test = () => {
 	  }
 
 	  if(eventLinkUrlText1 == "") {
-            eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,7) + "(#e)";
+            //eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,7) + "(#e)";
+            eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,2) + "(#e)";
 	    eventLinkUrl1 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
 	  }
 	  else if(eventLinkUrlText2 == "") {
-            eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,7) + "(#e 2)";
+            //eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,7) + "(#e 2)";
+            eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,2) + "(#e 2)";
 	    eventLinkUrl2 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
             eventLinkUrlText1  = eventLinkUrlText1.replace("#e","#e 1");
 	  }
@@ -341,9 +348,14 @@ const Test = () => {
 	      content = content.replace("\\n"," ");
 	    }
 	    
-	    content = content.replace("{","");
 	    content = content.replace("\"content\":\"","");
+	    content = content.replace("content","");
+	    content = content.replace("{","");
+	    content = content.replace("{","");
 	    content = content.replace("\"","");
+	    content = content.replace("\"","");
+	    content = content.replace("\"","");
+	    //content = content.replace(":","");  // https://
 
             for(let j=0; j<11; j++) {
 	      content = content.replace("\\","");
@@ -444,6 +456,7 @@ const Test = () => {
         }
       }
 
+      let note1LinkTextFront = "";
       let note1LinkUrl = "";
       let note1LinkText = "";
       let note1LinkUrl2 = "";
@@ -462,9 +475,15 @@ const Test = () => {
 	    content = content.replace(wordsNostr[i],'');
 	    note1LinkUrl =  "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
 	    content = content.replace(note1LinkUrl,'');
-            note1LinkText = "__nostr:note1(quote)";
-	    if(note1LinkUrl.includes("npub")) {
-              note1LinkText = "(nostr:npub1)(to)";
+            //note1LinkText = "__nostr:note1(quote)";
+            note1LinkText = "__(quote)";
+	    if(note1LinkUrl.includes("npub") && i != 1) {
+              //note1LinkText = "(nostr:npub1)(to)";
+              note1LinkText = "(to)";
+	    }
+	    else {
+	      //note1LinkTextFront = "(nostr:npub1)(to)";
+	      note1LinkTextFront = "(to)";
 	    }
 	  }
 	}
@@ -494,7 +513,7 @@ const Test = () => {
 
 	    if(note1LinkUrl == "") {
 	      note1LinkUrl =  "https://nostter.vercel.app/" + npub
-	      note1LinkText = npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
+	      note1LinkText = "__" + npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
 	    }
 	    else if(note1LinkUrl2 == "") {
 	      note1LinkUrl2 =  "https://nostter.vercel.app/" + npub
@@ -535,6 +554,11 @@ const Test = () => {
 	      content = content.replace(linkUrl4,'');
 	      linkUrlText4 = "(#r 4)";
 	    }
+	    else if(linkUrl5 == "") {
+	      linkUrl5 = note.tags[i][1];
+	      content = content.replace(linkUrl5,'');
+	      linkUrlText5 = "(#r 5)";
+	    }
 	  }
         }
       }
@@ -545,9 +569,16 @@ const Test = () => {
       let contentLinkUrlAfter2 = "";  // link after content
       let afterSpacer1 = "";
       let afterSpacer2 = "";
-      let words2 = content.split(' ');
-      words2 = content.split('\n');
-      words2 = content.split(' ');  // zenkaku space
+      let tmp = content;
+      //tmp = tmp.replace('\n\n','\n');
+      //tmp = tmp.replace(' ','\n');  // zenkaku space
+      //let words2 = tmp.split('\n');
+      //tmp = tmp.replace('\n\n',' ');
+      //tmp = tmp.replace('\n\n',' ');
+      for(let i=0; i<30; i++) {
+        tmp = tmp.replace('\n',' ');
+      }
+      let words2 = tmp.split(' ');
 
       if(content.includes("https://")) {
         for(let i=0; i<words2.length; i++) {
@@ -567,7 +598,7 @@ const Test = () => {
 	    content = content.replace(words2[i],'');
 	  }
 	  else if(words2[i].includes("https://") && contentLinkUrlAfter != "") {
-	    afterSpacer2 = "__";
+	    afterSpacer2 = "_0_";
 	    contentLinkUrlAfter2 = words2[i];
 	    content = content.replace(words2[i],'');
 	  }
@@ -599,6 +630,7 @@ const Test = () => {
                 <img src={emoji5URL} width={emoji5Size} height={emoji5Size} />
 		<a href={contentLinkUrlFront} target="_blank">{contentLinkUrlFront}</a>
 		<a href={contentLinkUrlFront2} target="_blank">{contentLinkUrlFront2}</a>
+		<a href={note1LinkUrl} target="_blank">{note1LinkTextFront}</a>
                 {content}
 		<a href={note1LinkUrl} target="_blank">{note1LinkText}</a>
 		<a href={note1LinkUrl2} target="_blank">{note1LinkText2}</a>
@@ -608,15 +640,16 @@ const Test = () => {
 		<a href={linkUrl2} target="_blank">{linkUrlText2}</a>
 		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
 		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
-		<a href={contentLinkUrlAfter} target="_blank">{afterSpacer1}{contentLinkUrlAfter}</a>
-		<a href={contentLinkUrlAfter2} target="_blank">{afterSpacer2}{contentLinkUrlAfter2}</a>
+		<a href={linkUrl5} target="_blank">{linkUrlText5}</a>
+		<a href={contentLinkUrlAfter} target="_blank">{contentLinkUrlAfter}</a>
+		<a href={contentLinkUrlAfter2} target="_blank">{contentLinkUrlAfter2}</a>
                 <a href={image1Url} target="_blank"><img src={image1Url} height={inlineImage1Height} /></a>
                 <a href={image2Url} target="_blank"><img src={image2Url} height={inlineImage2Height} /></a>
                 <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
                 <a href={image4Url} target="_blank"><img src={image4Url} height={inlineImage4Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-                <font color="black">{repHex}-{note.pubkey}-</font>{index}
+                <font color="black">{repHex}-{note.pubkey}</font>-id:<font color="black">{note.id}</font>-{index}
             </div>
           </div>
         </li>
@@ -638,6 +671,138 @@ const Test = () => {
       else if (pubkey == '') {
         image = ''
       } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == '') {
+        image = ''
+      } 
+      else if (pubkey == 'daefc770c5fa29cd52acbb444e5af3fc94b5bf775ee960703fd0f1da44085bb0') {
+        image = 'https://nostr.build/i/nostr.build_7ee429c6b9c942e468e7d78c267f01dd13d40775f3c86e63de105782de8bb9c1.jpg'
+      } 
+      else if (pubkey == 'b2ee0596dd20de190b909e21e9b079a7e7cc5c0696dd12e27e3e5b1a6c096485') {
+        image = 'https://nostr.build/i/9d6d6611424702e3cdbdbd6eb32fe50b2f46beb8ea99b4eb059dacd9d86ef145.jpg'
+      } 
+      else if (pubkey == '5c508c34f58866ec7341aaf10cc1af52e9232bb9f859c8103ca5ecf2aa93bf78') {
+        image = 'https://nostr.build/i/9a73a58e33dcbb77c7b1d692f0e46814e8048bdcf67957dd0afd8919fecdaf3d.gif'
+      } 
+      else if (pubkey == 'f481fd13f9d695285f0ef54f729836db0470f9f204d6fa7025ced851d6465ff7') {
+        image = 'https://void.cat/d/T3xr7Bs4wYaW81t4FXMPuQ.webp'
+      } 
+      else if (pubkey == '75da94027ad408bc2faffeb1e67d71babe8d78d89c3620da212303b877a65b5c') {
+        image = 'https://nostr.build/i/p/nostr.build_b998ce0359ad8f74ea580683be323e6ac724960ae92a08803cd5b4af846631a2.jpg'
+      } 
+      else if (pubkey == '6e75f7972397ca3295e0f4ca0fbc6eb9cc79be85bafdd56bd378220ca8eee74e') {
+        image = 'https://nostr.build/i/nostr.build_2aaf6d82bf46a54779df131f85e2bac7f98943bfb088bc6696cbe60741195e94.gif'
+      } 
+      else if (pubkey == '28f6ea2d316132ddf6910c789050b437122f6352ec8e01422b7cdc0d8a78deec') {
+        image = 'https://nostr.build/i/f8497d94a009df15b9122708c6bf6a2d4901d542dc3240e1268f057aea06d1fe.gif'
+      } 
+      else if (pubkey == 'ecfa3c5c82d589c867c044056f75d6cff794f1886d5ebcdd48ad851da47adae4') {
+        image = 'https://i.imgur.com/wCOItrV.jpg'
+      } 
+      else if (pubkey == '391819e2f2f13b90cac7209419eb574ef7c0d1f4e81867fc24c47a3ce5e8a248') {
+        image = 'https://nostr.build/i/nostr.build_9dae499904c6f29a6caa74eac9a017b9d41c5e35fee0f404dad80e0314772ca1.gif'
+      } 
+      else if (pubkey == '28d37e1b489437c78d64ccdbf1f44c20e3f013dba3f4c2573b25599ba6308c22') {
+        image = 'https://pbs.twimg.com/profile_images/1596544054942371842/yYCwsXQD_bigger.jpg'
+      } 
+      else if (pubkey == '9bf4f5b059522147f4302e04c1c65eefcb94da9f363cef467e87d152e5468e18') {
+        image = 'https://nostr.build/i/9e1df09777b122ef543e81114b30b8021f10b2c68ef709695e352376b39b025c.jpg'
+      } 
+      else if (pubkey == '958b754a1d3de5b5eca0fe31d2d555f451325f8498a83da1997b7fcd5c39e88c') {
+        image = 'https://nostr.build/p/nb1873.gif'
+      } 
+      else if (pubkey == '9be0be0e64d38a29a9cec9a5c8ef5d873c2bfa5362a4b558da5ff69bc3cbb81e') {
+        image = 'https://profilepics.nostur.com/profilepic_v1/e358d89477e2303af113a2c0023f6e77bd5b73d502cf1dbdb432ec59a25bfc0f/profilepic.jpg?1682440972'
+      } 
+      else if (pubkey == '8781706462080b2f1f62f42f9ae426e7b571dd5d4f0cce4249e8a6f0bdc694d6') {
+        image = 'https://nostr.build/i/p/nostr.build_9b11280ff4db4e568e7bd64a4ac27b63efd12009b1a8b9520352474e7a6205ba.gif'
+      } 
+      else if (pubkey == '6b67ed932051fff765001665b02c718dd3b8cb5bc860136076f3ef3a8eaad1e0') {
+        image = 'https://void.cat/d/5rrv8TBdqzfSrpvMNVjQ7R.webp'
+      } 
+      else if (pubkey == '11d0b66747887ba9a6d34b23eb31287374b45b1a1b161eac54cb183c53e00ef7') {
+        image = 'https://nostr.build/i/9084fd65a2c84632a296db939a509defc29849541d38538afe6baabd88946fda.jpg'
+      } 
+      else if (pubkey == '1aa8284bd7c06406bc9c1aa10aae237fcb7d3bac10753e95939cae33f9cb5854') {
+        image = 'https://showhyuga.pages.dev/nostricon/shockericon.jpg'
+      } 
+      else if (pubkey == '4a1ad1f471e64a8ab08863570c176e45debda7d085ac0579a699934d74fa7446') {
+        image = 'https://nostr.build/i/nostr.build_99e73d1755a4ea86f06038a1379509c271812439fb794af54f539451abdc53c5.jpeg'
+      } 
+      else if (pubkey == '13628c57afc5d5ce25dc305804fd3e871884e64ac3d16a0ad5891d5e36bf2e0f') {
+        image = 'https://nostr.build/i/nostr.build_ad7ace0829f3f0f017cb1c5c6db5d11a9f1c7d1370684a4e8c532ceadc6dc1f5.jpeg'
+      } 
+      else if (pubkey == 'd7c6d014b342815ba29c48f3449e4f0073df84f4ad580ae173538041a6abb6b8') {
+        image = 'https://pbs.twimg.com/profile_images/1617532509021143040/1t-ifMmV_400x400.jpg'
+      } 
+      else if (pubkey == '6e196b6f500d650e9dee07c404b8c1675bac55a07e1ee9335c14dd3453387bb9') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDk5LDM4LDEpOyBzdHJva2U6cmdiYSgyMTcsOTksMzgsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '592295cf2b09a7f9555f43adb734cbee8a84ee892ed3f9336e6a09b6413a0db9') {
+        image = 'https://void.cat/d/AMx6K7WfVzSe6R8DVx7rDE.webp'
+      } 
+      else if (pubkey == 'cce17e1b27f216e8f42548a60f59947e2b199a01ffdd993b3d66bd8dd193c7dd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODEsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4MSwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == 'eda6845cc2269bea10f010744ad79409acb7129d96857d4bf19e027696299292') {
+        image = 'https://cdn.zebedee.io/uploads/4a5e3b05-2b54-4d0d-a604-dff3133e00d6_46286295-B230-4784-883B-C88EADA646DC.jpg'
+      } 
+      else if (pubkey == '04ea59bf576b9c41ad8d2137c538d4f499717bb3df14f5a20d9489dcc457774d') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODAsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4MCwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '81d27c8405d50b6ef0c8171906d6c724af45ce3d8753a87b78472d6727cd41cd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDE2MiwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDE2MiwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
       else if (pubkey == '8be2fd2cf7cce65a56f0820b022125e9ab4044c7dc5e444e2c0c0eab7501b0d7') {
         image = 'https://nostr.build/i/p/nostr.build_b16cd573515c070e7212b26225bcccc0e98070e5b7316ec2d500f5a6b1b0bf2e.gif'
       } 
@@ -653,47 +818,48 @@ const Test = () => {
       else if (pubkey == 'a723805cda67251191c8786f4da58f797e6977582301354ba8e91bcb0342dc9c') {
         image = 'https://nostr.build/i/p/nostr.build_984d249cca437a3352a7a8fcf184b2a75cfbafafc5d4dae6ace0db182b87c834.gif'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '3ee23277f8a53c4486565167f6a02ffb133062424a2b8a4d86e68b58c71babcd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDEyMywxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDEyMywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '7f1b2d20466fd5ff836c6bca1a0849f9c77162cfc00b7e708a9142763c021673') {
+        image = 'https://nostr.build/i/nostr.build_33f40449b90c6c9da04132fdc51b3a75e62d447dff5bc52548abc177a539cfb8.png'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'cfdc11439f3b4b6aad060365c1182f774b524075170a6cf1a3c1b2abc61d102c') {
+        image = 'https://nostr.build/i/a0ce91e30a67fbcb83272ee60b98d7ae6ced37877dda77549a74fbb8e9ce41db.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '686c37bdc5043c8bea54bbf89802349ab9ec9ad47486ca10ec07cb9e69db536e') {
+        image = 'https://pbs.twimg.com/profile_images/1634017930974470145/8V5ZY5Tc_400x400.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '29079335c266e8995b9b8b0613017f8a818b2a52600ed19bed268b82f4d025dc') {
+        image = 'https://nostr.build/i/c283119d565b9d081f67e04a69c2e505c5675a8fe0b2285a877ccc08deb2f1ac.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0c98c195d9d44a99eac12f4134d47ced21c764fb6b12440de8ca3adbf0c373a7') {
+        image = 'https://nostr.build/i/nostr.build_328b9ead692352354f3bdc9ef0732583be0795c613ad093ff3106a444f64df85.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ea3ac5ea2be08fa176fd63e6637a94a8e996c1e5c3bf087eea013fffd1c9e28e') {
+        image = 'https://nostr.build/i/9341297454048230808a856ac38ea37f4a6c70e701fb85447f23bb648ede5f00.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'a6df050214a1de98d54d2e66d87395d5505f557bc79200b4cd02e34118ab038b') {
+        image = 'https://nostr.build/i/0fe56dd4f80ef6a3f62283b10f7b5499eff5f60e399fd3425638d706e7b3fe68.jpg'
+	image = 'https://nostr.build/i/2c2fc6ae54cc3ec77058df758784490f696b4507c00cc8726a0f731f934e4740.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ec7475faa996396d74e820bf70c507da56d02056cb49717b470cdb0f842f263b') {
+        image = 'https://void.cat/d/EH3ZiXjiSysvMfLZztGvxW.webp'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e') {
+        image = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f1ef-1f1f5.png'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'b9e4951d650df316db7560e4fd53355d142d18a2ea288549884674902a59ebfd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTIxLDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMTIxLDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ae4753868b2fa50ec8528c766e604c50bbc557c40bf290a78eecb657a816090e') {
+        image = 'https://nostr.build/i/d2f26339d147e39826baf9cd5d7c8bdd90bf8ce3b3b511fd12271818ec70cbc6.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '001863c7837dc05c768e4ed8d6ab2dd65d5f6af9df7e2a93190acf7f4a915c7a') {
+        image = 'https://nostr.build/i/nostr.build_17e7658cd41b9f62ce7e417c656e76e34fe4976d70214705bd9affe4eb936101.jpeg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '5fd693e61a7969ecf5c11dbf5ce20aedac1cea71721755b037955994bf6061bb') {
+        image = 'https://twobirds.one/pfp_purple.png'
       } 
       else if (pubkey == '5144fe88ff4253c6408ee89ce7fae6f501d84599bc5bd14014d08e489587d5af') {
         image = 'https://nostr.build/i/4aea777abc9af95b087911b4e6c59a5c503c13bf4d9a36b651daebf7b19beb87.jpg'
@@ -1635,6 +1801,7 @@ const Test = () => {
       else if (pubkey == '389ca4957911b126093f42a0a90786515b59311dc5a942b404d7e16f17287828') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/108610db6f53aead2966ea7e5e9a590d5e958f9b3ba83982a3d6c43ddf51a791.jpg'
 	image = 'https://pbs.twimg.com/profile_images/1311126856435814402/HqnsvcRT_400x400.jpg'
+	image = 'https://nostr.build/i/a3cee443969f4ff50035117722f1823f89ef96bb4136738f1c8c5f1bb048f048.jpg'
       }
       else if (pubkey == '6369fb82bec54226bf09bb365b6f0d71b16c41f56e7edfd4f97de23f9c3281da') {
         image = 'https://nostr.build/i/nostr.build_e9120a1b32f992f44c55c0a8916428a9e17a0b1a73439ecd0731997e94a67001.bmp'
@@ -2184,6 +2351,7 @@ const Test = () => {
       }
       else if (pubkey == 'a3bce095cd0e8348b094c9201bd0c3270eafaf78f776517f4101326daf5cb7ff') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://avatars.githubusercontent.com/u/83725933?v=4'
+	image = 'https://nostr.build/i/56b8c4078a0bcf07cb18e9f777a25eb415a681d80eff9d377060894bd602820d.jpg'
       }
       else if (pubkey == '046284c5d3cc859f58b1ff58d2bdbf22eb6f41a633e97f503a569cc1fe886322') {
         image = 'https://github.com/Neos21.png'
@@ -2769,6 +2937,7 @@ const Test = () => {
       }
       else if (pubkey == '6b6e19ce47a917cbe13a67eeb4053a9b301e78ec991413e7554953088ed62d3b') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1614562193147842563/mfd80R_H.jpg'
+	image = 'https://nostr.build/i/3806b00b13ab9e1d1f0bfa2251b5bf819e47975972f8d3604a0df49e7dd26ded.jpg'
       }
       else if (pubkey == '1ec007290d7bf778dbc41d52ddb0ff37fab0921437c913188aacc654fe7be633') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://void.cat/d/CJ5EFJVuDxLThhBoSiQWYu.webp'
@@ -3480,6 +3649,7 @@ const Test = () => {
         image = 'https://awayuki.net/con/my/img/icon237.png'
 	image = 'https://awayuki.net/con/my/img/icon178.png'
 	image = 'https://awayuki.net/con/my/img/icon222.png'
+	image = 'https://awayuki.net/con/my/img/icon286.png'
       }
       else if (pubkey == '7aa090be3c66dbcc7c98ca17a22ed5daa2cea6f2b87df35cada814bb09e1e283') {
         image = 'https://pbs.twimg.com/profile_images/1445176476161114113/pWP6zWyX_400x400.jpg'
@@ -3560,6 +3730,7 @@ const Test = () => {
       else if (pubkey == '4c5d5379a066339c88f6e101e3edb1fbaee4ede3eea35ffc6f1c664b3a4383ee') {
         // koteitan
         image = 'https://koteitan.github.io/img/ni_circlefit.jpg'
+	image = 'https://nostr.build/i/0e2151001b06bb95c6d076ebe185c4df0567103d2d0ef043f2d6f7a16262ac5d.jpg'
       }
       else if (pubkey == '6b24da7e8e5236d17307501b73b50326f33060d2ec11ee4b9c42576bd011b895') {
         // pomchan
