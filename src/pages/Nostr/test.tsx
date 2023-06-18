@@ -1,30 +1,61 @@
 import { useRef } from "react";
 import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
 import PostButton from "@/components/PostButton";
+import NextButton from "@/components/NextButton";
 import { nip19 } from "nostr-tools";
 import moment from 'moment';
+import parse from 'html-react-parser';
 import Pictures from './Pictures';
+
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
+  let untilValue = dateToUnix(now.current);  //now
+  untilValue = 1687021005;  //paging
+
   const { events } = useNostrEvents({
     filter: {
-      until: dateToUnix(now.current), // all new events from now
-      until: 1686231999,  //paging
+      //until: dateToUnix(now.current), // all new events from now
+      until: untilValue,  //paging
 
-//      until: 1686172323,  //contentLink
-      until: 1686224420,  //emoji
-//      until: 1686199783,  //emoji
-//      until: 1686148182,  //npub(to) 
-//      until: 1686181295,  //repost jpg fix
+//      until: 1686983200,  //naddr1
+//      until: 1686985618,  //nevent quote
+//      until: 1686933213,  //quote(nostr:note1)
+//      until: 1686929129,  //twitter card
+//      until: 1686949371,  //2 cards
+//      until: 1686918544,  //nhk news card
+//      until: 1686918929,  //hatenablog, nicovideo, card
+//      until: 1686896097,  //https:// 
+//      until: 1686898969,  //black  <a<b>c> fix, 1686898968,  //ok
+//      until: 1686839510,  //nicovideo
+//      until: 1686890295,  //spotify iframe
+//      until: 1686839199,  //youtube iframe
+//      until: 1686656876,  //repost Add <a href> fix
+//      until: 1686488789,  //repost image
+//      until: 1686393912,  //gazou fix
+//      until: 1686318772,  //reply fix
+//      until: 1686321677,  //<script> fix
+//      until: 1686098875,  //<marquee>, <SCRIPT>alert fix
+//      until: 1686223968,  //<h1> fix
+//      until: 1686199142,  //<button> fix
+//      until: 1686241976,  //emoji 13 fix, <img>
+//      until: 1685703268,  //emoji fix
+//      until: 1686199783,  //emoji, tate, <style> fix,
+//      until: 1686350208,  //repost \n fix
+//      until: 1686238459,  //#[0] fix, <a href>
+//      until: 1675779342,  //#[5] fix
+//      until: 1686377160,  //npub(to) fix, <a href> 
+//      until: 1686148182,  //npub(to) fix 
 //      until: 1686063586,  //npub(to) fix
-//      until: 1686052701,  //before 1 hour fix
-//      until: 1686034150,  //contentLink fix
+//      until: 1686486917,  //https:// fix, <a href>
+//      until: 1686318129,  //https:// fix
+//      until: 1686034150,  //https:// fix
 //      until: 1686041046,  //conteltLink fix
 //      until: 1686034209,  //about reverce
 //      until: 1686135829,  //U+202E (RTL)
 //      until: 1686051720,  //reverce
+//      until: 1686052701,  //before 1 hour fix
 
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
       kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
@@ -39,70 +70,51 @@ const Test = () => {
       //"#t": ["nosli"],
       //"#t": ["cluster"],
       //"#t": ["Amethyst"],
+      //"#t": ["名言画像"],
+      //"#t": ["makeitquote"],
 
-      //until: 1672000000, // 2022/12/26-1970/1/1 ,3 month ago, 17 notes
+      //until: 1672000000, // 2022/12/26-1970/1/1
       //until: 1675000000, // 2023/1/28- 1970/1/1
 
-      //until: 1676000000, // 2023/2/10- 2022/12/19,  +1,000,000, limit 100, wirednet
-      //until: 1676200000, // 2023/2/12- 2022/12/19,    +200,000,
-      //until: 1676300000, // 2023/2/13 23-2023/2/6 23, +100,000,
-      //until: 1676350000, // 2023/2/14 13-2023/2/7,   , +50,000
-      //until: 1676400000, // 2023/2/15 3- 2023/2/14 12, +50,000
-      //until: 1676440000, // 2023/2/15 14-2023/2/15 0,  +40,000
-      //until: 1676450000, // 2023/2/15 17-2023/2/15 13, +10,000
-      //until: 1676460000, // 2023/2/15 20-2023/2/15 16, +10,000
+//      until: 1675500000, // 2023/2/4 15- 1970/1/1,   +500,000, limit 100, wirednet
+//      until: 1675600000, // 2023/2/5 12- 2023/1/10   +100,000
+//      until: 1675650000, // 2023/2/6 11- 2023/2/4 18, +50,000
+//      until: 1675695000, // 2023/2/6 23- 2023/2/6 23, +45,000
+//      until: 1675700000, // 2023/2/7 1-  2023/2/7 0,   +5,000
+ //NG //until: 1675720000, // 2023/2/-     2023/2/,     +20,000
+//      until: 1675780000, // 2023/2/7 20- 2023/2/7 20, +60,000
+//      until: 1675790000, // 2023/2/8 2- 2023/2/8 1,   +10,000
+ //NG //until: 1675800000, // 2023/2/9-    2023/2/9,    +10,000
+      //until: 1675900000, // 2023/2/9  8 -2023/2/9,    +100,000
+      //until: 1676000000, // 2023/2/10 12-2023/2/10,   +100,000
+      //until: 1676100000, // 2023/2/11-   2023/2/11,   +100,000
+      //until: 1676200000, // 2023/2/12-   2023/2/12,   +200,000
+      //until: 1676300000, // 2023/2/13 23-2023/2/13 23 +100,000
+      //until: 1676350000, // 2023/2/14 13-2023/2/14 12, +50,000
+      //until: 1676400000, // 2023/2/15 3- 2023/2/15 1,  +50,000
       //until: 1676470000, // 2023/2/15 23-2023/2/15 20, +10,000
       //until: 1676480000, // 2023/2/16 1- 2023/2/15 22, +10,000
-      //until: 1676500000, // 2023/2/16 7- 2023/2/16 0,  +20,000
-      //until: 1676520000, // 2023/2/16 12-2023/2/16 6 , +20,000
-      //until: 1676530000, // 2023/2/16 15-2023/2/16 10, +20,000
       //until: 1676550000, // 2023/2/16 21-2023/2/16 15, +20,000
       //until: 1676580000, // 2023/2/17 5- 2023/2/16 21, +30,000
-      //until: 1676590000, // 2023/2/17 8- 2023/2/16 23  +10,000
-      //until: 1676600000, // 2023/2/17 11-2023/2/17 8,  +10,000
-      //until: 1676620000, // 2023/2/17 16-2023/2/17 10, +20,000
-      //until: 1676630000, // 2023/2/17 19-2023/2/17 16, +10,000
       //until: 1676640000, // 2023/2/17 22-2023/2/17 19, +10,000
       //until: 1676650000, // 2023/2/18 1- 2023/2/17 21, +10,000
       //until: 1676750000, // 2023/2/19 4- 2023/2/17 23,+100,000
       //until: 1676840000, // 2023/2/20 5- 2023/2/18 0,  +90,000
       //until: 1676920000, // 2023/2/21 4- 2023/2/18 5,  +80,000
-      //until: 1676940000, // 2023/2/21 9- 2023/2/21 2,  +20,000
-      //until: 1676950000, // 2023/2/21 12-2023/2/21 10, +10,000
-      //until: 1676970000, // 2023/2/21 17-2023/2/21 11, +20,000
-      //until: 1676980000, // 2023/2/21 20-2023/2/21 16, +10,000
       //until: 1676990000, // 2023/2/21 23-2023/2/21 20, +10,000
       //until: 1677030000, // 2023/2/22-10 2023/2/21 23, +40,000
-      //until: 1677040000, // 2023/2/22 13-2023/2/22 8,  +10,000
-      //until: 1677050000, // 2023/2/22 16-2023/2/22 12  +10,000
-      //until: 1677060000, // 2023/2/22 18-2023/2/22 15  +10,000
       //until: 1677070000, // 2023/2/22 21-2023/2/22 18  +10,000
       //until: 1677080000, // 2023/2/23 0- 2023/2/22 22  +10,000
-      //until: 1677100000, // 2023/2/23 6- 2023/2/22 23  +20,000
-      //until: 1677130000, // 2023/2/23 14-2023/2/23 2,  +30,000
       //until: 1677150000, // 2023/2/23 19-2023/2/22 12  +20,000
       //until: 1677170000, // 2023/2/24 1- 2023/2/23 17  +20,000
-      //until: 1677200000, // 2023/2/24 9- 2023/2/24 1   +30,000
-      //until: 1677220000, // 2023/2/24 15-2023/2/24 9   +20,000
       //until: 1677230000, // 2023/2/24 18-2023/2/24 14  +10,000
       //until: 1677270000, // 2023/2/25 5- 2023/2/24 18  +40,000
-      //until: 1677300000, // 2023/2/25 13-2023/2/25 3,  +30,000
       //until: 1677320000, // 2023/2/25 19-2023/2/25 14, +20,000
       //until: 1677360000, // 2023/2/26 6- 2023/2/25 18, +40,000
-      //until: 1677380000, // 2023/2/26 11-2023/2/26 3,  +20,000
-      //until: 1677400000, // 2023/2/26 17-2023/2/26 11  +20,000
       //until: 1677420000, // 2023/2/26 22-2023/2/26 20  +20,000
       //until: 1677440000, // 2023/2/27 4- 2023/2/26 23  +20,000
-      //until: 1677460000, // 2023/2/27 10-2023/2/27 4   +20,000
-      //until: 1677480000, // 2023/2/27 15-2023/2/27 9   +20,000
-      //until: 1677490000, // 2023/2/27 18-2023/2/27 16  +10,000
       //until: 1677500000, // 2023/2/27 21-2023/2/27 19  +10,000
       //until: 1677520000, // 2023/2/28 2- 2023/2/27 23  +20,000
-      //until: 1677540000, // 2023/2/28 8- 2023/2/28 0   +20,000
-      //until: 1677550000, // 2023/2/28 11-2023/2/28 9   +10,000
-      //until: 1677560000, // 2023/2/28 13-2023/2/28 12  +10,000
-      //until: 1677570000, // 2023/2/28 16-2023/2/28 15  +10,000
-      //until: 1677580000, // 2023/2/28 19-2023/2/28 15  +10,000
       //until: 1677590000, // 2023/2/28 22-2023/2/28 15  +10,000
       //until: 1677600000, // 2023/3/1 0-  2023/2/28 22, +10,000
 
@@ -134,26 +146,11 @@ const Test = () => {
       //until: 1680050000, // 2023/3/29 9- 2023/3/29 6,  +50,000 *11
       //until: 1680100000, // 2023/3/29 23-2023/3/29 22, +50,000 *13
       //until: 1680150000, // 2023/3/30 13-2023/3/30 11, +50,000 *12
-      //until: 1680160000, // 2023/3/30 16-2023/3/30 14, +10,000 *
-      //until: 1680170000, // 2023/3/30 18-2023/3/30 17, +10,000 *
       //until: 1680180000, // 2023/3/30 21-2023/3/30 20, +10,000 *2
       //until: 1680190000, // 2023/3/31 0- 2023/3/30 23, +10,000 *2
-      //until: 1680200000, // 2023/3/31 3- 2023/3/31 0,  +10,000
-      //until: 1680210000, // 2023/3/31 5- 2023/3/31 0,  +10,000
-      //until: 1680220000, // 2023/3/31 8- 2023/3/31 4,  +10,000
-      //until: 1680230000, // 2023/3/31 11- 2023/3/31 10,  +10,000 *2
-      //until: 1680240000, // 2023/3/31 14- 2023/3/31 12,  +10,000 *
-      //until: 1680250000, // 2023/3/31 17- 2023/3/31 15,  +10,000 *
-      //until: 1680260000, // 2023/3/31 19- 2023/3/31 17,  +10,000
       //until: 1680270000, // 2023/3/31 22- 2023/3/31 20,  +10,000 *
 
       //until: 1680300000, // 2023/4/1 6- 2023/4/1 2,  +30,000
-        //until: 1680300000, // 2023/4/1 6- 2023/3/31 12,  +50,000 limit 5,000
-      //until: 1680310000, // 2023/4/1 9- 2023/4/1 4,  +10,000 *2
-      //until: 1680320000, // 2023/4/1 12- 2023/4/1 10,  +10,000 *
-      //until: 1680330000, // 2023/4/1 15- 2023/4/1 13,  +10,000 *
-      //until: 1680340000, // 2023/4/1 18- 2023/4/1 15,  +10,000
-      //until: 1680350000, // 2023/4/1 20- 2023/4/1 17,  +10,000
       //until: 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
       //until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
       
@@ -176,9 +173,9 @@ const Test = () => {
   const { events: events2 } = useNostrEvents({
     filter: {
       kinds: [3],  // 3:following list
-      //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 following
+      //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 followees
       //authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
-      //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion
+      //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 800 followees
       authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
       //authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
       
@@ -186,6 +183,12 @@ const Test = () => {
       limit: 1000,
     },
   });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('You clicked submit.');
+    untilValue = 1686912353;
+  }
 
   var followList = "";
 
@@ -206,6 +209,7 @@ const Test = () => {
   }
 
   var follow = "";
+  var minCreateDate = 9999999999;
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
 
@@ -221,16 +225,21 @@ const Test = () => {
         return;
       }
 
-      let dateTime = new Date(note.created_at * 1000);
-      let createdDate = dateTime.toLocaleDateString('ja-JP');
-      let createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
+      if(minCreateDate > note.created_at) {
+        minCreateDate = note.created_at;
+      }
+
+      const dateTime = new Date(note.created_at * 1000);
+      const createdDate = dateTime.toLocaleDateString('ja-JP');
+      const createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
 
       const npub = nip19.npubEncode(note.pubkey)
       const url = "https://nostter.vercel.app/" + npub 
 
-      let imageURL2 = getImageURL(note.pubkey);  // avator
+      const imageURL2 = getImageURL(note.pubkey);  // avator
 
-      let noteUrl = "https://nostter.vercel.app/search?q=" + note.id
+      //const noteUrl = "https://nostter.vercel.app/search?q=" + note.id
+      const noteUrl = "https://snort.social/e/" + note.id
 
       /*let imageURL = Pictures.pictures.map((picture, index) => {
         if(note.pubkey == picture.npub) {
@@ -314,16 +323,15 @@ const Test = () => {
 	    reply = "#e]";
 	  }
 
+	  //const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
+	  const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
 	  if(eventLinkUrlText1 == "") {
-            //eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,7) + "(#e)";
-            eventLinkUrlText1  = "__" + note.tags[h][1].substring(0,2) + "(#e)";
-	    eventLinkUrl1 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
+            eventLinkUrlText1  = "__#e(" + note.tags[h][1].substring(0,2) + ")";
+	    eventLinkUrl1 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText2 == "") {
-            //eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,7) + "(#e 2)";
-            eventLinkUrlText2  = "__" + note.tags[h][1].substring(0,2) + "(#e 2)";
-	    eventLinkUrl2 = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
-            eventLinkUrlText1  = eventLinkUrlText1.replace("#e","#e 1");
+            eventLinkUrlText2  = "__#e(" + note.tags[h][1].substring(0,2) + ")";
+	    eventLinkUrl2 = eventLinkUrl
 	  }
         }
       }
@@ -335,30 +343,28 @@ const Test = () => {
 	let tmp = content.split('\",');  // ",
         for(let i=0; i<tmp.length; i++) {
 	  if(tmp[i].includes("\"content\"")) {
-	    let tmp2 = tmp[i].split('],');  // ],
-	    for(let j=0; j<tmp2.length; j++) {
-	      if(tmp2[j].includes("\"content\"")) {
-	        tmp[i] = tmp2[j];
+	    tmp = tmp[i].split(',');  // ,
+	    for(let j=0; j<tmp.length; j++) {
+	      if(tmp[j].includes("\"content\"")) {
+	        content = tmp[j];
 	      }
 	    }
-	    content = tmp[i];
-	    //content = content.replace("jpg",'');  //test
 	    
             for(let j=0; j<20; j++) {
-	      content = content.replace("\\n"," ");
+	      content = content.replace("\\/\\/","//");
+	      content = content.replace("\\\"","\"");
+	    }
+            for(let j=0; j<20; j++) {
+	      content = content.replace("\\/","/");
 	    }
 	    
 	    content = content.replace("\"content\":\"","");
 	    content = content.replace("content","");
 	    content = content.replace("{","");
 	    content = content.replace("{","");
-	    content = content.replace("\"","");
-	    content = content.replace("\"","");
-	    content = content.replace("\"","");
-	    //content = content.replace(":","");  // https://
 
             for(let j=0; j<11; j++) {
-	      content = content.replace("\\","");
+	    //  content = content.replace("\\","");
 	    }
 	  }
 	}
@@ -371,47 +377,6 @@ const Test = () => {
 	}
       }
 
-      let emoji1URL = "";
-      let emoji1Size = "0"
-      let emoji2URL = "";
-      let emoji2Size = "0"
-      let emoji3URL = "";
-      let emoji3Size = "0"
-      let emoji4URL = "";
-      let emoji4Size = "0"
-      let emoji5URL = "";
-      let emoji5Size = "0"
-      
-      for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "emoji") {
-          if(i==0) {
-            emoji1Size = "40";
-            emoji1URL = note.tags[i][2];
-            //note.content = note.content.replace(":" + note.tags[0][1] + ":",'');
-	  }
-          if(i==1) {
-            emoji2Size = "40";
-            emoji2URL = note.tags[i][2];
-            //note.content = note.content.replace(":" + note.tags[1][1] + ":",'');
-	  }
-          if(i==2) {
-            emoji3Size = "40";
-            emoji3URL = note.tags[i][2];
-            //note.content = note.content.replace(":" + note.tags[2][1] + ":",'');
-	  }
-          if(i==3) {
-            emoji4Size = "40";
-            emoji4URL = note.tags[i][2];
-            //note.content = note.content.replace(":" + note.tags[3][1] + ":",'');
-	  }
-          if(i==4) {
-            emoji5Size = "40";
-            emoji5URL = note.tags[i][2];
-            //note.content = note.content.replace(":" + note.tags[4][1] + ":",'');
-	  }
-        }
-      }
-
       let inlineImage1Height = "0";
       let inlineImage2Height = "0";
       let inlineImage3Height = "0";
@@ -420,47 +385,129 @@ const Test = () => {
       let image2Url = "";
       let image3Url = "";
       let image4Url = "";
-      //let words = content.split('\n');
-      //words = content.split(' ');
-      //words = content.split('\n\n');
-      let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
+      //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
-      let imageCount = 0;
-      for(let i=0; i<words .length; i++) {
-        if(words[i].includes(".jpg")  ||
-           words[i].includes(".jpeg") || 
-           words[i].includes(".png")  || 
-           words[i].includes(".gif")  || 
-           words[i].includes(".svg")  || 
-           words[i].includes(".ico")  || 
-           words[i].includes(".bmp")  || 
-           words[i].includes(".webp") ){
-	  if(imageCount==0) {
-            inlineImage1Height = "250";
-	    image1Url = words[i];
-	  }
-	  else if(imageCount==1) {
-            inlineImage2Height = "250";
-	    image2Url = words[i];
-	  }
-	  else if(imageCount==2) {
-            inlineImage3Height = "250";
-	    image3Url = words[i];
-	  }
-	  else if(imageCount==3) {
-            inlineImage4Height = "250";
-	    image4Url = words[i];
-	  }
-	  imageCount = imageCount + 1;
-          content = content.replace(words[i],'');
+      if(content.includes("https://")) {
+        let tmp = content;
+        for(let i=0; i<30; i++) {
+          tmp = tmp.replace('\\n',' ');
+          tmp = tmp.replace('、',' ');
+          tmp = tmp.replace('\'',' ');
+          tmp = tmp.replace(':https://',' https://');
+          tmp = tmp.replace('https://',' https://');
+        }
+        for(let i=0; i<30; i++) {
+          tmp = tmp.replace('\n',' ');
+        }
+        let tmp2 = tmp.split(' ');
+
+        let imageCount = 0;
+        for(let i=0; i<tmp2.length; i++) {
+          if(tmp2[i].includes(".jpg")  ||
+             tmp2[i].includes(".jpeg") || 
+             tmp2[i].includes(".png")  || 
+             tmp2[i].includes(".gif")  || 
+             tmp2[i].includes(".svg")  || 
+             tmp2[i].includes(".ico")  || 
+             tmp2[i].includes(".bmp")  || 
+             tmp2[i].includes(".webp") ||
+             tmp2[i].includes(".mp4") ||
+             tmp2[i].includes(".mov") ||
+             tmp2[i].includes("/img/") ||
+             tmp2[i].includes("grafana.gsn.im/") ){
+	    if(imageCount==0) {
+              inlineImage1Height = "250";
+	      image1Url = tmp2[i];
+	    }
+	    else if(imageCount==1) {
+              inlineImage2Height = "250";
+	      image2Url = tmp2[i];
+	    }
+	    else if(imageCount==2) {
+              inlineImage3Height = "250";
+	      image3Url = tmp2[i];
+	    }
+	    else if(imageCount==3) {
+              inlineImage4Height = "250";
+	      image4Url = tmp2[i];
+	    }
+	    imageCount = imageCount + 1;
+            content = content.replace(tmp2[i],'');
+          }
         }
       }
 
-      let note1LinkTextFront = "";
-      let note1LinkUrl = "";
-      let note1LinkText = "";
-      let note1LinkUrl2 = "";
-      let note1LinkText2 = "";
+      // cpngirl  
+      if(content.includes("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl")) {
+        //content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@ログボ(テスト運用中)");
+      }
+      // cpngirl  
+      const cpngirlnpub = "f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd"
+      for(let i=0; i<note.tags.length; i++)
+      {
+        if(content.includes("#[0]") && note.tags[i].includes(cpngirlnpub) ) 
+        {
+          //content = content.replace("#[0]","@ログボちゃん(テスト運用中)");
+        }
+      }
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] == "r") {
+	  if(note.tags[i][1].includes("http")) {
+	    if(linkUrl1 == "") {
+	      linkUrl1 = note.tags[i][1];
+	      linkUrlText1 = "__#r";
+	    }
+	    else if(linkUrl2 == "") {
+	      linkUrl2 = note.tags[i][1];
+	      linkUrlText2 = "__#r";
+	    }
+	    else if(linkUrl3 == "") {
+	      linkUrl3 = note.tags[i][1];
+	      linkUrlText3 = "__#r";
+	    }
+	    else if(linkUrl4 == "") {
+	      linkUrl4 = note.tags[i][1];
+	      linkUrlText4 = "__#r";
+	    }
+	    else if(linkUrl5 == "") {
+	      linkUrl5 = note.tags[i][1];
+	      linkUrlText5 = "__#r";
+	    }
+	  }
+        }
+      }
+
+      for(let i=0; i<50; i++) {
+        content = content.replace('<a','&lt;a');  
+      }
+
+      // #[0], #[1] (#p)
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] == "p") {
+          const npub = nip19.npubEncode(note.tags[i][1])
+	  const toLinkUrl =  "https://nostter.vercel.app/" + npub
+	  content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
+          if(npub == "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
+            content = content.replace('#[' + i + ']',"@もちもち");
+          }
+	  else if(npub == "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
+            content = content.replace('#[' + i + ']',"@やぶみちゃん");
+	  }
+	  else if(npub == "npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t") {
+            content = content.replace('#[' + i + ']',"@うにゅう");
+	  }
+        }
+	else {
+	  //const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[i][1]
+	  const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
+	  content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote)</a>');
+  	}
+      }
+
+      // (to), (quote)
+      let quoteLinkUrl = "";
+      let quoteLinkText = "";
       let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       // nostr:note1, nostr:naddr1, nostr:nevent1
       if(content != undefined &&
@@ -470,137 +517,88 @@ const Test = () => {
          content.includes("nostr:npub1"))
 	) {
 	for(let i=0; i<wordsNostr.length; i++) {
-	  if(wordsNostr[i].includes("nostr:")) {
-            //content = wordsNostr[0] + " https://nostter.vercel.app/" + wordsNostr[1].replace("nostr:",'');
-	    content = content.replace(wordsNostr[i],'');
-	    note1LinkUrl =  "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
-	    content = content.replace(note1LinkUrl,'');
-            //note1LinkText = "__nostr:note1(quote)";
-            note1LinkText = "__(quote)";
-	    if(note1LinkUrl.includes("npub") && i != 1) {
-              //note1LinkText = "(nostr:npub1)(to)";
-              note1LinkText = "(to)";
+	  if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
+	    const toLinkUrl = 'https://nostter.vercel.app/' + wordsNostr[i].replace('nostr:','');
+	    content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
+	    if(wordsNostr[i].replace('nostr:','') == 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
+	      content = content.replace('(to)','@やぶみちゃん');
 	    }
-	    else {
-	      //note1LinkTextFront = "(nostr:npub1)(to)";
-	      note1LinkTextFront = "(to)";
+	    else if(wordsNostr[i].replace('nostr:','') == 'npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg') {
+	      content = content.replace('(to)','@Yodogawa-Janken');
+	    }
+	    else if(wordsNostr[i].replace('nostr:','') == 'npub1ttqyyl8stz9wtj0sn25qp6vah0jdcxwpdtaaxg4efsqkczz7rsxshjpp3x') {
+	      content = content.replace('(to)','@mahjong');
+	    }
+	   
+	    else if(wordsNostr[i].replace('nostr:','') == 'npub1f6rvmwc76arl7sxx2vparlzx8cg2ajc3xpymqh7yx97znccue2hs5mkavc') {
+	      content = content.replace('(to)','@ぬるぽ・ｶﾞｯ');  //@nullpoga
+	    }
+            else if(wordsNostr[i].replace('nostr:','') == 'npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n') {
+              content = content.replace('(to)',"@もちもち");
+            }
+            else if(wordsNostr[i].replace('nostr:','') == 'npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t') {
+              content = content.replace('(to)',"@うにゅう");
+            }
+            else if(wordsNostr[i].replace('nostr:','') == 'npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl') {
+              content = content.replace('(to)',"@ログボちゃん(休止中)");
+            }
+	  }
+	  else if(wordsNostr[i].includes("nostr:note1") || 
+	          wordsNostr[i].includes("nostr:nevent1")) { 
+	    content = content.replace(wordsNostr[i],'');
+	    quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	    quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
+            quoteLinkText = "__(quote)";
+	    if(content.includes("nostr:nevent1")) {
+              quoteLinkText = quoteLinkText + wordsNostr[i];
 	    }
 	  }
 	}
       }
 
-      // cpngirl  
-      if(content.includes("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl")) 
-      {
-        content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@ログボ(テスト運用中)");
-      }
-      // cpngirl  
-      let cpngirlnpub = "f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd"
-      for(let i=0; i<note.tags.length; i++)
-      {
-        if(content.includes("#[0]") && note.tags[i].includes(cpngirlnpub) ) 
-        {
-          content = content.replace("#[0]","@ログボちゃん(テスト運用中)");
-        }
-      }
-
-      // #[0], #[1] (#p)
-      for(let i=0; i<note.tags.length; i++) {
-	let tmp = "#[" + String(i) + "]";
-        if(content.includes(tmp)) {
-          if(note.tags[i][0] == "p") {
-            const npub = nip19.npubEncode(note.tags[i][1])
-
-	    if(note1LinkUrl == "") {
-	      note1LinkUrl =  "https://nostter.vercel.app/" + npub
-	      note1LinkText = "__" + npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
-	    }
-	    else if(note1LinkUrl2 == "") {
-	      note1LinkUrl2 =  "https://nostter.vercel.app/" + npub
-	      note1LinkText2 = "__" + npub.substring(0,12) + "(" + tmp + " #" + note.tags[i][0] + ")"
-	    }
-          }
-	  else {
-            content = content + note.tags[i][1] + "(#[0] #" + note.tags[i][0] + ")";
-  	  }
-        }
-      }
-
-
-      for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "r") {
-	  if(note.tags[i][1].includes("http")) {
-	    if(linkUrl1 == "") {
-	      linkUrl1 = note.tags[i][1];
-	      //linkUrlText1 = note.tags[i][1];
-	      if(content != linkUrl1) {
-	        content = content.replace(linkUrl1,'');
-	      }
-	      linkUrlText1 = "__(#r)";
-	    }
-	    else if(linkUrl2 == "") {
-	      linkUrl2 = note.tags[i][1];
-	      content = content.replace(linkUrl2,'');
-	      linkUrlText2 = "(#r 2)";
-	      linkUrlText1 = "__(#r 1)";
-	    }
-	    else if(linkUrl3 == "") {
-	      linkUrl3 = note.tags[i][1];
-	      content = content.replace(linkUrl3,'');
-	      linkUrlText3 = "(#r 3)";
-	    }
-	    else if(linkUrl4 == "") {
-	      linkUrl4 = note.tags[i][1];
-	      content = content.replace(linkUrl4,'');
-	      linkUrlText4 = "(#r 4)";
-	    }
-	    else if(linkUrl5 == "") {
-	      linkUrl5 = note.tags[i][1];
-	      content = content.replace(linkUrl5,'');
-	      linkUrlText5 = "(#r 5)";
-	    }
-	  }
-        }
-      }
-
-      let contentLinkUrlFront = "";   // link before content
-      let contentLinkUrlFront2 = "";  // link before content
-      let contentLinkUrlAfter = "";   // link after content
-      let contentLinkUrlAfter2 = "";  // link after content
-      let afterSpacer1 = "";
-      let afterSpacer2 = "";
-      let tmp = content;
-      //tmp = tmp.replace('\n\n','\n');
-      //tmp = tmp.replace(' ','\n');  // zenkaku space
-      //let words2 = tmp.split('\n');
-      //tmp = tmp.replace('\n\n',' ');
-      //tmp = tmp.replace('\n\n',' ');
-      for(let i=0; i<30; i++) {
-        tmp = tmp.replace('\n',' ');
-      }
-      let words2 = tmp.split(' ');
-
+      // Add <a href>
+      let iframe = "";
       if(content.includes("https://")) {
-        for(let i=0; i<words2.length; i++) {
-	  if(words2[i].includes("https://") && contentLinkUrlAfter == "") {
-	    if(i == 0) {
-	      afterSpacer1 = "__";
-	      contentLinkUrlFront = words2[i];
+        let tmp = content;
+        for(let i=0; i<30; i++) {
+          tmp = tmp.replace('\\n',' ');
+          tmp = tmp.replace('、',' ');
+          tmp = tmp.replace('\'',' ');
+        }
+        for(let i=0; i<30; i++) {
+          tmp = tmp.replace('\n',' ');
+        }
+        let tmp2 = tmp.split(' ');
+        for(let i=0; i<tmp2.length; i++) {
+	  if(!tmp2[i].includes("\"https://") && tmp2[i].includes("https://")) {  // not <a href="https://>
+	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("/youtu.be/")) {
+	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
+	      id = id.replace("https://m.youtube.com/shorts/", "");
+	      id = id.replace("https://www.youtube.com/live/", "");
+	      id = id.replace("?feature=share", "");
+	      id = id.replace("https://youtu.be/", "");
+	      content = content.replace(tmp2[i], "");
+	      iframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
 	    }
-	    else if(i == 1 && words2[0] == "") {
-	      afterSpacer1 = "__";
-	      contentLinkUrlFront = words2[i];
+	    else if(tmp2[i].includes("open.spotify.com")) {
+	      content = content.replace(tmp2[i], "");
+	      const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
+	      iframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	    }
+	    //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
 	    else {
-	      afterSpacer1 = "__";
-	      contentLinkUrlAfter = words2[i];
+	      content = content.replace(tmp2[i], "");
+	      //content = content.replace(tmp2[i],'<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
+	      const url = tmp2[i];
+	      iframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:480px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>'
 	    }
-	    content = content.replace(words2[i],'');
-	  }
-	  else if(words2[i].includes("https://") && contentLinkUrlAfter != "") {
-	    afterSpacer2 = "_0_";
-	    contentLinkUrlAfter2 = words2[i];
-	    content = content.replace(words2[i],'');
+	    /*else if(tmp2[i].includes("nico")) {
+	      nicovideoIframe = '<iframe width="560" height="315" src="http://embed.nicovideo.jp/watch/sm37010793"></iframe>'
+	    }*/
+	    /*else {
+	      content = content.replace(tmp2[i],'<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
+	      //content = content + 'aaa:' + tmp2[i] + ':bbb';
+	    }*/
 	  }
         }
       }
@@ -615,6 +613,47 @@ const Test = () => {
         }
       }
       
+      for(let i=0; i<50; i++) {
+        content = content.replace('<i','&lt;i'); 
+      }
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] == "emoji") {
+            const emojiURL = note.tags[i][2];
+	    for(let j=0; j<200; j++) {
+              content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
+	    }
+        }
+      }
+
+      for(let i=0; i<50; i++) {
+        //content = content.replace('<','&lt;');  // <
+
+        content = content.replace('<m','&lt;m'); 
+        content = content.replace('</m','&lt;/m'); 
+        //content = content.replace('<i','&lt;i'); 
+        content = content.replace('<I','&lt;I'); 
+        content = content.replace('<S','&lt;S');  
+        content = content.replace('<f','&lt;f'); 
+        content = content.replace('</f','&lt;/f'); 
+        content = content.replace('<s','&lt;s');   // <script>, <style>
+        content = content.replace('</s','&lt;/s');  
+        content = content.replace('<b','&lt;b');   
+        content = content.replace('</b','&lt;/b');  
+        content = content.replace('<h','&lt;h');   // <h1> 
+        content = content.replace('</h','&lt;/h');  
+        content = content.replace('<t','&lt;t');   
+        content = content.replace('</t','&lt;/t');  
+        //content = content.replace('<a','&lt;a');  
+      }
+
+      for(let i=0; i<50; i++) {
+        content = content.replace('\\n','<br />');  // repost content
+      }
+      for(let i=0; i<50; i++) {
+        content = content.replace('\n','<br />');
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
@@ -623,17 +662,9 @@ const Test = () => {
 	        {follow}
 	        {contentWarning}{contentWarningText}{contentWarning}
                 {reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height="40" /></a> <a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height="40" /></a>  <a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height="40" /></a>
-                <img src={emoji1URL} width={emoji1Size} height={emoji1Size} />
-                <img src={emoji2URL} width={emoji2Size} height={emoji2Size} />
-                <img src={emoji3URL} width={emoji3Size} height={emoji3Size} />
-                <img src={emoji4URL} width={emoji4Size} height={emoji4Size} />
-                <img src={emoji5URL} width={emoji5Size} height={emoji5Size} />
-		<a href={contentLinkUrlFront} target="_blank">{contentLinkUrlFront}</a>
-		<a href={contentLinkUrlFront2} target="_blank">{contentLinkUrlFront2}</a>
-		<a href={note1LinkUrl} target="_blank">{note1LinkTextFront}</a>
-                {content}
-		<a href={note1LinkUrl} target="_blank">{note1LinkText}</a>
-		<a href={note1LinkUrl2} target="_blank">{note1LinkText2}</a>
+                {parse(content)}
+		{parse(iframe)}
+		<a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
 		<a href={eventLinkUrl1} target="_blank">{eventLinkUrlText1}</a>
 		<a href={eventLinkUrl2} target="_blank">{eventLinkUrlText2}</a>
 		<a href={linkUrl1} target="_blank">{linkUrlText1}</a>
@@ -641,8 +672,6 @@ const Test = () => {
 		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
 		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
 		<a href={linkUrl5} target="_blank">{linkUrlText5}</a>
-		<a href={contentLinkUrlAfter} target="_blank">{contentLinkUrlAfter}</a>
-		<a href={contentLinkUrlAfter2} target="_blank">{contentLinkUrlAfter2}</a>
                 <a href={image1Url} target="_blank"><img src={image1Url} height={inlineImage1Height} /></a>
                 <a href={image2Url} target="_blank"><img src={image2Url} height={inlineImage2Height} /></a>
                 <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
@@ -671,59 +700,564 @@ const Test = () => {
       else if (pubkey == '') {
         image = ''
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '0521db9531096dff700dcf410b01db47ab6598de7e5ef2c5a2bd7e1160315bf6') {
+        image = 'https://void.cat/d/WGjF8DTAq1EY8LDUb8pKUM.webp'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '8d39a0f9a133b626f5705324c39a3530ca01fae177ae3bb85d82aefe6c725f33') {
+        image = 'https://i.gyazo.com/d454507cee7b8de90381aa2d7147dabd.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '40cf870d93b7e67d9e0e140e150e064f2adc2cd3c4a91168cd95aa9e98bc91aa') {
+        image = 'https://i.seadn.io/gcs/files/b4a7c0d7e56670832655877e109c756c.gif?auto=format&w=1000'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '081014225487b59f721acb40a671d06b0b572706880167da64d3bc34420c5e84') {
+        image = 'https://media-momo.mame.moe/momo.mame.moe/accounts/avatars/000/000/001/original/27083181447427e7.png'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '8412c16b6c01fadd224622ee57b1dd58d298b433a37328e50a8c2a2a0bc7739d') {
+        image = 'https://pbs.twimg.com/profile_images/1455850581680332800/Fy-4d-jq_400x400.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '930b735b2cc3e200e6713241e34bb902b4c2ded90fb797d14a409ee4e6725fa2') {
+        image = 'https://nostr.build/i/856e847d6737739dbc780603f5fce96ab95472b8b9fc30f5410022097ff104e7.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'f8b2f4b46f2501049c5d86ee0e9c261d68b28713fb7772154a6d5085262aa742') {
+        image = 'https://nostr.build/i/3438133e56ae6386e47bfb1d991ee37cafd4dba67dc907001bdbe6d30de26031.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'ccc3e370a200ab7c2cad6308fcca7fe86dcf2fcee6e9dec1235afc9975d57bf2') {
+        image = 'https://nostr.build/i/ad906e7372b33b6c59ec78076673e793260ccf061c185fecf36d057de7da6b10.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '06d333dcfe659f2f8cd5adc76e943fe74ea2631514866ab2bce0ae94534d77a1') {
+        image = 'https://nostr.build/i/nostr.build_63b9165787d7191cc836dea416c7a47fad264a28f7ec05c40911da1edf1f5aa2.jpeg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '3d3177a086627249659aa2b3f9d2624ebe41fb45d394d4cf95c7307a0a88a726') {
+        image = 'https://nostr.build/i/a5125716cbd7e994bb834efe3753406d8277ce83c710e0a649237a9511823e9b.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == 'f7d34fb48940e06ea6e390234f2504e727c69a5a0df02230f06ffafc84dcd038') {
+        image = 'https://nostr.build/i/c06b29a51ea2729c11fa6627e0f18e969df9ddd28c785381a12c75763282763c.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '4d326a08d40450356514cd32b36b7d1f06e1e8dadbf266049d94f10164bdadc3') {
+        image = 'https://nostr.build/i/ef8b18a3e7bea076f00b1ce3c9cba205edc52096fd20154d5ab2740e2c1e5eca.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '15552fd34f51be26bcdb793d788e63f3b6544368cacf4a92ae4521e714deac37') {
+        image = 'https://nostr.build/i/446c540699783421728e2ba8c941e8b12eba1c6739a127b455eb637e00698e98.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '657d259ec889fbb7f995e027a317babd2196416b93611e2e2cc41aebe59b4671') {
+        image = 'https://nostr.build/i/p/nostr.build_95808cfca2d79caf1af1102628fc36539dc7c30be6047f1649b21afd340f3218.jpeg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '43afb6d668255b407baefbe206c7180cc50cced310d193563d58e610ddeba160') {
+        image = 'https://tee.jp/images/damus/pfp_illust_98-min.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '2a384b17c4e0efd3477c953d24bc4e9915f474f75aef9ffbc6412bf14e57a27d') {
+        image = 'https://nostr.build/i/p/nostr.build_715403651f9b4c1c87b5e298f1ff41c10683535c3263eb3051da0bd2c16f070e.jpeg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '3cd64d2382da6e9052dae595e5c97435c2c5f9642c1fb1fe2125e7cb496a2815') {
+        image = 'https://www.unagiworks.net/UnagiWorks_ICON.jpg'
       } 
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '92aac5a6445e3e12eb6dc661515f96a5442a9220ed33b7ed1acdc7c2e6b34f1e') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://i.postimg.cc/zf3HtRwD/BC346-C3-F-2-B17-47-EC-9579-9-F4632-D07675.jpg'
+      } 
+      else if (pubkey == '23d494a1d0b9fcd70fc3b6c28502f4b005349f55360a964006f7bee5d495e98f') {
+        image = 'https://pbs.twimg.com/profile_images/1614264181859192835/PSfF_mN1_400x400.png'
+      } 
+      else if (pubkey == 'a354901a6d25a835fd9f77979a6c8d7b8a006fd0129cdef9224c53dfcd506937') {
+        image = 'https://www.akira-plus.com/30707_1034162380_400x400.jpg'
+      } 
+      else if (pubkey == 'ad762d302bc0566e05f173b1d7c462ad645c1d888da61b925e9fc0e30f5517e6') {
+        image = 'https://kotori.style/img/profile.png'
+      } 
+      else if (pubkey == '894d2606bd1a328043aa7e63c2ecdbdfa728319b9e8c82ac0ee8855baca426fd') {
+        image = 'https://nostr.build/i/69109b7ef9845c006a38d943cd099f5876027f2f4a3f5ebd3e7a48608e5c54aa.jpg'
+      } 
+      else if (pubkey == '4ff1d10f5bf5afa17295f7d89dbd0a78dc78eb635ab23938a60a0d0deefb3693') {
+        image = 'https://void.cat/d/A5uK6mGji2davcQ8FqjsiU.webp'
+      } 
+      else if (pubkey == '6813eef6cd152da313c358b32e04866d9548bca2aa0054a438034ebb9f542412') {
+        image = 'https://nostr.build/i/7787da26c025026a90248a21a28786474ac8cb0bb01887bbd77512aee18cb716.jpg'
+      } 
+      else if (pubkey == '64751efc0810222ddbe8d5618c4d6f26fc4594147087e0b6088d080ca15543c2') {
+        image = 'https://nostr.build/i/20a871e90d4cba3f10b107de4b1842b790f14dbe5b4e40544921feec5feae06a.jpg'
+      } 
+      else if (pubkey == '23dafce457776160caf8f0d96d32d67643c2ee55501740825dd8a432fbbbba89') {
+        image = 'https://raw.githubusercontent.com/n0nakamura/yodogawa-janken/main/icon.jpg'
+      } 
+      else if (pubkey == '7e96f44501472378189cec95ff64e41215748aa37ae3be73a942a8d77c9edf24') {
+        image = 'https://pbs.twimg.com/profile_images/58651603/tyoro_matope_400x400.jpg'
+      } 
+      else if (pubkey == '4894d1f41f1fabce39463c5d9622e998deb7e838937424f1c55359312bffd88d') {
+        image = 'https://i.gyazo.com/66beb4b9d0f4b3193cd3dd5f2f40e0cc.png'
+      } 
+      else if (pubkey == 'e4828b81e20a0c0d4cc6183250c7f2321258376fab66c7a2c3ce0bef94013159') {
+        image = 'https://nostr.build/i/ba7c3d267dd3e57594cc524e0c3a7bdbff3f8dc660d9a80939eba98fd9f3bfea.jpg'
+      } 
+      else if (pubkey == 'ad3f1ce241ff0324745ebd5e7bc8aadda24641282ff351c6aeff581cce5026ba') {
+        image = 'https://www.gravatar.com/avatar/1179b2be2101d818dbb543537e6c3107?s=1024'
+      } 
+      else if (pubkey == '8f8a15cdc36597b6b85b4ab035331054bae5cfd618d223bb8c431063e2c23f3b') {
+        image = 'https://i.seadn.io/gcs/files/f0db8d9940b5c18fefdf27224c5a66d9.gif?auto=format&w=1000'
+      } 
+      else if (pubkey == 'ac39b5015512aa805cb1db84a52a096f1df4672ce7fd66b2fc821e336dd52d3b') {
+        image = 'http://naha-webc.com/img/jahgalu200x200.jpg'
+      } 
+      else if (pubkey == '6a3ff6aa3113e3c6e616a54e32c424a3e00bfd1d4f26912555a6674a84cc7491') {
+        image = 'https://pbs.twimg.com/profile_images/1612450446375030785/2gDVe5hC_400x400.png'
+      } 
+      else if (pubkey == '0b23a40520559c6eac3802aa113af1ecf32b224817fa4ba84c6d9c8b2fd523b4') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/0x72b38176864bf273412bbcabed5b7840edb533639f12d6dd5f3f47c6b5b1000b/image'
+      } 
+      else if (pubkey == 'c609ec03e1ea01d03b3b28a57c08349a16dde35c16f20c5216fbfe5edd935633') {
+        image = 'https://d8kcunw48sf0v.cloudfront.net/media_attachments/files/109/810/694/082/566/546/original/2172bb0699340d22.png'
+      } 
+      else if (pubkey == '2f1086a0ae44b921ea8066794c15eba5fa3651d9c6a0b47cd491a87e2e1e73fd') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDEwMCwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDEwMCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '0c521fd952b69cd68b562407f6cfe42a58acbb99840de035a550332614bcbd8d') {
+        image = 'https://void.cat/d/KUgDmxuBfe3N9YNSFr3Kiv.webp'
+      } 
+      else if (pubkey == '4e0ebe6254074e8a0f7cfecce8ae504884ac7ee377ee2dff00b395664d162efd') {
+        image = 'https://i.postimg.cc/bNgMycmJ/logo.png'
+      } 
+      else if (pubkey == '35400078c98bc5dac9912de5dce9679a9ffe9ef575f53f99c74cdb0ae535814c') {
+        image = 'https://nostr.build/i/p/nostr.build_504934de7008b91c7ac46fd0ea482b0195f1c1acf26f0c5bc4a6dd4e0184e245.png'
+      } 
+      else if (pubkey == '36d0d6c410571e19d469e06ea0cbc243ddffe5a16df248a62f5e9f4d44cf6a0a') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDEwMCwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDEwMCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == '28d1243fb879d353c15c4cfc7537bf88f6fe18db2160c553beee408147eb0be5') {
+        image = 'https://avatars.githubusercontent.com/u/1000796?v=4'
+      } 
+      else if (pubkey == '606de594a4de9a8956d0efc290b541cf19a38f9c162de78fbe52e7abcc9758de') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTA0LDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMTA0LDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '69f6045d039c1f2b50a89d87f2896f2e501f08f5df11b5ace69c14936930b4fe') {
+        image = 'https://pbs.twimg.com/profile_images/430761026422706178/U5Hktv0z_200x200.png'
+      } 
+      else if (pubkey == 'f7372426207d0936cdf674589d9969a61fcd0518ce526b28e945500f974a13cc') {
+        image = 'https://pbs.twimg.com/profile_images/1208718754969837569/HDxivlbb.jpg'
+      } 
+      else if (pubkey == '5d84244965de81a2378cb8cf17f8b2309c926f6dd7f5af02362af43c1f7b3898') {
+        image = 'https://pbs.twimg.com/profile_images/1055585733707251713/epj7cvoL_400x400.jpg'
+      } 
+      else if (pubkey == '4caccfa9aab4e06de0a73c1bb37c941f5cbf496e77b6c610dc6db1408c524cf6') {
+        image = 'https://pbs.twimg.com/profile_images/1618626377233883136/ABTUeQm2_400x400.png'
+      } 
+      else if (pubkey == '8c1b1bb6a49bb318db8c105e76d2a39bc7577c3fd6cca60b4db7995b9dec5b17') {
+        image = 'https://pbs.twimg.com/media/FfMqZC_UoAYBQrK?format=jpg&name=small'
+      } 
+      else if (pubkey == '35ac5793152c22f1ef4069220dc482bcbf1601361a3477c6f7aabfff276a59e8') {
+        image = 'https://pbs.twimg.com/profile_images/1010785278565351425/fpW6zdoi.jpg'
+      } 
+      else if (pubkey == '2d9f96e571713b51da42485902b0dfb0e91410e5cc540ed8679f8bc3df84c1ee') {
+        image = 'https://pbs.twimg.com/profile_images/557321563549081600/ALUCaM8U_400x400.jpeg'
+      } 
+      else if (pubkey == '22859c8ffc9614bd71ca8d012fc80c50a91c586db71fc05323639faf0e1bab19') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '485f3efca69a51ee39c0a86449a8ec7dec58f6141e9ffce196866aace8a5cd49') {
+        image = 'https://pbs.twimg.com/profile_images/788724819701342210/JYC32AoM_400x400.jpg'
+      } 
+      else if (pubkey == 'b20bd3cdb6194cf8e75d5b98986a7baf5dc7e1d130536d30ebf282d08759b035') {
+        image = 'https://pbs.twimg.com/profile_images/1455886356715274240/LUg2s1sr_400x400.jpg'
+      } 
+      else if (pubkey == '87c9568db9e983f57a326eec377158f026e34d18302a62c1e0442f4a3e6a4402') {
+        image = 'https://www.3qe.us/yuyuko.gif'
+      } 
+      else if (pubkey == 'f44563fdadd9396e4689b9fb71190cadc40a4808e6d064c60e3f48676d4d7546') {
+        image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe8Vo7mmhRpcgpdcb-OKnPR7eMiMlV_bzHoQ&usqp=CAU'
+      } 
+      else if (pubkey == '4a4e8362e72546b94b722431c9f21394273321d1d622f0e8cd9f0adab6423cc3') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == 'b6b3b04d78bcca3c7812908b794bbecaccffacc65374e34a3259f4ed2b09dafc') {
+        image = 'https://k16em.net/icons/cat.jpg'
+      } 
+      else if (pubkey == '020de9b13bafdd657cfa1c3f68348901587469cb4ce18cf06b4c8c075d9fc2ac') {
+        image = 'https://masterspark.net/img/moyashi_color_aberration.jpg'
+      } 
+      else if (pubkey == '341ebb17bd30e9b7311488ba145532e9fcd38c313fc2abb9d28ff03241a45d82') {
+        image = 'https://i.postimg.cc/QMzLZbK2/D02-F2035-F619-4-D2-F-9-AE4-58518871151-C.jpg'
+      } 
+      else if (pubkey == '9ef7875720bfdfc8e60fece858bc6d25368815a1b9ca46b4144fae89d09a3c3f') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMjAzLDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+      } 
+      else if (pubkey == '1355ef551cd53c9dcf920b127458a2ab8be213942271a2f9fd4ec1da5d5ae995') {
+        image = 'https://avatars2.githubusercontent.com/u/39210441?v=4'
+      } 
+      else if (pubkey == '483ff3870be8b5476806db0f11fae3b099fa322ab0cf4c67ee7733771b055677') {
+        image = 'https://void.cat/d/VDYkGmrwm7o1U3qCjF65HW.webp'
+      } 
+      else if (pubkey == '06c98992b72ce02a127a023fe73081d3f321a497855c19be16fd4f252cc23cca') {
+        image = 'https://yutashx.github.io/image/avatar.webp'
+      } 
+      else if (pubkey == 'f403126bfbccd7a0da09be9b6315f5d037c0f1112d7f8d08ee2308762f0ff6d4') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDE2OSwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDE2OSwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey == 'f9b159a029ac401472d3125fc934fbdedfc06a832f3991a47c840e7ed729a0ba') {
+        image = 'https://www.gravatar.com/avatar/6b05605bbb3b40e2f897d6347dd92b2d'
+      } 
+      else if (pubkey == '116357134a3c7759d30083056f91f5bb7399f52eaf48ee131c933725e806fd9f') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODgsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4OCwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey == 'b7bd7a454187e202eeb08a3803c716146e63fe9ff04d3b4b7d38c441e740cb68') {
+        image = 'https://bloggingfrom.tv/wp/wp-content/uploads/2023/02/kai3_profile.jpg'
+      } 
+      else if (pubkey == 'e9b4aa9bf5698ac4294bbb992698a591b8c61f3b9ca8bac951eb568550882a18') {
+        image = 'https://avatars.githubusercontent.com/u/4232165?s=96&v=4'
+      } 
+      else if (pubkey == 'b551940e2ea538c380056df0d68550396e49e53431f3d8d53ca26ffc8521cc68') {
+        image = 'https://void.cat/d/4e7E6KZkua4uqNw59LBvEM.webp'
+      } 
+      else if (pubkey == '43f7ddf5e1b2f8ab9fe6f3e28ef5fdc95d5cae9be78d2bc82c7db7d8c3f75704') {
+        image = 'https://majigomama.com/images/profile.png'
+      } 
+      else if (pubkey == '47444e175cd9523c808e1e9106c422bb24d4270e8a786ad81706e88beff296d5') {
+        image = 'https://pbs.twimg.com/profile_images/479564676385099776/o1Gwr_Vd_400x400.png'
+      } 
+      else if (pubkey == 'a75e9084b10a88007fc4e7c15e2f5a45b2b43bf160c199e861ea7fe4ac43a34d') {
+        image = 'https://pbs.twimg.com/profile_images/1545832376516808704/Qsyl9F60.jpg'
+      } 
+      else if (pubkey == '12759da6c6d560045e13b2cd97d57fd279a7cd0284594fc2b2b6ffe41e2f384e') {
+        image = 'https://void.cat/d/YakKQyvcnQpGy1Ye8zzXQ5.webp'
+      } 
+      else if (pubkey == '6e2c8c7e2535d42c3b90bda5b9ca1b17c1718144865d2d1770ac22a4c6a8b142') {
+        image = 'https://1.gravatar.com/avatar/83c113a45ccb936bb3eea7bd51bdc6a0'
+      } 
+      else if (pubkey == '9f247f26a3e06f753f1169940113c6046aa648cac4446c08c2ec5c6663cb0234') {
+        image = 'https://pbs.twimg.com/profile_images/1505117649159995396/y4OppqRI_400x400.jpg'
+      } 
+      else if (pubkey == '122001825a3636d8553d36d48e1fdfa159e2b0b8d03ef114a36d765a09a857e7') {
+        image = 'https://akimateras.github.io/nostr/icon.png'
+      } 
+      else if (pubkey == '60b0291148360290c487f519e9f9e7823b6395fb1ab6c9167b436414d766ba51') {
+        image = 'https://void.cat/d/NMMDthbmNHn1S21t8MRYcT.webp'
+      } 
+      else if (pubkey == 'd9bdc6e217f9d04ddc55c7f44163f5ef540b824731346fff7fcc69fd41412ff5') {
+        image = 'http://flat-icon-design.com/f/f_object_108/s128_f_object_108_0bg.jpg'
+      } 
+      else if (pubkey == '8a751ec188bc1652e878b1b26d052ef750672a299e0f0709b3e55c6e3ea95d03') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODgsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4OCwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey == '44e1f898a4bb071f985e2c8395aa627152aa28c771bec9ff954c6fc9bc1cebcc') {
+        image = 'https://cdn.discordapp.com/attachments/1065939465941565460/1071655313587056682/IMG_0418_jpg.jpg'
+      } 
+      else if (pubkey == 'c90a759ab3bc4006f1fe5684a1a0278b41e868580932ad67760f3e52db6112d0') {
+        image = 'https://fogtype.com/fileserver/01KH4AJRNSFBFWXFT4XGKX0270/attachment/original/01THJTX731AD39TGGW6MSTJBP8.png'
+      } 
+      else if (pubkey == 'e21acd469f76d4d82273a50892c8d5de08356b972ab1ebf042eea77363ca9ad9') {
+        image = 'https://www.gravatar.com/avatar/87f4fa9d64729982e5888cf66ae3532e'
+      } 
+      else if (pubkey == '024f4589cc1525d256abe646fa306debe1a8c165aca6ad1e82bd1142ee968c27') {
+        image = 'https://like-amber.com/wp-content/uploads/2023/02/red.jpg'
+      } 
+      else if (pubkey == '96436ad11fd17afd689e2ff2800a610f343d031f8d688c2b50aed921d6eb5de1') {
+        image = 'https://wiseken.tokyo/wiseken-icon.webp'
+      } 
+      else if (pubkey == '05804dea9ee0934bb8d56bc36c0dc5db664ca28c4c51114c6ab28a0aedca52c2') {
+        image = 'https://www.nakamuland.com/k.jpeg'
+      } 
+      else if (pubkey == 'f245bff9731a1965ee0c4288a659509540a1eb4653169355ba8d2ef502c0b735') {
+        image = 'https://i.imgur.com/LWBAIoj.png'
+      } 
+      else if (pubkey == '6b9da920c4b6ecbf2c12018a7a2d143b4dfdf9878c3beac69e39bb597841cc6e') {
+        image = 'https://i.pinimg.com/564x/c9/83/9b/c9839b712d428b0ee5377df243b25312.jpg'
+      } 
+      else if (pubkey == 'e022c76edd65a6ede27162ada4a44e6efa429353c4beb065ed097c5608da5a7a') {
+        image = 'https://pbs.twimg.com/profile_images/1557327200332165121/vynbKn2O_400x400.jpg'
+      } 
+      else if (pubkey == '8e448c48c88324988631c4f123dd9a4a89e8b81855f8a7e19190fa11465be0e2') {
+        image = 'https://i.gyazo.com/85ed9df6fac976fb2c4f145b430aaa95.jpg'
+      } 
+      else if (pubkey == '7b3737c195d44d7809bc030230910fc94dccf001e4a2459d34f73332ea38668e') {
+        image = 'https://nostr.build/i/nostr.build_0a2e0a5d1016e08a1e3428c4f53f7976f5a1d2348d0875197a717fe284899941.jpg'
+      } 
+      else if (pubkey == 'ddf5b3cbfb941d05b714e4b220c7a84dec590a98e82f5209a6acb9acc62dd414') {
+        image = 'https://s3-media.hostdon.ne.jp/m146/accounts/avatars/000/000/001/original/8d201d0127d2384c.png'
+      } 
+      else if (pubkey == '4f2fd842a9990925b299070a515a1bf81fa66654e71768d6906a056edb80a332') {
+        image = 'https://pbs.twimg.com/profile_images/850715009680195584/mNZr73Rn_400x400.jpg'
+      } 
+      else if (pubkey == 'e3610381e7599458701493b8561aadbc79ee7c88064308fc4d6bbf8060804c34') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDIwNSwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDIwNSwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+      } 
+      else if (pubkey == 'bf5ba38def8a5bfa6a89936584787151874725a5d3477d851111bdcf0d042b48') {
+        image = 'https://pbs.twimg.com/profile_images/1591780025702830080/_Bt9DySR_400x400.jpg'
+      } 
+      else if (pubkey == '8092cfdf8db195daa9347c2690f3509c993719ab5d03a5958bda5938e9250806') {
+        image = 'https://avatars.githubusercontent.com/u/4425329?v=4'
+      } 
+      else if (pubkey == 'b27dc08904fd814804657aa88a49e1fd01b3bfa99177eb92d5ba9ab83751032b') {
+        image = 'https://pbs.twimg.com/profile_images/1476511110140686336/m5GpFE1l_400x400.jpg'
+      } 
+      else if (pubkey == 'e472cba86ba9df4a48605371a42e90117036cbc1f9919865809346e59064b28f') {
+        image = 'https://kaminchu.github.io/kaminchu.png'
+      } 
+      else if (pubkey == 'ddb7a7c7d91776b7877b619d0c2941d025c71a9f6393e2f84994642e182fb2ec') {
+        image = 'https://pbs.twimg.com/profile_images/437079737660211200/ARP17o4Q_400x400.jpeg'
+      } 
+      else if (pubkey == 'c46a10ba768ef31d52474b2469c5ef3ae16b5b3832928cd8bd5f3807bd1029be') {
+        image = 'https://nostr.build/i/nostr.build_d978038bdd67747043966d70117c9d683b9299d7c77623bd56faebebb23fb155.jpeg'
+      } 
+      else if (pubkey == '4debe71bae209ddc088ed0d12876f78dc3f1a95daf5f4b97799e454554d63425') {
+        image = 'https://assets.kitar.org/profile.jpg'
+      } 
+      else if (pubkey == '2ab03a49abfd93673d5ef74aead6b9f536a9e1364d48fe9285085e44610dcc25') {
+        image = 'https://nostr.build/i/p/nostr.build_124d6462cb9b14ee9a26a65675997f27c0370b2f799268ebec3340d546917238.jpeg'
+      } 
+      else if (pubkey == '35453d2e49a0282c4dd694e5a364bf29600a9b5443e4712cfc86a0495345d10b') {
+        image = 'https://i.postimg.cc/5NF91wdg/D0-BE9-B25-E0-B2-48-F5-968-C-CBF2-D52-C47-A3.jpg'
+      } 
+      else if (pubkey == 'f6adddea9d7708808b71282a70f2fa40839ad4aa9393db859ff65b9bd3560283') {
+        image = 'https://void.cat/d/VVYuRHmfMzbzjzteqpPJGi.webp'
+      } 
+      else if (pubkey == '154da1bf418485ef8a70951dc7966a6fba01337a3f2b66dfa4efb5dee6852b68') {
+        image = 'https://avatars.githubusercontent.com/u/17245737'
+      } 
+      else if (pubkey == '7c6a5de9f044b3a9de0b8fe1ded0e6c8c401e6670ea6b7adb8f2a65122bd9507') {
+        image = 'https://void.cat/d/Jh2bCbM36LQ3teDGLrwZ1F.webp'
+      } 
+      else if (pubkey == '6f7c2b6cfe25c5f8e034b6598c577857996c4d9a966f57174ab7f7ae939d6da9') {
+        image = 'https://pbs.twimg.com/profile_images/1619164012167720960/L2WTpl5j_400x400.jpg'
+      } 
+      else if (pubkey == 'e40368c29c2735417beb36d9a649ee629f6c5c3bd1f28c47cafa06a27e81d7a8') {
+        image = 'https://live.staticflickr.com/3402/3343888756_874a98ecb2_t.jpg'
+      } 
+      else if (pubkey == '9b6b8d12ec6fff7cec88db87ebb4e8936bdf04763524fafc71f486f4d7706d2d') {
+        image = 'https://pbs.twimg.com/profile_images/3785115381/319a239dfbdbe3bec7afdacbfada91c8.jpeg'
+      } 
+      else if (pubkey == '13c7d9c16b8fac1a2fceafb929c6305ed37027b9913de7136708271507573ffa') {
+        image = 'https://ja.gravatar.com/userimage/78987/743de1f23fb87417a8a0927b36a2aa77.jpg?size=200'
+      } 
+      else if (pubkey == '2df7248fae88ce585f51544b18858c8d0959aaa251a29e5d1cca1edb07da7998') {
+        image = 'https://pbs.twimg.com/profile_images/1559013638283104256/k20LfHTo_400x400.jpg'
+      } 
+      else if (pubkey == 'e16c4ba89d4c3c1eb859ce59a0f9b7a1cc2bd98cac08f4ad3407d4f3e4ba189f') {
+        image = 'https://pbs.twimg.com/profile_images/1475261900397363200/FK7BJFdg_400x400.jpg'
+      } 
+      else if (pubkey == '12a305b19775f1b0deed18e1e5ce6486e52a17d83ea9ed03f4b1725b297933f3') {
+        image = 'https://pbs.twimg.com/profile_images/1609470932913098754/5lHIyHGi_400x400.jpg'
+      } 
+      else if (pubkey == '32db446fc0f10f3e2acd238b2837294b89d0042d8e58ad0c51f2064df291e8d6') {
+        image = 'https://yanokikuno.jp/kikuno_cms/wp-content/uploads/2023/02/0yanogohan.jpg'
+      } 
+      else if (pubkey == 'e0e5fa0186770677bf8b4fb67415c2ce74a33502d85a36171e1e13ec24281676') {
+        image = 'https://pbs.twimg.com/profile_images/1513763610094628864/O0MdoLTi_400x400.jpg'
+      } 
+      else if (pubkey == 'b69b81e87601692acee0bee5d863d3968d9dba253591e0ec119a120ba5484e8e') {
+        image = 'https://i.gyazo.com/cff71e3dec3b3bf346335046598fa5cc.png'
+      } 
+      else if (pubkey == '3f171452c21469efbad5e3080ae928680a5a97856d6e8a824870e8c0006c3bab') {
+        image = 'https://pbs.twimg.com/profile_images/768818758597029888/sVgaJtDj_400x400.jpg'
+      } 
+      else if (pubkey == '00910556a40fff31c13a55ffc562be82cb9ca541dfe49a60228abdb292a7dba1') {
+        image = 'https://social.mikutter.hachune.net/system/accounts/avatars/000/000/003/original/fdb6346f1e9c5661.png'
+      } 
+      else if (pubkey == '538d401b454b09443c647d34345bd6a96bc83968813619036fd6b4419d171d9a') {
+        image = 'https://imgur.com/H63SeT0.png'
+      } 
+      else if (pubkey == 'bd14949d5959be661ff63eee6404cf3d8c9ae41503575d194756d55fbd3eeaea') {
+        image = 'https://goroishihata.com/image/goro.png'
+      } 
+      else if (pubkey == '562fb434297ff3ed7581734525d9cf7b10cbf2b819594428bcb90908e7cc3c2d') {
+        image = 'https://pbs.twimg.com/profile_images/1306707794360377344/D1VyoqDZ_400x400.jpg'
+      } 
+      else if (pubkey == 'ce12ebdf4646e9b5184769cd25fbae7ecc060d4af0f547725511c8a36d8522a4') {
+        image = 'https://void.cat/d/4curxM1dZ3vqJ8A2KhCEnW.webp'
+      } 
+      else if (pubkey == '105e7f7e35f85d0b9bacbe6d2832e43e41816e21d9f405a368f14d8e6c63b547') {
+        image = 'https://ex.blazing.jp/wp-content/uploads/2022/05/icon10.png'
+      } 
+      else if (pubkey == 'bec8b8331a68f7a6334cdfce26fbd62ff050b4503763868826b2ca02382a4f01') {
+        image = 'https://pbs.twimg.com/profile_images/802132701838852096/qA16aU3h_400x400.jpg'
+      } 
+      else if (pubkey == '421f1a2abd3925f7fbe4fe5e5f3bde855d7a88e68ee0d2d3ed09b6b0d14425a4') {
+        image = 'https://spisignal.jp/static/wifrina.png'
+      } 
+      else if (pubkey == '35f118c7b7d349630306e57d4fa23c97e0732e9422e2123ab6111aa2be482dbd') {
+        image = 'https://nekomimi-taicho.com/wp-content/uploads/2022/02/94466513-4388-4CDE-BB9E-CFEDF67AE1A7.png'
+      } 
+      else if (pubkey == 'f264e757ddd895fa95297476085125dc2b6edd097c6536c324ecda5475b24809') {
+        image = 'https://f8n-production-collection-assets.imgix.net/0xE26E7000992e1E22e0f16EBD4fe9Fa3187b81F86/1/nft.jpg?q=80&auto=format%2Ccompress&cs=srgb&w=3000&h=3000&fit=max'
+      } 
+      else if (pubkey == 'b35908a3abfc3ea28f2cf9cef9bf87eeb186f88df4b4d35579afb1223d45fca1') {
+        image = 'https://i.seadn.io/gae/CUtwQuPhyNVHojaBXdBP9qOLdliwukunGvz8-LpYD_psCYAlwttMeQnRy1Ca3zhGVft8B-1Nz_lWrxfJjSNamSMCxmDqyvvYmbqc?auto=format&w=1000'
+      } 
+      else if (pubkey == '84753dbba0ec5661f18c27505ada88d73ef09ed7ce9d232fbcc0bf31e10b1875') {
+        image = 'https://nostr.build/i/p/nostr.build_76dacfc05acfb9f0fc63d997af155c2109c3f81c8edf628ffaeda2e7da4ff6c7.jpeg'
+      } 
+      else if (pubkey == '9d3ed48674b7a39ae489e101595ae8b7fd82aee9f274795b46c5fa2596031349') {
+        image = 'https://i.seadn.io/gcs/files/3af30c488bd686b45a61aa7ce0b8491d.png?auto=format&w=1000'
+      } 
+      else if (pubkey == '269bcebb937a925914074c7bcd33cf6d627fe103684f87f89d53aaa4eb75dda1') {
+        image = 'https://pbs.twimg.com/profile_images/876440874128875520/Xu5OeU71_400x400.jpg'
+      } 
+      else if (pubkey == 'ea2e3c814d08a378f8a5b8faecb2884d05855975c5ca4b5c25e2d6f936286f14') {
+        image = 'https://i.imgur.com/TblmAxU.jpg'
+      } 
+      else if (pubkey == 'be3e19a8337b290f82995be41d18620646bb28b97057f0a180aa62fcedf0bacc') {
+        image = 'https://pbs.twimg.com/profile_images/1593384040920657920/sKRMC3m6_400x400.jpg'
+      } 
+      else if (pubkey == 'bb48efb28768b1355566035ff2e33b2e30040c93c6ab2f5926d099d3402f4236') {
+        image = 'https://pbs.twimg.com/profile_images/1438229152486752258/2ZojA9FH.jpg'
+      } 
+      else if (pubkey == 'cb278c3e30175bd9330c9a00a2c301e634167710db7e1f28a1d42031482b079c') {
+        image = 'https://lh3.googleusercontent.com/pTdnIMHDozoVJ7aA-j2x0dBv6gZFzrccqeGlG8cP4MCb9qKNkfPdpIWQ_t140QEbiI6_Dvn3pECdIY1aEWWn2Z90pPqUXnCk0jQ8'
+      } 
+      else if (pubkey == 'aa8a8aee135a03f26b149b786d6000dbbcbbc50771d4d000e4d52e2747f56f7a') {
+        image = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5hSWOz0XuJRUvtRJp-RVau74pCRttRJ7c_FkGenbrIGm0vSv74pQXxdN9fVMUugJYESNiljKtXNuzEG3iSnAPPnNaVi733Rp5ijdwFCwBVEhUhsewS9A4nY_rbV_EkW9VZjhicTrbdv6p_BvKktWZavbUB7uUa0OYHEMoxIvEfYttNrJ_SkSLVz2FFg/s4032/PXL_20230107_062430878.PORTRAIT.jpg'
+      } 
+      else if (pubkey == 'ee24956dc647b0e70c5639ba89f6d4afffaf36b515cd27d3889e7551fc23470f') {
+        image = 'https://pbs.twimg.com/profile_images/1590603554947207168/pHuvaLba_400x400.jpg'
+      } 
+      else if (pubkey == '68c0fcb1804a6719e24acf2fc99103399b50b5e72267e686d135f6f692deb268') {
+        image = 'https://nostr.build/i/nostr.build_cba186d85cf24ccb5eb038d623e2aec8fa3d28e902a3273a3518b346d5520b85.gif'
+      } 
+      else if (pubkey == '330082f78a2860951a6c1b3c636ac72894f7df9fe43b80303cac4c91d724f4a2') {
+        image = 'https://nostr.build/i/p/nostr.build_0e31685f2aba305239151a7eb5e1953b8963f5efafb3853a36465993148f5597.jpeg'
+      } 
+      else if (pubkey == '7a5b71e67b2be494eb116b7239e1d3b4d13169d063c8ba35e00c403d4f7796ea') {
+        image = 'https://pbs.twimg.com/profile_images/1622200523037507587/73JXvMcq_400x400.jpg'
+      } 
+      else if (pubkey == '0d5e133460751e2ca9e4c4371911ad56bb676daed88fab20366161825bf13e47') {
+        image = 'https://pbs.twimg.com/profile_images/1611334093735890945/IFLRXfwJ_400x400.png'
+      } 
+      else if (pubkey == '9c2b587dd7645f924d0b0a125506dabbb70195ee7e31aa7f39c913618761786b') {
+        image = 'https://gyazo.transrain.net/image/yuki/1c19821aba3de559f02fdf23d49a63c30cfc6013'
+      } 
+      else if (pubkey == 'e8fd2572684b7715048d170c2324f3d340810be2e6c5b7222e93571cc79a9dc0') {
+        image = 'https://i.gyazo.com/22938efee0fb8dd506e343487387cb32.webp'
+      } 
+      else if (pubkey == 'b4b4200aa19978587526aad3953e34e973dc10ef68050d1a4ed52e639eb46049') {
+        image = 'https://pbs.twimg.com/profile_images/877152573974761473/M78OZigq_400x400.jpg'
+      } 
+      else if (pubkey == '3a80c0deeb4c40f7b26eb5d771a6d4a2650a128fd7d638cef10ec6b3a4fdeed9') {
+        image = 'https://pbs.twimg.com/profile_images/479342752941879297/BNYaEHfL_400x400.png'
+      } 
+      else if (pubkey == '8d812b66a9ae59397f7173c60368afdaf1a10aaee53316210f263c7fcb6cbfb0') {
+        image = 'https://2.gravatar.com/avatar/78f3c2f0ae440962084b4cf8c5568673'
+      } 
+      else if (pubkey == '81a9ae0a417a45e4c6f7dd47b64a077e48b20944f532c44d11f97dc0a6f2eb24') {
+        image = 'https://avatars.githubusercontent.com/u/26901342'
+      } 
+      else if (pubkey == '8d45003a9dfa0eac9436c8ba10a50c103e897fdfbe630e7a86a5aa88c5406d29') {
+        image = 'https://nostr.build/i/nostr.build_b1a7391b3db887e6177a3f5cfaab275d08bc975caf20b197d52ac7aabad94882.jpeg'
+      } 
+      else if (pubkey == '08956870438209a06b04e5d1ca6b9ef0b217f84d6894bab3133e6611e224bba9') {
+        image = 'https://pbs.twimg.com/profile_images/1544592696706473986/fNHDOvdz_400x400.jpg'
+      } 
+      else if (pubkey == 'df705aac787153c22d74aa78690c7adba1c084a594a496e5e64adc89b42d0c84') {
+        image = 'https://pbs.twimg.com/profile_images/1386990611706748935/PyyOaI68_400x400.jpg'
+      } 
+      else if (pubkey == 'd7d45a2bfc99dce7e749a6c29360a8c6afc7b477ef18e6a6925b7bc68e18bb5c') {
+        image = 'https://avatars.githubusercontent.com/u/1317305?v=4'
+      } 
+      else if (pubkey == '3afc6f47a0cfbe1f97bfdbaa7fa21e56315b09099ff865305e8763a994554ebd') {
+        image = 'https://nostr.build/i/nostr.build_d4ee391ed84fa452d2bb48d92784ddc9c412fdb6ca9992600044f5add4f9d7b8.jpeg'
+      } 
+      else if (pubkey == '1da0ebe88575c077009acead37f621baf45f30dfda759ef1d561f1eec808972e') {
+        image = 'https://pachelam.com/img/twitter_icon_rainbow.jpg'
+      } 
+      else if (pubkey == '5cd4a4ab697f52ce7c3725778758652bae2ce93c5a01dda5a6f5eed0428e48a8') {
+        image = 'https://pbs.twimg.com/profile_images/1210189515811250177/wr-LDUeN.jpg'
+      } 
+      else if (pubkey == '7fd9529640dfb96340a038a32b666976fef1309741fae318a79481641c1799e4') {
+        image = 'https://www.gravatar.com/avatar/6a52a4b638eeb48e35f8547828633ce7?size=200'
+      } 
+      else if (pubkey == '15766c32ea05c39185b761604a04382f72732968001e2ec307a16173d8af411e') {
+        image = 'https://yukaripeerless.ca/wp-content/uploads/2022/09/F8CEF5DE-42F2-4C90-8549-88847630FC7C.jpg'
+      } 
+      else if (pubkey == '2d4657179b6bf0f71b493f0b3a3fa8f7174d3f7d6a2fbc2f341e5101a56d74cb') {
+        image = 'https://nostr.build/i/nostr.build_ca0d23530b1d7397f0f43f6a0ae4cb25d1ba9fb6ff4c5cccb50ece1a42ca6c53.jpg'
+      } 
+      else if (pubkey == 'af73cc2f70c4440d9e7e0c531840c873be0639fa5964a1bc568e29e522bf4513') {
+        image = 'https://bitkini.org/profile_pic_.jpeg'
+      } 
+      else if (pubkey == 'a341f45ff9758f570a21b000c17d4e53a3a497c8397f26c0e6d61e5acffc7a98') {
+        image = 'https://i.postimg.cc/PxHQ0fwp/8t0-DGo6-V-400x400.jpg'
+      } 
+      else if (pubkey == 'c76d159ddda0ba6c94bb48c4012cf755c2ffb3bfb1fa89441b5dedb1c22267fa') {
+        image = 'https://nostr.build/i/nostr.build_5d3f4b34b6fdded5d7252c31c3714f77277539fe4343ba986f488ffc9f4ce902.gif'
+      } 
+      else if (pubkey == '6690cc06ddf41dd8de9b298baf9e00c3047dcaa855f9a5faccc5ce10b2d85809') {
+        image = 'https://i.seadn.io/gcs/files/c354997726552db84e7f4b5c42057d32.png?auto=format&w=1000'
+      } 
+      else if (pubkey == 'd7f415064de1335c4e8e378c6e70c1f7fd75e9dab460649f8f691e65514abcc7') {
+        image = 'https://pbs.twimg.com/profile_images/1600338666466906113/kXc6Y6Cw_400x400.jpg'
+      } 
+      else if (pubkey == 'f11e91c5bf486fbcb930d82811d026b113a5cfb77bc8ab91439a7b8759a0b04a') {
+        image = 'https://pbs.twimg.com/profile_images/1026477425373274112/pzycbWn__400x400.jpg'
+      } 
+      else if (pubkey == 'c6833a175a992030d04177fd8128e67110ad6bd1fc8143c830d4364fbecde085') {
+        image = 'https://i.imgur.com/ds3Pdj2.jpeg'
+      } 
+      else if (pubkey == '5e7ae588d7d11eac4c25906e6da807e68c6498f49a38e4692be5a089616ceb18') {
+        image = 'https://nostr.directory/icon80.png'
+      } 
+      else if (pubkey == 'a47ddd4595da6cff05f21f5248517c372447cc13d47031b7ffc50fcc654440d5') {
+        image = 'https://nostr.build/i/nostr.build_bb2ed1fb4f5ee027f43bf05fa3afbc1b87faa0fa533aa8661107e774e28d7583.jpg'
+      } 
+      else if (pubkey == '3b908a0c9aaef14718ff29633509ed5defbbbd730da4d2c7a52e1bee435b4162') {
+        image = 'https://pbs.twimg.com/profile_images/1552529198392102913/lTzVsjEc_400x400.jpg'
+      } 
+      else if (pubkey == '53037581f79ac726675a242efff1fb194f44d09c262c9a6ee2853d205a02b7a7') {
+        image = 'https://pbs.twimg.com/profile_images/1574549164385775617/04NvI_ZM.jpg'
+      } 
+      else if (pubkey == '2c305c8cc641b558edf6683789075d62f174d6fa3947555c8e8170fdbb08f49f') {
+        image = 'https://nostr.build/i/nostr.build_223cc59e51fe4fe9dff7830699023102beea1b2a06ea04f2b635942e9eb2a3a8.jpeg'
+      } 
+      else if (pubkey == '00291919b14905f8d33e97eb407d05958e2e30e5f03eb5c7a0c2f94bf44b4a04') {
+        image = 'https://pbs.twimg.com/profile_images/1605547413892399105/EZJJpr8i_400x400.png'
+      } 
+      else if (pubkey == '626b7e32f64dd0c241404d5dfdcf093d28d13638d1cb5db9509d96130aef3b1b') {
+        image = 'https://nostr.build/i/c216889751a652c97a56160bae449934a3ec54f4b371e70ff0be67b27d8bf8ec.jpg'
+      } 
+      else if (pubkey == 'b83a28b7e4e5d20bd960c5faeb6625f95529166b8bdb045d42634a2f35919450') {
+        image = 'https://nostr.build/p/nb305.gif'
+      } 
+      else if (pubkey == '5ac0427cf0588ae5c9f09aa800e99dbbe4dc19c16afbd322b94c016c085e1c0d') {
+        image = 'https://nostr.build/i/0cdfc8cb74370c0701c8699c417af3ebcba48e94bfa73e559a68f6a3d893c235.jpg'
+      } 
+      else if (pubkey == '706039b36ca7646fcd5211580aba1bcb8a75904cb4aa16fa12d3b9fdc4b5d06e') {
+        image = 'https://nostr.build/i/6881a9f4778cbf379e6692d4ce998d0f21d16a717b320b30badedd9c9655879d.jpg'
+      } 
+      else if (pubkey == 'd8af17bdd5f96ffd46c4b1261c0762dbdfb4ec60897dfb768b95ed07e08763de') {
+        image = 'https://herohoro.com/_next/image?url=%2Ffukidashi.png&w=256&q=75'
+      } 
+      else if (pubkey == '34d2f5274f1958fcd2cb2463dabeaddf8a21f84ace4241da888023bf05cc8095') {
+        image = 'https://zeusln.app/nostr/zeus.jpg'
+      } 
+      else if (pubkey == 'b93049a6e2547a36a7692d90e4baa809012526175546a17337454def9ab69d30') {
+        image = 'https://nostr.build/i/p/nostr.build_97516178e05c5b5235de1b1abc77872012b2d0cb9e1db7a581e5b3d6173d6273.jpg'
+      } 
+      else if (pubkey == '3a0392022aef09e2879e57a473e617f31d80549bad0641f6ec7e5441902de851') {
+        image = 'https://void.cat/d/23DG9NbM84W98XoHyyBfmx.webp'
+      } 
+      else if (pubkey == '8fc11a84c4e5556b332fb7d257ae326f2587f43fc59416e68a7303640c25c062') {
+        image = 'https://pbs.twimg.com/profile_images/1600089054657368064/Ow6iSEYF_400x400.jpg'
+      } 
+      else if (pubkey == 'c753e392890d3ec8274abc3013cd83796f273cbac1daa809dca48fb71fa8ba27') {
+        image = 'https://i.postimg.cc/7hzdfbHN/73-DFAD19-D381-4-D8-A-9057-729549-CDFDCA.jpg'
+      } 
+      else if (pubkey == '9366708117c4a7edf9178acdce538c95059b9eb3394808cdd90564094172d972') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTczLDIxNywzOCwxKTsgc3Ryb2tlOnJnYmEoMTczLDIxNywzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey == '4c7b041b5ad59e9aa086d1ceab47fce0f37cd834d4a29d90d8b243174967f755') {
+        image = 'https://pub-6e4159818a204ff08c81ffb5d7086cfb.r2.dev/utsuwa/a1ebcca9-f82a-4cf8-8990-8d3367350fe9.gif'
+      } 
+      else if (pubkey == '4c96d763eb2fe01910f7e7220b7c7ecdbe1a70057f344b9f79c28af080c3ee30') {
+        image = 'https://damus.io/img/logo.png'
+      } 
+      else if (pubkey == 'edf16b1dd61eab353a83af470cc13557029bff6827b4cb9b7fc9bdb632a2b8e6') {
+        image = 'https://damus.io/img/logo.png'
+      } 
+      else if (pubkey == '53a1eb46b9fb90d0a3147dc663c08da53515475ca8381fa1b12b53f263441e08') {
+        image = 'https://nostr.build/i/3806b00b13ab9e1d1f0bfa2251b5bf819e47975972f8d3604a0df49e7dd26ded.jpg'
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1614562193147842563/mfd80R_H.jpg'
+      } 
+      else if (pubkey == '3aa38bf663b6c834a04a6542edf14a81d3223e050c3cc9b7479f8c869c432cf2') {
+        image = 'https://i.floppy.media/a8ecd14602c8ebfca42e53557ad16542.jpeg'
+      } 
+      else if (pubkey == 'c998a5739f04f7fff202c54962aa5782b34ecb10d6f915bdfdd7582963bf9171') {
+        image = 'https://simplex.chat/img/icon.svg'
+      } 
+      else if (pubkey == 'f08a93704245801d7e5e6377f878e9c3ea2dfdf7419dc89efcf2b5d7a5f627d9') {
+        image = 'https://nostr.build/i/b1515af0f80416b326acd95d92dc33a569dfc6f3383670048163419f7ab83896.jpg'
       } 
       else if (pubkey == 'daefc770c5fa29cd52acbb444e5af3fc94b5bf775ee960703fd0f1da44085bb0') {
         image = 'https://nostr.build/i/nostr.build_7ee429c6b9c942e468e7d78c267f01dd13d40775f3c86e63de105782de8bb9c1.jpg'
@@ -916,7 +1450,7 @@ const Test = () => {
         image = 'https://nostr.build/i/nostr.build_81bd13a7c8e7db091c9010c5921b09b212d8e0476f64ae397626dfa410656a6f.png'
       } 
       else if (pubkey == 'f44fcbc65d464d61abce23bc171948b9cd31e136794260ac09d275d039634d2e') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMTM5LDIxNywxKTsgc3Ryb2tlOnJnYmEoMzgsMTM5LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://showhyuga.pages.dev/nostricon/v3aicon.jpg'
       } 
       else if (pubkey == '909efa6667b28627f107764ce3c28895c46fffd1811b7415dcab03f48c44b597') {
         image = 'https://nostr.build/i/p/nostr.build_7a596b6ad995b5f5ea99495c7d092953af53bf838b7824a146ad1534d9b88790.jpeg'
@@ -1330,7 +1864,7 @@ const Test = () => {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDExOCwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDExOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
       } 
       else if (pubkey == '2bb2abbfc5892b7bda8f78d53682d913cc9a446b45e11929f0935d8fdfcb40bd') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTc0LDIxNywzOCwxKTsgc3Ryb2tlOnJnYmEoMTc0LDIxNywzOCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://pbs.twimg.com/profile_images/59070266/unyu_400x400.png'
       } 
       else if (pubkey == '817148c3690155401b494580871fb0564a5faafb9454813ef295f2706bc93359') {
         image = 'https://pic-1252521402.cos.ap-hongkong.myqcloud.com/favicon.ico'
@@ -2095,6 +2629,7 @@ const Test = () => {
       }
       else if (pubkey == 'b25e56b72c676daf2e12717d25990dbc94ace8912f34ddd0b6574cba0ffe4ee9') {
         image = 'https://void.cat/d/6Keeg6s1NEDyx7fqdd3h8B.webp'
+	image = 'https://void.cat/d/RhK4rGFq5wUSm4MAeixD9c.webp'
       }
       else if (pubkey == 'b3320cbc0e54ebf79e6eb877fa609c8d645d6722882dc6d961c6b21f0503a468') {
         image = 'https://nostr.build/i/nostr.build_e9ab47cd02bce830593a5a7f9edc589034b3c510bcba3f86ddbe8359a190af23.jpg'
@@ -2255,14 +2790,15 @@ const Test = () => {
       else if (pubkey == '207eac28fa44d62179a179d98fe20658dc9ec5ba4da7730925322f5ff1d1d174') {
         image = 'https://rx104ff.me/icon/little_lady.jpg'
       }
-      else if (pubkey == '') {
-        image = ''
+      else if (pubkey == '76d5e7e16ad7aebfb8f87a7254516ecd57b2243e259a44793616b831cd191098') {
+        image = 'https://nostr.build/i/3ab018e481945ab22efb14b6d9b0ba1180ac159e7b9d3586fd37a72a4a31d4ef.jpg'
       }
       else if (pubkey == 'f5142896ed33a06299797864338779ba229a476693ca037a3a57f25440f94d11') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_3d83e82e7cb18822133d34cc0002cc874862562e872aad6ee02ad8cf55958a26.jpeg'
       }
       else if (pubkey == '8e4cdaca2afb6765f3c18d5d5c41ca9e1502e0816e96e8df4fc779e031030d4a') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/qchan.png'
+	image = 'https://nostr.kojira.net/qchan.png'
       }
       else if (pubkey == '9b840e12109a3ed2d54c75e872246e76d96a45fcdd6b171dc723eeac7232e29b') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/nostaro.png'
@@ -2294,6 +2830,7 @@ const Test = () => {
       }
       else if (pubkey == '9cf9b6087934351e408b971d3d4d7824503ac81b8e6d45e010e25440594db487') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/kojiranyan.png'
+	image = 'https://nostr.kojira.net/kojiranyan.png'
       }
       else if (pubkey == '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1509474712543399940/qaT7nqqS.jpg'
@@ -2345,6 +2882,7 @@ const Test = () => {
       }
       else if (pubkey == '22c733af44ce6f7b23a34d9beb99b30935aa0926b5dba44e4dde9c2dda4094ff') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/nostrchan4.png'
+	image = 'https://nostr.kojira.net/nostrchan4.png'
       }
       else if (pubkey == 'd801c8d4c9fa14c21a60e9a4c263687eba908b39d818611587f020f060cc5b68') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/p/nostr.build_e0b76469720c82cab4b43571e0260278a31adb0f1d5646542fd5a4cd0159eb4a.png'
@@ -2383,6 +2921,7 @@ const Test = () => {
       }
       else if (pubkey == 'ee7d9e9a33a6479c3890d52ce9602ff83f032645f1ca93d54873384f16c02b44') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.kojira.net/skyka.png'
+	image = 'https://nostr.kojira.net/skyka.jpg'
       }
       else if (pubkey == '4afc021c034d6fc25aa7989f24f83d1ba214ca0aaf45e090efc98e4d866076b1') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_dcccfa8138d0d17101ee5d6b64d45a74d45fe0651e8ada1f72d8595157e0102b.png'
@@ -2394,7 +2933,6 @@ const Test = () => {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDE2OCwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDE2OCwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
       }
       else if (pubkey == 'cb230a5e9341a1809c0d796ae4b63af1a513b735c49b8aa09278fd3414aed832') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDY3LDEpOyBzdHJva2U6cmdiYSgzOCwyMTcsNjcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
 	image = 'https://nostr.kojira.net/nostrchan2_new.png'
       }
       else if (pubkey == '1bdab038c79ce5fad6c2937a8ce720805de00288faa7d0a9df906bc1f7bffbc7') {
@@ -3334,6 +3872,7 @@ const Test = () => {
       }
       else if (pubkey == '0a02d935ff9a88f16b4c9f50e727f0de5c4f7c82606a9891db27e5eb666fb658') {
         image = 'https://pbs.twimg.com/profile_images/1622134050193563648/V7d0_9tP_400x400.jpg'
+	image = 'https://pbs.twimg.com/profile_images/1625672627821101056/js3LRsjQ_400x400.jpg'
       }
       else if (pubkey == 'c05f8ab1c206e7bf265e29b08c749804c4e5557bc202108ac708b20fe297bbe0') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/p/nostr.build_3ee78191a4dc407633307e5a29a0abd135b3084118e73b0cb98503d324ef6974.jpeg'
@@ -3379,6 +3918,7 @@ const Test = () => {
       }
       else if (pubkey == '9dc5c31062dde1f8e6c80d8c9e6fddf22fa2056672189c6443c3d87b6ed4dee7') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://i.gyazo.com/c846fc27f4787db65dd7ca2bc1d7d2ab.png'
+	image = 'https://i.gyazo.com/c846fc27f4787db65dd7ca2bc1d7d2ab.png'
       }
       else if (pubkey == 'cc88b7afe3e53e4acaf3702c5033582fd842a438f085c124f56130928266880b') {
         image = 'https://imgproxy.iris.to/insecure/plain/http://highrise.s28.xrea.com/icon.jpeg'
@@ -3456,6 +3996,7 @@ const Test = () => {
       }
       else if (pubkey == '91af95cbeb4d0f337efe69aef4ff9c81ff568f70e0393d65c1be44bdd6695d5b') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_426532198511c2d91f54fd5718f6fea8f791f2e69894bed740a153c18b65d0ae.png'
+	image = 'https://nostr.build/i/nostr.build_426532198511c2d91f54fd5718f6fea8f791f2e69894bed740a153c18b65d0ae.png'
       }
       else if (pubkey == '4fa2a4ddc81ffe91d28fb99262f8af383c687b12035ace73415fd705262c60af') {
         image = 'https://pbs.twimg.com/profile_images/1607010836912164867/th_K8vC4_400x400.jpg'
@@ -3573,10 +4114,10 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://xaiqi.graphics/external/icon.jpg'
       }
       else if (pubkey == '50d43bc04cead43df759d1e60ff6dc4c6f277c99efcc019507d6c57352c5b403') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDY2LDEpOyBzdHJva2U6cmdiYSgyMTcsMzgsNjYsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://nostr.build/i/c929f51ef1ca4cfdbedd82cb1f31ecb417c5654262bfa702b29ed32027d4c9f1.jpg'
       }
       else if (pubkey == '97a3bb8cb06ea92e9e4467443b4d5bb90a10a212cb577cae9b63de05d7cacf3e') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDEzMywxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDEzMywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+        image = 'https://nostr.build/i/nostr.build_e29b488178bd29a7bbb10a5ef7078d4551fdc6c2360647fe90e9c215e78ead48.jpeg'
       }
       else if (pubkey == '96fade2896aef1270bbb25f9195b389167e6ae51a53f0ccbb27b7de58345550b') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://lifehacking.jp/mehori/mehori_l-300x300.jpg'
@@ -3629,6 +4170,7 @@ const Test = () => {
       }
       else if (pubkey == 'aa4916c1e0036a526fc112d053ed1f438cee18ea34acc04e79dd4238aae82dcd') {
         image = 'https://www.peipeipe.net/images/jekyll-logo.png'
+	image = 'https://cdn.gudako.net/social/rita_mascot_ph_rev2.jpg'
       }
       else if (pubkey == '0e7e1cb3a8b0adcedce46c42c57db79dd2d360392b3e8da9f85f3441b6b4cbc1') {
         image = 'https://www.peipeipe.net/images/jekyll-logo.png'
@@ -3667,6 +4209,7 @@ const Test = () => {
         image = 'https://nostr.build/i/nostr.build_96de16125bf6fcf33c8e7aec18c1c9a043ec9f617148d3c7b9726c4fe5d17e74.jpeg'
         //image = 'https://void.cat/d/XaXeo5TPvrWKMX1rPb1hrN.webp'
 	image = 'https://nostr.build/i/nostr.build_a3d539ddaceeb6bcbdceab542208d346300f410b6227c0b278ae4f798666f04c.jpg'
+	image = 'https://ukadon.shillest.net/system/accounts/avatars/106/643/449/831/237/150/original/15898508930424cb.png'
       }
       else if (pubkey == '32310997f6b37b6cd60bb15a28e9a14badddfbf0875a7de24c69123a0c1e64cc') {
         image = 'https://www.eonet.ne.jp/~mmaga/omake/hyutegaki.jpg'
@@ -3712,7 +4255,7 @@ const Test = () => {
       }
       else if (pubkey == 'c762a9152a4fe93f35e386b668499dd140200d387c9f431e98ac75fd66eb0ad5') {
         // weepjp
-        image = 'https://nostr.weep.me/a/random.webp'
+	image = 'https://nostr.weep.me/a/random.webp'
       }
       else if (pubkey == 'd1d1747115d16751a97c239f46ec1703292c3b7e9988b9ebdd4ec4705b15ed44') {
         // jiftechnify
@@ -3849,10 +4392,14 @@ const Test = () => {
           <p>now:{dateToUnix(now.current)}</p>
         </div>
         <div>
-          <PostButton />
+	  <NextButton />
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
+	{minCreateDate}
       </div>
     </>
   );
