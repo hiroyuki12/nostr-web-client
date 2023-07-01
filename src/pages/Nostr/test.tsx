@@ -11,54 +11,177 @@ import Pictures from './Pictures';
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
-  let untilValue = dateToUnix(now.current);  //now
-  untilValue = 1687021005;  //paging
+  let noteCount = 0;
+
+  let untilValue = dateToUnix(now.current);  //all new events from now
+//  untilValue = 1688173937;  //paging
+
+//  untilValue = 1688091853;  //reply fix
+//  untilValue = 1688112602;  //youtube fix
+//  untilValue = 1688127347;  //youtube fix
+//  untilValue = 1688115603;  //nostr:profile
+//  untilValue = 1688127866;  //nostr:nprofile1
+//  untilValue = 1688084234;  //live_chat kind:1311 will
+//  untilValue = 1675550855;  //https:// fix
+//  untilValue = 1687937012;  //#q quote
+//  untilValue = 1687883912;  //https:// zozo
+//  untilValue = 1687905481;  //twitter fix
+//  untilValue = 1687906810;  //https:// spotify playlist
+//  untilValue = 1687907629;  //https:// amazon
+//  untilValue = 1687865289;  //emoji
+//  untilValue = 1687829407;  //https://  #actors
+//  untilValue = 1686896097;  //https://  same url fix
+//  untilValue = 1687829040;  //nachika
+//  untilValue = 1687819005;  //repost fix
+//  untilValue = 1687689358;  //https:// fix
+//  untilValue = 1687655585;  //yabumi
+//  untilValue = 1687601931;  //@npub
+//  untilValue = 1687588227;  //#nowplaying fix
+//  untilValue = 1687579812;  //#illust fix
+//  untilValue = 1687575908;  //tag fix
+//  untilValue = 1687534721;  //instagram fix
+//  untilValue = 1687194994;  //reply 8
+//  untilValue = 1687333253;  //nostr:naddr1 fix relay kind:30022
+//  untilValue = 1686983200;  //naddr1 emoji kind:30030 fix
+//  untilValue = 1686985618;  //about nevent relay
+//  untilValue = 1686933213;  //quote(nostr:note1) fix
+//  untilValue = 1687253423;  //iframe middle fix
+//  untilValue = 1686949316;  //2 cards fix
+//  untilValue = 1686918544;  //nhk news card
+//  untilValue = 1686918929;  //hatenablog, nicovideo, card
+//  untilValue = 1686898969;  //black  <a<b>c> fix, 1686898968,  //ok
+//  untilValue = 1686839510;  //nicovideo iframe
+//  untilValue = 1686929129;  //twitter iframe
+//  untilValue = 1687339664;  //twitter iframe
+//  untilValue = 1687839219;  //spotify no #r
+//  untilValue = 1686890295;  //spotify iframe #r
+//  untilValue = 1686839199;  //youtube iframe
+//  untilValue = 1686656876;  //repost Add <a href> fix
+//  untilValue = 1686488789;  //repost image
+//  untilValue = 1687358020;  //gazou fix
+//  untilValue = 1686393912;  //gazou fix
+//  untilValue = 1686318772;  //reply fix
+//  untilValue = 1687863811;  //<Equal<HelloWorld, string>> fix 
+//  untilValue = 1686321677;  //<script> fix
+//  untilValue = 1686098875;  //<marquee>, <SCRIPT>alert fix
+//  untilValue = 1686223968;  //<h1> fix
+//  untilValue = 1686199142;  //<button> fix
+//  untilValue = 1686241976;  //emoji 13 fix, <img>
+//  untilValue = 1685703268;  //emoji fix
+//  untilValue = 1686199783;  //emoji, tate, <style> fix,
+//  untilValue = 1686350208;  //repost \n fix
+//  untilValue = 1686238459;  //#[0] fix, <a href>
+//  untilValue = 1675779342;  //#[5] fix
+//  untilValue = 1686377160;  //npub(to) fix, <a href> 
+//  untilValue = 1686148182;  //npub(to) fix 
+//  untilValue = 1686063586;  //npub(to) fix
+//  untilValue = 1686486917;  //https:// fix, <a href>
+//  untilValue = 1686318129;  //https:// fix
+//  untilValue = 1686034150;  //https: 5 // fix
+//  untilValue = 1686041046;  //conteltLink
+//  untilValue = 1686034209;  //about reverce
+//  untilValue = 1686135829;  //U+202E (RTL)
+//  untilValue = 1686051720;  //reverce
+//  untilValue = 1686052701;  //before 1 hour fix
+
+
+//  untilValue = 1672000000; // 2022/12/26-1970/1/1
+//  untilValue = 1675000000; // 2023/1/28- 1970/1/1
+//
+//  untilValue = 1675500000; // 2023/2/4 15- 1970/1/1,   +500,000, limit 100, wirednet
+//  untilValue = 1675600000; // 2023/2/5 12- 2023/1/10   +100,000
+//  untilValue = 1675650000; // 2023/2/6 11- 2023/2/4 18, +50,000
+//  untilValue = 1675591669; // 2023/2/6 11- 2023/2/4 18, +50,000
+//  untilValue = 1675695000; // 2023/2/6 23- 2023/2/6 23, +45,000 nosaray
+//  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,   +5,000
+//  untilValue = 1675780000; // 2023/2/7 20- 2023/2/7 20, +60,000
+//  untilValue = 1675790000; // 2023/2/8 2- 2023/2/8 1,   +10,000 nosaray
+//  untilValue = 1675800000; // 2023/2/9-    2023/2/9,    +10,000
+//  untilValue = 1675900000; // 2023/2/9  8 -2023/2/9,    +100,000
+//  untilValue = 1676000000; // 2023/2/10 12-2023/2/10,   +100,000
+//  untilValue = 1676100000; // 2023/2/11-   2023/2/11,   +100,000
+//  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
+//      untilValue = 1676300000; // 2023/2/13 23-2023/2/13 23 +100,000
+//      untilValue = 1676350000; // 2023/2/14 13-2023/2/14 12, +50,000
+//      untilValue = 1676400000; // 2023/2/15 3- 2023/2/15 1,  +50,000
+//      untilValue = 1676470000; // 2023/2/15 23-2023/2/15 20, +10,000
+//      untilValue = 1676480000; // 2023/2/16 1- 2023/2/15 22, +10,000
+//      untilValue = 1676550000; // 2023/2/16 21-2023/2/16 15, +20,000
+//      untilValue = 1676580000; // 2023/2/17 5- 2023/2/16 21, +30,000
+//      untilValue = 1676640000; // 2023/2/17 22-2023/2/17 19, +10,000
+//      untilValue = 1676650000; // 2023/2/18 1- 2023/2/17 21, +10,000
+//      untilValue = 1676750000; // 2023/2/19 4- 2023/2/17 23,+100,000
+      //untilValue = 1676840000; // 2023/2/20 5- 2023/2/18 0,  +90,000
+      //untilValue = 1676920000; // 2023/2/21 4- 2023/2/18 5,  +80,000
+//      untilValue = 1676990000; // 2023/2/21 23-2023/2/21 20, +10,000 nosaray
+      //untilValue = 1677030000; // 2023/2/22-10 2023/2/21 23, +40,000
+      //untilValue = 1677070000; // 2023/2/22 21-2023/2/22 18  +10,000
+      //untilValue = 1677080000; // 2023/2/23 0- 2023/2/22 22  +10,000
+      //untilValue = 1677150000; // 2023/2/23 19-2023/2/22 12  +20,000
+      //untilValue = 1677170000; // 2023/2/24 1- 2023/2/23 17  +20,000
+      //untilValue = 1677230000; // 2023/2/24 18-2023/2/24 14  +10,000
+      //untilValue = 1677270000; // 2023/2/25 5- 2023/2/24 18  +40,000
+      //untilValue = 1677320000; // 2023/2/25 19-2023/2/25 14, +20,000
+      //untilValue = 1677360000; // 2023/2/26 6- 2023/2/25 18, +40,000
+      //untilValue = 1677420000; // 2023/2/26 22-2023/2/26 20  +20,000
+      //untilValue = 1677440000; // 2023/2/27 4- 2023/2/26 23  +20,000
+      //untilValue = 1677500000; // 2023/2/27 21-2023/2/27 19  +10,000
+      //untilValue = 1677520000; // 2023/2/28 2- 2023/2/27 23  +20,000
+      //untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
+//      untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
+
+      //until 1677700000, // 2023/3/2 4-  2023/3/2 1,  +100,000, limit 100
+      //until 1677800000, // 2023/3/3 8-  2023/3/3 3,  +100,000 * 25
+      //until 1677900000, // 2023/3/4 12- 2023/3/4 8,  +100,000
+      //until 1678000000, // 2023/3/5 16- 2023/3/5 13, +100,000
+      //until 1678100000, // 2023/3/6 19- 2023/3/6 18, +100,000
+      //until 1678200000, // 2023/3/7 23- 2023/3/7 19, +100,000
+      //until 1678300000, // 2023/3/9 3-  2023/3/8 15, +100,000
+      //until 1678400000, // 2023/3/10 7- 2023/3/10 2, +100,000
+      //until 1678500000, // 2023/3/11 10-2023/3/11 8, +100,000
+      //until 1678600000, // 2023/3/12 14-2023/3/12 12,+100,000
+      //until 1678700000, // 2023/3/13 18-2023/3/13 16,+100,000
+      //until 1678800000, // 2023/3/14 22-2023/3/14 21,+100,000
+      //until 1678860000, // 2023/3/15 14-2023/3/15 10,+100,000,broccoli
+      //until 1678900000, // 2023/3/16 2- 2023/3/15 20,+100,000
+      //until 1679000000, // 2023/3/17 5- 2023/3/17 1, +100,000
+      //until 1679100000, // 2023/3/18 9- 2023/3/18 4, +100,000
+      //until 1679200000, // 2023/3/19 13-2023/3/19 11,+100,000
+      //until 1679300000, // 2023/3/20 17-2023/3/20 14,+100,000
+      //until 1679400000, // 2023/3/21 20-2023/3/21 18,+100,000
+      //until 1679500000, // 2023/3/23 0- 2023/3/22 21,+100,000
+      //until 1679600000, // 2023/3/24 4- 2023/3/24 1, +100,000
+      //until 1679700000, // 2023/3/25 8- 2023/3/25 1, +100,000
+      //until 1679800000, // 2023/3/26 12-2023/3/25 12,+100,000
+      //until 1679900000, // 2023/3/27 15-2023/3/27 14,+100,000
+      //until 1680000000, // 2023/3/28 19-2023/3/28 17,+100,000 *26
+      //until 1680050000, // 2023/3/29 9- 2023/3/29 6,  +50,000 *11
+      //until 1680100000, // 2023/3/29 23-2023/3/29 22, +50,000 *13
+      //until 1680150000, // 2023/3/30 13-2023/3/30 11, +50,000 *12
+      //until 1680180000, // 2023/3/30 21-2023/3/30 20, +10,000 *2
+      //until 1680190000, // 2023/3/31 0- 2023/3/30 23, +10,000 *2
+      //until 1680270000, // 2023/3/31 22- 2023/3/31 20,  +10,000 *
+
+      //until 1680300000, // 2023/4/1 6- 2023/4/1 2,  +30,000
+      //until 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
+      //until 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
+      
+      //until: 1684667029, // 2023/5/21 20:03 - 
+
+//  untilValue = 1675720000; // 2023/2/-     2023/2/,     +20,000
+
+  let sinceValue = untilValue - 2000;  //about 30 minutes 
+  sinceValue = untilValue - 8000;  //about 120 minutes 
 
   const { events } = useNostrEvents({
     filter: {
-      //until: dateToUnix(now.current), // all new events from now
       until: untilValue,  //paging
 
-//      until: 1686983200,  //naddr1
-//      until: 1686985618,  //nevent quote
-//      until: 1686933213,  //quote(nostr:note1)
-//      until: 1686929129,  //twitter card
-//      until: 1686949371,  //2 cards
-//      until: 1686918544,  //nhk news card
-//      until: 1686918929,  //hatenablog, nicovideo, card
-//      until: 1686896097,  //https:// 
-//      until: 1686898969,  //black  <a<b>c> fix, 1686898968,  //ok
-//      until: 1686839510,  //nicovideo
-//      until: 1686890295,  //spotify iframe
-//      until: 1686839199,  //youtube iframe
-//      until: 1686656876,  //repost Add <a href> fix
-//      until: 1686488789,  //repost image
-//      until: 1686393912,  //gazou fix
-//      until: 1686318772,  //reply fix
-//      until: 1686321677,  //<script> fix
-//      until: 1686098875,  //<marquee>, <SCRIPT>alert fix
-//      until: 1686223968,  //<h1> fix
-//      until: 1686199142,  //<button> fix
-//      until: 1686241976,  //emoji 13 fix, <img>
-//      until: 1685703268,  //emoji fix
-//      until: 1686199783,  //emoji, tate, <style> fix,
-//      until: 1686350208,  //repost \n fix
-//      until: 1686238459,  //#[0] fix, <a href>
-//      until: 1675779342,  //#[5] fix
-//      until: 1686377160,  //npub(to) fix, <a href> 
-//      until: 1686148182,  //npub(to) fix 
-//      until: 1686063586,  //npub(to) fix
-//      until: 1686486917,  //https:// fix, <a href>
-//      until: 1686318129,  //https:// fix
-//      until: 1686034150,  //https:// fix
-//      until: 1686041046,  //conteltLink fix
-//      until: 1686034209,  //about reverce
-//      until: 1686135829,  //U+202E (RTL)
-//      until: 1686051720,  //reverce
-//      until: 1686052701,  //before 1 hour fix
-
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
-      kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
+      //kinds: [1,6,42],  // 1:post, 6:repost, 7:reaction, 42:channel message
+      kinds: [1,6,42,1311],  // 1:post, 6:repost, 7:reaction, 42:channel message, 1311:live chat
+      //kinds: [1311],  // 1311:live chat 
+      since: sinceValue,
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       //limit: 5000,
@@ -73,88 +196,6 @@ const Test = () => {
       //"#t": ["名言画像"],
       //"#t": ["makeitquote"],
 
-      //until: 1672000000, // 2022/12/26-1970/1/1
-      //until: 1675000000, // 2023/1/28- 1970/1/1
-
-//      until: 1675500000, // 2023/2/4 15- 1970/1/1,   +500,000, limit 100, wirednet
-//      until: 1675600000, // 2023/2/5 12- 2023/1/10   +100,000
-//      until: 1675650000, // 2023/2/6 11- 2023/2/4 18, +50,000
-//      until: 1675695000, // 2023/2/6 23- 2023/2/6 23, +45,000
-//      until: 1675700000, // 2023/2/7 1-  2023/2/7 0,   +5,000
- //NG //until: 1675720000, // 2023/2/-     2023/2/,     +20,000
-//      until: 1675780000, // 2023/2/7 20- 2023/2/7 20, +60,000
-//      until: 1675790000, // 2023/2/8 2- 2023/2/8 1,   +10,000
- //NG //until: 1675800000, // 2023/2/9-    2023/2/9,    +10,000
-      //until: 1675900000, // 2023/2/9  8 -2023/2/9,    +100,000
-      //until: 1676000000, // 2023/2/10 12-2023/2/10,   +100,000
-      //until: 1676100000, // 2023/2/11-   2023/2/11,   +100,000
-      //until: 1676200000, // 2023/2/12-   2023/2/12,   +200,000
-      //until: 1676300000, // 2023/2/13 23-2023/2/13 23 +100,000
-      //until: 1676350000, // 2023/2/14 13-2023/2/14 12, +50,000
-      //until: 1676400000, // 2023/2/15 3- 2023/2/15 1,  +50,000
-      //until: 1676470000, // 2023/2/15 23-2023/2/15 20, +10,000
-      //until: 1676480000, // 2023/2/16 1- 2023/2/15 22, +10,000
-      //until: 1676550000, // 2023/2/16 21-2023/2/16 15, +20,000
-      //until: 1676580000, // 2023/2/17 5- 2023/2/16 21, +30,000
-      //until: 1676640000, // 2023/2/17 22-2023/2/17 19, +10,000
-      //until: 1676650000, // 2023/2/18 1- 2023/2/17 21, +10,000
-      //until: 1676750000, // 2023/2/19 4- 2023/2/17 23,+100,000
-      //until: 1676840000, // 2023/2/20 5- 2023/2/18 0,  +90,000
-      //until: 1676920000, // 2023/2/21 4- 2023/2/18 5,  +80,000
-      //until: 1676990000, // 2023/2/21 23-2023/2/21 20, +10,000
-      //until: 1677030000, // 2023/2/22-10 2023/2/21 23, +40,000
-      //until: 1677070000, // 2023/2/22 21-2023/2/22 18  +10,000
-      //until: 1677080000, // 2023/2/23 0- 2023/2/22 22  +10,000
-      //until: 1677150000, // 2023/2/23 19-2023/2/22 12  +20,000
-      //until: 1677170000, // 2023/2/24 1- 2023/2/23 17  +20,000
-      //until: 1677230000, // 2023/2/24 18-2023/2/24 14  +10,000
-      //until: 1677270000, // 2023/2/25 5- 2023/2/24 18  +40,000
-      //until: 1677320000, // 2023/2/25 19-2023/2/25 14, +20,000
-      //until: 1677360000, // 2023/2/26 6- 2023/2/25 18, +40,000
-      //until: 1677420000, // 2023/2/26 22-2023/2/26 20  +20,000
-      //until: 1677440000, // 2023/2/27 4- 2023/2/26 23  +20,000
-      //until: 1677500000, // 2023/2/27 21-2023/2/27 19  +10,000
-      //until: 1677520000, // 2023/2/28 2- 2023/2/27 23  +20,000
-      //until: 1677590000, // 2023/2/28 22-2023/2/28 15  +10,000
-      //until: 1677600000, // 2023/3/1 0-  2023/2/28 22, +10,000
-
-      //until: 1677700000, // 2023/3/2 4-  2023/3/2 1,  +100,000, limit 100
-      //until: 1677800000, // 2023/3/3 8-  2023/3/3 3,  +100,000 * 25
-      //until: 1677900000, // 2023/3/4 12- 2023/3/4 8,  +100,000
-      //until: 1678000000, // 2023/3/5 16- 2023/3/5 13, +100,000
-      //until: 1678100000, // 2023/3/6 19- 2023/3/6 18, +100,000
-      //until: 1678200000, // 2023/3/7 23- 2023/3/7 19, +100,000
-      //until: 1678300000, // 2023/3/9 3-  2023/3/8 15, +100,000
-      //until: 1678400000, // 2023/3/10 7- 2023/3/10 2, +100,000
-      //until: 1678500000, // 2023/3/11 10-2023/3/11 8, +100,000
-      //until: 1678600000, // 2023/3/12 14-2023/3/12 12,+100,000
-      //until: 1678700000, // 2023/3/13 18-2023/3/13 16,+100,000
-      //until: 1678800000, // 2023/3/14 22-2023/3/14 21,+100,000
-      //until: 1678860000, // 2023/3/15 14-2023/3/15 10,+100,000,broccoli
-      //until: 1678900000, // 2023/3/16 2- 2023/3/15 20,+100,000
-      //until: 1679000000, // 2023/3/17 5- 2023/3/17 1, +100,000
-      //until: 1679100000, // 2023/3/18 9- 2023/3/18 4, +100,000
-      //until: 1679200000, // 2023/3/19 13-2023/3/19 11,+100,000
-      //until: 1679300000, // 2023/3/20 17-2023/3/20 14,+100,000
-      //until: 1679400000, // 2023/3/21 20-2023/3/21 18,+100,000
-      //until: 1679500000, // 2023/3/23 0- 2023/3/22 21,+100,000
-      //until: 1679600000, // 2023/3/24 4- 2023/3/24 1, +100,000
-      //until: 1679700000, // 2023/3/25 8- 2023/3/25 1, +100,000
-      //until: 1679800000, // 2023/3/26 12-2023/3/25 12,+100,000
-      //until: 1679900000, // 2023/3/27 15-2023/3/27 14,+100,000
-      //until: 1680000000, // 2023/3/28 19-2023/3/28 17,+100,000 *26
-      //until: 1680050000, // 2023/3/29 9- 2023/3/29 6,  +50,000 *11
-      //until: 1680100000, // 2023/3/29 23-2023/3/29 22, +50,000 *13
-      //until: 1680150000, // 2023/3/30 13-2023/3/30 11, +50,000 *12
-      //until: 1680180000, // 2023/3/30 21-2023/3/30 20, +10,000 *2
-      //until: 1680190000, // 2023/3/31 0- 2023/3/30 23, +10,000 *2
-      //until: 1680270000, // 2023/3/31 22- 2023/3/31 20,  +10,000 *
-
-      //until: 1680300000, // 2023/4/1 6- 2023/4/1 2,  +30,000
-      //until: 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
-      //until: 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
-      
-      //until: 1684667029, // 2023/5/21 20:03 - 
 
     },
   });
@@ -176,7 +217,8 @@ const Test = () => {
       //authors: ["c186f6af371c63beb8935fef666f59d7c6941434e237434ec5576baa7254b142"],  // hyuki  67 followees
       //authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       //authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 800 followees
-      authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+      //authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
       //authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
       
       //since: 0,
@@ -195,7 +237,7 @@ const Test = () => {
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
       for(let i=0; i<event.tags.length; i++) {
-        /*if(event.tags[i] == undefined) {
+        /*if(event.tags[i] === undefined) {
 	  break;
 	}*/
         followList = followList + event.tags[i][1] + ",";
@@ -216,14 +258,21 @@ const Test = () => {
       follow = "";
       if(!followList.includes(note.pubkey)) {
         // following filter
-	follow = "follow]";
+	//follow = "follow]";
         return;
       }
 
-      if(note.pubkey == '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')
+      if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/)) {
+        // hiragara filter
+        //return;
+      }
+
+      if(note.pubkey === '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')
       {
         return;
       }
+
+      noteCount = noteCount + 1;
 
       if(minCreateDate > note.created_at) {
         minCreateDate = note.created_at;
@@ -239,10 +288,11 @@ const Test = () => {
       const imageURL2 = getImageURL(note.pubkey);  // avator
 
       //const noteUrl = "https://nostter.vercel.app/search?q=" + note.id
-      const noteUrl = "https://snort.social/e/" + note.id
+      //const noteUrl = "https://snort.social/e/" + note.id
+      const noteUrl = "https://iris.to/#/post/" + note.id
 
       /*let imageURL = Pictures.pictures.map((picture, index) => {
-        if(note.pubkey == picture.npub) {
+        if(note.pubkey === picture.npub) {
           return picture.pic;
         }
       });*/
@@ -264,37 +314,27 @@ const Test = () => {
       let motoHex = replyToHex1
       let repHex = "";
 
-      let linkUrl1 = "";
-      let linkUrlText1 = "";  // #r 1
-      let linkUrl2 = "";
-      let linkUrlText2 = "";  // #r 2
-      let linkUrl3 = "";
-      let linkUrlText3 = "";  // #r 3
-      let linkUrl4 = "";
-      let linkUrlText4 = "";  // #r 4
-      let linkUrl5 = "";
-      let linkUrlText5 = "";  // #r 5
       let eventLinkUrl1 = "";
       let eventLinkUrlText1 = "";  // #e 1
       let eventLinkUrl2 = "";
       let eventLinkUrlText2 = "";  // #e 2
 
       for(let h=0; h<note.tags.length; h++)  {
-        if(note.tags[h][0] == "p") {  // mention
+        if(note.tags[h][0] === "p") {  // mention
           reply = "To]";
 	  if(!note.tags[h][1].includes("npub")) {  // not hex
 	    //if(motoHex != nip19.npubEncode(note.tags[h][1])) {  // not self
-	    if(replyToImageSize1 == "0") {
+	    if(replyToImageSize1 === "0") {
               replyToImageSize1 = "40"
               replyToImageURL1 = getImageURL(note.tags[h][1]);  // to user id
-	      if(replyToImageURL1 == "") {
+	      if(replyToImageURL1 === "") {
                 replyToImageSize1 = "60"
 	      }
 		repHex = note.tags[h][1];
 	      replyToHex1 = nip19.npubEncode(note.tags[h][1]);
 	      replyToUrl1 = "https://nostter.vercel.app/" + replyToHex1
 	    }
-	    else if(replyToImageSize2 == "0") {
+	    else if(replyToImageSize2 === "0") {
 	      replyToHex2 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex2 != replyToHex1) {
                 replyToImageSize2 = "40"
@@ -302,7 +342,7 @@ const Test = () => {
 	        replyToUrl2 = "https://nostter.vercel.app/" + replyToHex2
 	      }
 	    }
-	    else if(replyToImageSize3 == "0") {
+	    else if(replyToImageSize3 === "0") {
 	      replyToHex3 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
                 replyToImageSize3 = "40"
@@ -313,39 +353,53 @@ const Test = () => {
 	    //}
 	  }
           for(let i=0; i<note.tags.length; i++) { 
-            if(note.tags[i][0] == "e") {  // re
+            if(note.tags[i][0] === "e") {  // re
               reply = "Re]";
             }
           }
         }
-	else if(note.tags[h][0] == "e") {
-	  if(reply == "" || reply == "#e]") {
+	else if(note.tags[h][0] === "e") {
+	  if(reply === "" || reply === "#e]") {
 	    reply = "#e]";
+	  }
+
+	  let root = "";
+	  if(note.tags[h][3] === "root") {
+	    root = "root ";
+	  }
+	  if(note.tags[h][3] === "reply") {
+	    root = "reply ";
 	  }
 
 	  //const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[h][1]
 	  const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
-	  if(eventLinkUrlText1 == "") {
-            eventLinkUrlText1  = "__#e(" + note.tags[h][1].substring(0,2) + ")";
+	  if(eventLinkUrlText1 === "") {
+            eventLinkUrlText1  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl1 = eventLinkUrl
 	  }
-	  else if(eventLinkUrlText2 == "") {
-            eventLinkUrlText2  = "__#e(" + note.tags[h][1].substring(0,2) + ")";
+	  else if(eventLinkUrlText2 === "") {
+            eventLinkUrlText2  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl2 = eventLinkUrl
 	  }
         }
       }
 
       let content = note.content;
-      if(note.kind == "6") {  // 6.repost
+
+      for(let i=0; i<50; i++) {
+        content = content.replace('<','&lt;');  // <
+      }
+
+      if(note.kind === 6) {  // 6.repost
         reply = "Repost]";
-        
-	let tmp = content.split('\",');  // ",
+
+	let tmp = content.split('",');  // ",
         for(let i=0; i<tmp.length; i++) {
-	  if(tmp[i].includes("\"content\"")) {
+	  if(tmp[i].includes('"content"')) {
 	    tmp = tmp[i].split(',');  // ,
+	    //tmp = tmp[i].split('],');  // ],
 	    for(let j=0; j<tmp.length; j++) {
-	      if(tmp[j].includes("\"content\"")) {
+	      if(tmp[j].includes('"content"')) {
 	        content = tmp[j];
 	      }
 	    }
@@ -358,19 +412,16 @@ const Test = () => {
 	      content = content.replace("\\/","/");
 	    }
 	    
-	    content = content.replace("\"content\":\"","");
-	    content = content.replace("content","");
+	    content = content.replace('"kind":1,','');
+            content = content.replace('"content":"','');
 	    content = content.replace("{","");
 	    content = content.replace("{","");
-
-            for(let j=0; j<11; j++) {
-	    //  content = content.replace("\\","");
-	    }
+	    content = content.replace("\"}","");
 	  }
 	}
 	for(let i=0; i<note.tags.length; i++) {
-	  if(content == "") {
-	    if(note.tags[i][0] == "e") {
+	  if(content === "") {
+	    if(note.tags[i][0] === "e") {
 	      //content = note.tags[i][1] + "," + content;  // to eventId
 	    }
 	  }
@@ -414,20 +465,21 @@ const Test = () => {
              tmp2[i].includes(".mp4") ||
              tmp2[i].includes(".mov") ||
              tmp2[i].includes("/img/") ||
+             tmp2[i].includes("/images?") ||
              tmp2[i].includes("grafana.gsn.im/") ){
-	    if(imageCount==0) {
+	    if(imageCount===0) {
               inlineImage1Height = "250";
 	      image1Url = tmp2[i];
 	    }
-	    else if(imageCount==1) {
+	    else if(imageCount===1) {
               inlineImage2Height = "250";
 	      image2Url = tmp2[i];
 	    }
-	    else if(imageCount==2) {
+	    else if(imageCount===2) {
               inlineImage3Height = "250";
 	      image3Url = tmp2[i];
 	    }
-	    else if(imageCount==3) {
+	    else if(imageCount===3) {
               inlineImage4Height = "250";
 	      image4Url = tmp2[i];
 	    }
@@ -437,65 +489,119 @@ const Test = () => {
         }
       }
 
-      // cpngirl  
-      if(content.includes("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl")) {
-        //content = content.replace("nostr:npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl","@ログボ(テスト運用中)");
-      }
-      // cpngirl  
-      const cpngirlnpub = "f34d34b94c1dd0bb552803761e00cc7d3851f7bc8b9f0bf49edc3637b450aefd"
-      for(let i=0; i<note.tags.length; i++)
-      {
-        if(content.includes("#[0]") && note.tags[i].includes(cpngirlnpub) ) 
-        {
-          //content = content.replace("#[0]","@ログボちゃん(テスト運用中)");
-        }
-      }
+
+      let linkUrl1 = "";
+      let linkUrlText1 = "";  // #r 1
+      let linkUrl2 = "";
+      let linkUrlText2 = "";  // #r 2
+      let linkUrl3 = "";
+      let linkUrlText3 = "";  // #r 3
+      let linkUrl4 = "";
+      let linkUrlText4 = "";  // #r 4
+      let linkUrl5 = "";
+      let linkUrlText5 = "";  // #r 5
 
       for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "r") {
+        if(note.tags[i][0] === "r") {
 	  if(note.tags[i][1].includes("http")) {
-	    if(linkUrl1 == "") {
+	    if(linkUrl1 === "") {
 	      linkUrl1 = note.tags[i][1];
 	      linkUrlText1 = "__#r";
+              if(!note.tags[i][1].includes("youtu")) {
+	        content = content.replace(linkUrl1,"[@1]");
+	      }
 	    }
-	    else if(linkUrl2 == "") {
+	    else if(linkUrl2 === "") {
 	      linkUrl2 = note.tags[i][1];
 	      linkUrlText2 = "__#r";
+              if(!note.tags[i][1].includes("youtu")) {
+	        content = content.replace(linkUrl2,"[@2]");
+	      }
 	    }
-	    else if(linkUrl3 == "") {
+	    else if(linkUrl3 === "") {
 	      linkUrl3 = note.tags[i][1];
 	      linkUrlText3 = "__#r";
 	    }
-	    else if(linkUrl4 == "") {
+	    else if(linkUrl4 === "") {
 	      linkUrl4 = note.tags[i][1];
 	      linkUrlText4 = "__#r";
 	    }
-	    else if(linkUrl5 == "") {
+	    else if(linkUrl5 === "") {
 	      linkUrl5 = note.tags[i][1];
 	      linkUrlText5 = "__#r";
 	    }
 	  }
         }
       }
+      for(let i=0; i<note.tags.length; i++) {
+        let tmpWord = "";
+	let tmpIframe = "";
+	let tmpUrl = "";
+	if(i === 0) {
+	  tmpWord = "[@1]";
+	  tmpUrl = linkUrl1;
+	}
+	else if(i === 1) {
+	  tmpWord = "[@2]";
+	  tmpUrl = linkUrl2;
+	}
 
-      for(let i=0; i<50; i++) {
+        if(tmpUrl != "") {
+	  /*if(tmpUrl.includes("youtube.com") || tmpUrl.includes("/youtu.be/")) {
+	  }*/
+	  if(tmpUrl.includes("open.spotify.com")) {
+	    const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
+	    tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+	  }
+	  else if(tmpUrl.includes("twitter.com")) {
+	    //content = content.replace(tmp2[i], "");
+	    const id = tmpUrl; 
+	    tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+	  }
+	  else {
+            tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:480px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+	  }
+	  content = content.replace(tmpWord, tmpIframe);
+	}
+      }
+
+
+
+      /*for(let i=0; i<50; i++) {
         content = content.replace('<a','&lt;a');  
+      }*/
+
+      let tagUrl = "";  // #t
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "t") {
+	  let tag = note.tags[i][1];
+	  if(tag === "nowplaying") { tag = "NowPlaying"; }
+	  tagUrl = "https://snort.social/t/" + tag;
+
+	  if(!content.includes("/#" + tag)) {
+	    content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
+	  }
+        }
       }
 
       // #[0], #[1] (#p)
       for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "p") {
+        if(note.tags[i][0] === "p") {
           const npub = nip19.npubEncode(note.tags[i][1])
 	  const toLinkUrl =  "https://nostter.vercel.app/" + npub
 	  content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
-          if(npub == "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
+          if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
             content = content.replace('#[' + i + ']',"@もちもち");
           }
-	  else if(npub == "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
+	  else if(npub === "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
             content = content.replace('#[' + i + ']',"@やぶみちゃん");
 	  }
-	  else if(npub == "npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t") {
+	  else if(npub === "npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t") {
             content = content.replace('#[' + i + ']',"@うにゅう");
+	  }
+	  else if(npub === "npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg") {
+            content = content.replace('#[' + i + ']',"@Yodogawa-Janken");
 	  }
         }
 	else {
@@ -505,9 +611,11 @@ const Test = () => {
   	}
       }
 
-      // (to), (quote)
+      // (to), (quote)  nostr:npub1, nostr:note1
       let quoteLinkUrl = "";
       let quoteLinkText = "";
+      let quoteLinkUrl2	 = "";
+      let quoteLinkText2 = "";
       let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       // nostr:note1, nostr:naddr1, nostr:nevent1
       if(content != undefined &&
@@ -520,44 +628,85 @@ const Test = () => {
 	  if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
 	    const toLinkUrl = 'https://nostter.vercel.app/' + wordsNostr[i].replace('nostr:','');
 	    content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
-	    if(wordsNostr[i].replace('nostr:','') == 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
+	    if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
 	      content = content.replace('(to)','@やぶみちゃん');
 	    }
-	    else if(wordsNostr[i].replace('nostr:','') == 'npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg') {
+	    else if(wordsNostr[i].replace('nostr:','') === 'npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg') {
 	      content = content.replace('(to)','@Yodogawa-Janken');
 	    }
-	    else if(wordsNostr[i].replace('nostr:','') == 'npub1ttqyyl8stz9wtj0sn25qp6vah0jdcxwpdtaaxg4efsqkczz7rsxshjpp3x') {
+	    else if(wordsNostr[i].replace('nostr:','') === 'npub1ttqyyl8stz9wtj0sn25qp6vah0jdcxwpdtaaxg4efsqkczz7rsxshjpp3x') {
 	      content = content.replace('(to)','@mahjong');
 	    }
 	   
-	    else if(wordsNostr[i].replace('nostr:','') == 'npub1f6rvmwc76arl7sxx2vparlzx8cg2ajc3xpymqh7yx97znccue2hs5mkavc') {
+	    else if(wordsNostr[i].replace('nostr:','') === 'npub1f6rvmwc76arl7sxx2vparlzx8cg2ajc3xpymqh7yx97znccue2hs5mkavc') {
 	      content = content.replace('(to)','@ぬるぽ・ｶﾞｯ');  //@nullpoga
 	    }
-            else if(wordsNostr[i].replace('nostr:','') == 'npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n') {
+            else if(wordsNostr[i].replace('nostr:','') === 'npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n') {
               content = content.replace('(to)',"@もちもち");
             }
-            else if(wordsNostr[i].replace('nostr:','') == 'npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t') {
+            else if(wordsNostr[i].replace('nostr:','') === 'npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t') {
               content = content.replace('(to)',"@うにゅう");
             }
-            else if(wordsNostr[i].replace('nostr:','') == 'npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl') {
+            else if(wordsNostr[i].replace('nostr:','') === 'npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl') {
               content = content.replace('(to)',"@ログボちゃん(休止中)");
+            }
+            else if(wordsNostr[i].replace('nostr:','') === 'npub1pp79ruvjd7xned8lgh6n4rhz4pg3els3x5n6kr58l8zcyysp5c0qrkan2p') {
+              content = content.replace('(to)',"@日本人ユーザー (bot))");
             }
 	  }
 	  else if(wordsNostr[i].includes("nostr:note1") || 
-	          wordsNostr[i].includes("nostr:nevent1")) { 
+	          wordsNostr[i].includes("nostr:nevent1")) {  
+	    if(quoteLinkText === "") {
+	      quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
+  	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote)</a>');
+              quoteLinkText = "";
+	      if(content.includes("nostr:nevent1")) {
+                quoteLinkText = quoteLinkText + wordsNostr[i];
+	      }
+	    }
+	    else if(quoteLinkText2 === "") {
+  	      content = content.replace(wordsNostr[i],' [2] ');
+	      quoteLinkUrl2 = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl2 = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
+  	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">(quote)</a>');
+              quoteLinkText2 = "";
+	      if(content.includes("nostr:nevent1")) {
+                quoteLinkText2 = quoteLinkText2 + wordsNostr[i];
+	      }
+	    }
+	  }
+	  else if(wordsNostr[i].includes("nostr:naddr1")) {
 	    content = content.replace(wordsNostr[i],'');
 	    quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
 	    quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-            quoteLinkText = "__(quote)";
-	    if(content.includes("nostr:nevent1")) {
-              quoteLinkText = quoteLinkText + wordsNostr[i];
-	    }
+	    quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
+	    //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
+            quoteLinkText = "__(nostr:naddr1)";
 	  }
 	}
       }
 
+      let quoteId1 = "";
+      let quoteUrl1 = ""
+      let quoteIdText1 = "";  // #q 1
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "q") {
+	  if(quoteId1 === "") {
+	    quoteId1 = note.tags[i][1];
+	    quoteUrl1 = "https://snort.social/e/" + quoteId1;
+	    quoteIdText1 = "__#q";
+	  }
+        }
+      }
+
+
       // Add <a href>
       let iframe = "";
+      let iframe2 = "";
+      let httpLinkUrl1 = "";
+      let httpLinkUrlText1 = "";  // # https://
       if(content.includes("https://")) {
         let tmp = content;
         for(let i=0; i<30; i++) {
@@ -569,15 +718,26 @@ const Test = () => {
           tmp = tmp.replace('\n',' ');
         }
         let tmp2 = tmp.split(' ');
+	let iframeCount = 0;
         for(let i=0; i<tmp2.length; i++) {
 	  if(!tmp2[i].includes("\"https://") && tmp2[i].includes("https://")) {  // not <a href="https://>
 	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("/youtu.be/")) {
 	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
-	      id = id.replace("https://m.youtube.com/shorts/", "");
-	      id = id.replace("https://www.youtube.com/live/", "");
-	      id = id.replace("?feature=share", "");
+	      id = id.replace("https://m.youtube.com/", "");
+	      id = id.replace("https://www.youtube.com/", "");
+	      id = id.replace("https://youtube.com/", "");
 	      id = id.replace("https://youtu.be/", "");
+	      id = id.replace("shorts/", "");
+	      id = id.replace("live/", "");
+	      id = id.replace("watch?v=", "");
+	      id = id.replace("&feature=youtu.be&ab_channel=TheSaltLakeTribune", "");
+	      id = id.replace("?feature=share", "");
+	      id = id.replace("&feature=youtu.be", "");
+	      id = id.replace("&pp=ygUSU2hpbmljaGkgb3Nhd2EgbGRr", "");
+	      id = id.replace("&feature=sharec", "");
 	      content = content.replace(tmp2[i], "");
+	      httpLinkUrl1 = tmp2[i];
+	      httpLinkUrlText1 = '__YouTube';
 	      iframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
 	    }
 	    else if(tmp2[i].includes("open.spotify.com")) {
@@ -585,20 +745,24 @@ const Test = () => {
 	      const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
 	      iframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	    }
+	    else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
+	      content = content.replace(tmp2[i], "");
+	      const id = tmp2[i]; 
+	      iframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+	      httpLinkUrl1 = tmp2[i];
+	      httpLinkUrlText1 = '__twitter';
+	    }
 	    //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
 	    else {
-	      content = content.replace(tmp2[i], "");
-	      //content = content.replace(tmp2[i],'<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
+	      iframeCount++;
 	      const url = tmp2[i];
-	      iframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:480px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>'
+	      if(tmp2[i] != 'https://nostr.build/profilepic.php') {
+	        const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:480px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+	        content = content.replace(tmp2[i], tmpIframe);
+		httpLinkUrl1 = tmp2[i];
+		httpLinkUrlText1 = '__https';
+	      }
 	    }
-	    /*else if(tmp2[i].includes("nico")) {
-	      nicovideoIframe = '<iframe width="560" height="315" src="http://embed.nicovideo.jp/watch/sm37010793"></iframe>'
-	    }*/
-	    /*else {
-	      content = content.replace(tmp2[i],'<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
-	      //content = content + 'aaa:' + tmp2[i] + ':bbb';
-	    }*/
 	  }
         }
       }
@@ -607,18 +771,18 @@ const Test = () => {
       let contentWarningText = "";
 
       for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "content-warning") {  // NIP-36
+        if(note.tags[i][0] === "content-warning") {  // NIP-36
 	  contentWarning = "[!!content-warning!!]";
 	  contentWarningText = note.tags[i][1];
         }
       }
       
-      for(let i=0; i<50; i++) {
-        content = content.replace('<i','&lt;i'); 
-      }
+      /*for(let i=0; i<50; i++) {
+        content = content.replace('<img','&lt;img'); 
+      }*/
 
       for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] == "emoji") {
+        if(note.tags[i][0] === "emoji") {
             const emojiURL = note.tags[i][2];
 	    for(let j=0; j<200; j++) {
               content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
@@ -626,8 +790,8 @@ const Test = () => {
         }
       }
 
-      for(let i=0; i<50; i++) {
-        //content = content.replace('<','&lt;');  // <
+      /*for(let i=0; i<50; i++) {
+//        content = content.replace('<','&lt;');  // <
 
         content = content.replace('<m','&lt;m'); 
         content = content.replace('</m','&lt;/m'); 
@@ -644,8 +808,14 @@ const Test = () => {
         content = content.replace('</h','&lt;/h');  
         content = content.replace('<t','&lt;t');   
         content = content.replace('</t','&lt;/t');  
+        content = content.replace('<i>','&lt;i>'); 
+        content = content.replace('</i>','&lt;/i>'); 
+        content = content.replace('<T','&lt;T'); 
+        content = content.replace('<Equal','&lt;Equal'); 
+        content = content.replace('<infer','&lt;infer'); 
+        content = content.replace('<Hello','&lt;Hello'); 
         //content = content.replace('<a','&lt;a');  
-      }
+      }*/
 
       for(let i=0; i<50; i++) {
         content = content.replace('\\n','<br />');  // repost content
@@ -664,7 +834,9 @@ const Test = () => {
                 {reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height="40" /></a> <a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height="40" /></a>  <a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height="40" /></a>
                 {parse(content)}
 		{parse(iframe)}
+		{parse(iframe2)}
 		<a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
+		<a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
 		<a href={eventLinkUrl1} target="_blank">{eventLinkUrlText1}</a>
 		<a href={eventLinkUrl2} target="_blank">{eventLinkUrlText2}</a>
 		<a href={linkUrl1} target="_blank">{linkUrlText1}</a>
@@ -672,6 +844,8 @@ const Test = () => {
 		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
 		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
 		<a href={linkUrl5} target="_blank">{linkUrlText5}</a>
+		<a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
+		<a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a>
                 <a href={image1Url} target="_blank"><img src={image1Url} height={inlineImage1Height} /></a>
                 <a href={image2Url} target="_blank"><img src={image2Url} height={inlineImage2Height} /></a>
                 <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
@@ -693,12 +867,210 @@ const Test = () => {
 
   const getImageURL = (pubkey) => {
       let image =''
-      if (pubkey == '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
+      if (pubkey === '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
       } // @@ 
-      else if (pubkey == '') {
+      else if (pubkey === '') {
         image = ''
+      } 
+      else if (pubkey === '3470ab670cf9872b8ef6d8931aa17223890758649251f2aaf2a6cbe3cc6f65d5') {
+        image = 'https://cdn.discordapp.com/attachments/1068206832763555981/1068207349178839052/1C1EA55A-5F44-4E5D-A66C-96D7DAD63BEA.gif'
+      } 
+      else if (pubkey === '649eefe468ddb107c05eba6d0511d2a5298540fe4d5f0072b00636008fc72f92') {
+        image = 'https://i.postimg.cc/y8whz8Rm/D6-BC5806-FFAA-42-D2-8-EC9-B46131-B3-F646.jpg'
+      } 
+      else if (pubkey === '0fe0b18b4dbf0e0aa40fcd47209b2a49b3431fc453b460efcf45ca0bd16bd6ac') {
+        image = 'https://plebstr.com/public-images/icon.png'
+      } 
+      else if (pubkey === 'f9758ee7b4e8d50026fabf48aa4bfe18906f35813b143999c098641cf43b1dca') {
+        image = 'https://void.cat/d/7Y52kW15uEc1t3CtHZpvwn.webp'
+      } 
+      else if (pubkey === '922945779f93fd0b3759f1157e3d9fa20f3fd24c4b8f2bcf520cacf649af776d') {
+        image = 'https://nostr.build/i/nostr.build_b665919cb7cf1eb9fe4e100e195f370a79dfd3f63f8e6818c0e9a6fd0a9f9916.png'
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey == '60f2f1621970ff56b45b5bf55687f55c4c506b8c574575d537b1212570292f8c') {
+        image = 'https://gyazo.com/6ac3ed27bd2644cb247938526646e41f.jpeg'
+      } 
+      else if (pubkey == '920cf771aa19a105a2fc5dcfee2d399003716defb66b5fc4e9e9a14f389cdd01') {
+        image = 'https://pbs.twimg.com/profile_images/1313116386684616704/H9OZ_R_M_400x400.jpg'
+      } 
+      else if (pubkey == 'd4843f4c280abba3d43d84ed7924b2567d7c166f5e72985b9f06d355601b5d78') {
+        image = 'https://i.ibb.co/5r42hP4/ezofoxprof.png'
+      } 
+      else if (pubkey == '8d6ca15a767168b3d8719520254ba15904914ba1afa898f6796a3774880fae66') {
+        image = 'https://i.gyazo.com/e45eec0b963b6afb55a94f2b67635fe6.jpg'
+      } 
+      else if (pubkey == '1ece480f8382ff8ea6ac2a3db337855b30f3d915bc3a86edf87f7ac7d21478fd') {
+        image = 'https://pbs.twimg.com/profile_images/1569665887917195270/Bg-tLupq_400x400.jpg'
+      } 
+      else if (pubkey == '7372dcf5b87b7309320b41fee8de33d84ba5641a81686dd9b848f681166bf004') {
+        image = 'https://pbs.twimg.com/profile_images/1589639605992595456/XPuI-vhw_400x400.jpg'
+      } 
+      else if (pubkey == '7055804e90d350f215e812ec1e032a545b4fed317c88285ec066b1223fd78cb7') {
+        image = 'https://nostr.build/i/nostr.build_5043e51406170b90180db925d5f62e9eef65f00b808448a9e222a710cb7349e0.jpg'
+      } 
+      else if (pubkey == '74677f48d0c97b7fba1812ee11b88d28a77db9cc293d971e5272a99ac149e9d4') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/708/333/original/69d85d0fc90b9fc4.jpeg'
+      } 
+      else if (pubkey == 'a424e5b94f62eb98be760ae37d185848a185624dd4346f704a3a3fea93852b73') {
+        image = 'https://mstdn.umiu.si/system/accounts/avatars/109/807/885/376/040/379/original/3fe196a87c45d087.png'
+      } 
+      else if (pubkey == '04918dfc36c93e7db6cc0d60f37e1522f1c36b64d3f4b424c532d7c595febbc5') {
+        image = 'https://thesimplekid.com/thesimplekid.png'
+      } 
+      else if (pubkey == '8a000bd141200f24a517a9879631b5f4d660a6465217c360e81c07869b3136be') {
+        image = 'https://i.postimg.cc/rws2pB6x/F88-D276-F-71-A3-4-D73-8-A08-4-EFA73-F6-CA67.jpg'
+      } 
+      else if (pubkey == 'da49adaeefdeb5ff1ac6a05a5dab217bd6083c1301c4cfae237a1cf443e2e67e') {
+        image = 'https://pbs.twimg.com/media/FoVzuSiagAAatKA?format=jpg&name=small'
+      } 
+      else if (pubkey == '1ee931021bfc8b078e40435c2718c0c29cc4ddb187b6de29caa68d1faf6f4253') {
+        image = 'https://pbs.twimg.com/profile_images/924437605298585600/_2DSz1zu_400x400.jpg'
+      } 
+      else if (pubkey == '9010ae34695a2f501f9f1806ba373ff90369072a13e39617c0d1f403aaf1d8e9') {
+        image = 'https://dogsorcaravan.com/wp-content/uploads/2015/12/DC-big-logo.jpg'
+      } 
+      else if (pubkey == '90c3aff4fce73c990ac713fd103f1b114c3cdb63702a6fc2d5af32b7412e8fd0') {
+        image = 'https://s3.fedibird.com/accounts/avatars/109/028/357/866/877/269/original/41be6aee0f0c435584c2903bb1e64196'
+      } 
+      else if (pubkey == '2264ec9e619d6f2cbef0eca1f87f522c745b84ff9dd7309a900a66329242c405') {
+        image = 'https://files-nightly.fedibird.com/accounts/avatars/000/000/001/original/0207e949bc2edaf6.png'
+      } 
+      else if (pubkey == '5f84a83e43ce1b9bc4bbcf83cc2aac5448625af68dc7b08f507c53716e7e6370') {
+        image = 'https://s3.arkjp.net/misskey/894ba996-b1a3-4572-9ffb-d820cf434f03.png'
+      } 
+      else if (pubkey == '42262698a8cc5198af270774d331acc79466c1a76a3de65851a7d5e0e03cdb4f') {
+        image = 'https://s3.arkjp.net/misskey/webpublic-fc165642-8910-4a8a-9171-9a7c3bd13374.jpg'
+      } 
+      else if (pubkey == '94e268f4aca4cc14613e1a6d50dab40882b9f08a31d7f6ba81604429b1bbba0e') {
+        image = 'https://www.shutterstock.com/image-photo/closeup-portrait-funny-ginger-cat-260nw-1563541219.jpg'
+      } 
+      else if (pubkey == '92f35ca35ddb1a4233c7c5d59e70e4412e039ed2775952734af7fd4b7bf6eb63') {
+        image = 'https://s3.fedibird.com/accounts/avatars/000/024/125/original/ad38c318a965e27f.png'
+      } 
+      else if (pubkey == '79e993f32fe62a9b2a34f9c77409d34c6710f7bf8d899b353da1fa5cd9e5d39b') {
+        image = 'https://nostr.build/i/nostr.build_d5704c023cbc27944dffe251892c20faf2a0e8d8309c5c8f850f873dfdbe03c2.png'
+      } 
+      else if (pubkey == '579ef4c0be8033f9bb86f7bb1c22b9439b504b7e0293e9623bb08f6fca952d73') {
+        image = 'https://pbs.twimg.com/profile_images/1439910470178127877/dxZo3sxq_400x400.jpg'
+      } 
+      else if (pubkey == '62adeceead563db21bba3462f76256717f37f7516ccf3efd35f4bd5d9d51c1aa') {
+        image = 'https://i.seadn.io/gcs/files/d1326bfe6cc8e31b3b97e61c14ba100f.png?auto=format&w=1000'
+      } 
+      else if (pubkey == 'a75a91b6f29a3aa8ebb0321534b154d0c2ad1adba9df05f22e097037e0899d9f') {
+        image = 'https://www.gravatar.com/avatar/446952dec62544bbade3a281d6f6c550'
+      } 
+      else if (pubkey == 'f29bc6ada333f7b09afeabc521ef15266dc73df13a6266c19e0dbd2304b86ccf') {
+        image = 'https://pbs.twimg.com/profile_images/1146712249207160833/8AdAZi2q_400x400.png'
+      } 
+      else if (pubkey == 'fcaa58b4b233d811af3b9d76358f868e51d96d08aa5a89c132b827e7f7b836f7') {
+        image = 'https://pbs.twimg.com/profile_images/1111968075/____400x400.jpg'
+      } 
+      else if (pubkey == 'b03750fe62acb4d8f63b4f5e3b22ef85ebbe70ae7c29f9c8dc37b3e7a20c8228') {
+        image = 'https://i.seadn.io/gcs/files/e03f604ffca4291e809c174e05d7293b.png?auto=format&w=1000'
+      } 
+      else if (pubkey == '6d38a4cd613b36a611196c933b5fe1e9e313a58cf990c8353828e30f6c357771') {
+        image = 'https://i.seadn.io/gcs/files/0a103546533d5ecd5c26c92432de805b.gif?auto=format&w=1000'
+      } 
+      else if (pubkey == '9e4df482682fa1170d36f6cc901234ce1fe4576d7e8c9dd444893312111993a7') {
+        image = 'https://i.seadn.io/gae/0eblfojoKrnMgcUmWVrNb2uNqq7xCSUcL-5JEMWwPmfmZHO_FHLYEdrSnfIP_JEvzrSHqTmjdJXNChn4LUfVLCHySFEC_9sPaagcfg?auto=format&w=1000'
+      } 
+      else if (pubkey == 'b463e122350c4a6c97ed8962941167ac04f2964d64e08d982a8c3cf841e16bc3') {
+        image = 'https://pbs.twimg.com/profile_images/1614631558673240064/Tz2PaRli_400x400.jpg'
+      } 
+      else if (pubkey == 'b3f66b8825198636d87a4dda0b2f28db7d6799632ebee8ee2fd0d96090055ff5') {
+        image = 'https://pbs.twimg.com/profile_images/1424458182139662337/fc-M1ZkO_400x400.jpg'
+      } 
+      else if (pubkey == 'e7b0a99732858932238a19f7cf5d219346095dfc20209f92b894e90eab72b1b0') {
+        image = 'https://s3.fedibird.com/accounts/avatars/000/024/677/original/ae6ecc22c10c430a.jpeg'
+      } 
+      else if (pubkey == '2aef205e438b0bb4658d81c1838f5ecd039e1a70a73fc83f31fbee3d73e93a2e') {
+        image = 'https://yuki2021.sakura.ne.jp/illustration/my_image.jpg'
+      } 
+      else if (pubkey == 'ba027876b6ce5ddb3884ee49816b200baf00229747dbc0ff1bf8bde7136901ef') {
+        image = 'https://pbs.twimg.com/profile_images/563074436/negi_20091007_100x100_400x400.jpg'
+      } 
+      else if (pubkey == '7e4529fd3fe972e9ecafb0e1c523f42966d3328d1bf8bbd9c4e74d4665bbb0e3') {
+        image = 'https://nostr.build/i/efba3bb89dd76bab69108b19e674e7b537a069e4bd8083e9df7f239e407e397c.jpg'
+      } 
+      else if (pubkey == '73159c0679ec46615a48bd7893f49a5622c4416449b9026a43f96eae811c8400') {
+        image = 'https://pbs.twimg.com/profile_images/1591958306892947456/N-my18Fz_400x400.jpg'
+      } 
+      else if (pubkey == 'e22d11f61356c8f7c156b6c46de724765b54819e0de1f508aef0e9366ba94c46') {
+        image = 'https://i.imgur.com/jjHhD0d.jpg'
+      } 
+      else if (pubkey == 'd5c68ca0ac10b7497a7217ea5b9512c95eaa9d30bc2216f9b11bfdaccd8c8062') {
+        image = 'https://pbs.twimg.com/media/FpZ43QBaYAAUDZI?format=png&name=900x900'
+      } 
+      else if (pubkey == 'dea94f563ad8e0ada8acccdeb802cf350a77c9bc515ffd22c12a68c428a75357') {
+        image = 'https://avatars.githubusercontent.com/u/47011'
+      } 
+      else if (pubkey == 'b469d92fa9421fc34e6b91ce5e506e2a0e9f682529c203f177e39fd837b06d8f') {
+        image = 'https://void.cat/d/D5TXKUYMojgL2BPMBQDkPP.webp'
+      } 
+      else if (pubkey == '0b4f5ece165aa63a1b86736763425212da4ef55db83c1c4b809750fc094bf587') {
+        image = 'https://b.toenobu.name/images/avatar.jpg'
+      } 
+      else if (pubkey == 'cb634f6955d8bafbb14eb9df4329fbbb9deeba4313c0d3296b79ec0c706a78c8') {
+        image = 'https://pbs.twimg.com/profile_images/1234622374/mysh-03_400x400.png'
+      } 
+      else if (pubkey == '281a8fe1e44c2a7b47071dfe41d733dbdf32a43b85cc3ff6489c45e75cec719d') {
+        image = 'https://nostr.build/i/b96eb64f7e6431019246aca3f494429ebca94bec2f5ae918bcfd099f13c863c7.jpg'
+      } 
+      else if (pubkey == 'd30be7f2e66fdcfcb8fb6fedb7564ae898bec73cc65a319df68bed943b173c51') {
+        image = 'https://nostr.build/i/896faa3feebea9a433bbf474be203c1167dce5a6474b1907d014577a8b10df69.jpg'
+      } 
+      else if (pubkey == '86fd1c80c07debbc3d1929377b24d4bf65a85af268af15cda2acce454df670be') {
+        image = 'https://nostr.build/i/4388eca83f6cad96d0233c80eb2b0b3b39661dbbb8b6b2eba22e64f3642b2193.jpg'
+      } 
+      else if (pubkey == '563d9167de4d1e22a543c267c9d4822c7be682b187321bb9538a1558df342273') {
+        image = 'https://nostr.build/i/0c56b00467291354e477521f49008f5eebd881a337f20e951d98de3e973690e9.jpg'
+      } 
+      else if (pubkey == '361b1e0ab197450bf40b23f21be626bcc03e27dc2ece8931d45963250f613c2d') {
+        image = 'https://nostr.build/i/770f77cb29a047e17c72e2de09850caf6d6cb29ec69ab5f27e3a3c736c61dbe8.jpg'
+      } 
+      else if (pubkey == 'f0019b0732a2b1a70360fb8f5ddb7f40544f8b46b0c928e300b519f6d53ec7c9') {
+        image = 'https://nostr.build/i/93cd86ecfce2b125d3972dba08ead576af543f2531fb8fc025d175d0f9248fe1.jpg'
+      } 
+      else if (pubkey == '008a02699ed2ed6860d1c8c43337f242757e2f9978201876002f6aed1fe9f1fb') {
+        image = 'https://pbs.twimg.com/profile_images/1066259404117336065/LAAOEc7r_400x400.jpg'
+      } 
+      else if (pubkey == '49d7bd46dff2745598e5905e4a8fa6d91fa1d51ac90b1040b27e705a073d8eef') {
+        image = 'https://void.cat/d/8ziduWLqgGqgNV974m6EmQ.webp'
+      } 
+      else if (pubkey == 'b777988fbf6bd3f66a49476304dbe7d4d9739f17574225c234866d50c991d231') {
+        image = 'https://void.cat/d/MbHwT1JRM5dAxeDLtMVrmt.webp'
+      } 
+      else if (pubkey == '40a537a917d455a24c4b0c20ea496e81e9bbc807efb0faf76ee30ff32904fbd1') {
+        image = 'https://kyohsuke.github.io/avatar.jpg'
+      } 
+      else if (pubkey == 'aa3533aab5b7e810ec34d14ea8ab5b3296b41d10540b51a3f205de43ad9a5ce6') {
+        image = 'https://nostr.build/i/75bbc5aae5230638324d240db7f05508e646756f229c9f057787e0864ff06f07.jpg'
+      } 
+      else if (pubkey == '9aafb87aa08dd401746db925853dd3094287cfb58bc9ffe4eca18083d8db3d45') {
+        image = 'https://nostr.build/i/359b7f3625e6fb0f5c45e9acf7ea3b2a17aa15180394e51d40b045d07ee16d29.jpg'
+      } 
+      else if (pubkey == '32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24') {
+        image = 'https://s3.arkjp.net/misskey/e44afb80-e469-4ca2-bfd0-ddb8555e6a26.png'
+      } 
+      else if (pubkey == '9a71448d5b9855c83dc8bea7237a3f16654d6964779b04c1d6b530f1e26286ad') {
+        image = 'https://pbs.twimg.com/profile_images/1470320939757760513/kw-NKoMo.jpg'
+      } 
+      else if (pubkey == 'b742e3f15af9894cee58a4868fecb63d129d42a518b5cad46fcbdb68ba4659a7') {
+        image = 'https://void.cat/d/3DGn18BLAaXdDngkshc2M4.webp'
+      } 
+      else if (pubkey == '0d286497db795f7ac3ae19db21678a4fd6d2af8e4919cb383818da9bab646d48') {
+        image = 'https://i.imgur.com/rI8GAyb.jpeg'
+      } 
+      else if (pubkey == 'a7fa4b91d1913a262d1c0b19991b80104d471e139f42464138fb900ddc495cb0') {
+        image = 'https://nostr.build/i/nostr.build_07bc1a227d552bc678be585dfd42560083b71b5fc4b5927ed9ed7209072612fe.jpeg'
       } 
       else if (pubkey == '0521db9531096dff700dcf410b01db47ab6598de7e5ef2c5a2bd7e1160315bf6') {
         image = 'https://void.cat/d/WGjF8DTAq1EY8LDUb8pKUM.webp'
@@ -1318,6 +1690,7 @@ const Test = () => {
       } 
       else if (pubkey == 'd7c6d014b342815ba29c48f3449e4f0073df84f4ad580ae173538041a6abb6b8') {
         image = 'https://pbs.twimg.com/profile_images/1617532509021143040/1t-ifMmV_400x400.jpg'
+	image = 'https://pbs.twimg.com/profile_images/1666651014231908354/m3iI1oJH_400x400.png'
       } 
       else if (pubkey == '6e196b6f500d650e9dee07c404b8c1675bac55a07e1ee9335c14dd3453387bb9') {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDk5LDM4LDEpOyBzdHJva2U6cmdiYSgyMTcsOTksMzgsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
@@ -3839,6 +4212,7 @@ const Test = () => {
       }
       else if (pubkey == '0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a') {
         image = 'https://drive.google.com/uc?id=1E3JrJ2MSGBK_7YfIR-gF8XJMqV2FVAsN&export=download'
+	image = ''
       }
       else if (pubkey == '2a825cda6197a195929c5e62442bc5293cafb50132659a485a69804db9d0545e') {
         image = 'https://innocent40life.site/wp-content/uploads/2022/08/screenshot-opensea.io-2022.11.22-19_24_29.png'
@@ -4399,7 +4773,8 @@ const Test = () => {
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
-	{minCreateDate}
+	<ul>{noteCount}</ul>
+	End
       </div>
     </>
   );
