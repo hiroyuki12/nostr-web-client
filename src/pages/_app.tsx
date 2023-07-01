@@ -5,31 +5,35 @@ import { NostrProvider } from "nostr-react";
 const relayUrls = [
 
 
-  "wss://relay-jp.nostr.wirednet.jp",  //jp, Will
-      "wss://nostr-relay.nokotaro.com",  //jp en, jack, aogi, awoi, syui, fiatjaf, karnage, nostr commits, kame3, verbiricha, Nostrchan2, news
-      "wss://relay.damus.io",  //en jp, awoi, syui, Will, iefan, fiatjaf, karnage, news, niwaken, verbiricha
-      "wss://yabu.me",  //en, jp, jack, awoi, takeshi, syui, yutaro, verbiricha, kimymt
-      "wss://nostr.fediverse.jp",  //jp, awoi, syui, takeshi, snowden
-      "wss://universe.nostrich.land?lang=ja",  //jp
-      "wss://relay.nostr.band", //en jp, nachika, news, kaichiro, cpngirl
+  "wss://relay-jp.nostr.wirednet.jp",   //jp 
+      "wss://yabu.me",                  //en, jp, (wirednet,heguro,h3z,holybea,ocha,fediverce)
+      "wss://nostr.wine",               //jp en, Vitor, Terry
+      "wss://relay.mostr.pub",          // nachika
+      "wss://nos.lol",                  //en, jp  Nelly
 
-      //"wss://nostr.h3z.jp",  //en, jp + jack
-      //"wss://nostr-paid.h3z.jp",  //jp, yutaro
-      //"wss://nos.lol",  //en, jp,  news
+      //
+  /*"wss://relay.damus.io",           //en, jp  Nelly
+  "wss://eden.nostr.land",
+  "wss://nostr.fmt.wiz.biz",
+  "wss://nos.lol",                  //en, jp,
+  "wss://relay.snort.social",*/
+      /*"wss://relay.nostr.band",         //en, jp nachika
+      "wss://nostr.holybea.com",        //jp
+      "wss://nostr.fediverse.jp",       //jp 
+      "wss://nostr-relay.nokotaro.com", //jp, en 
+      "wss://nostr.h3z.jp",             //en, jp 
+      "wss://nostr-paid.h3z.jp",*/        //jp,
       
-      //"wss://nostr.wine",  //jp en, Vitor, fiatjaf, Terry
-      //"wss://nostr.holybea.com",  //jp
 
 
-  //"wss://nostrja-kari.heguro.com",  //jp
- 
-  //"wss://relay.nostrich.land",  //jp en
-  //"wss://relay.nostrica.com",  //en
-  //"wss://welcome.nostr.wine",  //en jp
-  //"wss://nostr.h3y6e.com",
-  //"wss://monad.jb55.com:8080",
-  //"wss://eden.nostr.land",
-  //"wss://relay.snort.social",
+
+  /*"wss://nostrja-kari.heguro.com",  //jp
+  "wss://relay.nostrich.land",  //jp en
+  "wss://relay.nostrica.com",   //en
+  "wss://welcome.nostr.wine",   //en jp
+  "wss://nostr.h3y6e.com",
+  "wss://monad.jb55.com:8080",
+  "wss://relay.mostr.pub",*/
 
 ];
 
