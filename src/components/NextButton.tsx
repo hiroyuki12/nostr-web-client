@@ -12,7 +12,7 @@ const NextButton = () => {
   const { publish } = useNostr();
 
   const onPost = async () => {
-    alert("no private key provided");
+    alert("Next Button Pushed");
     return;
   };
 
