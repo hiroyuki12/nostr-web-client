@@ -14,12 +14,21 @@ const Test = () => {
   let noteCount = 0;
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1693067220;  //paging
+//  untilValue = 1693795903;  //paging
 
+//  untilValue = 1693796212;  // #e(reply NG
+//  untilValue = 1693566199;  // generic repost channel message
+//  untilValue = 1693404923;  // follow channel
+//  untilValue = 1693396126;  // live event
+//  untilValue = 1693300143;  // channel creation
+//  untilValue = 1693298519;  // channel meta data, kind:41
+//  untilValue = 1693236193;  // contact list
+//  untilValue = 1693232264;  // youtube
+//  untilValue = 1693144021;  // repost
 //  untilValue = 1693039002;  // bookmark kind:30001
 //  untilValue = 1692986736;  // mute kind:10000,30000
 //  untilValue = 1692963302;  // svelte GitHub Pages
-//  untilValue = 1692951220;  // User Status Music Spofify Link, kind:30015
+//  untilValue = 1692951220;  // User Statuses Music Spofify Link, kind:30015
 //  untilValue = 1692922942;  // nak install
 //  untilValue = 1692921442;  // OGP
 //  untilValue = 1692694772;  // nostr:note1 (quote)
@@ -241,15 +250,35 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [1,4,6,42,1311,10000,30001,30023,30315],  // 1:post, 4:DM, 6:repost, 7:reaction, 42:channel message(GARNET), 10000,30000:mute, 1311:live chat, 30001:bookmark, 30023:Long-form Content, 30315:Statuses
-      //kinds: [9735],  // 9735:zap
-      //kinds: [9734],  // 9734:zap
-      //kinds: [10000,30000],  // 10000,30000:mute
-//      kinds: [10001],  // 10001:pin
-//     kinds: [30001],  // 30001:bookmark
+//      kinds: [0,1,3,4,6,40,41,42,1311,9734,9735,10000,10001,10002,30000,30001,30023,30315,30023,30078,30311,30315,31922],  // 1:post, 4:DM, 6:repost, 7:reaction, 42:channel message(GARNET), 10000,30000:mute, 1311:live chat, 30001:bookmark, 30023:Long-form Content, 30315:Statuses
+//      kinds: [0],      // 0:Metadata
+//      kinds: [1],      // 1:Short Text Note
+//      kinds: [3],      // 3:Contacts (follow)
+//      kinds: [4],      // 4:Encryped Direct Message(DM)
+//      kinds: [5],      // 5:Event Deletion
+//      kinds: [6],      // 6:Repost
+//      kinds: [7],      // 7:Reaction
+//      kinds: [8],      // 8:Badge Award
+//      kinds: [16],     // 16:Generic Repost
+//      kinds: [40],     // 40:Channel Creation
+//      kinds: [41],     // 41:Channel Metadata
+//      kinds: [42],     // 42:Channel Message
+//      kinds: [44],     // 44:Channel Mute User
+//      kinds: [1311],   // 1311:Live Chat Message
+//      kinds: [1984],   // 1984:Reporting
+//      kinds: [9734],   // 9734:Zap Request
+//      kinds: [9735],   // 9735:Zap
+//      kinds: [10000],  // 10000:Mute List
+//      kinds: [10001],  // 10001:Pin List
+//      kinds: [10002],  // 10002:Realy List Metadata(
+//      kinds: [30000],  // 30000:Categorized People List(mute)
+//      kinds: [30001],  // 30001:Categorized Bookmark List
+//      kinds: [30023],  // 30023:Long-form Content
       //kinds: [30315],  // 30315:User Statuses
       //kinds: [30023],  // 30023:Long-form Content
-      //kinds: [30078],  // 30078:key-value storage
+      //kinds: [30078],  // 30078:Application-specific Data(key-value storage)
+//      kinds: [30311],  // 30311:Live Event
+//      kinds: [30315],  // 30315:User Statuses
       //kinds: [31922],  // 31922:calender
 //      since: sinceValue,
       //since: dateToUnix(now.current), // all new events from now
@@ -364,6 +393,10 @@ const Test = () => {
         return;
       }
 
+      if(note.kind === 7) {  // 7:reaction
+        return;
+      }
+
       if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/)) {
         // hiragara filter
 	//follow = "[[en]]";
@@ -397,6 +430,7 @@ const Test = () => {
       //const noteUrl = "https://iris.to/#/post/" + note.id
       const noteUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.id)
       const noteIdShort = note.id.substring(0,2)
+      const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
 
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
 
@@ -430,12 +464,13 @@ const Test = () => {
       let motoHex = replyToHex1
       let repHex = "";
 
-      let garnetUrl = "";
+      let channelUrl = "";
       let client = "";
       let title = "";
       let proxy = "";
       let eventLinkUrl1 = "";
       let eventLinkUrlText1 = "";  // #e 1
+      let event1Id = "";
       let eventLinkUrl2 = "";
       let eventLinkUrlText2 = "";  // #e 2
       let event2Id = "";
@@ -448,6 +483,8 @@ const Test = () => {
       let eventLinkUrl6 = "";
       let eventLinkUrlText6 = "";  // #e 6
       let eventCount = 0;
+      let streaming = "";
+      let streamingUrl = "";
 
       for(let h=0; h<note.tags.length; h++)  {
         if(note.tags[h][0] === "p") {  // mention
@@ -527,81 +564,97 @@ const Test = () => {
             }
           }
         }
-	else if(note.tags[h][0] === "e") {
+	else if(note.tags[h][0] === "e") {  // NIP-10
 	  eventCount = eventCount + 1;
 	  if(reply === "" || reply === "#e]") {
-	    reply = "Re]";
+	    //reply = "Re]";
+	    if(note.kind != 5) {
+	      reply = "Mention]";
+	    }
 	    //reply = "";
 	  }
 
-	  let root = "";
-	  if(note.tags[h][3] === "root") {
-	    root = "root ";
-	  }
-	  if(note.tags[h][3] === "reply") {
-	    root = "reply ";
+	  let marker = "";
+	  if(note.tags[h][3] != undefined) {
+	    marker = note.tags[h][3] + " "
 	  }
 
-          garnetUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
+          if(channelUrl == "" || note.tags[h][3] === "root") {
+            //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
+            channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1]
+	  }
 	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[h][1])
 	  const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
 	  if(eventLinkUrlText1 === "") {
-            eventLinkUrlText1  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";  // event id
+	    if(marker === "" && note.kind != 6) {  // 6:repost
+	      //marker = "root ";
+	      marker = "reply ";
+	    }
+	    event1Id = note.tags[h][1].substring(0,2);
+            eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
 	    eventLinkUrl1 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText2 === "") {
-	    if(root === "") {
-	      root = "reply ";
+	    if(marker === "") {
+	      marker = "reply ";
+              eventLinkUrlText1  = "__#e(root " + event1Id + ")";
 	    }
-            eventLinkUrlText2  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
 	    event2Id = note.tags[h][1].substring(0,2);
+            eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
 	    eventLinkUrl2 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText3 === "") {
-            eventLinkUrlText3  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
+            eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl3 = eventLinkUrl
-	    if(root === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
+	    if(marker === "reply ") {
+              eventLinkUrlText2  = "__#e(mention " + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText4 === "") {
-            eventLinkUrlText4  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
+            eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl4 = eventLinkUrl
-	    if(root === "reply ") {
+	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText5 === "") {
-            eventLinkUrlText5  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
+            eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl5 = eventLinkUrl
-	    if(root === "reply ") {
+	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText6 === "") {
-          //  eventLinkUrlText6  = "__#e(" + root + note.tags[h][1].substring(0,2) + ")";
+          //  eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl6 = eventLinkUrl
-	    if(root === "reply ") {
+	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
-              eventLinkUrlText6  = "__#e(" + root + note.tags[h][1].substring(0,2) + ") ";
+              eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
 	      eventLinkUrlText6 += String(eventCount) + "replies";
             }
 	  }
         }
 	else if(note.tags[h][0] === "a") {  // live chat message. kind:1311
-//	  garnetUrl = "https://zap.stream";
-	  garnetUrl = "https://zap.stream/naddr1qq9rzd3c8qcrwvejxqusygpjuxp8vd29p6ancknaztql3eajk52y8xkppfn7au7elkw9c68zg5psgqqqwensgqahaf";
+//	  channelUrl = "https://zap.stream";
+	  channelUrl = "https://zap.stream/naddr1qq9rzd3c8qcrwvejxqusygpjuxp8vd29p6ancknaztql3eajk52y8xkppfn7au7elkw9c68zg5psgqqqwensgqahaf";
 	}
 	else if(note.tags[h][0] === "client") {  // client gossip 
-	  client = "__" + note.tags[h][1]
+	  client = "__" + note.tags[h][1] + "__"
 	}
 	else if(note.tags[h][0] === "title") {  // title 
 	  title = "[" + note.tags[h][1] + "]__"
 	}
 	else if(note.tags[h][0] === "proxy") {  // proxy 
-	  proxy = "__" + note.tags[h][2]
+	  proxy = "__" + note.tags[h][2] + "__"
+	}
+	else if(note.tags[h][0] === "streaming") {  //  streaming
+	  streaming = "-streaming"
+	  streamingUrl = note.tags[h][1]
+	}
+	else if(note.tags[h][0] === "ends") {  // ends 
+	  title = title + "ends"
 	}
       }
 
@@ -615,14 +668,17 @@ const Test = () => {
       let channel = ""
 
       if(note.kind === 42) {  // 42.channel message
-        channel = "(GARNET)-";   // garnetUrl
+        channel = "(Channel Message)-";   // channelUrl
       }
       if(note.kind === 1311) {  // 1311.live chat
-        channel = "(LIVE)-";   // garnetUrl
+        channel = "(LIVE)-";   // channelUrl
       }
 
-      if(note.kind === 6) {  // 6.repost
+      if(note.kind === 6 || note.kind === 16) {  // 6.repost, 16.Generic Repost
         reply = "Repost]";
+	if(note.kind === 16) {
+	  reply = "Generic Repost]"
+	}
 
         if(content === "") {
 	  content = "[empty]";
@@ -691,6 +747,8 @@ const Test = () => {
           tmp = tmp.replace('）',' ');
           tmp = tmp.replace('く',' ');
           tmp = tmp.replace('ぃ',' ');
+	  tmp = tmp.replace('\\',' ');
+	  tmp = tmp.replace('"',' ');
           tmp = tmp.replace(':https://',' https://');
           tmp = tmp.replace('https://',' https://');
           tmp = tmp.replace('https://',' https://');
@@ -699,6 +757,7 @@ const Test = () => {
           tmp = tmp.replace('\n',' ');
         }
         let tmp2 = tmp.split(' ');
+//        let tmp2 = tmp.split('"');
 
         let imageCount = 0;
         for(let i=0; i<tmp2.length; i++) {
@@ -1133,32 +1192,118 @@ const Test = () => {
 
       let status = "";
       let mute = "";
-      if(note.kind === 30315) {  // 30315:User Status
+      let bookmark = "";
+      let bookmarkUrl= "";
+      if(note.kind === 30315) {  // 30315:User Statuses
         status = "[status]"
 	if(note.tags[0][1].includes("music")) {
           status = "[status music]"
 	  content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
 	}
       }
-      if(note.kind === 10000 || note.kind === 30000) {  // 10000,30000:mute
-        status = "[mute]_"
+      else if(note.kind === 0) {  // 0:Metadata
+        status = "[Metadata]_"
       }
-      if(note.kind === 30001) {  // 30001:bookmark
-        status = "[bookmark " + note.tags[0][1] + "]_"
+      else if(note.kind === 3) {  // 3:Contacts
+        let followCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  followCount++
+	}
+        status = "[kind3 follow, save relay (snort/damus/coracle/NostrFlu " + followCount + "]_"
+	if(content != "") {
+	  content = 'relay list...'
+	}
+	else {
+	  content = '[empty]'
+	}
       }
+      else if(note.kind === 4) {  // 4:Encrypted Direct Message
+        status = "[DM]_"
+	content = ' Direct Message. This message is not for you.'
+      }
+      else if(note.kind === 5) {  // 5:Event Deletion
+        status = "[delete]"
+      }
+      else if(note.kind === 40) {  // 40:Channel Creation
+        status = "[Channel Creation]_"
+      }
+      else if(note.kind === 41) {  // 41:Channel Metadata
+        status = "[Channel Metadata]_"
+      }
+      else if(note.kind === 1984) {  // 1984:Reporting
+        status = "[Reporting " + note.tags[0][2] + "]_"
+      }
+      else if(note.kind === 9734) {  // 9734:Zap Request
+        status = "[Zap Request]_"
+      }
+      else if(note.kind === 10000) {  // 10000:Mute List, snort
+        let muteCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  muteCount++
+	}
+        status = "[mute list (snort) " + muteCount + "]_"
+      }
+      else if(note.kind === 10002) {  // 10002:Relay List Metadata, nostter
+        let relayCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  relayCount++
+	}
+        status = "[kind10002 save relay by nostter/coracle/snort " + relayCount + "]_"
+      }
+      else if(note.kind === 30000) {  // 30000:Categorized People List
+        if(note.tags[0][1] === "mute") {
+          let muteCount = 0
+	  for(let x=0; x<note.tags.length; x++) {
+	    muteCount++
+	  }
+          status = "[mute/unmute (damus/snort) " + muteCount + "]_"
+	}
+        else if(note.tags[0][1] === "notifications/lastOpened") {
+          status = "[notifications/lastOpened]_"
+	}
+	else {
+	  status = "[Categorized People List]_"
 
+	}
+      }
+      else if(note.kind === 30001) {  // 30001:Categorized Bookmark List
+        let bookmarkCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  bookmarkCount++
+	}
+        status = "[bookmark " + note.tags[0][1] + " " + bookmarkCount + "]_" 
+	content = " bookmark list."
+      }
+      else if(note.kind === 30002) {  // 30002:(snort tag follow)
+        status = "[tag follow(snort)]_"
+      }
+      else if(note.kind === 30078) {  // 30078:Application-specific Data
+        status = "[Application-specific Data]_"
+      }
+      else if(note.kind === 30311) {  // 30311:Live Event
+        status = "[Live Event]_"
+//	content = content + "[empty]_"
+      }
+      
+      bookmark = "-bookmark"
+      //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
+      bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
+
+      let nozokimado = "-nozokimado"
+      let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+      
       const note1 = nip19.noteEncode(note.id);
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
-                <a href={garnetUrl} target="_blank">{channel}</a>
+                <a href={channelUrl} target="_blank">{channel}</a>
 	        {contentWarning}{contentWarningText}{contentWarning}
                 {status}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
 		<a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height={replyToImageSize2} /></a>
 		<a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height={replyToImageSize3} /></a>
-		<a href={replyToUrl4} target="_blank"><img src={replyToImageURL4} width={replyToImageSize4} height={replyToUrl4} /></a>
+		<a href={replyToUrl4} target="_blank"><img src={replyToImageURL4} width={replyToImageSize4} height={replyToImageSize4} /></a>
 		<a href={replyToUrl5} target="_blank"><img src={replyToImageURL5} width={replyToImageSize5} height={replyToImageSize5} /></a>
                 {parse(content)}
 	        {follow}
@@ -1186,9 +1331,13 @@ const Test = () => {
                 <a href={image5Url} target="_blank"><img src={image5Url} height={inlineImage5Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-                ({noteIdShort}){client}{proxy}<font color="black">{repHex}-{note.pubkey}</font>
+                ({noteIdShort}){client}{proxy}<font color="black">{repHex}-{note.pubkey}-{npub}</font>
+		<a href={freefromUrl} target="_blank">-FreeFrom</a>
+		<a href={checkerUrl} target="_blank">-postChecker</a>
 		<a href={nostrnpub} target="_blank">-npub</a>
-		<a href={freefromUrl} target="_blank">-From</a>
+		<a href={bookmarkUrl} target="_blank">{bookmark}</a>
+		<a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
+		<a href={streamingUrl} target="_blank">{streaming}</a>
             </div>
           </div>
         </li>
@@ -1209,6 +1358,96 @@ const Test = () => {
       } // @@ 
       else if (pubkey === '') {
         image = ''
+      } 
+      else if (pubkey === 'b0909f64623144fdfb1b3ffe719bdcf1ecac99e51c94a05e0763e2c02685f82d') {
+        image = 'https://cdn.zebedee.io/uploads/95c255cb-6359-4e0b-9f21-625bddb725e5_ohachiged4484375.png'
+      } 
+      else if (pubkey === 'f5f9119374247b9d9c5c31f12907519b5733d6f51af6750530fa1b54baa53de2') {
+        image = 'https://cdn.zebedee.io/uploads/90dc570c-4531-4e25-a368-16e660e9778a_3D0F10CB-4913-4B95-B13D-3503A338397F.jpg'
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '3515c444be4f8c94620969693b79a75f902951429c8b9a1ccfdc8a1a9488ece6') {
+        image = 'https://void.cat/d/EZHVvWLvDQ1niwdsaB4yMG.webp'
+      } 
+      else if (pubkey === '68a9614039c02bce6881be3d6276714eb79a64f84244a45bd8f66bf9988999d6') {
+        image = 'https://cdn.nostr.build/i/707158c3472ddf0d7b196ebda42ebe438618cd0889db54ed860ae848642bfe89.jpg'
+      } 
+      else if (pubkey === 'c4da3be8e10fa86128530885d18e455900cccff39d7a24c4a6ac12b0284f62b3') {
+        image = 'https://pbs.twimg.com/profile_images/1527569256212144128/KjCARmKa_400x400.jpg'
+      } 
+      else if (pubkey === '4fc232dd5fa7e68859166cb8f8fabf3b84fde93ac957d44d37a848fb756d5590') {
+        image = 'https://cdn.nostr.build/i/c95023993e5fce039a81e01256e1e88e753465ebf5d844d090432fed6678f009.jpg'
+      } 
+      else if (pubkey === 'f83cd1975419ab02fe80747f8c9b2baa0a60b8b120cf1bab7cb4488ed59dbad7') {
+        image = 'https://cdn.nostr.build/i/8c696c3cec31f4b2167e9ad765faf0ad7422951571e92b49d42d11ccdaf6f9f8.jpg'
+      } 
+      else if (pubkey === '8cf596ce1976bc6b7ae88675e78bc7a9414b9e1ca0d046997fafc111d306ae70') {
+        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMTA0LDM4LDIxNywxKTsgc3Ryb2tlOnJnYmEoMTA0LDM4LDIxNywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMjcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
+      } 
+      else if (pubkey === 'e04fc40dcdc783b2782aef62d294d1eae32d2929ad4d9765d7834913a8810151') {
+        image = 'https://pomf2.lain.la/f/g4apsqb3.jpg'
+      } 
+      else if (pubkey === '82a467f04859c11cd644d692adfee508391243582def23534e46cc8122e3f9ed') {
+        image = 'https://cdn.nostr.build/i/ffce36183e1b0c82fed7ac8babc1a4a08d73aae65f1d92eadf84ebdb394569b1.jpg'
+      } 
+      else if (pubkey === 'e859a7cbde1006f823ee819aa308752d9e1123a1842a98ae2297a1031f5fdf94') {
+        image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/cccbb293f1af2fdb0603055f056162c868cf0aa95da22c8e9b55a926505f9fb7.jpg'
+      } 
+      else if (pubkey === '41d516e4907a461254f0789960c104dd8265723130c55e0b19e56e5e2bb49c9c') {
+        image = 'http://nostr.build/i/2199f8eba49404feac5e081b7d3db8f3e9f79365616cd63c76125ba2e474c3d6.png'
+      } 
+      else if (pubkey === '2c3cefee58b9bc3f169b30d6bb83ac6f9995889873bca15d3cf5438dc81d73e6') {
+        image = 'https://cdn.nostr.build/i/8fc43eb236cb2fdf8417fae7724c30e2c35d0e9aff917741999a0ac0a4dd48cf.jpg'
+      } 
+      else if (pubkey === '1e5b4ae1fa1fc87190d075e305da10775be571281157ce5cb696cac6b3a64818') {
+        image = 'https://void.cat/d/NDrSDe4QMx9jh6bD9LJwcK'
+      } 
+      else if (pubkey === '5534a5fb9800658dfa33197f6b0f6d1d9dbb97477c05e84c45f501c3af4b6190') {
+        image = 'https://lh3.googleusercontent.com/pw/AMWts8CpTqFYtZVHx7rvrn3RrmjvDEkOlaKR7Al-agrR9fQlLBxUvAtWLtrH4M8GaOzalsirY9cUy-lv7c9pWyNKNIgAzbgS421JVlwviK4PTDCSoTETcwmnmDoLqjQSx3dnZvaVrLyCgPaOybml46k6XtMhrg'
+      } 
+      else if (pubkey === '0086ebfedc592fb248540bc67a455eb8e3113d490d315c828177925176a9468f') {
+        image = 'https://showhyuga.pages.dev/nostricon/hyutestr2.jpg'
+      } 
+      else if (pubkey === '4b82077db95f1bcb1501be8d26c1a12d6f8ca1e902ad244eddf699e48a6b2f9e') {
+        image = 'https://cdn.nostr.build/i/07271816e0a21e0e00725bea306f1a7f3b5a1b7d1444f06bf44f22b70d3bb641.jpg'
+      } 
+      else if (pubkey === '7dadca72662e7a008698e5b3cf85483e62f8d39ab43d5f056f59a0799998dffc') {
+        image = 'https://cdn.nostr.build/i/b75ab933e2930fd5469607087f6e3310903efde26978e266749db9dde51b6da1.jpg'
+      } 
+      else if (pubkey === '5ba43622e34d4f7da57b693b5bfad71d475935633047e2efc40f76ccb5b06a59') {
+        image = 'https://cdn.nostr.build/i/e62b422460f569e9004b5f5357d0c411bbf0e80e5a510549e50fca085a18e345.jpg'
+      } 
+      else if (pubkey === '723ae60d5c23c6b973b5b8b0aa1384e1e196a580e480bb7ed3fcbf217aa57523') {
+        image = 'https://nostr.build/i/d19c1ae0cb4f84cdb4c993da9bad044af5700356524a0aa0ee6445056974b9dd.png'
+      } 
+      else if (pubkey === 'b707d6be7d469bd59bfea3da46586772e678e1aa788eb344f64a9e118129850f') {
+        image = 'https://i.floppy.media/3e84ad0b3e47959efb7f135758468902.png'
+      }  
+      else if (pubkey === '91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877') {
+        image = 'https://cdn.nostr.build/i/760a758fe20287a1b4dc2ee40a757fd58200e751ae47fb819b60d29d8614cd54.png'
       } 
       else if (pubkey === '548ce7c9f49011f0046fa8f1a22ed1dbe568778bb6d9a4cbcacdf0ccdcc74666') {
         image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_008fc7e6a180c44124c2c1d7e70ae34ab08b87c1e26b2155cb3bfbd73b62346d.jpg'
@@ -5891,6 +6130,7 @@ const Test = () => {
       }
       else if (pubkey == 'b7ab2dc03c22d569cf7c307ea8a59780e89b93c944c62d40bd3f57f5425ae9b0') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://proxy.irismessengers.wtf/insecure/plain/https://nostr.build/i/nostr.build_a701dd3a854c0b85544305e1b9ee4c4100bb0829f6db724e0a30a70bf452b05d.jpg'
+	image = 'https://nostrcheck.me/media/public/nostrcheck.me_6242875636227981231693501845.webp'
       }
       else if (pubkey == '50da372151e99214f544191e047ec5ebc4c0bc60ed8dd85430235d2955a2a0c5') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://shiopan.net/wp-content/uploads/しおぱんAI.gif'
@@ -6762,6 +7002,7 @@ const Test = () => {
       }
       else if (pubkey == '32310997f6b37b6cd60bb15a28e9a14badddfbf0875a7de24c69123a0c1e64cc') {
         image = 'https://www.eonet.ne.jp/~mmaga/omake/hyutegaki.jpg'
+	//image = 'https://showhyuga.pages.dev/nostricon/pehyu_s.png'
       }
       else if (pubkey == '3f4ec0d48b2441c658921402789271d93c42fb6ac2bf154159c7ec7b6c43328f') {
         image = 'https://void.cat/d/ApCMhfHKNMik9ohM1i3Kb4.webp'
