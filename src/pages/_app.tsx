@@ -4,21 +4,26 @@ import { NostrProvider } from "nostr-react";
 
 const relayUrls = [
 
+  "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
-      "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
-      "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
+  "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
+//  "wss://relay.damus.io",           //en, jp  Nelly
+  
+
+//      "wss://nostr-relay.nokotaro.com", //jp, en 
 //      "wss://relay.mostr.pub",          // nachika
 //
 //      "wss://relay.nostr.band",         //NIP-50 search, en, jp nachika
 //      "wss://nostr.wine",               //jp en, Vitor, Terry
       
-//  "wss://relay.damus.io",           //en, jp  Nelly
 //      "wss://relayable.org",            //
 //      
 
-//   "wss://nostr.zbd.gg",
+//     "wss://relay.nostrplebs.com/",
+//     "wss://nostr.zbd.gg",
 
-     "wss://r.kojira.io",
+//     "wss://r.kojira.io",
+//     "wss://relay-jp.shino3.net/",
 //     "wss://nostrbuzzs-relay.fly.dev/",
 //     "wss://relayable.org",
 
@@ -40,6 +45,8 @@ const relayUrls = [
 
 //"wss://relay.nostr.moctane.com",
 
+  //"wss://relay.shitforce.one",     // mostr
+  //"wss://nostr-us.coifundit.com",  // mostr
 
 
   /*"wss://relay.nostrich.land",  //jp en
