@@ -14,139 +14,79 @@ const Test = () => {
   let noteCount = 0;
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-//  untilValue = 1693795903;  //paging
+  untilValue = 1695070450;  //paging
 
+//  untilValue = 1695034027;  // repost NG
+//  untilValue = 1694945195;  // repost 1694945166
+//  untilValue = 1694683832;  // generic repost, Nostrasia Hackathon
+//  untilValue = 1694687538;  // zap request
+//  untilValue = 1694359339;  // search kind:30040
+//  untilValue = 1694326407;  // kind:10030
+//  untilValue = 1694194192;  // kind:30025 LongForm
+//  untilValue = 1694055016;  // \n\n
+//  untilValue = 1694003737;  // nostr:naddr1 zap.stream
 //  untilValue = 1693796212;  // #e(reply NG
 //  untilValue = 1693566199;  // generic repost channel message
-//  untilValue = 1693404923;  // follow channel
-//  untilValue = 1693396126;  // live event
 //  untilValue = 1693300143;  // channel creation
-//  untilValue = 1693298519;  // channel meta data, kind:41
-//  untilValue = 1693236193;  // contact list
-//  untilValue = 1693232264;  // youtube
-//  untilValue = 1693144021;  // repost
-//  untilValue = 1693039002;  // bookmark kind:30001
-//  untilValue = 1692986736;  // mute kind:10000,30000
-//  untilValue = 1692963302;  // svelte GitHub Pages
-//  untilValue = 1692951220;  // User Statuses Music Spofify Link, kind:30015
 //  untilValue = 1692922942;  // nak install
-//  untilValue = 1692921442;  // OGP
 //  untilValue = 1692694772;  // nostr:note1 (quote)
 //  untilValue = 1692649004;  // mp4
-//  untilValue = 1692453813;  // proxy NIP-48
-//  untilValue = 1692454068;  // proxy rss
-//  untilValue = 1692340701;  // gossip
-//  untilValue = 1691662709;  // repost mov
+//  untilValue = 1691662709;  // repost mov NG
 //  untilValue = 1691665815;  // tag:h nowplaying
-//  untilValue = 1691540726;  // kind:4  DM
-//  untilValue = 1691547530;  // kind:30078 key value
 //  untilValue = 1691507297;  // repost NG
-//  untilValue = 1691416756;  // kind:9735 zap
 //  untilValue = 1691417549;  // kind:9735 zap
-//  untilValue = 1691284771;  // /r/n
-//  untilValue = 1680529346;  //join
 //  untilValue = 1690983115;  //live chat message kind:1311 Karnage
-//  untilValue = 1690940778;  //Add GARNET
-//  untilValue = 1690451554;  //imeta
 //  untilValue = 1690354019;  //(quote)
-//  untilValue = 1690365252;  //repost https
 //  untilValue = 1690284540;  // \t
-//  untilValue = 1690213290;  //reply ab nostter
 //  untilValue = 1690114119;  //youtube
 //  untilValue = 1690041940;  //To 5
-//  untilValue = 1690037013;  //reply 4
 //  untilValue = 1689862993;  //https Add fix max width 580
-//  untilValue = 1689767602;  //NIP095 jpeg (quote)
-//  untilValue = 1689768580;  //NIP-95 jpeg (quote)
 //  untilValue = 1689652872;  //NIP-36
-//  untilValue = 1689522395;  //repost , fix
-//  untilValue = 1689548242;  //repost , fix
 //  untilValue = 1689374075;  //NIP-98 Firebase Auth
 //  untilValue = 1689334972;  //ff14
-//  untilValue = 1689335008;  //youtu.be/
-//  untilValue = 1689335282;  //NIP-50 search
-//  untilValue = 1689252283;  //repost fix
-//  untilValue = 1689254202;  //repost  , fix
+//  untilValue = 1689335282;  //NIP-50 search nostr.band
+//  untilValue = 1689254202;  //repost
 //  untilValue = 1689245113;  //nostr:naddr1 nostter fix
-//  untilValue = 1688922534;  //youtube fix
 //  untilValue = 1688944930;  //threads ogp
 //  untilValue = 1688605603;  //neventt1 (quote) fix
 //  untilValue = 1688460571;  //youtube channel
-//  untilValue = 1688462005;  //note1
 //  untilValue = 1688395711;  //youtube playlist
-//  untilValue = 1688390047;  //youtube fix
-//  untilValue = 1688382329;  //youtube fix
+//  untilValue = 1688390047;  //youtube
+//  untilValue = 1688382329;  //youtube
 //  untilValue = 1688303413;  //https:// search engine
-//  untilValue = 1688289075;  //1,300 active authors 7/2
+//  untilValue = 1688289075;  //1,300 active authors 2023/7/2
 //  untilValue = 1688253140;  //iframe 3
 //  untilValue = 1688261108;  //zap
-//  untilValue = 1688208404;  //image fix
-//  untilValue = 1688201398;  //quote nevent1 fix
-//  untilValue = 1688091853;  //reply fix
-//  untilValue = 1688112602;  //youtube fix
-//  untilValue = 1688127347;  //youtube fix
-//  untilValue = 1688115603;  //nostr:profile1 fix
-//  untilValue = 1688127866;  //nostr:nprofile1 fix
+//  untilValue = 1688115603;  //nostr:profile1
+//  untilValue = 1688127866;  //nostr:nprofile1
 //  untilValue = 1688084234;  //live_chat kind:1311 will
-//  untilValue = 1675550855;  //https:// fix
-//  untilValue = 1687937012;  //#q quote fix
-//  untilValue = 1687883912;  //https:// zozo
-//  untilValue = 1687905481;  //twitter fix
+//  untilValue = 1675550855;  //https://
 //  untilValue = 1692963542;  // spotify album
 //  untilValue = 1692963976;  // spotify playlist
 //  untilValue = 1687906810;  //https:// spotify playlist
-//  untilValue = 1687907629;  //https:// amazon
 //  untilValue = 1687865289;  //emoji
-//  untilValue = 1687829407;  //https://  #actors
-//  untilValue = 1686896097;  //https://  same url fix
-//  untilValue = 1687829040;  //nachika
-//  untilValue = 1687819005;  //repost fix
-//  untilValue = 1687689358;  //https:// fix
-//  untilValue = 1687655585;  //yabumi
-//  untilValue = 1687601931;  //@npub
-//  untilValue = 1687588227;  //#nowplaying fix
+//  untilValue = 1686896097;  //https://  same url
+//  untilValue = 1687689358;  //https://
+//  untilValue = 1687655585;  //yabumi relay
+//  untilValue = 1687588227;  //#nowplaying
 //  untilValue = 1687579812;  //#illust fix
 //  untilValue = 1687575908;  //tag fix
-//  untilValue = 1687534721;  //instagram fix
 //  untilValue = 1687194994;  //reply 8
 //  untilValue = 1687333253;  //nostr:naddr1 habla fix relay kind:30022
-//  untilValue = 1686983200;  //naddr1 hala emoji kind:30030 fix
+//  untilValue = 1686983200;  //naddr1 habla emoji kind:30030 fix
 //  untilValue = 1686985618;  //about nevent relay
 //  untilValue = 1686933213;  //quote(nostr:note1) fix
-//  untilValue = 1687253423;  //iframe middle fix
 //  untilValue = 1686949316;  //2 cards fix
 //  untilValue = 1686918544;  //nhk news card
 //  untilValue = 1686918929;  //hatenablog, nicovideo, card
-//  untilValue = 1686898969;  //black  <a<b>c> fix, 1686898968,  //ok
 //  untilValue = 1686839510;  //nicovideo iframe
 //  untilValue = 1686929129;  //twitter iframe
-//  untilValue = 1687339664;  //twitter iframe
-//  untilValue = 1687839219;  //spotify no #r
-//  untilValue = 1686890295;  //spotify iframe #r
-//  untilValue = 1686839199;  //youtube iframe
-//  untilValue = 1686656876;  //repost Add <a href> fix
-//  untilValue = 1686488789;  //repost image
-//  untilValue = 1687358020;  //gazou fix
-//  untilValue = 1686393912;  //gazou fix
-//  untilValue = 1686318772;  //reply fix
-//  untilValue = 1687863811;  //<Equal<HelloWorld, string>> fix 
-//  untilValue = 1686321677;  //<script> fix
-//  untilValue = 1686098875;  //<marquee>, <SCRIPT>alert fix
-//  untilValue = 1686223968;  //<h1> fix
-//  untilValue = 1686199142;  //<button> fix
 //  untilValue = 1686241976;  //emoji 13 fix, <img>
 //  untilValue = 1685703268;  //emoji fix
 //  untilValue = 1686199783;  //emoji, tate, <style> fix,
-//  untilValue = 1686350208;  //repost \n fix
 //  untilValue = 1686238459;  //#[0] fix, <a href>
 //  untilValue = 1675779342;  //#[5] fix
-//  untilValue = 1686377160;  //npub(to) fix, <a href> 
-//  untilValue = 1686148182;  //npub(to) fix 
-//  untilValue = 1686063586;  //npub(to) fix
-//  untilValue = 1686486917;  //https:// fix, <a href>
-//  untilValue = 1686318129;  //https:// fix
 //  untilValue = 1686034150;  //https: 5 // fix
-//  untilValue = 1686041046;  //conteltLink
 //  untilValue = 1686034209;  //about reverce
 //  untilValue = 1686135829;  //U+202E (RTL)
 //  untilValue = 1686051720;  //reverce
@@ -173,7 +113,7 @@ const Test = () => {
 //  untilValue = 1676300000; // 2023/2/13 23-2023/2/13 23 +100,000
 //  untilValue = 1676350000; // 2023/2/14 13-2023/2/14 12, +50,000
 //  untilValue = 1676400000; // 2023/2/15 3- 2023/2/15 1,  +50,000
-//      untilValue = 1676470000; // 2023/2/15 23-2023/2/15 20, +10,000
+      //untilValue = 1676470000; // 2023/2/15 23-2023/2/15 20, +10,000
 //      untilValue = 1676480000; // 2023/2/16 1- 2023/2/15 22, +10,000
 //      untilValue = 1676550000; // 2023/2/16 21-2023/2/16 15, +20,000
 //      untilValue = 1676580000; // 2023/2/17 5- 2023/2/16 21, +30,000
@@ -197,7 +137,7 @@ const Test = () => {
       //untilValue = 1677500000; // 2023/2/27 21-2023/2/27 19  +10,000
       //untilValue = 1677520000; // 2023/2/28 2- 2023/2/27 23  +20,000
       //untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
-//      untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
+      //untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
 
       //until 1677700000, // 2023/3/2 4-  2023/3/2 1,  +100,000, limit 100
       //until 1677800000, // 2023/3/3 8-  2023/3/3 3,  +100,000 * 25
@@ -250,7 +190,7 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-//      kinds: [0,1,3,4,6,40,41,42,1311,9734,9735,10000,10001,10002,30000,30001,30023,30315,30023,30078,30311,30315,31922],  // 1:post, 4:DM, 6:repost, 7:reaction, 42:channel message(GARNET), 10000,30000:mute, 1311:live chat, 30001:bookmark, 30023:Long-form Content, 30315:Statuses
+      kinds: [0,1,3,4,5,6,16,40,41,42,44,1311,1984,9734,9735,10000,10001,10002,30000,30001,30023,30311,30315,30023,30078,30311,30315,31922],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
@@ -265,25 +205,25 @@ const Test = () => {
 //      kinds: [42],     // 42:Channel Message
 //      kinds: [44],     // 44:Channel Mute User
 //      kinds: [1311],   // 1311:Live Chat Message
-//      kinds: [1984],   // 1984:Reporting
+//      kinds: [1984],   // 1984:Reporting spam
 //      kinds: [9734],   // 9734:Zap Request
 //      kinds: [9735],   // 9735:Zap
 //      kinds: [10000],  // 10000:Mute List
 //      kinds: [10001],  // 10001:Pin List
 //      kinds: [10002],  // 10002:Realy List Metadata(
+//      kinds: [10030],  // 
 //      kinds: [30000],  // 30000:Categorized People List(mute)
 //      kinds: [30001],  // 30001:Categorized Bookmark List
 //      kinds: [30023],  // 30023:Long-form Content
-      //kinds: [30315],  // 30315:User Statuses
-      //kinds: [30023],  // 30023:Long-form Content
-      //kinds: [30078],  // 30078:Application-specific Data(key-value storage)
+//      kinds: [30025],  // 
+//      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
 //      kinds: [30315],  // 30315:User Statuses
-      //kinds: [31922],  // 31922:calender
+//      kinds: [31922],  // 31922:calender
 //      since: sinceValue,
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
-      //limit: 5000,
+//      limit: 1000,
       limit: 100,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
@@ -421,7 +361,8 @@ const Test = () => {
       const npub = nip19.npubEncode(note.pubkey)
       //const nostrnpub = "https://nostr.com/" + npub
       const nostrnpub = "https://yabu.me/" + npub
-      const url = "https://nostter.vercel.app/" + npub 
+      //const url = "https://nostter.vercel.app/" + npub 
+      const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub 
 
       const imageURL2 = getImageURL(note.pubkey);  // avator
       const imageURL3 = getImageURL(note.pubkey);  // avator
@@ -433,6 +374,8 @@ const Test = () => {
       const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
 
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
+      const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
+      const noStrudelUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id)
 
       /*let imageURL = Pictures.pictures.map((picture, index) => {
         if(note.pubkey === picture.npub) {
@@ -451,11 +394,14 @@ const Test = () => {
       let replyToImageURL3 = getImageURL(note.pubkey);
       let replyToImageURL4 = getImageURL(note.pubkey);
       let replyToImageURL5 = getImageURL(note.pubkey);
-      let replyToUrl1 = "https://nostter.vercel.app/" + npub 
-      let replyToUrl2 = "https://nostter.vercel.app/" + npub
-      let replyToUrl3 = "https://nostter.vercel.app/" + npub
-      let replyToUrl4 = "https://nostter.vercel.app/" + npub
-      let replyToUrl5 = "https://nostter.vercel.app/" + npub
+      //let replyToUserBaseUrl = "https://nostter.vercel.app/" 
+      let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
+      //let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
+      let replyToUrl1 = replyToUserBaseUrl + npub 
+      let replyToUrl2 = replyToUrl1
+      let replyToUrl3 = replyToUrl1
+      let replyToUrl4 = replyToUrl1
+      let replyToUrl5 = replyToUrl1
       let replyToImageSize1 = "0"
       let replyToImageSize2 = "0"
       let replyToImageSize3 = "0"
@@ -501,7 +447,7 @@ const Test = () => {
               replyToImageURL1 = getImageURL(note.tags[h][1]);  // to user id
 	      repHex = note.tags[h][1];
 	      replyToHex1 = nip19.npubEncode(note.tags[h][1]);
-	      replyToUrl1 = "https://nostter.vercel.app/" + replyToHex1
+	      replyToUrl1 = replyToUserBaseUrl + replyToHex1
 	    }
 	    else if(replyToImageSize2 === "0") {
 	      replyToHex2 = nip19.npubEncode(note.tags[h][1]);
@@ -513,7 +459,7 @@ const Test = () => {
                   replyToImageSize2 = "40"
 		}
                 replyToImageURL2 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl2 = "https://nostter.vercel.app/" + replyToHex2
+	        replyToUrl2 = replyToUserBaseUrl + replyToHex2
 	      }
 	    }
 	    else if(replyToImageSize3 === "0") {
@@ -526,7 +472,7 @@ const Test = () => {
                   replyToImageSize3 = "40"
 		}
                 replyToImageURL3 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl3 = "https://nostter.vercel.app/" + replyToHex3
+	        replyToUrl3 = replyToUserBaseUrl + replyToHex3
 	      }
 	    }
 	    else if(replyToImageSize4 === "0") {
@@ -539,7 +485,7 @@ const Test = () => {
 	      replyToHex4 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex4 != replyToHex2 && replyToHex4 != replyToHex1) {
                 replyToImageURL4 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl4 = "https://nostter.vercel.app/" + replyToHex4
+	        replyToUrl4 = replyToUserBaseUrl + replyToHex4
 	      }
 	    }
 	    else if(replyToImageSize5 === "0") {
@@ -552,7 +498,7 @@ const Test = () => {
                   replyToImageSize5 = "40"
 		}
                 replyToImageURL5 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl5 = "https://nostter.vercel.app/" + replyToHex5
+	        replyToUrl5 = replyToUserBaseUrl + replyToHex5
 	      }
 	    }
 	    //}
@@ -564,12 +510,13 @@ const Test = () => {
             }
           }
         }
-	else if(note.tags[h][0] === "e") {  // NIP-10
+	else if(note.tags[h][0] === "e") {  // NIP-10 kind1
 	  eventCount = eventCount + 1;
 	  if(reply === "" || reply === "#e]") {
 	    //reply = "Re]";
-	    if(note.kind != 5) {
-	      reply = "Mention]";
+	    //if(note.kind != 5 && note.kind != 30001) {  // 5:Event Deletion, 30001:Bookmark
+	    if(note.kind === 1) {  // 1:note
+	      reply = "#e]";
 	    }
 	    //reply = "";
 	  }
@@ -581,14 +528,17 @@ const Test = () => {
 
           if(channelUrl == "" || note.tags[h][3] === "root") {
             //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
-            channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1]
+            //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
+            //channelUrl = "https://unyu-house.vercel.app/"
+            channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
 	  }
 	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[h][1])
-	  const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
+	  //const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
+	  const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
 	  if(eventLinkUrlText1 === "") {
-	    if(marker === "" && note.kind != 6) {  // 6:repost
+	    if(marker === "" && note.kind === 1) {  // 1:text
 	      //marker = "root ";
 	      marker = "reply ";
 	    }
@@ -597,7 +547,7 @@ const Test = () => {
 	    eventLinkUrl1 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText2 === "") {
-	    if(marker === "") {
+	    if(marker === "" && note.kind === 1) {  // 1:text
 	      marker = "reply ";
               eventLinkUrlText1  = "__#e(root " + event1Id + ")";
 	    }
@@ -609,7 +559,7 @@ const Test = () => {
             eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
 	    eventLinkUrl3 = eventLinkUrl
 	    if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(mention " + event2Id + ")";
+              eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText4 === "") {
@@ -641,7 +591,7 @@ const Test = () => {
 	  channelUrl = "https://zap.stream/naddr1qq9rzd3c8qcrwvejxqusygpjuxp8vd29p6ancknaztql3eajk52y8xkppfn7au7elkw9c68zg5psgqqqwensgqahaf";
 	}
 	else if(note.tags[h][0] === "client") {  // client gossip 
-	  client = "__" + note.tags[h][1] + "__"
+	  client = "-" + note.tags[h][1] + "-"
 	}
 	else if(note.tags[h][0] === "title") {  // title 
 	  title = "[" + note.tags[h][1] + "]__"
@@ -668,7 +618,7 @@ const Test = () => {
       let channel = ""
 
       if(note.kind === 42) {  // 42.channel message
-        channel = "(Channel Message)-";   // channelUrl
+        channel = "(Channel Message)";   // channelUrl
       }
       if(note.kind === 1311) {  // 1311.live chat
         channel = "(LIVE)-";   // channelUrl
@@ -711,6 +661,7 @@ const Test = () => {
 	    
 	    content = content.replace('"kind":1,','');
             content = content.replace('"content":"','');
+            content = content.replace('"created_at":','');
 	    content = content.replace("{","");
 	    content = content.replace("{","");
 	    content = content.replace("\"}","");
@@ -926,11 +877,12 @@ const Test = () => {
 	  }
         }
 	else {
-	  const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[i][1]
+	  //const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[i][1]
 	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
 	  //const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[i][1])
+	  const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
 	  //const aa = note.tags[i][1]
-	  content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote)</a>');
+	  content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
   	}
       }
 
@@ -982,24 +934,28 @@ const Test = () => {
 	  }
 	  else if(wordsNostr[i].includes("nostr:note1") || 
 	          wordsNostr[i].includes("nostr:nevent1")) {  
+            let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
 	    if(quoteLinkText === "") {
 	      //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://iris.to/post/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://coracle.social/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
-	      quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
-  	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote)</a>');
+	      //quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
               quoteLinkText = "";
-	      if(content.includes("nostr:nevent1")) {
+	      if(content.includes("nevent1")) {
                 //quoteLinkText = quoteLinkText + wordsNostr[i];
+                //quoteLinkText = "(quote_nevent1)";
+	        quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_nevent1)</a>');
+	      }
+	      else {
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note1)</a>');
 	      }
 	    }
 	    else if(quoteLinkText2 === "") {
-  	      //content = content.replace(wordsNostr[i],' [2] ');
-	      //quoteLinkUrl2 = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-	      //quoteLinkUrl2 = "https://coracle.social/" + wordsNostr[i].replace("nostr:",'') 
-	      quoteLinkUrl2 = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl2 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
   	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">(quote)</a>');
               quoteLinkText2 = "";
 	      if(content.includes("nostr:nevent1")) {
@@ -1007,10 +963,8 @@ const Test = () => {
 	      }
 	    }
 	    else if(quoteLinkText3 === "") {
-  	      content = content.replace(wordsNostr[i],' [3] ');
-	      //quoteLinkUrl3 = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-	      quoteLinkUrl3 = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
-  	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">(quote)</a>');
+	      quoteLinkUrl3 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+  	      content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl3 + '" target="_blank">(quote)</a>');
               quoteLinkText3 = "";
 	      if(content.includes("nostr:nevent1")) {
                 //quoteLinkText3 = quoteLinkText3 + wordsNostr[i];
@@ -1023,8 +977,9 @@ const Test = () => {
 	    //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
 	    quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
 	    //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
-            quoteLinkText = "__(nostr:naddr1)";
+            //quoteLinkText = "__(nostr:naddr1)";
 	    //content = content + '[kind:' + note.kind + ']'
+  	    content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
 	  }
 	  else if(wordsNostr[i].includes("nostr:nprofile1")) {
 	    quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
@@ -1038,14 +993,16 @@ const Test = () => {
       let quoteIdText1 = "";  // #q 1
 
       for(let i=0; i<note.tags.length; i++) {
+        let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
         if(note.tags[i][0] === "q") {
 	  if(quoteId1 === "") {
 	    quoteId1 = note.tags[i][1];  // event id
-	    quoteUrl1 = "https://snort.social/e/" + quoteId1;
+	    //quoteUrl1 = "https://snort.social/e/" + quoteId1;
 	    //quoteUrl1 = "https://nostr.com/" + quoteId1;
 	    //quoteUrl1 = "https://iris.to/post/" + quoteId1;
-	    quoteUrl1 = "https://nostter.vercel.app/" + nip19.noteEncode(quoteId1);
-	    quoteIdText1 = "__#q";
+	    //quoteUrl1 = "https://nostter.vercel.app/" + nip19.noteEncode(quoteId1);
+	    quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId1);
+	    quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
 	  }
         }
       }
@@ -1242,6 +1199,14 @@ const Test = () => {
 	  muteCount++
 	}
         status = "[mute list (snort) " + muteCount + "]_"
+	content = ""
+      }
+      else if(note.kind === 10001) {  // 10001:Pin List, nostter
+        let pinCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  pinCount++
+	}
+        status = "[pin list kind:10001 (snort) " + pinCount + "]_"
       }
       else if(note.kind === 10002) {  // 10002:Relay List Metadata, nostter
         let relayCount = 0
@@ -1257,13 +1222,12 @@ const Test = () => {
 	    muteCount++
 	  }
           status = "[mute/unmute (damus/snort) " + muteCount + "]_"
-	}
-        else if(note.tags[0][1] === "notifications/lastOpened") {
-          status = "[notifications/lastOpened]_"
+	  content = ""
 	}
 	else {
 	  status = "[Categorized People List]_"
-
+	  content = note.tags[0][1]  // notifications/lastOpened
+	  return
 	}
       }
       else if(note.kind === 30001) {  // 30001:Categorized Bookmark List
@@ -1271,18 +1235,39 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  bookmarkCount++
 	}
-        status = "[bookmark " + note.tags[0][1] + " " + bookmarkCount + "]_" 
-	content = " bookmark list."
+        status = "[bookmark/list " + note.tags[0][1] + " " + bookmarkCount + "]" 
+	//content = ""
       }
       else if(note.kind === 30002) {  // 30002:(snort tag follow)
-        status = "[tag follow(snort)]_"
+        status = "[kind30002 tag follow(snort)]_"
+	let tags = ""
+	for(let x=0; x<note.tags.length; x++) {
+	  if(note.tags[x][0] === "t") {
+	    tags = tags + "#" + note.tags[x][1] + ", " 
+	  }
+	}
+	content = tags 
       }
       else if(note.kind === 30078) {  // 30078:Application-specific Data
         status = "[Application-specific Data]_"
+	content = note.tags[0][1] 
+	return
       }
       else if(note.kind === 30311) {  // 30311:Live Event
         status = "[Live Event]_"
 //	content = content + "[empty]_"
+      }
+      else if(note.kind === 30023) {  // 30023:Long-form Content
+        let noteCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  noteCount++
+	}
+	if(note.tags[0][1].includes("nosli")) {
+          status = "[Nosli "  + noteCount + "]_"
+	}
+        else {
+	  status = "[Long-form Content]_"
+	}
       }
       
       bookmark = "-bookmark"
@@ -1297,7 +1282,7 @@ const Test = () => {
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <a href={url} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+              <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
                 <a href={channelUrl} target="_blank">{channel}</a>
 	        {contentWarning}{contentWarningText}{contentWarning}
                 {status}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
@@ -1333,6 +1318,8 @@ const Test = () => {
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
                 ({noteIdShort}){client}{proxy}<font color="black">{repHex}-{note.pubkey}-{npub}</font>
 		<a href={freefromUrl} target="_blank">-FreeFrom</a>
+		<a href={snortUrl} target="_blank">-Snort</a>
+		<a href={noStrudelUrl} target="_blank">-noS</a>
 		<a href={checkerUrl} target="_blank">-postChecker</a>
 		<a href={nostrnpub} target="_blank">-npub</a>
 		<a href={bookmarkUrl} target="_blank">{bookmark}</a>
@@ -1359,35 +1346,697 @@ const Test = () => {
       else if (pubkey === '') {
         image = ''
       } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === '') {
+        image = ''
+      } 
+      else if (pubkey === 'f4d639086f6b3452e6631b256b99b59afac27a9fed588a57fa337b6beb2a5d40') {
+        image = 'https://media.misskeyusercontent.com/io/49b3be7f-1db4-499b-82e7-420c5b30c7bb.webp'
+      } 
+      else if (pubkey === '3d025e0194a572d13309c4a3d8fa04ffe204f607a5d64b82ee9e38bed5d29925') {
+        image = 'https://storage.googleapis.com/oekakiskey/drive/webpublic-d4ed5991-544a-4734-b98c-ef6285d25f07.png'
+      } 
+      else if (pubkey === 'cd70588e162f568994eae7fbcf79de3271bc067d48b328941b4abe0007311402') {
+        image = 'https://nostr.build/i/nostr.build_c02cff2344abe6a0279f4a7edf6c92112a9373887258dd3c1ed6cc0a1b9b4abc.jpg'
+      } 
+      else if (pubkey === '809d679f28536555804989264310cfe044a7e2208ad794e0ee5ffb62ace0cd45') {
+        image = 'https://image.nostr.build/d9a37a39aa540208b95b9a800bedeb5d0b4794dd5032b4126da4fcf695ce8aaa.jpg'
+      } 
+      else if (pubkey === '58d3d7e0a7940dfc38d9671e399d13e6b823f3b424dbac2b715ca9a435acf733') {
+        image = 'https://file.misskey.design/post/webpublic-d7b6a7b7-007b-4da8-9a32-4a036d8d3b73.png'
+      } 
+      else if (pubkey === '8244e7b3f91550611e3798d021330e5292348ee36b2841935eb1419cbddec8dd') {
+        image = 'https://image.nostr.build/985351d838ee041a086ac06c403dbded65c5a6e19410d2ccb3126955a6e07b1d.jpg'
+      } 
+      else if (pubkey === '75d1103b38fdc24ff70cce6ba8617a1c976d58d361a3b32577c0db16c942c67a') {
+        image = 'https://media.misskeyusercontent.com/io/ba03bcbc-2a7c-4b95-9607-3d64be51ac69.png'
+      } 
+      else if (pubkey === 'a64dca76d60cef3b65ff7072655c271dac6dad55c71e6724575a52021c772af1') {
+        image = 'https://i.imgur.com/JUn4wxX.jpg'
+      } 
+      else if (pubkey === '5d7cab86675940c3f98906fb8e20c5076dddec08e3e6fa5458260709c9852421') {
+        image = 'https://img.pawoo.net/accounts/avatars/000/137/006/original/da5db2dd9f1ce644.png'
+      } 
+      else if (pubkey === 'ca509133f53efb59fea65877dddabdaa01716836874e55689ad36aa3f3128f2e') {
+        image = 'https://files.mastodon.social/accounts/avatars/108/192/867/039/682/392/original/0435fcbf14bf44c1.jpg'
+      } 
+      else if (pubkey === 'fc6dec96280c63e92f02f69767e08ceb66f5760f09cd729307620214956b5b9a') {
+        image = 'https://piclike.net/wp-content/uploads/2022/06/buta.png'
+      } 
+      else if (pubkey === '81933c52322ad56e04ac911e6a4f672d41f12e21d297c2961d382e7e49414f9a') {
+        image = 'https://s3-media.hostdon.ne.jp/m157/accounts/avatars/109/345/634/488/863/914/original/07db9ab54a7ebd51.png'
+      } 
+      else if (pubkey === 'f57e5eead054ad4c7f4d77bb7f00f31f3048e9beae2c5f1e1e3a1bf0ba3f55bd') {
+        image = 'https://image.nostr.build/3ed044fbab79f47f254288fccb267ea58567ba55b9f612b2bed3ea471167e502.jpg'
+      } 
+      else if (pubkey === 'b5dfec765e1537f5b597fd112f67f9284f476e9dd6d8431a41d088093ae15360') {
+        image = 'https://image.nostr.build/92103bf68df35a2a8d10ffff3719b8d868009687b7034d9d3095d1f5ac669150.jpg'
+      } 
+      else if (pubkey === '73603c219bb6cec5c05ceb87967a6721f552fda9c3e2ce6835fae3a0bc5b529e') {
+        image = 'https://s3-ap-northeast-1.amazonaws.com/qnmd-media/accounts/avatars/000/000/001/original/8bd78531f6783326.jpg'
+      } 
+      else if (pubkey === 'bb99f4a32833d99963c86a2cfeb07726124f99652065637155cec28362339149') {
+        image = 'https://image.nostr.build/598bfced7c82094563971725696b833f3863de37b48b6345a58aac4f73855afe.jpg'
+      } 
+      else if (pubkey === '35987703de8d40e12257d25ff599b5db780436e65e6babd88cb1b70b33767275') {
+        image = 'https://file.misskey.design/post/5555accb-ccc7-4c02-91ea-527c57c23fcd.jpg'
+      } 
+      else if (pubkey === '527337d5d58ad3ba966bb0ed46cd9a83ccaf1f03525631da06042e7e93e9525e') {
+        image = 'https://void.cat/d/FLyYQSvPMc1fSMXsj6Ccp6.webp'
+      } 
+      else if (pubkey === '3a1737927e888d9654996a45bc78d145ead38c252d03d60e9732d75c5fe45f68') {
+        image = 'https://storage.googleapis.com/oekakiskey/drive/webpublic-beb418ec-953a-4e71-bf2f-cb893618155a.png'
+      } 
+      else if (pubkey === 'bc3fd13a18c925c593199e40f454ec48af55dc9dafc95a8ffe009be2e5051980') {
+        image = 'https://sss.misskey.gg/sss/gg/7ee24d23-950f-4f01-b70b-72ef992a59ff.webp'
+      } 
+      else if (pubkey === 'db8bb06a2031261ee54199e932ac874d17d5ac2616fec78aa4f978ceaeae5a6c') {
+        image = 'https://pbs.twimg.com/profile_images/1566083450477883392/ozfrpHEt_400x400.jpg'
+      } 
+      else if (pubkey === 'c2a3a79c5b3eed5b8947adeb7830a613b2aeb0633f79a2cc1865197bf8ff27b5') {
+        image = 'https://media.misskeyusercontent.com/io/webpublic-12f65764-2467-470a-bc22-c1d48666c25f.png'
+      } 
+      else if (pubkey === 'c98b6b4267dc313218645c12c0d82532ddb6b45757ecf4e09b648c013e3dd1e6') {
+        image = 'https://minio.zuiho.moe/accounts/avatars/000/000/836/original/1f556ddd442ed9bc.jpeg'
+      } 
+      else if (pubkey === 'ddaa2ad83e43af702efde56dd81a05af069f9728d089ad9fabecc0b6d0cfb473') {
+        image = 'https://s3.fedibird.com/accounts/avatars/110/598/931/989/389/042/original/30c3052a1950e5a6.jpeg'
+      } 
+      else if (pubkey === '8436b5a31447ee71bc81cae3450dab8c630855128a34dc0e8499b0f1b01db187') {
+        image = 'https://cdn.zebedee.io/uploads/c8dd5b17-a727-47c9-b4f3-9c84a807d212_0ee432b6-9de9-4c54-8849-06754500b67f.jpeg'
+      } 
+      else if (pubkey === '2ad0fc169c6910ba1064a435bc5526d5b34b400cda7cde5c637d9ef04f36cdc0') {
+        image = 'https://cdn.nostr.build/i/3dae2fad99b04128a2a2c5c2bfaf3e11f5d3c0e9c5cd6ea043c661f676a12260.jpg'
+      } 
+      else if (pubkey === '081b66c7f7849592216379df979674d4f43dbe9e3836ae37e50b120e2d0fb6bd') {
+        image = 'https://robohash.org/npub1pqdkd3lhsj2eygtr080e09n56n6rm0578qm2udl9pvfqutg0k67s74wnrw?size=300x300'
+      } 
+      else if (pubkey === '55420ffdbfc84821412905b8ff7de90552ecb76e21d3604fa24edce8afce171d') {
+        image = 'https://s3.fedibird.com/accounts/avatars/109/733/162/411/553/243/original/dab0a884dd108b37.png'
+      } 
+      else if (pubkey === '5d1eef7dca1d0fbec3980b155dd86ae4c440da6c966494291f06943106d0c219') {
+        image = 'https://s3.fedibird.com/accounts/avatars/109/370/624/254/480/154/original/4d90c3fce734e4ca.jpg'
+      } 
+      else if (pubkey === 'd6e3d54434a68ac33b8dc0e9fcab234f89bc4d93a2efc551eafd99bf0376e0f4') {
+        image = 'https://cdn.nostr.build/i/d417a32080834de3587f344696d09b77172b8558bcb7ad0d0ce97c425849de86.jpg'
+      } 
+      else if (pubkey === 'c9eafd6f3847002cb9326c16e9ccf626fbfcdeb54c0a343bdabea62bc22fdd99') {
+        image = 'https://cdn.nostr.build/i/642aaaab3dd43d6379ef2d5c72a1e37674c9cd80daf8916077238c478d72747d.jpg'
+      } 
+      else if (pubkey === 'a353408d8a13b1d451ab9f0b9df8be6d4e817e723de517a64c61bb9081020ec8') {
+        image = 'https://cdn.nostr.build/i/14717d348affe2c1870ab012ecfefa6a5c481f72e85927068d1e8274c265b842.jpg'
+      } 
+      else if (pubkey === 'cb7d6867f107c2883d260c40e709fe04bcf260ae4477517f882cb16ca1869696') {
+        image = 'https://files.ostatus.taiyolab.com/accounts/avatars/109/292/246/093/315/248/original/81a22abe74032009.jpg'
+      } 
+      else if (pubkey === '6990a6ef0a29f0d62a03ec3c8415b3405fead3beac1bff9175b7ced9467c36df') {
+        image = 'https://media.maniakey.com/media/f926c9fc-8f76-44ea-9327-6275f5d0d50e.png'
+      } 
+      else if (pubkey === '4ae14d0b92572d8550ee81fd84c235784caef6ff828e639883c3e319415cb6ad') {
+        image = 'https://cdn.zebedee.io/uploads/2dd3f2ca-2651-463b-844a-b4243ed8f179_7a0908fe-38fd-4fea-b863-582e1c48fb53.jpeg'
+      } 
+      else if (pubkey === 'e86c527cba74123f72bc589508c11b3668cda85a7167d05618c7f25e5ed87939') {
+        image = 'https://cdn.nostr.build/i/c8bbad2a9175dc0687831fc57670357e0e4ccd8c629e53e9adc92e47931c7d79.jpg'
+      } 
+      else if (pubkey === '94cc1dcede887fee8c75c570816e1076a249ccd8fd739db5a6c8ae3375582612') {
+        image = 'https://photodn.net/system/accounts/avatars/000/007/722/original/4baf5bc356d7724d.jpg'
+      } 
+      else if (pubkey === '1f435571c0b526ba377d07d9629c40488662e1d1d4a4185b4ef1b6898b283fff') {
+        image = 'https://cdn.zebedee.io/uploads/680a597e-9554-4215-a951-38bd5db03552_7291531C-0B97-4245-98DC-BD1000B97B9D.jpg'
+      } 
+      else if (pubkey === 'dedd5b3ebcbe02b6dad7950e8c9babd44109fdbf4420be408f82701279321be1') {
+        image = 'https://file.misskey.design/post/2e6c76e7-f46b-4b90-9d7e-b428fbd75450.png'
+      } 
+      else if (pubkey === '55b06b2dfcf8ab1584181c58deae91f20c807e858ae8048d931b9b7705d7e0fa') {
+        image = 'https://media.minazukey.uk/data/webpublic-231993e8-6080-49cf-8535-b13cd5dc9ff2.webp'
+      } 
+      else if (pubkey === 'e372c3a3ad123decf07f8742f7a4147f5db9ced5c81546090e69618c53e1c0fe') {
+        image = 'https://media.misskeyusercontent.com/io/fd8a038c-25c2-46f2-8514-d5c7494a665e.png'
+      } 
+      else if (pubkey === '1839a10b6d534c253713ec8c248baeb1b42aa92a981a741fcd7979bec0a392e9') {
+        image = 'https://files.mastodon-japan.net/accounts/avatars/110/650/100/443/507/244/original/82bcaaddc52d8dbb.png'
+      } 
+      else if (pubkey === '42912eaa1609506a6347de157bcf767732114908a8ffae4c79fd36dcd4c5f997') {
+        image = 'https://s3.arkjp.net/misskey/31527780-325d-4299-8495-860c278ca4e6.png'
+      } 
+      else if (pubkey === 'a16cd2ce710c7790dd1e84ec0ad1aa830fd2e163118c1081f2c0fec9eee98bde') {
+        image = 'https://file.misskey.design/post/4a9da4d3-5340-4955-af62-38dbff5083a0.png'
+      } 
+      else if (pubkey === '18f7ee1c2b60f78e6bdeeb80012d5e1c9618b3e1d8103cc7cec696df7909f2e5') {
+        image = 'https://nostr.build/i/5fab606131108ac99fa86e26775f07adeb5992e02730503f7b2258b1ad994e19.jpg'
+      } 
+      else if (pubkey === '0ac9931e241fd1c1f6d04f45a7b8589158aec511f90cab9dfc6dcd358ec001eb') {
+        image = 'https://submarin.online/files/webpublic-6cad35b7-b148-4e66-b650-198fd6ea249f'
+      } 
+      else if (pubkey === '59a8c963ebbd5a81511dad27869a9547354fcac337a6af0f5f81fb8748f14b9a') {
+        image = 'https://file.misskey.design/post/5f06ea5c-3a6f-428e-b50a-e20c77b1529d.png'
+      } 
+      else if (pubkey === '9935d3ad4d33a2fdeb8fd3b725296734fb5578506cdb546d1b1ec952db14c1b0') {
+        image = 'https://s3.arkjp.net/misskey/b0d55bc2-c9ae-403c-9aa5-7a3c9c162388.png'
+      } 
+      else if (pubkey === '6efe5b2d24041c9ebb5f31f44e99f7ef22910fe4077f3459a7b7a543b84287e7') {
+        image = 'https://s3.fedibird.com/accounts/avatars/000/153/850/original/43c598b7dc7bff56.png'
+      } 
+      else if (pubkey === 'c1cab2874eb4ea804d6ae69a2444550299e5c5fbbd151dfd1683e0921b078aa2') {
+        image = 'https://cdn.nostr.build/i/05b2709b5cca5b103a36d8a9ee318e73fad8e1ed3a1081425147446bb3ec1565.png'
+      } 
+      else if (pubkey === '19a379d15fd329be24019ec845d60b771e4a6bd8bc5ca49bebdca99ead9a4ef3') {
+        image = 'https://cdn.nostr.build/i/d5f0f5273cf117e3797c6c58ef45d88383d1703a4d52e6cca1dcf656e5777900.jpg'
+      } 
+      else if (pubkey === 'f4389066e6edc80877748844382242cc140519df2f9decb34159fabfc27569b7') {
+        image = 'https://cdn.nostr.build/i/0bdcd229ad216a974779fe6afe80839d2f1f67c98b1b9c875a3d2c65c5468852.jpg'
+      } 
+      else if (pubkey === 'da92ec0dcd2afb18650c6cbb1f90e680ef7ba1c57e108e7b00fb6b2449243866') {
+        image = 'https://cdn.nostr.build/i/9f2f15689dfe6dc4e02001868e94c3ce0574fcdc7e1a72ad74554e69c218a383.jpg'
+      } 
+      else if (pubkey === 'dabdbf04ddd834446e8da4cd13b97042623d550d4ece077fe1f83800b7215f5f') {
+        image = 'https://cdn.nostr.build/i/c32519adf6bbcd5732df863d23752de3bfc912e54b75bd204dec58230efe7a8b.jpg'
+      } 
+      else if (pubkey === 'fdb789242b61d3a5eebb6e42862dbed482cb12ca9e332d5fc308fa5e996c4cd2') {
+        image = 'https://satoshi.news/favicon.png'
+      } 
+      else if (pubkey === '6be180c5e760deadf81bc46356d4fc33cd1e9b925276053c020a4b4a23af33a4') {
+        image = 'https://cdn.nostr.build/i/649192dcd39d54f4d55f73b0362f7a0b6ff374c7074d57fc265e297ec75f2806.jpg'
+      } 
+      else if (pubkey === '7c09b0e2b5975953442ab9783809a7b3a7da98a184538f54e9dc36ead83fc220') {
+        image = 'https://yakihonne.s3.ap-east-1.amazonaws.com/7c09b0e2b5975953442ab9783809a7b3a7da98a184538f54e9dc36ead83fc220/files/1693274777150-YAKIHONNES3.png'
+      } 
+      else if (pubkey === '6b1cad754ae53dcd8a349b7985971f4588b0fda1d5ee4f67bb906b116b02d3d4') {
+        image = 'https://yakihonne.s3.ap-east-1.amazonaws.com/6b1cad754ae53dcd8a349b7985971f4588b0fda1d5ee4f67bb906b116b02d3d4/files/1693274447505-YAKIHONNES3.png'
+      } 
+      else if (pubkey === 'e7f57bdb9d05622309b48ed01d73dbec1deab688dc35f8d71f3b81d07d63394f') {
+        image = 'https://cdn.nostr.build/i/8d286436fe1ad25bac7209712216eafdd8184bd5caa14b909728c1fa16fce8ad.jpg'
+      } 
+      else if (pubkey === '02467b27c88aed37f9369280a220c26736efe59add332f3023722004ef577d8a') {
+        image = 'https://i.imgur.com/1npa8Ku.png'
+      } 
+      else if (pubkey === 'f72db03978e54753ed827503105d5f84088b41fd0f0a0fc3aa85d6187ffceeb7') {
+        image = 'https://nostr.build/i/d2a961940ffd41b3ae0dd95cbee8f76f2d6f429e48e7d1aa2ae13116b18d7bb0.jpg'
+      } 
+      else if (pubkey === '4a82bd5f227e9c61f189862486cdcf1837775f1cb6d4dc50a4a9ff145b6173ce') {
+        image = 'https://void.cat/d/GtE4nWsk3fTLp7T59FtgtS.webp'
+      } 
+      else if (pubkey === '7a7aa33827438c019c031aebf2c258bbc3db094b26b28385d1b58a0e22f0f314') {
+        image = 'https://cdn.zebedee.io/uploads/245851df-52c5-4239-915b-d8edf55efdc3_ead3112b-785e-4122-baaa-b3f8f2a2cb3b.jpeg'
+      } 
+      else if (pubkey === '7daa45d7107e4e5e9eccf3bd536e29808b55e8c0cbfbe7a4f100668f6dfd954f') {
+        image = 'https://cdn.nostr.build/i/95e55d13cb558d4a6fc553e7c0042ac8bc806ace36cc10d8d3cb970f78c499de.jpg'
+      } 
+      else if (pubkey === '4ff3fa6ed4a4c225e75d0a98c03474ad49ce88aad018bfe2890ad2411227a66c') {
+        image = 'https://file.misskey.design/post/webpublic-a1f2f853-e771-4564-b874-9cc7aff42b93.png'
+      } 
+      else if (pubkey === 'f6b87828a3e32ad827d9ea6b43c27284c2e3fe9e154f7ceb4d24b5bff09f89eb') {
+        image = 'https://s3.arkjp.net/misskey/05524843-822e-4453-a213-32ce7d3fc807.png'
+      } 
+      else if (pubkey === 'd70443903e58607ba5868071f1c0c779b13edf1bfdc8b85681ccc963cad6f522') {
+        image = 'https://s3.arkjp.net/misskey/af92c0eb-c400-4efe-8cf3-ebd0351386a3.png'
+      } 
+      else if (pubkey === 'aabb25563f52e698287b540e81d961ae2a575314ed6dacdcd5d51cffc7ba47c6') {
+        image = 'https://media.sushi.ski/files/webpublic-58bb0d7c-e433-4b87-85b9-b252aff13dcd.png'
+      } 
+      else if (pubkey === '23b29ef1354991438b4c5011b9a8a1fe5e28a293e1c8b976ccc858216adfa5ed') {
+        image = 'https://s3.bskstorage.com/sakura/backspacekey/56dad931-e65f-493b-8ec9-6265caefb82f.webp'
+      } 
+      else if (pubkey === 'ebad21b502fc6b555bd94a1b4c278c4286cc9c3a183ef4154650db5a0539350c') {
+        image = 'https://i.nya.coffee/accounts/avatars/106/804/691/471/152/602/original/a78e83daf435573e.jpg'
+      } 
+      else if (pubkey === '79071fa7c5ab57cda01cbb270412e8335a954b88005c6bb55c3586c668d1a9d7') {
+        image = 'https://file.misskey.design/post/4f5f2cfa-be1c-40ba-bd06-7073dc5fabf6.png'
+      } 
+      else if (pubkey === 'bfa68b60559b3a11daed0cfaaccd1aa4eb2ac43c8b59a8e2f6f14ba44d97b0c9') {
+        image = 'https://storage.googleapis.com/sh1cdn/icon.png'
+      } 
+      else if (pubkey === 'b9125f519d31a9096fcbbe24f03d227141ed8b830d0ab6ac221aecc5c31484a0') {
+        image = 'https://cdn.nostr.build/i/4691a63fc46e4b4217413e52006bc1d95687eb6d4a4cfa8f0ab38ff88b5b6b40.webp'
+      } 
+      else if (pubkey === '14dd8d94e4f37072d34a9a544c9480323593f24b20bca6fd1496699607cfcc13') {
+        image = 'https://img.pawoo.net/accounts/avatars/000/055/501/original/c23b861e23cd78d2.png'
+      } 
+      else if (pubkey === '0cc3d3e7e6f115c4af27a274f541afaefcbfdcb9fe4730b682825a5ac889d431') {
+        image = 'https://files.mastodon-japan.net/accounts/avatars/110/218/642/847/271/364/original/6475ee32d13b23a7.jpg'
+      } 
+      else if (pubkey === '0da086f31ba266ecd45b95ab79261ae22cd61adb58ee857ae44a066ca37127bc') {
+        image = 'https://cdn.nostr.build/i/25e98902bdf060d981414a63295e3c93caaf61b5b5eef32d5a606c95246c6d6d.jpg'
+      } 
+      else if (pubkey === '697ed956ec6ea1f433edb3d3736b5bc40f6adb8ad38a5d8d452bd9c95832560a') {
+        image = 'https://nostr.build/i/25185d3d47860dbc5f41ae5ecfb7a25e642608314a5564d5830bf34d1db90258.jpg'
+      } 
+      else if (pubkey === '7f3029851e1aa33461a87b34c9d3a7b0ba82d1cd287cc61543f763e018984ece') {
+        image = 'https://file.misskey.design/post/webpublic-1fffe734-a38a-4bae-acbd-1d5ff6d67556.webp'
+      } 
+      else if (pubkey === 'e95698da15ad2d813ef12f91f789b59e6b39fd3c12c8f9fc1f98833eeac62650') {
+        image = 'https://social-cdn.vivaldi.net/system/accounts/avatars/110/186/329/813/065/410/original/4b7dd6b78b8333bc.png'
+      } 
+      else if (pubkey === 'd8d55626752262fb4a17590347139b2c2d29bca7aa440d07f9c14302f15994da') {
+        image = 'https://cdn.nostr.build/i/31222f6fbdf9eff52758a95cc229a920a9d7091fae336c49857a4c69b08c6b36.jpg'
+      } 
+      else if (pubkey === 'abf985b08dc8549db1faa7fe146cd8c20703097e01d4be7a543410b6fce6dfdb') {
+        image = 'https://cdn.nostr.build/i/f4f2b3693468e68f6fc2178381615d70794d0a5ec7aaea616f1f497eebf71c9b.jpg'
+      } 
+      else if (pubkey === '9ca57f24676947b7d717b10663e48dd741bca23f40e71d00e629b80dc9d37e2f') {
+        image = 'https://void.cat/d/9Q2JRVnMD9ff9Vew7QCQkE.webp'
+      } 
+      else if (pubkey === '2020b7f55006cdb4f972b3943e7043d45d576fa735c0c83c246950858622ef29') {
+        image = 'https://cdn.nostr.build/i/4853c46ed6db6480a55c7a98f03818258530c98827fb0da00c6132e89c7cc1c7.jpg'
+      } 
+      else if (pubkey === '4039df038890f83d936f8bc0c998809fcebcc0a3a7a6b091e32f3e8db5b9b1c7') {
+        image = 'https://cdn.nostr.build/i/248946ed7d12ea2be114101ad5ef1273abf11b98f11e176d816afa7b9f6b12af.jpg'
+      } 
+      else if (pubkey === '805d2a171d3579236d92bec1724c78eae1551753eac6a818c413496323fc0918') {
+        image = 'https://us-southeast-1.linodeobjects.com/dufflepud/uploads/52977737-acd1-4ec3-b241-8685baeb64dc.jpg'
+      } 
+      else if (pubkey === '9e6db7b6481ca3c4ba82ab6a48871e2fbd95ac658b4f7dd7fae19ae9336d8293') {
+        image = 'https://cdn.nostr.build/i/ebc3920463c93bea7ef4570484c9b7dcc0de49e13e50218291fbc18b5777ffaa.jpg'
+      } 
+      else if (pubkey === 'baf11a37812dbdc2049d925ce50083d16de3f1a464191593509e311b49dfdf33') {
+        image = 'https://cdn.nostr.build/i/919ed020f752808c4feae99c333acdb0bb280f55993d9e2bbab8fc118ab1b464.jpg'
+      } 
+      else if (pubkey === 'b55f50e0fe05ca2cf1f54c5bd637d851a6cf113357fa95d226769fde40ab294b') {
+        image = 'https://s3.fedibird.com/accounts/avatars/109/920/193/069/486/469/original/dbf5d82dfe8107ad.png'
+      } 
+      else if (pubkey === 'f80f6204403cbba65e3e24973236f80b2310cec4f16160f0b8b48d6641cd7f4c') {
+        image = 'https://cdn.nostr.build/i/b82b4937b91ba547ce21b38c87e4b561001d7f0a62248c1f8b0ec420886d8072.jpg'
+      } 
+      else if (pubkey === '50b5ba07998cb67506139e0f4234a620f9b1f6e890ed75d7a9932653104f1930') {
+        image = 'https://s3.metaskey.net/files/40555607-4830-40d4-93e2-e4ea909020d4.png'
+      } 
+      else if (pubkey === '58289164a81d5d817b8d3580722e4c5401f03ba74936501ee79951ef1189a93b') {
+        image = 'https://cdn.nostr.build/i/9d66546d67a6a80ad61e23188c633f230334dee62967f95521ec984ebb4ce3eb.jpg'
+      } 
+      else if (pubkey === '44b00385d5a507a8e181c893660066c6e666af0f0e4c860f26aa1fade10cb435') {
+        image = 'https://nostr.build/i/6ebee426a9b2cdc73f3f4fbc1638a82708bd78fc82fa30f418df8ef5c443e050.jpg'
+      } 
+      else if (pubkey === '2b0e1b5a4162a4482e8dc912cef6edf4c45a9afceab09213b7b8a7841d09a8e4') {
+        image = 'https://pbs.twimg.com/profile_images/1107234399634898944/MQLkqXhw_400x400.png'
+      } 
+      else if (pubkey === '7c31ecec3ee2dc9e080bb658afdc1839ed619d099debbe17b549c1c6f87c175c') {
+        image = 'https://social.mikutter.hachune.net/system/accounts/avatars/000/013/511/original/fe293a6aacab597f.jpg'
+      } 
+      else if (pubkey === '6e6ae466bcb5685f18cc1289b1a063beaa17de4204a537e7510966fcdf59233f') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/816/889/original/8c55dd84b9595a81.jpg'
+      } 
+      else if (pubkey === '13e033a79ed39e58a37c3795ddd3b8d93eada2c0a303790e4e366e26b343fb96') {
+        image = 'https://i.gyazo.com/2720e65d811434d5681bfa2bcbb4b8e1.jpg'
+      } 
+      else if (pubkey === 'c67698b1236a63e2e4b59c88e32347689586b1a48fa3bd593a4087420c7601cc') {
+        image = 'https://media.mstdn.jp/accounts/avatars/109/795/200/663/945/361/original/7b55f63014377bb5.gif'
+      } 
+      else if (pubkey === '9bd48699d2666fc113fdb219017deb85ec4262bcb985753cbe1c4060b8ea478c') {
+        image = 'https://s3.arkjp.net/misskey/2a9fbe09-a1d9-4617-af56-9e27e857e401.png'
+      } 
+      else if (pubkey === '5b407259615b5ed78fbcadc1db5dd26d5b6033f68af89a04ca31a477364f5519') {
+        image = 'https://media.songbird.cloud/accounts/avatars/110/479/872/468/812/381/original/5364c5ad9930939d.jpg'
+      } 
+      else if (pubkey === '47093feec6b196b95b2261cc7ee9ca66dfa98322046bd96d0c3657bbc4aa9c6b') {
+        image = 'https://media.nijimiss.app/null/webpublic-6a784579-5ceb-4ef5-81e8-5ed56fe3c902.webp'
+      } 
+      else if (pubkey === '089ba22e47bc9417b75b6d93f4a97ecf43838617f39691ce3605311c79bcf396') {
+        image = 'https://media.misskeyusercontent.com/io/3a6f48c0-61a9-4761-b5c4-dad3ae411d8d.png'
+      } 
+      else if (pubkey === 'f328b3a2ef3446c2b9afaf0551b763469f43666b708925406471e7305e176124') {
+        image = 'https://img.pawoo.net/accounts/avatars/001/309/373/original/14c08a0e1fe5a716.jpg'
+      } 
+      else if (pubkey === '38e470752e13f637f9f60ad2e920e3ddfa166e53d9aa584d22a884ca94e57168') {
+        image = 'https://sss.misskey.gg/sss/gg/19dcc65f-6a5d-40b5-beee-343956d186c5.webp'
+      } 
+      else if (pubkey === 'ee49752d166566b16ac4ca42ae82ab8fc12cdafd40ce7eacb29b766acfb6f794') {
+        image = 'https://media.misskeyusercontent.com/io/a840c4f8-aee6-49af-a205-ea08a485f83b.jpg'
+      } 
+      else if (pubkey === 'fa98ec33098cf4df45af63a12b086d949ff021a36da17c60da7bae9ca36471ef') {
+        image = 'https://i.nostrimg.com/a38c05a20829f1af99b21645a7ba4c1dc1892d6b6a0b58030d8939d6e11ab079/file.jpg'
+      } 
+      else if (pubkey === '44a550b499576d4a38385b6621c1b653c6a8391e4295abc7e98deeba0cc3d345') {
+        image = 'https://rss-mstdn.studiofreesia.com/file/accounts/avatars/110/868/874/073/303/216/original/300ff2f665b4e805.png'
+      } 
+      else if (pubkey === 'ce4446d03e99590cc48ca58ecbbf476f161927cd28b96d7459466f420581579e') {
+        image = 'https://carloshmbtn.github.io/images/avatar.png'
+      } 
+      else if (pubkey === 'a309992f115e424db1cae9584ec152f55023a9bed6f59435366830e2cb04515a') {
+        image = 'https://cdn.nostr.build/i/2948fd8555937d6c31ff4ff6975ee3db71cdb48c339624ece6cbccaeff179e39.jpg'
+      } 
+      else if (pubkey === '2b7d73db9921fbac8874db63fbee6891e34c93c9c77f7660fb9866d582687503') {
+        image = 'https://nostr.build/i/nostr.build_332e0c860aea9514fd04b47a447490c614ebdc48e3e7509f8777454418e3291c.jpeg'
+      } 
+      else if (pubkey === '486172f9815bfefe48dad8aeb3334bd31f4b3e58f391700d51c7c0339e3128be') {
+        image = 'https://media.shrimpia.network/mk-shrimpia/files/c3d7b85a-7aad-42fb-9f7e-119a95834b9e.png'
+      } 
+      else if (pubkey === 'd0a1c8495ef9ceedb164ff3043a338e735a2fa1e942fe1c75dee030780d9a68c') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/001/861/original/afcba4b771d32d7e.jpg'
+      } 
+      else if (pubkey === '66225e75c6030d2f770faf5f53895f41bebe96929e5e2fc28813275b6acb5e19') {
+        image = 'https://image.nostr.build/4883261ecb4c8847c418b15be39f2bfce51e124fedc325f04c25f3821215a396.jpg'
+      } 
+      else if (pubkey === '31bea2615ae59c7227da4cae242571fd752d5c61a683a95e307d7bae623d3a45') {
+        image = 'https://image.nostr.build/0f85cb3f35ede75e8a58ca681bb5d45a8e653587c8ccd96134fc4f8f1dc6f2e8.jpg'
+      } 
+      else if (pubkey === '0e39506491ab68b88c057c9ce7d65f0934661a1c57f57f168884a7b06840e6c4') {
+        image = 'https://image.nostr.build/4036868f8fb0c86c8c6994daf8bc67c95ee640a187448f0011ab8b0520224c69.jpg'
+      } 
+      else if (pubkey === 'bc207c46098b36db035453781fa7872a77708605dc5f3ae0f9f293bba3ee75f2') {
+        image = 'https://nostr.build/i/nostr.build_20ccb417f89c757737929654508ff0e20d0e51f5dc01ba58c1d72f79e83a574b.jpg'
+      } 
+      else if (pubkey === '878eef83027374a9bab3c1a1505af02dd6426c4c3f330b06f0aadc3126d04bbc') {
+        image = 'https://image.nostr.build/3c0ee995380f7781c6dc4086f15213dae833adf91b46428784e6515b0bbff854.jpg'
+      } 
+      else if (pubkey === '8865750008bec8b0ba02ad75c58677dd9c6dbfb59ec7191382fa8e5160c5c9cb') {
+        image = 'https://cdn.nostr.build/i/3b859f57a70b3c6e2f187f5db3c34fe86176dedec6588edc14f8a0cafbfcb841.jpg'
+      } 
+      else if (pubkey === 'cca4729bd4a9247d9e8a4b350352e0513e87645031b62b2c1a17b892d8ff0513') {
+        image = 'https://kids-image.0px.io/kids-image.0px.io/file/b22ede1d-8356-4e44-9132-e389b230ab39.png'
+      } 
+      else if (pubkey === '6c33c32469c0b843dac9798b2fd21214520d34f3fee3bf934b94b661644bd694') {
+        image = 'https://image.nostr.build/012f7b424e3819e95857836aa6da9024fd5f8b22031754318656fb7db984d51a.jpg'
+      } 
+      else if (pubkey === 'ce41ccc467d2b3d735538036f251ad1d8885c4cd62b55620c007e50d1cadb39d') {
+        image = 'https://s3.isk01.sakurastorage.jp/backspacekey/misskey/a7079322-8c9d-449d-a7ac-2882f443c760.png'
+      } 
+      else if (pubkey === '9ff8d05acefd61f720e7caa75323a4ea356e293ae18b04bc684f42af801d829f') {
+        image = 'https://cdn.nostr.build/i/788b8baa371cde951d178e1f7ee393f8082911003927847d785cd36effa5c705.jpg'
+      } 
+      else if (pubkey === '95826345a5279672487b1c975c06fdc7a216075c03b816f7d2a007b0c0311dfd') {
+        image = 'https://image.nostr.build/ed3f11ed0ab97fc99d030a570794072b68d3b556b4a94a27531f7a17debce834.jpg'
+      } 
+      else if (pubkey === 'b17bfc98f2b71eaf90f82773377e34defe31b0e4197cc8d4762181bc1edc7658') {
+        image = 'https://image.nostr.build/346caa5b0d06ff979aad4fbc9773d2ea1a677e0be073c63939490faaafe8cb3d.jpg'
+      } 
+      else if (pubkey === '5b9321f039b6d4bfa4afbfeba816c7fe486c0322894f52fe026e9ded1fc36a4f') {
+        image = 'https://cdn.nostr.build/i/38514ff061624f661a54875cd18221859493e6caf2cfcfdcda35e029a00af9d3.jpg'
+      } 
+      else if (pubkey === 'eca04a9112a35e21877b4f8b43c3340f14084417ac995e9ddef6659209405454') {
+        image = 'https://media.handon.club/accounts/avatars/000/000/001/original/5a9499233e906258.jpg'
+      } 
+      else if (pubkey === '77911886971fe579fe3e4f90d9dc7e91fcd74850dc2853681fff17654b218091') {
+        image = 'https://robohash.org/77911886971fe579fe3e4f90d9dc7e91fcd74850dc2853681fff17654b218091?size=300x300'
+      } 
+      else if (pubkey === 'e1f33a026697601b24a8bc6011f8cd83b817a0e82fd12b41c6993ed045687054') {
+        image = 'https://i.seadn.io/gae/BAeuvdSNwbg4yDudn6DyLGUstbgqcfcdX3NEi9-eawuICzKckMlJemoeJgNOo6Bi0n8e-8CrZP60NRKojedBOJ_Lp2RafulCe7xQ?w=500&auto=format'
+      } 
+      else if (pubkey === '195db35cf21bb242b61c60d9d076cf5cbdffdfa2bd844ef69c18fbb4bf41cc20') {
+        image = 'https://media.nijimiss.app/null/webpublic-d01b3129-030d-48e9-ad95-ccb02ff9e8fe.png'
+      } 
+      else if (pubkey === 'e94c30ac74a226a28099a47b81cf301c5e8bf79982ec1540bc7ccd2209482b87') {
+        image = 'https://media.misskeyusercontent.com/io/1ec98702-84a0-4355-a5d3-029cdc577b91.webp'
+      } 
+      else if (pubkey === 'fcdb20efe3af6682d0e0a2a35c7b493e470e14987fbb0f69e5b386a8307fb419') {
+        image = 'https://media.misskeyusercontent.com/io/31d1ee00-40bb-43a1-ac91-2ee84206a8e8.webp'
+      } 
+      else if (pubkey === 'd0efbbec2e54774a8094e17cb7ad454d887ab833a731861a8ee6c157e058a757') {
+        image = 'https://media.misskeyusercontent.com/io/webpublic-4f776ab2-e620-4042-b5db-26f2f6a9eff5.webp'
+      } 
+      else if (pubkey === 'c0faee02a7753452628bc967abb6ec3712ec9a294928a22f6708240ee2c4363f') {
+        image = 'https://pbs.twimg.com/profile_images/1437646027662626819/6t6bfgXi.jpg'
+      } 
+      else if (pubkey === 'd3bdc7aa55f360bbac9360edf335fb07bc06ce5704b1c8113fa3a117c86701e1') {
+        image = 'https://void.cat/d/LQbQKXRcXZNf6K2pRFYyb1.webp'
+      } 
+      else if (pubkey === '8bbd407875cacbe4129854dfa10c60313ca31fedd6fc8399864515de94582d53') {
+        image = 'https://image.nostr.build/9817fb9160b2707b407387350530406dc55d39c5269e9752f68c05ad1c108d80.jpg'
+      } 
+      else if (pubkey === '9fef8aee4b6ebe4440c5cb9dc04c0b7f89b608bd0160daadcb5fe4622a390cd0') {
+        image = 'https://conoha.cuconoki.net/cucotto.jpg'
+      } 
+      else if (pubkey === '902d5ef4cc759af28764127f7a8eca9ebfc3c2df517a0046284a92879bcd4989') {
+        image = 'https://cdn.nostr.build/i/ab91c02b5ce82f0fe9839dce920848f5616c891da784adb0bd311ec159500070.jpg'
+      } 
+      else if (pubkey === 'b72fb8a3d67456a435ce55a4c5069100b445d761a6477f810d1502e03356403c') {
+        image = 'https://pbs.twimg.com/profile_images/1475092829798277121/c63BCHIE_normal.jpg'
+      } 
+      else if (pubkey === 'ece52f8cc7eea940a136f4d96134f23d6f1169a6985320e6d6a98f44d2e08e2f') {
+        image = 'https://nostr.build/i/30f45876f4dfcde91899980666c5e2e83ed63c132f39de1134886298228eb1f5.jpg'
+      } 
+      else if (pubkey === '39f85d995a8b3534b037295c09a637941294ad921ea9f03d7ac2d5186bc4b666') {
+        image = 'https://cdn.nostr.build/i/24441682460a126a120ae8e6c09799905551144f026ef3f71e88fce37b776c63.jpg'
+      } 
+      else if (pubkey === '5e1c3b6ff87c16300694cb12d9bacc7698045e212b5b564d438715505299f8bc') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_4875040461492972211692123526.webp'
+      } 
+      else if (pubkey === 'd91f33300ebd00bd983ded3afd628b2fbda2d90bf16410b3dc0f5550d7800598') {
+        image = 'https://cdn.nostr.build/i/10d07b8c8d13ba97c5b7be02c837636fe13b67d50a7b2054d5ad3c0d9d951251.jpg'
+      } 
+      else if (pubkey === '5949a32b92a0ebf0611a1d7dac35eb3027bc96d32b06618c15bc914e1692ef75') {
+        image = 'https://pbs.twimg.com/profile_images/618607921501310977/m7E8wzNV_400x400.png'
+      } 
+      else if (pubkey === 'b7f319a227077ad69b8c3d9a5d8cf0d33489bea45ff8066183339a47302f4ef0') {
+        image = 'https://nostr.build/i/nostr.build_a678bb4db051863c00e14844220f6509d119ada4a5eb45f5ad2d6c7d8420dc4d.jpg'
+      } 
+      else if (pubkey === '447eda6cddc80a4d5d5f71d686bffc33f1b0467b124c61fb41a29f90f22bc9ea') {
+        image = 'https://petit-plaisir.info/Nostr/icon/IMG_1282.JPG'
+      } 
+      else if (pubkey === '4e653e9ac7940a207ff86df8aec62d0f2051bca086d982bbcd609344cfe015ac') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/007/980/original/D1U2CQ4OPAJV.png'
+      } 
+      else if (pubkey === 'b83636b41fae77a8e2e983d463e0c7d77e36c205dd6c6cb032139c8c2e54a17a') {
+        image = 'https://s.gravatar.com/avatar/c5b4d57a23b991d41ac0a89926ab4f8a?s=80'
+      } 
+      else if (pubkey === 'b883b3f46e35605978212946468482c49c3fc4020b40ad6df851314c6092e33f') {
+        image = 'https://nostr.build/i/p/nostr.build_d16b7be9b7fb9bf4a3d8ce40766dedc9fd1ac81c307a2ec964bbf911ceeea45b.jpeg'
+      } 
+      else if (pubkey === '1c29a4dda7865a1006650bdfb2f480a328388ce113d6e45490af9ba0e06e5e55') {
+        image = 'https://i.seadn.io/gae/VcJlWnsDy_SxmzXg5BOm_LqmwJW_W4R2rBktY58Tw5az3g5t3q-4XivtceHrPaK1an25CoLGi1nf7UIqwJXFcsyZIpEocVo4snCUMDY?auto=format&w=1920'
+      } 
+      else if (pubkey === '48343f32410f8c05dd3dddb0c0e888a58313d2a26bf4ff8fb74250a5af3bbe57') {
+        image = 'https://nostr.build/i/nostr.build_70baabbba948c12b677fb3651a576a399d3d996055d0f8c2dfd66e616bbf4d16.jpeg'
+      } 
+      else if (pubkey === 'a82c090da99392379473d6085022a388ee437832126823f943290a9100a46341') {
+        image = 'https://nostr.build/i/nostr.build_17b85ef9368c4fa4e56a0c09ef17bac3a9a2379c28f8d28bc5e2aa6141ed1a1f.jpeg'
+      } 
+      else if (pubkey === '0437def2c5de7c24074734fd9f3e1fb1fc17f5daff5f8f7df4265b959634bf4a') {
+        image = 'http://www.textlife.net/mizukiroad/IMG_1258.JPG'
+      } 
+      else if (pubkey === 'c1bcb7993e80502fb3c4c9dba1b07b49632e7f2af8c8961977f29363d229f893') {
+        image = 'https://lh3.googleusercontent.com/ZTQlgOwQgt2m9vfe9dw6XONyC9fVVdDXN58mdlrD0UasUugYqgWww6BnJe4UuTswXgYRQ4Ok5moDqYr5QlwLgDf9N3tPBZr8gsOfIVs'
+      } 
+      else if (pubkey === '583213248b262da46b309a70c723a5f48158cf89d7d0a8338c037fcfd251b2ac') {
+        image = 'https://pbs.twimg.com/profile_images/1577580533244387328/o3ioaN-L_400x400.jpg'
+      } 
+      else if (pubkey === '8cef27301cfc72af9dbcc5730e3e18d16929ea7fdb8054c03a36858a43180d3c') {
+        image = 'https://pbs.twimg.com/profile_images/1591074878014521344/hpPOoh9A_400x400.jpg'
+      } 
+      else if (pubkey === 'b7f25158271e7011fc168b3991af87578fc0d47926b263be70ab2343ddadcc36') {
+        image = 'https://i.seadn.io/gae/4Re320jfpMx8rJD5RQtzhaWG9gi_cJQPc370Oz6R1bDIxLzvjh5YQld6aokIif87QaRcApm0q-4Z6HZZW43hOdis0iubRko-0f5luA?auto=format&w=1000'
+      } 
+      else if (pubkey === 'e378977e9cedde39a076a385d32a879f927b46d4a48a831b0015ec0a2ef7e5ee') {
+        image = 'https://pbs.twimg.com/profile_images/1578604125847097344/-HmnTAja.jpg'
+      } 
+      else if (pubkey === '3521c09faa4f8c28d0a31aabc78664e20fdf32f91cc4942e31084f0e2901ca08') {
+        image = 'https://s3.arkjp.net/misskey/38247312-5cd5-40c5-9dd7-9537c31a3378.png'
+      } 
+      else if (pubkey === '4541a11c5ab8617e64555dcc3d31860412e86eb12abfb9a6f51f4e16b9dba08e') {
+        image = 'https://212.maho.app/accounts/avatars/000/000/002/original/5d954552bcfde30d.gif'
+      } 
+      else if (pubkey === 'b8440245ae880bf3fe78439d0eca8bcdb515fd0e90db4129ec1c63538d250035') {
+        image = 'https://sss.misskey.gg/sss/gg/webpublic-4f17a71d-429e-4186-bf11-d10431c7055f.webp'
+      } 
+      else if (pubkey === 'd57b2570241c371cb6e3e82a9232941c127a8333dd667fcbfe86fe0c73481790') {
+        image = 'https://sss.misskey.gg/sss/gg/ec0b4aa6-d76c-4e19-b25e-f61e855a6b71.webp'
+      } 
+      else if (pubkey === 'a1fb842d670e498737cff1b279579a64a67a3b668db0da3c048e801eaa0def24') {
+        image = 'https://media.nijimiss.app/null/webpublic-a97c5e7b-e706-44d7-8f44-7cd4c9bc6368.png'
+      } 
+      else if (pubkey === 'b8f7bfa8d2e9fae8183d8d3ce13d12cb05e3743ab653b8114cca8f4d4c2e78ba') {
+        image = 'https://media.misskeyusercontent.com/io/47e66103-9262-434a-9105-26e0f256a088.png'
+      } 
+      else if (pubkey === '14062b9a30b840ee56b8c3f543c3bb432142625307bee61ac727ea7b7578257b') {
+        image = 'https://s3.arkjp.net/misskey/062f0ed0-9e51-4d0f-9495-9d99519aa558.png'
+      } 
+      else if (pubkey === 'b0b104912a869129788cdbc83b0483c0d764b899795295a81bd3aca12c288c84') {
+        image = 'https://sss.misskey.gg/sss/gg/webpublic-532e092a-ca63-44df-9d71-1c9b36c572a1.webp'
+      } 
+      else if (pubkey === 'a8da46165e111c8c6912a321c56bc2f6bd7dce0677bbf0600ac6993cb2c6a52c') {
+        image = 'https://gyazo.com/832562b53c7722c3d7a3ddea15b1c03e.png'
+      } 
+      else if (pubkey === 'c5d9cc12e7296d74e991e2843cc0eefc83d0d5bae8bca18bd1ddf7cad503327e') {
+        image = 'https://pbs.twimg.com/profile_images/926944891107553280/Nht1IoUT_400x400.jpg'
+      } 
+      else if (pubkey === '8c5ff828f59bc6df82e19c57de83fff795b6131b46eec56a71ed0e805ccb2af2') {
+        image = 'https://nostr.build/i/nostr.build_03d050ad6cc6e083000cf4073d7546b2a06b877434ee3375f3c843bbc0ac1972.png'
+      } 
+      else if (pubkey === '3e3a58f0dc800533cc3764820b77fbccff3355a57923c873b2538e486b843266') {
+        image = 'https://void.cat/d/Dc3Lf8oDphcZSNUfwXAHku.webp'
+      } 
+      else if (pubkey === 'b79f017a887116745127e6249924b940ff3710b45e14ce9d9529785dc7659ce1') {
+        image = 'https://tamiweb.net/bonkura.jpg'
+      } 
+      else if (pubkey === 'd1c1a00a1c6232a3ca34a64e657ca99fcba58b01236c334dfdbcddface1b63bf') {
+        image = 'https://pbs.twimg.com/profile_images/1600775542042943489/RjI4N7kQ_400x400.jpg'
+      } 
+      else if (pubkey === '111c60608f753b85eb14d3fe49e75135f8ea1c6680efeacabf2c1bddf9b464a2') {
+        image = 'https://dq10u.com/image/icon.jpg'
+      } 
+      else if (pubkey === 'cf3a32df889ec2058ad5d3f89dbd251d4b224dcd54e720bbdb44cb6d9b088637') {
+        image = 'https://void.cat/d/wDVdZBckqMm9hdTYi5o1B.webp'
+      } 
+      else if (pubkey === '11063ce9a1fd48c0086f433ceeb4e3880b3fb0c9580d7dd726dbd701f41c5867') {
+        image = 'https://susumuota.github.io/images/tw_prof.png'
+      } 
+      else if (pubkey === 'd2cfb3b9e5e7256e1ffce3b62453076bcb802799979f2597ef5ca46e393259df') {
+        image = 'https://0.gravatar.com/avatar/afc8687d0f839a61d3fafa9b38adb885'
+      } 
+      else if (pubkey === 'e344a1fe0448942daeeaa509149a9be256ee28795b8847e6003a2b77cb37c3fa') {
+        image = 'https://pbs.twimg.com/profile_images/1625170321144954880/ANRwhNcg_400x400.jpg'
+      } 
+      else if (pubkey === 'f56b00379ffcef0fe7bbb273efce50d14e89d080447392deed248f12b9147bfa') {
+        image = 'https://i.imgur.com/JtWb4Cq.png'
+      } 
+      else if (pubkey === '8807f73f73701d9aaeb03882c15a9b58888c6152b1937bcac1ef07f9575c942a') {
+        image = 'https://pbs.twimg.com/profile_images/1598676676913033217/CbvCWMDs_400x400.jpg'
+      } 
+      else if (pubkey === 'd91a495e47a8f6064849bdaf5621cdf20dee35f3c83c9b1134b0659871826642') {
+        image = 'https://yt3.ggpht.com/a/AATXAJxaKKgVCqPT5zYUhr4EdYfKa0Nal0LfMeoBXQ=s900-c-k-c0xffffffff-no-rj-mo'
+      } 
+      else if (pubkey === '8714a5336fa28fad79a141e3beb3340d08b100921078661c9f7cc973648e1bad') {
+        image = 'https://nostr.build/i/nostr.build_1a7a966297b60e2c32d03d5abafb01519748000153a6664f017c4d3efee657c4.png'
+      } 
+      else if (pubkey === 'eebc7542bdc4beb1e621a3258b9b431530f943fc773459b43cc580f58e85218c') {
+        image = 'https://pbs.twimg.com/media/Fo62okuaUAEj7ku?format=jpg&name=medium'
+      } 
+      else if (pubkey === 'eee33b392112fff080342600eeebb27418c63582384f1a64846111ed970c3166') {
+        image = 'https://pbs.twimg.com/profile_images/1129703804520214528/j2OBW-VA_200x200.jpg'
+      } 
+      else if (pubkey === 'd3f9fa3dec7cb471bf4ea6898f049b42fe77291b7f23038dc8c66dee42485ab3') {
+        image = 'https://avatars.githubusercontent.com/u/1259266?v=4'
+      } 
+      else if (pubkey === 'e3b9961de5377d987d310ec3baaf807272723a3792e47c3b7652828f9946b526') {
+        image = 'http://takasefuhito.net/src/avater.png'
+      } 
+      else if (pubkey === 'dbd0e7449d5e7aaf096de5cdc75129a27c77e580285ffa8e505084196330373f') {
+        image = 'https://pbs.twimg.com/profile_images/928781486777499649/_I_BEM_t_400x400.jpg'
+      } 
+      else if (pubkey === 'bb67202f8dd652d80e4258b6b51b6d3d254baa5041b0d67a07f601efe19ef173') {
+        image = 'https://nostr.build/i/nostr.build_6227a03f8f928a88a2eac3987a5f551cbd6a21abb67c2376eadbcbceff20af61.jpeg'
+      } 
+      else if (pubkey === '7f36f0c1d71b1a0d19fde504a05146192a91f66c414980162a1250617fd1db56') {
+        image = 'https://pics.prcm.jp/5e6679fecc080/67553970/jpeg/67553970.jpeg'
+      } 
+      else if (pubkey === '01be1603babb1b59386ca66943feb6d1d9e85814c7b08bc73205098b73e7a9df') {
+        image = 'https://s3.arkjp.net/misskey/33bae95d-5bf1-4664-8690-cedae18a45c6.png'
+      } 
+      else if (pubkey === 'ea2a4267e16547c52f1c7b3be65f87f04fd9868de1989762c12fcd466a9e3c44') {
+        image = 'https://nostr.build/i/p/nostr.build_83967ecab7fbb4dc35fe4f20a51600f2b9905371f9e03eb51bcfabe29f56682a.png'
+      } 
+      else if (pubkey === '50dd7ef8fc38217ff2b73b6fb2ab6965588b2d16a1fc7b067095eaddd1d2f3fc') {
+        image = 'https://pbs.twimg.com/profile_images/940251907196567554/ofIkmVnV_400x400.jpg'
+      } 
+      else if (pubkey === '7ff274def56595ec4b145db902527c9e2ba4d49a11cc06c9088983726c549855') {
+        image = 'https://avatars.githubusercontent.com/u/2178847?v=4'
+      } 
+      else if (pubkey === '53c6d689ede704330b76a741024e10dd17793c5ab2fefab973f6943a240dd109') {
+        image = 'https://pbs.twimg.com/profile_images/378800000510057295/2dde73ef602f7d4c12aea96947efa408_200x200.png'
+      } 
+      else if (pubkey === '42280ba9894986f45f2483603aed35550c6ad12c993bead6a7baf560ceb13bbf') {
+        image = 'https://void.cat/d/LD2f1ipa6mooCQ7B5MAiiN.webp'
+      } 
+      else if (pubkey === '527b67fe18e49b6f96690016e8ce1b1d70f13eedc2e42fc1a1bb67ed0da556c3') {
+        image = 'https://pbs.twimg.com/profile_images/531675219140685825/JPRlVqSm_400x400.jpeg'
+      } 
+      else if (pubkey === '04c8329c2469f046fc0cc10e59ae37f2f0e751525bdf0d691f4e4a5cf8299287') {
+        image = 'https://nostr.build/i/p/nostr.build_a5e5aee4d7022daf644c678b396fff5e7f5ab4ecde0dde2dc72a229a62e866d0.jpeg'
+      } 
+      else if (pubkey === '3d2ebbd741c634fec425ababde63dc1a4387a2fa97f7eea94f3ea7227f19b119') {
+        image = 'https://void.cat/d/GD1V3EXUCK8HRve1BAqzWw.webp'
+      } 
+      else if (pubkey === '8ebf24a6d1a0bb69f7bce5863fec286ff3a0ebafdff0e89e2ed219d83f219238') {
+        image = 'https://void.cat/d/P1UtWNWZSUo5pYrrGfgDiR.webp'
+      } 
+      else if (pubkey === '126103bfddc8df256b6e0abfd7f3797c80dcc4ea88f7c2f87dd4104220b4d65f') {
+        image = 'https://pbs.twimg.com/profile_images/1629360712974999554/Ua0sKfhz.jpg'
+      } 
+      else if (pubkey === 'd8ae8810be4a362425b3000dcfc659c55fcec89db39e30b1fbb7de4c1af2f2c6') {
+        image = 'https://www.mobile-com.net/wp-content/uploads/2023/02/U49Jk6bb_400x400.jpg'
+      } 
+      else if (pubkey === '2af2b6ff36ba5b401b8d36972f9974d8a47dae42da82efb62dc7b237adc521a6') {
+        image = 'https://pbs.twimg.com/profile_images/780458809038811136/mWTiGfsm_400x400.jpg'
+      } 
+      else if (pubkey === '100cf2110741e1f850ae6da495414eef002ee04d32bca67518e843d0c6efb533') {
+        image = 'https://pbs.twimg.com/profile_images/1525740217797574657/auqtsCAy_400x400.png'
+      } 
+      else if (pubkey === 'a73a25f1f5394c74f307b49b3505b5ab3d1ef829e5e91934c48c212b7244a7ff') {
+        image = 'https://i.seadn.io/gae/Cc80QtEWh23840GjTAA5i9JhkVfPzJ4PvogutpTgee4j60xwUBmzWbeWO1sI_4c7c-FgHgM92uK5Y2vyGVw2lSKSnZwu9QhGn8lxIA?auto=format&w=1000'
+      } 
+      else if (pubkey === 'c8b6d63c7bbd72e3dfa7f4fe1cd5362955bebd8f044b16688f65904342463e4c') {
+        image = 'https://i.seadn.io/gcs/files/8174d269becabc78621c020b4cefb793.gif?auto=format&w=1000'
+      } 
+      else if (pubkey === 'dd8656e4b3a3848f1c43140f6fd99029e7d9dbf2f0d0f59d4db8d9e853fa8689') {
+        image = 'http://www.mayonnaise.jp/img/mayo.jpeg'
+      } 
+      else if (pubkey === 'c6ca80847914bcc3c728707b1f77659468421b71a1a1f099d25a71aa74e7641a') {
+        image = 'https://kechako.dev/image/profile/icon.png'
+      } 
+      else if (pubkey === 'e121a996cf83877325f3cb3f351e5159d58ead194f4aca0c8fd9bfa893d6e369') {
+        image = 'https://void.cat/d/W2SkCBoX3AvmAVD6K17JPx.webp'
+      } 
+      else if (pubkey === 'fe7f6bc6f7338b76bbf80db402ade65953e20b2f23e66e898204b63cc42539a3') {
+        image = 'https://cdn.nostr.build/i/p/67d94f416326bf241847739dd20c2eafb4751da28e3a38e24207d1ba66978c83.png'
+      } 
+      else if (pubkey === 'd4a2f2a06ac25d8cd496ca7e04260bd645a2705ce0d5a30c245ab9fb4def3159') {
+        image = 'https://cdn.nostr.build/i/bb80b5245782fe339ba06484101887e0437c5890a394f5dd6ceac94384beefd4.jpg'
+      } 
+      else if (pubkey === 'dfb20ab8851501400a0890d51dd690e42b1cb0ff40da96c4c889f13a8bb49237') {
+        image = 'https://void.cat/d/5PuQg3uSGi1wG3pDNSeoZZ.webp'
+      } 
+      else if (pubkey === '87c312b1e9cb9a245db62201091d1319166f830960980793d89cf1404d645dcf') {
+        image = 'https://cdn.zebedee.io/uploads/a7b92c92-f780-40b7-9946-d9d10679a343_3CEA1897-7D04-429E-8733-1BC93243AF7E.png'
+      } 
+      else if (pubkey === '9fd1529f75020e620f7443369dd48323f98b6b85a5ef3ad70a5c5f131ac8d6e5') {
+        image = 'https://lh3.googleusercontent.com/Jd8vzL3-Mg9rRPfhuRr1bV8hQ_rRhP4z3OfjSZllcT5jk9HGwJCm43GlgnVd1RGktaqJ346nySt3WMncre1MH1hrhtYZ4CAnFm7BbymCCIAi'
+      } 
+      else if (pubkey === 'a9135276130203614862b9210ba3e93ab279d82719613a5c40e566aad6d1eb17') {
+        image = 'https://cdn.nostr.build/i/6a0acfe39cba333132f2d38dc8b94f0f5404351cb3d1d6deef60323af16bb807.jpg'
+      } 
+      else if (pubkey === '2188aa64fb0ebc5e2313d0bc95e8e80246b946b446c90c0df4512466dacc83fd') {
+        image = 'https://pbs.twimg.com/profile_images/598830285459853313/wxz1uqEl_400x400.png'
+      } 
+      else if (pubkey === 'a1c1984994512025327f52c7b6d3a1434a37fbb7a318380cab4832f8daacbb52') {
+        image = 'https://nostr.build/i/p/nostr.build_e0ac869a3dc075cdb739c28262da4226793d906cb0d588fb00f2dad02f75a8a8.gif'
+      } 
+      else if (pubkey === '4e32dbe4ef021fd6b22947c5e510fa5b4ea43284ec01f4dec1af551ab00e76e1') {
+        image = 'https://image.nostr.build/4bfc13373696c760ae1c7c4825971838c986083522abb61654ad6373ca9a5727.jpg'
+      } 
       else if (pubkey === 'b0909f64623144fdfb1b3ffe719bdcf1ecac99e51c94a05e0763e2c02685f82d') {
         image = 'https://cdn.zebedee.io/uploads/95c255cb-6359-4e0b-9f21-625bddb725e5_ohachiged4484375.png'
       } 
       else if (pubkey === 'f5f9119374247b9d9c5c31f12907519b5733d6f51af6750530fa1b54baa53de2') {
         image = 'https://cdn.zebedee.io/uploads/90dc570c-4531-4e25-a368-16e660e9778a_3D0F10CB-4913-4B95-B13D-3503A338397F.jpg'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '87256f1afba02bca2141aad1a68eb467e78255f3cd4cff089cf5400995c0fadc') {
+        image = 'https://media.hostdon.ne.jp/hostdon-m34/accounts/avatars/000/016/821/original/50cf95f303a2d1b0.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === 'df8f0a640c3ffd09e293999acfa399d0574c8501fcdabceca5072ee2057d87a5') {
+        image = 'https://cdn.nostr.build/p/L0X9.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '0a1cbc1392761924b2c2d100c7b99136a03de0c23b276f3c9493ece1669b8fb8') {
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === 'b77f64db5428af783d7681a44010f31e1fd745a7c63e41455335fb86129746f2') {
+        image = 'https://image.nostr.build/7c9677801bc4d5f2d3f718343a62eefc765687a89cffaed6bd07f97066c5be24.jpg'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '0726c94c7c2b60aac7660dedbb51f5a53ccf5e7c858c7adca6501f82a899288e') {
+        image = 'https://cdn.zebedee.io/uploads/0fa5036b-79ec-46f7-8292-7de73804ecf7_2c9aa66e-7903-4428-b1b8-ec046c1b49d6.jpeg'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === 'fb7d9edb022881ac80da6369832f67e300f06d8524a2a55d1aa88aed51b481ba') {
+        image = 'https://cdn.nostr.build/i/6933b115492468a726ad512ad091ce582c8abe655409dc22ed4d997f7d184518.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '40c77ab35089711fa1080cd90a5a4abb8621665d3972264a1ca5233a0c2a054b') {
+        image = 'https://void.cat/d/LcANyNWhWsQ1LZaESfuihn.webp'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '96ac4d04bc403e679f009cf0ea68ec1b744d8cfc6f62e73865d8d82135536a0d') {
+        image = 'https://void.cat/d/T8EvUcNK7V6Xu1RAC67qaJ.webp'
       } 
       else if (pubkey === '3515c444be4f8c94620969693b79a75f902951429c8b9a1ccfdc8a1a9488ece6') {
         image = 'https://void.cat/d/EZHVvWLvDQ1niwdsaB4yMG.webp'
@@ -1604,9 +2253,11 @@ const Test = () => {
       } 
       else if (pubkey === '416c7f49c5acc6b28e80f6afb38075c8ad11503d34aaab63527cf0758d179785') {
         image = 'https://cdn.nostr.build/i/db1879feb37b55829a82fd853672caa5b2244a09f915d88b0aa6617da43ab0a4.jpg'
+	image = 'https://cdn.nostr.build/i/0b53cd76f9ee73ed7236443551bdd65d8c3366ae2ce6511d2628b0ee67c1b3d3.jpg'
       } 
       else if (pubkey === '200844241c9ebfe5c7633646098f3303372fe9359a9a56219d8a9da23a59ed24') {
         image = 'https://cdn.nostr.build/i/37a266ffcde217ec3a7193b8908272088b2f1c044567a4edbd56c68e9be58562.jpg'
+	image = 'https://cdn.nostr.build/i/79f3c5f4f973ecef9d51568099b0967f5ffa179124839880bf2797cb46b807d2.jpg'
       } 
       else if (pubkey === '511fa8d73ca8513f6fd44751dbccf7c06b6912280f8c4f1c3f0a6bcf4b7e7f2e') {
         image = 'https://void.cat/d/SKULqy13Q2F4RRnZ28Pnob.webp'
@@ -1653,6 +2304,7 @@ const Test = () => {
       } 
       else if (pubkey === '2b9515a5afeff5caecc9187bb8515e27e39cab06ef4a8b8ca9cb267b40a073fc') {
         image = 'https://files.mastodon-japan.net/accounts/avatars/109/312/934/646/805/590/original/bdc5d764e5bef2cf.png'
+	image = 'https://files.mastodon-japan.net/accounts/avatars/109/312/934/646/805/590/original/c88c1308622d0333.png'
       } 
       else if (pubkey === '0d5d10c063f93d9991a91815093c209228c969c2d85f44775d31c34509374969') {
         image = 'https://calc.aloneroid.one/files/5d592802-2b63-4c63-9982-8b3600b683c1'
@@ -1859,6 +2511,7 @@ const Test = () => {
       } 
       else if (pubkey === '3a1c66a52624e8a04fc31ec58cf7637d706b34d4c8a5e6844a1c3417f1772e33') {
         image = 'https://media.minazukey.uk/data/e284d548-b191-4e3a-ac2d-71dad91b5dd0.gif'
+	image = 'https://media.minazukey.uk/data/bfefece2-2864-43ba-bd82-711b8afee954.jpg'
       } 
       else if (pubkey === 'bd69d603165ff7f9bd478c8095087b8218f955dd8730580cfa64252492d647cd') {
         image = 'https://nostr.build/i/1ccfa0c28d0eb405b319e180655ee0297d4baaab3b8900aaefdc645a6c4e6a28.jpg'
@@ -2541,6 +3194,7 @@ const Test = () => {
       } 
       else if (pubkey === '586892a56108cadefd5bbe1ad2569b7638af99f3b5e82f573430af0068139814') {
         image = 'https://s3.fedibird.com/accounts/avatars/109/815/930/896/696/818/original/twicon_mh2.png'
+	image = 'https://s3.fedibird.com/accounts/avatars/109/815/930/896/696/818/original/dce240b7f6cf2e29.png'
       } 
       else if (pubkey === '11d029866a7e89aa4c097c1ffd1ed777897b4f79dc4090e96587f5ce5da13a1b') {
         image = 'https://nostr.build/i/1eaf7092652e1f27ac619f3ba3d77d7e3ce1a7cc5e7eedd06263087161e022e1.jpg'
@@ -4049,6 +4703,7 @@ const Test = () => {
       } 
       else if (pubkey == 'f08a93704245801d7e5e6377f878e9c3ea2dfdf7419dc89efcf2b5d7a5f627d9') {
         image = 'https://nostr.build/i/b1515af0f80416b326acd95d92dc33a569dfc6f3383670048163419f7ab83896.jpg'
+	image = 'https://image.nostr.build/39bfdb1ac1b9bc51f7154e721228d3179aa83f6f868ba13c19830c3614dcc153.gif'
       } 
       else if (pubkey == 'daefc770c5fa29cd52acbb444e5af3fc94b5bf775ee960703fd0f1da44085bb0') {
         image = 'https://nostr.build/i/nostr.build_7ee429c6b9c942e468e7d78c267f01dd13d40775f3c86e63de105782de8bb9c1.jpg'
@@ -4747,6 +5402,7 @@ const Test = () => {
       }
       else if (pubkey == 'f07e0b1af066b4838386360a1a2cbb374429a9fbaab593027f3fcd3bd3b5c367') {
         image = 'https://nostr.build/i/p/nostr.build_cf4966bc801a4f01c1c37150ee45f9849b3501aa5ed1ae11d0de414336d12974.jpg'
+	image = 'https://cdn.nostr.build/i/p/69cdd2a12f6b7ec0a3677db3646080d075b33e6dfedc971d6e8dcc550c3182c5.jpg'
       }
       else if (pubkey == 'ad8c68f4baa51a236d05a1491f986aca4bc05bbee92f0e413a9b994247a2b746') {
         image = 'https://pbs.twimg.com/profile_images/1219756534/48587_1256800997_8531_q_400x400.jpg'
@@ -5130,6 +5786,7 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/108610db6f53aead2966ea7e5e9a590d5e958f9b3ba83982a3d6c43ddf51a791.jpg'
 	image = 'https://pbs.twimg.com/profile_images/1311126856435814402/HqnsvcRT_400x400.jpg'
 	image = 'https://nostr.build/i/a3cee443969f4ff50035117722f1823f89ef96bb4136738f1c8c5f1bb048f048.jpg'
+	image = 'https://nostr.build/i/f495d598e51fb31a3cdf327a03bff1e1a1614391731d651adfed352a18378235.jpg'
       }
       else if (pubkey == '6369fb82bec54226bf09bb365b6f0d71b16c41f56e7edfd4f97de23f9c3281da') {
         image = 'https://nostr.build/i/nostr.build_e9120a1b32f992f44c55c0a8916428a9e17a0b1a73439ecd0731997e94a67001.bmp'
@@ -5248,6 +5905,7 @@ const Test = () => {
       }
       else if (pubkey == '6a36c1a62cba047b1cdb93bef316c6617c79816e32b80166c471c30bdb77e526') {
         image = 'https://nostr.build/i/9127cb93848b22344fcf93ae2674c5f2160fec9e88551815d520278832ad913b.jpg'
+	image = 'https://cdn.nostr.build/i/p/5a061cb56e92193be1e579f72258889382bfc8f853d06cbd9efbfd26683fac59.jpg'
       }
       else if (pubkey == 'e1b89ba9f8a3f2a23de3a28eba7d10bf4896509f4f91fced09dd4aeeda4859a2') {
         image = 'https://nostr.build/i/df5b8a593730ac5121c11ef4eeaa7f6434424847a4a5081b3c8fb43865d652f1.jpg'
@@ -5554,6 +6212,7 @@ const Test = () => {
       }
       else if (pubkey == '658ae463581942c0e3975613df5c4274f3d3767e00a0fba37965e6574ccb9d6a') {
         image = 'https://wangdora.jp/images/wangdora.jpg'
+	image = 'https://pbs.twimg.com/profile_images/1038813265663410179/lFhy4hcs_400x400.jpg'
       }
       else if (pubkey == 'a56783deb3a83cfbdd331a854a74d599bfc8bf05b4221cf8f0e1347b089f8e8f') {
         image = 'https://nostr.build/i/nostr.build_98169d045a5add9ca2fe9a8dd0bac5256414bcfc998e99b4efacefc88bac10e8.png'
@@ -5634,6 +6293,7 @@ const Test = () => {
       else if (pubkey == '7dc1677112f05eaf49547806543b1c006ce3257278e52b1c9abff63270ed704f') {
         image = 'https://i.imgur.com/WgIkvHL.jpg'
 	image = 'https://i.imgur.com/kcS2WiU.jpg'
+	image = 'https://image.nostr.build/1e957ca3f25bf97fd3050036849a80b9b43be3831ab452378ef5a06f66685d88.gif'
       }
       else if (pubkey == 'f03f2244d27bfd41e4de902fcc8744bcc1a425b466b3d6057e30d2ca31275430') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://teraminato.com/apple-touch-icon-precomposed.png'
@@ -5664,6 +6324,7 @@ const Test = () => {
       }
       else if (pubkey == '6b48053fc2e87420ca48d5d2fd827cf55a5cbcaecf5136ff8fc5c344427059b8') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://64.media.tumblr.com/959baab597673135942b2a1397b5fac3/51dd5b5ea841aed3-6d/s512x512u_c1/a33b1bf5073848d55d17a33568cd277ec4284600.jpg'
+	image = 'https://void.cat/d/XwDZx78HGtQ1UcpVSD71fs.webp'
       }
       else if (pubkey == 'd4ea67859c89cce2a2f25c41f0efc81da8299f086e34eff47d661807dcc8e982') {
         image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/time2/0600.png'
@@ -6252,6 +6913,7 @@ const Test = () => {
       }
       else if (pubkey == 'f9cb12d3c14e7316b564120495f315863b541ce464c12cbfb09018d1e6981885') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1306898059750563840/hrBDpuE3_400x400.jpg'
+	image = 'https://void.cat/d/ChHCGP3mMZj968JqTW9GUW.webp'
       }
       else if (pubkey == 'bf2376e17ba4ec269d10fcc996a4746b451152be9031fa48e74553dde5526bce') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/3063i.gif'
@@ -6984,6 +7646,7 @@ const Test = () => {
       }
       else if (pubkey == '7aa090be3c66dbcc7c98ca17a22ed5daa2cea6f2b87df35cada814bb09e1e283') {
         image = 'https://pbs.twimg.com/profile_images/1445176476161114113/pWP6zWyX_400x400.jpg'
+	image = 'https://cdn.nostr.build/i/779159f79559a9487018850628af1b62d8800ab907aeccdc058e3199cf16931e.png'
       }
       else if (pubkey == '804bc2c1366938c45a2c8409afbe284c48981d492d510fa47a57eb8c08a660d2') {
         image = 'https://img.majipoka.com/080717e.png'
@@ -7059,6 +7722,7 @@ const Test = () => {
         // erechorse
         image = 'https://i.gyazo.com/0775dc06170f3a9385faf921c50d8d80.jpg'
         image = 'https://i.gyazo.com/ee480a2fdfa15aae6c9a15d44225489f.jpg'
+	image = 'https://image.nostr.build/3e55ee8d28c338052a1bdc36a59d871f4447fe28c70e192f85230ba2a2ad98db.gif'
       }
       else if (pubkey == '4c5d5379a066339c88f6e101e3edb1fbaee4ede3eea35ffc6f1c664b3a4383ee') {
         // koteitan
@@ -7126,6 +7790,7 @@ const Test = () => {
       else if (pubkey == '53bde5f1748546a0c28f1fab8ee18d7229e6ebaaea2df343906de9325333dd3c') {
         // syui
         image = 'https://imgproxy.iris.to/insecure/plain/https://syui.cf/icon/syui.png'
+	image = 'https://syui.ai/icon/syui.png'
       }
       else if (pubkey == 'f1479c160e576934586a7424195dc155a04448d3d71d4090adec95915dd1eba9') {
         // h3y6e
