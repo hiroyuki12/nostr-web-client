@@ -11,21 +11,35 @@ import Pictures from './Pictures';
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
+  let untilValue = dateToUnix(now.current);  //all new events from now
+//  untilValue = 1697180410;  //paging
+
   let noteCount = 0;
 
-  let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1695070450;  //paging
-
-//  untilValue = 1695034027;  // repost NG
+//  untilValue = 1697112060;  // #r NG
+//  untilValue = 1696632885;  // Metadata
+//  untilValue = 1696502429;  // jpg NG
+//  untilValue = 1696412926;  // LIVE
+//  untilValue = 1696316415;  // nevent1
+//  untilValue = 1696327217;  // repost NG
+//  untilValue = 1696105738;  // quote_nevent njump fix
+//  untilValue = 1696119569;  // njump.me nevent fix
+//  untilValue = 1696110614;  // url # NG
+//  untilValue = 1695999820;  // Apple Music OGP
+//  untilValue = 1695702700;  // repost NG fix
+//  untilValue = 1695438407;  // to link NG fix
+//  untilValue = 1695370850;  // tiktok
+//  untilValue = 1695066723;  // kind:10001 pin channel
+//  untilValue = 1695034027;  // repost NG fix
 //  untilValue = 1694945195;  // repost 1694945166
 //  untilValue = 1694683832;  // generic repost, Nostrasia Hackathon
 //  untilValue = 1694687538;  // zap request
 //  untilValue = 1694359339;  // search kind:30040
 //  untilValue = 1694326407;  // kind:10030
 //  untilValue = 1694194192;  // kind:30025 LongForm
-//  untilValue = 1694055016;  // \n\n
+//  untilValue = 1694055016;  // \n\n NG
 //  untilValue = 1694003737;  // nostr:naddr1 zap.stream
-//  untilValue = 1693796212;  // #e(reply NG
+//  untilValue = 1693796212;  // #e(reply NG fix
 //  untilValue = 1693566199;  // generic repost channel message
 //  untilValue = 1693300143;  // channel creation
 //  untilValue = 1692922942;  // nak install
@@ -34,7 +48,7 @@ const Test = () => {
 //  untilValue = 1691662709;  // repost mov NG
 //  untilValue = 1691665815;  // tag:h nowplaying
 //  untilValue = 1691507297;  // repost NG
-//  untilValue = 1691417549;  // kind:9735 zap
+//  untilValue = 1691417549;  // kind:9735 zap memo
 //  untilValue = 1690983115;  //live chat message kind:1311 Karnage
 //  untilValue = 1690354019;  //(quote)
 //  untilValue = 1690284540;  // \t
@@ -190,7 +204,7 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [0,1,3,4,5,6,16,40,41,42,44,1311,1984,9734,9735,10000,10001,10002,30000,30001,30023,30311,30315,30023,30078,30311,30315,31922],
+      kinds: [0,1,3,4,5,6,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,30000,30001,30023,30311,30315,30023,30078,30311,30315,31922],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
@@ -224,7 +238,7 @@ const Test = () => {
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
 //      limit: 1000,
-      limit: 100,
+      limit: 150,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
       //"#t": ["illust"],
@@ -337,6 +351,10 @@ const Test = () => {
         return;
       }
 
+      if(note.content.includes('#markostr') || note.content.includes('#targoyleTweetGen')) {  
+        return;
+      }
+
       if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/)) {
         // hiragara filter
 	//follow = "[[en]]";
@@ -361,8 +379,10 @@ const Test = () => {
       const npub = nip19.npubEncode(note.pubkey)
       //const nostrnpub = "https://nostr.com/" + npub
       const nostrnpub = "https://yabu.me/" + npub
-      //const url = "https://nostter.vercel.app/" + npub 
-      const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub 
+      //const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub 
+      //const userUrl = "https://snort.social/p/" + npub 
+      //const userUrl = "https://yabu.me/" + npub 
+      const userUrl = "https://nostter.vercel.app/" + npub 
 
       const imageURL2 = getImageURL(note.pubkey);  // avator
       const imageURL3 = getImageURL(note.pubkey);  // avator
@@ -371,7 +391,8 @@ const Test = () => {
       //const noteUrl = "https://iris.to/#/post/" + note.id
       const noteUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.id)
       const noteIdShort = note.id.substring(0,2)
-      const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
+      //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
+      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
 
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
@@ -395,8 +416,9 @@ const Test = () => {
       let replyToImageURL4 = getImageURL(note.pubkey);
       let replyToImageURL5 = getImageURL(note.pubkey);
       //let replyToUserBaseUrl = "https://nostter.vercel.app/" 
-      let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
       //let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
+      //let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
+      let replyToUserBaseUrl = "https://yabu.me/" 
       let replyToUrl1 = replyToUserBaseUrl + npub 
       let replyToUrl2 = replyToUrl1
       let replyToUrl3 = replyToUrl1
@@ -532,11 +554,12 @@ const Test = () => {
             //channelUrl = "https://unyu-house.vercel.app/"
             channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
 	  }
-	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
-	  //const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[h][1])
 	  //const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
-	  const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
+	  //const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
+	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
+	  //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + note.tags[h][1]
+	  const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[h][1])
 	  if(eventLinkUrlText1 === "") {
 	    if(marker === "" && note.kind === 1) {  // 1:text
 	      //marker = "root ";
@@ -635,7 +658,6 @@ const Test = () => {
 	}
 	else {
         let tmp
-//	let tmp = content.split('abc",');  // abc",
 	tmp = content.split('","');  // ","
 	if(content.includes("pubkey")) {
 	  tmp = content.split('",');  // ",
@@ -656,7 +678,8 @@ const Test = () => {
 	    }
             for(let j=0; j<20; j++) {
 	      content = content.replace("\\/","/");  // \/ -> /
-	      content = content.replace("\\r","");   // \r
+	      content = content.replace("\\r","");   // \\r -> \r
+	      content = content.replace("\\n","\n");   // \\n -> \n
 	    }
 	    
 	    content = content.replace('"kind":1,','');
@@ -689,8 +712,13 @@ const Test = () => {
       let image5Url = "";
       //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
-      if(content.includes("https://") || content.includes("http://")) {
+      if(content.includes("https:") || content.includes("http:")) {
         let tmp = content;
+        for(let i=0; i<100; i++) {
+          tmp = tmp.replace('\\/','/');
+          content = content.replace('\\/','/');
+	  
+	}
         for(let i=0; i<100; i++) {
           tmp = tmp.replace('\\n',' ');
           tmp = tmp.replace('、',' ');
@@ -712,7 +740,7 @@ const Test = () => {
 
         let imageCount = 0;
         for(let i=0; i<tmp2.length; i++) {
-          if(tmp2[i].includes(".jpg")  ||
+          if((tmp2[i].includes(".jpg")  ||
              tmp2[i].includes(".jpeg") || 
              tmp2[i].includes(".png")  || 
              tmp2[i].includes(".gif")  || 
@@ -724,7 +752,11 @@ const Test = () => {
              tmp2[i].includes(".mov") ||
              tmp2[i].includes("/img/") ||
              tmp2[i].includes("/images?") ||
-             tmp2[i].includes("grafana.gsn.im/") ){
+             tmp2[i].includes("?set=set4") ||
+             tmp2[i].includes("grafana.gsn.im/"))
+	     && tmp2[i].includes("http")
+	     )  {
+	     //content = content + '[' + tmp2[i] + '],'
 	    if(imageCount===0) {
               inlineImage1Height = "250";
 	      image1Url = tmp2[i];
@@ -746,7 +778,7 @@ const Test = () => {
 	      image5Url = tmp2[i];
 	    }
 	    imageCount = imageCount + 1;
-            content = content.replace(tmp2[i],'');
+            //content = content.replace(tmp2[i],'');
           }
         }
       }
@@ -822,15 +854,25 @@ const Test = () => {
 	    const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
 	    tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	  }
-	  else if(tmpUrl.includes("twitter.com")) {
+	  else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
 	    //content = content.replace(tmp2[i], "");
-	    const id = tmpUrl; 
+	    const id = tmpUrl.replace("x.com","twitter.com"); 
 	    tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 	  }
 	  else {
             tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 	  }
-	  content = content.replace(tmpWord, tmpIframe);
+	  if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
+	    if(!tmpUrl.includes("mov") && !tmpUrl.includes("jpeg")  && !tmpUrl.includes("jpg") && !tmpUrl.includes("mp4") && !tmpUrl.includes("png") && !tmpUrl.includes("webp")) {
+	      content = content.replace(tmpWord, tmpIframe);
+	    }
+	    else {
+	      content = content.replace(tmpWord, "");
+	    }
+	  }
+	  else {
+	    content = content.replace(tmpWord, tmpUrl);
+	  }
 	}
       }
 
@@ -861,7 +903,8 @@ const Test = () => {
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "p") {
           const npub = nip19.npubEncode(note.tags[i][1])
-	  const toLinkUrl =  "https://nostter.vercel.app/" + npub
+	  //const toLinkUrl =  "https://nostter.vercel.app/" + npub
+	  const toLinkUrl =  "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
 	  content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
           if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
             content = content.replace('#[' + i + ']',"@もちもち");
@@ -886,7 +929,7 @@ const Test = () => {
   	}
       }
 
-      // (to), (quote)  nostr:npub1, nostr:note1
+      // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
       let quoteLinkUrl = "";
       let quoteLinkText = "";
       let quoteLinkUrl2	 = "";
@@ -904,7 +947,9 @@ const Test = () => {
 	) {
 	for(let i=0; i<wordsNostr.length; i++) {
 	  if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
-	    const toLinkUrl = 'https://nostter.vercel.app/' + wordsNostr[i].replace('nostr:','');
+	    //const toLinkUrl = 'https://nostter.vercel.app/' + wordsNostr[i].replace('nostr:','');
+            //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
+            const toLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace('nostr:',''); 
 	    content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
 	    if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
 	      content = content.replace('(to)','@やぶみちゃん');
@@ -934,24 +979,27 @@ const Test = () => {
 	  }
 	  else if(wordsNostr[i].includes("nostr:note1") || 
 	          wordsNostr[i].includes("nostr:nevent1")) {  
-            let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
+            //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
+            let quoteBaseUrl = "https://snort.social/e/"
 	    if(quoteLinkText === "") {
 	      //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://iris.to/post/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://coracle.social/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
-	      //quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
-	      quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+	      //quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
               quoteLinkText = "";
 	      if(content.includes("nevent1")) {
                 //quoteLinkText = quoteLinkText + wordsNostr[i];
                 //quoteLinkText = "(quote_nevent1)";
-	        quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
-  	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_nevent1)</a>');
+	        //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
+	        //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
+	        let quoteNeventLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
 	      }
 	      else {
-  	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note1)</a>');
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
 	      }
 	    }
 	    else if(quoteLinkText2 === "") {
@@ -988,19 +1036,34 @@ const Test = () => {
 	}
       }
 
+
+      // nevent1
+      if(content.includes("\nnevent1")) {
+        let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+	for(let i=0; i<wordsNostr.length; i++) {
+	  if(wordsNostr[i].includes("nevent1")) {
+	  //content = wordsNostr[1]
+            let quoteBaseUrl = "https://snort.social/e/"
+	    quoteLinkUrl = quoteBaseUrl + wordsNostr[i]
+  	    content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nevent1)</a>');
+	  }
+	}
+      }
+
+
       let quoteId1 = "";
       let quoteUrl1 = ""
       let quoteIdText1 = "";  // #q 1
 
       for(let i=0; i<note.tags.length; i++) {
-        let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
+	//quoteUrl1 = "https://snort.social/e/" + quoteId1;
+	//quoteUrl1 = "https://nostr.com/" + quoteId1;
+	//quoteUrl1 = "https://iris.to/post/" + quoteId1;
+        //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
+        let quoteBaseUrl = "https://nostter.vercel.app/"
         if(note.tags[i][0] === "q") {
 	  if(quoteId1 === "") {
 	    quoteId1 = note.tags[i][1];  // event id
-	    //quoteUrl1 = "https://snort.social/e/" + quoteId1;
-	    //quoteUrl1 = "https://nostr.com/" + quoteId1;
-	    //quoteUrl1 = "https://iris.to/post/" + quoteId1;
-	    //quoteUrl1 = "https://nostter.vercel.app/" + nip19.noteEncode(quoteId1);
 	    quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId1);
 	    quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
 	  }
@@ -1079,11 +1142,24 @@ const Test = () => {
 	    else {
 	      iframeCount++;
 	      const url = tmp2[i];
-	      if(tmp2[i] != 'https://nostr.build/profilepic.php' && tmp2[i].length != 0) {
-	        const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-	        content = content.replace(tmp2[i], tmpIframe);
-		httpLinkUrl1 = tmp2[i];
-		httpLinkUrlText1 = '__https';
+	      if(!tmp2[i].includes("codepen.io") 
+	        &&!tmp2[i].includes("ctoa-") 
+	        &&!tmp2[i].includes("nostr.cooking") 
+		&& tmp2[i] != 'https://nostr.build/profilepic.php' 
+		&& tmp2[i].length != 0) {
+	        if(!tmp2[i].includes("?set=set4") && !tmp2[i].includes(".png") && !tmp2[i].includes(".mov") && !tmp2[i].includes(".jpeg") && !tmp2[i].includes(".jpg") && !tmp2[i].includes(".webp")) {
+	          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+	          content = content.replace(tmp2[i], tmpIframe);
+		  httpLinkUrl1 = tmp2[i];
+		  httpLinkUrlText1 = '__https';
+		}
+		else {
+	          content = content.replace(tmp2[i], "");
+		}
+	      }
+	      else {
+	        //content = content.replace(tmp2[i], "");
+	        content = content.replace(tmp2[i], '<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
 	      }
 	    }
 	  }
@@ -1189,6 +1265,11 @@ const Test = () => {
       }
       else if(note.kind === 1984) {  // 1984:Reporting
         status = "[Reporting " + note.tags[0][2] + "]_"
+	for(let x=0; x<note.tags.length; x++) {
+	  if(note.tags[x][0] == "report") {
+            status = "[Reporting " + note.tags[x][1] + "]_"
+	  }
+	}
       }
       else if(note.kind === 9734) {  // 9734:Zap Request
         status = "[Zap Request]_"
@@ -1198,7 +1279,7 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  muteCount++
 	}
-        status = "[mute list (snort) " + muteCount + "]_"
+        status = "[kind:10000 mute word (nostter), mute list (snort)" + muteCount + "]_"
 	content = ""
       }
       else if(note.kind === 10001) {  // 10001:Pin List, nostter
@@ -1274,7 +1355,7 @@ const Test = () => {
       //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
       bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
 
-      let nozokimado = "-nozokimado"
+      let nozokimado = "-nozoki"
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
       
       const note1 = nip19.noteEncode(note.id);
@@ -1316,12 +1397,11 @@ const Test = () => {
                 <a href={image5Url} target="_blank"><img src={image5Url} height={inlineImage5Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-                ({noteIdShort}){client}{proxy}<font color="black">{repHex}-{note.pubkey}-{npub}</font>
+                ({noteIdShort}){client}{proxy}<br />
 		<a href={freefromUrl} target="_blank">-FreeFrom</a>
 		<a href={snortUrl} target="_blank">-Snort</a>
-		<a href={noStrudelUrl} target="_blank">-noS</a>
-		<a href={checkerUrl} target="_blank">-postChecker</a>
-		<a href={nostrnpub} target="_blank">-npub</a>
+		<a href={noStrudelUrl} target="_blank">-noStrudel</a>
+		<a href={checkerUrl} target="_blank">-checker</a>
 		<a href={bookmarkUrl} target="_blank">{bookmark}</a>
 		<a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
 		<a href={streamingUrl} target="_blank">{streaming}</a>
@@ -1342,12 +1422,22 @@ const Test = () => {
       if (pubkey === '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
+//	image = 'https://i.gyazo.com/6f4959939afeb35e64ead00af7a74bb7.jpg'
       } // @@ 
       else if (pubkey === '') {
         image = ''
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === 'b33ab1f5cbca4659785b9bf7cb9106b5129efbf1a720f02da9e522f9acc8fe33') {
+        image = 'https://nostrcheck.me/media/public/db704f89184becdcc6ad8ef10402e0dda227172051e5641f57231f0ee8fa9152.webp'
+      } 
+      else if (pubkey === 'c2b2006172dfe76e4c5160b6686d60eb228e0c21a84ab83c505eac3224eb149a') {
+        image = 'https://robohash.org/npub1c2eqqctjmlnkunz3vzmxsmtqav3gurpp4p9ts0zst6kryf8tzjdq5stmrs?set=set4'
+      } 
+      else if (pubkey === '15b9f4a92b2f4b24b59621acdc1c996facbd37f1b5606045bbd1663ce87eef10') {
+        image = 'https://cdn.nostr.build/i/8793e6a1011b8ea48e5ea10ab4fd9a97f18a43fa377d2a15b0e35505e7ab6ff8.jpg'
+      } 
+      else if (pubkey === '32f2ac16fd46ed576db22c47ea3904e26f56687a72369fe6885b5a76fcd3915e') {
+        image = 'https://robohash.org/npub1xte2c9hagmk4wmdj93r75wgyufh4v6r6wgmfle5gtdd8dlxnj90qtsplw7?set=set4'
       } 
       else if (pubkey === '') {
         image = ''
@@ -1366,6 +1456,63 @@ const Test = () => {
       } 
       else if (pubkey === '') {
         image = ''
+      } 
+      else if (pubkey === '24f2b4bf4f2d59c505e169f073b8e0696ee92307e40788ca6baf171d52ce6fef') {
+        image = 'https://nostr.build/i/f2953b3ba96998ab0fb2fb14418a1be56826ecbf18e31c3970af3bc49db5cdc7.jpg'
+      } 
+      else if (pubkey === 'd83c6828113f4f4573a30ec278aef3cf8ae8b270d9b4e1cf5e4a936bab9c2b0e') {
+        image = 'https://storage.social.camph.net/drive/webpublic-0cb26cad-f7c5-43a6-aaa3-32a5a2d8d1cd.webp'
+      } 
+      else if (pubkey === '7d4e04503ab26615dd5f29ec08b52943cbe5f17bacc3012b26220caa232ab14c') {
+        image = 'https://void.cat/d/BouBC1J4Gt13vpowA4SHtP.webp'
+      } 
+      else if (pubkey === '1f2787b72797d6be8d32a0bb993c19e698765fd5aeb66c3e788570693c045d87') {
+        image = 'https://i.floppy.media/122a98f7ec54b655e96b41c5cdfca971.png'
+      } 
+      else if (pubkey === '620fa6800af4ceb8d7be27dcf6df50c15402a050b383b501d5fae83346de17ab') {
+        image = 'https://image.nostr.build/8d6edcb7535eaa21d2400a5de6ebee2667cba85825904163f2098ece27cadddf.png'
+      } 
+      else if (pubkey === 'e1e3fa7adcffde794232108bf21392f9bf2496d73cde611534f2dcc1be872d25') {
+        image = 'https://1.bp.blogspot.com/-FYWRJSiVIgI/UQuSUjfog0I/AAAAAAAALvE/-ZlEQ4pAnZk/s1600/shoes_32.png'
+      } 
+      else if (pubkey === '98bd8a4ff20760b72fa25dfd98ef3c162c253a126f1cf5cf85f76b9dcc9a1a9e') {
+        image = 'https://image.nostr.build/75ca4cf30f285d5acca87730011fe26f1fc4fcf562a5454a8c7945d1c409f321.jpg'
+      } 
+      else if (pubkey === '8d28f681506b81876c1f0599738e31f72a8bc40cddfd1855134b7a84e900a387') {
+        image = 'https://cdn.nostr.build/i/c09c0bab1f88c9e6fc9a3848f5d97acbaacf1ee1b880c2c71d7db96123f13e08.jpg'
+      } 
+      else if (pubkey === 'dbf0becf3483602e3a733452954d31328d9274f83f0fe910ea09df49b5b0bd21') {
+        image = 'https://moctane.com/data/moctane.png'
+      } 
+      else if (pubkey === '5f468793f907165a97d145407e824c5f6ee82ab9884d070229ac67eff17e29c0') {
+        image = 'https://cdn.targoyle.jp/img/230928_icon_q10.webp'
+      } 
+      else if (pubkey === '89e14be49ed0073da83b678279cd29ba5ad86cf000b6a3d1a4c3dc4aa4fdd02c') {
+        image = 'https://nostrcheck.me/media/quentin/avatar.webp?v=555'
+      } 
+      else if (pubkey === '134743ca8ad0203b3657c20a6869e64f160ce48ae6388dc1f5ca67f346019ee7') {
+        image = 'https://nostrcheck.me/media/public/avatar.webp'
+      } 
+      else if (pubkey === '857aacd9bc6e8f8639a4905cbbc25f64289e6b8bb3e0be6ae6ec15f238858631') {
+        image = 'https://tgkzmdd.help/nostrimg/profile/caz0617_silhouette_600x600.jpg'
+      } 
+      else if (pubkey === '458f02ba60e31025208fa48dd13682a91c7da1d04bc9e318340880774be7dc50') {
+        image = 'https://image.nostr.build/30a7edf903a0405cd9cb738b199e3369db7ebe306fd2a1e7808f7b22bd60a579.jpg'
+      } 
+      else if (pubkey === '8c284466bf370c2ed9c7911bf368d984877075fd1b67988f58a74c41e38568ac') {
+        image = 'https://image.nostr.build/cde7cbb76c21385e93450dadec223d8934284dacb315dc5231a5351d779f0b2a.png'
+      } 
+      else if (pubkey === '107aad26f58d19e0f4ee43d8dc86ad7056c35508633b7538ee1f148a38b83e68') {
+        image = 'https://lh3.googleusercontent.com/a/AGNmyxZ-R2s8alq6n1PwuRVRVonlfuXdx58dYioSgNVM5A=s96-c'
+      } 
+      else if (pubkey === '16d16239698f995dafbe5874c5f5ff9c8bd0eda9e0b948dae881b0b291e45f4c') {
+        image = 'https://cdn.nostr.build/i/4702b0b42cca496e5b12fe9dd87d57a4e94bb4da5271b26042e151bf5e59c05d.jpg'
+      } 
+      else if (pubkey === 'b29156a299493256dc25b36d22a1e1795bb1ddc5c5f6b42f2d22fd9837d6fe75') {
+        image = 'https://www.city.urasoe.lg.jp/sites/urasoe-envmap/kansatsu/images/k-usukawa.jpg'
+      } 
+      else if (pubkey === '4ce9af0070072fb6ec635d58546afd55d292c843dba7c420faa4242a5bd4549b') {
+        image = 'https://image.nostr.build/37999bf68d3feacefdad834e93c620492606fc441c5964fffbf366ffa953f060.jpg'
       } 
       else if (pubkey === 'f4d639086f6b3452e6631b256b99b59afac27a9fed588a57fa337b6beb2a5d40') {
         image = 'https://media.misskeyusercontent.com/io/49b3be7f-1db4-499b-82e7-420c5b30c7bb.webp'
@@ -2020,6 +2167,8 @@ const Test = () => {
       } 
       else if (pubkey === 'df8f0a640c3ffd09e293999acfa399d0574c8501fcdabceca5072ee2057d87a5') {
         image = 'https://cdn.nostr.build/p/L0X9.png'
+	image = 'https://i.nostr.build/6jgz.jpg'
+	image = 'https://nostrcheck.me/media/likemike/avatar.webp?5'
       } 
       else if (pubkey === '0a1cbc1392761924b2c2d100c7b99136a03de0c23b276f3c9493ece1669b8fb8') {
       } 
@@ -2448,6 +2597,7 @@ const Test = () => {
       else if (pubkey === '82b30d30444170e6a8c819e8406e362a3695454a4617894ce2706f3840c6c003') {
         image = 'https://nostr.build/i/c4467f9ea2a5b9654ff42ae7a6d8de0547df13909483e4d95d38430c4925a89d.png'
 	image = 'https://cdn.nostr.build/i/f264302a7ea8072a997f1abf5fe27b6cf755825fa1abae22e2c4d8cbcc65bc58.png'
+	image = 'https://cdn.nostr.build/i/65ee830af86c9caf571c0a47b4a41b7d6e41abc7e7eb26959228d865ebc48b53.jpg'
       } 
       else if (pubkey === 'e642ce7f99aa5df3d5596264f7f25689a2c33a7d435648618ff272353e7245f0') {
         image = 'https://kojira.io/twitter.png'
@@ -3285,6 +3435,7 @@ const Test = () => {
       } 
       else if (pubkey === '5bab615f042d568110dacb25393ab7d2436bc05f3dca8cce5f06787d2ac4109f') {
         image = 'https://nostr.build/i/7cbd4e554ed9e93c201608544b17726945aeee5274903a15271ed05a786e1107.jpg'
+	image = 'https://cdn.nostr.build/i/bfc10cf24fd9768bad2c5eb3b569d4f38f5193da38f151d5642c7d6125b10547.jpg'
       } 
       else if (pubkey === 'a6b1f4f0f23055628692e3b437ecc772c8fbfb2aa54c3c564f4e31a6148f8026') {
         image = 'https://nostr.build/i/4863ba0481b9de6fa6352aabe3b669b4a049bcfa4b9d6bcbd3067dcc877aaa09.jpg'
@@ -3367,6 +3518,7 @@ const Test = () => {
       else if (pubkey === '4320138a4fe3ae364f6d3545bcfe797f2d9290e7d911321a9bc675e0dd24131e') {
         image = 'https://omae.dev/img/IMG_3558.jpeg'
 	image = 'https://omae.dev/img/profile_icon.avif'
+	image = 'https://omae.dev/img/profile_icon_1KiB.avif'
       } 
       else if (pubkey === 'f536e69adfe7102bcc5e34fead49da7230c48dc981c9d47a7e937d4e35d944a6') {
         image = 'https://nostr.build/i/e9d673f421ce7614745c7784c9974974e92952bfd63b0eeebe5e2f1c914c3619.jpg'
@@ -3384,6 +3536,7 @@ const Test = () => {
         image = 'https://nostr.build/i/66fb269b327e7f348956a540695c3e73263ab419e22d90a68ce1ff44aee7c17e.jpg'
 	image = 'https://i.nostrimg.com/2055f414c27d71b659745615f4c45bfa9d171c176f8fdf9305fae12fb8309766/file.jpeg'
 	image = 'https://i.nostrimg.com/ea6c7b9b9b1252f3c7e46c1e4c185a5d258c6954446b19c9cf6d76d39363fe67/file.jpeg'
+	image = 'https://i.nostrimg.com/4b9c0d3edd400a88737c94996c25ba6f1edc9790e589cee652eee0bfa2feb9fb/file.png'
       } 
       else if (pubkey === '88d2a67e50005e76f4154cd43706a334b81da8eeb825853e1489f4ff6127f4a8') {
         image = 'https://nostr.build/i/8d5cc69d06cdf3738a037777f8c1a3373540bd14b8138f841e52a3e437630f4a.jpg'
@@ -3669,6 +3822,7 @@ const Test = () => {
         image = 'https://nostr.build/i/5e990251f00167a523f53bde7dbc5e6b84013fe0268ea27e8565c006dcdd5d74.jpg'
 	image = 'https://cdn.nostr.build/i/c62b9ce04ff4297504675c733b8b829953e5634b21b3247fb7dc0463097770a6.jpg'
 	image = 'https://cdn.nostr.build/i/adb4964603bcb2b0d90edf097e98e9a3341bad47f9b4a53e8a0ae19dda336f18.jpg'
+	image = 'https://image.nostr.build/4df95de07557dfb70fd0daa605503713606230ec5e35c2b3f773ae717e10b213.jpg'
       } 
       else if (pubkey === 'cb39315e73dc4e5b8e158c2f8ddf81e769847164f6d198ad610e71434f7cbf2b') {
         image = 'https://pbs.twimg.com/profile_images/1656948140925419520/qmYjlcUX.jpg'
@@ -4210,6 +4364,7 @@ const Test = () => {
       } 
       else if (pubkey == '894d2606bd1a328043aa7e63c2ecdbdfa728319b9e8c82ac0ee8855baca426fd') {
         image = 'https://nostr.build/i/69109b7ef9845c006a38d943cd099f5876027f2f4a3f5ebd3e7a48608e5c54aa.jpg'
+	image = 'https://image.nostr.build/bfb41dfc71bf6cdc531fa74d372a0f8f8b08d75cc9d73d5a77fd012ae203010c.jpg'
       } 
       else if (pubkey == '4ff1d10f5bf5afa17295f7d89dbd0a78dc78eb635ab23938a60a0d0deefb3693') {
         image = 'https://void.cat/d/A5uK6mGji2davcQ8FqjsiU.webp'
@@ -4773,16 +4928,16 @@ const Test = () => {
         image = 'https://void.cat/d/AMx6K7WfVzSe6R8DVx7rDE.webp'
       } 
       else if (pubkey == 'cce17e1b27f216e8f42548a60f59947e2b199a01ffdd993b3d66bd8dd193c7dd') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODEsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4MSwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PC9nPjwvc3ZnPg=='
+        image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
       } 
       else if (pubkey == 'eda6845cc2269bea10f010744ad79409acb7129d96857d4bf19e027696299292') {
         image = 'https://cdn.zebedee.io/uploads/4a5e3b05-2b54-4d0d-a604-dff3133e00d6_46286295-B230-4784-883B-C88EADA646DC.jpg'
       } 
       else if (pubkey == '04ea59bf576b9c41ad8d2137c538d4f499717bb3df14f5a20d9489dcc457774d') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoODAsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg4MCwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzI3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PScxNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzE3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc0Nycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
       } 
       else if (pubkey == '81d27c8405d50b6ef0c8171906d6c724af45ce3d8753a87b78472d6727cd41cd') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMjE3LDM4LDE2MiwxKTsgc3Ryb2tlOnJnYmEoMjE3LDM4LDE2MiwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzE3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PSczNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
       } 
       else if (pubkey == '8be2fd2cf7cce65a56f0820b022125e9ab4044c7dc5e444e2c0c0eab7501b0d7') {
         image = 'https://nostr.build/i/p/nostr.build_b16cd573515c070e7212b26225bcccc0e98070e5b7316ec2d500f5a6b1b0bf2e.gif'
@@ -4800,7 +4955,7 @@ const Test = () => {
         image = 'https://nostr.build/i/p/nostr.build_984d249cca437a3352a7a8fcf184b2a75cfbafafc5d4dae6ace0db182b87c834.gif'
       } 
       else if (pubkey == '3ee23277f8a53c4486565167f6a02ffb133062424a2b8a4d86e68b58c71babcd') {
-        image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDEyMywxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDEyMywxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nNDcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzM3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzQ3JyB5PScyNycgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJy8+PHJlY3QgIHg9JzcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNDcnIHk9JzM3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48L2c+PC9zdmc+'
+        image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
       } 
       else if (pubkey == '7f1b2d20466fd5ff836c6bca1a0849f9c77162cfc00b7e708a9142763c021673') {
         image = 'https://nostr.build/i/nostr.build_33f40449b90c6c9da04132fdc51b3a75e62d447dff5bc52548abc177a539cfb8.png'
@@ -5243,6 +5398,7 @@ const Test = () => {
       } 
       else if (pubkey == '717d4b62ed661dec51fb39962728a424dd00f8edb68da2c52851b79a0ad25465') {
         image = 'https://pbs.twimg.com/profile_images/1632551261965893632/WThDhlfZ.jpg'
+	image = 'https://image.nostr.build/fb4acf29faaca7514662a31579e8c756a94852307a69eede3ca3a112b511594f.jpg'
       } 
       else if (pubkey == '5b0183ab6c3e322bf4d41c6b3aef98562a144847b7499543727c5539a114563e') {
         image = 'https://nostr.build/i/p/nostr.build_0e69671aba33808290112d47f133b7169d28e84bdd7dfdb88a517672d4c66ac2.gif'
@@ -5360,6 +5516,7 @@ const Test = () => {
       } 
       else if (pubkey == '9989500413fb756d8437912cc32be0730dbe1bfc6b5d2eef759e1456c239f905') {
         image = 'https://nostr.build/i/p/1.jpeg'
+	image = 'https://i.nostr.build/knvA.gif'
       } 
       else if (pubkey == '8ab46d8b770f3841f4f3dfabf117a382373177e6bd308e2eba1f626d81a7e012') {
         image = 'https://nostr.build/i/nostr.build_0500b929438734a080ad3e0d13553c1fcfdcd50f59a6f77ee01eb8a6cb80ac95.jpg'
@@ -5682,6 +5839,7 @@ const Test = () => {
       }
       else if (pubkey == 'a3eb29554bd27fca7f53f66272e4bb59d066f2f31708cf341540cb4729fbd841') {
         image = 'https://nostr.build/i/p/nostr.build_03bddff1b0d3f89cc607f18b6f307fc9bab4da250e53bc243d9808daef227613.gif'
+	image = 'https://nostr.build/i/p/nostr.build_5f1c735902d71d138c37095016ef28735c42a7a47388ce0717b6a4eca5c06143.gif'
       }
       else if (pubkey == '1b24801aaed6940d470bad5d905bc2668cd2ad5d5c337afa7e2c4b1da45193c7') {
         image = 'https://ryoch.in/profile.jpg'
@@ -5709,6 +5867,7 @@ const Test = () => {
       }
       else if (pubkey == 'b34340b89cdabd07c37ed56f575161ed37e55301898f8f4f56f45aca9a06d0b8') {
         image = 'https://nostr.build/i/19c550e18c8fad6b7ca15061d97ac7c5d88eb707689b41bfc51686f5325de272.jpg'
+	image = 'https://nostr.build/i/f69be1029ebdd6602f919d039fc9df45d8f852d1a71ae0b50ab7d9f4c77fdaa8.jpg'
       }
       else if (pubkey == 'f31c5b56075046e41e95888bb5a4e21730e1a11210bdb4343d0f9febf7867432') {
         image = 'https://nostr.build/i/nostr.build_83088aefb926032e480b24109e00214c982157979d3e36707eb625522be4d6c3.jpg'
@@ -5815,6 +5974,7 @@ const Test = () => {
       }
       else if (pubkey == '047a32b35da5372967e8fc52144011439cb5ea8dbb640e1d56e7790db91abf78') {
         image = 'https://void.cat/d/PdFB24HyM77wfUB8u54ntC.webp'
+	image = 'https://nostr.build/i/e06a5fcfacb1aa6203e7c7392ade12667bd4c2744a16584fd4f206bf187148e2.jpg'
       }
       else if (pubkey == '2717d9d9d3b6b5075ecf034957468bd8cc6687356d10ed6d5b29a0f5a474de69') {
         image = 'https://s3.arkjp.net/misskey/e976a3fc-82b8-4a1b-9ca5-500532da4b17.jpeg'
@@ -6673,7 +6833,6 @@ const Test = () => {
         image = 'https://imgproxy.iris.to/insecure/plain/https://penlight777.com/images/IMG_0768.JPG'
       }
       else if (pubkey == '115e05ed17b23426eb0833db4d642b7e0be34387fba1070cb9f2c0cd53f1c564') {
-        image = 'npub1z90qtmghkg6zd6cgx0d56ept0c97xsu8lwsswr9e7tqv65l3c4jqcn5wm3'
 	image = 'https://pbs.twimg.com/profile_images/1587842667010199552/XF-DWF2M_400x400.jpg'
       }
       else if (pubkey == '09a34a94eea50687758255b3bb4cb2a2b4878215e3b7d01daeb31c6132f62918') {
@@ -6781,7 +6940,7 @@ const Test = () => {
       }
       else if (pubkey == '148755e670adb36ebba529ff46b9f3580a499928249dd79a749b2853450c107f') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_6167a9d3b1e22cd4fd8110fdb28204729cfc602d8b27533e3b612722c07b5bf4.jpeg'
-        image = 'https://nostr.build/i/1157ac8075fea71d087ed51d82ccbbe534edb1b8732448de0af763a5cfdc2eff.jpg';
+        image = 'https://nostr.build/i/1157ac8075fea71d087ed51d82ccbbe534edb1b8732448de0af763a5cfdc2eff.jpg'
       }
       else if (pubkey == '8685f2e2e2792d392af9ea147695a0983c98afacea7fff25004bb50d025a117e') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://ja.gravatar.com/userimage/96575492/1a29d227f05f66c68176a6c334128d1d.jpg'
@@ -6933,6 +7092,7 @@ const Test = () => {
       else if (pubkey == '6b6e19ce47a917cbe13a67eeb4053a9b301e78ec991413e7554953088ed62d3b') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1614562193147842563/mfd80R_H.jpg'
 	image = 'https://nostr.build/i/3806b00b13ab9e1d1f0bfa2251b5bf819e47975972f8d3604a0df49e7dd26ded.jpg'
+//	image = 'https://image.nostr.build/60b815bf3035327eea27dd43826c57b4b123d257b73b6b73e0292cc73213f0e0.gif'
       }
       else if (pubkey == '1ec007290d7bf778dbc41d52ddb0ff37fab0921437c913188aacc654fe7be633') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://void.cat/d/CJ5EFJVuDxLThhBoSiQWYu.webp'
@@ -6955,6 +7115,7 @@ const Test = () => {
       else if (pubkey == '2d417bce8c10883803bc427703e3c4c024465c88e7063ed68f9dfeecf56911ac') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1622377449941250049/4oaXywYL.jpg'
 	image = 'https://nostr.build/i/nostr.build_eee59b4db55bc81004ad4c3ca4025565e7990ad3c8c33f395f725631737f6490.jpg'
+	image = 'https://media.discordapp.net/attachments/1078693696712736860/1137648827168473199/97cce7198c2c74e6d4d2365a0441511d6b3b5fa4e9e0ddd41b8f00d26a2e37d4.png?width=1212&height=1212'
       }
       else if (pubkey == 'f1db37389f268a87afe95ab0f4f1e6302ca0cc21cd36294323a9352e3374985a') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://media.manji.dev/icon.png'
@@ -7060,6 +7221,7 @@ const Test = () => {
       }
       else if (pubkey == '64c66c231ea1c25ebd66b14fe4a0b1b39a6928d6824ad43e035f54aa667bc650') {
         image = 'https://i.imgur.com/nhJ2vCo.jpg'
+	image = 'https://i.imgur.com/SsNCSLd.png'
       }
       else if (pubkey == '93ab9382fa66c807cd4bb702cf3be9e52f42ff9629db84e5a97c7b3bd336a4ac') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://heguro.com/public/nostr/heguro-icon-20230206.jpg'
@@ -7717,6 +7879,7 @@ const Test = () => {
       else if (pubkey == 'a2ee3c86c25f22a23e0bd7b8af18631a994b8d67a9fba7b657a9db63560c8c47') {
         // pomcan
         image = 'https://nostr.build/i/nostr.build_b8a40685d0b7f631bd3efb44c48777ad2a25316c1c3cc38945634c36dc3e220b.jpeg'
+	image = 'https://nostr.build/i/nostr.build_b8a40685d0b7f631bd3efb44c48777ad2a25316c1c3cc38945634c36dc3e220b.jpeg'
       }
       else if (pubkey == 'f40832e26b1d12f8a27717b606996baef68bc4b6b86c4a35ca827f6fbcbf511e') {
         // erechorse
