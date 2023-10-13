@@ -6,17 +6,19 @@ const relayUrls = [
 
   "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
-  "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
+//  "wss://relayable.org",            //
 //  "wss://relay.damus.io",           //en, jp  Nelly
+//  "wss://purplepag.es",             // kind0
+//  "wss://relay.snort.social",
+//  "wss://nostr.wine",               //jp en, Vitor, Terry
+//  "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
   
 
 //      "wss://nostr-relay.nokotaro.com", //jp, en 
 //      "wss://relay.mostr.pub",          // nachika
 //
-//      "wss://relay.nostr.band",         //NIP-50 search, en, jp nachika
-//      "wss://nostr.wine",               //jp en, Vitor, Terry
+//      "wss://relay.nostr.band",         //NIP-50 search, kind0, en, jp nachika
       
-//      "wss://relayable.org",            //
 //      
 
 //     "wss://relay.nostrplebs.com/",
@@ -34,7 +36,6 @@ const relayUrls = [
 /*  "wss://relay.damus.io",           //en, jp  Nelly
   "wss://nostr.fmt.wiz.biz",
   "wss://nos.lol",                  //en, jp,
-  "wss://relay.snort.social",
       "wss://nostr.holybea.com",        //jp
       "wss://nostr.fediverse.jp",       //jp 
       "wss://nostr-relay.nokotaro.com", //jp, en 
