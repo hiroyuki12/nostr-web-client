@@ -4,59 +4,55 @@ import { NostrProvider } from "nostr-react";
 
 const relayUrls = [
 
-  "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
-//  "wss://relayable.org",            //
+  "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
+  "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
+
+//  "wss://r.kojira.io",
+//  "wss://relay.nostr.wirednet.jp",    // mostr 
+//  "wss://riray.nostr1.com",
+//  "wss://ren.nostr1.com",
+//  "wss://nostr.fediverse.jp",       //jp 
+//  "wss://nostrja-kari.heguro.com",  //jp
+//  "wss://nostr.holybea.com",        //jp
+//  "wss://nostr-relay.nokotaro.com", //jp, en 
+//  "wss://nrelay.c-stellar.net",
+//  "wss://nrelay-jp.c-stellar.net",
+//  "wss://nostr-relay.nokotaro.com", //jp, en 
+
+//  "wss://relay.nostr.moctane.com",
+//  "wss://relay-jp.nostr.moctane.com",
+//  "wss://nostream.ocha.one",
+
 //  "wss://relay.damus.io",           //en, jp  Nelly
-//  "wss://purplepag.es",             // kind0
-//  "wss://relay.snort.social",
 //  "wss://nostr.wine",               //jp en, Vitor, Terry
-//  "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
-  
+//  "wss://relay.mostr.pub",          // nachika, karnage
+//  "wss://purplepag.es",             // kind0
+//  "wss://relayable.org",            //
 
-//      "wss://nostr-relay.nokotaro.com", //jp, en 
-//      "wss://relay.mostr.pub",          // nachika
-//
-//      "wss://relay.nostr.band",         //NIP-50 search, kind0, en, jp nachika
+//  "wss://relay.nostr.band",         //NIP-50 search, kind0, en, jp nachika
       
-//      
-
-//     "wss://relay.nostrplebs.com/",
-//     "wss://nostr.zbd.gg",
-
-//     "wss://r.kojira.io",
-//     "wss://relay-jp.shino3.net/",
-//     "wss://nostrbuzzs-relay.fly.dev/",
-//     "wss://relayable.org",
-
-//     "nostrja-kari-nip50.heguro.com",   // NIP-50
-//      "wss://nrelay-jp.c-stellar.net",
-//      "wss://nrelay.c-stellar.net",
+//  "nostrja-kari-nip50.heguro.com",   // NIP-50
       
-/*  "wss://relay.damus.io",           //en, jp  Nelly
-  "wss://nostr.fmt.wiz.biz",
-  "wss://nos.lol",                  //en, jp,
-      "wss://nostr.holybea.com",        //jp
-      "wss://nostr.fediverse.jp",       //jp 
-      "wss://nostr-relay.nokotaro.com", //jp, en 
-      "wss://nostr.h3z.jp",             //en, jp 
-      "wss://nostr-paid.h3z.jp",        //jp,
-  "wss://eden.nostr.land",  // 2023/8/26 going away
+/* 
+   "wss://nostr.fmt.wiz.biz",
+   "wss://relay-jp.shino3.net/",
+   "wss://nostr.h3z.jp",             //en, jp 
+   "wss://nostr-paid.h3z.jp",        //jp,
+   "wss://eden.nostr.land",  // 2023/8/26 going away
+   "wss://relay.nostrich.land",  //jp en
+   "wss://relay.nostrica.com",   //en
+   "wss://welcome.nostr.wine",   //en jp
+   "wss://nostr.h3y6e.com",
+   "wss://monad.jb55.com:8080",
+   "wss://relay.mostr.pub",
+   "wss://nostrbuzzs-relay.fly.dev/",
+   "wss://nostr.zbd.gg",
+   "wss://relay.nostrplebs.com/",
 */      
 
-//"wss://relay.nostr.moctane.com",
-
-  //"wss://relay.shitforce.one",     // mostr
-  //"wss://nostr-us.coifundit.com",  // mostr
-
-
-  /*"wss://relay.nostrich.land",  //jp en
-  "wss://nostrja-kari.heguro.com",  //jp
-  "wss://relay.nostrica.com",   //en
-  "wss://welcome.nostr.wine",   //en jp
-  "wss://nostr.h3y6e.com",
-  "wss://monad.jb55.com:8080",
-  "wss://relay.mostr.pub",*/
+//  "wss://relay.shitforce.one",     // mostr
+//  "wss://nostr-us.coifundit.com",  // mostr
 
 ];
 
