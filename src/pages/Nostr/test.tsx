@@ -12,25 +12,44 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-//  untilValue = 1697180410;  //paging
+  untilValue = 1700730769;  //paging
 
   let noteCount = 0;
 
+//  untilValue = 1700648893;  // bookmark
+//  untilValue = 1700654092;  // Long-form Content
+//  untilValue = 1700351963;  // NG link
+//  untilValue = 1700358511;  // NG insta link
+//  untilValue = 1700282586;  // kind 10005 channel list?
+//  untilValue = 1699350541;  // Nostrasia Day 1 Summary Nosli
+//  untilValue = 1698731466;  // Invalid byte sequence NG
+//  untilValue = 1698636018;  // kind 6666
+//  untilValue = 1698415786;  // Zap Add Avatar
+//  untilValue = 1698228483;  // link NG
+//  untilValue = 1697641710;  // :bow:  FreeFrom
+//  untilValue = 1697598212;  // Zap
+//  untilValue = 1697536841;  // NG
+//  untilValue = 1697471297;  // kind:4550
+//  untilValue = 1697385059;  // channel message nostter
+//  untilValue = 1697448782;  // kind:9735
+//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
+//  untilValue = 1697289857;  // will nos.lol
+//  untilValue = 1697223369;  // jack nos.lol
+//  untilValue = 1697282603;  // fiatjaf yabu.me
+//  untilValue = 1697247223;  // reply image NG
+//  untilValue = 1697247497;  // tag relay
 //  untilValue = 1697112060;  // #r NG
 //  untilValue = 1696632885;  // Metadata
 //  untilValue = 1696502429;  // jpg NG
 //  untilValue = 1696412926;  // LIVE
 //  untilValue = 1696316415;  // nevent1
-//  untilValue = 1696327217;  // repost NG
 //  untilValue = 1696105738;  // quote_nevent njump fix
 //  untilValue = 1696119569;  // njump.me nevent fix
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1695999820;  // Apple Music OGP
-//  untilValue = 1695702700;  // repost NG fix
 //  untilValue = 1695438407;  // to link NG fix
 //  untilValue = 1695370850;  // tiktok
 //  untilValue = 1695066723;  // kind:10001 pin channel
-//  untilValue = 1695034027;  // repost NG fix
 //  untilValue = 1694945195;  // repost 1694945166
 //  untilValue = 1694683832;  // generic repost, Nostrasia Hackathon
 //  untilValue = 1694687538;  // zap request
@@ -108,15 +127,17 @@ const Test = () => {
 
 
 //  untilValue = 1672000000; // 2022/12/26-1970/1/1
-//  untilValue = 1675000000; // 2023/1/28- 1970/1/1
-//
-//  untilValue = 1675500000; // 2023/2/4 15- 1970/1/1,   +500,000, limit 100, wirednet
-//  untilValue = 1675600000; // 2023/2/5 12- 2023/1/10   +100,000
-//  untilValue = 1675650000; // 2023/2/6 11- 2023/2/4 18, +50,000
-//  untilValue = 1675591669; // 2023/2/6 11- 2023/2/4 18, +50,000
-//  untilValue = 1675695000; // 2023/2/6 23- 2023/2/6 23, +45,000 nosaray
-//  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,   +5,000
-//  untilValue = 1675780000; // 2023/2/7 20- 2023/2/7 20, +60,000
+//  untilValue = 1675000000; // 2023/1/29 22- 2023/1/11 4, 
+//  untilValue = 1675200000; // 2023/2/1 6-  2023/1/12 20, +200,000
+//  untilValue = 1675300000; // 2023/2/2 10- 2023/2/1 10, +100,000
+//  untilValue = 1675400000; // 2023/2/3 13- 2023/2/2 19, +100,000 
+//  untilValue = 1675500000; // 2023/2/4 15- 2023/2/7,    +100,000
+//  untilValue = 1675600000; // 2023/2/5 21- 2023/2/5 18  +100,000
+//  untilValue = 1675650000; // 2023/2/6 11- 2023/2/4 18,  +50,000
+//  untilValue = 1675591669; // 2023/2/6 11- 2023/2/4 18,  +50,000
+//  untilValue = 1675695000; // 2023/2/6 23- 2023/2/6 23 , +45,000 nosaray
+//  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
+//  untilValue = 1675780000; // 2023/2/7 20- 2023/2/7 20 , +60,000
 //  untilValue = 1675780000; 
 //  untilValue = 1675790000; // 2023/2/8 2- 2023/2/8 1,   +10,000 nosaray
 //  untilValue = 1675800000; // 2023/2/9-    2023/2/9,    +10,000
@@ -136,7 +157,7 @@ const Test = () => {
 //      untilValue = 1676750000; // 2023/2/19 4- 2023/2/17 23,+100,000
       //untilValue = 1676840000; // 2023/2/20 5- 2023/2/18 0,  +90,000
       //untilValue = 1676920000; // 2023/2/21 4- 2023/2/18 5,  +80,000
-//      untilValue = 1676990000; // 2023/2/21 23-2023/2/21 20, +10,000 nosaray
+      //untilValue = 1676990000; // 2023/2/21 23-2023/2/21 20, +10,000 nosaray
       //untilValue = 1677030000; // 2023/2/22-10 2023/2/21 23, +40,000
       //untilValue = 1677070000; // 2023/2/22 21-2023/2/22 18  +10,000
       //untilValue = 1677080000; // 2023/2/23 0- 2023/2/22 22  +10,000
@@ -151,7 +172,7 @@ const Test = () => {
       //untilValue = 1677500000; // 2023/2/27 21-2023/2/27 19  +10,000
       //untilValue = 1677520000; // 2023/2/28 2- 2023/2/27 23  +20,000
       //untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
-      //untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
+//      untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
 
       //until 1677700000, // 2023/3/2 4-  2023/3/2 1,  +100,000, limit 100
       //until 1677800000, // 2023/3/3 8-  2023/3/3 3,  +100,000 * 25
@@ -204,7 +225,8 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [0,1,3,4,5,6,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,30000,30001,30023,30311,30315,30023,30078,30311,30315,31922],
+      kinds: [0,1,3,4,6,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30023,30311,30315,31922],
+//      kinds: [0,1,3,4,6,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
@@ -225,9 +247,12 @@ const Test = () => {
 //      kinds: [10000],  // 10000:Mute List
 //      kinds: [10001],  // 10001:Pin List
 //      kinds: [10002],  // 10002:Realy List Metadata(
+//      kinds: [10003],  // 10003:Bookmark list
+//      kinds: [10005],  // 10005:Public chats list
 //      kinds: [10030],  // 
 //      kinds: [30000],  // 30000:Categorized People List(mute)
-//      kinds: [30001],  // 30001:Categorized Bookmark List
+//      kinds: [30001],  // 30001:Generic lists(Categorized Bookmark List) (hex79)
+//      kinds: [30003],  // 30003:Bookmark sets
 //      kinds: [30023],  // 30023:Long-form Content
 //      kinds: [30025],  // 
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
@@ -239,6 +264,7 @@ const Test = () => {
       //since: 1679403822, // 1679413822 2023/03/22 0:50
 //      limit: 1000,
       limit: 150,
+//      limit: 100,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
       //"#t": ["illust"],
@@ -342,21 +368,33 @@ const Test = () => {
 
       follow = "";
       if(!followList.includes(note.pubkey)) {
-        // following filter
+// following filter
 	follow = " [follow]";
         return;
       }
+      else {
+        //return;
+      }
 
-      if(note.kind === 7) {  // 7:reaction
+      if(note.kind === 7
+        || note.kind === 30078  //Application-specific Data
+      ) {  // 7:reaction
         return;
       }
 
       if(note.content.includes('#markostr') || note.content.includes('#targoyleTweetGen')) {  
-        return;
+        //return;
       }
 
-      if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/)) {
-        // hiragara filter
+      // japanese filter
+      if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/) && 
+        //note.pubkey != '' &&
+        //jack, will, fiatfaf
+        note.pubkey != '82341f882b6eabcd2ba7f1ef90aad961cf074af15b9ef44a09f9d2a8fbfbe6a2' &&
+        note.pubkey != '3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d' &&
+        note.pubkey != '32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245' 
+      ||note.pubkey == '3e1691aa75beb6aff2887e677b10f89a5ab9f71e7e3c54800eb6ab96d3afd9a7')  {
+// hiragara filter
 	//follow = "[[en]]";
 //        return;
       }
@@ -379,20 +417,44 @@ const Test = () => {
       const npub = nip19.npubEncode(note.pubkey)
       //const nostrnpub = "https://nostr.com/" + npub
       const nostrnpub = "https://yabu.me/" + npub
-      //const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub 
       //const userUrl = "https://snort.social/p/" + npub 
       //const userUrl = "https://yabu.me/" + npub 
-      const userUrl = "https://nostter.vercel.app/" + npub 
+      //const userUrl = "https://nostter.app/" + npub 
+      //const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub 
+      //const userUrl = "https://astraea.mousedev.page/profile/" + npub 
+      const userUrl = "https://nostrudel.ninja/#/u/" + npub 
 
-      const imageURL2 = getImageURL(note.pubkey);  // avator
-      const imageURL3 = getImageURL(note.pubkey);  // avator
+      let imageURL2 = getImageURL(note.pubkey);  // avator
 
       //const noteUrl = "https://snort.social/e/" + note.id
       //const noteUrl = "https://iris.to/#/post/" + note.id
-      const noteUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.id)
+      //let noteUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
+      let noteUrl = "https://nostter.app/" + nip19.neventEncode({id:note.id})
+      for(let h=0; h<note.tags.length; h++)  {
+        // 6.repost, 4550.Post Approval by moderators
+        if(note.kind == 6 || note.kind == 4550) {
+          if(note.tags[h][0] == "e") {
+	    // repost nevent nostter
+	    if(note.tags[h][1].includes(":")) {
+	      return
+	    }
+            noteUrl = "https://nostter.app/" + nip19.neventEncode({id:note.tags[h][1]})
+	  }
+	}
+        // 42.Channel Message
+        else if(note.kind == 42) {
+          if(note.tags[h][0] == "e") {
+	    if(note.tags[h][1].includes(":")) {
+	      return
+	    }
+            noteUrl = "https://nostter.app/channels/" 
+	      + nip19.neventEncode({id:note.tags[h][1]})
+	  }
+	}
+      }
       const noteIdShort = note.id.substring(0,2)
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
-      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
+      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
 
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
@@ -415,10 +477,11 @@ const Test = () => {
       let replyToImageURL3 = getImageURL(note.pubkey);
       let replyToImageURL4 = getImageURL(note.pubkey);
       let replyToImageURL5 = getImageURL(note.pubkey);
-      //let replyToUserBaseUrl = "https://nostter.vercel.app/" 
-      //let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
-      //let replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
-      let replyToUserBaseUrl = "https://yabu.me/" 
+      //let replyToUserBaseUrl = "https://nostter.app/" 
+      //let replyToUserBaseUrl = "https://yabu.me/" 
+      //const replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
+      //const replyToUserBaseUrl = "https://astraea.mousedev.page/profile/" 
+      const replyToUserBaseUrl = "https://nostrudel.ninja/#/u/" 
       let replyToUrl1 = replyToUserBaseUrl + npub 
       let replyToUrl2 = replyToUrl1
       let replyToUrl3 = replyToUrl1
@@ -432,6 +495,7 @@ const Test = () => {
       let motoHex = replyToHex1
       let repHex = "";
 
+      let kindNumber = "";
       let channelUrl = "";
       let client = "";
       let title = "";
@@ -474,7 +538,7 @@ const Test = () => {
 	    else if(replyToImageSize2 === "0") {
 	      replyToHex2 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex2 != replyToHex1) {
-                if(note.kind === 6) {  // 6.repost
+                if(note.kind === 6) {
                   replyToImageSize2 = "60"
 	        }
 	        else {
@@ -487,7 +551,7 @@ const Test = () => {
 	    else if(replyToImageSize3 === "0") {
 	      replyToHex3 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
-                if(note.kind === 6) {  // 6.repost
+                if(note.kind === 6) {
                   replyToImageSize3 = "60"
 	        }
 	        else {
@@ -498,7 +562,7 @@ const Test = () => {
 	      }
 	    }
 	    else if(replyToImageSize4 === "0") {
-                if(note.kind === 6) {  // 6.repost
+                if(note.kind === 6) {
                   replyToImageSize4 = "60"
 	        }
 	        else {
@@ -513,7 +577,7 @@ const Test = () => {
 	    else if(replyToImageSize5 === "0") {
 	      replyToHex5 = nip19.npubEncode(note.tags[h][1]);
 	      if(replyToHex5 != replyToHex2 && replyToHex5 != replyToHex1) {
-                if(note.kind === 6) {  // 6.repost
+                if(note.kind === 6) {
                   replyToImageSize5 = "60"
 	        }
 	        else {
@@ -548,10 +612,16 @@ const Test = () => {
 	    marker = note.tags[h][3] + " "
 	  }
 
-          if(channelUrl == "" || note.tags[h][3] === "root") {
+          //if(channelUrl == "" || note.tags[h][3] === "root") {
+          if(channelUrl == "") {
             //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
             //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
             //channelUrl = "https://unyu-house.vercel.app/"
+            //channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
+	    // ### nip19.neventEncode Error: hexToBytes: received invalid unpadded hex79 (kind:30001)
+	    if(note.tags[h][1].includes(":")) {  // tag:e
+	      return
+	    }
             channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
 	  }
 	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
@@ -559,7 +629,15 @@ const Test = () => {
 	  //const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
 	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + note.tags[h][1]
-	  const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[h][1])
+	  // ### nip19.noteEncode Error: hexToBytes: received invalid unpadded hex79 (kind:30001)
+	  if(note.tags[h][1].includes(":")) {  // tag:e
+	    return
+	  }
+	  //const eventLinkUrl = "https://snort.social/" + nip19.noteEncode(note.tags[h][1])
+	  //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.tags[h][1])
+	  const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[h][1])
+	  //note.content = note.content + "##" + note.tags[h][1]  //debug
+
 	  if(eventLinkUrlText1 === "") {
 	    if(marker === "" && note.kind === 1) {  // 1:text
 	      //marker = "root ";
@@ -630,7 +708,7 @@ const Test = () => {
 	  title = title + "ends"
 	}
       }
-
+//
       let content = note.content;
       content = title + content
 
@@ -641,16 +719,20 @@ const Test = () => {
       let channel = ""
 
       if(note.kind === 42) {  // 42.channel message
-        channel = "(Channel Message)";   // channelUrl
+        channel = "[42 Channel Message]";   // channelUrl
       }
       if(note.kind === 1311) {  // 1311.live chat
-        channel = "(LIVE)-";   // channelUrl
+        channel = "[1311 Live Chat]";   // channelUrl
       }
 
-      if(note.kind === 6 || note.kind === 16) {  // 6.repost, 16.Generic Repost
+      // 6.repost, 16.Generic Repost, 4550.Post Approval by moderators
+      if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
         reply = "Repost]";
 	if(note.kind === 16) {
 	  reply = "Generic Repost]"
+	}
+	else if(note.kind === 4550) {
+	  reply = "To]"
 	}
 
         if(content === "") {
@@ -753,8 +835,16 @@ const Test = () => {
              tmp2[i].includes("/img/") ||
              tmp2[i].includes("/images?") ||
              tmp2[i].includes("?set=set4") ||
+             tmp2[i].includes("pbs.twimg.com/") ||
+             tmp2[i].includes("robohash.org/") ||
+             tmp2[i].includes("pbs.twimg.com/") ||
+             tmp2[i].includes("/profile/avatar/") ||
+             tmp2[i].includes("/imgproxy.snort.social/") ||
+             tmp2[i].includes("/0.gravatar.com/avatar/") ||
+             tmp2[i].includes("/www.gravatar.com/avatar/") ||
              tmp2[i].includes("grafana.gsn.im/"))
 	     && tmp2[i].includes("http")
+	     && !tmp2[i].includes("gifu.jp/")
 	     )  {
 	     //content = content + '[' + tmp2[i] + '],'
 	    if(imageCount===0) {
@@ -854,7 +944,7 @@ const Test = () => {
 	    const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
 	    tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	  }
-	  else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
+	  else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com") || tmpUrl.includes("t.co")) {
 	    //content = content.replace(tmp2[i], "");
 	    const id = tmpUrl.replace("x.com","twitter.com"); 
 	    tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
@@ -862,8 +952,16 @@ const Test = () => {
 	  else {
             tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 	  }
+	  // text link
 	  if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
-	    if(!tmpUrl.includes("mov") && !tmpUrl.includes("jpeg")  && !tmpUrl.includes("jpg") && !tmpUrl.includes("mp4") && !tmpUrl.includes("png") && !tmpUrl.includes("webp")) {
+	    // remove image link OGP
+	    if(!tmpUrl.includes(".mov") 
+	      && !tmpUrl.includes(".jpeg")  
+	      && !tmpUrl.includes(".jpg") 
+	      && !tmpUrl.includes(".mp4") 
+	      && !tmpUrl.includes(".png") 
+	      && !tmpUrl.includes(".gif") 
+	      && !tmpUrl.includes(".webp")) {
 	      content = content.replace(tmpWord, tmpIframe);
 	    }
 	    else {
@@ -903,7 +1001,7 @@ const Test = () => {
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "p") {
           const npub = nip19.npubEncode(note.tags[i][1])
-	  //const toLinkUrl =  "https://nostter.vercel.app/" + npub
+	  //const toLinkUrl =  "https://nostter.app/" + npub
 	  const toLinkUrl =  "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
 	  content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
           if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
@@ -920,9 +1018,9 @@ const Test = () => {
 	  }
         }
 	else {
-	  //const eventLinkUrl = "https://nostter.vercel.app/search?q=" + note.tags[i][1]
+	  //const eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
 	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
-	  //const eventLinkUrl = "https://nostter.vercel.app/" + nip19.noteEncode(note.tags[i][1])
+	  //const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
 	  const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
 	  //const aa = note.tags[i][1]
 	  content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
@@ -947,9 +1045,9 @@ const Test = () => {
 	) {
 	for(let i=0; i<wordsNostr.length; i++) {
 	  if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
-	    //const toLinkUrl = 'https://nostter.vercel.app/' + wordsNostr[i].replace('nostr:','');
-            //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
-            const toLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace('nostr:',''); 
+	    //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
+            //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
+            const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
 	    content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
 	    if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
 	      content = content.replace('(to)','@やぶみちゃん');
@@ -988,14 +1086,14 @@ const Test = () => {
 	      //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
 	      //quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-	      quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	      quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
               quoteLinkText = "";
 	      if(content.includes("nevent1")) {
                 //quoteLinkText = quoteLinkText + wordsNostr[i];
                 //quoteLinkText = "(quote_nevent1)";
 	        //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
 	        //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
-	        let quoteNeventLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	        let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
   	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
 	      }
 	      else {
@@ -1021,7 +1119,7 @@ const Test = () => {
 	  }
 	  else if(wordsNostr[i].includes("nostr:naddr1")) {
 	    //content = content.replace(wordsNostr[i],'');
-	    quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	    quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
 	    //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
 	    quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
 	    //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
@@ -1030,7 +1128,7 @@ const Test = () => {
   	    content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
 	  }
 	  else if(wordsNostr[i].includes("nostr:nprofile1")) {
-	    quoteLinkUrl = "https://nostter.vercel.app/" + wordsNostr[i].replace("nostr:",'')
+	    quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
   	    content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:nprofile1)</a>');
 	  }
 	}
@@ -1060,7 +1158,7 @@ const Test = () => {
 	//quoteUrl1 = "https://nostr.com/" + quoteId1;
 	//quoteUrl1 = "https://iris.to/post/" + quoteId1;
         //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
-        let quoteBaseUrl = "https://nostter.vercel.app/"
+        let quoteBaseUrl = "https://nostter.app/"
         if(note.tags[i][0] === "q") {
 	  if(quoteId1 === "") {
 	    quoteId1 = note.tags[i][1];  // event id
@@ -1085,6 +1183,7 @@ const Test = () => {
           tmp = tmp.replace('　',' ');
           tmp = tmp.replace('？',' ');
           tmp = tmp.replace('（今こうなる…）',' ');
+          tmp = tmp.replace('！',' ');
         }
         for(let i=0; i<100; i++) {
           tmp = tmp.replace('\n',' ');
@@ -1142,19 +1241,29 @@ const Test = () => {
 	    else {
 	      iframeCount++;
 	      const url = tmp2[i];
-	      if(!tmp2[i].includes("codepen.io") 
-	        &&!tmp2[i].includes("ctoa-") 
-	        &&!tmp2[i].includes("nostr.cooking") 
-		&& tmp2[i] != 'https://nostr.build/profilepic.php' 
+	      // text link
+	      if(  !tmp2[i].includes("codepen.io")
+	        && !tmp2[i].includes("ctoa-") 
+	        && !tmp2[i].includes("nostr.cooking") 
+		&& !tmp2[i].includes('https://nostr.build/profilepic.php' )
+		//&& tmp2[i] != 'https://nostr.build/profilepic.php' 
 		&& tmp2[i].length != 0) {
-	        if(!tmp2[i].includes("?set=set4") && !tmp2[i].includes(".png") && !tmp2[i].includes(".mov") && !tmp2[i].includes(".jpeg") && !tmp2[i].includes(".jpg") && !tmp2[i].includes(".webp")) {
+		// remove image link
+	        if(  tmp2[i].includes(".mp4") 
+		  || tmp2[i].includes("?set=set4") 
+		  || tmp2[i].includes(".png") 
+		  || tmp2[i].includes(".mov") 
+		  || tmp2[i].includes(".jpeg") 
+		  || tmp2[i].includes(".jpg") 
+		  || tmp2[i].includes(".webp")) {
+	          content = content.replace(tmp2[i], "");
+		}
+		// OGP
+		else {
 	          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 	          content = content.replace(tmp2[i], tmpIframe);
 		  httpLinkUrl1 = tmp2[i];
 		  httpLinkUrlText1 = '__https';
-		}
-		else {
-	          content = content.replace(tmp2[i], "");
 		}
 	      }
 	      else {
@@ -1183,10 +1292,13 @@ const Test = () => {
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
             const emojiURL = note.tags[i][2];
-	    for(let j=0; j<200; j++) {
+	    for(let j=0; j<50; j++) {
               content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
 	    }
         }
+      }
+      for(let j=0; j<10; j++) {
+        content = content.replace(":bow:","🙇");
       }
 
       /*for(let i=0; i<50; i++) {
@@ -1218,6 +1330,7 @@ const Test = () => {
 
       for(let i=0; i<200; i++) {
         content = content.replace('\\n','<br />');  // repost content
+        content = content.replace('\\t','&#009;');  // tab
       }
       for(let i=0; i<200; i++) { // nya
         content = content.replace('\n','<br />');
@@ -1228,21 +1341,21 @@ const Test = () => {
       let bookmark = "";
       let bookmarkUrl= "";
       if(note.kind === 30315) {  // 30315:User Statuses
-        status = "[status]"
-	if(note.tags[0][1].includes("music")) {
-          status = "[status music]"
+        status = "[30315 status]"
+	if(note.tags[0][1] != undefined && note.tags[0][1].includes("music")) {
+          status = "[30315 status music]"
 	  content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
 	}
       }
       else if(note.kind === 0) {  // 0:Metadata
-        status = "[Metadata]_"
+        status = "[0 Metadata]_"
       }
       else if(note.kind === 3) {  // 3:Contacts
         let followCount = 0
 	for(let x=0; x<note.tags.length; x++) {
 	  followCount++
 	}
-        status = "[kind3 follow, save relay (snort/damus/coracle/NostrFlu " + followCount + "]_"
+        status = "[3 Contacts / follow, save relay (snort/damus/coracle/NostrFlu " + followCount + "]_"
 	if(content != "") {
 	  content = 'relay list...'
 	}
@@ -1251,17 +1364,17 @@ const Test = () => {
 	}
       }
       else if(note.kind === 4) {  // 4:Encrypted Direct Message
-        status = "[DM]_"
+        status = "[4 DM]_"
 	content = ' Direct Message. This message is not for you.'
       }
       else if(note.kind === 5) {  // 5:Event Deletion
-        status = "[delete]"
+        status = "[5 Delete]"
       }
       else if(note.kind === 40) {  // 40:Channel Creation
-        status = "[Channel Creation]_"
+        status = "[40 Channel Creation]_"
       }
       else if(note.kind === 41) {  // 41:Channel Metadata
-        status = "[Channel Metadata]_"
+        status = "[41 Channel Metadata]_"
       }
       else if(note.kind === 1984) {  // 1984:Reporting
         status = "[Reporting " + note.tags[0][2] + "]_"
@@ -1271,39 +1384,87 @@ const Test = () => {
 	  }
 	}
       }
+      else if(note.kind === 4550) {  // 4550:
+        status = "[Post Approval by moderators]_"
+      }
       else if(note.kind === 9734) {  // 9734:Zap Request
         status = "[Zap Request]_"
+      }
+      else if(note.kind === 9735) {
+        status = "[9735 Zap]_"
+	for(let x=0; x<note.tags.length; x++) {
+	  if(note.tags[x][0] === "description") {
+	    //content = content + note.tags[x][1].substring(11,75)
+            //imageURL2 = getImageURL(note.tags[x][1].substring(11,75));  // avator from
+	  }
+	}
       }
       else if(note.kind === 10000) {  // 10000:Mute List, snort
         let muteCount = 0
 	for(let x=0; x<note.tags.length; x++) {
 	  muteCount++
 	}
-        status = "[kind:10000 mute word (nostter), mute list (snort)" + muteCount + "]_"
-	content = ""
+        status = "[10000 mute word (nostter), mute list (snort) " + muteCount + "]_"
+        if(content === "") {
+	  content = "[empty]"
+	}
+	else {
+	  content = "m+BHkF89jh..."
+	}
       }
       else if(note.kind === 10001) {  // 10001:Pin List, nostter
         let pinCount = 0
 	for(let x=0; x<note.tags.length; x++) {
 	  pinCount++
 	}
-        status = "[pin list kind:10001 (snort) " + pinCount + "]_"
+        status = "[10001 pin list (snort) " + pinCount + "]_"
       }
       else if(note.kind === 10002) {  // 10002:Relay List Metadata, nostter
         let relayCount = 0
 	for(let x=0; x<note.tags.length; x++) {
 	  relayCount++
 	}
-        status = "[kind10002 save relay by nostter/coracle/snort " + relayCount + "]_"
+        status = "[10002 save relay by nostter/coracle/snort " + relayCount + "]_"
+        if(content === "") {
+	  content = "[empty]";
+	}
+      }
+      else if(note.kind === 10003) {  // 10003:
+        let bookmarkCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  bookmarkCount++
+	}
+	//if(note.tags[0][1] != undefined) {
+          status = "[10003 Bookmark list]" 
+	  if(content === "") {
+	    content = "[empty]"
+	  }
+	  else {
+	    content = "rgOCelOjTo..."
+	  }
+	//}
+	//content = ""
+      }
+      else if(note.kind === 10005) {  // 10005:
+        let listCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  listCount++
+	}
+        status = "[10005 Public chats List " + listCount + "]_"
       }
       else if(note.kind === 30000) {  // 30000:Categorized People List
-        if(note.tags[0][1] === "mute") {
+        if(note.tags[0][1] != undefined && note.tags[0][1] === "mute") {
           let muteCount = 0
 	  for(let x=0; x<note.tags.length; x++) {
 	    muteCount++
 	  }
-          status = "[mute/unmute (damus/snort) " + muteCount + "]_"
-	  content = ""
+          status = "[30000 mute/unmute (damus/snort) " + muteCount + "]_"
+	  if(content === "") {
+	    content = "[empty]"
+	  }
+	  else {
+	    content = "NeT1Xn3AXhQAi~"
+	  }
 	}
 	else {
 	  status = "[Categorized People List]_"
@@ -1316,11 +1477,19 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  bookmarkCount++
 	}
-        status = "[bookmark/list " + note.tags[0][1] + " " + bookmarkCount + "]" 
+	//if(note.tags[0][1] != undefined) {
+          status = "[30001 Generic lists(Bookmark) / " + note.tags[0][1] + " " + bookmarkCount + "]" 
+	  if(content === "") {
+	    content = "[empty]"
+	  }
+	  else {
+	    content = "rgOCelOjTo..."
+	  }
+	//}
 	//content = ""
       }
       else if(note.kind === 30002) {  // 30002:(snort tag follow)
-        status = "[kind30002 tag follow(snort)]_"
+        status = "[30002 tag follow(snort)]_"
 	let tags = ""
 	for(let x=0; x<note.tags.length; x++) {
 	  if(note.tags[x][0] === "t") {
@@ -1329,10 +1498,42 @@ const Test = () => {
 	}
 	content = tags 
       }
+      else if(note.kind === 30003) {  // 30003:
+        let bookmarkCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  bookmarkCount++
+	}
+	//if(note.tags[0][1] != undefined) {
+          status = "[30003 Bookmark sets / " + note.tags[0][1] + " " + bookmarkCount + "]" 
+	//}
+	//content = ""
+      }
       else if(note.kind === 30078) {  // 30078:Application-specific Data
-        status = "[Application-specific Data]_"
-	content = note.tags[0][1] 
-	return
+        status = "[30078_Application-specific Data]_"
+	//content = note.tags[0][1] 
+	//return
+	for(let x=0; x<note.tags.length; x++) {
+	  if(note.tags[x][1] === "nostter-reaction-emoji") {
+	    status = status + "[" + note.tags[x][0] + " nostter-reaction-emoji]_"
+	  }
+	  else if(npub == "npub150qnaaxfan8auqdajvn292cgk2khm3tl8dmakamj878z44a6yntqk7uktv" ||
+	          note.tags[x][1] == "" || 
+	          note.tags[x][1] == "ostr-engine/Nip28/rooms_joined/v1" || 
+	          note.tags[x][1] == "read-mark-map" || 
+	          note.tags[x][1] == "OtherConfig" || 
+	          note.tags[x][1] == "nostr-engine/User/settings/v1" || 
+	          note.tags[x][1] == "plebstr" || 
+	          note.tags[x][1] == "nostr-engine/Nip04/last_checked/v1" || 
+	          note.tags[x][1] == "RelayConfig" || 
+	          note.tags[x][1] == "nostr-engine/Nip28/last_checked/v1" || 
+	          note.tags[x][1] == "ff_chats") {
+	    return
+	  }
+	  else if(note.tags[x][0] === "d") {
+	    status = status + "[d" + " " + note.tags[x][1] + "]_"
+	    content = "" 
+	  }
+	}
       }
       else if(note.kind === 30311) {  // 30311:Live Event
         status = "[Live Event]_"
@@ -1347,7 +1548,7 @@ const Test = () => {
           status = "[Nosli "  + noteCount + "]_"
 	}
         else {
-	  status = "[Long-form Content]_"
+	  status = "[30023 Long-form Content]_"
 	}
       }
       
@@ -1356,7 +1557,8 @@ const Test = () => {
       bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
 
       let nozokimado = "-nozoki"
-      let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+      //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+      let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
       
       const note1 = nip19.noteEncode(note.id);
       return (
@@ -1364,6 +1566,7 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+	        {kindNumber}
                 <a href={channelUrl} target="_blank">{channel}</a>
 	        {contentWarning}{contentWarningText}{contentWarning}
                 {status}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
@@ -1418,14 +1621,858 @@ const Test = () => {
   }
 
   const getImageURL = (pubkey) => {
+      let npub = nip19.npubEncode(pubkey)
       let image =''
       if (pubkey === '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {
         // maya
         image = 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp'
 //	image = 'https://i.gyazo.com/6f4959939afeb35e64ead00af7a74bb7.jpg'
       } // @@ 
-      else if (pubkey === '') {
+      else if (npub === '') {
         image = ''
+      } 
+      else if (npub === 'npub1fzud9283ljrcfcpfrxsefnya9ayc54445249j3mdmu2dwmh9xmxqqwejyn') {
+        image = 'https://nostrcheck.me/media/public/45a02504a321a92a920d3863475e15c5ca2388a7ecbff167be52fb1f273c727d.webp'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1dyqasukhw28hx33j8sjzzchj2ehmcu67puvsm9r66vj5qhq5ucgqh96qz5') {
+        image = 'https://image.nostr.build/e8a25dbad19163fb67e1971d597874c10c483b650876ee5e2c02a7905a095ee1.jpg'
+      } 
+      else if (npub === 'npub1wkausy2sgvrnp4c2s7zv30hwqml4snlrwr9deczj06980pjqkqvscefeg9') {
+        image = 'https://nostr.build/i/13bcc307a2acdbe6300db6cb99b62e0992023ee56dac604c151ecf08d4995752.jpg'
+      } 
+      else if (npub === 'npub1ksz2kxa43e5aqsd00qqkzulaleudgzlac42u99xqk87dxu3nhtmsdqctcx') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/160/720/original/6483013ad0118b6d.jpg'
+      } 
+      else if (npub === 'npub1fdqyx5udmcv83yz49zytxrqqdev00lksp5v2h3eupjnjp639wzsqwy0y4d') {
+        image = 'https://void.cat/d/Qeno3q3stZFJ5qJM6xadDu.webp'
+      } 
+      else if (npub === 'npub1qh3kyju2d60dyqz9axyvduqkn833mu8cwaafmq0g6n26n8ft566scmqe8n') {
+        image = 'https://image.nostr.build/5b0d97ce1bda0e894ccc36cd0f233f92608721255ca3e637bbdfdfed8190cb2e.jpg'
+      } 
+      else if (npub === 'npub1uchj055pfgj3w8zxd5khvy4drgrxmvfk9d8zt8d4cpm0ne4jrjms30u6q9') {
+        image = 'https://www.uchijo.com/icon.jpg'
+      } 
+      else if (npub === 'npub18rj2gle8unwgsd63gn639nhre4kpltdrtzwkede4k9mqdaqn6jgs5ekqcd') {
+        image = 'https://tukinami.github.io/favicon.svg'
+      } 
+      else if (npub === 'npub12562t7ucqpjcm73nr9lkkrmdrkwmh9680sz7snz975qu8t6tvxgqaxlehh') {
+        image = 'https://lh3.googleusercontent.com/pw/AMWts8CpTqFYtZVHx7rvrn3RrmjvDEkOlaKR7Al-agrR9fQlLBxUvAtWLtrH4M8GaOzalsirY9cUy-lv7c9pWyNKNIgAzbgS421JVlwviK4PTDCSoTETcwmnmDoLqjQSx3dnZvaVrLyCgPaOybml46k6XtMhrg'
+      } 
+      else if (npub === 'npub1n6l8p9swvw6qsp5ft5gvt4yef9uprgxaewn26mkdcx2mcpxff3tsuszvgu') {
+        image = 'https://image.nostr.build/7d5d18555d62ebe075a14ca25e17e3e7c7023f04a41ba2dfa29feba1bd3d4722.jpg'
+      } 
+      else if (npub === 'npub1jhwf4lasurcst4jyaj9cugv7nlaxud04twatrpmwswjptkmqw3mqc0zdse') {
+        image = 'https://nostr.build/i/p/nostr.build_998a1a5c794cf42603e6fd5c9a7a30a5f19b6a80e3246693acf1631bfd4474e2.png'
+      } 
+      else if (npub === 'npub1rm8ysrurstlcaf4v9g7mxdu9tvc08kg4hsagdm0c0aav05s50r7sdjqd6h') {
+        image = ''
+      } 
+      else if (npub === 'npub1uppfkelag8szx027wm35yxtvl75an99qt65g6w3tta34gk5k06xqk6txt7') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_6561238173496372431699702077.webp'
+      } 
+      else if (npub === 'npub1pqgpggj5s76e7us6edq2vuwsdv94wfcx3qqk0kny6w7rgssvt6zqlq80md') {
+        image = ''
+      } 
+      else if (npub === 'npub1uppfkelag8szx027wm35yxtvl75an99qt65g6w3tta34gk5k06xqk6txt7') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_6561238173496372431699702077.webp'
+      } 
+      else if (npub === 'npub1m78s5eqv8l7snc5nnxdvlgue6pt5epgplndtem99quhwyptas7jss2qx53') {
+        image = 'https://i.nostr.build/KYWl.jpg'
+	image = 'https://i.nostr.build/9qRE.jpg'
+      } 
+      else if (npub === 'npub1ca2xqej87v7hq97fjthtg32vvjlmpyu20ulaqdhnud5rnrkqlx3q4vaq3f') {
+        image = ''
+      } 
+      else if (npub === 'npub1wnwwcv0a8wx0m9stck34ajlwhzuua68ts8mw3kjvspn42dcfyjxs4n95l8') {
+        image = ''
+      } 
+      else if (npub === 'npub1afgejt3kpvkxa3vlgamxwqzfdl3fsfypsdt9fq0sm7vxmwsd6n5qluz5lk') {
+        image = ''
+      } 
+      else if (npub === 'npub1yndrj79av9pxk4yemrj6ss4y68vsv7gvpfhuy3ca58s79yl6wlrsrxd0e9') {
+        image = ''
+      } 
+      else if (npub === 'npub17a50460j8y99yglsqzjzfh4exq4f8q0r82ackzzv4pz0dyd3rnwsxc9tp2') {
+        image = 'https://nostrcheck.me/media/public/d93484460b8e6d6c8b92b22ad041b22abf23eb8954145bf4c17569c2ea887758.webp'
+      } 
+      else if (npub === 'npub19rfhux6gjsmu0rtyendlrazvyr3lqy7m506vy4emy4vehf3s3s3qhhje7x') {
+        image = 'https://nostrcheck.me/media/snowcait_test/efcf2dafc8386647d004bb46df8d2bd9598635f418eb591a2cdc0a4dc0a8a340.webp'
+      } 
+      else if (npub === 'npub1u4sfdmw8trsqpnt2cclm36tvvv09kvvx596z5zu9x3qr0za8mvps3cl56y') {
+        image = 'https://ul.h3z.jp/hHjZ9WA9.webp'
+      } 
+      else if (npub === 'npub1tvqc82mv8cezhax5r34n4muc2c4pgjz8kaye2smj032nngg52clq0rkrq4') {
+        image = 'https://nostr.build/i/p/nostr.build_0e69671aba33808290112d47f133b7169d28e84bdd7dfdb88a517672d4c66ac2.gif'
+      } 
+      else if (npub === 'npub1yr7g5t2jdhygx7frl9k44qjtflm0glr5auu3vf6y6cayle6pvmdqkkkqk4') {
+        image = 'https://nostr.build/i/nostr.build_605c4c2a01c1a2f036584daf915045f2364e425e52ce199af9e0896b83b95b3c.jpg'
+      } 
+      else if (npub === 'npub142hcyec2zkn526fnpruy63hzhf28tqrzn2qxhqcgn6e5sjrerwhsgp4lf7') {
+        image = 'https://image.nostr.build/a6935651d3a55a82c4c8fda874a7fc43ceba83655e70247d9ffa5f0119e0982c.png'
+      } 
+      else if (npub === 'npub1upv4xeydzu0ahflm853vw68sax7hfqjd64zskwl4eq42qccqs0yq2ayw07') {
+        image = 'https://drive.misskey.nokotaro.com/files/b8d5d593-2894-4550-82f5-e05d25f42177.png'
+      } 
+      else if (npub === 'npub18p9ksnc3tgqp64gej3qsp6qly45e6zr8dfk25hjrhlqr8qzx4t8qc7547a') {
+        image = 'https://ocean-alliance.org/oceanalliance_circle_logo.png'
+      } 
+      else if (npub === 'npub16nhjj9nfga7jqwvzkyskpg4f2f9h7knalepx8atzqz85rwcm09rsflu0rh') {
+        image = ''
+      } 
+      else if (npub === 'npub1tqwfm20g9pxzd70f8w8cnphsl8u28ydl0kkqpmhnk3pc2spuz5us9j2jhh') {
+        image = 'https://i.postimg.cc/nVGyVMHR/reflectacles-privacy-eyewear-phantom-monitoring-public-space.jpg'
+      } 
+      else if (npub === 'npub19x0h8jm3mnwzhv4tpq62zta05er0qlyge73m0pwsp7h666khkd9qev2ree') {
+        image = 'https://pbs.twimg.com/profile_images/1362913610415005696/cfMHMSqh_400x400.jpg'
+      } 
+      else if (npub === 'npub1uwp0f94sxgexn3pd747csqchqfhxaypkj9r397qmlw8vx8yt4e7qdeu73w') {
+        image = 'https://nostrcheck.me/media/public/b4f0374681400904381c3d0dc3b1fb93055c92b57133cf5e935c09bf30c6c7ed.webp'
+      } 
+      else if (npub === 'npub1evz2dan8p8rw9gc2csaz6dhgj2na77xxwhxsynlku60du2lul94qakqkgh') {
+        image = 'https://i.nostrimg.com/8e88c705202de204f6c29e444d211c479934f2f14af42093bcaab8bdb6a79db9/file.jpg'
+      } 
+      else if (npub === 'npub17plqkxhsv66g8quxxc9p5t9mxazzn20m426exqnl8lxnh5a4cdns7jezx0') {
+        image = 'https://image.nostr.build/9b02b3ea87195faff955ad3b32d133c9e8f24dee61e01a5df85e35f8981afac8.jpg'
+      } 
+      else if (npub === 'npub1satgtcftm6420gs8mrf9c075x2527vrmsru22gn8w76skz4zlprqdezplw') {
+        image = 'https://void.cat/d/32atZtT1JDoXsrnUntiyd2.webp'
+      } 
+      else if (npub === 'npub1m0sxqk5uwvtjhtt4yw3j0v3k6402fd35aq8832gp8kmer78atvkq9vgcru') {
+        image = 'https://pfp.nostr.build/19ae3f573c6c8a4da03aac652db44e7865b16435c57c2444f24cc5547b9ab371.jpg'
+      } 
+      else if (npub === 'npub1p2vxafm57hvvy7jung99ht6t6850r8aj237ayrmc2ckgr634q7dsd263nw') {
+        image = 'https://pbs.twimg.com/profile_images/1241920358740946945/BIyzKcej.jpg'
+      } 
+      else if (npub === 'npub14g6n8244kl5ppmp56982326mx2ttg8gs2s94rgljqh0y8tv6tnnqhq3dlu') {
+        image = 'https://nostr.build/i/75bbc5aae5230638324d240db7f05508e646756f229c9f057787e0864ff06f07.jpg'
+      } 
+      else if (npub === 'npub1wu64zkgq9wt98mavhp9e4f8c2cjr42drdyrj4ns0zmtfq2hqu82sk2zt99') {
+        image = 'https://image.nostr.build/4a88827e3dcf62a4b3fdec612ca2ef5c2f88b5d8147175542741d8d4d576f164.jpg'
+      } 
+      else if (npub === 'npub1wv4j0wu4tmtvz0xazrpdypezs6fujtxyq0jwawdu0zd5ly6453zskl2sa0') {
+        image = 'https://kojira.io/labomi.webp'
+      } 
+      else if (npub === 'npub1rnrnclxznfkqqu8nnpt0mwp4hj0xe005mnwjqlafaluv7n2kn80sy53aq2') {
+        image = 'https://nikolat.github.io/avatar/rinrin.png'
+      } 
+      else if (npub === 'npub1chunacswmcejn8ge95vzl22a2g6pd4nfchygslnt9gj9dshqcvqq5amrlj') {
+        image = 'https://nikolat.github.io/avatar/chunchun.png'
+      } 
+      else if (npub === 'npub1l4049g5rvjx2rapxlsj2m7v5tvqdkvv0xz2hjlsdydrhczhctvhqyaralq') {
+        image = 'https://piks.sovbit.com/public/uploads/medium/8c/5a/0114067f55f7d52fe312adcc6663.webp'
+      } 
+      else if (npub === 'npub1uxlhp5fudrfchgc7j7zkar0v9vwlwls2pk3ennkrd2qydt9ytshscsmgqv') {
+        image = 'https://image.nostr.build/c1fd21f259a4a55130ba6782a92dd5b0168a5528d9b791caed263046939ca10b.jpg'
+      } 
+      else if (npub === 'npub1wysazhsuwvh7cddlcl8qpq4395ul774wzelupcndlwzt37yaeyvqrzu6gn') {
+        image = 'https://void.cat/d/QWN4zpfcjUQhcvhAcHrQ4B.webp'
+      } 
+      else if (npub === 'npub17mj5mskzdzfkn2ad6d7jac0ej8qrhahl4jnps03z99ue3trxetjs3d384p') {
+        image = 'https://pbs.twimg.com/profile_images/1172565293698125824/Sh6V2-ve_400x400.jpg'
+      } 
+      else if (npub === 'npub1sytget3suf7s5gkx9fnt4upw0a45n3zkd7emrpddnpvzl558umys5apyau') {
+        image = 'https://void.cat/d/K6vpZfhXpG1HicqoQ7z5Vm.webp'
+      } 
+      else if (npub === 'npub1cpzpxu5w86mkvvjncl6g4gm723u6vhqv34lj7dxtszsq9ed0nrqqqqsfvr') {
+        image = 'https://pbs.twimg.com/profile_images/1179379994239361025/-rSns1ax_400x400.jpg'
+      } 
+      else if (npub === 'npub1txum90npvsupzu347gm02gvlnznmw3f9444p5vegt7647mnegjnqd5fehn') {
+        image = 'https://image.nostr.build/76949072d65fe85ccb2a18cc9644e830c15bab3448411a85ac2d7f7bd94846d4.jpg'
+      } 
+      else if (npub === 'npub1nnumvzrexs63usytjuwn6ntcy3gr4jqm3ek5tcqsuf2yqk2dkjrsrdxqrl') {
+        image = 'https://kojira.io/kojiranyan.png'
+      } 
+      else if (npub === 'npub1dxg440ltnu9pppjc94a03pwvgvaxvadfphn9ejz4qkcukts8sy3s8lgr73') {
+        image = 'https://image.nostr.build/86ad7b473f912303b5307c7620d3b7324d9a90464abd75fb4951d4844f797c1a.jpg'
+      } 
+      else if (npub === 'npub1e4gscs30mhrypr42ux8xnc7smlvvygjxks3ev8um84wz6ljkytvqalcy0f') {
+        image = 'https://kojira.io/tuna.webp'
+      } 
+      else if (npub === 'npub1uykrdeaxwqfltjzy6fygsk9gecfag9n3a3kkvsynma9czzr0ffaqaf9v0g') {
+        image = 'https://image.nostr.build/49732a1fa084822c09d772a9d95790bffca354ed9d9786e9549d5c2d83f0df81.jpg'
+      } 
+      else if (npub === 'npub14fpew4p8466ye9uc7cu8qm7hulkzslpqvh08s2x2a64njd4e20hqm3nvff') {
+        image = 'https://image.nostr.build/8786ce431e041284aaefe46e907d00a85e6450f221430cac4980c0e39adaeb71.jpg'
+      } 
+      else if (npub === 'npub1rg6m2nhhw5402n9vhmklpu6fuvs0pghw2q2z3qcnfslwxxreeecsvhlxfh') {
+        image = 'https://nostrcheck.me/media/kunigaku/56b123b841bb148c9a067dd9ee6f631b75a254d8ae789d7f1e78b9db05a66580.webp'
+      } 
+      else if (npub === 'npub1curnt7jtq8mhl9fcswnwvuvc9ccm6lvsdv4kzydx75v92kldrvdqh7sq09') {
+        image = 'https://i.current.fyi/help/Screenshot+2023-05-10+at+10.18.33+PM.png'
+      } 
+      else if (npub === 'npub1u35rk4sj7ctcpp8z9hmt7s5jv4nknesh7dtk5d5lp3fxn279dyfsx709vj') {
+        image = 'https://cdn.nostr.build/i/a4a1e654bd55de58bf07677a63d94818ef932b5d6bc7eac08d8408b2bddafb83.jpg'
+      } 
+      else if (npub === 'npub1yvcpmszjpk42wq9ukhehdhkd2jtvu32lrzukssv0kx7v3rf2pnvqfmey9v') {
+        image = 'https://pbs.twimg.com/profile_images/1492374017034297344/EFf7S6t4_400x400.jpg'
+      } 
+      else if (npub === 'npub1f0zm8waa6l7yyre8nlx40ew75f89r0kyqphnzve505vnjkgkz72sehr8rq') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/578/753/original/e400ef15981ea8cc.jpg'
+      } 
+      else if (npub === 'npub1zt8s2qpktqdu4par9c9970mats7n6us83s29yzuxmw8u9thsjtyqgtfspy') {
+        image = 'https://pbs.twimg.com/profile_images/1592174020522577920/s0-TFjHp_400x400.jpg'
+      } 
+      else if (npub === 'npub1a7n2h5y3gt90y00mwrknhx74fyzzjqw25ehkscje58x9tfyhqd5snyvfnu') {
+        image = 'https://cutclout.com/images/about/elidy-profile-pic.png'
+      } 
+      else if (npub === 'npub1hcp9cc59ks7z0t8ujwpfxh723yhtqels4ntq4ttdpa53vz5nuwaqs3h70p') {
+        image = 'https://image.nostr.build/92ba5e1742cbdda55471cc3e610de556ad89f5d9aec0cafec08704d0038df0bd.jpg'
+      } 
+      else if (npub === 'npub155c00a6mvtuxquc83lgdsgcz2zxfyulvs3k3janw7s2p06uzqezqw6dfkh') {
+        image = 'https://nostr.build/i/nostr.build_d4fa58cf9f36714c3249efcc3572d9a658497b7165e930582aad364a7f254820.jpeg'
+      } 
+      else if (npub === 'npub13sajvl5ak6cpz4ycesl0e5v869r5sey5pt50l9mcy6uas0fqtpmscth4np') {
+        image = 'https://kwintendebacker.com/images/foto.jpg'
+      } 
+      else if (npub === 'npub185h9z5yxn8uc7retm0n6gkm88358lejzparxms5kmy9epr236k2qcswrdp') {
+        image = 'https://media.mastodon.bitcoin.ninja/accounts/avatars/109/298/428/329/361/355/original/597491e22ffd0081.png'
+      } 
+      else if (npub === 'npub1mymntclrwsca9z7exxeh43vl32udaezxgnlhwvtvjm7y8n8aff5ss3r5lk') {
+        image = 'https://image.nostr.build/c02b67890c3e40d2a70b86d7b83bbb68b920cbc559bc334215bdef5de43be92f.jpg'
+      } 
+      else if (npub === 'npub1d43cqptd4a85mc75s5zeltu79ge7vdmw5tjq3xe7wc5ytzj0tauq2re6p5') {
+        image = 'https://image.nostr.build/531ba8b15b0c18f483ecc64d3f672162a24517f74a66786c7f2963750818d822.jpg'
+      } 
+      else if (npub === 'npub15w7wp9wdp6p53vy5eysph5xryu82ltmc7am9zl6pqyexmt6ukllst6ddy2') {
+        image = 'https://i.nostrimg.com/c700a8adac1d6a81c66b6aeea10ce730c7aa0f48f17b267e4a4f7f166c95742e/file.jpeg'
+      } 
+      else if (npub === 'npub1hy7r6evx9e9l6xz7phnysm3fcfz6vkmswvsyduhcetyuy07uvxkqws4rrx') {
+        image = 'https://void.cat/d/VcjqkupB32h3UDj2YCSyC5.webp'
+      } 
+      else if (npub === 'npub1cyla8qgt9gv8y6ydv8s2prt89h8afc0sr2kaz64ryjmlpdrzxm4qwlh53q') {
+        image = 'https://github.com/kdnolan/kdnolan.github.io/blob/master/avatars/lasereyes.jpeg?raw=true'
+      } 
+      else if (npub === 'npub1q3ar9v6a55mjjelgl3fpgsq3gwwtt65dhdjqu82kuausmwg6hauq8mekza') {
+        image = 'https://nostr.build/i/e06a5fcfacb1aa6203e7c7392ade12667bd4c2744a16584fd4f206bf187148e2.jpg'
+      } 
+      else if (npub === 'npub16mwf24pwrzut0tkz79rppa2uxddta0k8du7mnevvy4rxr5ze8gxq4w2myx') {
+        image = 'https://void.cat/d/BjgwgSJ2pVT8QRdETNT1m7.webp'
+      } 
+      else if (npub === 'npub1arkn0xxxll4llgy9qxkrncn3vc4l69s0dz8ef3zadykcwe7ax3dqrrh43w') {
+        image = 'https://image.nostr.build/4709f089162a7d3ea6a5c604fc4b4541b233ca4a52f7731ec75b810924f80c5e.jpg'
+      } 
+      else if (npub === 'npub1z34a5nkxjv5rq5p7unuw3d3xh4an54uyyv4cys96zhyvhlu6qlxs4qnh9r') {
+        image = 'https://nolim1t.co/shadowy-super-coder.png'
+      } 
+      else if (npub === 'npub172v6ulfpl5yghp9u643szjze7n0vc2r5ksvfxgaw7zmahv53dyvss3jhsm') {
+        image = 'https://image.nostr.build/fb4abd9ccfb45281cd9cf6dc5367dbe5455447f8cf0a0b13d65ad9f6f8662211.jpg'
+      } 
+      else if (npub === 'npub19mun7qwdyjf7qs3456u8kyxncjn5u2n7klpu4utgy68k4aenzj6synjnft') {
+        image = 'https://nostr.build/i/nostr.build_18d8e640c3a8adf2158016425c94a79b6dbe149e552449613890b6224d70efa8.jpeg'
+      } 
+      else if (npub === 'npub1nmr6w7qk0ta36vxysv77jv3d5rqghfc6d8sez8240rf3gja4vsmsd2yha8') {
+        image = 'https://user-images.githubusercontent.com/17043377/210444663-ca73049a-ba01-40d9-86e8-204d450eaec4.jpg'
+      } 
+      else if (npub === 'npub1ktt8phjnkfmfrsxrgqpztdjuxk3x6psf80xyray0l3c7pyrln49qhkyhz0') {
+        image = 'https://oxtr.dev/assets/profilepic-animated-small.gif'
+      } 
+      else if (npub === 'npub13sx6fp3pxq5rl70x0kyfmunyzaa9pzt5utltjm0p8xqyafndv95q3saapa') {
+        image = 'https://astral.ninja/aura/monlovesmango.svg'
+      } 
+      else if (npub === 'npub16rsaeu8d63hhahlnwkmx6w645f7tjuu3n9q8q6wcfny4e93xkess3yqq66') {
+        image = 'https://i.nostrimg.com/bf4b0d4561299e171d3ffd4fff588863b137617df7dcf7d3e01dfee858f3315e/file.jpg'
+      } 
+      else if (npub === 'npub1j3n89ef365gucp479yrj0cdnewswmhm27kmwe6tgg7vu7eptzjnste73us') {
+        image = 'https://nostrcheck.me/media/public/0a2c3774b988489fb77ce8d226f501c9b1f0dfd1be700f7e92f934cee27bb84d.webp'
+      } 
+      else if (npub === 'npub1lhe30pu544d6nwf5r5xqsw50y8d97cmghsvcn8htrvm532j2kusqlmad5l') {
+        image = 'https://i.nostrimg.com/c07345e7a37cfa8ff146d992aa3684d0735add24edf1f5f81e7518bb2f44d76e/file.jpg'
+      } 
+      else if (npub === 'npub1katana3n8vawxc0xxqhdzw5gzlswu57nz5gw4dn9wnx4lqxr2pcqtesvmu') {
+        image = 'https://nostrcheck.me/media/public/e613c28d39cf4a6c4841124ba46e01003b897fc5fe323bdec27498ac19c82e7f.webp'
+      } 
+      else if (npub === 'npub1ptck8euwvgmwtc8f524cartxqgz0ckuwufrs6679gmewxt5u387secfjy9') {
+        image = 'https://cdn.nostr.build/i/1404bb11e19f2e3b46a49374e52019229fe3b2f41f77c661527dd50231093d6c.jpg'
+      } 
+      else if (npub === 'npub1cqwkqf2jrzqe0wrljf3mxef89z5th29zdxkslkz9s4evpjexeqxqva2kea') {
+        image = 'https://image.nostr.build/8ab2a62c5a35ebfa065e337d396386b40982f985581295ebed3bd33f6db2783c.jpg'
+      } 
+      else if (npub === 'npub1zp8y57vg3g74urqfkyxs7u4ufht85wlrs95cdls602jutjahe69sgsxsnf') {
+        image = 'https://nostrcheck.me/media/public/13978c2b10779e0e8463db6b6d55d0081ab0c1eb0b4e7f326117553e15ea5f4e.webp'
+      } 
+      else if (npub === 'npub1djk4g4psjp9cf2qsr3tc8djsg0ce4c5a9kssw6u0c0ny3ynndups0z2mfj') {
+        image = 'http://cdn.jb55.com/img/minebot.jpg'
+      } 
+      else if (npub === 'npub1434u9urykyrplpxf5kmry75fmngrugy9h92lr6e0uztld64q7wdsm37v2c') {
+        image = 'https://img.atis.dev/avatar.png'
+      } 
+      else if (npub === 'npub1yw66p8fqnl3qfq3pszt5caauhhdu6mutc0jwe0endynsg6f3mfmqesjvxg') {
+        image = 'https://image.nostr.build/fd661fe1d9cb86aa18a3fca6001f14e4e44f37adc912cb0a6a952d0891960c5b.jpg'
+      } 
+      else if (npub === 'npub175ydvjhtxxavq53j0pquclw4njwn0svzzq4qfzjrjzv23wupdk4seh25c3') {
+        image = 'https://nostr.build/i/nostr.build_942df604c06584f569500d9717dc82f595ba4ea089d2c3d6f5a805c93e1a3c77.jpeg'
+      } 
+      else if (npub === 'npub178em4nummr6fkj4mgpgjcm4hrfx3vhmzj67u8fuls38q46h2clmsxff447') {
+        image = 'https://image.nostr.build/7e969739ba63d487600d74345abed75005dc397f97a38a93d6c3ea0c2ae130dd.png'
+      } 
+      else if (npub === 'npub1wxtrek8grj8rswyssp2acp75g60vwafcg3xcm9l9u7u89qjz3weq7qflrr') {
+        image = 'https://image.nostr.build/439d59665467378bafaf2c0f89bc6fbe8313e3d10ed6ecc5c0944a93fabfc2f3.png'
+      } 
+      else if (npub === 'npub12pnpy6uy0ap96jhv5psprhhzs8j6kjhdgxh8fe4rw45wfsmwy8uqn20uvh') {
+        image = 'https://image.nostr.build/c450bfac284d18351487c3849f2cdde472eec81c7195c60c3c8fd9b6db6547d3.jpg'
+      } 
+      else if (npub === 'npub1adqltym8h7vzgvkmqvwzx6mn49rl3j57qp8rspegmpuy9d5tvy3q2adqqz') {
+        image = 'https://image.nostr.build/7d7cf42991e8aa4d7dd451e9867ca972716a572ed15ccb20bb854e097638f0b2.png'
+      } 
+      else if (npub === 'npub1qj8vk9xavpu5ylgwy58v8np6yr4jhd0new9encly6wuzglpg43uqyks7e6') {
+        image = 'https://nostr.build/i/72dcc0770039b9c8056ca619c832fe802005d665fa1143abd802b0aa9e479b75.jpg'
+      } 
+      else if (npub === 'npub12gyrpse550melzx2ey69srfxlyd8svkxkg0mjcjkjr4zakqm2cnqwa3jj5') {
+        image = 'https://nostr.build/i/nostr.build_e3eb9194c60c1c8715a9eeb256d3cbd3d00657515da4d66b608c5f3c0ba859b9.jpg'
+      } 
+      else if (npub === 'npub1sctag667a7np6p6ety2up94pnwwxhd2ep8n8afr2gtr47cwd4ewsvdmmjm') {
+        image = 'https://cdn.nostr.build/i/270de92fa4e5118a28352720b7f26c360aa2dbfdb1c12517f3e3117a2f9de47a.png'
+      } 
+      else if (npub === 'npub1h882a66p0zj5n69s2u8nfzev4f97lzfnlcej84z78p6uqxge5tpqlupz20') {
+        image = 'https://pbs.twimg.com/profile_images/1601453529293529088/lLNR3plf.jpg'
+      } 
+      else if (npub === 'npub18p8ma5h4kslcp905lw99e00rl2x6j2qphpzrnvnrd4ufva4mxn7ssj6v3c') {
+        image = 'https://image.nostr.build/abe1865d5c3ec096c3d45e62ca1c5bc4909fd67155f9236d09baf0d8314088b1.jpg'
+      } 
+      else if (npub === 'npub12zr4grhvlh8wx0wt83cu9jaudlqwwwy5g5rh6g6jkywu8jltxseskh97nm') {
+        image = 'https://i.nostrimg.com/dfd3f34c78d309905cf954ed504389f8ab7eaaddbd1c1fdd7158e25c39573cb0/file.jpg'
+      } 
+      else if (npub === 'npub1hq4ljuwvcaz8t004jvkjgk8vnge88pq45rzfaep6m7u2clmenm4q2u8peg') {
+        image = 'https://nostr.build/i/84055a0d4065e1bb15811268d4d9ec98a0ae9e33f7b6056abd1c5ddcfc0b7135.jpg'
+      } 
+      else if (npub === 'npub1j5wug436qf7vxafgty9hhpvy6hxgk8nmy8g9dcwrykklnmrp6a3smcvps9') {
+        image = 'https://cdn.nostr.build/i/f301c4b62229b5906d63eab4c8b4efebdcc81872089c06994dcd358490724911.jpg'
+      } 
+      else if (npub === 'npub1nfnycjt2tkw6mm7dd5stanhxf9dax6lde9xkk9ap0h87qptxs24qxf4ufs') {
+        image = 'https://i.nostrimg.com/4b9c0d3edd400a88737c94996c25ba6f1edc9790e589cee652eee0bfa2feb9fb/file.png'
+        //image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
+	image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
+      } 
+      else if (npub === 'npub1qdkl4et0xhz3u32722g8q0ejx0pz0f6stxtaug55ncgymy3nrwwsqr2rde') {
+        image = 'https://nostr.build/i/nostr.build_3aaaaa1b1a8758df34041136ea04eb7ad77621b7a98fffb90ab04a36dc535d70.jpg'
+      } 
+      else if (npub === 'npub1rhnnazml5hefl4zz855apf9yaxegz8thuzwf4dvdtcf0nx7xlsyq7jlxe3') {
+        image = 'https://i.nostrimg.com/ea4b7fd4a318b3b8779332bdd6c4e5926525b4c16b3bc67ee0ce112a5a48ac43/file.jpg'
+      } 
+      else if (npub === 'npub1ees322t2ppy339xssa8vqknrfl96j99792chhvxq0u835jc4rxustae8d8') {
+        image = 'https://file.misskey.design/post/fd777132-c0ee-46b3-af08-693d0aef678d.png'
+      } 
+      else if (npub === 'npub1m8xtewufstu6s7fn25m2nn8l8nnw6tfaz8kuqnar9t0swujw0wcq6ur8a8') {
+        image = 'https://image.nostr.build/0fce3a0d831dd949be93701f3f5e0a2772f7b5b2ffa9b9699f9f8eb85d5cbded.png'
+      } 
+      else if (npub === 'npub1tv7cz7a5spkc2dua2f37g5k5w85kr5d9agp8yjkmcpzu5tsda6vsjyyus4') {
+        image = 'https://image.nostr.build/77ce62bb092bc1af5e5519fb606427654a70fc9d88d2b2f058d96fff59359a79.jpg'
+      } 
+      else if (npub === 'npub1y9xpx3azu5vqgw3g5g77tlex0w3r546ncwwd7s28q3a8e3804nnqyx93s5') {
+        image = ''
+      } 
+      else if (npub === 'npub1r0rs5q2gk0e3dk3nlc7gnu378ec6cnlenqp8a3cjhyzu6f8k5sgs4sq9ac') {
+        image = 'https://nostr.build/i/p/nostr.build_4fb6accf6b24cdb58be127d9a509c3acd3e859bbe24b5c194b82bf30bc1e511a.jpg'
+      } 
+      else if (npub === 'npub19fz2f8vpzpnnchs8xrql0sv6p2xwpfv3ktyzgfwk8ugqn5nwpfhsamduqq') {
+        image = 'https://ja.gravatar.com/userimage/36206190/d4282acc7c10065dbae4337cd9eea7d4.jpeg?size=256'
+      } 
+      else if (npub === 'npub1getal6ykt05fsz5nqu4uld09nfj3y3qxmv8crys4aeut53unfvlqr80nfm') {
+        image = 'https://m.primal.net/HIPZ.png'
+      } 
+      else if (npub === 'npub1vd9ar8jusldjze24eq2tlz8xdt8pwkq99ydxh6gtzkkrkgj8m2dsndwen9') {
+        //image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1568747937513222144/VneRfcSu_400x400.jpg'
+        image = 'https://image.nostr.build/f57843f2b031c5399372400a98ca42f78e8247814b9741f75786ce6548460106.jpg'
+	image = 'https://nostr.wirednet.jp/avaters/20230206_125054.jpg'
+      } 
+      else if (npub === 'npub158h6j5yee9876xmwz88drlw8jzwxeja83sh4trn4kdll27uq2ypqam303e') {
+        image = 'https://image.nostr.build/c6b816e1ff2803f2463946f1bf689f4401c1a3c88dfc041d61cf11cd81edbd79.jpg'
+      } 
+      else if (npub === 'npub1hgats28c2ulvfz7eyzrdq2dy6dx9cln999vxhank4lm69fexujds27tthe') {
+        image = 'https://pfp.nostr.build/5b914411d754c144382c7757ea48d6e9b92d68a9101f4f8d17c70006e7dc9a88.jpg'
+      } 
+      else if (npub === 'npub1wgawvr2uy0rtjua4hzc25yuyu8sedfvqujqtklknljljz749w53se6xncu') {
+        image = 'https://nostr.build/i/d19c1ae0cb4f84cdb4c993da9bad044af5700356524a0aa0ee6445056974b9dd.png'
+      } 
+      else if (npub === 'npub1hzyrfyqfxg6ly79rtcpy6fgp2eps8s7pq2cwma3285gn3w2e30wqy03ka2') {
+        image = 'https://nostr.build/i/7af5fc1bcfe122589e340081b2909066aac1c4fb9f2128a43d5046e433092481.jpg'
+      } 
+      else if (npub === 'npub1hq4ljuwvcaz8t004jvkjgk8vnge88pq45rzfaep6m7u2clmenm4q2u8peg') {
+        image = ''
+      } 
+      else if (npub === 'npub1tuqsl6l8xzly95vv80um7wsnt7gxy8w9wgt4khp4wyv4xwhfw44slm93e9') {
+        image = 'https://cdn.nostr.build/i/cbbf30d005524e7bb29e9b5e515dae68b1891825a1f2f49812a8de4ea2c0ccef.png'
+      } 
+      else if (npub === 'npub1u3rz86hzjejkh54mg04u20sxe62ps3nhtqy987n6yqv6sx52uhjsnkn4se') {
+        image = 'https://nostr.build/i/025f55da95fcf7324586235e52fd6a3e85bdbf199718f4b1e2726a73ba846c10.jpg'
+      } 
+      else if (npub === 'npub1d52qe5fdn3ee6fheumpr33n5spxez4f6lq49ykmc287m2dh3caeqk07787') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_3025919611501907821698408056.webp'
+      } 
+      else if (npub === 'npub1rymd3ejr3c077adcnsydx9uugmt3umwy66a7xwtqz3memxjws0ks29mg8t') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_4852796685475312101698407312.webp'
+      } 
+      else if (npub === 'npub1adz6swzfzya68t4v4mfsg36u7glrhway7tjn4sqw3kyghqxekhqqzdgn6z') {
+        image = 'https://i.nostrimg.com/aaa4339a65a55804ca0b7dbd1bb42524cbc8cb13eddd5c00d06ab3dcf70e84cc/file.jpg'
+      } 
+      else if (npub === 'npub19lr6k5gfnl69t70zytn4xhx38gzzvxulugkn95hsh5u2rst0yggsaw6dwy') {
+        image = 'https://nostr.build/i/d7d320045b178b85c0ff24e8507f495d613f8f5cb6d997878ca7ba528e370dbc.jpg'
+      } 
+      else if (npub === 'npub19q7kmcafn4x8pyj0chz20sgja3642g5mvzru09se0wdw87a8msys249h0x') {
+        image = 'https://image.nostr.build/43daa8a26aa96f9141def2665dacfc9e9e23a01f789530ca1155191d2e99c5e7.jpg'
+      } 
+      else if (npub === 'npub1n0stur7q092gyverzc2wfc00e8egkrdnnqq3alhv7p072u89m5es5mk6h0') {
+        image = 'https://nostur.com/Nostur/profile.jpg'
+      } 
+      else if (npub === 'npub1ddhpnnj84ytuhcf6vlhtgpf6nvcpu78vny2p8e64f9fs3rkk95ashxgr8s') {
+        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1614562193147842563/mfd80R_H.jpg'
+	image = 'https://nostr.build/i/3806b00b13ab9e1d1f0bfa2251b5bf819e47975972f8d3604a0df49e7dd26ded.jpg'
+//	image = 'https://image.nostr.build/60b815bf3035327eea27dd43826c57b4b123d257b73b6b73e0292cc73213f0e0.gif'
+        image = 'https://image.nostr.build/2f6f14975176bd46b565175e677072cb1d9655e3bfb0ab2d195c2db9872fbed4.jpg'
+	image = 'https://image.nostr.build/eed8fb5ff6ae2ff2a52a13b6d43e8a058c088a807792f541c6d2fbeb6607cd72.jpg'
+      } 
+      else if (npub === 'npub1tjg450n2g6tr9jmjqnmkrqcvcxepk404thy0z4pd7ruefrnnxx4skamcfz') {
+        image = 'https://nostr.build/i/45e074e6d95e6c766a1580f8f37fdd3a624a563219c6c431378eca17128811c2.jpg'
+      } 
+      else if (npub === 'npub13sdalr4c02s26sk94ecdskfpcf98kt84vfu9p8n57x9xgnrgq59s6ww73n') {
+        image = 'https://kojira.io/rabbit.jpg'
+      } 
+      else if (npub === 'npub1a0vdlqx5unsds8q9gclrcj4kkgd9vuqwa6dqweh30c5ksgljqe3st7ldwh') {
+        image = 'https://nostrcheck.me/media/public/404e6e260e8defc1f79096c89e8a6212e10993a2e9836b136336d9ac92cf4ea0.webp'
+      } 
+      else if (npub === 'npub18mz5sq799y2e4czterq706wm6lwjgsh3wtsmnd0v736n9tqpqlfs452gy7') {
+        image = 'https://pbs.twimg.com/profile_images/1709824288919068672/pXb0gJ_x.png'
+      } 
+      else if (npub === 'npub127knhcmatjn5tj8azvptwan9rxhzpu9a5nmu0tjag4f7c6ae2lcqq0azpa') {
+        image = 'https://image.nostr.build/1d60312eab99090ebafd98fb405bb35bda646d35b2feb3cd93ed5cd3c53cc237.jpg'
+      } 
+      else if (npub === 'npub1z4gsy2zcylj7hartjxusgmknqyve2ehsxqth8988wn3s5uyhp50q3zq86a') {
+        image = 'https://image.nostr.build/73501210a6a2e1af6e0d5106d7c2808c4316e1d079d16bb3ffb484e50ac6a827.jpg'
+      } 
+      else if (npub === 'npub1y3gdwpxzqcz6udqz8ujrekv23x4svlsk0czxuzky5ejlsz8vzhcqpechsk') {
+        image = 'https://nostr.build/i/0e7f0b7f07ab028e166a3bca72b2d493fb0b35ec1ac0cadfec3d33dbbeb81f88.jpg'
+      } 
+      else if (npub === 'npub1e4c93rsk9atgn982ulau77w7xfcmcpnafzej39qmf2lqqpe3zspqxvvpmc') {
+        image = 'https://nostr.build/i/nostr.build_c02cff2344abe6a0279f4a7edf6c92112a9373887258dd3c1ed6cc0a1b9b4abc.jpg'
+      } 
+      else if (npub === 'npub1504jj42t6flu5l6n7e389e9mt8gxduhnzuyv7dq4gr95w20mmpqscx0cg0') {
+        image = ''
+      } 
+      else if (npub === 'npub1z9zw0jkvkuwvjan9add3q3susphyzmtfz2xqtj8jcmh86yppy2xqkek4d9') {
+        image = 'https://nostrcheck.me/media/public/332ba9ca305d8a4cfd7cd6f8bf2e1628e0a0c7e21fa7e8f303f57d35059ae37c.webp'
+      } 
+      else if (npub === 'npub17069lhtwe279umwker069lcp33aqdgew70tn5q8cu2avml3sxpsqcu8hgu') {
+        image = 'https://i.imgur.com/m5zAiXX.jpeg'
+      } 
+      else if (npub === 'npub1funq0ywh32faz0sf7xt97japu8uk687tsysj8gndj4ehe825sq4s70gs0p') {
+        image = 'https://imagedelivery.net/wyrwp3c-j0gDDUWgnE7lig/f494848b-9baa-4262-a948-301df5b9c500/public'
+      } 
+      else if (npub === 'npub1qd6zcgzukmydscp3eyauf2dn6xzgfsevsetrls8zrzgs5t0e4fws7re0mj') {
+        image = 'https://image.nostr.build/9bc561b224e7f9256536a39bb0945dcc75f1dc8e220a04dbcdaffe0f71bc6f54.jpg'
+      } 
+      else if (npub === 'npub1ezw0xm0w52rd4yfdg9zlw9qvwdy46alzelklkefptrd203m37tuq4djmeg') {
+        image = 'https://pfp.nostr.build/0069c41ba1061ef3fef7527f42f8c7c721cd8f9c575278f97a7e10a8c167e4d4.jpg'
+      } 
+      else if (npub === 'npub1u9wn35fm446vkdrmrg8yx5xhqdcmn5mnfnc3p3uujyvh88gg39lsv9ea2l') {
+        image = 'https://yanom.netlify.app/mycat.png'
+      } 
+      else if (npub === 'npub1xzpf0hpm0tklta7snfsjm3dsxg6gausqslu2s47gtqmx7uyfxtqsvfaqmg') {
+        image = 'https://image.nostr.build/eaf5ff5f1d90be383145f1fd8cfc24c2cb6f240df1e9e0e36f68c3ad57e8353c.jpg'
+      } 
+      else if (npub === 'npub1fk957xtltkjpgyynrffhx2zwt4wyfmva5g0a8wl55lcrtewksswqtq2lda') {
+        image = 'https://cdn.nostr.build/i/883f63ea1b635fb0ea1a9d66df842e3817ee747c57419fe762cb0d3cbb813125.png'
+      } 
+      else if (npub === 'npub1spdcmpq0rly7cfufvu8ukz2mwe24074sg5u556s2axjq6c5w4vrqcupx0r') {
+        image = 'https://us-southeast-1.linodeobjects.com/dufflepud/uploads/ff93d430-11bf-4fa4-b145-1f3e72c71372.jpg'
+      } 
+      else if (npub === 'npub1gq6ee54n39ky9lx79x6cf85uu5ftqvxu8g3kq6uzfec0fndj5jfqnk9s7p') {
+        image = 'https://monacharat-img.komikikaku.com/A5583104072565642044.png'
+      } 
+      else if (npub === 'npub1ynetf06094vu2p0pd8c88w8qd9hwjgc8usrc3jnt4ut365kwdlhs3xdkv3') {
+        image = 'https://nostr.build/i/f2953b3ba96998ab0fb2fb14418a1be56826ecbf18e31c3970af3bc49db5cdc7.jpg'
+      } 
+      else if (npub === 'npub1yk7zf4rm8nmsuka0g9lkgppml4ctv4tuz9gzg0c7sgxsvxjsl7ksztvsm0') {
+        image = 'https://nostr.build/i/nostr.build_6f2b1f8b144609df74e9c3f101ff3d402fe01b0dad34f3e051de614ef9bcb652.jpg'
+      } 
+      else if (npub === 'npub150wk05w90kw3lzeu09fp7cmd66zkft9tmgk5memkcs3pm7m7yjhq47krwd') {
+        image = 'https://kojira.io/blueskychan.jpg'
+      } 
+      else if (npub === 'npub1r25zsj7hcpjqd0yur2ss4t3r0l9h6wavzp6na9vnnjhr87wttp2qmx0zct') {
+        image = 'https://showhyuga.pages.dev/nostricon/shockericon.jpg'
+      } 
+      else if (npub === 'npub1m0ctane5sdszuwnnx3ff2nf3x2xeya8c8u87jy82p805nddsh5ssc66ndf') {
+        image = 'https://moctane.com/data/moctane.png'
+	image = 'https://media.connpass.com/thumbs/2e/44/2e444398a319b3307b47445226d176d2.png'
+      } 
+      else if (npub === 'npub1y3gdwpxzqcz6udqz8ujrekv23x4svlsk0czxuzky5ejlsz8vzhcqpechsk') {
+        image = ''
+      } 
+      else if (npub === 'npub1k6usplmpjuu887twmym9x2j9j4hk42fmwh6g33lxfgwwn5lh2v2synfrvz') {
+        image = 'https://pbs.twimg.com/profile_images/1207320642078396416/ieHwAyoM_400x400.jpg'
+      } 
+      else if (npub === 'npub1wm270ct267htlw8c0fe9g5twe4tmyfp7ykdyg7fkz6urrngezzvqw33jrh') {
+        image = 'https://image.nostr.build/3ab018e481945ab22efb14b6d9b0ba1180ac159e7b9d3586fd37a72a4a31d4ef.jpg'
+      } 
+      else if (npub === 'npub178rw9gfadwstj4jpj5ccqw09zvh4vtrgznkwp88nsmufyu67qnyqzv8kqp') {
+        image = 'https://th.bing.com/th?id=OIP.f5s00zuDtyecXd9VAwe5fwHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+      } 
+      else if (npub === 'npub1t8wgz9hma5u6gfagvc0wewsdas28k9e4ck0dy37gd9m244qfdeqq5ncqhd') {
+        image = 'https://void.cat/d/m3T4WmcMEFZUF9Fxn95AJ.webp'
+      } 
+      else if (npub === 'npub1jx5wwlghmj3w45dxlthaj82tetvcch7c3q52kev57esltx6zxvmslc6l2v') {
+        image = 'https://i.nostrimg.com/ee456922aa610b406992cae8f18c1c8b7852d2d5266e449528b711d0502152af/file.jpg'
+      } 
+      else if (npub === 'npub18ukszjp29n8846qekqlccf4v252hat28seef9a3d2ur20zm49q3qdtnycl') {
+        image = 'https://image.nostr.build/f3007dc0eac8a525d25b6855cfb82c93cf1b8e7f947d4f2515e7a3ae125e36bc.jpg'
+      } 
+      else if (npub === 'npub1yme6rcmfanhna3tffsd6atxz43xjng95wcfuuwleppjn0e44hvns2t2444') {
+        image = 'https://files.mastodon-japan.net/accounts/avatars/111/163/102/308/902/646/original/ee2154b05dd978d2.jpg'
+      } 
+      else if (npub === 'npub1gpf2z0d58k3huudr3ykfnw3qws9p9alj666ffa96966w67ukw2gqckll3v') {
+        image = 'https://ovo.wxw.moe/accounts/avatars/110/158/794/214/513/168/original/df18a4f70323aa29.jpg'
+      } 
+      else if (npub === 'npub1ez3rgswp9ufpqv34g5e4gwlkqcyslvpxd3u0g4sgdqlrr0cgp6ssklc2r0') {
+        image = 'https://image.nostr.build/4e1009f70224974c033e0662fa10ee95e4112d80ffba558a6faa37e3a9d2d782.png'
+      } 
+      else if (npub === 'npub1sxrs75asx0q7tyandhtdnd5gj3447qevldle9y63rlq5w2d776nqqgffxa') {
+        image = 'https://nostr.build/i/4a8c217e21ce73c6b32293d18f5e058429c2c29826310ce4a907f4d18a3cff0f.jpg'
+      } 
+      else if (npub === 'npub1y9zf6sn2naxflyz43j9ju7e80946k9mfh8t3fjw69rewpm6q94xsarmvkt') {
+        image = 'https://nostrcheck.me/media/public/5e3025e7fee67d27a655369fb569cbeddbfb9335275ec6b7d6cc9e110ce1849a.webp'
+      } 
+      else if (npub === 'npub1335f2r0e7xqyqjvk7g2zkdf38dhvh4g7xn6eecfza5ttwkvnlshs8ntw8n') {
+        image = 'https://i.gyazo.com/c98bad340933f37d5559d379ec0fffe7.png'
+      } 
+      else if (npub === 'npub17n53d53ql9seuxap52r6uckkvvf9nk0pg2v6ecpj7z9nnh8fwh2sl3j6ds') {
+        image = 'https://nostr.build/i/nostr.build_03eeedfcd38e3e54b8cbde5d02227e7a6d81c4d9a33227d31eed4519fe313a29.jpg'
+      } 
+      else if (npub === 'npub1h5uawzp7dqkz228j3l2m8x9lh3flm8n3asfwd6vr5chf8lu3ajgs4lgx3s') {
+        image = 'https://image.nostr.build/6059dcebbf56109d4d5fb8b745f62f163ca91b26d82f9db665e2f7b1e5148332.png'
+      } 
+      else if (npub === 'npub13ljnkd633c7maxatymv3y2fqq8vt3qk7j3tt0vytv90eztwgha9qmfcfhw') {
+        image = 'https://void.cat/d/25WZPEiojrhWvQFfGr9k5M.webp'
+      } 
+      else if (npub === 'npub1s5ngsu82ef2rtjyv6hlstkhdgua4xs88c8mkxwmx2d2tf22f790q6c7yxr') {
+        image = 'https://void.cat/d/LqhcwvPk8c3sJYTzZXoJtU.webp'
+      } 
+      else if (npub === 'npub18xy0r9lh5h7n22ldfkr9prhtvsanlcmhhyz350uqwfjydy5spufsh5znac') {
+        image = 'https://best-friends.media/accounts/avatars/000/019/339/original/c97edb19ed9f8da5.png'
+      } 
+      else if (npub === 'npub139amxazfa5luagvcufs2gpnnx2gdc2ld6kjag3axs3evfyd65uus2mh097') {
+        image = 'http://circle-ay.info/TwitterIcon_800x800.png'
+      } 
+      else if (npub === 'npub1zzmsgm27sghy2wg9wlgm877g430w9a29dl54zcznznrxhk4cshtsj9cnz4') {
+        image = 'https://image.nostr.build/d8f98c2fb59edfeaebbd57d782dc7fc4638695c598f86839c15607fc3c711135.jpg'
+      } 
+      else if (npub === 'npub1z0c5d90mqmyvqta9gp4he8rcg4qamnarfcrkye7k98nqv0eyh4usdkj2dj') {
+        image = 'https://image.nostr.build/a7844c22359e7d64a5cb0456e1c8e90a3ebc142ed3210728e933218c13e4754f.jpg'
+      } 
+      else if (npub === 'npub16ll6padfy2qr4x2d09qp7u5t9s2zfgwkg2dh2dr5k0rq8s3ma0hshhyhgw') {
+        image = 'https://cdn.nostr.build/i/af04334e12d8b98f2c90fb33f3be8852792dd8e4d4acf96b53725113d66154d9.jpg'
+      } 
+      else if (npub === 'npub1zpn2qhg5wnn7zvafwgy2tjch02wqre9cru83gdc26k055zj826qsrhqlt5') {
+        image = 'https://pub-58b4279cc09745c39d1bdb08f520d9d1.r2.dev/mosaic_250_avif.jpg'
+      } 
+      else if (npub === 'npub1s93w93h4faz4jxfc3r7hp433qkcngn96mv8q8d7rcr2tjnpeplcsxzq8rl') {
+        image = 'https://media.misskeyusercontent.com/io/webpublic-08e45a9f-8c98-4697-9111-4915881edb29.webp'
+      } 
+      else if (npub === 'npub1mxv9lg7run07ptq9w50l6w74cp8c072zjaeusuzh7a6jt8ufk0nq2uxamw') {
+        image = 'https://image.nostr.build/e62db7f39cd8586b0fdddd8241567f7cd2ec07573d669e2145113b5cbb0912ce.jpg'
+      } 
+      else if (npub === 'npub12j9vgaugnvvt700kxzg4n2e5ctkwgvv4npjjcd2k0a3y8gfkaf8s3jq62y') {
+        image = 'https://void.cat/d/QbTgbSHjDtzFJNsZQg1b73.webp'
+      } 
+      else if (npub === 'npub19q2zuuklgwpq2nl0c276r6h5rsjhdq608hy5ylq37qfec5y4kj5s5v5d0u') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_1703790422175470981688388743.webp'
+      } 
+      else if (npub === 'npub1ncvpth7qzqjj59c837gq2vmthsz874gad4akg4zs227wmhkt3g4q0aqa6p') {
+        image = 'https://image.nostr.build/a60fd29a813c13e8bedfc0b341155d9ad928ad66f13e1da596326c953305db2c.jpg'
+	image = 'https://image.nostr.build/509a216e1c482906f6670bd60021b5b763f5006c68919b5568d8cb313d5f5f6f.jpg'
+      } 
+      else if (npub === 'npub1u3qf4xhxz8k8yp5ff6t764jgu3mtzhcpvqg6csquw0ezqvwrveusemhhqw') {
+        image = 'https://image.nostr.build/1e570d4465496dd9ff259c193b7890ddbb10ab0fae2fcd3a3087fef4410c69ec.jpg'
+      } 
+      else if (npub === 'npub147a6wanzyqskrmx55s0e3qhkpay82f6arzgpa3xuunrsjl7gptcsxs8dzk') {
+        image = 'https://image.nostr.build/1578f5e456b85af1e98efb932061e5e71bbc6a124bd01f1e4a0219f1a8f81892.jpg'
+      } 
+      else if (npub === 'npub1zyzy7apfqpcdsnz0pttazmgfagqqqxmyt0x6v26umjn5jy4792wqlxhqxm') {
+        image = 'https://image.nostr.build/7c3bbb754e02a7c13127df88c0b10a475d5f1c57287de0b5a0d0c8eebf653fb3.jpg'
+      } 
+      else if (npub === 'npub16477vrdvula4dgwap3j0n3rqmwnyu0w9gpq3g5c33rf3a026le0sg24zx4') {
+        image = 'https://pbs.twimg.com/profile_images/1362969994569555973/mQYhNF2-_400x400.jpg'
+      } 
+      else if (npub === 'npub1vs23ex5l3v9666w2lwt84nz7a2p377323jlmhfjm978zrzpjgz8qhayflh') {
+        image = 'https://nostrcheck.me/media/public/c743876542b09f266457837f2d79d94956a449d4871f3849cd70c1671ff0295c.webp'
+      } 
+      else if (npub === 'npub1f2kqdhjg6uqzm9dpkzw9fnut6zqwfl7ymzhj7kkarnz22lfwjntsr2cjwm') {
+        image = 'https://image.nostr.build/d0144f7907c92478dd0e904529e8d09e0a5a7f5fda86aa5183a7fff261cbcb22.jpg'
+      } 
+      else if (npub === 'npub1gsl4k2hnz66dg6f9xm7j9ztmkjkcyptx6zrxj9wqhfqqcua8ssasw04u56') {
+        image = 'https://image.nostr.build/0d15cf128abd0a0770b0ef4c3921dc2e616542d84eff531372906c83dadb559a.jpg'
+      } 
+      else if (npub === 'npub1aw8cqgmywsnezzlf79q5rv8v7kjccmyt85k7tkcku2gjza2fz76qg8yf36') {
+        image = 'https://image.nostr.build/7557b7862cfd0bba33f009dd6a18b24218158552330fbac12ba173fe213eca4e.jpg'
+      } 
+      else if (npub === 'npub1qet5r70ujwwahgpxr7sjcghfv7c4tunr6wk964kfhep9n20cykaq2vkq4e') {
+        image = 'https://media.mstdn.jp/accounts/avatars/000/097/993/original/d9024ec8fb105f21.png'
+      } 
+      else if (npub === 'npub1zz42gjxxxnmn9fegg3af9mkd06zdk0f3f79fmuftaftrdts6yahs42tx7m') {
+        image = 'https://image.nostr.build/8ab4596f54b76ffd4597ecfad1d308e8486becb5eb92da9442c3dcc69983d458.jpg'
+      } 
+      else if (npub === 'npub1xav4phdpyh6nmavpf0thw3s9syugcjgpl3gt8p4qykte3uw7shasz62n5k') {
+        image = 'https://image.nostr.build/c0b8f68cccc416d9c5d918089ba36ac4bb72a3355e8166ad1599234a6880b6f6.jpg'
+      } 
+      else if (npub === 'npub1tzfhjkqrdnk7j4djtwfftqupgzazm6kt35vnnmv35sd7y4z7dx2qzhkje9') {
+        image = 'https://pbs.twimg.com/profile_images/1684180526624821250/KYn7m0nr_400x400.jpg'
+      } 
+      else if (npub === 'npub1r0vdvgzw55q55t4xhe05xj28n5xt3s0n7jwdrdlm0p972xzmp2wq36390z') {
+        image = 'https://pbs.twimg.com/profile_images/1198535120396808192/sDzOF2sc_400x400.png'
+      } 
+      else if (npub === 'npub1f27hlrx0vmwfgqjhl8kcd6fdfsv9ztrlu39xpaclt40uz670ergq20a2t5') {
+        image = 'https://nostrcheck.me/media/public/aff86d1bc1611b2f8620fd4ee860d4e2c24ed443177e6a2c8f3a6bebf36d7428.webp'
+      } 
+      else if (npub === 'npub1shmp30fttjm45x55hyp8tf9hyucjwzzwdgqakuwd94uzh68fn3rsuje362') {
+        image = 'https://bae.st/media/a365fcca6237f1925199bb42ec02e2c5b1ef9533c5fea9e9a008685b1b98d86c.png?name=SpookyBot_avi.png'
+      } 
+      else if (npub === 'npub1e8x35z77zdqv53km0d7atjvd9s0tncs6eqm30ymkh3vp9v0r420qcx2fwy') {
+        image = 'https://image.nostr.build/35dda9b1dca89da70041e835c7800d1a2b2c1c0df4a7f4b94bd5c5f6553cb551.jpg'
+      } 
+      else if (npub === 'npub1a6e3kzl8xy8assa0jakr9454wpacq3cg5l5npu3tczrqxzazrlys6sfwes') {
+        image = 'https://image.nostr.build/40ca03eac5953e264dcb51db18b842bad01f763187fe90a7da4d888e57d47f3d.jpg'
+      } 
+      else if (npub === 'npub1ght0kah3jpv4sy0xjhqlzp3erxy3ljchz0fc5c4dmx7kfl3jwjxsmt2g3d') {
+        image = 'https://image.nostr.build/fd0f9467761e9ad2c9150c1a04e7849b26616f41e0e8061f5efa9556cdfcd877.jpg'
+      } 
+      else if (npub === 'npub18t2s3z0m63x0kvjqanmmw5y0s9896pclk9zrk5jg9nmmzvqkv7vqxs45cs') {
+        image = 'https://nostr.build/i/nostr.build_a8bf6513f7862da282ff81aeff479e108604e29d67cf9bb9fd8ef14a10377c76.jpg'
+      } 
+      else if (npub === 'npub139xjvp4argegqsa20e3u9mxmm7njsvvmn6xg9tqwazz4ht9yym7st0f8ez') {
+        image = 'https://nostr.build/i/69109b7ef9845c006a38d943cd099f5876027f2f4a3f5ebd3e7a48608e5c54aa.jpg'
+	image = 'https://image.nostr.build/bfb41dfc71bf6cdc531fa74d372a0f8f8b08d75cc9d73d5a77fd012ae203010c.jpg'
+        image = 'https://image.nostr.build/2ea499df3598936ed07dc3286194edd554cf6f2b9a8c99fdb0eeaf5cdf1c89f5.jpg'
+      } 
+      else if (npub === 'npub19t6fx7vnalp5x0rng3xrnpuuukwatlacuglhqfk3atv9qkeu23es7nycx9') {
+        image = 'https://image.nostr.build/4ef52f385d9bc85e7dfc5882e6fa695bce12f64f4aa72cc1536dd2211e44d403.jpg'
+      } 
+      else if (npub === 'npub13uc3jsqsjn7l0mc7zu6ke890hspqgzyxfl82s07ltkl2sdn53q0q6kj48r') {
+        image = 'https://image.nostr.build/90af47b04d530224d2cbc33e9ebf0b92a143bdd2c459968868d0bfe1a8bc93ac.jpg'
+      } 
+      else if (npub === 'npub1t9wy66teyy8pszhawnz6cu9rd3f4344mpmyfr9fn4zk2x8fwpjps52frzk') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_2686401472732926641695396727.webp'
+      } 
+      else if (npub === 'npub12h6gnqwcmms7ya464fg6jzlju4h00l77qds30k8ed82jceuddexqnhahq9') {
+        image = 'https://image.nostr.build/3b530dae3b943114def2e3acc229ebd5c526b7a075594a01a1f37e8db4ba3d24.jpg'
+      } 
+      else if (npub === 'npub1jp8gar0sujvrw69mg7addzrtmgupdvhuyvccgecru64a7fftvwdqtjslre') {
+        image = 'https://pfp.nostr.build/882933ad596bf8e40c26b4c6d9901c88a54572563029a9b9cf02cd344c143189.jpg'
+      } 
+      else if (npub === 'npub1jczntzerp94kff0hlwx0e3l0xu92dzealr7xj5zzgl4npfumz5zqlp8p0g') {
+        image = 'https://nftoasis.io/saunaland/img/saunaland_img.jpg'
+      } 
+      else if (npub === 'npub1y3d8gnmetz6mquqc4ej4hd7cf4zyrdp72fff0hsg97xhff0cdj8s72taqn') {
+        image = 'https://nostrcheck.me/media/public/28441a448caa58886b885e0f20e2cebdbb5c66701fbbb1f320f5cdb8db9ab209.webp'
+      } 
+      else if (npub === 'npub18qvuqy2hd20g8gyvfg3vxqra0h63xkhnhpgqlma0d6avd5v0662q8twuf5') {
+        image = 'https://nostr.build/i/nostr.build_fe2c6155c8608f1faeb370ecd66b1f283ac2540d81c629c9a36c3f5ad5f1866c.png'
+      } 
+      else if (npub === 'npub1gk36gm0a5mdt5rv9xnsf2f994mu8swr45x0ww5d7qc0ezkyp6r2s2re5qs') {
+        image = 'https://image.nostr.build/2fc812fabed2819baef818a9cd8741888fb0959452dd21ae22ce469c942e7231.jpg'
+      } 
+      else if (npub === 'npub1ex8aej88mfctkcp8lkanqfvrqe82hmfcm0a7xencwusput5nnttsvtgpyc') {
+        image = 'https://image.nostr.build/4054796e714f5280044a35191a38b9e89c311ba2cd0a028ba42c0656c5f235cc.jpg'
+      } 
+      else if (npub === 'npub1pjvcwasj9ydasx9nmkf09pftsg640vm5fs7tzprssew8544yj2ds6e0h42') {
+        image = 'https://pjv.me/pjv1.png'
+      } 
+      else if (npub === 'npub1hp2na2fancmjfca6ss8rn63nzc3pktcd7nkxmx4ke6azt7kqawssj8cu23') {
+        image = 'https://image.nostr.build/43b49dd50084e085ca62c6d08a830b1a2cc03926b28af9af6f027fda89dc1af6.jpg'
+      } 
+      else if (npub === 'npub1a5m6plhmcvr6vs6uxj05daujea8hu9fazayzv9lee0x3t9p6vspq7m4vp4') {
+        image = 'https://image.nostr.build/889e256228a3141c0437ca464a5186e32a37e82f6eb41a3b6e082ab77e979aa8.jpg'
+      } 
+      else if (npub === 'npub1rufdth8rha9uvg80qk79e6rq39hpws8vfs6nvpcqt9zl7y4pmxgq7tsjj3') {
+        image = ''
+      } 
+      else if (npub === 'npub1m4xkk6tlt3wqdhvvltr90xf5pvxd8vntapghd8udlwd4ywenawjq003ffg') {
+        image = 'https://wos.hostdon.ne.jp/m297/accounts/avatars/111/086/731/036/509/821/original/b423af5943cb862d.webp'
+      } 
+      else if (npub === 'npub100q7h5j8p0c7a2527s2m8ewxhgka6se8qexfppgzswruc6ldsfmsqce5xa') {
+        image = 'https://image.nostr.build/315d1b50482a33ed5b9c9ad61f18649bb29bae72c74952a01f4bc07812f654fe.jpg'
+      } 
+      else if (npub === 'npub1trx6nd93wafj2tjqeuxa79xn2n5ctvq55pxu5srgjn5v9qjlwx5q9j8pg6') {
+        image = 'https://i.nostrimg.com/8b4134c5f65a64d54d392a28aa5924be0b0c55488e7367e571f896082a869152/file.jpg'
+      } 
+      else if (npub === 'npub1wx7tgh2rqc2dw4j0hfjhg474la7c009vtp0nkhh578d3qeq0rvwsuyr0nw') {
+        image = 'https://image.nostr.build/aceb465c7a9f4db5922f9a3b8a2e380eb8f1af779a41d5d58c9036cd7e80ca59.jpg'
+      } 
+      else if (npub === 'npub1d7q26usgnmesjc9s7we4cvv039gy2xht9j2g0mlqr8jgshgescrqcu4n8u') {
+        image = 'https://pbs.twimg.com/profile_images/1570660340240875520/UCgg95CR_400x400.jpg'
+      } 
+      else if (npub === 'npub1xacszdsz6q9yv7gcrwugrc8fzxdkm7nl35jm2u5v80ctkhh46tlsu8aenk') {
+        image = 'https://image.nostr.build/918bce0f50e31e66aa5546a8edff29ca52c413ed28099ac8b8cca93d911e2eb0.jpg'
+      } 
+      else if (npub === 'npub1hzhwglrhcq3hwnfpntjah9xm66e8t5x69c0pcuqdpuc9vm8w2lyqpx8udc') {
+        image = 'https://robohash.org/npub1hzhwglrhcq3hwnfpntjah9xm66e8t5x69c0pcuqdpuc9vm8w2lyqpx8udc?set=set4'
+      } 
+      else if (npub === 'npub1wfd37edmgz0zq85gvjqp3vyyup2a5nt6p8nsuw9m2y5zcguwlezszj9qqh') {
+        image = 'https://void.cat/d/7jiiyz3zjPu8MY5XPAk6Y2.webp'
+      } 
+      else if (npub === 'npub1rnzdz0yqy744tctdh9mtfpsdx42gpdwvf5pc7re6umu4dk94wx8sjq0wfg') {
+        image = 'https://pfp.nostr.build/fd0c9cf4f0b869b40b02783cf2e65402fa81937e40b37c2396784fd79f07e167.png'
+      } 
+      else if (npub === 'npub1z7k4pffj7250eaydd3ya0v07mmzecylcq9cw5af68zu39q0k4u3qj6xre4') {
+        image = 'https://void.cat/d/XWffUQatK3jZTniiGYJUbD.webp'
+      } 
+      else if (npub === 'npub17qqekpej52c6wqmqlw84mkmlgp2ylz6xkryj3ccqk5vld4f7clys047uwf') {
+        image = 'https://nostr.build/i/93cd86ecfce2b125d3972dba08ead576af543f2531fb8fc025d175d0f9248fe1.jpg'
+      } 
+      else if (npub === 'npub1a4xt09x60ssnwsz7supcszsx4ju2t06gkhhfw76h3z6u8zd8e6vs8prdgk') {
+        image = 'https://image.nostr.build/4533e0480f17763fb5ee85f05d7a187f18e8023baced868838a87a857d5fc426.jpg'
+      } 
+      else if (npub === 'npub1gs0lczssedg0c9r66c5v7x5jkn5nwfza0l222f3jvek36cm8v7ds4yr5c2') {
+        image = 'https://nostr.build/i/nostr.build_acaac90108786a66a979562cae69d7ed4f5dbf22f4744de0943d1031605aa6b7.jpg'
+      } 
+      else if (npub === 'npub1hknw6wqv9jtd8gc5paha6ng2dstfd4n0fxl04t8z4lrmpcr52xnqu0pll8') {
+        image = 'https://image.nostr.build/c05379eb9a0ce0b14cf0827c505f721b3672c13a668e7e9be8f0642eb4aed58a.jpg'
+      } 
+      else if (npub === 'npub1q9s9hngm5ttdeyvh5asf344cch5eel7udj4sqvj7keanv2p5tvdqgsj3cc') {
+        image = 'https://image.nostr.build/54de942633f74140fa6143956f958f592d557e433b60570c393334fa0d6b3bf9.jpg'
+	image = 'https://image.nostr.build/16d025d2489b25d544b60bc08b2cc025752e4f9c8cbba998fd1c9a13a4a25ce4.jpg'
+      } 
+      else if (npub === 'npub1zrhuszhdmt57ag842s6u9tm26yfp642ddn2dd3znec67dejdestsggrkq5') {
+        image = 'https://nostr.build/i/e163883c19d56067ada60b12fbbe1611b64398973af0b10371742b152549d06d.jpg'
+      } 
+      else if (npub === 'npub1w6g59r0eeu8svsyk53p86lp2emly3dh2rphaew8zrjxn7gstl0es8zlftc') {
+        image = 'https://i0.wp.com/nagahama88-b.shop/wp-content/uploads/2022/09/C_200807_88_logo_ol_350_CMYK-scaled-e1663128083320.jpg?w=787'
+      } 
+      else if (npub === 'npub160sqe0y28udv7jlasqvr7hpzvtvr9s0zhp986qxraudf4prcgvkqwwt39x') {
+        image = 'https://cdn.nostr.build/i/e11ea8aa2744e3a3dfdc0cf76eb722d39a353ee7e3f217053f69148967ddb719.jpg'
+      } 
+      else if (npub === 'npub156nt05a2wszhzcwy4ukyyu2frpshxtsjq6d2jgrspzt6hj0zn5zq2puzk3') {
+        image = 'https://pfp.nostr.build/208617fefa4422f5e98105771217b1bced1a9a9c93be36446cc2fe8b83ffab10.jpg'
+      } 
+      else if (npub === 'npub1xh3has87stm7mx4339zf0q07xx2ssv7yrvanj72tfshu2wfa7ggqxp6fj8') {
+        image = 'https://image.nostr.build/1fd1f7df8e7260ddcb900a56a9eb00307c37b3535c15a1bfa9758ce97d694104.jpg'
+      } 
+      else if (npub === 'npub1w8eql247lm2ycdha0je6uf2846w7wvvfw5r798lsk703w622gy7qtd0rjm') {
+        image = 'https://image.nostr.build/7e393f46594486d8b50f3553302c0570ea6dc0f5fb1fc5161d48d2063f05cc17.jpg'
+      } 
+      else if (npub === 'npub18m4nmc2wchzgcmzvnluqjzxyrpshp64mwje2vuz60kulny3v6c0qtgcl2x') {
+        image = 'https://nostr.build/i/p/nostr.build_07ce22b2dbb8ace6d6f87ee5e3625823965f737254cfa37f7e4a82a717aa9bbf.jpg'
+      } 
+      else if (npub === 'npub108yl9s9q3q2cyxgfmup08w7xptt948lyc5vjcegxh4dqmcswdwnqy84das') {
+        image = 'https://i.nostrimg.com/921e6128bbb1c72762767ff9c6f693985cd014ccfaf9af4141a3c9a356402a4b/file.jpg'
+      } 
+      else if (npub === 'npub18e2zsjvqs5mtvexsfl2ycc3l3jhctekn9xtqxvrt8r0ykeuu8dgsttezf3') {
+        image = 'https://void.cat/d/YLaLuVVSPmqRMD4vVFc91X.webp'
+      } 
+      else if (npub === 'npub1cgmz0duause9f7l338cwqt5k086w89h2vptjzu5hywct0v6fftcqazj6vy') {
+        image = 'https://i.imgur.com/MaceU96.png'
+      } 
+      else if (npub === 'npub1xatyljf6wkgccegzsehwlkyqv9tpe5xe6hxe2dhefqh6mekurtwqt2uuae') {
+        image = 'https://yoshiki.kato.name/shared/img/yoshiki_600x600.png'
+      } 
+      else if (npub === 'npub1p2psats79rypr8lpnl9t5qdekfp700x660qsgw284xvq4s09lqrqqk3m82') {
+        image = 'https://pbs.twimg.com/profile_images/1524391291475406850/ULKOymid_400x400.jpg'
+      } 
+      else if (npub === 'npub198pqyzfmdmrp0hs52qnzayv7peh73t5eu5eusvhv7wadr5lkusmqhvkw87') {
+        image = 'https://image.nostr.build/042ac3faaca20d0c2a6b3c9fa882000cf911aa118e9a6a449d353a4e2e7da531.jpg'
+      } 
+      else if (npub === 'npub1dwqu0sflksh3a743202c6rj2jfd6cdjpj7guvmwgg4e8esdlwt2sqec9pq') {
+        image = 'https://cdn.nostr.build/i/p/61e4bee361fec34f7ffd296a9380c16f3744411d63761965884ff07e4d942d71.jpg'
+      } 
+      else if (npub === 'npub1el7htyt98s7myfcddy38rc4atf533yjufrvywzxq9nr2xkqzj4eskwsv5g') {
+        image = 'https://image.nostr.build/ce72f5122b087e4c0ce4c2892fce8f014f2e9db59022f73ac1fceca30a8bbd70.jpg'
+      } 
+      else if (npub === 'nprofile1qqstr72vgw705nhh30eyl9ujz60av64xgnln0evgwd83kskl9uceqjq6e9qtw') {
+        image = 'https://i.postimg.cc/x8B073vs/360-F-572971935-Dz-Glb-YAHz-RHXQLFzjezbv-Ka-Jme-Hf1f-B7.jpg'
+      } 
+      else if (npub === 'npub1wf4pufsucer5va8g9p0rj5dnhvfeh6d8w0g6eayaep5dhps6rsgs43dgh9') {
+        image = 'https://nostr.build/i/nostr.build_1732d9a6cd9614c6c4ac3b8f0ee4a8242e9da448e2aacb82e7681d9d0bc36568.jpg'
+      } 
+      else if (npub === 'npub1hcwcj72tlyk7thtyc8nq763vwrq5p2avnyeyrrlwxrzuvdl7j3usj4h9rq') {
+        image = 'https://void.cat/d/LjNxweFpq6P6rgn2SmiPvT.webp'
+      } 
+      else if (npub === 'npub1e9vcz6204fft6jxvyf0edd3a54t8n9znz007h94mmwlkqlqeulzqfjj93f') {
+        image = 'https://nostr.build/i/p/nostr.build_528c8201b8c21e1ba4822e6a4a1bf4e381c6f984eb2aadc517f4bea5e00415de.png'
+      } 
+      else if (npub === 'npub14mcddvsjsflnhgw7vxykz0ndfqj0rq04v7cjq5nnc95ftld0pv3shcfrlx') {
+        image = 'https://pbs.twimg.com/profile_images/1524287442307723265/_59ITDbJ_400x400.jpg'
+      } 
+      else if (npub === 'npub1mayqdaq0sd5f4uexa6aky3agr982vhqs3rw7qwm6yr9h5zetdg4q4shl50') {
+        image = 'https://www.boltcard.org/img/profile_400x400.jpg'
+      } 
+      else if (npub === 'npub1kmwdmhuxvafg05dyap3qmy42jpwztrv9p0uvey3a8803ahlwtmnsnhxqk9') {
+        image = 'https://void.cat/d/6keaRZZHz7emqDJ1bF5Ucd.webp'
+      } 
+      else if (npub === 'npub19uy0u0ferx98qqltm0zlnyx0yuexz0kkm2qdym6rkm6mvu5cadgs6uffq5') {
+        image = 'https://image.nostr.build/457e3c18395b8774213364864fb8308005b7e5d709bbc8529e0b832126d89fea.jpg'
+      } 
+      else if (npub === 'npub1ymxzx5v2va4n0vg42pvzlsm8zhw24t0mq8nh95ffs0axm02365pqxtwy3j') {
+        image = 'https://image.nostr.build/324664bc70596b58e506edaf16c2eea0f8733385a3c3b94dbb53bd50494949de.jpg'
+      } 
+      else if (npub === 'npub1hvcfd5eg4t5tu9v0zlx425jg4yhk0tqhsmutalprcrxdnlu0jqgsv3qag9') {
+        image = 'https://image.nostr.build/09c0a4b09d12703d90735e5e5ab57504d1bab7e03bcd1993c40e7095ec132413.jpg'
+      } 
+      else if (npub === 'npub1epn2p2r8jqxj2rqx33ncxdnwyjwgt5vs22r6le4nwj7ykry84hssdrezft') {
+        image = 'https://void.cat/d/QVWQfGzNuucfcgSvbBGpoH.webp'
+      } 
+      else if (npub === 'npub1afax0uhu9lczgkca47wmhp854xd06wwft999ddqkun7d7zszm36sqw5hct') {
+        image = 'https://void.cat/d/Sub5tdvgXDbsS5F7sWT6KQ.webp'
+      } 
+      else if (npub === 'npub1j8f588s627gtldwr6mt6kkce7pc4787mtsawm5tddwf5tfuftnzqlpn4d4') {
+        image = 'https://image.nostr.build/a1865855e2fe315c0f61a41d2f785ac9ee4e4da40bb4d15bae9b396bc709cffb.jpg'
+      } 
+      else if (npub === 'npub1zp5l9g8tzzdgzpwrgexqyndhyrx0qk8mq0dcnw8ykqx0nnjxwe6sld206q') {
+        image = 'https://nostr.build/i/956ef5438b5da23fd0d53cbe575a6e9303a86692ccf39c378178c5eab8ade29f.jpg'
+      } 
+      else if (npub === 'npub1cj5ykww7s2k0468z0rwggkf92679qgdcedu5jn86rtarsv05ee7q0gjj9s') {
+        image = 'https://nostr.build/i/8c45cdeaca7af18eca41e63337f04a204b798616d8f53b4f0da8bd6fdadd2be7.jpg'
+	image = 'https://nostr.build/i/8c45cdeaca7af18eca41e63337f04a204b798616d8f53b4f0da8bd6fdadd2be7.jpg'
+      } 
+      else if (npub === 'npub1smy6967kc552nyntpamfazv8vtpppsvu0739xu8senpfm2qr9t7q2f5p6x') {
+        image = 'https://image.nostr.build/7dbea25f0de4c42888b295b49c5b2a619253200c51c22e3815c34d7f2767728c.jpg'
+      } 
+      else if (npub === 'npub1lp2s7ek845haxkds2y4r5hdurmpyw6zyhf49nchsl6h2cqz3d5qs6kame3') {
+        image = 'https://i.imgur.com/JGBbE72.jpg'
+      } 
+      else if (npub === 'npub16xznny2gk7nqdg0d2wwfrvmwxwh6x523u8003tg4ddq94szth0nswe7rsr') {
+        image = 'https://file.misskey.design/post/8c81a5a4-35cc-4b7f-8986-50090c9fba51.png'
+      } 
+      else if (npub === 'npub1cg8jv2759y85tsw0677v836qzhufw4zr45tva2devmfrdlvc8ydsjwpn02') {
+        image = 'https://s3.arkjp.net/misskey/b9f008c8-cd65-4610-a3e5-0cdcb9afc0f4.jpg'
+      } 
+      else if (npub === 'npub1ljypdr068fk0fh92tfvwzklej4rhw8ej2seh9hhveva488gq7zms8s2xpu') {
+        image = 'https://media.discordapp.net/attachments/693923727984820234/1097140781585797242/20230416_214316_11.jpg'
+      } 
+      else if (npub === 'npub1ttkaekhqjmhk2lcq3tdywspyzjf2vqr6258upmgvtwq6ek7dfxdscwgmw3') {
+        image = 'https://s3.fedibird.com/accounts/avatars/111/228/191/894/242/252/original/11272539b0df9013.png'
+      } 
+      else if (npub === 'npub168ln85twmu2um4xrer2wv3ld80rzucadfg7ur0l4t5e0j2wesqpswx5ae8') {
+        image = 'https://4.bp.blogspot.com/-2HGFveBBt1Y/WkR92oLErgI/AAAAAAABJVg/h6O11ZNXvigH0HgGwDEeN8inaC9FKRfQwCLcBGAs/s800/money_kasoutsuuka_b.png'
+      } 
+      else if (npub === 'npub1nm4had2qc7x8xj6stdhpk5jhm7denqytvmvnhxxtggt72eznr9kqcrltls') {
+        image = 'https://image.nostr.build/92597cfd27e5bd14208ac044501cad7fad361892c8f09c7d27230d09f20285b1.jpg'
+      } 
+      else if (npub === 'npub1fpnx8zytrl8txw8wcsj2jta0a5y7mpnwlj4w8efvps0y8w79e54sj5qhh2') {
+        image = 'https://media.misskeyusercontent.com/io/e748489e-3967-4c08-b799-5c1be1ef3da5.png'
+      } 
+      else if (npub === 'npub17s28ft6mzqrx9dja683h3tsfcm0lc4nyhjghu4e4qewlhhhwwhts8vce2n') {
+        image = 'https://media.misskeyusercontent.com/io/webpublic-2365a91b-93bc-426c-8197-af1ab8938c8c.png'
+      } 
+      else if (npub === 'npub1txckvarwd8ztjy3l84n4any0k4m8pw8yukgn2em7sr52g9lm3alqj58rcg') {
+        image = 'https://social-cdn.vivaldi.net/system/accounts/avatars/109/348/506/893/620/318/original/fe9f45b9d88db936.png'
+      } 
+      else if (npub === 'npub1vl5kls55u0v9qe6sv5ypknx8krm4zday6gxzrd3se84ng88mztmqn9gr3e') {
+        image = 'https://s3.fedibird.com/accounts/avatars/109/313/898/019/877/115/original/60c0277169d5f6ea.png'
       } 
       else if (pubkey === 'b33ab1f5cbca4659785b9bf7cb9106b5129efbf1a720f02da9e522f9acc8fe33') {
         image = 'https://nostrcheck.me/media/public/db704f89184becdcc6ad8ef10402e0dda227172051e5641f57231f0ee8fa9152.webp'
@@ -1439,23 +2486,29 @@ const Test = () => {
       else if (pubkey === '32f2ac16fd46ed576db22c47ea3904e26f56687a72369fe6885b5a76fcd3915e') {
         image = 'https://robohash.org/npub1xte2c9hagmk4wmdj93r75wgyufh4v6r6wgmfle5gtdd8dlxnj90qtsplw7?set=set4'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (pubkey === '40be6c7785ca0902f029f5813ba7fb7aadd4991a3207cea92877870a3a14f980') {
+        image = 'https://s3.arkjp.net/misskey/9b4999f9-2eea-4125-9507-48fd7e7d4c32.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (npub === 'npub195mmvxv6fglpz3pldfm4zmam9l5nh0as3yykq59jdk3plr7asghq6jqzhe') {
+        image = 'https://file.misskey.design/post/54762070-70e2-4e5c-aa42-5ddd1c6cdc59.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (npub === 'npub1gudx4luwa5thmv5mtftdgxg4qgj850yls35mqyryhsxj4xh7v5wsvuehf0') {
+        image = 'https://image.nostr.build/d836dbc0c3efbb6d8e1d662c7ab4d1f3dac1d2edea965fa0b138ab0279a0edcf.jpg'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (npub === 'npub1vfutm42cjzqmajflvry2u0rjqfglr537rjynj7q2tncqmg3dup6s5zxu87') {
+        image = 'https://file.misskey.design/post/569a3b1d-4088-41c6-89d5-3f586ad48ae6.png'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (npub === 'npub16ctx4q9rgpm23vyr4yud2nhd086gvdf542gtn3x5nq2u5h66t37s789m6d') {
+        image = 'https://nostrcheck.me/media/npub16ct7s789m6d/avatar.webp?76'
       } 
-      else if (pubkey === '') {
-        image = ''
+      else if (npub === 'npub1gtejc00zpt0c0mmce5kwe8x5dcz23m5cu0zs9lnl9fk8afrkunwsld63ck') {
+        image = 'https://media.misskeyusercontent.com/io/49881d05-e2ec-407e-98fd-5dc8d812d4b1.png'
+      } 
+      else if (npub === 'npub1uky4aymg30w0vqhz769htv8kjd32fzq5lndahk30uwy0xrde0wkq87g6sn') {
+        image = 'https://nostr.build/i/nostr.build_3ff7d0185a0824642d4cfd9eb77df4a5f648fbab37e41057ffcb451b78dfa5bc.jpeg'
+      } 
+      else if (npub === 'npub1ns7am84rm6vh3zwplcz4ykkjqyt5jq8pzjac2lxjg0ptpqnr6mhswgsg2y') {
+        image = 'https://nostr.build/i/e89035f7fe8f1325e2a27ee011621cba6799433d113b52c7d1ec621628b44467.jpg'
       } 
       else if (pubkey === '24f2b4bf4f2d59c505e169f073b8e0696ee92307e40788ca6baf171d52ce6fef') {
         image = 'https://nostr.build/i/f2953b3ba96998ab0fb2fb14418a1be56826ecbf18e31c3970af3bc49db5cdc7.jpg'
@@ -2244,8 +3297,10 @@ const Test = () => {
       else if (pubkey === 'b707d6be7d469bd59bfea3da46586772e678e1aa788eb344f64a9e118129850f') {
         image = 'https://i.floppy.media/3e84ad0b3e47959efb7f135758468902.png'
       }  
-      else if (pubkey === '91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877') {
+      //else if (pubkey === '91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877') {
+      else if (npub === 'npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt') {
         image = 'https://cdn.nostr.build/i/760a758fe20287a1b4dc2ee40a757fd58200e751ae47fb819b60d29d8614cd54.png'
+	image = 'https://robohash.org/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt?set=set4'
       } 
       else if (pubkey === '548ce7c9f49011f0046fa8f1a22ed1dbe568778bb6d9a4cbcacdf0ccdcc74666') {
         image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_008fc7e6a180c44124c2c1d7e70ae34ab08b87c1e26b2155cb3bfbd73b62346d.jpg'
@@ -3661,9 +4716,6 @@ const Test = () => {
       else if (pubkey === 'd1559e0e4048783e835337fbf6c12909d53809ed30f0ce4c261abd525b0a19dd') {
         image = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoMzgsMjE3LDIxNiwxKTsgc3Ryb2tlOnJnYmEoMzgsMjE3LDIxNiwxKTsgc3Ryb2tlLXdpZHRoOjAuMzI7Jz48cmVjdCAgeD0nMjcnIHk9JzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScyNycgeT0nMTcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PScxNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSczNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
       } 
-      else if (pubkey === 'bb3096d328aae8be158f17cd555248a92f67ac1786f8befc23c0ccd9ff8f9011') {
-        image = 'https://nostr.build/i/nostr.build_f0f12d4570cfe7de04f3312b80b9fba5b6911e731654a189b8ec2df13c2905a8.jpeg'
-      } 
       else if (pubkey === '8cc9566c96e2f07d9dc5689162ce997d65dc76ebb1f8c1d63a564e8a29e8d7db') {
         image = 'https://nostr.build/i/2c3fcf55c1f03305bb91c0fcc36569a737c6627ef47a95e08887e6a97ad31a44.jpg'
       } 
@@ -4263,9 +5315,6 @@ const Test = () => {
       else if (pubkey == '361b1e0ab197450bf40b23f21be626bcc03e27dc2ece8931d45963250f613c2d') {
         image = 'https://nostr.build/i/770f77cb29a047e17c72e2de09850caf6d6cb29ec69ab5f27e3a3c736c61dbe8.jpg'
       } 
-      else if (pubkey == 'f0019b0732a2b1a70360fb8f5ddb7f40544f8b46b0c928e300b519f6d53ec7c9') {
-        image = 'https://nostr.build/i/93cd86ecfce2b125d3972dba08ead576af543f2531fb8fc025d175d0f9248fe1.jpg'
-      } 
       else if (pubkey == '008a02699ed2ed6860d1c8c43337f242757e2f9978201876002f6aed1fe9f1fb') {
         image = 'https://pbs.twimg.com/profile_images/1066259404117336065/LAAOEc7r_400x400.jpg'
       } 
@@ -4279,7 +5328,7 @@ const Test = () => {
         image = 'https://kyohsuke.github.io/avatar.jpg'
       } 
       else if (pubkey == 'aa3533aab5b7e810ec34d14ea8ab5b3296b41d10540b51a3f205de43ad9a5ce6') {
-        image = 'https://nostr.build/i/75bbc5aae5230638324d240db7f05508e646756f229c9f057787e0864ff06f07.jpg'
+        //image = 'https://nostr.build/i/75bbc5aae5230638324d240db7f05508e646756f229c9f057787e0864ff06f07.jpg'
       } 
       else if (pubkey == '9aafb87aa08dd401746db925853dd3094287cfb58bc9ffe4eca18083d8db3d45') {
         image = 'https://nostr.build/i/359b7f3625e6fb0f5c45e9acf7ea3b2a17aa15180394e51d40b045d07ee16d29.jpg'
@@ -4363,8 +5412,6 @@ const Test = () => {
         image = 'https://kotori.style/img/profile.png'
       } 
       else if (pubkey == '894d2606bd1a328043aa7e63c2ecdbdfa728319b9e8c82ac0ee8855baca426fd') {
-        image = 'https://nostr.build/i/69109b7ef9845c006a38d943cd099f5876027f2f4a3f5ebd3e7a48608e5c54aa.jpg'
-	image = 'https://image.nostr.build/bfb41dfc71bf6cdc531fa74d372a0f8f8b08d75cc9d73d5a77fd012ae203010c.jpg'
       } 
       else if (pubkey == '4ff1d10f5bf5afa17295f7d89dbd0a78dc78eb635ab23938a60a0d0deefb3693') {
         image = 'https://void.cat/d/A5uK6mGji2davcQ8FqjsiU.webp'
@@ -4739,7 +5786,7 @@ const Test = () => {
         image = 'https://nostr.build/i/nostr.build_b1a7391b3db887e6177a3f5cfaab275d08bc975caf20b197d52ac7aabad94882.jpeg'
       } 
       else if (pubkey == '08956870438209a06b04e5d1ca6b9ef0b217f84d6894bab3133e6611e224bba9') {
-        image = 'https://pbs.twimg.com/profile_images/1544592696706473986/fNHDOvdz_400x400.jpg'
+//        image = 'https://pbs.twimg.com/profile_images/1544592696706473986/fNHDOvdz_400x400.jpg'
       } 
       else if (pubkey == 'df705aac787153c22d74aa78690c7adba1c084a594a496e5e64adc89b42d0c84') {
         image = 'https://pbs.twimg.com/profile_images/1386990611706748935/PyyOaI68_400x400.jpg'
@@ -4908,9 +5955,6 @@ const Test = () => {
       else if (pubkey == '11d0b66747887ba9a6d34b23eb31287374b45b1a1b161eac54cb183c53e00ef7') {
         image = 'https://nostr.build/i/9084fd65a2c84632a296db939a509defc29849541d38538afe6baabd88946fda.jpg'
       } 
-      else if (pubkey == '1aa8284bd7c06406bc9c1aa10aae237fcb7d3bac10753e95939cae33f9cb5854') {
-        image = 'https://showhyuga.pages.dev/nostricon/shockericon.jpg'
-      } 
       else if (pubkey == '4a1ad1f471e64a8ab08863570c176e45debda7d085ac0579a699934d74fa7446') {
         image = 'https://nostr.build/i/nostr.build_99e73d1755a4ea86f06038a1379509c271812439fb794af54f539451abdc53c5.jpeg'
       } 
@@ -4934,7 +5978,6 @@ const Test = () => {
         image = 'https://cdn.zebedee.io/uploads/4a5e3b05-2b54-4d0d-a604-dff3133e00d6_46286295-B230-4784-883B-C88EADA646DC.jpg'
       } 
       else if (pubkey == '04ea59bf576b9c41ad8d2137c538d4f499717bb3df14f5a20d9489dcc457774d') {
-        image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
       } 
       else if (pubkey == '81d27c8405d50b6ef0c8171906d6c724af45ce3d8753a87b78472d6727cd41cd') {
         image = 'https://robohash.org/npub1qn49n06hdwwyrtvdyymu2wx57jvhz7anmu20tgsdjjyae3zhwaxsjtl6rj?set=set4'
@@ -5946,6 +6989,7 @@ const Test = () => {
 	image = 'https://pbs.twimg.com/profile_images/1311126856435814402/HqnsvcRT_400x400.jpg'
 	image = 'https://nostr.build/i/a3cee443969f4ff50035117722f1823f89ef96bb4136738f1c8c5f1bb048f048.jpg'
 	image = 'https://nostr.build/i/f495d598e51fb31a3cdf327a03bff1e1a1614391731d651adfed352a18378235.jpg'
+	image = 'https://image.nostr.build/23dd05361e3826f3a51e7299d52191ee9296128a4c593f49c5ae01923fbe91e5.png'
       }
       else if (pubkey == '6369fb82bec54226bf09bb365b6f0d71b16c41f56e7edfd4f97de23f9c3281da') {
         image = 'https://nostr.build/i/nostr.build_e9120a1b32f992f44c55c0a8916428a9e17a0b1a73439ecd0731997e94a67001.bmp'
@@ -7563,7 +8607,7 @@ const Test = () => {
       else if (pubkey == '84b0c46ab699ac35eb2ca286470b85e081db2087cdef63932236c397417782f5') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/Freest2022/images/icon.png'
         image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
-	image = 'https://nostr.build/i/377697f4bdcbd0648949fb52b31270952a4ef50ab347a9636585ef9a94a43b26.jpg'
+	//image = 'https://nostr.build/i/377697f4bdcbd0648949fb52b31270952a4ef50ab347a9636585ef9a94a43b26.jpg'
       }
       else if (pubkey == '55e15d51e5ea14ee1ee1098263a8579428c8073a9173869853b585dccec5ccde') {
         image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1354235589415997441/jai-ftL2_400x400.jpg'
@@ -7776,7 +8820,6 @@ const Test = () => {
         image = 'https://pbs.twimg.com/profile_images/1559219223863316481/6418TZ5B_400x400.jpg'
       }
       else if (pubkey == '634bd19e5c87db216555c814bf88e66ace175805291a6be90b15ac3b2247da9b') {
-        image = 'https://imgproxy.iris.to/insecure/plain/https://pbs.twimg.com/profile_images/1568747937513222144/VneRfcSu_400x400.jpg'
       }
       else if (pubkey == '898f59d12df63f89d85167c89adc5aefa3ab7f6b299d17a4113c4e269ec8a6f3') {
         image = 'https://cdn.gudako.net/social/rita_mascot_ph_rev2.jpg'
@@ -7892,14 +8935,17 @@ const Test = () => {
         image = 'https://koteitan.github.io/img/ni_circlefit.jpg'
 	image = 'https://nostr.build/i/0e2151001b06bb95c6d076ebe185c4df0567103d2d0ef043f2d6f7a16262ac5d.jpg'
 	image = 'https://nostr.build/i/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
+	image = 'https://cdn.nostr.build/i/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
       }
       else if (pubkey == '6b24da7e8e5236d17307501b73b50326f33060d2ec11ee4b9c42576bd011b895') {
         // pomchan
         image = 'https://nostr.build/i/nostr.build_a414ec5fb667dd1965c9f70d4e1e4c3ad7be88ba4189bfcfbc80cf1274eb49c0.jpg'
+	image = 'https://profilepics.nostur.com/profilepic_v1/5439ea4fc92c3512a999ef08472a6271d23fe51dd0cb38709ec14695227661ef/profilepic.jpg?1685834552'
       }
       else if (pubkey == '5257f6d685301de8792099a0b173c3f57f42750612dd876fa0955aaac90192b1') {
         // takenoko
         image = 'https://storage.googleapis.com/drive.misskey.nokotaro.com/files/fcef8b90-e0af-445e-b259-49422df0ea86.png'
+	image = 'https://icon.nokotaro.com/kanako_sweetches_512.png'
       }
       else if (pubkey == 'c9a58ba53c4287c4939ed71a7e31cb21bd13d2ff4bbbcc985455f25a7a20e636') {
         // afternooncurry
@@ -8001,7 +9047,12 @@ const Test = () => {
         image = 'https://www.tgkzmdd.help/nostrimg/profile/feelie.jpg'
 	image = 'https://tgkzmdd.help/nostrimg/profile/caz0617_malaysia_800x800.png'
       }
-    return image;
+
+      if(image == '') {
+        image = 'https://robohash.org/' + nip19.npubEncode(pubkey) + '?set=set4'
+      }
+
+      return image;
   }
 
   return (
