@@ -7,9 +7,10 @@ const relayUrls = [
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
   "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
   "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
+  "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
 
 //  "wss://r.kojira.io",
-//  "wss://relay.nostr.wirednet.jp",    // mostr 
+//  "wss://relay.nostr.wirednet.jp", 
 //  "wss://riray.nostr1.com",
 //  "wss://ren.nostr1.com",
 //  "wss://nostr.fediverse.jp",       //jp 
@@ -26,7 +27,6 @@ const relayUrls = [
 
 //  "wss://relay.damus.io",           //en, jp  Nelly
 //  "wss://nostr.wine",               //jp en, Vitor, Terry
-//  "wss://relay.mostr.pub",          // nachika, karnage
 //  "wss://purplepag.es",             // kind0
 //  "wss://relayable.org",            //
 
