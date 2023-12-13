@@ -12,7 +12,7 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1700730769;  //paging
+//  untilValue = 1702451086;  //paging
 
   let noteCount = 0;
 
@@ -221,11 +221,13 @@ const Test = () => {
   const { events } = useNostrEvents({
     filter: {
       until: untilValue,  //paging
+//      authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
+//      authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
 
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [0,1,3,4,6,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30023,30311,30315,31922],
+      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0,1,3,4,6,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
@@ -253,12 +255,16 @@ const Test = () => {
 //      kinds: [30000],  // 30000:Categorized People List(mute)
 //      kinds: [30001],  // 30001:Generic lists(Categorized Bookmark List) (hex79)
 //      kinds: [30003],  // 30003:Bookmark sets
+//      kinds: [30008],  // 30008:Profile Badges
+//      kinds: [30009],  // 30009:Badge definition event
 //      kinds: [30023],  // 30023:Long-form Content
 //      kinds: [30025],  // 
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
 //      kinds: [30315],  // 30315:User Statuses
 //      kinds: [31922],  // 31922:calender
+//      kinds: [31989],  // 31989:Handler recommendation
+//      kinds: [31990],  // 31990:Handler information
 //      since: sinceValue,
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
@@ -373,7 +379,7 @@ const Test = () => {
         return;
       }
       else {
-        //return;
+//        return;
       }
 
       if(note.kind === 7
@@ -432,7 +438,7 @@ const Test = () => {
       let noteUrl = "https://nostter.app/" + nip19.neventEncode({id:note.id})
       for(let h=0; h<note.tags.length; h++)  {
         // 6.repost, 4550.Post Approval by moderators
-        if(note.kind == 6 || note.kind == 4550) {
+        /*if(note.kind == 6 || note.kind == 4550) {
           if(note.tags[h][0] == "e") {
 	    // repost nevent nostter
 	    if(note.tags[h][1].includes(":")) {
@@ -440,9 +446,9 @@ const Test = () => {
 	    }
             noteUrl = "https://nostter.app/" + nip19.neventEncode({id:note.tags[h][1]})
 	  }
-	}
+	}*/
         // 42.Channel Message
-        else if(note.kind == 42) {
+        if(note.kind == 42) {
           if(note.tags[h][0] == "e") {
 	    if(note.tags[h][1].includes(":")) {
 	      return
@@ -495,11 +501,11 @@ const Test = () => {
       let motoHex = replyToHex1
       let repHex = "";
 
-      let kindNumber = "";
       let channelUrl = "";
       let client = "";
       let title = "";
       let proxy = "";
+      let proxyUrl = "";
       let eventLinkUrl1 = "";
       let eventLinkUrlText1 = "";  // #e 1
       let event1Id = "";
@@ -697,8 +703,19 @@ const Test = () => {
 	else if(note.tags[h][0] === "title") {  // title 
 	  title = "[" + note.tags[h][1] + "]__"
 	}
-	else if(note.tags[h][0] === "proxy") {  // proxy 
-	  proxy = "__" + note.tags[h][2] + "__"
+	else if(note.tags[h][0] === "proxy") { 
+	  //proxy = "__" + note.tags[h][2] + "__"  // activitypub
+	  if(note.tags[h][1].includes("misskey.io")) {
+	    proxy = "__misskey.io__"
+	    proxyUrl = note.tags[h][1]
+	  }
+	  else if(note.tags[h][1].includes("unnerv.jp")) {
+	    proxy = "__unnerv.jp__"
+	    proxyUrl = note.tags[h][1]
+	  }
+	  else {
+	    proxy = "__proxy__"
+	  }
 	}
 	else if(note.tags[h][0] === "streaming") {  //  streaming
 	  streaming = "-streaming"
@@ -1344,7 +1361,7 @@ const Test = () => {
         status = "[30315 status]"
 	if(note.tags[0][1] != undefined && note.tags[0][1].includes("music")) {
           status = "[30315 status music]"
-	  content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
+	  //content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
 	}
       }
       else if(note.kind === 0) {  // 0:Metadata
@@ -1369,6 +1386,10 @@ const Test = () => {
       }
       else if(note.kind === 5) {  // 5:Event Deletion
         status = "[5 Delete]"
+      }
+      else if(note.kind === 8) {  // 8:Badge Award
+        status = "[8 Badge Award]"
+	content = note.tags[0][1].split(":")[2]
       }
       else if(note.kind === 40) {  // 40:Channel Creation
         status = "[40 Channel Creation]_"
@@ -1404,12 +1425,13 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  muteCount++
 	}
-        status = "[10000 mute word (nostter), mute list (snort) " + muteCount + "]_"
+        status = "[10000 Mute list(snort), mute word (nostter) " + muteCount + "]_"
         if(content === "") {
 	  content = "[empty]"
 	}
 	else {
-	  content = "m+BHkF89jh..."
+	  //content = "m+BHkF89jh..."
+	  content = content.substring(0,8) + "..."
 	}
       }
       else if(note.kind === 10001) {  // 10001:Pin List, nostter
@@ -1424,7 +1446,7 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  relayCount++
 	}
-        status = "[10002 save relay by nostter/coracle/snort " + relayCount + "]_"
+        status = "[10002 Relay List Metadata / save relay by nostter/coracle/snort " + relayCount + "]_"
         if(content === "") {
 	  content = "[empty]";
 	}
@@ -1435,7 +1457,7 @@ const Test = () => {
 	  bookmarkCount++
 	}
 	//if(note.tags[0][1] != undefined) {
-          status = "[10003 Bookmark list]" 
+          status = "[10003 Bookmark list " + bookmarkCount + "]_" 
 	  if(content === "") {
 	    content = "[empty]"
 	  }
@@ -1458,7 +1480,7 @@ const Test = () => {
 	  for(let x=0; x<note.tags.length; x++) {
 	    muteCount++
 	  }
-          status = "[30000 mute/unmute (damus/snort) " + muteCount + "]_"
+          status = "[30000 Mute list (nostter/damus/snort) " + muteCount + "]_"
 	  if(content === "") {
 	    content = "[empty]"
 	  }
@@ -1508,6 +1530,22 @@ const Test = () => {
 	//}
 	//content = ""
       }
+      else if(note.kind === 30008) {  // 30008:Profile Badges
+        if(note.tags.length > 1 && note.tags[1].length > 0)
+	{
+          status = "[30008 Profile Badges] " 
+	  content = note.tags[note.tags.length-2][1].split(":")[2]
+	}
+      }
+      else if(note.kind === 30009) {  // 30009:Badge Definition event
+          status = "[30009 Badge Definition] " + note.tags[1][1] + " , " + note.tags[2][1] 
+	  if(note.tags[3][1] != "") {
+	    content = "<img src=" + note.tags[3][1] + " height=150>"
+	  }
+	  else {
+	    content = "[empty]"
+	  }
+      }
       else if(note.kind === 30078) {  // 30078:Application-specific Data
         status = "[30078_Application-specific Data]_"
 	//content = note.tags[0][1] 
@@ -1551,6 +1589,26 @@ const Test = () => {
 	  status = "[30023 Long-form Content]_"
 	}
       }
+      else if(note.kind === 31989) {  // 31989:Handler recommendation
+        let tagCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  tagCount++
+	}
+        status = "[31989 Handler recommendation " + tagCount + "]_"
+	if(note.tags[0][0] === "d") {
+	  status = status + "[d" + " " + note.tags[0][1] + "]_"
+	  content = "" 
+	}
+//	content = content + "[empty]_"
+      }
+      else if(note.kind === 31990) {  // 31990:Handler information
+        let tagCount = 0
+	for(let x=0; x<note.tags.length; x++) {
+	  tagCount++
+	}
+        status = "[31990 Handler information " + tagCount + "]_"
+//	content = content + "[empty]_"
+      }
       
       bookmark = "-bookmark"
       //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
@@ -1566,7 +1624,6 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
-	        {kindNumber}
                 <a href={channelUrl} target="_blank">{channel}</a>
 	        {contentWarning}{contentWarningText}{contentWarning}
                 {status}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
@@ -1600,7 +1657,8 @@ const Test = () => {
                 <a href={image5Url} target="_blank"><img src={image5Url} height={inlineImage5Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-                ({noteIdShort}){client}{proxy}<br />
+                ({noteIdShort}){client}
+		<a href={proxyUrl} target="_blank">{proxy}</a><br />
 		<a href={freefromUrl} target="_blank">-FreeFrom</a>
 		<a href={snortUrl} target="_blank">-Snort</a>
 		<a href={noStrudelUrl} target="_blank">-noStrudel</a>
@@ -1631,26 +1689,65 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === 'npub1srtr60ty7pnvjg60la832mjutk86z3vmhvuc02cncme7sutnz4mqxrlt58') {
+        image = 'https://pubimgs.c-stellar.net/ritrin1_s.webp'
+      } 
+      else if (npub === 'npub1jdulk82j8kxwvrca9v3tkajarrll8zhz9cwx7w470wkm2te2l9wq6z06vz') {
+        image = 'https://image.nostr.build/242b8282773bc4172cd6ed0d6f107475e1ba7fc296e6b2568121dc06ccbe6dcd.jpg'
+      } 
+      else if (npub === 'npub10wnn0nngrs7zpq00yttm35aqrt9hv45nvjphjt60lkzg0m2ee3qq7wm3yu') {
+        image = 'https://image.nostr.build/8d46ece4c77ef3d3f2c630d65adfb657963a9219300f5665d131532b92693281.png'
+      } 
+      else if (npub === 'npub1jac0kj928psa6wf7hpt7ws8jmah33c826sa668fsce09cxvzqznqprc8yd') {
+        image = 'https://image.nostr.build/f35823ae55a0d2a70039c8628f2985737775986cf8c24db971efc6bf8359cbc2.jpg'
+      } 
+      else if (npub === 'npub1sujk7xhm5q4u5g2p4tg6dr45vlncy40ne4x07zyu74qqn9wqltwqellvmp') {
+        image = ''
+      } 
+      else if (npub === 'npub1z3v2rkksqrtp7n78fujex06llgk3lwj7pc3t3tmzd84x35j3e7mqsacpnr') {
+        image = 'https://void.cat/d/73ZwTnAFPKF5PEpFDQw2yZ.webp'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1clmf25mymlm3mlrr3lj6umgaurch3jcgsvakr258svjdcl0tvfasvkzkyc') {
+        image = 'https://image.nostr.build/52f37948739666c87c9ee77c24c5bacf8151fae8a48eb12d093c6d81473b4d60.png'
+      } 
+      else if (npub === 'npub182r0ws7xc7v2yq2t69gr8k6tfkrt7tqrfytqavl5m27n7yul6mus4vdj05') {
+        image = 'https://image.nostr.build/2c314bcee693d8a905e61bb9921079508adf67475c4f8c2ad32c9581e8903aa0.png'
+      } 
+      else if (npub === 'npub1vszh239q84lc6fr9sqyvmkfg9my29tunkf6ysuley556anz6me9sr0w8gc') {
+        image = 'https://nostrcheck.me/media/public/71d5e3041cc1b6bfd7053dba8f747ebb6000cce07f9a7966d5ffc0f49ec8af43.webp'
+      } 
+      else if (npub === 'npub1lcu8ts0fe2h05p2ft48pyr8wgkdzs7juzwq935z95q4teyhujtcs8sp00g') {
+        image = 'https://nostrcheck.me/media/public/7320436f462738c4e00682c301d8e5e2c51550926257e9de1b9032f86604e9bf.webp'
+      } 
+      else if (npub === 'npub15threpkztu32y0st67u27xrrr2v5hrt848a60djh48dkx4sv33rssf7rxu') {
+        image = 'https://image.nostr.build/f87e3716f58dba1d365c9e635acc0420aac74ff6fa5bc8cfab42a7a21910962b.jpg'
+      } 
+      else if (npub === 'npub156va3gdfcz3v0ckykaft5xtc2yrf79l5qarn65t7w0z6c8w2mp7qw9c4kq') {
+        image = 'https://s3.arkjp.net/misskey/04574a60-9672-46ea-a710-4131e0133f17.png'
+      } 
       else if (npub === 'npub1fzud9283ljrcfcpfrxsefnya9ayc54445249j3mdmu2dwmh9xmxqqwejyn') {
         image = 'https://nostrcheck.me/media/public/45a02504a321a92a920d3863475e15c5ca2388a7ecbff167be52fb1f273c727d.webp'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1fz65nf68h0kyg895u9vvwzwc0paynvdv64nu7cg7700g845k6juqzg59wk') {
+        image = 'https://2.sumi.space/avatar.gif'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1ntq989r8h36hjk6d9kuxupwss8jyhdz3tc4sjfxxcvxp48hplzmqcy3twf') {
+        image = 'https://cdn.bsky.app/img/avatar/plain/did:plc:cpxx2uveaepjaavox4y6lm6q/bafkreid2ikx2dz5bgjsdeq6bzgsjpjksfw6biq7zowxbzjz5idv4izeb74@jpeg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub17qr74gy9y5z04nwhd58v96l5udkya9v3npu84zv7t32s0hx2a5csyr78fh') {
+        image = 'https://nostr.build/i/c9391e4e6e1e768e62cf4bf8576cccf979480031f40e891c1529895f0b3f2fb9.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1dwfj2pw3m428udsrm2xkrpqmgyhxnn82ask3wpgemlcvc8h2xhhs4mawdy') {
+        image = 'https://pbs.twimg.com/profile_images/1620011149805879296/T8nc4TkA_400x400.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1valq4c7sf5khjn66v0taakd42tpau6h2dppprhq83p3mnqwk9prqdl0zcx') {
+        image = 'https://nostr.build/i/4d0f27394a87768b2c2535a29347ba46cfc0533f23be96e913fa1959e22026cb.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub126yus8txwxt9d30l7py5y6m2hfg63gnxhtn392myjccjsqd6agnsv00gpm') {
+        image = 'https://www.iplatform.org/files/data/profile_korodroid.png'
       } 
       else if (npub === 'npub1dyqasukhw28hx33j8sjzzchj2ehmcu67puvsm9r66vj5qhq5ucgqh96qz5') {
         image = 'https://image.nostr.build/e8a25dbad19163fb67e1971d597874c10c483b650876ee5e2c02a7905a095ee1.jpg'
@@ -1802,6 +1899,7 @@ const Test = () => {
       } 
       else if (npub === 'npub1dxg440ltnu9pppjc94a03pwvgvaxvadfphn9ejz4qkcukts8sy3s8lgr73') {
         image = 'https://image.nostr.build/86ad7b473f912303b5307c7620d3b7324d9a90464abd75fb4951d4844f797c1a.jpg'
+	image = 'https://profilepics.nostur.com/profilepic_v1/bc140ef69a7aebd23de181587880826599e2e9d97950d8ccb837e9a0eadf7d65/profilepic.jpg?1700259570'
       } 
       else if (npub === 'npub1e4gscs30mhrypr42ux8xnc7smlvvygjxks3ev8um84wz6ljkytvqalcy0f') {
         image = 'https://kojira.io/tuna.webp'
@@ -2192,6 +2290,7 @@ const Test = () => {
       } 
       else if (npub === 'npub19q2zuuklgwpq2nl0c276r6h5rsjhdq608hy5ylq37qfec5y4kj5s5v5d0u') {
         image = 'https://nostrcheck.me/media/public/nostrcheck.me_1703790422175470981688388743.webp'
+	image = 'https://image.nostr.build/5f8863ac4a838c37c08bc84b2f6ebcd004c4441e3d77bf6f22cfddcb8af77c5b.jpg'
       } 
       else if (npub === 'npub1ncvpth7qzqjj59c837gq2vmthsz874gad4akg4zs227wmhkt3g4q0aqa6p') {
         image = 'https://image.nostr.build/a60fd29a813c13e8bedfc0b341155d9ad928ad66f13e1da596326c953305db2c.jpg'
