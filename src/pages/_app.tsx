@@ -5,9 +5,10 @@ import { NostrProvider } from "nostr-react";
 const relayUrls = [
 
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
-  "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,wirednet,nokotaro) 
+  "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,nokotaro) 
   "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
   "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
+//  "wss://bostr.nokotaro.com",
 
 //  "wss://r.kojira.io",
 //  "wss://relay.nostr.wirednet.jp", 
@@ -34,6 +35,8 @@ const relayUrls = [
       
 //  "nostrja-kari-nip50.heguro.com",   // NIP-50
       
+//  "wss://bostr/nokotaro.work",
+
 /* 
    "wss://nostr.fmt.wiz.biz",
    "wss://relay-jp.shino3.net/",
