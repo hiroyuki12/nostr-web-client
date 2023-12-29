@@ -12,10 +12,14 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-//  untilValue = 1702451086;  //paging
+  untilValue = 1703848907;  //paging
 
   let noteCount = 0;
 
+//  untilValue = 1703758761;  // error black
+//  untilValue = 1703564079;  // googleusercontent.com/ img fix
+//  untilValue = 1703568307;  // img threads NG
+//  untilValue = 1702648801;  // 9735 content empty NG
 //  untilValue = 1700648893;  // bookmark
 //  untilValue = 1700654092;  // Long-form Content
 //  untilValue = 1700351963;  // NG link
@@ -227,8 +231,9 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
-//      kinds: [0,1,3,4,6,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
+//      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
+      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
+//      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
@@ -376,9 +381,11 @@ const Test = () => {
       if(!followList.includes(note.pubkey)) {
 // following filter
 	follow = " [follow]";
+	// not follow user
         return;
       }
       else {
+          // follow user
 //        return;
       }
 
@@ -402,6 +409,7 @@ const Test = () => {
       ||note.pubkey == '3e1691aa75beb6aff2887e677b10f89a5ab9f71e7e3c54800eb6ab96d3afd9a7')  {
 // hiragara filter
 	//follow = "[[en]]";
+	// not japanese
 //        return;
       }
 
@@ -509,16 +517,16 @@ const Test = () => {
       let eventLinkUrl1 = "";
       let eventLinkUrlText1 = "";  // #e 1
       let event1Id = "";
-      let eventLinkUrl2 = "";
+      //let eventLinkUrl2 = "";
       let eventLinkUrlText2 = "";  // #e 2
       let event2Id = "";
-      let eventLinkUrl3 = "";
+      //let eventLinkUrl3 = "";
       let eventLinkUrlText3 = "";  // #e 3
-      let eventLinkUrl4 = "";
+      //let eventLinkUrl4 = "";
       let eventLinkUrlText4 = "";  // #e 4
-      let eventLinkUrl5 = "";
+      //let eventLinkUrl5 = "";
       let eventLinkUrlText5 = "";  // #e 5
-      let eventLinkUrl6 = "";
+      //let eventLinkUrl6 = "";
       let eventLinkUrlText6 = "";  // #e 6
       let eventCount = 0;
       let streaming = "";
@@ -647,45 +655,46 @@ const Test = () => {
 	  if(eventLinkUrlText1 === "") {
 	    if(marker === "" && note.kind === 1) {  // 1:text
 	      //marker = "root ";
-	      marker = "reply ";
+	      //marker = "reply ";
 	    }
 	    event1Id = note.tags[h][1].substring(0,2);
             eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
-	    eventLinkUrl1 = eventLinkUrl
+	    //eventLinkUrl1 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText2 === "") {
 	    if(marker === "" && note.kind === 1) {  // 1:text
-	      marker = "reply ";
-              eventLinkUrlText1  = "__#e(root " + event1Id + ")";
+	      //marker = "reply ";
+              //eventLinkUrlText1  = "__#e(root " + event1Id + ")";
+              eventLinkUrlText1  = "__#e(" + event1Id + ")";
 	    }
 	    event2Id = note.tags[h][1].substring(0,2);
             eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
-	    eventLinkUrl2 = eventLinkUrl
+	    //eventLinkUrl2 = eventLinkUrl
 	  }
 	  else if(eventLinkUrlText3 === "") {
             eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    eventLinkUrl3 = eventLinkUrl
+	    //eventLinkUrl3 = eventLinkUrl
 	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText4 === "") {
             eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    eventLinkUrl4 = eventLinkUrl
+	    //eventLinkUrl4 = eventLinkUrl
 	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText5 === "") {
             eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    eventLinkUrl5 = eventLinkUrl
+	    //eventLinkUrl5 = eventLinkUrl
 	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
             }
 	  }
 	  else if(eventLinkUrlText6 === "") {
           //  eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    eventLinkUrl6 = eventLinkUrl
+	    //eventLinkUrl6 = eventLinkUrl
 	    if(marker === "reply ") {
               eventLinkUrlText2  = "__#e(" + event2Id + ")";
               eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
@@ -709,12 +718,17 @@ const Test = () => {
 	    proxy = "__misskey.io__"
 	    proxyUrl = note.tags[h][1]
 	  }
+	  else if(note.tags[h][1].includes("p1.a9z.dev")) {
+	    proxy = "__p1.a9z.dev__"
+	    proxyUrl = note.tags[h][1]
+	  }
 	  else if(note.tags[h][1].includes("unnerv.jp")) {
 	    proxy = "__unnerv.jp__"
 	    proxyUrl = note.tags[h][1]
 	  }
 	  else {
 	    proxy = "__proxy__"
+	    proxyUrl = note.tags[h][1]
 	  }
 	}
 	else if(note.tags[h][0] === "streaming") {  //  streaming
@@ -727,9 +741,9 @@ const Test = () => {
       }
 //
       let content = note.content;
-      content = title + content
+//      content = title + content
 
-      for(let i=0; i<50; i++) {
+      for(let i=0; i<10; i++) {
         content = content.replace('<','&lt;');  // <
       }
 
@@ -771,7 +785,7 @@ const Test = () => {
 	      }
 	    }
 	    
-            for(let j=0; j<20; j++) {
+            for(let j=0; j<10; j++) {
 	      content = content.replace("\\/\\/","//");
 	      content = content.replace("\\\"","\""); // \" -> "
 	    }
@@ -813,12 +827,12 @@ const Test = () => {
 
       if(content.includes("https:") || content.includes("http:")) {
         let tmp = content;
-        for(let i=0; i<100; i++) {
+        for(let i=0; i<10; i++) {
           tmp = tmp.replace('\\/','/');
           content = content.replace('\\/','/');
 	  
 	}
-        for(let i=0; i<100; i++) {
+        for(let i=0; i<10; i++) {
           tmp = tmp.replace('\\n',' ');
           tmp = tmp.replace('、',' ');
           tmp = tmp.replace('\'',' ');
@@ -831,7 +845,7 @@ const Test = () => {
           tmp = tmp.replace('https://',' https://');
           tmp = tmp.replace('https://',' https://');
         }
-        for(let i=0; i<100; i++) {
+        for(let i=0; i<20; i++) {
           tmp = tmp.replace('\n',' ');
         }
         let tmp2 = tmp.split(' ');
@@ -859,9 +873,11 @@ const Test = () => {
              tmp2[i].includes("/imgproxy.snort.social/") ||
              tmp2[i].includes("/0.gravatar.com/avatar/") ||
              tmp2[i].includes("/www.gravatar.com/avatar/") ||
+             tmp2[i].includes("googleusercontent.com/") ||
              tmp2[i].includes("grafana.gsn.im/"))
 	     && tmp2[i].includes("http")
 	     && !tmp2[i].includes("gifu.jp/")
+//	     && !tmp2[i].includes("minio.compile-error.net/")
 	     )  {
 	     //content = content + '[' + tmp2[i] + '],'
 	    if(imageCount===0) {
@@ -961,12 +977,12 @@ const Test = () => {
 	    const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
 	    tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	  }
-	  else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com") || tmpUrl.includes("t.co")) {
+	  else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
 	    //content = content.replace(tmp2[i], "");
 	    const id = tmpUrl.replace("x.com","twitter.com"); 
 	    tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 	  }
-	  else {
+	  else if(!tmpUrl.includes("googleusercontent.com/")){
             tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 	  }
 	  // text link
@@ -1006,7 +1022,8 @@ const Test = () => {
 	  if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
 	  if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
 	  if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
-	  tagUrl = "https://snort.social/t/" + tag;
+//	  tagUrl = "https://snort.social/t/" + tag;
+	  tagUrl = "https://nostrudel.ninja/#/t/" + tag;
 
 	  if(!content.includes("/#" + tag)) {
 	    content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
@@ -1193,7 +1210,7 @@ const Test = () => {
       let httpLinkUrlText1 = "";  // # https://
       if(content.includes("https://") || content.includes("youtu.be")) {
         let tmp = content;
-        for(let i=0; i<30; i++) {
+        for(let i=0; i<10; i++) {
           tmp = tmp.replace('\\n',' ');
           tmp = tmp.replace('、',' ');
           tmp = tmp.replace('\'',' ');
@@ -1202,7 +1219,7 @@ const Test = () => {
           tmp = tmp.replace('（今こうなる…）',' ');
           tmp = tmp.replace('！',' ');
         }
-        for(let i=0; i<100; i++) {
+        for(let i=0; i<10; i++) {
           tmp = tmp.replace('\n',' ');
         }
 	//tmp = tmp.replace("https://", " https://");
@@ -1272,6 +1289,7 @@ const Test = () => {
 		  || tmp2[i].includes(".mov") 
 		  || tmp2[i].includes(".jpeg") 
 		  || tmp2[i].includes(".jpg") 
+		  || tmp2[i].includes("@jpeg")  // threads img
 		  || tmp2[i].includes(".webp")) {
 	          content = content.replace(tmp2[i], "");
 		}
@@ -1302,14 +1320,14 @@ const Test = () => {
         }
       }
       
-      /*for(let i=0; i<50; i++) {
+      /*for(let i=0; i<10; i++) {
         content = content.replace('<img','&lt;img'); 
       }*/
 
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
             const emojiURL = note.tags[i][2];
-	    for(let j=0; j<50; j++) {
+	    for(let j=0; j<10; j++) {
               content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
 	    }
         }
@@ -1318,7 +1336,7 @@ const Test = () => {
         content = content.replace(":bow:","🙇");
       }
 
-      /*for(let i=0; i<50; i++) {
+      /*for(let i=0; i<10; i++) {
 //        content = content.replace('<','&lt;');  // <
 
         content = content.replace('<m','&lt;m'); 
@@ -1345,11 +1363,11 @@ const Test = () => {
         //content = content.replace('<a','&lt;a');  
       }*/
 
-      for(let i=0; i<200; i++) {
-        content = content.replace('\\n','<br />');  // repost content
+      for(let i=0; i<30; i++) {
+        //content = content.replace('\\n','<br />');  // repost content
         content = content.replace('\\t','&#009;');  // tab
       }
-      for(let i=0; i<200; i++) { // nya
+      for(let i=0; i<30; i++) { // nya
         content = content.replace('\n','<br />');
       }
 
@@ -1361,7 +1379,7 @@ const Test = () => {
         status = "[30315 status]"
 	if(note.tags[0][1] != undefined && note.tags[0][1].includes("music")) {
           status = "[30315 status music]"
-	  //content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
+	  content = '<a href="' + "https://open.spotify.com/search/" + content + '" target="_blank">' + content + '</a>'
 	}
       }
       else if(note.kind === 0) {  // 0:Metadata
@@ -1475,7 +1493,8 @@ const Test = () => {
         status = "[10005 Public chats List " + listCount + "]_"
       }
       else if(note.kind === 30000) {  // 30000:Categorized People List
-        if(note.tags[0][1] != undefined && note.tags[0][1] === "mute") {
+        status = "[30000 Follow sets_"
+        //if(note.tags[0][1] != undefined && note.tags[0][1] === "mute") {
           let muteCount = 0
 	  for(let x=0; x<note.tags.length; x++) {
 	    muteCount++
@@ -1487,12 +1506,12 @@ const Test = () => {
 	  else {
 	    content = "NeT1Xn3AXhQAi~"
 	  }
-	}
-	else {
+	//}
+	/*else {
 	  status = "[Categorized People List]_"
 	  content = note.tags[0][1]  // notifications/lastOpened
 	  return
-	}
+	}*/
       }
       else if(note.kind === 30001) {  // 30001:Categorized Bookmark List
         let bookmarkCount = 0
@@ -1528,12 +1547,21 @@ const Test = () => {
 	//if(note.tags[0][1] != undefined) {
           status = "[30003 Bookmark sets / " + note.tags[0][1] + " " + bookmarkCount + "]" 
 	//}
-	//content = ""
+	if(content === "") {
+	  content = "[empty]"
+	}
+	else {
+	  content = content.substring(0,8) + "..."
+	}
       }
       else if(note.kind === 30008) {  // 30008:Profile Badges
         if(note.tags.length > 1 && note.tags[1].length > 0)
 	{
-          status = "[30008 Profile Badges] " 
+          let badgeCount = 0
+	  for(let x=0; x<note.tags.length; x++) {
+	    badgeCount++
+  	}
+          status = "[30008 Profile Badges " + badgeCount + "] " 
 	  content = note.tags[note.tags.length-2][1].split(":")[2]
 	}
       }
@@ -1619,6 +1647,7 @@ const Test = () => {
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
       
       const note1 = nip19.noteEncode(note.id);
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
@@ -1626,7 +1655,7 @@ const Test = () => {
               <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
                 <a href={channelUrl} target="_blank">{channel}</a>
 	        {contentWarning}{contentWarningText}{contentWarning}
-                {status}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
+                {status}{title}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
 		<a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height={replyToImageSize2} /></a>
 		<a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height={replyToImageSize3} /></a>
 		<a href={replyToUrl4} target="_blank"><img src={replyToImageURL4} width={replyToImageSize4} height={replyToImageSize4} /></a>
@@ -1637,12 +1666,12 @@ const Test = () => {
 		{parse(iframe2)}
 		<a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
 		<a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
-		<a href={eventLinkUrl1} target="_blank">{eventLinkUrlText1}</a>
-		<a href={eventLinkUrl2} target="_blank">{eventLinkUrlText2}</a>
-		<a href={eventLinkUrl3} target="_blank">{eventLinkUrlText3}</a>
-		<a href={eventLinkUrl4} target="_blank">{eventLinkUrlText4}</a>
-		<a href={eventLinkUrl5} target="_blank">{eventLinkUrlText5}</a>
-		<a href={eventLinkUrl6} target="_blank">{eventLinkUrlText6}</a>
+		{eventLinkUrlText1}
+		{eventLinkUrlText2}
+		{eventLinkUrlText3}
+		{eventLinkUrlText4}
+		{eventLinkUrlText5}
+		{eventLinkUrlText6}
 		<a href={linkUrl1} target="_blank">{linkUrlText1}</a>
 		<a href={linkUrl2} target="_blank">{linkUrlText2}</a>
 		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
@@ -1688,6 +1717,179 @@ const Test = () => {
       } // @@ 
       else if (npub === '') {
         image = ''
+      } 
+      else if (npub === 'npub14dkz8wag0e8kwgx6sp2w3nrq0lk7qju432n69p9qhsvxnq8jkmys49ssqh') {
+        image = 'https://image.nostr.build/9ae13caa5940587376fb8f63546a894c62ffbd73333e4b66f0e65e29afdb6c0d.jpg'
+      } 
+      else if (npub === 'npub1dl4x52a5xeppqyt8gm7j8gvn3sfzysggrmdjw58v346mf6m0emdssmqekp') {
+        image = 'https://image.nostr.build/c6f8ae15642befb82bcd33aae624d2f4b0ff768c1709d325381003abf77cf4d3.jpg'
+      } 
+      else if (npub === 'npub18hdtmhl0xl67yp256cavq0fswrvh6ajcj4w2jan8yvh527mlklds6e9403') {
+        image = 'https://nostrcheck.me/media/public/135a9f103d6423dd8ecfbced09f62bbd746164e74301ba24a095b13daecd3bab.webp'
+      } 
+      else if (npub === 'npub1ugfyg6e2a7hlfjpje2v72266ufmt0hcp6qu4g6ndh4sk06rzsyusc74dpn') {
+        image = 'https://nostrcheck.me/media/public/c5b7327f17d7d8669f1baeaa7369972f39fbcd0700af20c68973138beb92309e.webp'
+      } 
+      else if (npub === 'npub12uuzj6elk7xkpqkac26xwau936y0pguzm3cu9da2xas88unjkcps4d7u9p') {
+        image = 'https://image.nostr.build/7b559e58e485d149366e644e736133a3e251ca87004667c13ced90567b6c269a.jpg'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1ykuyd0qgnfd9rqtvlmf5xe0ufjuyf0nxv8fhwsr0u2yggxn45twqk49ska') {
+        image = 'https://nostrcheck.me/media/public/1dcd911e7b7ff89a96d567be9d06dd90d5acbe19fa2ae2e3a176ff0400ca9b22.webp'
+      } 
+      else if (npub === 'npub1m8zvlc72hztas98we756jpskca0cvwe7gulwyq606ca53jjx75lqvr865y') {
+        image = 'https://image.nostr.build/c0d2779998e61af66687541723c3f1d3150b34b1e7f7d8968b0f542ce6a4be14.jpg'
+      } 
+      else if (npub === 'npub1yh8efhc3dd3fugnapkpz4dtsdwhnjfsery7mjg9h7uxnlnfztjvsyrkp2m') {
+        image = 'https://pbs.twimg.com/profile_images/1601886120140476417/A3KPa71b_400x400.jpg'
+      } 
+      else if (npub === 'npub1tn9c6gkjv8y76k7s5nsmmu5mgy7pp4pmc8eau9pvxv8wlgsxrdmqgc66ke') {
+        image = 'https://image.nostr.build/53d97479ad847e8dee4998907f888af4a0ecea882d297ea70aebfc61cecafffa.jpg'
+      } 
+      else if (npub === 'npub1cmrfel9eplcsd6y33wpqkcnj059qrvp33flt4nxq4wlw0awqvr6qd8228e') {
+        image = 'https://image.nostr.build/348c70635f3ebd9007c6c189576ecc693a932cbc3e681ab402770a60c7491fec.jpg'
+      } 
+      else if (npub === 'npub1hxdz5pw4uqfxsls6f4ezpqhsxwxq903z3xwszk8zhkl08nem2g0qwec49n') {
+        image = 'https://nostrcheck.me/media/public/24856f7ef32e1892bda6d8178527142a1346d06323e8f46e20db3a8b45957b83.webp'
+      } 
+      else if (npub === 'npub1r4cflnluywtf92r6ug4ldjv6zrc6yud943gc0t0j5cmkx405nkjscl9fmt') {
+        image = 'https://nostr.kojira.net/will_neighbor.jpg'
+      } 
+      else if (npub === 'npub1wt5dv4y46evudluddxxuumwpkkp2fhuzltcs9cjxj9phgvaffvsqllye95') {
+        image = 'https://kojira.io/brrcm.webp'
+      } 
+      else if (npub === 'npub10qts94q2q75ya5798jyrl5gzqy8xrwtfzk02kf22cm4qmt0qf4cqyzhv24') {
+        image = 'https://s3.arkjp.net/misskey/5810edfe-777b-47e1-b1c4-ce35a1e89d57.jpeg'
+      } 
+      else if (npub === 'npub1takur0epyq0ttpv8x7xef6g5y7vqfvy5rvj78cqsxntkymrpfy7qzpls6g') {
+        image = 'https://image.nostr.build/5253a3e5f25619bbc9a93066597c192741a5c1e49c52450bb90601e473eaa1e9.jpg'
+      } 
+      else if (npub === 'npub1zaxudwsms6y8eneynuf4ktvhpltmfaufqyve5xxx46k6ng482qfqmg376j') {
+        image = 'https://nostrcheck.me/media/public/11d8e8b5ece07870ff4f901be73a505e99bd6c38351e53ca5cb36c5ebc92dacd.webp'
+      } 
+      else if (npub === 'npub1fttawyzx7v674kn0la99ggwf53q6vuufq6nw4qj9krwttyh73nyqlmhpsa') {
+        image = 'https://image.nostr.build/58233dd47d4b799b5d1b1f8dea2e19bdc6b4840c8759fd695df587eb0b220439.jpg'
+      } 
+      else if (npub === 'npub1cuqeaw5kygdtrlr0errsgrlypmxcxzzawv59y33vctukxk3yg7wqs4966e') {
+        image = 'https://nostr.build/i/251c4db0b7bcf394a256e0161fa689d8b54c060feb052b5bb73fca4dcabb4644.jpg'
+      } 
+      else if (npub === 'npub1j2az4qzc0809xutq8lejaax4ywlqynquh7nf3ajeuak0w97l9ltssyx55c') {
+        image = 'https://image.nostr.build/5d376587f0273058fe23204f5b8a3c17c2c11376e8ca1d664680439b82f7ca6c.jpg'
+      } 
+      else if (npub === 'npub1tnw8g7sagu0mhmu4d9khw6antggltdt36d3yr90770ewmcdvqpqqr8rrgg') {
+        image = 'https://image.nostr.build/53835a76c421ab6ee445364cb05f8d3cd4925528c12f7f0f1574f0801643e5b2.jpg'
+      } 
+      else if (npub === 'npub1nk4g3unwu3zk05td55hahu5py56h2wt23cls2uz5ugpukvsrj09qqaxav3') {
+        image = 'https://nostr.build/i/fbea7c8a0aa61216740d5748c83d7655c0cf8570a9de6091f2bbe395fbe043bb.jpg'
+      } 
+      else if (npub === 'npub15vl9fr0aegfd8azp59gypae72vjq666n5xdx8jflvl40uggmzzmqcg859t') {
+        image = 'https://image.nostr.build/53763ea0261283766c8b8d275d4674f8385bc0961a15cb1ff11ab7fcb23197a5.jpg'
+      } 
+      else if (npub === 'npub1fphjyv4gv7n06xzhfjkjcpghje8ptghd8cm22dx65cjfjuc6kndqe8jk4k') {
+        image = 'https://image.nostr.build/ad80f0474486205e50db59de0efd55c19608d9ba291825c9129d0a7ddc2552ff.jpg'
+      } 
+      else if (npub === 'npub1qs9dsslqqn9d3rfs5ljhnma0dzrnzcesmwvvragjgchwu95jqqus9mcxwh') {
+        image = 'https://rinokurata.com/damus/S__56262660.jpg'
+      } 
+      else if (npub === 'npub10zeurmg22wc89l8m3npw9cyu45cun0lvs6w3ep69cdpa25pna65s0994qz') {
+        image = 'https://i.nostr.build/E0JJ.webp'
+      } 
+      else if (npub === 'npub1x3azxuysp5vmfer4vgs4jn5tmfcx4ew8sh0qnev7gczljxsr7jwqa3g4el') {
+        image = 'https://image.nostr.build/30df7e4bc9e7b2b8a79f2c72bc45db596b952ccf1da5388e5bce04119a195c6b.jpg'
+      } 
+      else if (npub === 'npub1ea3ww4qkdvt3q47wdyxf0d44643pnm7qm9hcavydt0qgeqgvr3rq8as9uj') {
+        image = 'https://image.nostr.build/377d8f0a4aa88b0997e9e66977d837600ecb7c29785882a4bc89749f49899f07.jpg'
+      } 
+      else if (npub === 'npub1t7s68hjxv3q8sm7clu8cex34e3e4wu6ygpd6y5gphxphf88y8jsqv6r3uw') {
+        image = 'https://image.nostr.build/9892accef067428cff74772e691535c58b7ff5f0c048c6ce7d4ef07a0e0b6e45.jpg'
+      } 
+      else if (npub === 'npub1nml73gurf6e97rjsxyg739mue24wjutfqtsh3u8wg7262ga79k7sv59fh0') {
+        image = 'https://nostrcheck.me/media/public/899196cf0a22892cfc9ae10c90b9a548b94db8c8ec8abd4c2a0a8b9984d9ea68.webp'
+      } 
+      else if (npub === 'npub1w9z4cvccxf0p9lvwrcvs4xq7g0765mnhwevyu5lx9vy6h59c5rys3m2dlm') {
+        image = 'https://image.nostr.build/2e25952eaea7b082c4f179c89e06dbbd4e90f6e78acec11e3140d4059bc9ded7.jpg'
+      } 
+      else if (npub === 'npub15ttxzgfcf2yr0xc0zcggdty5v58n388jgnryl5xjpykzex9mwcfsfpuj93') {
+        image = 'https://kouhouyoukai.github.io/images/shadow-cat-icon-800.svg'
+      } 
+      else if (npub === 'npub17fqvnsj3ps7x856jttg3a5fswaqaphl7eh4nuhxhmgfrjmqvp2rqrcuyff') {
+        image = 'https://image.nostr.build/5361bf7421c2c51c42ee39277f3837d9f612086c6c6ddf9b4837b6a2fe3af4cd.jpg'
+      } 
+      else if (npub === 'npub19mgjqqla88h0yvhfxqp9xnve578g2f39f79zujw40e20lxyw72ns3j7x3v') {
+        image = 'https://image.nostr.build/827d8ae877427842768f4e8e2f3825b94365ea9470131d66e4248089fd289e2e.png'
+      } 
+      else if (npub === 'npub1kscpkjnfj7x9fd435rv27ts0fw32gp3uswt3ehy7uexvm7u57pws367hv0') {
+        image = 'https://media.nijimiss.app/null/09fb9f22-a557-4fee-adec-b4e161015164.png'
+      } 
+      else if (npub === 'npub1jgswa4xlp6xkknvg3z6vdk3rgc5rld7wn3yjd0p0gyupj4qx6g3q507u02') {
+        image = 'https://s3.arkjp.net/misskey/webpublic-bc69f1a8-5232-400f-9a16-b7b8e6b9273e.png'
+      } 
+      else if (npub === 'npub1qu5d7xl45ym80qfnn6ktqvxqrrq0zrwv5m628pp3jmclwffnus8qaxj8um') {
+        image = 'https://s3.arkjp.net/misskey/062ff2c5-35e5-4749-8e2a-e7f54cf9ac4d.jpg'
+      } 
+      else if (npub === 'npub1m0lushlwhq0ug0sfnea0hvatmt6rxfs94pnp7zc0t9tv5hd2vncsz7874j') {
+        image = 'https://oransns.com/system/accounts/avatars/000/000/036/original/fe79c91ec09346ee.jpg'
+      } 
+      else if (npub === 'npub10az0l5et89644edj9sxynnk653xkddfl6v8yvw3rtym8yy9pw3ys8n07x8') {
+        image = 'https://nostrcheck.me/media/public/70ae58f5b4c56107e92f97f9638379eb7eb573f8dfef2b81751ebd349fc49b21.webp'
+      } 
+      else if (npub === 'npub1zjr4tens4kekawa998l5dw0ntq9ynxfgyjwa0xn5nv59x3gvzplsfqql0n') {
+        image = 'https://image.nostr.build/9aa335e2113746ea34f6d8f1a0a1cd118fcc28f42e48d38958975d64206c7b96.jpg'
+      } 
+      else if (npub === 'npub1dzmp94s4zhcv6ryx2pq9e4rufjmrs2syphal6a4fjy8eaf7cm6aslza7fz') {
+        image = 'https://pbs.twimg.com/profile_images/378800000504742189/03e132f51bc3166a7c304516b58131a3_400x400.jpeg'
+      } 
+      else if (npub === 'npub1ktzp8kerd3v6uavul6dx2rkv5pg04vrkpta4p0fcxvmcdtjgdr4q09gga9') {
+        image = 'https://nostr.build/i/78215173491a7ffe6103029d7ed7b41add4e43b93cabe01d1854143b8f29dee1.jpg'
+      } 
+      else if (npub === 'npub1pqehy4x5s85sza8rpdtvg2vsn6355a62rp9ys25yhr84p4pd32eqr0wvxx') {
+        image = 'https://nostrcheck.me/media/public/1c96cfcfe06d070af1887bdaf4d17e45236e2a6898740b9d45a9949532223d1d.webp'
+      } 
+      else if (npub === 'npub15f9l48hjadg5ah4f2vlxc37lzkkh2gehy9zujn9ul4lnpjh0ck7qfgrq75') {
+        image = 'https://nostr.build/i/aa649e4839f308a48818d8b461f06674cf3c6fd4fd111fb05088bf1d1e55aa49.jpg'
+      } 
+      else if (npub === 'npub15sln9x8434l57pamd4qderxe7nmjj5up75x08guwrqnnhwje354s2u32sj') {
+        image = 'https://image.nostr.build/218202c9871175ec91701e74f7a73a87d8164d9f16ba19a3dd59620f38e27cca.png'
+      } 
+      else if (npub === 'npub1tmaru4mzc6p6zfsreg40p9rsajj9aqg5w9j7fx4awy48kktqcgaqx279qe') {
+        image = 'https://toshimaru0123.net/icon_home.png'
+      } 
+      else if (npub === 'npub1ctevs08z8xyttzqny8car439pcyr4vsf76cy89k5exyhvn6q8laq6966yv') {
+        image = 'https://i.postimg.cc/1XmPGW4b/E90-E4-D78-D74-D-4-BA4-8-CAE-42866761-C45-A.jpg'
+      } 
+      else if (npub === 'npub168ghgug469n4r2tuyw05dmqhqv5jcwm7nxytn67afmz8qkc4a4zqsu2dlc') {
+        image = 'https://pubimgs.c-stellar.net/leaf_xmas.webp'
+      } 
+      else if (npub === 'npub1xs5vncmwc58zun3u649qrcnj2tx507mq4cccgs9kfhzdeetglajqcr30xd') {
+        image = 'https://void.cat/d/6LxFFrLwSAZo5gHErDB6aW.webp'
+      } 
+      else if (npub === 'npub137c5pd8gmhhe0njtsgwjgunc5xjr2vmzvglkgqs5sjeh972gqqxqjak37w') {
+	image = 'https://i.nostrpix.com/fishcake/p/profile.png'
+        image = 'https://i.nostrpix.com/fishcake/p/profile-xmas.png'
+      } 
+      else if (npub === 'npub18wgg5ry64mc5wx8l993n2z0dthhmh0tnpkjd93a99cd7us6mg93q9r8n6j') {
+        image = ''
+      } 
+      else if (npub === 'npub1mpdtc8pzn9q4y7n9l7dqr6zvnn344n8ve66ue68n027az3pvs2ws9w6qx9') {
+        image = 'https://cdn.nostr.build/i/5e5a228f8cc3218673701adf3e368150e81149e46c253a049bbddace4cdb138d.jpg'
+      } 
+      else if (npub === 'npub1cq827zsq6q0j783yk2mefv62le4r3drhnye5p4jj5m8e2mvat8jsyesnvh') {
+        image = 'https://cdn.discordapp.com/attachments/742671079318880257/1185549190177239050/a68faa8f-efc6-496a-afcb-97faef36e1a8.png?ex=659003b9&is=657d8eb9&hm=e4e631d7f8d3c88aba20bef6cdc7f3e8a53e262c1d14d7dc86aa5996735d9001&'
+	image = ''
+      } 
+      else if (npub === 'npub1yqyygfqun6l7t3mrxerqnrenqvmjl6f4n2d9vgva32w6ywjea5jqhffpuh') {
+        image = 'https://image.nostr.build/18c3d732428d108f48ac46beb7a95ea839c5a9d17c5aba60154bf6ff0cafa00f.jpg'
+      } 
+      else if (npub === 'npub1s7y2n2l262kp463qs0ygf9wqjt7fjqg0cpgvrj6vpfh9f79egz3snngw3z') {
+        image = 'https://nostr.build/i/e606328b7948004861f3d9b5b765a98e8964700d1b7f7204a4d331e5101beace.jpg'
       } 
       else if (npub === 'npub1srtr60ty7pnvjg60la832mjutk86z3vmhvuc02cncme7sutnz4mqxrlt58') {
         image = 'https://pubimgs.c-stellar.net/ritrin1_s.webp'
@@ -2057,6 +2259,7 @@ const Test = () => {
       else if (npub === 'npub1nfnycjt2tkw6mm7dd5stanhxf9dax6lde9xkk9ap0h87qptxs24qxf4ufs') {
         image = 'https://i.nostrimg.com/4b9c0d3edd400a88737c94996c25ba6f1edc9790e589cee652eee0bfa2feb9fb/file.png'
         //image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
+	//image = 'https://i.nostrimg.com/d054511468e29a106ae1835a5ba7d52cb305fcba92fd6d896b992925de3e0f9a/file.png'
 	image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
       } 
       else if (npub === 'npub1qdkl4et0xhz3u32722g8q0ejx0pz0f6stxtaug55ncgymy3nrwwsqr2rde') {
@@ -2196,6 +2399,7 @@ const Test = () => {
       } 
       else if (npub === 'npub1ynetf06094vu2p0pd8c88w8qd9hwjgc8usrc3jnt4ut365kwdlhs3xdkv3') {
         image = 'https://nostr.build/i/f2953b3ba96998ab0fb2fb14418a1be56826ecbf18e31c3970af3bc49db5cdc7.jpg'
+	image = 'https://nostr.build/i/f2953b3ba96998ab0fb2fb14418a1be56826ecbf18e31c3970af3bc49db5cdc7.jpg'
       } 
       else if (npub === 'npub1yk7zf4rm8nmsuka0g9lkgppml4ctv4tuz9gzg0c7sgxsvxjsl7ksztvsm0') {
         image = 'https://nostr.build/i/nostr.build_6f2b1f8b144609df74e9c3f101ff3d402fe01b0dad34f3e051de614ef9bcb652.jpg'
@@ -9160,12 +9364,11 @@ const Test = () => {
         <div>
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
-        </div>
-        <div>
-	  <button onClick={onLoadNext}>TestLoadNext!</button>
-        </div>
-        <div>
-	  <NextButton />
+	  <p>links:</p>
+	  <p><a href="https://nostrends.vercel.app" target="_blank">nostrends</a></p>
+	  <p><a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a></p>
+	  <p><a href="https://nos.today" target="_blank">nos.today</a></p>
+	  <p><a href="https://nosaray.vercel.app" target="_blank">Nosaray</a></p>
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
