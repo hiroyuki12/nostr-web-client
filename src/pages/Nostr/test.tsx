@@ -12,11 +12,13 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1703848907;  //paging
+//  untilValue = 1704469528;  //paging
 
   let noteCount = 0;
 
-//  untilValue = 1703758761;  // error black
+//  untilValue = 1704284862;  // moster cannot open
+//  untilValue = 1704158604;  // cashu sats snort
+//  untilValue = 1704037251;  // lightning invoice 1 sat pay snort
 //  untilValue = 1703564079;  // googleusercontent.com/ img fix
 //  untilValue = 1703568307;  // img threads NG
 //  untilValue = 1702648801;  // 9735 content empty NG
@@ -232,10 +234,12 @@ const Test = () => {
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
 //      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
-      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
+//      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
+//      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,13194,23194,23195],
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
+      kinds: [1,6],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -247,6 +251,7 @@ const Test = () => {
 //      kinds: [41],     // 41:Channel Metadata
 //      kinds: [42],     // 42:Channel Message
 //      kinds: [44],     // 44:Channel Mute User
+//      kinds: [1063],   // 1063:File Metadata
 //      kinds: [1311],   // 1311:Live Chat Message
 //      kinds: [1984],   // 1984:Reporting spam
 //      kinds: [9734],   // 9734:Zap Request
@@ -718,12 +723,24 @@ const Test = () => {
 	    proxy = "__misskey.io__"
 	    proxyUrl = note.tags[h][1]
 	  }
+	  else if(note.tags[h][1].includes("misskey.nokotaro.com")) {
+	    proxy = "__misskey.nokotaro.com__"
+	    proxyUrl = note.tags[h][1]
+	  }
 	  else if(note.tags[h][1].includes("p1.a9z.dev")) {
 	    proxy = "__p1.a9z.dev__"
 	    proxyUrl = note.tags[h][1]
 	  }
 	  else if(note.tags[h][1].includes("unnerv.jp")) {
 	    proxy = "__unnerv.jp__"
+	    proxyUrl = note.tags[h][1]
+	  }
+	  else if(note.tags[h][1].includes("mstdn.jp")) {
+	    proxy = "__mstdn.jp__"
+	    proxyUrl = note.tags[h][1]
+	  }
+	  else if(note.tags[h][1].includes("fedibird.com")) {
+	    proxy = "__fedibird.com__"
 	    proxyUrl = note.tags[h][1]
 	  }
 	  else {
@@ -1415,6 +1432,9 @@ const Test = () => {
       else if(note.kind === 41) {  // 41:Channel Metadata
         status = "[41 Channel Metadata]_"
       }
+      else if(note.kind === 1063) {  // 1063:File Metadata
+        status = "[1063 File Metadata]_"
+      }
       else if(note.kind === 1984) {  // 1984:Reporting
         status = "[Reporting " + note.tags[0][2] + "]_"
 	for(let x=0; x<note.tags.length; x++) {
@@ -1491,6 +1511,9 @@ const Test = () => {
 	  listCount++
 	}
         status = "[10005 Public chats List " + listCount + "]_"
+      }
+      else if(note.kind === 24133) {  // 24133:Nostr Connect
+        status = "[24133 Nostr Connect]_"
       }
       else if(note.kind === 30000) {  // 30000:Categorized People List
         status = "[30000 Follow sets_"
@@ -1718,6 +1741,111 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === 'npub1et5n58h9zkd43vm3q8qj6yuk62pr2ewcqugyt73qht34telrqpms7vj5c7') {
+        image = 'https://media-momo.mame.moe/momo.mame.moe/accounts/avatars/000/000/001/original/d662e166380be6f7.png'
+      } 
+      else if (npub === 'npub18zn5jful49k6mrdc7y4t2x70c5dtfdt0gxtndfrgasx8qcukj4as2shuyl') {
+        image = 'https://void.cat/d/7RyeGkDADqgBWNF3s4FbSk'
+      } 
+      else if (npub === 'npub1gzw92wwjpq30gclquc5hugta2afpp8xmmn4uy838ysr47unpqfzsnf52uv') {
+        image = 'https://nostrcheck.me/media/public/d1eea5b6bdaf971bd10d1a934f7aebc5153626c6f478def599d38996a94a7749.webp'
+      } 
+      else if (npub === 'npub1sk0x00vvc4s46ljs7y9qfvu2u3fzufy3au4kca73jkxssckm6sdsu9ku2a') {
+        image = 'https://nostrcheck.me/media/public/455c67a1a1eca95d2f639c62614c5b7fcc1eccb5abc0c4a093e28b29c5a329c3.webp'
+      } 
+      else if (npub === 'npub163z478qn84nynwrfqcgs6g3mdpqcqkdzupjy06m4nmknctthswws7rn8uz') {
+        image = 'https://pbs.twimg.com/profile_images/1194739470/071224-073842_400x400.jpg'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1yg6m89jp5t3w64e8n2nyd8vezt3gc8c05jylleht9v0x30zlx8fqqsydgh') {
+        image = 'https://www.gravatar.com/avatar/19606b92a428ca0fed7fe5291bcfd865'
+      } 
+      else if (npub === 'npub10denkun2slqlr53mjahfrx92f24nphmpy4zgkxjygmpw3h23hunsrj806q') {
+        image = 'https://image.nostr.build/8d9def9a4a4db745dbe7d6a7e639a437781892627c4d667b20b0402a057bf30f.jpg'
+      } 
+      else if (npub === 'npub1ml7nllp64d3fxx5vkz8s52jg3kn5wq7s35w7lyux3t3s7kk700ss548cua') {
+        image = 'https://nostrcheck.me/media/public/281a460c96e63a7d7665c27d18a8828d9c2fee9b8b0c79e3aedd0970446e0293.webp'
+      } 
+      else if (npub === 'npub1l2zcm58lwd3mz3rt964t8e3fhyr2z5w89vzn0m2u6rh7ugq9x2tsu7eek0') {
+        image = 'https://nostrcheck.me/media/public/d1ddbaef5b3f6da91ec218e7417f324a96ff00d53621df2aeb0de6337efa8f67.webp'
+      } 
+      else if (npub === 'npub1xtscya34g58tk0z605fvr788k263gsu6cy9x0mhnm87echrgufzsevkk5s') {
+        image = 'https://cdn.jb55.com/img/red-me.jpg'
+      } 
+      else if (npub === 'npub163qhxuj7sf4hagnzrayrfypfh5cld2lshcqzqsqpqc53fy6m87sqlrvjv9') {
+        image = 'https://void.cat/d/NSL2Uya8ZPcyzW5bxsrdFB.webp'
+      } 
+      else if (npub === 'npub166lrvl8jdztjv0p209ahujxjg2xr9pcvnr3clvcm4vcp7rcyc6eqzy7zj8') {
+        image = 'https://nostrcheck.me/media/public/7ce423acf591595f642f46b4333c609275fa3918e745ea2d5af07f567a0eaf0d.webp'
+      } 
+      else if (npub === 'npub1g5vqgf8jfewl2rfc020mlawq9r7grkc5adzvzamv6harmmwvymvq5czrmf') {
+        image = 'https://pbs.twimg.com/profile_images/1541807671019352064/tfk6aKlu_400x400.jpg'
+      } 
+      else if (npub === 'npub19563pyg6xpt96cxu28xhchzmhr55532kse4sdr5kdt5v6p6nxhrskhyqny') {
+        image = 'https://nostrcheck.me/media/public/4f386c250b7e9675a01b25c21426f619fcff6aec98d0d16e359838b5c24eefe2.webp'
+      } 
+      else if (npub === 'npub1q7qyk7rvdga5qzmmyrvmlj29qd0n45snmfuhkrzsj4rk0sm4c4psvqwt9c') {
+        image = 'https://avatars.githubusercontent.com/u/2363?v=4'
+      } 
+      else if (npub === 'npub15rjycufudtr6wvm0mlgwvsctrxsfpxlc5y8r8hs6qjm5ggn4c3tsppna6n') {
+        image = 'https://cuconoki.net/public/icon.jpg'
+      } 
+      else if (npub === 'npub19lpfgx9yrgv820jkatre2w5v9laap3c33gudd736usdeaz7wdv9qu5camf') {
+        image = 'https://pbs.twimg.com/profile_images/1101891498/0625019sakana_400x400.jpg'
+      } 
+      else if (npub === 'npub1ztfvnuxfaw8c0y4ca794pyfpskwajz3h08c67vy0hfstevweuyrsw0e4ve') {
+        image = 'https://kunigaku.github.io/public/news_icon.png'
+      } 
+      else if (npub === 'npub15rycjjk60qzaf22ptfyyadnt7uhcmnkwcs2t8er7y3r9wwjt6z9ssywcn8') {
+        image = 'https://nostr.build/i/p/5a1b683c8226df5c47228c60a991a744159704ffbac3410c972a6a24c6603f01.jpg'
+      } 
+      else if (npub === 'npub1e3wcsda3cjymxvp8rn8jnkkvwa38sg4dgc9mxjmel63cj2nnym0s49g5rn') {
+        image = 'https://image.nostr.build/b87d86d1d12163a092e5e5bf0f81f7d213ba4b800bb05749625ce4db9f2308b5.jpg'
+      } 
+      else if (npub === 'npub1namazu7um9xvgfpax6yrk9tl3segxpgac67jx7cuttzqp7usem9sqavlhz') {
+        image = 'https://void.cat/d/SUGwzKgvoyY87HhTNstPYY.webp'
+      } 
+      else if (npub === 'npub1jw4e8qh6vmyq0n2tkupv7wlfu5h59luk98dcfedf03anh5ek5jkq936u57') {
+        image = 'https://heguro.com/public/nostr/heguro-icon-20230206.jpg'
+      } 
+      else if (npub === 'npub133vj8ycevdle0cq8mtgddq0xtn34kxkwxvak983dx0u5vhqnycyqj6tcza') {
+        image = 'https://penpenpng.github.io/static/icon-powa.webp'
+      } 
+      else if (npub === 'npub1ssv4gjrsqmw8fm2hje3av4kafvx23w7me2mfmgks6dm5ktamzsjqajuvfd') {
+        image = 'https://void.cat/d/Q4MCnRoXPouXPyLPDseKJ8.webp'
+      } 
+      else if (npub === 'npub1th4he3tn87gahsdu0stadv2hey93tpkvpk2lnm04k6tes7lddqtsh4mnln') {
+        image = 'https://media.mastodon.chotto.moe/accounts/avatars/000/000/001/original/dd1d249b25e5ae9a.jpg'
+      } 
+      else if (npub === 'npub1e8ayygy4aactcd33d4vasdlp2fjwj7ehs9aqkwg9j7kattn9nr0q9u7kmr') {
+        image = 'https://image.nostr.build/64a682074a96d0c1eea1daba9e6a2dc71bb37f3f158634844d6780116adfa213.jpg'
+      } 
+      else if (npub === 'npub1hjaa9j22we9cfn6qep7mmkh2usysv9hgzq6sqd3re9w8dd0qcdxq9txvxw') {
+        image = 'https://media.honi.club/files/webpublic-329c93dc-1373-453d-9075-7cfce28e2b3d.png'
+      } 
+      else if (npub === 'npub1ju9ytvpyg8undhdfwpjlctuju5nnpju5hmd5d53sq547gckw4xpscyjz9f') {
+        image = 'https://www.monesynth.io/_next/image?url=%2Ficons%2Fhal.webp&w=1920&q=75'
+      } 
+      else if (npub === 'npub1v3n0q0ell57z2vrqq55a2y5rsyhr3yfuj8pvun77p8p5phm8eldq2vpdyp') {
+        image = 'https://nostrcheck.me/media/public/c1a499f87c5e6f72973020400c437dd42d57ded59333ef5365aaaa5cfa31f6a7.webp'
+      } 
+      else if (npub === 'npub19ulz38wlkm5xvhqehj9lan447csgu9a8a62k6ztp26ugtc9cp9hq5dsr5k') {
+        image = 'https://pbs.twimg.com/profile_images/1709537408222646272/mF533kDv.jpg'
+      } 
+      else if (npub === 'npub1s02jksmr6tgmcksf3hnmue7pyzlm0sxwarh7lk8tdeprw2hjg6ysp7fxtw') {
+        image = 'https://nostrcheck.me/media/snowcait/f5d75b50763570ba8f001f2f86c0bcccdcb025b48e1ab091353735fa49d1f76b.webp'
+      } 
+      else if (npub === 'npub1k0jrarx8um0lyw3nmysn50539ky4k8p7gfgzgrsvn8d7lccx3d0s38dczd') {
+        image = 'https://kojira.io/kojira.webp'
+      } 
+      else if (npub === 'npub13cmlnzle8vfulw04ka2c2890v3g6smad8zgtm5peh0pla7st0wgslc7muk') {
+        image = 'https://nostrcheck.me/media/public/d8f8c30c2bd8ee64abe2d7be2b78d8c1e96ddf6d70bc61bca535618abba1642c.webp'
+      } 
       else if (npub === 'npub14dkz8wag0e8kwgx6sp2w3nrq0lk7qju432n69p9qhsvxnq8jkmys49ssqh') {
         image = 'https://image.nostr.build/9ae13caa5940587376fb8f63546a894c62ffbd73333e4b66f0e65e29afdb6c0d.jpg'
       } 
@@ -1733,14 +1861,14 @@ const Test = () => {
       else if (npub === 'npub12uuzj6elk7xkpqkac26xwau936y0pguzm3cu9da2xas88unjkcps4d7u9p') {
         image = 'https://image.nostr.build/7b559e58e485d149366e644e736133a3e251ca87004667c13ced90567b6c269a.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1hu02hkdrw6ymyaxugmu7lrmytyefrhpsngj9at0zdh4rq0g83q6s7x9tmq') {
+        image = 'https://pbs.twimg.com/profile_images/1707037997605212160/-PaUm3_p_400x400.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1ye5ptcxfyyxl5vjvdjar2ua3f0hynkjzpx552mu5snj3qmx5pzjscpknpr') {
+        image = 'https://nostr.build/i/p/nostr.build_d8a82acc6ac86b2e167ab2dbfb3a2eafb01979801ad68ec827d7693a6e76b316.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub10smgemvaepx992lq9wa79fmxjzt0ttvly9v3nk9p9y840duem7jsu07534') {
+        image = 'https://nostrcheck.me/media/public/nostrcheck.me_7050170562175398971703863158.webp'
       } 
       else if (npub === 'npub1ykuyd0qgnfd9rqtvlmf5xe0ufjuyf0nxv8fhwsr0u2yggxn45twqk49ska') {
         image = 'https://nostrcheck.me/media/public/1dcd911e7b7ff89a96d567be9d06dd90d5acbe19fa2ae2e3a176ff0400ca9b22.webp'
