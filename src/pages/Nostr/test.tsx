@@ -12,7 +12,7 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-//  untilValue = 1704469528;  //paging
+  untilValue = 1705358344;  //paging
 
   let noteCount = 0;
 
@@ -21,9 +21,9 @@ const Test = () => {
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay snort
 //  untilValue = 1703564079;  // googleusercontent.com/ img fix
 //  untilValue = 1703568307;  // img threads NG
-//  untilValue = 1702648801;  // 9735 content empty NG
-//  untilValue = 1700648893;  // bookmark
-//  untilValue = 1700654092;  // Long-form Content
+//  untilvalue = 1702648801;  // 9735 content empty ng
+//  untilvalue = 1700648893;  // bookmark
+//  untilvalue = 1700654092;  // long-form content
 //  untilValue = 1700351963;  // NG link
 //  untilValue = 1700358511;  // NG insta link
 //  untilValue = 1700282586;  // kind 10005 channel list?
@@ -279,7 +279,7 @@ const Test = () => {
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
 //      limit: 1000,
-      limit: 150,
+      limit: 100,
 //      limit: 100,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
@@ -401,7 +401,7 @@ const Test = () => {
       }
 
       if(note.content.includes('#markostr') || note.content.includes('#targoyleTweetGen')) {  
-        //return;
+        return;
       }
 
       // japanese filter
@@ -719,6 +719,7 @@ const Test = () => {
 	}
 	else if(note.tags[h][0] === "proxy") { 
 	  //proxy = "__" + note.tags[h][2] + "__"  // activitypub
+    /*
 	  if(note.tags[h][1].includes("misskey.io")) {
 	    proxy = "__misskey.io__"
 	    proxyUrl = note.tags[h][1]
@@ -742,11 +743,12 @@ const Test = () => {
 	  else if(note.tags[h][1].includes("fedibird.com")) {
 	    proxy = "__fedibird.com__"
 	    proxyUrl = note.tags[h][1]
-	  }
-	  else {
-	    proxy = "__proxy__"
+	  }*/
+	  //else {
+      let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+	    proxy = "__" + host + "__"
 	    proxyUrl = note.tags[h][1]
-	  }
+	  //}
 	}
 	else if(note.tags[h][0] === "streaming") {  //  streaming
 	  streaming = "-streaming"
@@ -840,6 +842,7 @@ const Test = () => {
       let image3Url = "";
       let image4Url = "";
       let image5Url = "";
+      //RegExp
       //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
       if(content.includes("https:") || content.includes("http:")) {
@@ -1741,6 +1744,33 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === 'npub1762knx5ffzv5sqgayjr4mwt6tvyjn4rvuyc4w43yy726p95mxhes05g3cs') {
+        image = 'https://nostrcheck.me/media/public/f0f991922b28b7170e52119df3d1b4667ec622a35c6b465eea406d45b07a9552.webp'
+      } 
+      else if (npub === 'npub1w2l7k0j8tnd4zjfgr3tm5spefehsjcyytp4xhgq4lecs3263ndgs6lx5jx') {
+        image = 'https://image.nostr.build/6fee887243a57945734ba2f30a24b22402275368ed61eb258cdd01d2a354e4c2.jpg'
+      } 
+      else if (npub === 'npub1z9phepse5ttqrv4fj2ypr8cjx22av0hq2ywve5uny62je2rsr69sx0r7xf') {
+        image = 'https://media.sushi.ski/files/71ac51fe-11a0-4bd0-a200-8f2fee1ff214.png'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
       else if (npub === 'npub1et5n58h9zkd43vm3q8qj6yuk62pr2ewcqugyt73qht34telrqpms7vj5c7') {
         image = 'https://media-momo.mame.moe/momo.mame.moe/accounts/avatars/000/000/001/original/d662e166380be6f7.png'
       } 
@@ -1756,11 +1786,11 @@ const Test = () => {
       else if (npub === 'npub163z478qn84nynwrfqcgs6g3mdpqcqkdzupjy06m4nmknctthswws7rn8uz') {
         image = 'https://pbs.twimg.com/profile_images/1194739470/071224-073842_400x400.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1c0pw59sdy4euuy7ghaxtkm73ug6gm8puhjw3fy4wtes6caxt8zasufn4de') {
+        image = 'https://image.nostr.build/1321af63df9978855ff60c160753812be8a51c173cb30ed184cb3b8f85485e54.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub12tnzjs3varzdp2r87y3wernk0cav2fcs75e2m3tyakhrj0cjpyyqfn4f7c') {
+        image = 'https://image.nostr.build/19baef70054283a3cef51fb3a7b35597ec24764f4ca888daf081d5fb47b2f2ef.gif'
       } 
       else if (npub === 'npub1yg6m89jp5t3w64e8n2nyd8vezt3gc8c05jylleht9v0x30zlx8fqqsydgh') {
         image = 'https://www.gravatar.com/avatar/19606b92a428ca0fed7fe5291bcfd865'
@@ -9497,6 +9527,7 @@ const Test = () => {
 	  <p><a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a></p>
 	  <p><a href="https://nos.today" target="_blank">nos.today</a></p>
 	  <p><a href="https://nosaray.vercel.app" target="_blank">Nosaray</a></p>
+	  <p><a href="https://flycat.club" target="_blank">flycat</a></p>
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
