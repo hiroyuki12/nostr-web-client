@@ -12,7 +12,7 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1705358344;  //paging
+  untilValue = 1706720463;  //paging
 
   let noteCount = 0;
 
@@ -233,7 +233,7 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-//      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
+      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
 //      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,13194,23194,23195],
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
@@ -473,7 +473,7 @@ const Test = () => {
       }
       const noteIdShort = note.id.substring(0,2)
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
-      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
+      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
 
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
@@ -1744,6 +1744,30 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === 'npub1ap4h3mkal5se8ukxp8pgg8gwf2c9uwjxxc33vqnh07y4ph07lm7qwqlvsr') {
+        image = 'https://s3.7mi.site/nana-miss/d22155c1-01f7-4164-87e1-f531f7d8a1e8.png'
+      } 
+      else if (npub === 'npub1ezaqlegz6fzeydkn5cwm82ejf0zw8rw6s2zn5gmwf663nhm539asageeet') {
+        image = 'https://image.nostr.build/913935d9ef319e762a8c18208777e52ce8566d5c3801a4feb8d1a6274dd71140.jpg'
+      } 
+      else if (npub === 'npub1uqpvezl04655qrdk5cth9apa83czjzzzl0rhevs6cuq2vyvtz75szq29xh') {
+        image = 'https://files.syo.bar/0495b142513dc896a80d483fdc464cc7573f3bf2d1acb2dad08dffee9f369c1e.webp'
+      } 
+      else if (npub === 'npub1nxeszl8l367k0sdfg7evnp9y386wcdwarst9p59908cra8zw8j3qxtwwze') {
+        image = 'https://media.misskeyusercontent.com/io/webpublic-3089c87e-5524-4522-9190-4b4f7297c73f.png'
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
       else if (npub === 'npub1762knx5ffzv5sqgayjr4mwt6tvyjn4rvuyc4w43yy726p95mxhes05g3cs') {
         image = 'https://nostrcheck.me/media/public/f0f991922b28b7170e52119df3d1b4667ec622a35c6b465eea406d45b07a9552.webp'
       } 
@@ -1753,23 +1777,23 @@ const Test = () => {
       else if (npub === 'npub1z9phepse5ttqrv4fj2ypr8cjx22av0hq2ywve5uny62je2rsr69sx0r7xf') {
         image = 'https://media.sushi.ski/files/71ac51fe-11a0-4bd0-a200-8f2fee1ff214.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1lz9578rqe4m605d4wprqg0c0nqaqls0ppd9hjqc8rk80jjykqdqsvmmarq') {
+        image = 'https://github.com/totegamma.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1h580h07f9nhxnx9k4mdpttukngr4nhzf0ze67a2uqkyq3mjchq8qn6v5c7') {
+        image = 'https://s3.gammalab.net/profile/tote-icon.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1twfjrupekm2tlf90hl46s9k8leyxcqez39849lszd6w7687rdf8s2tsz2f') {
+        image = 'https://image.nostr.build/56224389c367626d8c270235df01f44e809e406bc058f66cd2265a4a8bc0506c.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub17y44k3jspquss4mnfmwfmza7tlmcy7xklx9spa49n5d8ax2t8dtqugvw6l') {
+        image = 'https://www.gravatar.com/avatar/19606b92a428ca0fed7fe5291bcfd865'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1udm7adxx3xf9p2nl25ka8h0a0juuhzlhur8jzc5lqx4n5wklfq7qthu9tc') {
+        image = 'https://showhyuga.pages.dev/nostricon/cake1.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1tuj3pgzpn75dw0cscnx69e9cz8ge439gjfpuna3xt3r2p4uk8ywsftkq06') {
+        image = 'https://icon.nokotaro.com/kanako_sweetches_512.png'
       } 
       else if (npub === 'npub1et5n58h9zkd43vm3q8qj6yuk62pr2ewcqugyt73qht34telrqpms7vj5c7') {
         image = 'https://media-momo.mame.moe/momo.mame.moe/accounts/avatars/000/000/001/original/d662e166380be6f7.png'
