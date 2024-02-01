@@ -8,8 +8,14 @@ const relayUrls = [
   "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,nokotaro) 
   "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
   "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
+  "wss://relay.snort.social", 
+
+//  "wss://cagliostr.compile-error.net",  // C++
+//  "wss://nostr.compile-error.net",      // Go
+
 //  "wss://bostr.nokotaro.com",
 
+ 
 //  "wss://r.kojira.io",
 //  "wss://relay.nostr.wirednet.jp", 
 //  "wss://riray.nostr1.com",
@@ -17,10 +23,9 @@ const relayUrls = [
 //  "wss://nostr.fediverse.jp",       //jp 
 //  "wss://nostrja-kari.heguro.com",  //jp
 //  "wss://nostr.holybea.com",        //jp
-//  "wss://nostr-relay.nokotaro.com", //jp, en 
+  "wss://nostr-relay.nokotaro.com", //jp, en 
 //  "wss://nrelay.c-stellar.net",
 //  "wss://nrelay-jp.c-stellar.net",
-//  "wss://nostr-relay.nokotaro.com", //jp, en 
 
 //  "wss://relay.nostr.moctane.com",
 //  "wss://relay-jp.nostr.moctane.com",
@@ -36,6 +41,10 @@ const relayUrls = [
 //  "nostrja-kari-nip50.heguro.com",   // NIP-50
       
 //  "wss://bostr/nokotaro.work",
+
+// twitch
+ "wss://irc-ws.chat.twitch.tv/",
+ "wss://pubsub-edge.twitch.tv/v1 ",
 
 /* 
    "wss://nostr.fmt.wiz.biz",
