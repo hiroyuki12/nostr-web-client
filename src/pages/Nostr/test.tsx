@@ -12,10 +12,13 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1706720463;  //paging
+  untilValue = 1710760959;  //paging
 
   let noteCount = 0;
 
+
+//  untilValue = 1707783206;  // :kubipaka_null: NG
+//  untilValue = 1707634026;  // repost icon NG
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats snort
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay snort
@@ -151,6 +154,7 @@ const Test = () => {
 //  untilValue = 1676000000; // 2023/2/10 12-2023/2/10,   +100,000
 //  untilValue = 1676100000; // 2023/2/11-   2023/2/11,   +100,000
 //  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
+//  untilValue = 1676210000; // 
 //  untilValue = 1676300000; // 2023/2/13 23-2023/2/13 23 +100,000
 //  untilValue = 1676350000; // 2023/2/14 13-2023/2/14 12, +50,000
 //  untilValue = 1676400000; // 2023/2/15 3- 2023/2/15 1,  +50,000
@@ -233,13 +237,13 @@ const Test = () => {
       //authors: ['2235b39641a2e2ed57279aa6469d9912e28c1f0fa489ffe6eb2b1e68bc5f31d2','43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906','fe9edd5d5c635dd2900f1f86a872e81ce1d6e20bd4e06549f133ae6bf158913b'], // maya,Segment,shino3
 
 //      authors: ['91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877'],
-      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
+//      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,6969,9734,9735,10000,10001,10002,10003,10005,30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,],
 //      kinds: [0,1,3,4,6,8,16,40,41,42,44,1311,1984,4550,6969,9734,9735,10000,10001,10002,10003,10005,13194,23194,23195],
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
-      kinds: [1,6],      // 1:Short Text Note
+      kinds: [1,6,42],      // 1:Short Text Note
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -297,9 +301,9 @@ const Test = () => {
     },
   });
 
-  /*const { data: npub } = nip19.decode(
-    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
-  );*/
+    /*const { data: npub } = nip19.decode(
+      "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
+    );*/
 
   /*const { data: userData, isLoading } = useProfile({
     //pubkey: npub.toString(),
@@ -1346,10 +1350,10 @@ const Test = () => {
 
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
-            const emojiURL = note.tags[i][2];
-	    for(let j=0; j<10; j++) {
-              content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
-	    }
+          const emojiURL = note.tags[i][2];
+	        for(let j=0; j<100; j++) {
+            content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
+	        }
         }
       }
       for(let j=0; j<10; j++) {
@@ -1410,7 +1414,8 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  followCount++
 	}
-        status = "[3 Contacts / follow, save relay (snort/damus/coracle/NostrFlu " + followCount + "]_"
+        //status = "[3 Contacts / follow, save relay (snort/damus/coracle/NostrFlu " + followCount + "]_"
+        status = "[3 Contacts " + followCount + "]_"
 	if(content != "") {
 	  content = 'relay list...'
 	}
@@ -1466,7 +1471,8 @@ const Test = () => {
 	for(let x=0; x<note.tags.length; x++) {
 	  muteCount++
 	}
-        status = "[10000 Mute list(snort), mute word (nostter) " + muteCount + "]_"
+        //status = "[10000 Mute list(snort), mute word (nostter) " + muteCount + "]_"
+        status = "[10000 Mute list " + muteCount + "]_"
         if(content === "") {
 	  content = "[empty]"
 	}
@@ -1525,7 +1531,8 @@ const Test = () => {
 	  for(let x=0; x<note.tags.length; x++) {
 	    muteCount++
 	  }
-          status = "[30000 Mute list (nostter/damus/snort) " + muteCount + "]_"
+          //status = "[30000 Mute list (nostter/damus/snort) " + muteCount + "]_"
+          status = "[30000 Mute list " + muteCount + "]_"
 	  if(content === "") {
 	    content = "[empty]"
 	  }
@@ -1744,6 +1751,57 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub17lzfqw8nq62pr7xjhw8u3rmmhsyl9gh7ky9afqsg4ay2jaehm77sfedgqg') {
+        image = 'https://image.nostr.build/3c5bc11daa603cf63ae6ef5a4330e18a1c1f08f0f4435595e750a312b6c7efc4.jpg'
+      } 
+      else if (npub === 'npub10ze0lwc8mvm5k7juv8hnf0h5kl26ypf9z0m3zgk0qepm8nf22erszvgtzt') {
+        image = 'https://s3.arkjp.net/misskey/2916bd77-7dd5-47e7-873c-2891d1e14e65.jpg'
+      } 
+      else if (npub === 'npub1ec2v78zyhvmz7m8w8s6e2kd4uapq4zcdsjmx595s4alg0aymw3usztvkc0') {
+        image = 'https://nostrcheck.me/media/public/d1f33b9bae6c8b053dd43309736f26c716dbe2a5281c30700464b47b5ed18d8a.webp'
+      } 
+      else if (npub === 'npub1nkl96lv62qhyf7ctpd9qr08ejx70qwexv90qdumyfl32uwlg3hus5yqs0r') {
+        image = 'https://cdn.nostr.build/i/bdb5727d140cbd9ae923fe11c40e8bfe2684ea0f08beb6478d5ea187c982a641.jpg'
+      } 
+      else if (npub === 'npub17d8lr6qlu28526qwu8dq7vdrajcxn7azspmu6qt4crm63f7lm3gsh8fx50') {
+        image = 'https://link.storjshare.io/raw/jub7gggngptk25tljcsybiewkhmq/production/403548143620ae18671d53655f216134118a52f7fa3e03fcbf3ca44b45d7b2a2.JPG'
+      } 
+      else if (npub === 'npub1s4a2ekdud68cvwdyjpwthsjlvs5fu6utk0stu6hxas2lywy9sccs2fftre') {
+        image = 'https://tgkzmdd.work/nostrimg/profile/prof9_gx100.jpg'
+      } 
+      else if (npub === 'npub1rn8nxqdmm6sy9daqph58gctp8c4kjs2zq73xu6wean986h7gm9gs36kz0d') {
+        image = 'https://betoneto.win/media/nokakoi.png'
+      } 
+      else if (npub === 'npub1324mn5j68ctfajjd6xut96c8fmz02urdya7hecz49n3p9gg6surqge6msu') {
+        image = 'https://nostrcheck.me/media/public/6a3168c9ea46bda36ac2aa5c39ca7a9b09b451833d75a5acf1d72cb319146533.webp'
+      } 
+      else if (npub === 'npub1u8wjez6hj3fs255gxs7kn5znqm2spq823w6nqqgjlrmua67laczqekrsxz') {
+        image = 'https://nostrcheck.me/media/public/13b38abc96e28d9e22f2eb2737e27f166fca99e3a7026234cce64026a6759808.webp'
+      } 
       else if (npub === 'npub1ap4h3mkal5se8ukxp8pgg8gwf2c9uwjxxc33vqnh07y4ph07lm7qwqlvsr') {
         image = 'https://s3.7mi.site/nana-miss/d22155c1-01f7-4164-87e1-f531f7d8a1e8.png'
       } 
@@ -1756,17 +1814,17 @@ const Test = () => {
       else if (npub === 'npub1nxeszl8l367k0sdfg7evnp9y386wcdwarst9p59908cra8zw8j3qxtwwze') {
         image = 'https://media.misskeyusercontent.com/io/webpublic-3089c87e-5524-4522-9190-4b4f7297c73f.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub19auf9m9pcv4f44zsp3tss3ds0cdz80my0pxjm3zzcqml0dwszuvs8yfyrw') {
+        image = 'https://pbs.twimg.com/profile_images/1654098667341774850/GXesftMk.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1l4vcnh06mk0z4akwhzmrjs4fuvdnwdn73xghjv0duwew5a5z8ugq6zur0c') {
+        image = 'https://nostr.build/i/04a7b635c555b9a564a0981bc3135c44ef6d29bca023bcd8f90cfe94a0a937f5.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1s34hvwcjxnzk2tc7xfl9j4cdedjnt5kjqkyuvlp2n2gtxg6nnm9qldp90r') {
+        image = 'https://tgkzmdd.work/nostrimg/profile/prof8_pentax.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1zafcms4xya5ap9zr7xxr0jlrtrattwlesytn2s42030lzu0dwlzqpd26k5') {
+        image = 'https://nostr.build/i/p/nostr.build_7b9579da60a52c32a61cfe48e7b55b9fbd58d389ca29128d6c6851b00bb23d0a.jpg'
       } 
       else if (npub === 'npub1762knx5ffzv5sqgayjr4mwt6tvyjn4rvuyc4w43yy726p95mxhes05g3cs') {
         image = 'https://nostrcheck.me/media/public/f0f991922b28b7170e52119df3d1b4667ec622a35c6b465eea406d45b07a9552.webp'
