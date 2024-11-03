@@ -12,7 +12,7 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1710760959;  //paging
+  untilValue = 1729321827;  //paging
 
   let noteCount = 0;
 
@@ -9605,6 +9605,8 @@ const Test = () => {
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
 	  <p>links:</p>
+	  <p><a href="https://lumilumi.vercel.app" target="_blank">lumilumi</a></p>
+	  <p><a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a></p>
 	  <p><a href="https://nostrends.vercel.app" target="_blank">nostrends</a></p>
 	  <p><a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a></p>
 	  <p><a href="https://nos.today" target="_blank">nos.today</a></p>
