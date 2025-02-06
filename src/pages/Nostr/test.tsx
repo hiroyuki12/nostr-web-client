@@ -12,7 +12,7 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   let untilValue = dateToUnix(now.current);  //all new events from now
-  untilValue = 1729321827;  //paging
+//  untilValue = 1738846859;  //paging
 
   let noteCount = 0;
 
@@ -1772,8 +1772,35 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1hw5u53rvfv05c6p76arrcur2lk9fl35d6qgntxsjazrpue5jsg9q3lehv8') {
+        image = 'https://nokakoi.com/media/nokakoi_uwasa.png'
+      } 
+      else if (npub === 'npub1937vv2nf06360qn9y8el6d8sevnndy7tuh5nzre4gj05xc32tnwqauhaj6') {
+        image = 'https://nostrcheck.me/media/public/eee2f2752096a9e1edc98999dcc03f017dd3ed8fd2267f46106a183fde35a37f.webp'
+      } 
+      else if (npub === 'npub1u6zg4hf8xmavcfxvjqv5ysdvmxju8z3lqnv5navaytdj32yqu05s058xlu') {
+        image = 'https://image.nostr.build/39fe3b2bcf344668649c0126b507022ac76b82f291793c3f199083db17b973fd.jpg'
+      } 
+      else if (npub === 'npub1nfnycjt2tkw6mm7dd5stanhxf9dax6lde9xkk9ap0h87qptxs24qxf4ufs') {
+        image = 'https://image.nostr.build/511a70c6f0464224f78925d290d859ab1a7a5af2a7fb159d221b967e2e778159.png'
+        //image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
+	//image = 'https://i.nostrimg.com/d054511468e29a106ae1835a5ba7d52cb305fcba92fd6d896b992925de3e0f9a/file.png'
+	//image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
+      } 
+      else if (npub === 'npub1y6aja0kkc4fdvuxgqjcdv4fx0v7xv2epuqnddey2eyaxquznp9vq0tp75l') {
+        image = 'https://monacute.art/_next/image?url=https%3A%2F%2Fimage.monacute.art%2F9a0fd54b-c619-4b3f-952e-d86a7df08ba8.png&w=640&q=75'
+      } 
+      else if (npub === 'npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49') {
+        image = 'https://nostr.download/7a32988f10104771b67f5d50b4f058873a45241a441920b70242fb22f16fd839'
+      } 
+      else if (npub === 'npub1ae7eax3n5erecwys65kwjcp0lqlsxfj9789f842gwvuy79kq9dzqf7h6mm') {
+        image = 'https://kojira.io/skyka.jpg'
+      } 
+      else if (npub === 'npub106su77ex643vgqac37juu89sulywv2g7zw4flfm54ta62ea97hnsudqla8') {
+        image = 'https://image.nostr.build/d36da572bbb187366aa8b5c96e77ab61e0406ae8dff6317ec91bfb3cf87c55a4.jpg'
+      } 
+      else if (npub === 'npub1vd5lhq47c4pzd0cfhvm9kmcdwxckcs04deldl48e0h3rl8pjs8dq6g5jwe') {
+        image = 'https://i.imgur.com/2xAsZeI.png'
       } 
       else if (npub === 'npub17lzfqw8nq62pr7xjhw8u3rmmhsyl9gh7ky9afqsg4ay2jaehm77sfedgqg') {
         image = 'https://image.nostr.build/3c5bc11daa603cf63ae6ef5a4330e18a1c1f08f0f4435595e750a312b6c7efc4.jpg'
@@ -2392,7 +2419,7 @@ const Test = () => {
         image = 'https://image.nostr.build/531ba8b15b0c18f483ecc64d3f672162a24517f74a66786c7f2963750818d822.jpg'
       } 
       else if (npub === 'npub15w7wp9wdp6p53vy5eysph5xryu82ltmc7am9zl6pqyexmt6ukllst6ddy2') {
-        image = 'https://i.nostrimg.com/c700a8adac1d6a81c66b6aeea10ce730c7aa0f48f17b267e4a4f7f166c95742e/file.jpeg'
+	image = 'https://image.nostr.build/f21f4997b4bc0d04c03371da493e733fa62e1cc0e550fc8ecc72552e835d1f9a.jpg'
       } 
       else if (npub === 'npub1hy7r6evx9e9l6xz7phnysm3fcfz6vkmswvsyduhcetyuy07uvxkqws4rrx') {
         image = 'https://void.cat/d/VcjqkupB32h3UDj2YCSyC5.webp'
@@ -2495,12 +2522,6 @@ const Test = () => {
       } 
       else if (npub === 'npub1j5wug436qf7vxafgty9hhpvy6hxgk8nmy8g9dcwrykklnmrp6a3smcvps9') {
         image = 'https://cdn.nostr.build/i/f301c4b62229b5906d63eab4c8b4efebdcc81872089c06994dcd358490724911.jpg'
-      } 
-      else if (npub === 'npub1nfnycjt2tkw6mm7dd5stanhxf9dax6lde9xkk9ap0h87qptxs24qxf4ufs') {
-        image = 'https://i.nostrimg.com/4b9c0d3edd400a88737c94996c25ba6f1edc9790e589cee652eee0bfa2feb9fb/file.png'
-        //image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
-	//image = 'https://i.nostrimg.com/d054511468e29a106ae1835a5ba7d52cb305fcba92fd6d896b992925de3e0f9a/file.png'
-	image = 'https://i.nostrimg.com/d32ad4414105c05e1550478a154601934546eb6b798f6f6fdda0d23f034f1883/file.png'
       } 
       else if (npub === 'npub1qdkl4et0xhz3u32722g8q0ejx0pz0f6stxtaug55ncgymy3nrwwsqr2rde') {
         image = 'https://nostr.build/i/nostr.build_3aaaaa1b1a8758df34041136ea04eb7ad77621b7a98fffb90ab04a36dc535d70.jpg'
