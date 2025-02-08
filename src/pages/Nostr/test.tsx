@@ -80,7 +80,7 @@ const Test = () => {
 //  untilValue = 1690983115;  //live chat message kind:1311 Karnage
 //  untilValue = 1690354019;  //(quote)
 //  untilValue = 1690284540;  // \t
-//  untilValue = 1690114119;  //youtube
+//  untilValue = 1690114119;  //youtube ok
 //  untilValue = 1690041940;  //To 5
 //  untilValue = 1689862993;  //https Add fix max width 580
 //  untilValue = 1689652872;  //NIP-36
@@ -91,10 +91,10 @@ const Test = () => {
 //  untilValue = 1689245113;  //nostr:naddr1 nostter fix
 //  untilValue = 1688944930;  //threads ogp
 //  untilValue = 1688605603;  //neventt1 (quote) fix
-//  untilValue = 1688460571;  //youtube channel
-//  untilValue = 1688395711;  //youtube playlist
-//  untilValue = 1688390047;  //youtube
-//  untilValue = 1688382329;  //youtube
+//  untilValue = 1688460571;  //youtube channel NG
+//  untilValue = 1688395711;  //youtube playlist (normal youtube ok)
+//  untilValue = 1688390047;  //music.youtube (normal youtube ok)
+//  untilValue = 1688382329;  //music.youtube (normal youtube ok)
 //  untilValue = 1688303413;  //https:// search engine
 //  untilValue = 1688289075;  //1,300 active authors 2023/7/2
 //  untilValue = 1688253140;  //iframe 3
@@ -1260,32 +1260,34 @@ const Test = () => {
             }
 	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
 	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
+	      id = tmp2[i].replace("https://music.youtube.com/watch?v=", "");
+	      id = id.substring(0, id.indexOf("&"));  // &以降を削除
 	      id = id.replace("https://", "");
 	      id = id.replace("m.youtube.com/", "");
 	      id = id.replace("www.youtube.com/", "");
 	      id = id.replace("youtube.com/", "");
 	      id = id.replace("youtu.be/", "");
-	      id = id.replace("music.youtube.com/", "");
 	      id = id.replace("shorts/", "");
 	      id = id.replace("live/", "");
 	      id = id.replace("watch?v=", "");
 	      id = id.replace("?feature=", "");
-	      id = id.replace("&feature=", "");
-	      id = id.replace("&ab_channel=", "");
 	      id = id.replace("TimHenson", "");
-	      id = id.replace("&pp=ygUSU2hpbmljaGkgb3Nhd2EgbGRr", "");
 	      id = id.replace("TheSaltLakeTribune", "");
 	      id = id.replace("sharec", "");
 	      id = id.replace("share", "");
 	      id = id.replace("youtu.be", "");
 	      id = id.replace("よさげ", "");
-	      id = id.replace("&t=30", "");
-	      id = id.replace("&t=30s", "");
 	      content = content.replace(tmp2[i], "");
 //	      content = content + '[[[[' + id + ']]]]';
 	      httpLinkUrl1 = tmp2[i];
 	      httpLinkUrlText1 = '__YouTube';
+
 	      iframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+	      
+//	      iframe = '<iframe src="https://www.youtube.com/embed/' + '4WXs3sKu41I' + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+	      //
+//	      content = content + "id=" + id  // Debug id表示
+
 	    }
 	    else if(tmp2[i].includes("open.spotify.com")) {
 	      content = content.replace(tmp2[i], "");
