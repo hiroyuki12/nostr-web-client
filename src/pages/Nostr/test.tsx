@@ -479,7 +479,10 @@ const Test = () => {
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
       const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
 
+      const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
+      const lumilumiUrl = "https://lumilumi.app/" + nip19.noteEncode(note.id)
+      const irisUrl = "https://iris.to/" + nip19.noteEncode(note.id)
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
       const noStrudelUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id)
 
@@ -1105,7 +1108,8 @@ const Test = () => {
 	  if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
 	    //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
             //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
-            const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
+            //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
+            const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
 	    content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
 	    if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
 	      content = content.replace('(to)','@やぶみちゃん');
@@ -1722,9 +1726,12 @@ const Test = () => {
                 ({noteIdShort}){client}
 		<a href={proxyUrl} target="_blank">{proxy}</a><br />
 		<a href={freefromUrl} target="_blank">-FreeFrom</a>
-		<a href={snortUrl} target="_blank">-Snort</a>
+		<a href={nostterUrl} target="_blank">-nostter</a>
+		<a href={lumilumiUrl} target="_blank">-lumilumi</a>
 		<a href={noStrudelUrl} target="_blank">-noStrudel</a>
 		<a href={checkerUrl} target="_blank">-checker</a>
+		<a href={irisUrl} target="_blank">-Iris</a>
+		<a href={snortUrl} target="_blank">-Snort</a>
 		<a href={bookmarkUrl} target="_blank">{bookmark}</a>
 		<a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
 		<a href={streamingUrl} target="_blank">{streaming}</a>
@@ -1766,11 +1773,35 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1k87krg9xs2sut79utq3yp0dweev7nq74tmcvsrr8rmy4n3l22q2sd7tmva') {
+        image = 'https://cdn.nostrcheck.me/b1fd61a0a682a1c5f8bc582240bdaece59e983d55ef0c80c671ec959c7ea5015/0292fe172ab555c5d90e977736b2726b27e00b8463d1f75896adf3e5ea467700.webp'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1wdsrcgvmkm8vtszuawrev7n8y8649ldfc03vu6p4lt36p0zm220qjrjvlh') {
+        image = 'https://s3.isk01.sakurastorage.jp/qnmd-media/accounts/avatars/000/000/001/original/8bd78531f6783326.jpg'
+      } 
+      else if (npub === 'npub1c2yfu95s72xmna9e95fwkcrgqszc9l5tus8wk9lz6ug36kl89fcsa7v0dk') {
+        image = 'https://media.misskeyusercontent.com/misskey/4a12ff3e-8553-4b85-bcd6-5baf3a35a917.jpg'
+      } 
+      else if (npub === 'npub15tpsv09znjrs0yruynflxj7nlzv4ekrkg0g7wp7x5hkqg5lzyfdq7956cr') {
+        image = 'https://media.misskeyusercontent.com/io/274cc4f7-4674-4db1-9439-9fac08a66aa1.png'
+      } 
+      else if (npub === 'npub1y6qr0pl5l9g6djm69su4gevpg2kwu8d69cc5ehnhl8pzea2nl53qhdmp7f') {
+        image = 'https://cdn.nostrcheck.me/26803787f4f951a6cb7a2c3954658142acee1dba2e314cde77f9c22cf553fd22/cadaa37c1b99411887915fe01436bdd73c58edf7427cd25d4dadf01aa5e05790.webp'
+      } 
+      else if (npub === 'npub1nwzquyssngld942vwh58yfrwwmvk530um443w8w8y0h2cu3ju2dsl4hqsg') {
+        image = 'https://kojira.io/nostaro.png'
+      } 
+      else if (npub === 'npub1m0n0eyetgrflxghneeckkv95ukrn0fdpzyysscy4vha3gm64739qxn23sk') {
+        image = 'https://icon.eyemono.moe/image.png'
+      } 
+      else if (npub === 'npub13exd4j32ldnktu7p34w4csw2nc2s9cypd6tw3h60cau7qvgrp49qpvqjhl') {
+        image = 'https://kojira.io/qchan.png'
+      } 
+      else if (npub === 'npub1e4exj26j6ltn0ehft2he7qehmxwr3gee8f695w0rthe0watjaaxss33x8q') {
+        image = 'https://nostrcheck.me/media/cd72692b52d7d737e6e95aaf9f0337d99c38a3393a745a39e35df2f77572ef4d/f10b2d02ce20786d3b616a4a49112e34ff9321dd5ff51f0cb31dbead95ec34e1.webp'
+      } 
+      else if (npub === 'npub1wgedwfwmh2uu3qdj5f403r7k28wezumz5u8v05cps2tvdg30748qf2y7nq') {
+        image = 'https://tiltpapa.tv/image/icon.webp'
       } 
       else if (npub === 'npub1hw5u53rvfv05c6p76arrcur2lk9fl35d6qgntxsjazrpue5jsg9q3lehv8') {
         image = 'https://nokakoi.com/media/nokakoi_uwasa.png'
@@ -2261,8 +2292,7 @@ const Test = () => {
         image = 'https://nostrcheck.me/media/public/nostrcheck.me_6561238173496372431699702077.webp'
       } 
       else if (npub === 'npub1m78s5eqv8l7snc5nnxdvlgue6pt5epgplndtem99quhwyptas7jss2qx53') {
-        image = 'https://i.nostr.build/KYWl.jpg'
-	image = 'https://i.nostr.build/9qRE.jpg'
+	image = 'https://mymt.casa/icons/1.webp'
       } 
       else if (npub === 'npub1ca2xqej87v7hq97fjthtg32vvjlmpyu20ulaqdhnud5rnrkqlx3q4vaq3f') {
         image = ''
@@ -9626,7 +9656,8 @@ const Test = () => {
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
 	  <p>links:</p>
-	  <p><a href="https://lumilumi.vercel.app" target="_blank">lumilumi</a></p>
+	  <p><a href="https://lumilumi.app" target="_blank">lumilumi</a></p>
+	  <p><a href="https://jumble.social" target="_blank">Jumble</a></p>
 	  <p><a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a></p>
 	  <p><a href="https://nostrends.vercel.app" target="_blank">nostrends</a></p>
 	  <p><a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a></p>
