@@ -16,15 +16,20 @@ const Test = () => {
 
   let noteCount = 0;
 
-  untilValue = 1739008290;  // youtube NG
+//  untilValue = 1739015355;  // dare-ai OGP  Todo
+//  untilValue = 1739011806;  // mostr niji
+//  untilValue = 1739012160;  // youtube Repost NG
+//  untilValue = 1739008290;  // youtube fix Delete After &
 //  untilValue = 1703568307;  // img threads NG
 //  untilValue = 1700358511;  // NG insta link
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
 //  untilValue = 1691507297;  // repost image NG. nostter ok
 //  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
 
-//  untilValue = 1695999820;  // Apple Music OGP. fixdisplay
-//  untilValue = 1707634026;  // repost icon NG. not 
+//  untilValue = 1695999820;  // Apple Music OGP. fix
+//  untilValue = 1739017185;  // repost 数字 fix
+//  untilValue = 1739011853;  // ryusoku fix
+//  untilValue = 1707634026;  // repost icon NG. not display
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
@@ -804,29 +809,31 @@ const Test = () => {
         for(let i=0; i<tmp.length; i++) {
 	  if(tmp[i].includes('"content"')) {
 //	    tmp = tmp[i].split(',');  // ,
-	    tmp = tmp[i].split('],');  // ],  fix ,
-	    for(let j=0; j<tmp.length; j++) {
-	      if(tmp[j].includes('"content"')) {
-	        content = tmp[j];
-	      }
-	    }
+	    // tmp = tmp[i].split('],');  // ],  fix ,
+	    // for(let j=0; j<tmp.length; j++) {
+	      // if(tmp[j].includes('"content"')) {
+	        // content = tmp[j];
+	      // }
+	    // }
 	    
-            for(let j=0; j<10; j++) {
-	      content = content.replace("\\/\\/","//");
-	      content = content.replace("\\\"","\""); // \" -> "
-	    }
-            for(let j=0; j<20; j++) {
-	      content = content.replace("\\/","/");  // \/ -> /
-	      content = content.replace("\\r","");   // \\r -> \r
-	      content = content.replace("\\n","\n");   // \\n -> \n
-	    }
+            content = content.substring(content.indexOf('content'),content.length);  // content:より前を削除
+            content = content.replace('content":"','');
+      
+            // for(let j=0; j<10; j++) {
+	      // content = content.replace("\\/\\/","//");
+	      // content = content.replace("\\\"","\""); // \" -> "
+	    // }
+            // for(let j=0; j<20; j++) {
+	      // content = content.replace("\\/","/");  // \/ -> /
+	      // content = content.replace("\\r","");   // \\r -> \r
+	      // content = content.replace("\\n","\n");   // \\n -> \n
+	    // }
 	    
-	    content = content.replace('"kind":1,','');
-            content = content.replace('"content":"','');
-            content = content.replace('"created_at":','');
-	    content = content.replace("{","");
-	    content = content.replace("{","");
-	    content = content.replace("\"}","");
+	    // content = content.replace('"kind":1,','');
+      // content = content.replace('"created_at":','');
+	    // content = content.replace("{","");
+	    // content = content.replace("{","");
+	    // content = content.replace("\"}","");
 	  }
 	}
 	for(let i=0; i<note.tags.length; i++) {
@@ -1317,10 +1324,16 @@ const Test = () => {
 		}
 		// OGP
 		else {
-	          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-	          content = content.replace(tmp2[i], tmpIframe);
-		  httpLinkUrl1 = tmp2[i];
-		  httpLinkUrlText1 = '__https';
+                  // ryusoku
+                  if(tmp2[i].includes("https://nostr-hotter-site.vercel.app")){
+                    content = content.replace(tmp2[i], '<a href="https://nostr-hotter-site.vercel.app" target="_blank">https://nostr-hotter-site.vercel.app/</a>'); 
+                  }
+                  else {
+	            const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+	            content = content.replace(tmp2[i], tmpIframe);
+		    httpLinkUrl1 = tmp2[i];
+		    httpLinkUrlText1 = '__https_iframe';
+		  }
 		}
 	      }
 	      else {
@@ -1755,20 +1768,20 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1hk8wmj288k48ezpqe9ptw3rkkmucue6c60gs9rtjk60ftpp9qxlqv2xhle') {
+        image = 'https://kojira.io/nostrchan0.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1qsvna7xj4363fcycf47u9yahyrdjeh57lwh0r253e8mkryustkts403kkk') {
+        image = 'https://media.misskeyusercontent.com/misskey/cf0c1be5-5c7d-4988-aa3c-d239560317a2.png'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub14sum2q24z24gqh93mwz222sfduwlgeevul7kdvhusg0rxmw495ashv5wqu') {
+        image = 'https://image.nostr.build/27498e9f9785e748fb462d8b6c0935619d2bd7e6a6259958d47674b1fd104281.jpg'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub194qhhn5vzzyrsqaugfms8c7ycqjyvhyguurra450nhlweatfzxkqy8tgkd') {
+        image = 'https://nostrcheck.me/media/public/dd5321df200dc54a0b71230143f8fce1656e33ce83343790f8fc70eac783efdd.webp'
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1f2v6jwct47c2wx5849zzyv5hmpkzulmj3tj44s0r5h7ljxfyay3s5fp3te') {
+        image = 'https://kojira.io/nostrchan_new.png'
       } 
       else if (npub === 'npub1lztcadacdk59vwev7gyrt83wpt38s9aav9hyrqd9vk37yluw3fgqwa42yy') {
         image = 'https://image.nostr.build/e885a60f872b4983175bb72886b599beb21fb6be0d32190056b18ef984b299e7.jpg'
@@ -9671,14 +9684,14 @@ const Test = () => {
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
 	  <p>links:</p>
-	  <p><a href="https://lumilumi.app" target="_blank">lumilumi</a></p>
-	  <p><a href="https://jumble.social" target="_blank">Jumble</a></p>
-	  <p><a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a></p>
-	  <p><a href="https://nostrends.vercel.app" target="_blank">nostrends</a></p>
-	  <p><a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a></p>
-	  <p><a href="https://nos.today" target="_blank">nos.today</a></p>
-	  <p><a href="https://nosaray.vercel.app" target="_blank">Nosaray</a></p>
-	  <p><a href="https://flycat.club" target="_blank">flycat</a></p>
+	  <a href="https://lumilumi.app" target="_blank">lumilumi</a>-
+	  <a href="https://jumble.social" target="_blank">Jumble</a>-
+	  <a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a>-
+	  <a href="https://nostrends.vercel.app" target="_blank">nostrends</a>-
+	  <a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a>-
+	  <a href="https://nos.today" target="_blank">nos.today</a>-
+	  <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
+	  <a href="https://flycat.club" target="_blank">flycat</a>
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
