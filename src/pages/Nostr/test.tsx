@@ -1000,7 +1000,13 @@ const Test = () => {
         if(tmpUrl != "") {
 	  /*if(tmpUrl.includes("youtube.com") || tmpUrl.includes("/youtu.be/")) {
 	  }*/
-	  if(tmpUrl.includes("open.spotify.com")) {
+	  if(tmpUrl.includes("music.apple.com")) {
+	    const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
+	    //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
+	    //small tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/jp/album/tubular-bells-pt-i/1440852773?i=1440852782"></iframe>'
+	    tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+	  }
+	  else if(tmpUrl.includes("open.spotify.com")) {
 	    const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
 	    tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 	  }
