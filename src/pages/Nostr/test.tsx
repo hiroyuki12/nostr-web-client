@@ -17,25 +17,29 @@ const Test = () => {
   let noteCount = 0;
 
 
-//  untilValue = 1707783206;  // :kubipaka_null: NG
-//  untilValue = 1707634026;  // repost icon NG
-//  untilValue = 1704284862;  // moster cannot open
-//  untilValue = 1704158604;  // cashu sats snort
-//  untilValue = 1704037251;  // lightning invoice 1 sat pay snort
-//  untilValue = 1703564079;  // googleusercontent.com/ img fix
+//  untilValue = 1695999820;  // Apple Music OGP. Todo
 //  untilValue = 1703568307;  // img threads NG
-//  untilvalue = 1702648801;  // 9735 content empty ng
-//  untilvalue = 1700648893;  // bookmark
+//  untilValue = 1700358511;  // NG insta link
+//  untilValue = 1691662709;  // repost mov NG. nostter ok
+//  untilValue = 1691507297;  // repost image NG. nostter ok
+//  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
+
+//  untilValue = 1707634026;  // repost icon NG. not display
+//  untilValue = 1704284862;  // moster cannot open
+//  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
+//  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
+//  untilValue = 1703564079;  // googleusercontent.com/ img fix
+//  untilValue = 1702648801;  // 9735 content empty ng
+//  untilValue = 1700648893;  // bookmark
 //  untilvalue = 1700654092;  // long-form content
 //  untilValue = 1700351963;  // NG link
-//  untilValue = 1700358511;  // NG insta link
+//  untilValue = 1698228483;  // link NG
 //  untilValue = 1700282586;  // kind 10005 channel list?
 //  untilValue = 1699350541;  // Nostrasia Day 1 Summary Nosli
 //  untilValue = 1698731466;  // Invalid byte sequence NG
 //  untilValue = 1698636018;  // kind 6666
 //  untilValue = 1698415786;  // Zap Add Avatar
-//  untilValue = 1698228483;  // link NG
-//  untilValue = 1697641710;  // :bow:  FreeFrom
+//  untilValue = 1697641710;  // ok :bow:  FreeFrom ok
 //  untilValue = 1697598212;  // Zap
 //  untilValue = 1697536841;  // NG
 //  untilValue = 1697471297;  // kind:4550
@@ -45,18 +49,17 @@ const Test = () => {
 //  untilValue = 1697289857;  // will nos.lol
 //  untilValue = 1697223369;  // jack nos.lol
 //  untilValue = 1697282603;  // fiatjaf yabu.me
-//  untilValue = 1697247223;  // reply image NG
+//  untilValue = 1697247223;  // reply image OK
 //  untilValue = 1697247497;  // tag relay
-//  untilValue = 1697112060;  // #r NG
+//  untilValue = 1697112060;  // #r link? NG
 //  untilValue = 1696632885;  // Metadata
-//  untilValue = 1696502429;  // jpg NG
+//  untilValue = 1696502429;  // jpg OK
 //  untilValue = 1696412926;  // LIVE
 //  untilValue = 1696316415;  // nevent1
 //  untilValue = 1696105738;  // quote_nevent njump fix
 //  untilValue = 1696119569;  // njump.me nevent fix
 //  untilValue = 1696110614;  // url # NG
-//  untilValue = 1695999820;  // Apple Music OGP
-//  untilValue = 1695438407;  // to link NG fix
+//  untilValue = 1695438407;  // to link fix
 //  untilValue = 1695370850;  // tiktok
 //  untilValue = 1695066723;  // kind:10001 pin channel
 //  untilValue = 1694945195;  // repost 1694945166
@@ -65,17 +68,15 @@ const Test = () => {
 //  untilValue = 1694359339;  // search kind:30040
 //  untilValue = 1694326407;  // kind:10030
 //  untilValue = 1694194192;  // kind:30025 LongForm
-//  untilValue = 1694055016;  // \n\n NG
+//  untilValue = 1694055016;  // \n\n NG?
 //  untilValue = 1694003737;  // nostr:naddr1 zap.stream
-//  untilValue = 1693796212;  // #e(reply NG fix
+//  untilValue = 1693796212;  // #e(reply fix
 //  untilValue = 1693566199;  // generic repost channel message
 //  untilValue = 1693300143;  // channel creation
 //  untilValue = 1692922942;  // nak install
 //  untilValue = 1692694772;  // nostr:note1 (quote)
 //  untilValue = 1692649004;  // mp4
-//  untilValue = 1691662709;  // repost mov NG
 //  untilValue = 1691665815;  // tag:h nowplaying
-//  untilValue = 1691507297;  // repost NG
 //  untilValue = 1691417549;  // kind:9735 zap memo
 //  untilValue = 1690983115;  //live chat message kind:1311 Karnage
 //  untilValue = 1690354019;  //(quote)
@@ -91,7 +92,6 @@ const Test = () => {
 //  untilValue = 1689245113;  //nostr:naddr1 nostter fix
 //  untilValue = 1688944930;  //threads ogp
 //  untilValue = 1688605603;  //neventt1 (quote) fix
-//  untilValue = 1688460571;  //youtube channel NG
 //  untilValue = 1688395711;  //youtube playlist (normal youtube ok)
 //  untilValue = 1688390047;  //music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  //music.youtube (normal youtube ok)
@@ -133,7 +133,7 @@ const Test = () => {
 //  untilValue = 1686135829;  //U+202E (RTL)
 //  untilValue = 1686051720;  //reverce
 //  untilValue = 1686052701;  //before 1 hour fix
-
+//untilValue = 1707783206;  // :kubipaka_null: NG
 
 //  untilValue = 1672000000; // 2022/12/26-1970/1/1
 //  untilValue = 1675000000; // 2023/1/29 22- 2023/1/11 4, 
@@ -1774,6 +1774,27 @@ const Test = () => {
       } 
       else if (npub === '') {
         image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1lztcadacdk59vwev7gyrt83wpt38s9aav9hyrqd9vk37yluw3fgqwa42yy') {
+        image = 'https://image.nostr.build/e885a60f872b4983175bb72886b599beb21fb6be0d32190056b18ef984b299e7.jpg'
+      } 
+      else if (npub === 'npub16lrdq99ng2q4hg5ufre5f8j0qpealp8544vq4ctn2wqyrf4tk6uqn8mfeq') {
+        image = 'https://profilepics.nostur.com/profilepic_v1/e22ffb351cfe95e227f7e2219c05f12a0e89d3f8bc067c5f23d6884be3c930e3/profilepic.jpg'
+      } 
+      else if (npub === 'npub1qpvchcscwvtxnn4aj4r0ya2lfujmvua76k7rn3mrcap47vjkp5nsu7rcm3') {
+        image = 'https://kojira.io/nostrchan_tako.jpg'
+      } 
+      else if (npub === 'npub1f5uuywemqwlejj2d7he6zjw8jz9wr0r5z6q8lhttxj333ph24cjsymjmug') {
+        image = 'https://image.nostr.build/7e99a1f30f59aa981057a5a910a62d43e600cd5bbc47f00130ca284f1914cc27.jpg'
+      } 
+      else if (npub === 'npub1dv9xpnlnajj69vjstn9n7ufnmppzq3wtaaq085kxrz0mpw2jul2qjy6uhz') {
+        image = 'https://nikolat.github.io/avatar/unyu-nostr.png'
+      } 
+      else if (npub === 'npub1ev3s5h5ngxscp8qd094wfd367xj38de4cjdc4gyj0r7ng99wmqeqj66k2s') {
+        image = 'https://kojira.io/nostrchan2_new.png'
       } 
       else if (npub === 'npub1k87krg9xs2sut79utq3yp0dweev7nq74tmcvsrr8rmy4n3l22q2sd7tmva') {
         image = 'https://cdn.nostrcheck.me/b1fd61a0a682a1c5f8bc582240bdaece59e983d55ef0c80c671ec959c7ea5015/0292fe172ab555c5d90e977736b2726b27e00b8463d1f75896adf3e5ea467700.webp'
