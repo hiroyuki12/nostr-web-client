@@ -16,15 +16,15 @@ const Test = () => {
 
   let noteCount = 0;
 
-
-//  untilValue = 1695999820;  // Apple Music OGP. Todo
+  untilValue = 1739008290;  // youtube NG
 //  untilValue = 1703568307;  // img threads NG
 //  untilValue = 1700358511;  // NG insta link
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
 //  untilValue = 1691507297;  // repost image NG. nostter ok
 //  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
 
-//  untilValue = 1707634026;  // repost icon NG. not display
+//  untilValue = 1695999820;  // Apple Music OGP. fixdisplay
+//  untilValue = 1707634026;  // repost icon NG. not 
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
@@ -998,8 +998,6 @@ const Test = () => {
 	}
 
         if(tmpUrl != "") {
-	  /*if(tmpUrl.includes("youtube.com") || tmpUrl.includes("/youtu.be/")) {
-	  }*/
 	  if(tmpUrl.includes("music.apple.com")) {
 	    const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
 	    //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
@@ -1266,32 +1264,20 @@ const Test = () => {
             }
 	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
 	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
-	      id = tmp2[i].replace("https://music.youtube.com/watch?v=", "");
-	      id = id.substring(0, id.indexOf("&"));  // &以降を削除
-	      id = id.replace("https://", "");
-	      id = id.replace("m.youtube.com/", "");
-	      id = id.replace("www.youtube.com/", "");
-	      id = id.replace("youtube.com/", "");
-	      id = id.replace("youtu.be/", "");
-	      id = id.replace("shorts/", "");
-	      id = id.replace("live/", "");
-	      id = id.replace("watch?v=", "");
+	      id = id.replace("https://music.youtube.com/watch?v=", "");
+	      id = id.replace("https://m.youtube.com/watch?v=", "");
+	      if(tmp2[i].includes("&")) {
+	        id = id.substring(0, id.indexOf("&"));  // &以降を削除
+	      }
 	      id = id.replace("?feature=", "");
-	      id = id.replace("TimHenson", "");
-	      id = id.replace("TheSaltLakeTribune", "");
-	      id = id.replace("sharec", "");
-	      id = id.replace("share", "");
-	      id = id.replace("youtu.be", "");
-	      id = id.replace("よさげ", "");
 	      content = content.replace(tmp2[i], "");
-//	      content = content + '[[[[' + id + ']]]]';
 	      httpLinkUrl1 = tmp2[i];
 	      httpLinkUrlText1 = '__YouTube';
 
 	      iframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
 	      
 //	      iframe = '<iframe src="https://www.youtube.com/embed/' + '4WXs3sKu41I' + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-	      //
+	      
 //	      content = content + "id=" + id  // Debug id表示
 
 	    }
