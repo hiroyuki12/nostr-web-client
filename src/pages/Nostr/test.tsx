@@ -16,6 +16,8 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1734489831;  // kind:20 not display picture
+//  untilValue = 1732921974;  // kind:20 not display picture
 //  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
 //  untilValue = 1739024868;  // kirby OGP Todo nostter ok
 //  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
@@ -253,7 +255,7 @@ const Test = () => {
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
-      kinds: [1,6,42],      // 1:Short Text Note
+      kinds: [1,6,20,42],      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -943,6 +945,23 @@ const Test = () => {
         }
       }
 
+      // kind:20 for picture-first clients.
+      let pictureImage1Height = "0";
+      let pictureImage1Url = "";
+
+      if(note.kind === 20) {
+	content = "Picture] " + content
+        pictureImage1Height = "250";
+        for(let i=0; i<note.tags.length; i++) {
+	  if(note.tags[i][0].includes("imeta")) {
+	    for(let j=0; j<note.tags[j].length; j++) {
+	      if(note.tags[i][j].includes("url")) {
+	        pictureImage1Url = note.tags[i][j].substring(4, note.tags[i][j].length);
+	      }
+	    }
+	  }
+        }
+      }
 
       let linkUrl1 = "";
       let linkUrlText1 = "";  // #r 1
@@ -1732,6 +1751,7 @@ const Test = () => {
                 <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
                 <a href={image4Url} target="_blank"><img src={image4Url} height={inlineImage4Height} /></a>
                 <a href={image5Url} target="_blank"><img src={image5Url} height={inlineImage5Height} /></a>
+                <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
                 <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
                 -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
                 ({noteIdShort}){client}
