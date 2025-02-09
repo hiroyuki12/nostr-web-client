@@ -7,7 +7,7 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 import Pictures from './Pictures';
 import {getImageURL} from './getImageURL'
-import {getInlineImageHTML} from './getInlineImageHTML'
+import {makeInlineImageHTML} from './makeInlineImageHTML'
 
 
 const Test = () => {
@@ -815,9 +815,9 @@ const Test = () => {
     }
 
 
-    let inlineImageHTML = getInlineImageHTML(content);
+    let inlineImageHTML = makeInlineImageHTML(content);
 
-    
+
       // kind:20 for picture-first clients.
       let pictureImage1Height = "0";
       let pictureImage1Url = "";

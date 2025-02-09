@@ -1,5 +1,5 @@
 
-export const getInlineImageHTML = (content) => {
+export const makeInlineImageHTML = (content) => {
     let inlineImage1Height = "0";
     let inlineImage2Height = "0";
     let inlineImage3Height = "0";
