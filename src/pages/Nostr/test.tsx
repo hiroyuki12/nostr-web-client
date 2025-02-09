@@ -800,6 +800,7 @@ const Test = () => {
         channel = "[1311 Live Chat]";   // link to ChannelUrl
       }
 
+      // kind:6
       // 6.repost, 16.Generic Repost, 4550.Post Approval by moderators
       if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
         reply = "Repost]";
@@ -836,6 +837,14 @@ const Test = () => {
             // pubkey 以降を削除
 	    if(content.includes('","pubkey')) {
 	      content = content.substring(0, content.indexOf('","pubkey'));  
+	    }
+            // tags 以降を削除
+	    if(content.includes('","tags')) {
+	      content = content.substring(0, content.indexOf('","tags'));  
+	    }
+            // kind 以降を削除
+	    if(content.includes('","kind')) {
+	      content = content.substring(0, content.indexOf('","kind'));  
 	    }
             for(let j=0; j<10; j++) {
 	      content = content.replace("\\n","\n");   // \\n -> \n
@@ -1810,8 +1819,8 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
-      else if (npub === '') {
-        image = ''
+      else if (npub === 'npub1s4c69em8nqhsd3a0h2qxvu2846gdx93704al928tdfqjzc7pzn5sprd93v') {
+        image = 'https://nostrcheck.me/media/8571a2e767982f06c7afba80667147ae90d3163e7d7bf2a8eb6a412163c114e9/fe16792197ee64433a75cd9fdad59d4074079171b71626df1dafc68b640d12ef.webp'
       } 
       else if (npub === 'npub1vuy8f7nd64zwm3vxwa3uu7f42guk4mw6rf0a5w5hjj0kd2c2e7es8t229r') {
         image = 'https://nostrcheck.me/media/670874fa6dd544edc5867763ce793552396aedda1a5fda3a97949f66ab0acfb3/9e117b345571026588e2750729159da97d9775444fd0b6a11816f176fb01db05.webp'
