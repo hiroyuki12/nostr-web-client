@@ -16,6 +16,7 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1734489831;  // kind:20 not display picture
 //  untilValue = 1732921974;  // kind:20 not display picture
 //  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
@@ -284,7 +285,7 @@ const Test = () => {
 //      kinds: [30003],  // 30003:Bookmark sets
 //      kinds: [30008],  // 30008:Profile Badges
 //      kinds: [30009],  // 30009:Badge definition event
-//      kinds: [30023],  // 30023:Long-form Content
+//      kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
 //      kinds: [30025],  // 
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
@@ -1632,14 +1633,25 @@ const Test = () => {
 	  content = note.tags[note.tags.length-2][1].split(":")[2]
 	}
       }
+      // kind:30009
       else if(note.kind === 30009) {  // 30009:Badge Definition event
-          status = "[30009 Badge Definition] " + note.tags[1][1] + " , " + note.tags[2][1] 
-	  if(note.tags[3][1] != "") {
-	    content = "<img src=" + note.tags[3][1] + " height=150>"
-	  }
-	  else {
-	    content = "[empty]"
-	  }
+          //status = "[30009 Badge Definition] " + note.tags[1][1] + " , " + note.tags[2][1] 
+          status = "[30009 Badge Definition] " 
+	  for(let i=0; i<note.tags.length; i++) {
+	    if(note.tags[i][0] == "d") {
+	      content = note.tags[i][1] + "<br />";
+	    }
+          }
+	  for(let i=0; i<note.tags.length; i++) {
+	    if(note.tags[i][0] == "description") {
+	      content = content + "description: " + note.tags[i][1] + "<br />";
+	    }
+          }
+	  for(let i=0; i<note.tags.length; i++) {
+	    if(note.tags[i][0] == "image") {
+	      content = content + "<img src=" + note.tags[i][1] + " height=150>";
+	    }
+          }
       }
       else if(note.kind === 30078) {  // 30078:Application-specific Data
         status = "[30078_Application-specific Data]_"
