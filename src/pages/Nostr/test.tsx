@@ -267,7 +267,6 @@ const Test = () => {
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
       kinds: [1,6,20,42,1111],      // 1:Short Text Note ======================
-//      kinds: [6,20,42,1111],      // 6:Repost 
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -299,6 +298,7 @@ const Test = () => {
 //      kinds: [30009],  // 30009:Badge definition event
 //      kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
 //      kinds: [30025],  // 
+//      kinds: [30030],  // 30030:emoji set 
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
 //      kinds: [30315],  // 30315:User Statuses
@@ -524,6 +524,7 @@ const Test = () => {
       let eventLinkUrlText4 = "";  // tags[3][0]
       let eventLinkUrlText5 = "";  // tags[4][0]
       let eventLinkUrlText6 = "";  // tags[5][0]
+      let alt = "";
       let streaming = "";
       let streamingUrl = "";
 
@@ -546,6 +547,9 @@ const Test = () => {
           let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
           proxy = "__" + host + "__"
           proxyUrl = note.tags[h][1]
+        }
+        else if(marker === "alt") {  //  alt picture
+          alt = "alt] " + note.tags[h][1]
         }
         else if(marker === "streaming") {  //  streaming
           streaming = "-streaming"
@@ -651,7 +655,8 @@ const Test = () => {
 	  if(note.tags[i][0].includes("imeta")) {
 	    for(let j=0; j<note.tags[j].length; j++) {
 	      if(note.tags[i][j].includes("url")) {
-	        pictureImage1Url = note.tags[i][j].substring(4, note.tags[i][j].length);
+	        //pictureImage1Url = note.tags[i][j].substring(4, note.tags[i][j].length);
+	        pictureImage1Url = note.tags[i][j].replace('url ', '');
 	      }
 	    }
 	  }
@@ -1410,6 +1415,7 @@ const Test = () => {
               <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
               {parse(inlineImageHTML)}
               <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
+	      {alt}
               <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
               -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
               ({noteIdShort}){client}
