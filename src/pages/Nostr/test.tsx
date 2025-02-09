@@ -16,6 +16,7 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1739008994;  // kind:1111 NG
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1734489831;  // kind:20 not display picture
 //  untilValue = 1732921974;  // kind:20 not display picture
@@ -256,7 +257,7 @@ const Test = () => {
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
-      kinds: [1,6,20,42],      // 1:Short Text Note ======================
+      kinds: [1,6,20,42,1111],      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -269,6 +270,7 @@ const Test = () => {
 //      kinds: [41],     // 41:Channel Metadata
 //      kinds: [42],     // 42:Channel_Message
 //      kinds: [44],     // 44:Channel Mute User
+//      kinds: [1111],     // 1111:Comment
 //      kinds: [1063],   // 1063:File Metadata
 //      kinds: [1311],   // 1311:Live Chat Message
 //      kinds: [1984],   // 1984:Reporting spam
@@ -298,7 +300,6 @@ const Test = () => {
       //since: 1679403822, // 1679413822 2023/03/22 0:50
 //      limit: 1000,
       limit: 100,
-//      limit: 100,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
       //"#t": ["illust"],
@@ -636,6 +637,9 @@ const Test = () => {
             //if(note.tags[i][0] === "e" && note.tags[h][1] != note.pubkey) {  // re
             if(note.tags[i][0] === "e") {  // re
               reply = "Re]";
+	      if(note.kind === 1111) {  // 1111:Comment
+	        reply = "Comment Re]";
+	      }
             }
           }
         }
