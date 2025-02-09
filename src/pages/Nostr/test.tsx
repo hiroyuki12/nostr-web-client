@@ -19,6 +19,7 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1739113299;  // YouTube NG. youtube.com
 //  untilValue = 1739087698;  // Error: hexToBytes NG
 //  untilValue = 1739099394;  // Repost URL fix
 //  untilValue = 1739100944;  // client fix
@@ -982,10 +983,15 @@ const Test = () => {
 	      tmp2[i] = "";
             }
 	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
-	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
-	      id = id.replace("https://music.youtube.com/watch?v=", "");
-	      id = id.replace("https://m.youtube.com/watch?v=", "");
-	      id = id.replace("https://www.youtube.com/live/", "");
+              // watch?v= より前を削除
+	      //let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
+	      let id = tmp2[i].substring(tmp2[i].indexOf('youtube.com/watch?v='), tmp2[i].length);
+	      //id = id.replace("https://music.youtube.com/watch?v=", "");
+	      //id = id.replace("https://m.youtube.com/watch?v=", "");
+              // live/ より前を削除
+	      //id = id.replace("https://www.youtube.com/live/", "");
+	      id = tmp2[i].substring(tmp2[i].indexOf('/live/'), tmp2[i].length);
+	      id = id.replace("https://youtu.be/", "");
 	      if(tmp2[i].includes("&")) {
 	        id = id.substring(0, id.indexOf("&"));  // &以降を削除
 	      }
@@ -1382,7 +1388,7 @@ const Test = () => {
       //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
 
-      for(let i=0; i<20; i++) {
+      for(let i=0; i<30; i++) {
         content = content.replace('\n', '<br />');
       }
 
