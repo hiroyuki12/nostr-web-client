@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 import Pictures from './Pictures';
 import {getImageURL} from './getImageURL'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
+import {makeReplyHTML} from './makeReplyHTML'
 
 
 const Test = () => {
@@ -18,6 +19,7 @@ const Test = () => {
 
   let noteCount = 0;
 
+untilValue = 1739091313;  // repost image size
 //  untilValue = 1739089652;  // inlineImage
 //  untilValue = 1739087698;  // Error: hexToBytes
 //  untilValue = 1739008994;  // kind:1111 NG
@@ -505,36 +507,9 @@ const Test = () => {
         }
       });*/
 
+    
       let reply = "";
-      let replyToHex1 = nip19.npubEncode(note.pubkey)
-      let replyToHex2 = nip19.npubEncode(note.pubkey)
-      let replyToHex3 = nip19.npubEncode(note.pubkey)
-      let replyToHex4 = nip19.npubEncode(note.pubkey)
-      let replyToHex5 = nip19.npubEncode(note.pubkey)
-      let replyToImageURL1 = getImageURL(note.pubkey);
-      let replyToImageURL2 = getImageURL(note.pubkey);
-      let replyToImageURL3 = getImageURL(note.pubkey);
-      let replyToImageURL4 = getImageURL(note.pubkey);
-      let replyToImageURL5 = getImageURL(note.pubkey);
-      //let replyToUserBaseUrl = "https://nostter.app/" 
-      //let replyToUserBaseUrl = "https://yabu.me/" 
-      //const replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
-      //const replyToUserBaseUrl = "https://astraea.mousedev.page/profile/" 
-      const replyToUserBaseUrl = "https://nostrudel.ninja/#/u/" 
-      let replyToUrl1 = replyToUserBaseUrl + npub 
-      let replyToUrl2 = replyToUrl1
-      let replyToUrl3 = replyToUrl1
-      let replyToUrl4 = replyToUrl1
-      let replyToUrl5 = replyToUrl1
-      let replyToImageSize1 = "0"
-      let replyToImageSize2 = "0"
-      let replyToImageSize3 = "0"
-      let replyToImageSize4 = "0"
-      let replyToImageSize5 = "0"
-      let motoHex = replyToHex1
-      let repHex = "";
 
-      let channelUrl = "";
       let client = "";
       let title = "";
       let proxy = "";
@@ -553,191 +528,35 @@ const Test = () => {
       let eventLinkUrlText5 = "";  // #e 5
       //let eventLinkUrl6 = "";
       let eventLinkUrlText6 = "";  // #e 6
-      let eventCount = 0;
       let streaming = "";
       let streamingUrl = "";
 
+      let replyHTML = makeReplyHTML(note);
+
+////////////////////////////////////////////////
+
       for(let h=0; h<note.tags.length; h++)  {
-        if(note.tags[h][0] === "p") {  // mention
-          reply = "To]";
-	  if(!note.tags[h][1].includes("npub")) {  // not hex
-	    // Repost kind:6
-	    if(replyToImageSize1 === "0") {
-              if(note.kind === 6) {  // 6.repost
-                replyToImageSize1 = "60"
-	      }
-	      else {
-                replyToImageSize1 = "40"
-              }
-              replyToImageURL1 = getImageURL(note.tags[h][1]);  // to user id
-	      repHex = note.tags[h][1];
-	      replyToHex1 = nip19.npubEncode(note.tags[h][1]);
-	      replyToUrl1 = replyToUserBaseUrl + replyToHex1
-	    }
-	    else if(replyToImageSize2 === "0") {
-	      replyToHex2 = nip19.npubEncode(note.tags[h][1]);
-	      if(replyToHex2 != replyToHex1) {
-                if(note.kind === 6) {
-                  replyToImageSize2 = "60"
-	        }
-	        else {
-                  replyToImageSize2 = "40"
-		}
-                replyToImageURL2 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl2 = replyToUserBaseUrl + replyToHex2
-	      }
-	    }
-	    else if(replyToImageSize3 === "0") {
-	      replyToHex3 = nip19.npubEncode(note.tags[h][1]);
-	      if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
-                if(note.kind === 6) {
-                  replyToImageSize3 = "60"
-	        }
-	        else {
-                  replyToImageSize3 = "40"
-		}
-                replyToImageURL3 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl3 = replyToUserBaseUrl + replyToHex3
-	      }
-	    }
-	    else if(replyToImageSize4 === "0") {
-                if(note.kind === 6) {
-                  replyToImageSize4 = "60"
-	        }
-	        else {
-                  replyToImageSize4 = "40"
-		}
-	      replyToHex4 = nip19.npubEncode(note.tags[h][1]);
-	      if(replyToHex4 != replyToHex2 && replyToHex4 != replyToHex1) {
-                replyToImageURL4 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl4 = replyToUserBaseUrl + replyToHex4
-	      }
-	    }
-	    else if(replyToImageSize5 === "0") {
-	      replyToHex5 = nip19.npubEncode(note.tags[h][1]);
-	      if(replyToHex5 != replyToHex2 && replyToHex5 != replyToHex1) {
-                if(note.kind === 6) {
-                  replyToImageSize5 = "60"
-	        }
-	        else {
-                  replyToImageSize5 = "40"
-		}
-                replyToImageURL5 = getImageURL(note.tags[h][1]);  // to user id
-	        replyToUrl5 = replyToUserBaseUrl + replyToHex5
-	      }
-	    }
-	    //}
-	  }
-          for(let i=0; i<note.tags.length; i++) { 
-            //if(note.tags[i][0] === "e" && note.tags[h][1] != note.pubkey) {  // re
-            if(note.tags[i][0] === "e") {  // re
-              reply = "Re]";
-	      if(note.kind === 1111) {  // kind:1111:Comment
-	        reply = "Comment Re]";
-	      }
-            }
-          }
+        else if(note.tags[h][0] === "client") {  // client gossip 
+          client = "-via " + note.tags[h][1] + "-"
         }
-	else if(note.tags[h][0] === "e") {  // NIP-10 kind1
-	  eventCount = eventCount + 1;
-	  if(reply === "" || reply === "#e]") {
-	    if(note.kind === 1) {  // kind:1:note
-	      reply = "#e]";
-	    }
-	  }
-
-	  let marker = "";
-	  if(note.tags[h][3] != undefined) {
-	    marker = note.tags[h][3] + " "
-	  }
-
-          if(channelUrl == "") {
-            //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
-            //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
-            //channelUrl = "https://unyu-house.vercel.app/"
-            //channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
-	    if(note.tags[h][1].includes(":")) {  // tag:e
-	      return
-	    }
-            //channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
-            channelUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1] })  // nos_haiku
-	  }
-	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
-	  //const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
-	  //const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
-	  //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
-	  //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + note.tags[h][1]
-	  // ### nip19.noteEncode Error: hexToBytes: received invalid unpadded hex79 (kind:30001)
-	  if(note.tags[h][1].includes(":")) {  // tag:e
-	    return
-	  }
-	  //const eventLinkUrl = "https://snort.social/" + nip19.noteEncode(note.tags[h][1])
-	  //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.tags[h][1])
-	  const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[h][1])
-	  //note.content = note.content + "##" + note.tags[h][1]  //debug
-
-	  if(eventLinkUrlText1 === "") {
-	    event1Id = note.tags[h][1].substring(0,2);
-            eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
-	  }
-	  else if(eventLinkUrlText2 === "") {
-	    if(marker === "" && note.kind === 1) {  // 1:text
-              eventLinkUrlText1  = "__#e(" + event1Id + ")";
-	    }
-	    event2Id = note.tags[h][1].substring(0,2);
-            eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
-	  }
-	  else if(eventLinkUrlText3 === "") {
-            eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-	  }
-	  else if(eventLinkUrlText4 === "") {
-            eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-	  }
-	  else if(eventLinkUrlText5 === "") {
-            eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-	    if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-	  }
-	  else if(eventLinkUrlText6 === "") {
-	    if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-              eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
-	      eventLinkUrlText6 += String(eventCount) + "replies";
-            }
-	  }
+        else if(note.tags[h][0] === "title") {  // title 
+          title = "[" + note.tags[h][1] + "]__"
         }
-	else if(note.tags[h][0] === "a") {  // live chat message. kind:1311
-//	  channelUrl = "https://zap.stream";
-	  channelUrl = "https://zap.stream/naddr1qq9rzd3c8qcrwvejxqusygpjuxp8vd29p6ancknaztql3eajk52y8xkppfn7au7elkw9c68zg5psgqqqwensgqahaf";
-	}
-	else if(note.tags[h][0] === "client") {  // client gossip 
-	  client = "-via " + note.tags[h][1] + "-"
-	}
-	else if(note.tags[h][0] === "title") {  // title 
-	  title = "[" + note.tags[h][1] + "]__"
-	}
-	else if(note.tags[h][0] === "proxy") { 
-	  //proxy = note.tags[h][2]  // activitypub (misskey.io, p1.a9z.dev, unnerv.jp, fedibird.com, etc)
-          let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
-	  proxy = "__" + host + "__"
-	  proxyUrl = note.tags[h][1]
-	}
-	else if(note.tags[h][0] === "streaming") {  //  streaming
-	  streaming = "-streaming"
-	  streamingUrl = note.tags[h][1]
-	}
-	else if(note.tags[h][0] === "ends") {  // ends 
-	  title = title + "ends"
-	}
-      }
-//
+        else if(note.tags[h][0] === "proxy") { 
+          //proxy = note.tags[h][2]  // activitypub (misskey.io, p1.a9z.dev, unnerv.jp, fedibird.com, etc)
+                let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+          proxy = "__" + host + "__"
+          proxyUrl = note.tags[h][1]
+        }
+        else if(note.tags[h][0] === "streaming") {  //  streaming
+          streaming = "-streaming"
+          streamingUrl = note.tags[h][1]
+        }
+        else if(note.tags[h][0] === "ends") {  // ends 
+          title = title + "ends"
+        }
+      }  //for
+
       let content = note.content;
 //      content = title + content
 
@@ -745,14 +564,6 @@ const Test = () => {
         content = content.replace('<','&lt;');  // <
       }
 
-      let channel = ""
-
-      if(note.kind === 42) {  // kind:42.Channel_Message
-        channel = "Channel_Message(nos_haiku_Channel)] ";   // link to ChannelUrl
-      }
-      if(note.kind === 1311) {  // kind:1311.live chat
-        channel = "Live Chat]";   // link to ChannelUrl
-      }
 
       // kind:6.repost, kind:16.Generic Repost, kind:4550.Post Approval by moderators
       if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
@@ -1560,48 +1371,44 @@ const Test = () => {
           <div className="card-container">
             <div className="card-text">
               <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
-                <a href={channelUrl} target="_blank">{channel}</a>
-	        {contentWarning}{contentWarningText}{contentWarning}
-                {status}{title}{reply} <a href={replyToUrl1} target="_blank"><img src={replyToImageURL1} width={replyToImageSize1} height={replyToImageSize1} /></a>
-		<a href={replyToUrl2} target="_blank"><img src={replyToImageURL2} width={replyToImageSize2} height={replyToImageSize2} /></a>
-		<a href={replyToUrl3} target="_blank"><img src={replyToImageURL3} width={replyToImageSize3} height={replyToImageSize3} /></a>
-		<a href={replyToUrl4} target="_blank"><img src={replyToImageURL4} width={replyToImageSize4} height={replyToImageSize4} /></a>
-		<a href={replyToUrl5} target="_blank"><img src={replyToImageURL5} width={replyToImageSize5} height={replyToImageSize5} /></a>
-                {parse(content)}
-	        {follow}
-		{parse(iframe)}
-		{parse(iframe2)}
-		<a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
-		<a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
-		{eventLinkUrlText1}
-		{eventLinkUrlText2}
-		{eventLinkUrlText3}
-		{eventLinkUrlText4}
-		{eventLinkUrlText5}
-		{eventLinkUrlText6}
-		<a href={linkUrl1} target="_blank">{linkUrlText1}</a>
-		<a href={linkUrl2} target="_blank">{linkUrlText2}</a>
-		<a href={linkUrl3} target="_blank">{linkUrlText3}</a>
-		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
-		<a href={linkUrl5} target="_blank">{linkUrlText5}</a>
-		<a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
-    <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
-		{parse(inlineImageHTML)}
-    <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
-    <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
-    -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-    ({noteIdShort}){client}
-		<a href={proxyUrl} target="_blank">{proxy}</a><br />
-		<a href={freefromUrl} target="_blank">-FreeFrom</a>
-		<a href={nostterUrl} target="_blank">-nostter</a>
-		<a href={lumilumiUrl} target="_blank">-lumilumi</a>
-		<a href={noStrudelUrl} target="_blank">-noStrudel</a>
-		<a href={checkerUrl} target="_blank">-checker</a>
-		<a href={irisUrl} target="_blank">-Iris</a>
-		<a href={snortUrl} target="_blank">-Snort</a>
-		<a href={bookmarkUrl} target="_blank">{bookmark}</a>
-		<a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
-		<a href={streamingUrl} target="_blank">{streaming}</a>
+	            {contentWarning}{contentWarningText}{contentWarning}
+              {status}{title}
+              {parse(replyHTML)}
+              {parse(content)}
+              {follow}
+              {parse(iframe)}
+              {parse(iframe2)}
+              <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
+              <a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
+              {eventLinkUrlText1}
+              {eventLinkUrlText2}
+              {eventLinkUrlText3}
+              {eventLinkUrlText4}
+              {eventLinkUrlText5}
+              {eventLinkUrlText6}
+              <a href={linkUrl1} target="_blank">{linkUrlText1}</a>
+              <a href={linkUrl2} target="_blank">{linkUrlText2}</a>
+              <a href={linkUrl3} target="_blank">{linkUrlText3}</a>
+              <a href={linkUrl4} target="_blank">{linkUrlText4}</a>
+              <a href={linkUrl5} target="_blank">{linkUrlText5}</a>
+              <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
+              <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
+              {parse(inlineImageHTML)}
+              <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
+              <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
+              -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
+              ({noteIdShort}){client}
+              <a href={proxyUrl} target="_blank">{proxy}</a><br />
+              <a href={freefromUrl} target="_blank">-FreeFrom</a>
+              <a href={nostterUrl} target="_blank">-nostter</a>
+              <a href={lumilumiUrl} target="_blank">-lumilumi</a>
+              <a href={noStrudelUrl} target="_blank">-noStrudel</a>
+              <a href={checkerUrl} target="_blank">-checker</a>
+              <a href={irisUrl} target="_blank">-Iris</a>
+              <a href={snortUrl} target="_blank">-Snort</a>
+              <a href={bookmarkUrl} target="_blank">{bookmark}</a>
+              <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
+              <a href={streamingUrl} target="_blank">{streaming}</a>
             </div>
           </div>
         </li>
@@ -1616,17 +1423,17 @@ const Test = () => {
         <div>
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
-	  <p>links:</p>
-	  <a href="https://nostter.app/home" target="_blank">nostter</a>-
-	  <a href="https://lumilumi.app" target="_blank">lumilumi</a>-
-	  <a href="https://nos-haiku.vercel.app" target="_blank">ノスハイク</a>-
-	  <a href="https://jumble.social" target="_blank">Jumble</a>-
-	  <a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a>-
-	  <a href="https://nostrends.vercel.app" target="_blank">nostrends</a>-
-	  <a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a>-
-	  <a href="https://nos.today" target="_blank">nos.today</a>-
-	  <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
-	  <a href="https://flycat.club" target="_blank">flycat</a>
+          <p>links:</p>
+          <a href="https://nostter.app/home" target="_blank">nostter</a>-
+          <a href="https://lumilumi.app" target="_blank">lumilumi</a>-
+          <a href="https://nos-haiku.vercel.app" target="_blank">ノスハイク</a>-
+          <a href="https://jumble.social" target="_blank">Jumble</a>-
+          <a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a>-
+          <a href="https://nostrends.vercel.app" target="_blank">nostrends</a>-
+          <a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a>-
+          <a href="https://nos.today" target="_blank">nos.today</a>-
+          <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
+          <a href="https://flycat.club" target="_blank">flycat</a>
         </div>
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
