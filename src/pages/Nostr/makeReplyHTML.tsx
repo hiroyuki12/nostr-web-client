@@ -178,6 +178,17 @@ export const makeReplyHTML = (note) => {
         } //else if L123
     }  //for
 
+    
+    // kind:6.repost, kind:16.Generic Repost, kind:4550.Post Approval by moderators
+    if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
+      reply = "Repost]";
+      if(note.kind === 16) {
+        reply = "Generic Repost]"
+      }
+      else if(note.kind === 4550) {
+      reply = "To]"
+      }
+    }
 
 
 

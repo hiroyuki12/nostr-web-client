@@ -19,10 +19,12 @@ const Test = () => {
 
   let noteCount = 0;
 
-//  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu)
+//  untilValue = 1739087698;  // Error: hexToBytes NG
+//  untilValue = 1739099394;  // Repost URL fix
+//  untilValue = 1739100944;  // client fix
+//  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
 //  untilValue = 1739091313;  // repost image size
 //  untilValue = 1739089652;  // inlineImage
-//  untilValue = 1739087698;  // Error: hexToBytes
 //  untilValue = 1739008994;  // kind:1111 NG
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1734489831;  // kind:20 not display picture
@@ -498,6 +500,7 @@ const Test = () => {
       const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
       const lumilumiUrl = "https://lumilumi.app/" + nip19.noteEncode(note.id)
+      const nosHaikuUrl = "https://nos-haiku.vercel.app/entry/" + nip19.neventEncode({id:note.id})
       const irisUrl = "https://iris.to/" + nip19.noteEncode(note.id)
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
       const noStrudelUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id)
@@ -512,23 +515,15 @@ const Test = () => {
       let reply = "";
 
       let client = "";
-      let title = "";
+      //let title = "";
       let proxy = "";
       let proxyUrl = "";
-      let eventLinkUrl1 = "";
-      let eventLinkUrlText1 = "";  // #e 1
-      let event1Id = "";
-      //let eventLinkUrl2 = "";
-      let eventLinkUrlText2 = "";  // #e 2
-      let event2Id = "";
-      //let eventLinkUrl3 = "";
-      let eventLinkUrlText3 = "";  // #e 3
-      //let eventLinkUrl4 = "";
-      let eventLinkUrlText4 = "";  // #e 4
-      //let eventLinkUrl5 = "";
-      let eventLinkUrlText5 = "";  // #e 5
-      //let eventLinkUrl6 = "";
-      let eventLinkUrlText6 = "";  // #e 6
+      let eventLinkUrlText1 = "";  // tags[0][0]
+      let eventLinkUrlText2 = "";  // tags[1][0] 
+      let eventLinkUrlText3 = "";  // tags[2][0] 
+      let eventLinkUrlText4 = "";  // tags[3][0]
+      let eventLinkUrlText5 = "";  // tags[4][0]
+      let eventLinkUrlText6 = "";  // tags[5][0]
       let streaming = "";
       let streamingUrl = "";
 
@@ -539,90 +534,54 @@ const Test = () => {
 
       for(let h=0; h<note.tags.length; h++)  {
         let marker = "";
-        if(note.tags[h][3] != undefined) {
-          marker = note.tags[h][3] + " "
+        if(note.tags[h][0] != undefined) {
+          marker = note.tags[h][0]
         }
 
-        if(eventLinkUrlText1 === "") {
-          event1Id = note.tags[h][1].substring(0,2);
-          eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
-        }
-        else if(eventLinkUrlText2 === "") {
-          if(marker === "" && note.kind === 1) {  // 1:text
-            eventLinkUrlText2  = "__#e(" + event1Id + ")";
-          }
-          event2Id = note.tags[h][1].substring(0,2);
-          eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
-        }
-        else if(eventLinkUrlText3 === "") {
-          eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-          if(marker === "reply ") {
-            eventLinkUrlText3  = "__#e(" + event2Id + ")";
-          }
-        }
-        else if(eventLinkUrlText4 === "") {
-          eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-          if(marker === "reply ") {
-            eventLinkUrlText4  = "__#e(" + event2Id + ")";
-          }
-        }
-        else if(eventLinkUrlText5 === "") {
-          eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-          if(marker === "reply ") {
-            eventLinkUrlText5  = "__#e(" + event2Id + ")";
-          }
-        }
-        else if(eventLinkUrlText6 === "") {
-          if(marker === "reply ") {
-            //eventLinkUrlText6  = "__#e(" + event2Id + ")";
-            //eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
-            eventLinkUrlText6 += String(eventCount) + "replies";
-          }
-        }
-
-
-        if(note.tags[h][0] === "client") {  // client gossip 
+        if(marker === "client") {  // client gossip 
           client = "-via " + note.tags[h][1] + "-"
         }
-        else if(note.tags[h][0] === "title") {  // title 
-          title = "[" + note.tags[h][1] + "]__"
-        }
-        else if(note.tags[h][0] === "proxy") { 
+        else if(marker === "proxy") { 
           //proxy = note.tags[h][2]  // activitypub (misskey.io, p1.a9z.dev, unnerv.jp, fedibird.com, etc)
-                let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+          let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
           proxy = "__" + host + "__"
           proxyUrl = note.tags[h][1]
         }
-        else if(note.tags[h][0] === "streaming") {  //  streaming
+        else if(marker === "streaming") {  //  streaming
           streaming = "-streaming"
           streamingUrl = note.tags[h][1]
         }
-        else if(note.tags[h][0] === "ends") {  // ends 
-          title = title + "ends"
+        else {
+          if(eventLinkUrlText1 === "") {
+            eventLinkUrlText1  = "_tags[0](" + marker + ")";  // event id
+          }
+          else if(eventLinkUrlText2 === "") {
+            eventLinkUrlText2  = "_tags[1](" + marker + ")";
+          }
+          else if(eventLinkUrlText3 === "") {
+            eventLinkUrlText3  = "_tags[2](" + marker + ")";
+          }
+          else if(eventLinkUrlText4 === "") {
+            eventLinkUrlText4  = "_tags[3](" + marker + ")";
+          }
+          else if(eventLinkUrlText5 === "") {
+            eventLinkUrlText5  = "_tags[4](" + marker + ")";
+          }
+          else if(eventLinkUrlText6 === "") {
+            eventLinkUrlText6  = "_tags[5](" + marker + ")";
+          }
         }
       }  //for
 
       let content = note.content;
-//      content = title + content
 
       for(let i=0; i<10; i++) {
         content = content.replace('<','&lt;');  // <
       }
 
-
-      // kind:6.repost, kind:16.Generic Repost, kind:4550.Post Approval by moderators
-      if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
-        reply = "Repost]";
-	if(note.kind === 16) {
-	  reply = "Generic Repost]"
-	}
-	else if(note.kind === 4550) {
-	  reply = "To]"
-	}
-
-        if(content === "") {
-	  content = "[empty]";
-	}
+      if(content === "") {
+	      content = "[empty]";
+	    }
 	else {
         let tmp
 	tmp = content.split('","');  // ","
@@ -655,8 +614,15 @@ const Test = () => {
 	    if(content.includes('","kind')) {
 	      content = content.substring(0, content.indexOf('","kind'));  
 	    }
+            // id 以降を削除
+	    if(content.includes('","id')) {
+	      content = content.substring(0, content.indexOf('","id'));  
+	    }
             for(let j=0; j<10; j++) {
 	      content = content.replace("\\n","\n");   // \\n -> \n
+	    }
+            for(let j=0; j<20; j++) {
+	      content = content.replace("\\/","/");   // \/ -> /
 	    }
 	  }
 	}  //for
@@ -668,7 +634,7 @@ const Test = () => {
 	  }
 	}  //for
       }  // else
-    }
+    
 
 
     let inlineImageHTML = makeInlineImageHTML(content);
@@ -913,9 +879,9 @@ const Test = () => {
                 //quoteLinkText = "(quote_nevent1)";
 	        //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
 	        //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
-	        //let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-	        let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-  	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent_(nos_haiku_entry))</a>');
+	        //let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
+	        let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
 	      }
 	      else {
   	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
@@ -1411,13 +1377,17 @@ const Test = () => {
       //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
 
+      for(let i=0; i<20; i++) {
+        content = content.replace('\n', '<br />');
+      }
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
               <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
 	            {contentWarning}{contentWarningText}{contentWarning}
-              {status}{title}
+              {status}
               {parse(replyHTML)}
               {parse(content)}
               {follow}
@@ -1447,6 +1417,7 @@ const Test = () => {
               <a href={freefromUrl} target="_blank">-FreeFrom</a>
               <a href={nostterUrl} target="_blank">-nostter</a>
               <a href={lumilumiUrl} target="_blank">-lumilumi</a>
+              <a href={nosHaikuUrl} target="_blank">-Nos Haiku</a>
               <a href={noStrudelUrl} target="_blank">-noStrudel</a>
               <a href={checkerUrl} target="_blank">-checker</a>
               <a href={irisUrl} target="_blank">-Iris</a>
