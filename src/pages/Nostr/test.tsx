@@ -7,6 +7,7 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 import Pictures from './Pictures';
 import {getImageURL} from './getImageURL'
+import {getInlineImageHTML} from './getInlineImageHTML'
 
 
 const Test = () => {
@@ -17,6 +18,7 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1739089652;  // inlineImage
 //  untilValue = 1739087698;  // Error: hexToBytes
 //  untilValue = 1739008994;  // kind:1111 NG
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
@@ -259,8 +261,8 @@ const Test = () => {
 //      kinds: [30000,30001,30003,30008,30009,30023,30311,30315,31922,31989,31990],
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
-//      kinds: [1,6,20,42,1111],      // 1:Short Text Note ======================
-      kinds: [6,20,42,1111],      // 1:Short Text Note ======================
+      kinds: [1,6,20,42,1111],      // 1:Short Text Note ======================
+//      kinds: [6,20,42,1111],      // 6:Repost 
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -812,100 +814,10 @@ const Test = () => {
       }  // else
     }
 
-      let inlineImage1Height = "0";
-      let inlineImage2Height = "0";
-      let inlineImage3Height = "0";
-      let inlineImage4Height = "0";
-      let inlineImage5Height = "0";
-      let image1Url = "";
-      let image2Url = "";
-      let image3Url = "";
-      let image4Url = "";
-      let image5Url = "";
-      //RegExp
-      //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
-      if(content.includes("https:") || content.includes("http:")) {
-        let tmp = content;
-        for(let i=0; i<10; i++) {
-          tmp = tmp.replace('\\/','/');
-          content = content.replace('\\/','/');
-	  
-	}
-        for(let i=0; i<10; i++) {
-          tmp = tmp.replace('\\n',' ');
-          tmp = tmp.replace('、',' ');
-          tmp = tmp.replace('\'',' ');
-          tmp = tmp.replace('）',' ');
-          tmp = tmp.replace('く',' ');
-          tmp = tmp.replace('ぃ',' ');
-	  tmp = tmp.replace('\\',' ');
-	  tmp = tmp.replace('"',' ');
-          tmp = tmp.replace(':https://',' https://');
-          tmp = tmp.replace('https://',' https://');
-          tmp = tmp.replace('https://',' https://');
-        }
-        for(let i=0; i<20; i++) {
-          tmp = tmp.replace('\n',' ');
-        }
-        let tmp2 = tmp.split(' ');
-//        let tmp2 = tmp.split('"');
+    let inlineImageHTML = getInlineImageHTML(content);
 
-        let imageCount = 0;
-        for(let i=0; i<tmp2.length; i++) {
-          if((tmp2[i].includes(".jpg")  ||
-             tmp2[i].includes(".jpeg") || 
-             tmp2[i].includes(".png")  || 
-             tmp2[i].includes(".gif")  || 
-             tmp2[i].includes(".svg")  || 
-             tmp2[i].includes(".ico")  || 
-             tmp2[i].includes(".bmp")  || 
-             tmp2[i].includes(".webp") ||
-             tmp2[i].includes(".mp4") ||
-             tmp2[i].includes(".mov") ||
-             tmp2[i].includes("/img/") ||
-             tmp2[i].includes("/images?") ||
-             tmp2[i].includes("?set=set4") ||
-             tmp2[i].includes("pbs.twimg.com/") ||
-             tmp2[i].includes("robohash.org/") ||
-             tmp2[i].includes("pbs.twimg.com/") ||
-             tmp2[i].includes("/profile/avatar/") ||
-             tmp2[i].includes("/imgproxy.snort.social/") ||
-             tmp2[i].includes("/0.gravatar.com/avatar/") ||
-             tmp2[i].includes("/www.gravatar.com/avatar/") ||
-             tmp2[i].includes("googleusercontent.com/") ||
-             tmp2[i].includes("grafana.gsn.im/"))
-	     && tmp2[i].includes("http")
-	     && !tmp2[i].includes("gifu.jp/")
-//	     && !tmp2[i].includes("minio.compile-error.net/")
-	     )  {
-	     //content = content + '[' + tmp2[i] + '],'
-	    if(imageCount===0) {
-              inlineImage1Height = "250";
-	      image1Url = tmp2[i];
-	    }
-	    else if(imageCount===1) {
-              inlineImage2Height = "250";
-	      image2Url = tmp2[i];
-	    }
-	    else if(imageCount===2) {
-              inlineImage3Height = "250";
-	      image3Url = tmp2[i];
-	    }
-	    else if(imageCount===3) {
-              inlineImage4Height = "250";
-	      image4Url = tmp2[i];
-	    }
-	    else if(imageCount===4) {
-              inlineImage5Height = "250";
-	      image5Url = tmp2[i];
-	    }
-	    imageCount = imageCount + 1;
-            //content = content.replace(tmp2[i],'');
-          }
-        }
-      }
-
+    
       // kind:20 for picture-first clients.
       let pictureImage1Height = "0";
       let pictureImage1Url = "";
@@ -1335,56 +1247,18 @@ const Test = () => {
         }
       }
       
-      /*for(let i=0; i<10; i++) {
-        content = content.replace('<img','&lt;img'); 
-      }*/
-
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
           const emojiURL = note.tags[i][2];
-	        for(let j=0; j<100; j++) {
+	  for(let j=0; j<100; j++) {
             content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
-	        }
+	  }
         }
       }
       for(let j=0; j<10; j++) {
         content = content.replace(":bow:","🙇");
       }
 
-      /*for(let i=0; i<10; i++) {
-//        content = content.replace('<','&lt;');  // <
-
-        content = content.replace('<m','&lt;m'); 
-        content = content.replace('</m','&lt;/m'); 
-        //content = content.replace('<i','&lt;i'); 
-        content = content.replace('<I','&lt;I'); 
-        content = content.replace('<S','&lt;S');  
-        content = content.replace('<f','&lt;f'); 
-        content = content.replace('</f','&lt;/f'); 
-        content = content.replace('<s','&lt;s');   // <script>, <style>
-        content = content.replace('</s','&lt;/s');  
-        content = content.replace('<b','&lt;b');   
-        content = content.replace('</b','&lt;/b');  
-        content = content.replace('<h','&lt;h');   // <h1> 
-        content = content.replace('</h','&lt;/h');  
-        content = content.replace('<t','&lt;t');   
-        content = content.replace('</t','&lt;/t');  
-        content = content.replace('<i>','&lt;i>'); 
-        content = content.replace('</i>','&lt;/i>'); 
-        content = content.replace('<T','&lt;T'); 
-        content = content.replace('<Equal','&lt;Equal'); 
-        content = content.replace('<infer','&lt;infer'); 
-        content = content.replace('<Hello','&lt;Hello'); 
-        //content = content.replace('<a','&lt;a');  
-      }*/
-
-      for(let i=0; i<30; i++) {
-        //content = content.replace('\\n','<br />');  // repost content
-        content = content.replace('\\t','&#009;');  // tab
-      }
-      for(let i=0; i<30; i++) { // nya
-        content = content.replace('\n','<br />');
-      }
 
       let status = "";
       let mute = "";
@@ -1680,8 +1554,6 @@ const Test = () => {
       let nozokimado = "-nozoki"
       //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
-      
-      const note1 = nip19.noteEncode(note.id);
 
       return (
         <li className="item" key={index}>
@@ -1713,16 +1585,12 @@ const Test = () => {
 		<a href={linkUrl4} target="_blank">{linkUrlText4}</a>
 		<a href={linkUrl5} target="_blank">{linkUrlText5}</a>
 		<a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
-		<a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
-                <a href={image1Url} target="_blank"><img src={image1Url} height={inlineImage1Height} /></a>
-                <a href={image2Url} target="_blank"><img src={image2Url} height={inlineImage2Height} /></a>
-                <a href={image3Url} target="_blank"><img src={image3Url} height={inlineImage3Height} /></a>
-                <a href={image4Url} target="_blank"><img src={image4Url} height={inlineImage4Height} /></a>
-                <a href={image5Url} target="_blank"><img src={image5Url} height={inlineImage5Height} /></a>
-                <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
-                <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
-                -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-                ({noteIdShort}){client}
+    <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
+		{parse(inlineImageHTML)}
+    <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
+    <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
+    -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
+    ({noteIdShort}){client}
 		<a href={proxyUrl} target="_blank">{proxy}</a><br />
 		<a href={freefromUrl} target="_blank">-FreeFrom</a>
 		<a href={nostterUrl} target="_blank">-nostter</a>
@@ -1740,10 +1608,6 @@ const Test = () => {
       );
     });
     return posts;
-  }
-
-  const getImageURL2 = (pubkey) => {
-    return 'https://i.gyazo.com/3e33d8e30a6db0868ad7a5beee61d5d2.webp';
   }
 
   return (
@@ -1772,6 +1636,5 @@ const Test = () => {
     </>
   );
 };
-
 
 export default Test;
