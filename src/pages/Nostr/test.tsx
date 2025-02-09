@@ -16,20 +16,34 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
+//  untilValue = 1739024868;  // kirby OGP Todo nostter ok
+//  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
+//  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
 //  untilValue = 1739015355;  // dare-ai OGP  Todo
 //  untilValue = 1739011806;  // mostr niji
-//  untilValue = 1739012160;  // youtube Repost NG
-//  untilValue = 1739008290;  // youtube fix Delete After &
 //  untilValue = 1703568307;  // img threads NG
 //  untilValue = 1700358511;  // NG insta link
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
 //  untilValue = 1691507297;  // repost image NG. nostter ok
 //  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
-
+  
+//  untilValue = 1739065989;  // nos_haiku. wip quote_nevent link event id. 42.Channel_Message
+//  untilValue = 1707634026;  // repost icon NG. not display
+//  untilValue = 1700351963;  // NG link
+//  untilValue = 1698228483;  // link NG
+//  untilValue = 1698731466;  // Invalid byte sequence NG
+//  untilValue = 1697536841;  // NG
+//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
+//  untilValue = 1697112060;  // #r link? NG
+//  untilValue = 1696110614;  // url # NG
+//  untilValue = 1694055016;  // \n\n NG?
+//  untilValue = 1739008290;  // youtube fix Delete After &
 //  untilValue = 1695999820;  // Apple Music OGP. fix
+//  untilValue = 1739012160;  // youtube live Repost ¥n fix
+//  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix
-//  untilValue = 1707634026;  // repost icon NG. not display
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
@@ -37,54 +51,45 @@ const Test = () => {
 //  untilValue = 1702648801;  // 9735 content empty ng
 //  untilValue = 1700648893;  // bookmark
 //  untilvalue = 1700654092;  // long-form content
-//  untilValue = 1700351963;  // NG link
-//  untilValue = 1698228483;  // link NG
-//  untilValue = 1700282586;  // kind 10005 channel list?
+//  untilValue = 1700282586;  // kind 10005 Channel list?
 //  untilValue = 1699350541;  // Nostrasia Day 1 Summary Nosli
-//  untilValue = 1698731466;  // Invalid byte sequence NG
 //  untilValue = 1698636018;  // kind 6666
 //  untilValue = 1698415786;  // Zap Add Avatar
 //  untilValue = 1697641710;  // ok :bow:  FreeFrom ok
 //  untilValue = 1697598212;  // Zap
-//  untilValue = 1697536841;  // NG
 //  untilValue = 1697471297;  // kind:4550
-//  untilValue = 1697385059;  // channel message nostter
+//  untilValue = 1697385059;  // 42.Channel_Message nostter
 //  untilValue = 1697448782;  // kind:9735
-//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
 //  untilValue = 1697289857;  // will nos.lol
 //  untilValue = 1697223369;  // jack nos.lol
 //  untilValue = 1697282603;  // fiatjaf yabu.me
 //  untilValue = 1697247223;  // reply image OK
 //  untilValue = 1697247497;  // tag relay
-//  untilValue = 1697112060;  // #r link? NG
 //  untilValue = 1696632885;  // Metadata
 //  untilValue = 1696502429;  // jpg OK
 //  untilValue = 1696412926;  // LIVE
 //  untilValue = 1696316415;  // nevent1
-//  untilValue = 1696105738;  // quote_nevent njump fix
+//  untilValue = 1696105738;  // quote_nevent njump fix. quote_nos_haiku ok
 //  untilValue = 1696119569;  // njump.me nevent fix
-//  untilValue = 1696110614;  // url # NG
 //  untilValue = 1695438407;  // to link fix
 //  untilValue = 1695370850;  // tiktok
-//  untilValue = 1695066723;  // kind:10001 pin channel
+//  untilValue = 1695066723;  // kind:10001 pin Channel
 //  untilValue = 1694945195;  // repost 1694945166
 //  untilValue = 1694683832;  // generic repost, Nostrasia Hackathon
 //  untilValue = 1694687538;  // zap request
 //  untilValue = 1694359339;  // search kind:30040
 //  untilValue = 1694326407;  // kind:10030
 //  untilValue = 1694194192;  // kind:30025 LongForm
-//  untilValue = 1694055016;  // \n\n NG?
 //  untilValue = 1694003737;  // nostr:naddr1 zap.stream
 //  untilValue = 1693796212;  // #e(reply fix
-//  untilValue = 1693566199;  // generic repost channel message
-//  untilValue = 1693300143;  // channel creation
+//  untilValue = 1693566199;  // generic repost 42.Channel_Message
+//  untilValue = 1693300143;  // Channel creation
 //  untilValue = 1692922942;  // nak install
 //  untilValue = 1692694772;  // nostr:note1 (quote)
 //  untilValue = 1692649004;  // mp4
 //  untilValue = 1691665815;  // tag:h nowplaying
 //  untilValue = 1691417549;  // kind:9735 zap memo
 //  untilValue = 1690983115;  //live chat message kind:1311 Karnage
-//  untilValue = 1690354019;  //(quote)
 //  untilValue = 1690284540;  // \t
 //  untilValue = 1690114119;  //youtube ok
 //  untilValue = 1690041940;  //To 5
@@ -256,9 +261,10 @@ const Test = () => {
 //      kinds: [7],      // 7:Reaction
 //      kinds: [8],      // 8:Badge Award
 //      kinds: [16],     // 16:Generic Repost
+//      kinds: [20],     // 20:Picture Events
 //      kinds: [40],     // 40:Channel Creation
 //      kinds: [41],     // 41:Channel Metadata
-//      kinds: [42],     // 42:Channel Message
+//      kinds: [42],     // 42:Channel_Message
 //      kinds: [44],     // 44:Channel Mute User
 //      kinds: [1063],   // 1063:File Metadata
 //      kinds: [1311],   // 1311:Live Chat Message
@@ -469,14 +475,17 @@ const Test = () => {
             noteUrl = "https://nostter.app/" + nip19.neventEncode({id:note.tags[h][1]})
 	  }
 	}*/
-        // 42.Channel Message
+        // 42.Channel_Message
         if(note.kind == 42) {
           if(note.tags[h][0] == "e") {
 	    if(note.tags[h][1].includes(":")) {
 	      return
 	    }
-            noteUrl = "https://nostter.app/channels/" 
+            //noteUrl = "https://nostter.app/channels/" 
+	    //  + nip19.neventEncode({id:note.tags[h][1]})
+            noteUrl = "https://nos-haiku.vercel.app/keyword/" 
 	      + nip19.neventEncode({id:note.tags[h][1]})
+	    //noteUrl = "eventid?=" + note.id;  // nos_haiku debug
 	  }
 	}
       }
@@ -653,7 +662,8 @@ const Test = () => {
 	    if(note.tags[h][1].includes(":")) {  // tag:e
 	      return
 	    }
-            channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
+            //channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
+            channelUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1] })
 	  }
 	  //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
 	  //const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
@@ -724,7 +734,7 @@ const Test = () => {
 	  channelUrl = "https://zap.stream/naddr1qq9rzd3c8qcrwvejxqusygpjuxp8vd29p6ancknaztql3eajk52y8xkppfn7au7elkw9c68zg5psgqqqwensgqahaf";
 	}
 	else if(note.tags[h][0] === "client") {  // client gossip 
-	  client = "-" + note.tags[h][1] + "-"
+	  client = "-via " + note.tags[h][1] + "-"
 	}
 	else if(note.tags[h][0] === "title") {  // title 
 	  title = "[" + note.tags[h][1] + "]__"
@@ -780,11 +790,11 @@ const Test = () => {
 
       let channel = ""
 
-      if(note.kind === 42) {  // 42.channel message
-        channel = "[42 Channel Message]";   // channelUrl
+      if(note.kind === 42) {  // 42.Channel_Message
+        channel = "[42 Channel_Message (nos_haiku_Channel)] ";   // link to ChannelUrl
       }
       if(note.kind === 1311) {  // 1311.live chat
-        channel = "[1311 Live Chat]";   // channelUrl
+        channel = "[1311 Live Chat]";   // link to ChannelUrl
       }
 
       // 6.repost, 16.Generic Repost, 4550.Post Approval by moderators
@@ -807,44 +817,37 @@ const Test = () => {
 	  tmp = content.split('",');  // ",
 	}
         for(let i=0; i<tmp.length; i++) {
+	  // Repostのcontentデータを本文のみに調整
 	  if(tmp[i].includes('"content"')) {
-//	    tmp = tmp[i].split(',');  // ,
-	    // tmp = tmp[i].split('],');  // ],  fix ,
-	    // for(let j=0; j<tmp.length; j++) {
-	      // if(tmp[j].includes('"content"')) {
-	        // content = tmp[j];
-	      // }
-	    // }
-	    
-            content = content.substring(content.indexOf('content'),content.length);  // content:より前を削除
+	    // content より前を削除. content" も削除
+            content = content.substring(content.indexOf('content'),content.length);  
             content = content.replace('content":"','');
-      
-            // for(let j=0; j<10; j++) {
-	      // content = content.replace("\\/\\/","//");
-	      // content = content.replace("\\\"","\""); // \" -> "
-	    // }
-            // for(let j=0; j<20; j++) {
-	      // content = content.replace("\\/","/");  // \/ -> /
-	      // content = content.replace("\\r","");   // \\r -> \r
-	      // content = content.replace("\\n","\n");   // \\n -> \n
-	    // }
-	    
-	    // content = content.replace('"kind":1,','');
-      // content = content.replace('"created_at":','');
-	    // content = content.replace("{","");
-	    // content = content.replace("{","");
-	    // content = content.replace("\"}","");
+	    // created_at 以降を削除
+	    if(content.includes("created_at")) {
+              content = content.substring(0,content.indexOf("created_at"));  				      
+	    }
+            // sig 以降を削除
+	    if(content.includes('","sig')) {
+	      content = content.substring(0, content.indexOf('","sig'));  
+	    }
+            // pubkey 以降を削除
+	    if(content.includes('","pubkey')) {
+	      content = content.substring(0, content.indexOf('","pubkey'));  
+	    }
+            for(let j=0; j<10; j++) {
+	      content = content.replace("\\n","\n");   // \\n -> \n
+	    }
 	  }
-	}
+	}  //for
 	for(let i=0; i<note.tags.length; i++) {
 	  if(content === "") {
 	    if(note.tags[i][0] === "e") {
 	      //content = note.tags[i][1] + "," + content;  // to eventId
 	    }
 	  }
-	}
-	}  // else
-      }
+	}  //for
+      }  // else
+    }
 
       let inlineImage1Height = "0";
       let inlineImage2Height = "0";
@@ -1166,8 +1169,9 @@ const Test = () => {
                 //quoteLinkText = "(quote_nevent1)";
 	        //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
 	        //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
-	        let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-  	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
+	        //let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+	        let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
+  	        content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent_(nos_haiku_entry))</a>');
 	      }
 	      else {
   	        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
@@ -1251,17 +1255,10 @@ const Test = () => {
         let tmp = content;
         for(let i=0; i<10; i++) {
           tmp = tmp.replace('\\n',' ');
-          tmp = tmp.replace('、',' ');
-          tmp = tmp.replace('\'',' ');
-          tmp = tmp.replace('　',' ');
-          tmp = tmp.replace('？',' ');
-          tmp = tmp.replace('（今こうなる…）',' ');
-          tmp = tmp.replace('！',' ');
         }
         for(let i=0; i<10; i++) {
           tmp = tmp.replace('\n',' ');
         }
-	//tmp = tmp.replace("https://", " https://");
         let tmp2 = tmp.split(' ');
 	let iframeCount = 0;
         for(let i=0; i<tmp2.length; i++) {
@@ -1273,19 +1270,26 @@ const Test = () => {
 	      let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
 	      id = id.replace("https://music.youtube.com/watch?v=", "");
 	      id = id.replace("https://m.youtube.com/watch?v=", "");
+	      id = id.replace("https://www.youtube.com/live/", "");
 	      if(tmp2[i].includes("&")) {
 	        id = id.substring(0, id.indexOf("&"));  // &以降を削除
 	      }
-	      id = id.replace("?feature=", "");
+	      id = id.replace("/>", "");
 	      content = content.replace(tmp2[i], "");
+	      if(content.includes('","sig')) {
+	        content = content.substring(0, content.indexOf('","sig'));  // sig 以降を削除
+	      }
 	      httpLinkUrl1 = tmp2[i];
+	      if(tmp2[i].includes("/live/")) {
+	        httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
+	      }
 	      httpLinkUrlText1 = '__YouTube';
 
 	      iframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
 	      
 //	      iframe = '<iframe src="https://www.youtube.com/embed/' + '4WXs3sKu41I' + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 	      
-//	      content = content + "id=" + id  // Debug id表示
+//	      content = content + "<br>id=" + id  // Debug id表示
 
 	    }
 	    else if(tmp2[i].includes("open.spotify.com")) {
@@ -1768,6 +1772,27 @@ const Test = () => {
       else if (npub === '') {
         image = ''
       } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === '') {
+        image = ''
+      } 
+      else if (npub === 'npub1vuy8f7nd64zwm3vxwa3uu7f42guk4mw6rf0a5w5hjj0kd2c2e7es8t229r') {
+        image = 'https://nostrcheck.me/media/670874fa6dd544edc5867763ce793552396aedda1a5fda3a97949f66ab0acfb3/9e117b345571026588e2750729159da97d9775444fd0b6a11816f176fb01db05.webp'
+      } 
+      else if (npub === 'npub1x26ymrlm0svetecghdllkmzf63jhd9caufr2k6jn5h0xffzcnsjq3af8wc') {
+        image = 'https://media.misskeyusercontent.com/misskey/e44afb80-e469-4ca2-bfd0-ddb8555e6a26.png'
+      } 
+      else if (npub === 'npub1508dflhuqm2rd3xtcmumukxkwwnrpz3hvszxt9tdjmd2zdry2yuqtx9r62') {
+        image = 'https://image.nostr.build/fb002b13790ddac2a1e3a3981322c1a004143306047923dc0ae85eeff95ebe36.jpg'
+      } 
+      else if (npub === 'npub1ytrn8t6yeehhkgarfkd7hxdnpy665zfxkhd6gnjdm6wzmkjqjnlsgnz5r2') {
+        image = 'https://kojira.io/nostrchan4.png'
+      } 
       else if (npub === 'npub1hk8wmj288k48ezpqe9ptw3rkkmucue6c60gs9rtjk60ftpp9qxlqv2xhle') {
         image = 'https://kojira.io/nostrchan0.jpg'
       } 
@@ -2144,7 +2169,7 @@ const Test = () => {
         image = 'https://image.nostr.build/2e25952eaea7b082c4f179c89e06dbbd4e90f6e78acec11e3140d4059bc9ded7.jpg'
       } 
       else if (npub === 'npub15ttxzgfcf2yr0xc0zcggdty5v58n388jgnryl5xjpykzex9mwcfsfpuj93') {
-        image = 'https://kouhouyoukai.github.io/images/shadow-cat-icon-800.svg'
+        image = 'https://statesch.zitrus.haus/images/citrus-box-trapped-800.svg'
       } 
       else if (npub === 'npub17fqvnsj3ps7x856jttg3a5fswaqaphl7eh4nuhxhmgfrjmqvp2rqrcuyff') {
         image = 'https://image.nostr.build/5361bf7421c2c51c42ee39277f3837d9f612086c6c6ddf9b4837b6a2fe3af4cd.jpg'
@@ -2853,7 +2878,7 @@ const Test = () => {
         image = 'https://image.nostr.build/c0b8f68cccc416d9c5d918089ba36ac4bb72a3355e8166ad1599234a6880b6f6.jpg'
       } 
       else if (npub === 'npub1tzfhjkqrdnk7j4djtwfftqupgzazm6kt35vnnmv35sd7y4z7dx2qzhkje9') {
-        image = 'https://pbs.twimg.com/profile_images/1684180526624821250/KYn7m0nr_400x400.jpg'
+        image = 'https://cdn.nostrcheck.me/58937958036cede955b25b9295838140ba2deacb8d1939ed91a41be2545e6994/3b6584a8a9ae0779d3f8aefe1ae80e15396d96ad8742f696533a8b7dc27ababa.webp'
       } 
       else if (npub === 'npub1r0vdvgzw55q55t4xhe05xj28n5xt3s0n7jwdrdlm0p972xzmp2wq36390z') {
         image = 'https://pbs.twimg.com/profile_images/1198535120396808192/sDzOF2sc_400x400.png'
@@ -9684,7 +9709,9 @@ const Test = () => {
           <p>now:{dateToUnix(now.current)}</p>
           <p>untilValue:{untilValue}</p>
 	  <p>links:</p>
+	  <a href="https://nostter.app/home" target="_blank">nostter</a>-
 	  <a href="https://lumilumi.app" target="_blank">lumilumi</a>-
+	  <a href="https://nos-haiku.vercel.app" target="_blank">ノスハイク</a>-
 	  <a href="https://jumble.social" target="_blank">Jumble</a>-
 	  <a href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt" target="_blank">nsec.app</a>-
 	  <a href="https://nostrends.vercel.app" target="_blank">nostrends</a>-
