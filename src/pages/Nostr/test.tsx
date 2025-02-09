@@ -19,7 +19,8 @@ const Test = () => {
 
   let noteCount = 0;
 
-untilValue = 1739091313;  // repost image size
+//  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu)
+//  untilValue = 1739091313;  // repost image size
 //  untilValue = 1739089652;  // inlineImage
 //  untilValue = 1739087698;  // Error: hexToBytes
 //  untilValue = 1739008994;  // kind:1111 NG
@@ -535,8 +536,52 @@ untilValue = 1739091313;  // repost image size
 
 ////////////////////////////////////////////////
 
+
       for(let h=0; h<note.tags.length; h++)  {
-        else if(note.tags[h][0] === "client") {  // client gossip 
+        let marker = "";
+        if(note.tags[h][3] != undefined) {
+          marker = note.tags[h][3] + " "
+        }
+
+        if(eventLinkUrlText1 === "") {
+          event1Id = note.tags[h][1].substring(0,2);
+          eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
+        }
+        else if(eventLinkUrlText2 === "") {
+          if(marker === "" && note.kind === 1) {  // 1:text
+            eventLinkUrlText2  = "__#e(" + event1Id + ")";
+          }
+          event2Id = note.tags[h][1].substring(0,2);
+          eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
+        }
+        else if(eventLinkUrlText3 === "") {
+          eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
+          if(marker === "reply ") {
+            eventLinkUrlText3  = "__#e(" + event2Id + ")";
+          }
+        }
+        else if(eventLinkUrlText4 === "") {
+          eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
+          if(marker === "reply ") {
+            eventLinkUrlText4  = "__#e(" + event2Id + ")";
+          }
+        }
+        else if(eventLinkUrlText5 === "") {
+          eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
+          if(marker === "reply ") {
+            eventLinkUrlText5  = "__#e(" + event2Id + ")";
+          }
+        }
+        else if(eventLinkUrlText6 === "") {
+          if(marker === "reply ") {
+            //eventLinkUrlText6  = "__#e(" + event2Id + ")";
+            //eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
+            eventLinkUrlText6 += String(eventCount) + "replies";
+          }
+        }
+
+
+        if(note.tags[h][0] === "client") {  // client gossip 
           client = "-via " + note.tags[h][1] + "-"
         }
         else if(note.tags[h][0] === "title") {  // title 
@@ -1435,6 +1480,7 @@ untilValue = 1739091313;  // repost image size
           <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
           <a href="https://flycat.club" target="_blank">flycat</a>
         </div>
+        <br />
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
 	<ul>{noteCount}</ul>

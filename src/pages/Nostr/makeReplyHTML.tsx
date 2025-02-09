@@ -147,10 +147,7 @@ export const makeReplyHTML = (note) => {
             }
           }
 
-          let marker = "";
-          if(note.tags[h][3] != undefined) {
-            marker = note.tags[h][3] + " "
-          }
+
 
           if(channelUrl == "") {
             //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
@@ -177,44 +174,6 @@ export const makeReplyHTML = (note) => {
           const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[h][1])
           //note.content = note.content + "##" + note.tags[h][1]  //debug
 
-
-          /*
-          if(eventLinkUrlText1 === "") {
-            event1Id = note.tags[h][1].substring(0,2);
-            eventLinkUrlText1  = "__#e(" + marker + event1Id + ")";  // event id
-          }
-          else if(eventLinkUrlText2 === "") {
-            if(marker === "" && note.kind === 1) {  // 1:text
-              eventLinkUrlText1  = "__#e(" + event1Id + ")";
-            }
-            event2Id = note.tags[h][1].substring(0,2);
-            eventLinkUrlText2  = "__#e(" + marker + event2Id + ")";
-          }
-          else if(eventLinkUrlText3 === "") {
-            eventLinkUrlText3  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-            if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-          }
-          else if(eventLinkUrlText4 === "") {
-            eventLinkUrlText4  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-            if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-          }
-          else if(eventLinkUrlText5 === "") {
-            eventLinkUrlText5  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ")";
-            if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-            }
-          }
-          else if(eventLinkUrlText6 === "") {
-            if(marker === "reply ") {
-              eventLinkUrlText2  = "__#e(" + event2Id + ")";
-              eventLinkUrlText6  = "__#e(" + marker + note.tags[h][1].substring(0,2) + ") ";
-	            eventLinkUrlText6 += String(eventCount) + "replies";
-            }
-          }*/
     
         } //else if L123
     }  //for

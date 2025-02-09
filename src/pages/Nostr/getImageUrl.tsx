@@ -11,6 +11,24 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === 'npub1tmy6wf4stq3jyaza23x2zzyzxwnsrvrygdprpgfffwzeyga9qapqqyc5t6') {
+      image = 'https://nostrcheck.me/media/5ec9a726b0582322745d544ca1088233a701b064434230a1294b859223a50742/b46cf2282312c3dfe5d4aeab590da54e6fc0339ff797f8d67fd9290e40a4a088.webp'
+    } 
     else if (npub === 'npub1svne455wa3rctcsnnhzjn2t9pldmgfpkd4rytewzsf8he02fysxsvgwhj4') {
       image = 'https://image.nostr.build/4be72dc02e01cfa2685912f4d1396d3719d0d1db841e3cc49c3247b94dc401b4.jpg'
     } 
