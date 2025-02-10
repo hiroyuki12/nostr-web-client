@@ -266,15 +266,15 @@ const Test = () => {
         // kind:42.Channel_Message
         if(note.kind === 42) {
           if(note.tags[h][0] == "e") {
-	    if(note.tags[h][1].includes(":")) {
-	      return
-	    }
+            if(note.tags[h][1].includes(":")) {
+              return
+            }
             //noteUrl = "https://nostter.app/channels/" 
-	    //  + nip19.neventEncode({id:note.tags[h][1]})
+            //  + nip19.neventEncode({id:note.tags[h][1]})
             noteUrl = "https://nos-haiku.vercel.app/keyword/" 
-	      + nip19.neventEncode({id:note.tags[h][1]})
-	  }
-	}
+              + nip19.neventEncode({id:note.tags[h][1]})
+          }
+	      }
       }
       const noteIdShort = note.id.substring(0,2)
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
@@ -426,196 +426,197 @@ const Test = () => {
     
 
 
-    let inlineImageHTML = makeInlineImageHTML(content);
+
+      let inlineImageHTML = makeInlineImageHTML(content);
 
 
 
 
-    // kind:20 for picture-first clients.
-    let pictureImage1Height = "0";
-    let pictureImage1Url = "";
+      // kind:20 for picture-first clients.
+      let pictureImage1Height = "0";
+      let pictureImage1Url = "";
 
-    if(note.kind === 20) {
-      content = "Picture] " + content
-      pictureImage1Height = "250";
+      if(note.kind === 20) {
+        content = "Picture] " + content
+        pictureImage1Height = "250";
+        for(let i=0; i<note.tags.length; i++) {
+          if(note.tags[i][0].includes("imeta")) {
+            for(let j=0; j<note.tags[j].length; j++) {
+              if(note.tags[i][j].includes("url")) {
+                pictureImage1Url = note.tags[i][j].replace('url ', '');
+              }
+            }
+          }
+        }
+      }
+
+
+  /////////////////////////////////
+  // make linkUrl
+
+      let linkUrl1 = "";
+      let linkUrlText1 = "";  // #r 1
+      let linkUrl2 = "";
+      let linkUrlText2 = "";  // #r 2
+      let linkUrl3 = "";
+      let linkUrlText3 = "";  // #r 3
+      let linkUrl4 = "";
+      let linkUrlText4 = "";  // #r 4
+      let linkUrl5 = "";
+      let linkUrlText5 = "";  // #r 5
+
       for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0].includes("imeta")) {
-          for(let j=0; j<note.tags[j].length; j++) {
-            if(note.tags[i][j].includes("url")) {
-              pictureImage1Url = note.tags[i][j].replace('url ', '');
+        if(note.tags[i][0] === "r") {
+          if(note.tags[i][1].includes("http")) {
+            if(linkUrl1 === "") {
+              linkUrl1 = note.tags[i][1];
+              linkUrlText1 = "__#r";
+                    if(!note.tags[i][1].includes("youtu")) {
+                content = content.replace(linkUrl1,"[@1]");
+              }
+            }
+            else if(linkUrl2 === "") {
+              linkUrl2 = note.tags[i][1];
+              linkUrlText2 = "__#r";
+                    if(!note.tags[i][1].includes("youtu")) {
+                content = content.replace(linkUrl2,"[@2]");
+              }
+            }
+            else if(linkUrl3 === "") {
+              linkUrl3 = note.tags[i][1];
+              linkUrlText3 = "__#r";
+                    if(!note.tags[i][1].includes("youtu")) {
+                content = content.replace(linkUrl2,"[@3]");
+              }
+            }
+            else if(linkUrl4 === "") {
+              linkUrl4 = note.tags[i][1];
+              linkUrlText4 = "__#r";
+            }
+            else if(linkUrl5 === "") {
+              linkUrl5 = note.tags[i][1];
+              linkUrlText5 = "__#r";
             }
           }
         }
       }
-    }
 
+  //////////////////////////////
+  // make iframe, content
+        
+        // make iframe, content
+      for(let i=0; i<note.tags.length; i++) {
+        let tmpWord = "";
+        let tmpIframe = "";
+        let tmpUrl = "";
+        if(i === 0) {
+          tmpWord = "[@1]";
+          tmpUrl = linkUrl1;
+        }
+        else if(i === 1) {
+          tmpWord = "[@2]";
+          tmpUrl = linkUrl2;
+        }
+        else if(i === 2) {
+          tmpWord = "[@3]";
+          tmpUrl = linkUrl3;
+        }
 
-/////////////////////////////////
-// make linkUrl
-
-    let linkUrl1 = "";
-    let linkUrlText1 = "";  // #r 1
-    let linkUrl2 = "";
-    let linkUrlText2 = "";  // #r 2
-    let linkUrl3 = "";
-    let linkUrlText3 = "";  // #r 3
-    let linkUrl4 = "";
-    let linkUrlText4 = "";  // #r 4
-    let linkUrl5 = "";
-    let linkUrlText5 = "";  // #r 5
-
-    for(let i=0; i<note.tags.length; i++) {
-      if(note.tags[i][0] === "r") {
-        if(note.tags[i][1].includes("http")) {
-          if(linkUrl1 === "") {
-            linkUrl1 = note.tags[i][1];
-            linkUrlText1 = "__#r";
-                  if(!note.tags[i][1].includes("youtu")) {
-              content = content.replace(linkUrl1,"[@1]");
+        if(tmpUrl != "") {
+          if(tmpUrl.includes("music.apple.com")) {
+            const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
+            //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
+            tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+          }
+          else if(tmpUrl.includes("open.spotify.com")) {
+            const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
+            tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+          }
+          else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
+            //content = content.replace(tmp2[i], "");
+            const id = tmpUrl.replace("x.com","twitter.com"); 
+            tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+          }
+          else if(!tmpUrl.includes("googleusercontent.com/")){
+            tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+          }
+          // text link
+          if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
+            // remove image link OGP
+            if(!tmpUrl.includes(".mov") 
+              && !tmpUrl.includes(".jpeg")  
+              && !tmpUrl.includes(".jpg") 
+              && !tmpUrl.includes(".mp4") 
+              && !tmpUrl.includes(".png") 
+              && !tmpUrl.includes(".gif") 
+              && !tmpUrl.includes(".webp")) {
+              content = content.replace(tmpWord, tmpIframe);
             }
-          }
-          else if(linkUrl2 === "") {
-            linkUrl2 = note.tags[i][1];
-            linkUrlText2 = "__#r";
-                  if(!note.tags[i][1].includes("youtu")) {
-              content = content.replace(linkUrl2,"[@2]");
+            else {
+              content = content.replace(tmpWord, "");
             }
-          }
-          else if(linkUrl3 === "") {
-            linkUrl3 = note.tags[i][1];
-            linkUrlText3 = "__#r";
-                  if(!note.tags[i][1].includes("youtu")) {
-              content = content.replace(linkUrl2,"[@3]");
-            }
-          }
-          else if(linkUrl4 === "") {
-            linkUrl4 = note.tags[i][1];
-            linkUrlText4 = "__#r";
-          }
-          else if(linkUrl5 === "") {
-            linkUrl5 = note.tags[i][1];
-            linkUrlText5 = "__#r";
-          }
-        }
-      }
-    }
-
-//////////////////////////////
-// make iframe, content
-      
-      // make iframe, content
-    for(let i=0; i<note.tags.length; i++) {
-      let tmpWord = "";
-      let tmpIframe = "";
-      let tmpUrl = "";
-      if(i === 0) {
-        tmpWord = "[@1]";
-        tmpUrl = linkUrl1;
-      }
-      else if(i === 1) {
-        tmpWord = "[@2]";
-        tmpUrl = linkUrl2;
-      }
-      else if(i === 2) {
-        tmpWord = "[@3]";
-        tmpUrl = linkUrl3;
-      }
-
-      if(tmpUrl != "") {
-        if(tmpUrl.includes("music.apple.com")) {
-          const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
-          //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-          tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-        }
-        else if(tmpUrl.includes("open.spotify.com")) {
-          const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
-          tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
-        }
-        else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
-          //content = content.replace(tmp2[i], "");
-          const id = tmpUrl.replace("x.com","twitter.com"); 
-          tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-        }
-        else if(!tmpUrl.includes("googleusercontent.com/")){
-          tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-        }
-        // text link
-        if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
-          // remove image link OGP
-          if(!tmpUrl.includes(".mov") 
-            && !tmpUrl.includes(".jpeg")  
-            && !tmpUrl.includes(".jpg") 
-            && !tmpUrl.includes(".mp4") 
-            && !tmpUrl.includes(".png") 
-            && !tmpUrl.includes(".gif") 
-            && !tmpUrl.includes(".webp")) {
-            content = content.replace(tmpWord, tmpIframe);
           }
           else {
-            content = content.replace(tmpWord, "");
+            content = content.replace(tmpWord, tmpUrl);
+          }
+        }
+      }
+
+
+
+
+      let tagUrl = "";  // #t
+
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "t") {
+          let tag = note.tags[i][1];
+          if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
+          if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
+          if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
+          if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
+      //	  tagUrl = "https://snort.social/t/" + tag;
+          tagUrl = "https://nostrudel.ninja/#/t/" + tag;
+
+          if(!content.includes("/#" + tag)) {
+            content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
+          }
+        }
+      }
+
+
+
+
+
+
+      // #[0], #[1] (#p)
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "p") {
+          const npub = nip19.npubEncode(note.tags[i][1])
+          //const toLinkUrl =  "https://nostter.app/" + npub
+          const toLinkUrl =  "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
+          content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
+                if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
+                  content = content.replace('#[' + i + ']',"@もちもち");
+                }
+          else if(npub === "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
+                  content = content.replace('#[' + i + ']',"@やぶみちゃん");
+          }
+          else if(npub === "npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t") {
+                  content = content.replace('#[' + i + ']',"@うにゅう");
+          }
+          else if(npub === "npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg") {
+                  content = content.replace('#[' + i + ']',"@Yodogawa-Janken");
           }
         }
         else {
-          content = content.replace(tmpWord, tmpUrl);
+          //const eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
+          //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
+          //const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
+          const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
+          //const aa = note.tags[i][1]
+          content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
         }
       }
-    }
-
-
-
-
-    let tagUrl = "";  // #t
-
-    for(let i=0; i<note.tags.length; i++) {
-      if(note.tags[i][0] === "t") {
-        let tag = note.tags[i][1];
-        if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
-        if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
-        if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
-        if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
-    //	  tagUrl = "https://snort.social/t/" + tag;
-        tagUrl = "https://nostrudel.ninja/#/t/" + tag;
-
-        if(!content.includes("/#" + tag)) {
-          content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
-        }
-      }
-    }
-
-
-
-
-
-
-    // #[0], #[1] (#p)
-    for(let i=0; i<note.tags.length; i++) {
-      if(note.tags[i][0] === "p") {
-        const npub = nip19.npubEncode(note.tags[i][1])
-        //const toLinkUrl =  "https://nostter.app/" + npub
-        const toLinkUrl =  "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
-        content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
-              if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
-                content = content.replace('#[' + i + ']',"@もちもち");
-              }
-        else if(npub === "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
-                content = content.replace('#[' + i + ']',"@やぶみちゃん");
-        }
-        else if(npub === "npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t") {
-                content = content.replace('#[' + i + ']',"@うにゅう");
-        }
-        else if(npub === "npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg") {
-                content = content.replace('#[' + i + ']',"@Yodogawa-Janken");
-        }
-      }
-      else {
-        //const eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
-        //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
-        //const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
-        const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
-        //const aa = note.tags[i][1]
-        content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
-      }
-    }
 
 
 
@@ -623,310 +624,310 @@ const Test = () => {
 
 
 
-    // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
+      // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
 
-    let quoteLinksHTML = makeQuoteLinksHTML(content);
-    
-    let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
-    for(let i=0; i<wordsNostr.length; i++) {
-      let tmp = wordsNostr[i];
-      if(tmp.includes("nostr:note1") //|| 
-        // tmp.includes("nostr:naddr1") || 
-        // tmp.includes("nostr:nevent1") || 
-        // tmp.includes("nostr:nprofile1") || 
-        // tmp.includes("nostr:npub1")
-      ) {
-          // contentからnostr:note1を削除
-          content = content.replace(wordsNostr[i], '');
-        }
-    }
-
-
-
-
-    
-
-
-
-
-    // nevent1
-    if(content.includes("\nnevent1")) {
-      let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+      let quoteLinksHTML = makeQuoteLinksHTML(content);
+      
+      let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       for(let i=0; i<wordsNostr.length; i++) {
-        if(wordsNostr[i].includes("nevent1")) {
-          //content = wordsNostr[1]
-          let quoteBaseUrl = "https://snort.social/e/"
-          quoteLinkUrl = quoteBaseUrl + wordsNostr[i]
-          content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nevent1)</a>');
+        let tmp = wordsNostr[i];
+        if(tmp.includes("nostr:note1") //|| 
+          // tmp.includes("nostr:naddr1") || 
+          // tmp.includes("nostr:nevent1") || 
+          // tmp.includes("nostr:nprofile1") || 
+          // tmp.includes("nostr:npub1")
+        ) {
+            // contentからnostr:note1を削除
+            content = content.replace(wordsNostr[i], '');
+          }
+      }
+
+
+
+
+      
+
+
+
+
+      // nevent1
+      if(content.includes("\nnevent1")) {
+        let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+        for(let i=0; i<wordsNostr.length; i++) {
+          if(wordsNostr[i].includes("nevent1")) {
+            //content = wordsNostr[1]
+            let quoteBaseUrl = "https://snort.social/e/"
+            quoteLinkUrl = quoteBaseUrl + wordsNostr[i]
+            content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nevent1)</a>');
+          }
         }
       }
-    }
 
 
 
 
-    let quoteId1 = "";
-    let quoteUrl1 = ""
-    let quoteIdText1 = "";  // #q 1
+      let quoteId1 = "";
+      let quoteUrl1 = ""
+      let quoteIdText1 = "";  // #q 1
 
-    for(let i=0; i<note.tags.length; i++) {
-      //quoteUrl1 = "https://snort.social/e/" + quoteId1;
-      //quoteUrl1 = "https://nostr.com/" + quoteId1;
-      //quoteUrl1 = "https://iris.to/post/" + quoteId1;
-      //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
-      let quoteBaseUrl = "https://nostter.app/"
-      if(note.tags[i][0] === "q") {
-        if(quoteId1 === "") {
-          quoteId1 = note.tags[i][1];  // event id
-          quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId1);
-          quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+      for(let i=0; i<note.tags.length; i++) {
+        //quoteUrl1 = "https://snort.social/e/" + quoteId1;
+        //quoteUrl1 = "https://nostr.com/" + quoteId1;
+        //quoteUrl1 = "https://iris.to/post/" + quoteId1;
+        //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
+        let quoteBaseUrl = "https://nostter.app/"
+        if(note.tags[i][0] === "q") {
+          if(quoteId1 === "") {
+            quoteId1 = note.tags[i][1];  // event id
+            quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId1);
+            quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+          }
         }
       }
-    }
 
 
-/////////////////////////////////
-// Add <a href>      
+  /////////////////////////////////
+  // Add <a href>      
 
-    // Add <a href>
-    let iframe1 = "";
-    let iframe2 = "";
-    let youtubeId = "";
-    let httpLinkUrl1 = "";
-    let httpLinkUrlText1 = "";  // # https://
-    if(content.includes("https://") || content.includes("youtu.be")) {
-      let tmp = content;
-      for(let i=0; i<10; i++) {
-        tmp = tmp.replace('\\n\\n',' ');
-        tmp = tmp.replace('\\n',' ');
-        tmp = tmp.replace('\n',' ');
-        tmp = tmp.replace('　',' ');  // zenkaku space
-      }
-      let tmp2 = tmp.split(' ');
-      let iframeCount = 0;
-      for(let i=0; i<tmp2.length; i++) {
-        if(!tmp2[i].includes("\"https://") && tmp2[i].includes("https://")) {  // not <a href="https://>
-          if(tmp2[i] == "https://") {
-            tmp2[i] = "";
-          }
-          if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
-            let id = tmp2[i];  // tmp2は' 'でsplit済み, idに入れる
-
-            let target = 'youtube.com/watch?v=';
-            // watch?v= より後を取得
-            if(id.includes(target)) {
-              id = id.substring(id.indexOf(target) + target.length, id.length);
+      // Add <a href>
+      let iframe1 = "";
+      let iframe2 = "";
+      let youtubeId = "";
+      let httpLinkUrl1 = "";
+      let httpLinkUrlText1 = "";  // # https://
+      if(content.includes("https://") || content.includes("youtu.be")) {
+        let tmp = content;
+        for(let i=0; i<10; i++) {
+          tmp = tmp.replace('\\n\\n',' ');
+          tmp = tmp.replace('\\n',' ');
+          tmp = tmp.replace('\n',' ');
+          tmp = tmp.replace('　',' ');  // zenkaku space
+        }
+        let tmp2 = tmp.split(' ');
+        let iframeCount = 0;
+        for(let i=0; i<tmp2.length; i++) {
+          if(!tmp2[i].includes("\"https://") && tmp2[i].includes("https://")) {  // not <a href="https://>
+            if(tmp2[i] == "https://") {
+              tmp2[i] = "";
             }
-            // /live/ より後を取得
-            target = '/live/'
-            if(id.includes(target)) {
-              id = id.substring(id.indexOf(target) + target.length, id.length);
-            }
-            // youtube.be/ より後を取得
-            target = 'youtu.be/'
-            if(id.includes(target)) {
-              id = id.substring(id.indexOf(target) + target.length, id.length);
-            }
+            if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
+              let id = tmp2[i];  // tmp2は' 'でsplit済み, idに入れる
 
-            // &より前を取得
-            target = '&'
-            if(id.includes(target)) {
-              id = id.substring(0, id.indexOf(target));
-            }
-            // ","sig より前を取得
-            target = '","sig'
-            if(id.includes(target)) {
-              id = id.substring(0, id.indexOf(target));
-            }
-
-            // contentから削除
-            content = content.replace(tmp2[i], "");
-
-            // httpLink __YouTube
-            httpLinkUrl1 = tmp2[i];
-            if(tmp2[i].includes("/live/")) {
-              httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
-            }
-            httpLinkUrlText1 = '__YouTube';
-
-            iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-            
-            youtubeId = 'id = ' + id;
-            //content = content + "<br />id=" + id  // Debug id表示
-          }
-          else if(tmp2[i].includes("open.spotify.com")) {
-            content = content.replace(tmp2[i], "");
-            const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
-            iframe1 = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
-          }
-          else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
-            content = content.replace(tmp2[i], "");
-            const id = tmp2[i]; 
-            iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-            httpLinkUrl1 = tmp2[i];
-            httpLinkUrlText1 = '__twitter';
-          }
-          //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
-          else {
-            iframeCount++;
-            const url = tmp2[i];
-            // text link
-            if(  !tmp2[i].includes("codepen.io")
-              && !tmp2[i].includes("ctoa-") 
-              && !tmp2[i].includes("nostr.cooking") 
-              && !tmp2[i].includes('https://nostr.build/profilepic.php' )
-              //&& tmp2[i] != 'https://nostr.build/profilepic.php' 
-              && tmp2[i].length != 0) {
-              // remove image link
-              if(  tmp2[i].includes(".mp4") 
-                || tmp2[i].includes("?set=set4") 
-                || tmp2[i].includes(".png") 
-                || tmp2[i].includes(".mov") 
-                || tmp2[i].includes(".jpeg") 
-                || tmp2[i].includes(".jpg") 
-                || tmp2[i].includes("@jpeg")  // threads img
-                || tmp2[i].includes(".webp")) {
-                      content = content.replace(tmp2[i], "");
+              let target = 'youtube.com/watch?v=';
+              // watch?v= より後を取得
+              if(id.includes(target)) {
+                id = id.substring(id.indexOf(target) + target.length, id.length);
               }
-              // OGP
-              else {
-                // ryusoku
-                if(tmp2[i].includes("https://nostr-hotter-site.vercel.app")){
-                  content = content.replace(tmp2[i], '<a href="https://nostr-hotter-site.vercel.app" target="_blank">https://nostr-hotter-site.vercel.app/</a>'); 
+              // /live/ より後を取得
+              target = '/live/'
+              if(id.includes(target)) {
+                id = id.substring(id.indexOf(target) + target.length, id.length);
+              }
+              // youtube.be/ より後を取得
+              target = 'youtu.be/'
+              if(id.includes(target)) {
+                id = id.substring(id.indexOf(target) + target.length, id.length);
+              }
+
+              // &より前を取得
+              target = '&'
+              if(id.includes(target)) {
+                id = id.substring(0, id.indexOf(target));
+              }
+              // ","sig より前を取得
+              target = '","sig'
+              if(id.includes(target)) {
+                id = id.substring(0, id.indexOf(target));
+              }
+
+              // contentから削除
+              content = content.replace(tmp2[i], "");
+
+              // httpLink __YouTube
+              httpLinkUrl1 = tmp2[i];
+              if(tmp2[i].includes("/live/")) {
+                httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
+              }
+              httpLinkUrlText1 = '__YouTube';
+
+              iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+              
+              youtubeId = 'id = ' + id;
+              //content = content + "<br />id=" + id  // Debug id表示
+            }
+            else if(tmp2[i].includes("open.spotify.com")) {
+              content = content.replace(tmp2[i], "");
+              const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
+              iframe1 = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+            }
+            else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
+              content = content.replace(tmp2[i], "");
+              const id = tmp2[i]; 
+              iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+              httpLinkUrl1 = tmp2[i];
+              httpLinkUrlText1 = '__twitter';
+            }
+            //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
+            else {
+              iframeCount++;
+              const url = tmp2[i];
+              // text link
+              if(  !tmp2[i].includes("codepen.io")
+                && !tmp2[i].includes("ctoa-") 
+                && !tmp2[i].includes("nostr.cooking") 
+                && !tmp2[i].includes('https://nostr.build/profilepic.php' )
+                //&& tmp2[i] != 'https://nostr.build/profilepic.php' 
+                && tmp2[i].length != 0) {
+                // remove image link
+                if(  tmp2[i].includes(".mp4") 
+                  || tmp2[i].includes("?set=set4") 
+                  || tmp2[i].includes(".png") 
+                  || tmp2[i].includes(".mov") 
+                  || tmp2[i].includes(".jpeg") 
+                  || tmp2[i].includes(".jpg") 
+                  || tmp2[i].includes("@jpeg")  // threads img
+                  || tmp2[i].includes(".webp")) {
+                        content = content.replace(tmp2[i], "");
                 }
+                // OGP
                 else {
-                  const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-                  content = content.replace(tmp2[i], tmpIframe);
-                  httpLinkUrl1 = tmp2[i];
-                  if(httpLinkUrl1.includes("music.apple.com")) {
-                      httpLinkUrlText1 = '__Apple Music';
-                  }
-                  else if(httpLinkUrl1.includes("/x.com/")) {
-                      httpLinkUrlText1 = '__X(Twitter)';
-                  }
-                  else if(httpLinkUrl1.includes("/zenn.dev/")) {
-                      httpLinkUrlText1 = '__Zenn';
+                  // ryusoku
+                  if(tmp2[i].includes("https://nostr-hotter-site.vercel.app")){
+                    content = content.replace(tmp2[i], '<a href="https://nostr-hotter-site.vercel.app" target="_blank">https://nostr-hotter-site.vercel.app/</a>'); 
                   }
                   else {
-                    httpLinkUrlText1 = '__https_iframe';
+                    const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    content = content.replace(tmp2[i], tmpIframe);
+                    httpLinkUrl1 = tmp2[i];
+                    if(httpLinkUrl1.includes("music.apple.com")) {
+                        httpLinkUrlText1 = '__Apple Music';
+                    }
+                    else if(httpLinkUrl1.includes("/x.com/")) {
+                        httpLinkUrlText1 = '__X(Twitter)';
+                    }
+                    else if(httpLinkUrl1.includes("/zenn.dev/")) {
+                        httpLinkUrlText1 = '__Zenn';
+                    }
+                    else {
+                      httpLinkUrlText1 = '__https_iframe';
+                    }
                   }
                 }
               }
-            }
-            else {
-              //content = content.replace(tmp2[i], "");
-              content = content.replace(tmp2[i], '<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
+              else {
+                //content = content.replace(tmp2[i], "");
+                content = content.replace(tmp2[i], '<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
+              }
             }
           }
         }
       }
-    }
 
 
 
 
 
-    let contentWarning = "";
-    let contentWarningText = "";
+      let contentWarning = "";
+      let contentWarningText = "";
 
-    for(let i=0; i<note.tags.length; i++) {
-      if(note.tags[i][0] === "content-warning") {  // NIP-36
-        contentWarning = "[!!content-warning!!]";
-        contentWarningText = note.tags[i][1];
-      }
-    }
-    
-    for(let i=0; i<note.tags.length; i++) {
-      if(note.tags[i][0] === "emoji") {
-        const emojiURL = note.tags[i][2];
-        for(let j=0; j<100; j++) {
-                content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "content-warning") {  // NIP-36
+          contentWarning = "[!!content-warning!!]";
+          contentWarningText = note.tags[i][1];
         }
       }
-    }
-    for(let j=0; j<10; j++) {
-      content = content.replace(":bow:","🙇");
-    }
+      
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "emoji") {
+          const emojiURL = note.tags[i][2];
+          for(let j=0; j<100; j++) {
+                  content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
+          }
+        }
+      }
+      for(let j=0; j<10; j++) {
+        content = content.replace(":bow:","🙇");
+      }
 
 
 
 
 
-    let statusString = makeStatusString(note);
+      let statusString = makeStatusString(note);
 
 
 
 
 
 
-    let bookmark = "";
-    let bookmarkUrl= "";
+      let bookmark = "";
+      let bookmarkUrl= "";
 
-    bookmark = "-bookmark"
-    //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
-    bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
+      bookmark = "-bookmark"
+      //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
+      bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
 
-    let nozokimado = "-nozoki"
-    //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
-    let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
-
-
+      let nozokimado = "-nozoki"
+      //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+      let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
 
 
 
-    for(let i=0; i<30; i++) {
-      content = content.replace('\n', '<br />');
-    }
 
-    return (
-      <li className="item" key={index}>
-        <div className="card-container">
-          <div className="card-text">
-            <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
-            {contentWarning}{contentWarningText}{contentWarning}
-            {statusString}
-            {parse(replyHTML)}
-            {parse(content)}
-            {youtubeId}
-            {follow}
-            {parse(iframe1)}
-            {parse(iframe2)}
-            {parse(quoteLinksHTML)}
-            {tagsLinkUrlText1}
-            {tagsLinkUrlText2}
-            {tagsLinkUrlText3}
-            {tagsLinkUrlText4}
-            {tagsLinkUrlText5}
-            {tagsLinkUrlText6}
-            <a href={linkUrl1} target="_blank">{linkUrlText1}</a>
-            <a href={linkUrl2} target="_blank">{linkUrlText2}</a>
-            <a href={linkUrl3} target="_blank">{linkUrlText3}</a>
-            <a href={linkUrl4} target="_blank">{linkUrlText4}</a>
-            <a href={linkUrl5} target="_blank">{linkUrlText5}</a>
-            <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
-            <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
-            {parse(inlineImageHTML)}
-            <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
-      {alt}
-            <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
-            -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-            ({noteIdShort}){client}
-            <a href={proxyUrl} target="_blank">{proxy}</a><br />
-            <a href={freefromUrl} target="_blank">-FreeFrom</a>
-            <a href={nostterUrl} target="_blank">-nostter</a>
-            <a href={lumilumiUrl} target="_blank">-lumilumi</a>
-            <a href={nosHaikuUrl} target="_blank">-Nos Haiku</a>
-            <a href={noStrudelUrl} target="_blank">-noStrudel</a>
-            <a href={checkerUrl} target="_blank">-checker</a>
-            <a href={irisUrl} target="_blank">-Iris</a>
-            <a href={snortUrl} target="_blank">-Snort</a>
-            <a href={bookmarkUrl} target="_blank">{bookmark}</a>
-            <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
-            <a href={streamingUrl} target="_blank">{streaming}</a>
+
+      for(let i=0; i<30; i++) {
+        content = content.replace('\n', '<br />');
+      }
+
+      return (
+        <li className="item" key={index}>
+          <div className="card-container">
+            <div className="card-text">
+              <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+              {contentWarning}{contentWarningText}{contentWarning}
+              {statusString}
+              {parse(replyHTML)}
+              {parse(content)}
+              {youtubeId}
+              {follow}
+              {parse(iframe1)}
+              {parse(iframe2)}
+              {parse(quoteLinksHTML)}
+              {tagsLinkUrlText1}
+              {tagsLinkUrlText2}
+              {tagsLinkUrlText3}
+              {tagsLinkUrlText4}
+              {tagsLinkUrlText5}
+              {tagsLinkUrlText6}
+              <a href={linkUrl1} target="_blank">{linkUrlText1}</a>
+              <a href={linkUrl2} target="_blank">{linkUrlText2}</a>
+              <a href={linkUrl3} target="_blank">{linkUrlText3}</a>
+              <a href={linkUrl4} target="_blank">{linkUrlText4}</a>
+              <a href={linkUrl5} target="_blank">{linkUrlText5}</a>
+              <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
+              <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
+              {parse(inlineImageHTML)}
+              <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
+        {alt}
+              <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
+              -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
+              ({noteIdShort}){client}
+              <a href={proxyUrl} target="_blank">{proxy}</a><br />
+              <a href={freefromUrl} target="_blank">-FreeFrom</a>
+              <a href={nostterUrl} target="_blank">-nostter</a>
+              <a href={lumilumiUrl} target="_blank">-lumilumi</a>
+              <a href={nosHaikuUrl} target="_blank">-Nos Haiku</a>
+              <a href={noStrudelUrl} target="_blank">-noStrudel</a>
+              <a href={checkerUrl} target="_blank">-checker</a>
+              <a href={irisUrl} target="_blank">-Iris</a>
+              <a href={snortUrl} target="_blank">-Snort</a>
+              <a href={bookmarkUrl} target="_blank">{bookmark}</a>
+              <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
+              <a href={streamingUrl} target="_blank">{streaming}</a>
+            </div>
           </div>
-        </div>
-      </li>
-    );  // return
+        </li>
+      );  // return
     });  // list.map
     return posts;
   }  // renderImageList
