@@ -10,6 +10,7 @@ import {getImageURL} from './getImageURL'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
 import {makeReplyHTML} from './makeReplyHTML'
 import {makeStatusString} from './makeStatusString'
+import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
 
 
 const Test = () => {
@@ -20,7 +21,9 @@ const Test = () => {
 
   let noteCount = 0;
 
-  untilValue = 1739169149;  // userStatus test
+//  untilValue = 1739175991;  // nostr:npub1 todo quote
+//  untilValue = 1686933213;  // quote(nostr:note1) fix
+//  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739169439;  // httpが２つ。画像表示NG
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK
 //  untilValue = 1739159139;  // twitter large ok. x.com
@@ -534,7 +537,7 @@ const Test = () => {
           tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
         }
         else if(!tmpUrl.includes("googleusercontent.com/")){
-                tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+          tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
         }
         // text link
         if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
@@ -616,115 +619,32 @@ const Test = () => {
 
 
 
+
+
+
+
     // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
-    let quoteLinkUrl = "";
-    let quoteLinkText = "";
-    let quoteLinkUrl2	 = "";
-    let quoteLinkText2 = "";
-    let quoteLinkUrl3	 = "";
-    let quoteLinkText3 = "";
+
+    let quoteLinksHTML = makeQuoteLinksHTML(content);
+    
     let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
-    // nostr:note1, nostr:naddr1, nostr:nevent1
-    if(content != undefined &&
-      (content.includes("nostr:note1") || 
-        content.includes("nostr:naddr1") || 
-        content.includes("nostr:nevent1") || 
-        content.includes("nostr:nprofile1") || 
-        content.includes("nostr:npub1"))
-    ) {
-      for(let i=0; i<wordsNostr.length; i++) {
-        if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
-          //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
-                //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
-                //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
-                const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
-          content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
-          if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
-            content = content.replace('(to)','@やぶみちゃん');
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg') {
-            content = content.replace('(to)','@Yodogawa-Janken');
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub1ttqyyl8stz9wtj0sn25qp6vah0jdcxwpdtaaxg4efsqkczz7rsxshjpp3x') {
-            content = content.replace('(to)','@mahjong');
-          }
-        
-          else if(wordsNostr[i].replace('nostr:','') === 'npub1f6rvmwc76arl7sxx2vparlzx8cg2ajc3xpymqh7yx97znccue2hs5mkavc') {
-            content = content.replace('(to)','@ぬるぽ・ｶﾞｯ');  //@nullpoga
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n') {
-            content = content.replace('(to)',"@もちもち");
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub19we2h0793y4hhk500r2ndqkez0xf53rtghs3j20sjdwclh7tgz7s36kl6t') {
-            content = content.replace('(to)',"@うにゅう");
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub17dxnfw2vrhgtk4fgqdmpuqxv05u9raau3w0shay7msmr0dzs4m7s6ng4yl') {
-            content = content.replace('(to)',"@ログボちゃん(休止中)");
-          }
-          else if(wordsNostr[i].replace('nostr:','') === 'npub1pp79ruvjd7xned8lgh6n4rhz4pg3els3x5n6kr58l8zcyysp5c0qrkan2p') {
-            content = content.replace('(to)',"@日本人ユーザー (bot))");
-          }
+    for(let i=0; i<wordsNostr.length; i++) {
+      let tmp = wordsNostr[i];
+      if(tmp.includes("nostr:note1") //|| 
+        // tmp.includes("nostr:naddr1") || 
+        // tmp.includes("nostr:nevent1") || 
+        // tmp.includes("nostr:nprofile1") || 
+        // tmp.includes("nostr:npub1")
+      ) {
+          // contentからnostr:note1を削除
+          content = content.replace(wordsNostr[i], '');
         }
-        else if(wordsNostr[i].includes("nostr:note1") || 
-          wordsNostr[i].includes("nostr:nevent1")) {  
-          //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
-          let quoteBaseUrl = "https://snort.social/e/"
-          if(quoteLinkText === "") {
-            //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-            //quoteLinkUrl = "https://iris.to/post/" + wordsNostr[i].replace("nostr:",'') 
-            //quoteLinkUrl = "https://coracle.social/" + wordsNostr[i].replace("nostr:",'') 
-            //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
-            //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
-            //quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-            quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-            quoteLinkText = "";
-            if(content.includes("nevent1")) {
-              //quoteLinkText = quoteLinkText + wordsNostr[i];
-              //quoteLinkText = "(quote_nevent1)";
-              //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
-              //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
-              //let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-              let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-              content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
-            }
-            else {
-              content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
-            }
-          }
-          else if(quoteLinkText2 === "") {
-            quoteLinkUrl2 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-            content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">(quote)</a>');
-            quoteLinkText2 = "";
-            if(content.includes("nostr:nevent1")) {
-              //quoteLinkText2 = quoteLinkText2 + wordsNostr[i];
-            }
-          }
-          else if(quoteLinkText3 === "") {
-            quoteLinkUrl3 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-            content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl3 + '" target="_blank">(quote)</a>');
-            quoteLinkText3 = "";
-            if(content.includes("nostr:nevent1")) {
-              //quoteLinkText3 = quoteLinkText3 + wordsNostr[i];
-            }
-          }
-        }
-        else if(wordsNostr[i].includes("nostr:naddr1")) {
-          //content = content.replace(wordsNostr[i],'');
-          quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-          //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-          quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
-          //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
-          //quoteLinkText = "__(nostr:naddr1)";
-          //content = content + '[kind:' + note.kind + ']'
-          content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
-        }
-        else if(wordsNostr[i].includes("nostr:nprofile1")) {
-          quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-          content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:nprofile1)</a>');
-        }
-      }
     }
 
+
+
+
+    
 
 
 
@@ -971,8 +891,7 @@ const Test = () => {
             {follow}
             {parse(iframe1)}
             {parse(iframe2)}
-            <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
-            <a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
+            {parse(quoteLinksHTML)}
             {tagsLinkUrlText1}
             {tagsLinkUrlText2}
             {tagsLinkUrlText3}
