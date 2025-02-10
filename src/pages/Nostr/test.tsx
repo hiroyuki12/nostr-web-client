@@ -22,7 +22,7 @@ const Test = () => {
   let noteCount = 0;
 
 //  untilValue = 1739177954;  // nostr:nvent1 fix quote
-//  untilValue = 1739175991;  // nostr:npub1 todo quote
+  untilValue = 1739175991;  // nostr:npub1 todo quote
 //  untilValue = 1686933213;  // quote(nostr:note1) fix
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739169439;  // httpが２つ。画像表示NG
@@ -634,9 +634,9 @@ const Test = () => {
         let tmp = wordsNostr[i];
         if(tmp.includes("nostr:note1") || 
           // tmp.includes("nostr:naddr1") || 
-          tmp.includes("nostr:nevent1") //|| 
+          tmp.includes("nostr:nevent1") || 
           // tmp.includes("nostr:nprofile1") || 
-          // tmp.includes("nostr:npub1")
+          tmp.includes("nostr:npub1")
         ) {
             // contentからnostr:note1を削除
             content = content.replace(wordsNostr[i], '');

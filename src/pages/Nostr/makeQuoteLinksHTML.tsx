@@ -32,10 +32,23 @@ export const makeQuoteLinksHTML = (content) => {
         // todo
         if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
           //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
-                //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
-                //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
-                const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
-          content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
+          //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
+          //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
+          const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
+          if(quoteLinkText === "") {
+            //content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
+            quoteLinkText = "(to1)";
+            quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">(to1)</a>';
+          }
+          else if(quoteLinkText2 === "") {
+            quoteLinkText2 = "(to2)";
+            quoteLinkHTML2 = '<a href="' + toLinkUrl + '" target="_blank">(to2)</a>';
+          }
+          else if(quoteLinkText3 === "") {
+            quoteLinkText3 = "(to3)";
+            quoteLinkHTML3 = '<a href="' + toLinkUrl + '" target="_blank">(to3)</a>';
+          }
+
           if(wordsNostr[i].replace('nostr:','') === 'npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r') {
             content = content.replace('(to)','@やぶみちゃん');
           }
@@ -64,7 +77,7 @@ export const makeQuoteLinksHTML = (content) => {
         }
 
 
-        // fix note1, todo nevent1
+        // fixed
         else if(wordsNostr[i].includes("nostr:note1") || 
           wordsNostr[i].includes("nostr:nevent1")) {  
           //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
