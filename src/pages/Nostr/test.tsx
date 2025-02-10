@@ -19,6 +19,12 @@ const Test = () => {
 
   let noteCount = 0;
 
+// untilValue = 1739163316;  // Repost  
+//  untilValue = 1739159139;  // twitter large ok. x.com
+//  untilValue = 1739114442;  // あめさん @rain_256
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK
+//  untilValue = 1739114136;  // YouTube fix. nostter ok
+//  untilValue = 1739114201;  // YouTube repost NG. nostter ok
 //  untilValue = 1739113299;  // YouTube NG. youtube.com
 //  untilValue = 1739087698;  // Error: hexToBytes NG
 //  untilValue = 1739099394;  // Repost URL fix
@@ -53,7 +59,8 @@ const Test = () => {
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1694055016;  // \n\n NG?
 //  untilValue = 1739008290;  // youtube fix Delete After &
-//  untilValue = 1695999820;  // Apple Music OGP. fix
+//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK
+//  untilValue = 1695999820;  // Apple Music OGP. fix.
 //  untilValue = 1739012160;  // youtube live Repost ¥n fix
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
@@ -191,7 +198,7 @@ const Test = () => {
 //      untilValue = 1676750000; // 2023/2/19 4- 2023/2/17 23,+100,000
       //untilValue = 1676840000; // 2023/2/20 5- 2023/2/18 0,  +90,000
       //untilValue = 1676920000; // 2023/2/21 4- 2023/2/18 5,  +80,000
-      //untilValue = 1676990000; // 2023/2/21 23-2023/2/21 20, +10,000 nosaray
+//      untilValue = 1676990000; // 2023/2/21 23-2023/2/21 20, +10,000 nosaray
       //untilValue = 1677030000; // 2023/2/22-10 2023/2/21 23, +40,000
       //untilValue = 1677070000; // 2023/2/22 21-2023/2/22 18  +10,000
       //untilValue = 1677080000; // 2023/2/23 0- 2023/2/22 22  +10,000
@@ -205,13 +212,13 @@ const Test = () => {
       //untilValue = 1677440000; // 2023/2/27 4- 2023/2/26 23  +20,000
       //untilValue = 1677500000; // 2023/2/27 21-2023/2/27 19  +10,000
       //untilValue = 1677520000; // 2023/2/28 2- 2023/2/27 23  +20,000
-      //untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
+//      untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
 //      untilValue = 1677600000; // 2023/3/1 0-  2023/2/28 22, +10,000
 
       //until 1677700000, // 2023/3/2 4-  2023/3/2 1,  +100,000, limit 100
       //until 1677800000, // 2023/3/3 8-  2023/3/3 3,  +100,000 * 25
       //until 1677900000, // 2023/3/4 12- 2023/3/4 8,  +100,000
-//      untilValue = 1678000000; // 2023/3/5 16- 2023/3/5 13, +100,000
+      //untilValue = 1678000000; // 2023/3/5 16- 2023/3/5 13, +100,000
       //until 1678100000, // 2023/3/6 19- 2023/3/6 18, +100,000
       //until 1678200000, // 2023/3/7 23- 2023/3/7 19, +100,000
       //until 1678300000, // 2023/3/9 3-  2023/3/8 15, +100,000
@@ -242,7 +249,7 @@ const Test = () => {
 
       //until 1680300000, // 2023/4/1 6- 2023/4/1 2,  +30,000
       //until 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
-      //until 1680370000, // 2023/4/1 - 2023/4/1 ,  +10,000 *
+//      untilValue = 1680370000; // 2023/4/1 - 2023/4/1 ,  +10,000 *
       
       //until: 1684667029, // 2023/5/21 20:03 - 
 
@@ -519,12 +526,12 @@ const Test = () => {
       //let title = "";
       let proxy = "";
       let proxyUrl = "";
-      let eventLinkUrlText1 = "";  // tags[0][0]
-      let eventLinkUrlText2 = "";  // tags[1][0] 
-      let eventLinkUrlText3 = "";  // tags[2][0] 
-      let eventLinkUrlText4 = "";  // tags[3][0]
-      let eventLinkUrlText5 = "";  // tags[4][0]
-      let eventLinkUrlText6 = "";  // tags[5][0]
+      let tagsLinkUrlText1 = "";  // tags[0][0]
+      let tagsLinkUrlText2 = "";  // tags[1][0] 
+      let tagsLinkUrlText3 = "";  // tags[2][0] 
+      let tagsLinkUrlText4 = "";  // tags[3][0]
+      let tagsLinkUrlText5 = "";  // tags[4][0]
+      let tagsLinkUrlText6 = "";  // tags[5][0]
       let alt = "";
       let streaming = "";
       let streamingUrl = "";
@@ -557,23 +564,23 @@ const Test = () => {
           streamingUrl = note.tags[h][1]
         }
         else {
-          if(eventLinkUrlText1 === "") {
-            eventLinkUrlText1  = "_tags[0](" + marker + ")";  // event id
+          if(tagsLinkUrlText1 === "") {
+            tagsLinkUrlText1  = "_tags[0](" + marker + ")";  // event id
           }
-          else if(eventLinkUrlText2 === "") {
-            eventLinkUrlText2  = "_tags[1](" + marker + ")";
+          else if(tagsLinkUrlText2 === "") {
+            tagsLinkUrlText2  = "_tags[1](" + marker + ")";
           }
-          else if(eventLinkUrlText3 === "") {
-            eventLinkUrlText3  = "_tags[2](" + marker + ")";
+          else if(tagsLinkUrlText3 === "") {
+            tagsLinkUrlText3  = "_tags[2](" + marker + ")";
           }
-          else if(eventLinkUrlText4 === "") {
-            eventLinkUrlText4  = "_tags[3](" + marker + ")";
+          else if(tagsLinkUrlText4 === "") {
+            tagsLinkUrlText4  = "_tags[3](" + marker + ")";
           }
-          else if(eventLinkUrlText5 === "") {
-            eventLinkUrlText5  = "_tags[4](" + marker + ")";
+          else if(tagsLinkUrlText5 === "") {
+            tagsLinkUrlText5  = "_tags[4](" + marker + ")";
           }
-          else if(eventLinkUrlText6 === "") {
-            eventLinkUrlText6  = "_tags[5](" + marker + ")";
+          else if(tagsLinkUrlText6 === "") {
+            tagsLinkUrlText6  = "_tags[5](" + marker + ")...";
           }
         }
       }  //for
@@ -588,47 +595,43 @@ const Test = () => {
 	      content = "[empty]";
 	    }
 	else {
-        let tmp
-	tmp = content.split('","');  // ","
-	if(content.includes("pubkey")) {
-	  tmp = content.split('",');  // ",
-	}
+	let tmp = content
+	tmp = tmp.split(',');  // , でsplit
         for(let i=0; i<tmp.length; i++) {
-	  // Repostのcontentデータを本文のみに調整
+	  // Repostのcontentデータをcontentの本文のみに調整
 	  if(tmp[i].includes('"content"')) {
-	    // content より前を削除. content" も削除
-            content = content.substring(content.indexOf('content'),content.length);  
-            content = content.replace('content":"','');
-	    // created_at 以降を削除
-	    if(content.includes("created_at")) {
-              content = content.substring(0,content.indexOf("created_at"));  				      
+            let tmp2 = tmp[i];
+	    if(tmp2.includes('{"content"')) {
+              tmp2 = tmp2.replace('{"content":"','');
+            }
+	    
+	    /*let first = tmp2.slice(0, 1) 
+	    if(first == '{') { // 先頭が{の時は先頭の文字を削除
+	    }*/
+            tmp2 = tmp2.replace('"content":"','');
+	    if(tmp2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
+              tmp2 = tmp2.slice(0, -1);
 	    }
-            // sig 以降を削除
-	    if(content.includes('","sig')) {
-	      content = content.substring(0, content.indexOf('","sig'));  
+	    if(tmp2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
+              tmp2 = tmp2.slice(0, -1);
 	    }
-            // pubkey 以降を削除
-	    if(content.includes('","pubkey')) {
-	      content = content.substring(0, content.indexOf('","pubkey'));  
-	    }
-            // tags 以降を削除
-	    if(content.includes('","tags')) {
-	      content = content.substring(0, content.indexOf('","tags'));  
-	    }
-            // kind 以降を削除
-	    if(content.includes('","kind')) {
-	      content = content.substring(0, content.indexOf('","kind'));  
-	    }
-            // id 以降を削除
-	    if(content.includes('","id')) {
-	      content = content.substring(0, content.indexOf('","id'));  
-	    }
+	    
+	    /* // content より後を取得
+	    if(content.includes("content")) {
+              //tmp2 = tmp2.substring(content.indexOf('content'),content.length);  
+            }
+	    // created_at より前を取得
+	    if(tmp2.includes("created_at")) {
+              //tmp2= tmp2.substring(0,content.indexOf("created_at"));  				      
+	    }*/
+
             for(let j=0; j<10; j++) {
-	      content = content.replace("\\n","\n");   // \\n -> \n
+	      tmp2 = tmp2.replace("\\n","\n");   // \\n -> \n
 	    }
             for(let j=0; j<20; j++) {
-	      content = content.replace("\\/","/");   // \/ -> /
+	      tmp2= tmp2.replace("\\/","/");   // \/ -> /
 	    }
+	    content = tmp2;
 	  }
 	}  //for
 	for(let i=0; i<note.tags.length; i++) {
@@ -965,15 +968,16 @@ const Test = () => {
       // Add <a href>
       let iframe = "";
       let iframe2 = "";
+      let youtubeId = "";
       let httpLinkUrl1 = "";
       let httpLinkUrlText1 = "";  // # https://
       if(content.includes("https://") || content.includes("youtu.be")) {
         let tmp = content;
         for(let i=0; i<10; i++) {
+          tmp = tmp.replace('\\n\\n',' ');
           tmp = tmp.replace('\\n',' ');
-        }
-        for(let i=0; i<10; i++) {
           tmp = tmp.replace('\n',' ');
+          tmp = tmp.replace('　',' ');  // zenkaku space
         }
         let tmp2 = tmp.split(' ');
 	let iframeCount = 0;
@@ -983,23 +987,39 @@ const Test = () => {
 	      tmp2[i] = "";
             }
 	    if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
-              // watch?v= より前を削除
-	      //let id = tmp2[i].replace("https://www.youtube.com/watch?v=", "");
-	      let id = tmp2[i].substring(tmp2[i].indexOf('youtube.com/watch?v='), tmp2[i].length);
-	      //id = id.replace("https://music.youtube.com/watch?v=", "");
-	      //id = id.replace("https://m.youtube.com/watch?v=", "");
-              // live/ より前を削除
-	      //id = id.replace("https://www.youtube.com/live/", "");
-	      id = tmp2[i].substring(tmp2[i].indexOf('/live/'), tmp2[i].length);
-	      id = id.replace("https://youtu.be/", "");
-	      if(tmp2[i].includes("&")) {
-	        id = id.substring(0, id.indexOf("&"));  // &以降を削除
+	      let id = tmp2[i];  // tmp2は' 'でsplit済み, idに入れる
+
+	      let target = 'youtube.com/watch?v=';
+              // watch?v= より後を取得
+	      if(id.includes(target)) {
+	        id = id.substring(id.indexOf(target) + target.length, id.length);
 	      }
-	      id = id.replace("/>", "");
+              // /live/ より後を取得
+	      target = '/live/'
+	      if(id.includes(target)) {
+	        id = id.substring(id.indexOf(target) + target.length, id.length);
+	      }
+              // youtube.be/ より後を取得
+	      target = 'youtu.be/'
+	      if(id.includes(target)) {
+	        id = id.substring(id.indexOf(target) + target.length, id.length);
+	      }
+
+              // &より前を取得
+	      target = '&'
+	      if(id.includes(target)) {
+	        id = id.substring(0, id.indexOf(target));
+	      }
+              // ","sig より前を取得
+	      target = '","sig'
+	      if(id.includes(target)) {
+	        id = id.substring(0, id.indexOf(target));
+	      }
+
+              // contentから削除
 	      content = content.replace(tmp2[i], "");
-	      if(content.includes('","sig')) {
-	        content = content.substring(0, content.indexOf('","sig'));  // sig 以降を削除
-	      }
+
+	      // httpLink __YouTube
 	      httpLinkUrl1 = tmp2[i];
 	      if(tmp2[i].includes("/live/")) {
 	        httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
@@ -1010,7 +1030,8 @@ const Test = () => {
 	      
 //	      iframe = '<iframe src="https://www.youtube.com/embed/' + '4WXs3sKu41I' + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 	      
-//	      content = content + "<br>id=" + id  // Debug id表示
+              youtubeId = 'id = ' + id;
+	      //content = content + "<br />id=" + id  // Debug id表示
 
 	    }
 	    else if(tmp2[i].includes("open.spotify.com")) {
@@ -1057,7 +1078,18 @@ const Test = () => {
 	            const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 	            content = content.replace(tmp2[i], tmpIframe);
 		    httpLinkUrl1 = tmp2[i];
-		    httpLinkUrlText1 = '__https_iframe';
+		    if(httpLinkUrl1.includes("music.apple.com")) {
+  		      httpLinkUrlText1 = '__Apple Music';
+		    }
+		    else if(httpLinkUrl1.includes("/x.com/")) {
+  		      httpLinkUrlText1 = '__X(Twitter)';
+		    }
+		    else if(httpLinkUrl1.includes("/zenn.dev/")) {
+  		      httpLinkUrlText1 = '__Zenn';
+		    }
+		    else {
+		      httpLinkUrlText1 = '__https_iframe';
+		    }
 		  }
 		}
 	      }
@@ -1401,17 +1433,18 @@ const Test = () => {
               {status}
               {parse(replyHTML)}
               {parse(content)}
+              {youtubeId}
               {follow}
               {parse(iframe)}
               {parse(iframe2)}
               <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
               <a href={quoteLinkUrl2} target="_blank">{quoteLinkText2}</a>
-              {eventLinkUrlText1}
-              {eventLinkUrlText2}
-              {eventLinkUrlText3}
-              {eventLinkUrlText4}
-              {eventLinkUrlText5}
-              {eventLinkUrlText6}
+              {tagsLinkUrlText1}
+              {tagsLinkUrlText2}
+              {tagsLinkUrlText3}
+              {tagsLinkUrlText4}
+              {tagsLinkUrlText5}
+              {tagsLinkUrlText6}
               <a href={linkUrl1} target="_blank">{linkUrlText1}</a>
               <a href={linkUrl2} target="_blank">{linkUrlText2}</a>
               <a href={linkUrl3} target="_blank">{linkUrlText3}</a>

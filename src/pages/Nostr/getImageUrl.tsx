@@ -40,8 +40,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === 'npub1ys2ywty0a8j97pv5ntnjajqcdcxqqzy5qcygn03d8zgr3hk5tftskcjpyu') {
       image = 'https://mk.tenpest-moon.uk/files/008c3fad-99bd-4cef-ab64-1b9ade496207'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1p0w0qqv708g4n0vz9ds743xaqx8k7lfuvm25h7vam0x4r8anf7tq4eh8x2') {
+      image = 'https://ocha.one/icon_400x400.jpg?date=20231127'
     } 
     else if (npub === 'npub1q2yz4r4rjlfrpw34sjuu4v9k62wr0f7ja0g202e34hd77qdz94ds074xlm') {
       image = 'https://ja.gravatar.com/userimage/39763792/d8f6c6ee3fb0654a166560d5a6f9fb05.png?size=200'

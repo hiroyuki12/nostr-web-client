@@ -40,7 +40,7 @@ export const makeReplyHTML = (note) => {
     let channel = ""
 
     if(note.kind === 42) {  // kind:42.Channel_Message
-      channel = "Channel_Message(nos_haiku_Channel)] ";   // link to ChannelUrl
+      channel = "Channel_Message(nos_haiku_keyword)] ";   // link to ChannelUrl
     }
     if(note.kind === 1311) {  // kind:1311.live chat
       channel = "Live Chat]";   // link to ChannelUrl
