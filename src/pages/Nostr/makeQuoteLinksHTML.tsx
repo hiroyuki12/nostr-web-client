@@ -27,9 +27,6 @@ export const makeQuoteLinksHTML = (content) => {
         content.includes("nostr:nprofile1") || 
         content.includes("nostr:npub1"))
     ) {
-
-      //quoteLinkText = "[fff]"
-
       for(let i=0; i<wordsNostr.length; i++) {
 
         // todo
@@ -67,11 +64,12 @@ export const makeQuoteLinksHTML = (content) => {
         }
 
 
-        // fix
+        // fix note1, todo nevent1
         else if(wordsNostr[i].includes("nostr:note1") || 
           wordsNostr[i].includes("nostr:nevent1")) {  
           //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
-          let quoteBaseUrl = "https://snort.social/e/"
+          //let quoteBaseUrl = "https://snort.social/e/"
+          let quoteBaseUrl = "https://nostter.app/"
 
           if(quoteLinkText === "") {
             //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
@@ -80,22 +78,22 @@ export const makeQuoteLinksHTML = (content) => {
             //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
             //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
             //quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-            quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+            quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
             if(content.includes("nevent1")) {
               //quoteLinkText = quoteLinkText + wordsNostr[i];
               //quoteLinkText = "(quote_nevent1)";
               //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
               //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
               //let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-              let quoteNeventLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-                quoteLinkText = "_(quote_nevent)";
-                //content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
-                quoteLinkHTML1 = '<a href="' + quoteNeventLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+              let quoteNeventLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+              quoteLinkText = "_(quote_nevent1)";
+              //content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
+              quoteLinkHTML1 = '<a href="' + quoteNeventLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
             }
             else {
-                //content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
-                quoteLinkText = "_(quote_note1)";
-                quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+              //content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
+              quoteLinkText = "_(quote_note1)";
+              quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
             }
           }
 

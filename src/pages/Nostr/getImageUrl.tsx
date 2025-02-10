@@ -28,6 +28,21 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === 'npub10vk9gv50y29p7fgxf5m9thsjl7j52rcqswpw9uwun5qdxajef8ms9jfxkx') {
+      image = 'https://image.nostr.build/353cca990e630a5afceb96e8faed3c28f5481eb51fa49633bba47dcaede362d7.jpg'
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
     else if (npub === 'npub18zw2f9tezxcjvzflg2s2jpux29d4jvgack559dqy6lsk79eg0q5qggvaxw') {
       image = 'https://image.nostr.build/e2e1a8df3582c393398406248a41fcc748c00f8c9bf1b91db6acdf08c0d0faa4.jpg'
     } 
