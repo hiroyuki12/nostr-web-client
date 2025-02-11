@@ -114,8 +114,10 @@ export const makeIframesbyTagHTML = (content, note) => {
             }
             else if(tmpUrl.includes("music.apple.com")) {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
-                //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-                tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                //large linkUrlHTML1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
+                linkUrlHTML1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                youtubeIdText1 = '__(fromTag"r")'
+                content = content.replace(tmpUrl, '');
             }
             else if(tmpUrl.includes("open.spotify.com")) {
                 const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
@@ -141,7 +143,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                         && !tmpUrl.includes(".png") 
                         && !tmpUrl.includes(".gif") 
                         && !tmpUrl.includes(".webp")) {
-                        //content = content.replace(tmpWord, tmpIframe);
+                        content = content.replace(tmpWord, tmpIframe);
                     }
                     else {
                         // remove link

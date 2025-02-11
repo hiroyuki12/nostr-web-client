@@ -24,7 +24,9 @@ const Test = () => {
 
   let noteCount = 0;
 
- untilValue = 1688390047;  //music.youtube (normal youtube ok)
+   untilValue = 1695999820;  // Apple Music OGP. fix.
+
+//  untilValue = 1688390047;  //music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  //music.youtube (normal youtube ok)
 //  untilValue = 1739008290;  // youtube fix Delete After &
 //  untilValue = 1739012160;  // youtube live Repost ¥n fix
@@ -965,7 +967,6 @@ export default Test;
 //  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1694055016;  // \n\n NG?
-//  untilValue = 1695999820;  // Apple Music OGP. fix.
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix
