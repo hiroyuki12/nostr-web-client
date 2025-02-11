@@ -3,7 +3,6 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
 
-    //todo linkUrlText1 display
 
     let linkUrl1 = "";
     let linkUrlText1 = "";  // #r 1
@@ -23,7 +22,6 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
 
-//
 
     for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "r") {
@@ -124,7 +122,6 @@ export const makeIframesbyTagHTML = (content, note) => {
             }
         }
     }
-//
 
 
 

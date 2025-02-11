@@ -1,4 +1,3 @@
-
 export const makeInlineImageHTML = (content) => {
     let inlineImage1Height = "0";
     let inlineImage2Height = "0";
@@ -15,22 +14,13 @@ export const makeInlineImageHTML = (content) => {
 
     if(content.includes("https:") || content.includes("http:")) {
         let tmp = content;
-        for(let i=0; i<10; i++) {
+        for(let i=0; i<20; i++) {
             tmp = tmp.replace('\\/','/');
-            content = content.replace('\\/','/');
         }
-        for(let i=0; i<10; i++) {
-            tmp = tmp.replace('\\n',' ');
-            tmp = tmp.replace('、',' ');
-            tmp = tmp.replace('\'',' ');
-            tmp = tmp.replace('）',' ');
-            tmp = tmp.replace('く',' ');
-            tmp = tmp.replace('ぃ',' ');
-            tmp = tmp.replace('\\',' ');
-            tmp = tmp.replace('"',' ');
-            tmp = tmp.replace(':https://',' https://');
+        for(let i=0; i<5; i++) {
+            tmp = tmp.replace('　',' ');
             tmp = tmp.replace('https://',' https://');
-            tmp = tmp.replace('https://',' https://');
+            tmp = tmp.replace('http://',' http://');
         }
         for(let i=0; i<20; i++) {
             tmp = tmp.replace('\n',' ');
@@ -65,23 +55,23 @@ export const makeInlineImageHTML = (content) => {
             && !tmp2[i].includes("gifu.jp/")
             )  {
                 if(imageCount===0) {
-                        inlineImage1Height = "250";
+                    inlineImage1Height = "250";
                     image1Url = tmp2[i];
                 }
                 else if(imageCount===1) {
-                        inlineImage2Height = "250";
+                    inlineImage2Height = "250";
                     image2Url = tmp2[i];
                 }
                 else if(imageCount===2) {
-                        inlineImage3Height = "250";
+                    inlineImage3Height = "250";
                     image3Url = tmp2[i];
                 }
                 else if(imageCount===3) {
-                        inlineImage4Height = "250";
+                    inlineImage4Height = "250";
                     image4Url = tmp2[i];
                 }
                 else if(imageCount===4) {
-                        inlineImage5Height = "250";
+                    inlineImage5Height = "250";
                     image5Url = tmp2[i];
                 }
                 imageCount = imageCount + 1;
@@ -95,6 +85,10 @@ export const makeInlineImageHTML = (content) => {
             '<a href="' + image3Url + '" target="_blank"><img src="' + image3Url + '" height="' + inlineImage3Height + '" /></a>' +
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +
             '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
+    
 
+    // inlineImageHTML = image1Url;
+    
+    
     return inlineImageHTML;
 }

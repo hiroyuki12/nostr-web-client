@@ -55,8 +55,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1kf09ddevvak67tsjw97jtxgdhj22e6y39u6dm59k2axt5rl7fm5sl9gt9v') {
+      image = 'https://nostrcheck.me/media/b25e56b72c676daf2e12717d25990dbc94ace8912f34ddd0b6574cba0ffe4ee9/b8706ec4dfea5d2722e74d32fdb70030d9d00b8607c344237da1d5f3e43ccc48.webp'
     } 
     else if (npub === 'npub17qljy3xj0075rex7jqhuep6yhnq6gfd5v6eavpt7xrfv5vf82scqexx0vr') {
       image = 'https://image.nostr.build/583d7e034f093935f59e5c2e0d171a7b8a1ad5edb7287f0d5f8c351e8d1c5393.jpg'
@@ -886,7 +886,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://void.cat/d/VcjqkupB32h3UDj2YCSyC5.webp'
     } 
     else if (npub === 'npub1cyla8qgt9gv8y6ydv8s2prt89h8afc0sr2kaz64ryjmlpdrzxm4qwlh53q') {
-      image = 'https://github.com/kdnolan/kdnolan.github.io/blob/master/avatars/lasereyes.jpeg?raw=true'
+      image = 'https://i.nostr.build/j5UP4Hrkz3zt4wNU.jpg'
     } 
     else if (npub === 'npub1q3ar9v6a55mjjelgl3fpgsq3gwwtt65dhdjqu82kuausmwg6hauq8mekza') {
       image = 'https://nostr.build/i/e06a5fcfacb1aa6203e7c7392ade12667bd4c2744a16584fd4f206bf187148e2.jpg'
@@ -1388,7 +1388,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://nostr.build/i/p/nostr.build_07ce22b2dbb8ace6d6f87ee5e3625823965f737254cfa37f7e4a82a717aa9bbf.jpg'
     } 
     else if (npub === 'npub108yl9s9q3q2cyxgfmup08w7xptt948lyc5vjcegxh4dqmcswdwnqy84das') {
-      image = 'https://i.nostrimg.com/921e6128bbb1c72762767ff9c6f693985cd014ccfaf9af4141a3c9a356402a4b/file.jpg'
+      image = 'https://link.storjshare.io/raw/jwalhivalup4yvj6m4sgrhngxtaa/freefrom-prod/5205fa5945b0f8038faaf88bce7c37dd2867ac1301d22f48a3b67dc7cc16518b.JPG'
     } 
     else if (npub === 'npub18e2zsjvqs5mtvexsfl2ycc3l3jhctekn9xtqxvrt8r0ykeuu8dgsttezf3') {
       image = 'https://void.cat/d/YLaLuVVSPmqRMD4vVFc91X.webp'

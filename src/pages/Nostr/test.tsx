@@ -22,26 +22,27 @@ const Test = () => {
 
   let noteCount = 0;
 
+  // untilValue = 1737563052;  // NG very large html. nostter ok
+  // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
   // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
-  // untilValue = 1739158577;  // NG https_iframe href target="_blank". NHK
+  // untilValue = 1739158577;  // fix https_iframe href target="_blank". NHK
 //  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1739177954;  // nostr:nvent1 fix quote
 //  untilValue = 1739175991;  // nostr:npub1 fix quote
 //  untilValue = 1686933213;  // nostr:note1 fix quote
 //  untilValue = 1739169149;  // userStatus test
-//  untilValue = 1739169439;  // httpが２つ。画像表示NG
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
-//  untilValue = 1739114201;  // YouTube repost NG. nostter ok
-//  untilValue = 1739113299;  // YouTube NG. youtube.com
-//  untilValue = 1739087698;  // Error: hexToBytes NG
-//  untilValue = 1739008994;  // kind:1111 NG
+  // untilValue = 1739114201;  // YouTube repost fix. nostter ok
+  // untilValue = 1739113299;  // YouTube fix. youtube.com
+  // untilValue = 1739087698;  // Error: hexToBytes NG
+//  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1703568307;  // img threads NG
-//  untilValue = 1700358511;  // NG insta link
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
 //  untilValue = 1691507297;  // repost image NG. nostter ok
 //  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
+  // untilValue = 1700358511;  // instagram link iframe fix
   
 
   const sinceValue = untilValue - 1800;  //about 30 minutes 
@@ -458,7 +459,7 @@ const Test = () => {
 
 
 
-      
+
   /////////////////////////////////
   // make linkUrl by tag
   // make iframe, content
@@ -651,17 +652,20 @@ const Test = () => {
               if(tmp2[i].includes("/live/")) {
                 httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
               }
-              httpLinkUrlText1 = '__YouTube';
+              httpLinkUrlText1 = '__YouTube(fromContent)';
 
               iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
               
-              youtubeId = 'id = ' + id;
+              youtubeId = '_[id = ' + id + ']';
               //content = content + "<br />id=" + id  // Debug id表示
-            }
+            }  // youtube
             else if(tmp2[i].includes("open.spotify.com")) {
               content = content.replace(tmp2[i], "");
               const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
               iframe1 = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+
+              httpLinkUrl1 = tmp2[i];
+              httpLinkUrlText1 = '__Spotify(fromContent)';
             }
             else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
               content = content.replace(tmp2[i], "");
@@ -669,7 +673,7 @@ const Test = () => {
               iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
               httpLinkUrl1 = tmp2[i];
-              httpLinkUrlText1 = '__twitter';
+              httpLinkUrlText1 = '__Ttwitter(fromContent)';
             }
             //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
             else {
@@ -704,16 +708,20 @@ const Test = () => {
                     content = content.replace(tmp2[i], tmpIframe);
                     httpLinkUrl1 = tmp2[i];
                     if(httpLinkUrl1.includes("music.apple.com")) {
-                        httpLinkUrlText1 = '__Apple Music';
+                        httpLinkUrlText1 = '__Apple Music(fromContent)';
                     }
                     else if(httpLinkUrl1.includes("/x.com/")) {
-                        httpLinkUrlText1 = '__X(Twitter)';
+                        httpLinkUrlText1 = '__X(fromContent)';
                     }
                     else if(httpLinkUrl1.includes("/zenn.dev/")) {
-                        httpLinkUrlText1 = '__Zenn';
+                        httpLinkUrlText1 = '__Zenn(fromContent)';
                     }
+                    else if(httpLinkUrl1.includes("/www.instagram.com/")) {
+                        httpLinkUrlText1 = '__Instagram(fromContent)';
+                        httpLinkUrlText1 = '__Instagram' + '[URL=' + httpLinkUrl1 + ']';
+                      }
                     else {
-                      httpLinkUrlText1 = '__https_iframe';
+                      httpLinkUrlText1 = '__https_iframe(fromContent)';
                     }
                   }
                 }
