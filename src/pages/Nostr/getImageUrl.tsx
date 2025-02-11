@@ -52,8 +52,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub18cag5sj94gyz9szscsk7pvtapl3s63ruag8xppl9tdncs50dqdes9x3zed') {
+      image = 'https://sksksketch.net/wp-content/themes/sksksketch2021/images/sksksketch-author-icon-qt.webp'
     } 
     else if (npub === 'npub1kf09ddevvak67tsjw97jtxgdhj22e6y39u6dm59k2axt5rl7fm5sl9gt9v') {
       image = 'https://nostrcheck.me/media/b25e56b72c676daf2e12717d25990dbc94ace8912f34ddd0b6574cba0ffe4ee9/b8706ec4dfea5d2722e74d32fdb70030d9d00b8607c344237da1d5f3e43ccc48.webp'

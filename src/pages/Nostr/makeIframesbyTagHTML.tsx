@@ -1,8 +1,10 @@
 export const makeIframesbyTagHTML = (content, note) => {
-    //let newContent = content;
 
+// make iframe by tag "r" (URL) &  make link #r
+// update content. replace URL to iframe
+// add #r link to content
 
-
+// return cotent
 
     let linkUrl1 = "";
     let linkUrlText1 = "";  // #r 1
@@ -27,31 +29,36 @@ export const makeIframesbyTagHTML = (content, note) => {
         if(note.tags[i][0] === "r") {
             if(note.tags[i][1].includes("http")) {
 		        // 全卓スペースで分割。tag rにURLと日本語が入っている場合があるため
-                let text = note.tags[i][1].split('　');
+                let value = note.tags[i][1].split('　');
+                let contentReplace = "";
+
                 let textUrl = "";
-                for(let j=0; j<text.length; j++) {
-                    if(text[j].includes("http"))  textUrl = text[j];
+                for(let j=0; j<value.length; j++) {
+                    if(value[j].includes("http"))  textUrl = value[j];
+                    contentReplace = value[j];
+                    textUrl = textUrl.replace('`','');
                 }
+
 
                 if(linkUrl1 === "") {
                     linkUrl1 = textUrl;
                     linkUrlText1 = "__#r";
                     if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(linkUrl1,"[@1]");
+                        content = content.replace(contentReplace,"[@1]");
                     }
                 }
                 else if(linkUrl2 === "") {
                     linkUrl2 = textUrl;
                     linkUrlText2 = "__#r";
                     if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(linkUrl2,"[@2]");
+                        content = content.replace(contentReplace,"[@2]");
                     }
                 }
                 else if(linkUrl3 === "") {
                     linkUrl3 = textUrl;
                     linkUrlText3 = "__#r";
                     if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(linkUrl2,"[@3]");
+                        content = content.replace(contentReplace,"[@3]");
                     }
                 }
                 else if(linkUrl4 === "") {
@@ -66,6 +73,7 @@ export const makeIframesbyTagHTML = (content, note) => {
         }
     }
 
+    // youtube のみ. update content.
     for(let i=0; i<note.tags.length; i++) {
         let tmpWord = "";
         let tmpIframe = "";
@@ -83,6 +91,7 @@ export const makeIframesbyTagHTML = (content, note) => {
             tmpUrl = linkUrl3;
         }
 
+        // youtubeのみ [@1]などを使用する
         if(tmpUrl != "") {
             if(tmpUrl.includes("music.apple.com")) {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
@@ -101,6 +110,7 @@ export const makeIframesbyTagHTML = (content, note) => {
             else if(!tmpUrl.includes("googleusercontent.com/")){
                 tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
             }
+
             // update content
             if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
                 // remove image link OGP
@@ -135,11 +145,11 @@ export const makeIframesbyTagHTML = (content, note) => {
     if(linkUrlText5 != "") linkUrlHTML5 = '<a href="' + linkUrl5 + '" target="_blank">' + linkUrlText5 + '</a>';
 
     content = content + 
-	linkUrlHTML1 +  
-	linkUrlHTML2 +  
-	linkUrlHTML3 +  
-	linkUrlHTML4 +  
-	linkUrlHTML5;  
+        linkUrlHTML1 +  
+        linkUrlHTML2 +  
+        linkUrlHTML3 +  
+        linkUrlHTML4 +  
+        linkUrlHTML5;  
 
 
 

@@ -7,6 +7,8 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 import Pictures from './Pictures';
 import {getImageURL} from './getImageURL'
+import {makeTagImageHTML} from './makeTagImageHTML'
+import {removeTagImageUrl} from './removeTagImageUrl'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
 import {makeReplyHTML} from './makeReplyHTML'
 import {makeStatusString} from './makeStatusString'
@@ -22,6 +24,14 @@ const Test = () => {
 
   let noteCount = 0;
 
+  // untilValue = 1739262337;  // Repost先のiconが表示されない
+  // untilValue = 1739261908;  // kind:20 http://の表示が消えない。http://がaltにあるため
+  // untilValue = 1739258350;  // tag "r" jpg
+  // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
+  // untilValue = 1739089652;  // inlineImage. tag "r" なし.
+  // untilValue = 1734489831;  // kind:20 not display picture
+  // untilValue = 1732921974;  // kind:20 not display picture
+  // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
   // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
@@ -343,7 +353,7 @@ const Test = () => {
           proxyUrl = note.tags[h][1]
         }
         else if(marker === "alt") {  //  alt picture
-          alt = "alt] " + note.tags[h][1]
+          alt = "alt][ " + note.tags[h][1] + "]"
         }
         else if(marker === "streaming") {  //  streaming
           streaming = "-streaming"
@@ -429,11 +439,59 @@ const Test = () => {
 	      }  //for
 
       }
-    
 
 
+
+
+
+
+      
+  /////////////////////////////////
+      
+// make img by tag "r"
+      
+      let tagImageHTML = makeTagImageHTML(content, note);
+
+// update cotent. remove tag "r" image URL
+
+      content = removeTagImageUrl(content, note);
+
+
+
+
+
+
+
+      
+  /////////////////////////////////
+      
+// make img by conent. (tag "r"にない時もあるので必要)
+// return inlineImageHTML
+
+// makeInlineImageHTMLの前に、makeIframesbyTagHTMLを実行すると、複数画像表示がNG
 
       let inlineImageHTML = makeInlineImageHTML(content);
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////
+
+// make iframe by tag "r" (URL) &  make link #r
+// update content. replace URL to iframe
+// add #r link to content
+
+// update cotent. Add iframe to content
+
+      content = makeIframesbyTagHTML(content, note);
+
+
+
 
 
 
@@ -458,13 +516,6 @@ const Test = () => {
 
 
 
-
-
-  /////////////////////////////////
-  // make linkUrl by tag
-  // make iframe, content
-
-      content = makeIframesbyTagHTML(content, note);
 
 
 
@@ -541,7 +592,7 @@ const Test = () => {
           // tmp.includes("nostr:nprofile1") || 
           tmp.includes("nostr:npub1")
         ) {
-            // contentからnostr:note1を削除
+            // contentからnostr:note1, nvent1, npub1を削除
             content = content.replace(wordsNostr[i], '');
           }
       }
@@ -817,6 +868,7 @@ const Test = () => {
               {tagsLinkUrlText6}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
               <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
+              {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
               <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
         {alt}
@@ -884,9 +936,6 @@ export default Test;
 //  untilValue = 1739015355;  // dare-ai OGP  Todo
 //  untilValue = 1739024868;  // kirby OGP Todo nostter ok
 //  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
-//  untilValue = 1734489831;  // kind:20 not display picture
-//  untilValue = 1732921974;  // kind:20 not display picture
-//  untilValue = 1739089652;  // inlineImage
 //  untilValue = 1739091313;  // repost image size
 // untilValue = 1739163316;  // Repost  fix
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
@@ -911,7 +960,6 @@ export default Test;
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
-//  untilValue = 1703564079;  // googleusercontent.com/ img fix
 //  untilValue = 1702648801;  // 9735 content empty ng
 //  untilValue = 1700648893;  // bookmark
 //  untilvalue = 1700654092;  // long-form content

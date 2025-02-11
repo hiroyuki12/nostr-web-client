@@ -1,4 +1,9 @@
 export const makeInlineImageHTML = (content) => {
+
+// make img by conent
+
+// return inlineImageHTML
+
     let inlineImage1Height = "0";
     let inlineImage2Height = "0";
     let inlineImage3Height = "0";
@@ -12,13 +17,19 @@ export const makeInlineImageHTML = (content) => {
     //RegExp
     //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
+
+
+    
     if(content.includes("https:") || content.includes("http:")) {
         let tmp = content;
         for(let i=0; i<20; i++) {
             tmp = tmp.replace('\\/','/');
         }
         for(let i=0; i<5; i++) {
+            tmp = tmp.replace('\n',' ');
             tmp = tmp.replace('　',' ');
+            tmp = tmp.replace('`',' ');
+            tmp = tmp.replace('`',' ');
             tmp = tmp.replace('https://',' https://');
             tmp = tmp.replace('http://',' http://');
         }
@@ -87,8 +98,6 @@ export const makeInlineImageHTML = (content) => {
             '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
     
 
-    // inlineImageHTML = image1Url;
-    
     
     return inlineImageHTML;
 }
