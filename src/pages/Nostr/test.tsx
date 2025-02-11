@@ -29,7 +29,8 @@ const Test = () => {
   
 
   // untilValue = 1739262337;  // NG. Repost先のiconが表示されない
-  // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
+//  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
+ // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
   // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
   // untilValue = 1739258350;  // tag "r" jpg
   // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
@@ -52,8 +53,7 @@ const Test = () => {
 //  untilValue = 1703568307;  // img threads NG. link切れ
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
 //  untilValue = 1691507297;  // repost mp4 NG. nostter ok
- untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
-  // untilValue = 1700358511;  // instagram link iframe fix
+  untilValue = 1700358511;  // instagram link iframe fix
   
 
   const sinceValue = untilValue - 1800;  //about 30 minutes 
@@ -766,7 +766,7 @@ const Test = () => {
                   || tmp2[i].includes(".webp")) {
                         content = content.replace(tmp2[i], "");
                 }
-                // OGP
+                // OGP hatenablogcard
                 else {
                   // ryusoku
                   if(tmp2[i].includes("https://nostr-hotter-site.vercel.app")){
@@ -787,8 +787,10 @@ const Test = () => {
                     }
                     else if(httpLinkUrl1.includes("/www.instagram.com/")) {
                         httpLinkUrlText1 = '__Instagram(fromContent)';
-                        httpLinkUrlText1 = '__Instagram' + '[URL=' + httpLinkUrl1 + ']';
-                      }
+                        // https:// 以降の文字列を取得(https://も含む)
+                        httpLinkUrl1 = httpLinkUrl1.substring(httpLinkUrl1.indexOf('https://'), httpLinkUrl1.length);
+                        // httpLinkUrlText1 = '__Instagram' + '[URL=' + httpLinkUrl1 + ']';  // debug
+                    }
                     else {
                       httpLinkUrlText1 = '__https_iframe(fromContent)';
                     }
