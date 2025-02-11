@@ -116,7 +116,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
                 //large linkUrlHTML1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
                 linkUrlHTML1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                youtubeIdText1 = '__(fromTag"r")'
+                youtubeIdText1 = '__AppleMusic(fromTag"r")'
                 content = content.replace(tmpUrl, '');
             }
             else if(tmpUrl.includes("open.spotify.com")) {
@@ -124,9 +124,10 @@ export const makeIframesbyTagHTML = (content, note) => {
                 tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
             }
             else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
-                //content = content.replace(tmp2[i], "");
                 const id = tmpUrl.replace("x.com","twitter.com"); 
-                tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+                linkUrlHTML1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+                youtubeIdText1 = '__Twitter(fromTag"r")'
+                content = content.replace(tmpUrl, '');
             }
             else if(!tmpUrl.includes("googleusercontent.com/")){
                 tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
@@ -158,7 +159,6 @@ export const makeIframesbyTagHTML = (content, note) => {
 
     }
 }
-
 
 
 

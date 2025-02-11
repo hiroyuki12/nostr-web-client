@@ -24,7 +24,11 @@ const Test = () => {
 
   let noteCount = 0;
 
-   untilValue = 1695999820;  // Apple Music OGP. fix.
+  //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
+
+ untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1692963542;  // spotify album. no tag "r"
+  //  untilValue = 1695999820;  // Apple Music OGP. fix.
 
 //  untilValue = 1688390047;  //music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  //music.youtube (normal youtube ok)
@@ -51,8 +55,6 @@ const Test = () => {
 //  untilValue = 1739175991;  // nostr:npub1 fix quote
 //  untilValue = 1686933213;  // nostr:note1 fix quote
 //  untilValue = 1739169149;  // userStatus test
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
-//  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
   // untilValue = 1739114201;  // YouTube repost fix. nostter ok
   // untilValue = 1739087698;  // Error: hexToBytes NG
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
@@ -735,9 +737,10 @@ const Test = () => {
               httpLinkUrl1 = tmp2[i];
               httpLinkUrlText1 = '__Spotify(fromContent)';
             }
-            else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
+            // else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
+            else if(tmp2[i].includes("twitter.com") || tmp2[i].includes("x.com")) {
               content = content.replace(tmp2[i], "");
-              const id = tmp2[i]; 
+              const id = tmp2[i].replace("x.com","twitter.com"); 
               iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
               httpLinkUrl1 = tmp2[i];
@@ -1036,7 +1039,6 @@ export default Test;
 //  untilValue = 1688127866;  //nostr:nprofile1
 //  untilValue = 1688084234;  //live_chat kind:1311 will
 //  untilValue = 1675550855;  //https://
-//  untilValue = 1692963542;  // spotify album
 //  untilValue = 1692963976;  // spotify playlist
 //  untilValue = 1687906810;  //https:// spotify playlist
 //  untilValue = 1687865289;  //emoji
