@@ -49,7 +49,12 @@ export const makeTagImageHTML = (content, note) => {
                     textUrl.includes("/www.gravatar.com/avatar/") ||
                     textUrl.includes("googleusercontent.com/") ||
                     textUrl.includes("grafana.gsn.im/")) {
-                
+                        
+                    if(textUrl.includes(""))
+                    {
+                        // googleusercontent
+                        textUrl = textUrl.replace("`", "");
+                    }
 
 
                     if(linkUrl1 === "") {

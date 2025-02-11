@@ -26,17 +26,8 @@ const Test = () => {
 
   //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
 
- untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
-//  untilValue = 1692963542;  // spotify album. no tag "r"
-  //  untilValue = 1695999820;  // Apple Music OGP. fix.
-
-//  untilValue = 1688390047;  //music.youtube (normal youtube ok)
-//  untilValue = 1688382329;  //music.youtube (normal youtube ok)
-//  untilValue = 1739008290;  // youtube fix Delete After &
-//  untilValue = 1739012160;  // youtube live Repost ¥n fix
-//  untilValue = 1739114136;  // YouTube fix. nostter ok
-// untilValue = 1739265383;  // youtube hrefが表示される
-  // untilValue = 1739113299;  // YouTube fix. youtube.com
+  untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
+  
 
   // untilValue = 1739262337;  // Repost先のiconが表示されない
   // untilValue = 1739261908;  // kind:20 http://の表示が消えない。http://がaltにあるため
@@ -45,7 +36,6 @@ const Test = () => {
   // untilValue = 1739089652;  // inlineImage. tag "r" なし.
   // untilValue = 1734489831;  // kind:20 not display picture
   // untilValue = 1732921974;  // kind:20 not display picture
-  // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
   // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
@@ -948,7 +938,16 @@ export default Test;
 
 // memo
 
-
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1692963542;  // spotify album. no tag "r"
+//  untilValue = 1695999820;  // Apple Music OGP. fix.
+//  untilValue = 1688390047;  // music.youtube (normal youtube ok)
+//  untilValue = 1688382329;  // music.youtube (normal youtube ok)
+//  untilValue = 1739008290;  // youtube fix Delete After &
+//  untilValue = 1739012160;  // youtube live Repost ¥n fix
+//  untilValue = 1739114136;  // YouTube fix. nostter ok
+//  untilValue = 1739265383;  // youtube hrefが表示される
+//  untilValue = 1739113299;  // YouTube fix. youtube.com
 //  untilValue = 1739114442;  // あめさん @rain_256
 //  untilValue = 1739011806;  // mostr niji
 //  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok

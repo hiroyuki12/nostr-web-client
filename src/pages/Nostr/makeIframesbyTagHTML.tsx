@@ -129,9 +129,11 @@ export const makeIframesbyTagHTML = (content, note) => {
                 youtubeIdText1 = '__Twitter(fromTag"r")'
                 content = content.replace(tmpUrl, '');
             }
-            else if(!tmpUrl.includes("googleusercontent.com/")){
-                tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-            }
+            //else if(tmpUrl.includes("googleusercontent.com/")){
+            //    let tmpUrl2 = tmpUrl.replace("`", "");
+            //    linkUrlHTML1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+            //    youtubeIdText1 = '__googleusercontent(fromTag"r")'
+            //}
             else {  // todo
 
                 // update content
