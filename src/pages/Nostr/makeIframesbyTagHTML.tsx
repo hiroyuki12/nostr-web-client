@@ -104,13 +104,20 @@ export const makeIframesbyTagHTML = (content, note) => {
         if(tmpUrl != "") {
             // YouTube tag "r"
             if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
-                let tmpId = ''
-                tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
-                tmpId = tmpUrl.replace("https://youtu.be/", "");
-                tmpId = tmpUrl.replace("https://www.youtube.com/watch?v=", "");
-                linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tmpId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-                youtubeIdText1 = '__[id=' + tmpId + '(fromTag"r")]'
-                content = content.replace(tmpUrl, '');
+                if(!tmpUrl.includes('@')) {
+                    let tmpId = ''
+                    tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
+                    tmpId = tmpId.replace("https://youtu.be/", "");
+                    tmpId = tmpId.replace("https://www.youtube.com/watch?v=", "");
+                    linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tmpId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+                    youtubeIdText1 = '__[id=' + tmpId + '(fromTag"r")]'
+                    content = content.replace(tmpUrl, '');
+                }
+                else {
+                    linkUrlHTML1 = tmpUrl;
+                    youtubeIdText1 = '__[YouTubeChannel(fromTag"r")]'
+                    content = content.replace(tmpUrl, '');
+                }
             }
             else if(tmpUrl.includes("music.apple.com")) {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 

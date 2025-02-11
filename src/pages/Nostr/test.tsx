@@ -26,11 +26,11 @@ const Test = () => {
 
   //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
 
-  untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
   
 
-  // untilValue = 1739262337;  // Repost先のiconが表示されない
-  // untilValue = 1739261908;  // kind:20 http://の表示が消えない。http://がaltにあるため
+  // untilValue = 1739262337;  // NG. Repost先のiconが表示されない
+  // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
+  // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
   // untilValue = 1739258350;  // tag "r" jpg
   // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
   // untilValue = 1739089652;  // inlineImage. tag "r" なし.
@@ -49,10 +49,10 @@ const Test = () => {
   // untilValue = 1739087698;  // Error: hexToBytes NG
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
-//  untilValue = 1703568307;  // img threads NG
+//  untilValue = 1703568307;  // img threads NG. link切れ
 //  untilValue = 1691662709;  // repost mov NG. nostter ok
-//  untilValue = 1691507297;  // repost image NG. nostter ok
-//  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
+//  untilValue = 1691507297;  // repost mp4 NG. nostter ok
+ untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
   // untilValue = 1700358511;  // instagram link iframe fix
   
 
@@ -703,19 +703,27 @@ const Test = () => {
                 id = id.substring(0, id.indexOf(target));
               }
 
-              // contentから削除
-              content = content.replace(tmp2[i], "");
 
               // httpLink __YouTube
               httpLinkUrl1 = tmp2[i];
+              // httpLinkUrl1 = 'https://www.youtube.com/@diversesystem';  //debug
               if(tmp2[i].includes("/live/")) {
                 httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
               }
-              httpLinkUrlText1 = '__YouTube(fromContent)';
 
-              iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-              
-              youtubeId = '_[id = ' + id + '(fromContent)]';
+              if(!id.includes("@")) {  // youtube channel 以外
+                // contentから削除
+                content = content.replace(tmp2[i], "");
+
+                httpLinkUrlText1 = '__YouTube(fromContent)';
+                iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+                youtubeId = '_[id = ' + id + '(fromContent)]';
+              }
+              else {
+                // content = content + 'https://www.youtube.com/@diversesystem';
+                content = content.replace(id, '<a href="' + id + '" target="_blank">' + id + '</a>');
+              }
+
               // youtubeId = '_[id = ' + tmp2[i] + ']';  // Debug tmp2[i]表示
               //content = content + "<br />id=" + id  // Debug id表示
             }  // youtube
