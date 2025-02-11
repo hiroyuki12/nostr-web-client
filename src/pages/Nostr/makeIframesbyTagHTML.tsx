@@ -8,19 +8,28 @@ export const makeIframesbyTagHTML = (content, note) => {
 
     let linkUrl1 = "";
     let linkUrlText1 = "";  // #r 1
-    let linkUrlHTML1 = ""
+    let linkUrlHTML1 = "";
+    let linkTagR1 = "";
+    let youtubeIdText1 = "";
     let linkUrl2 = "";
     let linkUrlText2 = "";  // #r 2
-    let linkUrlHTML2 = ""
+    let linkUrlHTML2 = "";
+    let linkTagR2 = "";
+    let youtubeIdText2 = "";
     let linkUrl3 = "";
     let linkUrlText3 = "";  // #r 3
-    let linkUrlHTML3 = ""
+    let linkUrlHTML3 = "";
+    let linkTagR3 = "";
+    let youtubeIdText3 = "";
+
     let linkUrl4 = "";
     let linkUrlText4 = "";  // #r 4
-    let linkUrlHTML4 = ""
+    let linkUrlHTML4 = "";
+    let linkTagR4 = "";
     let linkUrl5 = "";
     let linkUrlText5 = "";  // #r 5
-    let linkUrlHTML5 = ""
+    let linkUrlHTML5 = "";
+    let linkTagR5 = "";
 
 
 
@@ -43,23 +52,23 @@ export const makeIframesbyTagHTML = (content, note) => {
                 if(linkUrl1 === "") {
                     linkUrl1 = textUrl;
                     linkUrlText1 = "__#r";
-                    if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(contentReplace,"[@1]");
-                    }
+                    //if(!note.tags[i][1].includes("youtu")) {
+                    //    content = content.replace(contentReplace,"[@1]");
+                    //}
                 }
                 else if(linkUrl2 === "") {
                     linkUrl2 = textUrl;
                     linkUrlText2 = "__#r";
-                    if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(contentReplace,"[@2]");
-                    }
+                    //if(!note.tags[i][1].includes("youtu")) {
+                    //    content = content.replace(contentReplace,"[@2]");
+                    //}
                 }
                 else if(linkUrl3 === "") {
                     linkUrl3 = textUrl;
                     linkUrlText3 = "__#r";
-                    if(!note.tags[i][1].includes("youtu")) {
-                        content = content.replace(contentReplace,"[@3]");
-                    }
+                    //if(!note.tags[i][1].includes("youtu")) {
+                    //    content = content.replace(contentReplace,"[@3]");
+                    //}
                 }
                 else if(linkUrl4 === "") {
                     linkUrl4 = textUrl;
@@ -73,27 +82,37 @@ export const makeIframesbyTagHTML = (content, note) => {
         }
     }
 
-    // youtube のみ. update content.
+    // update content.
     for(let i=0; i<note.tags.length; i++) {
         let tmpWord = "";
         let tmpIframe = "";
         let tmpUrl = "";
         if(i === 0) {
-            tmpWord = "[@1]";
+            // tmpWord = "[@1]";
             tmpUrl = linkUrl1;
         }
         else if(i === 1) {
-            tmpWord = "[@2]";
+            // tmpWord = "[@2]";
             tmpUrl = linkUrl2;
         }
         else if(i === 2) {
-            tmpWord = "[@3]";
+            // tmpWord = "[@3]";
             tmpUrl = linkUrl3;
         }
 
-        // youtubeのみ [@1]などを使用する
+
         if(tmpUrl != "") {
-            if(tmpUrl.includes("music.apple.com")) {
+            // YouTube tag "r"
+            if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
+                let tmpId = ''
+                tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
+                tmpId = tmpUrl.replace("https://youtu.be/", "");
+                tmpId = tmpUrl.replace("https://www.youtube.com/watch?v=", "");
+                linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tmpId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+                youtubeIdText1 = '__[id=' + tmpId + '(fromTag"r")]'
+                content = content.replace(tmpUrl, '');
+            }
+            else if(tmpUrl.includes("music.apple.com")) {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
                 //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
                 tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
@@ -110,46 +129,60 @@ export const makeIframesbyTagHTML = (content, note) => {
             else if(!tmpUrl.includes("googleusercontent.com/")){
                 tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
             }
+            else {  // todo
 
-            // update content
-            if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
-                // remove image link OGP
-                if(!tmpUrl.includes(".mov") 
-                    && !tmpUrl.includes(".jpeg")  
-                    && !tmpUrl.includes(".jpg") 
-                    && !tmpUrl.includes(".mp4") 
-                    && !tmpUrl.includes(".png") 
-                    && !tmpUrl.includes(".gif") 
-                    && !tmpUrl.includes(".webp")) {
-                    content = content.replace(tmpWord, tmpIframe);
+                // update content
+                if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
+                    // Add iframe, or remove link
+                    if(!tmpUrl.includes(".mov") 
+                        && !tmpUrl.includes(".jpeg")  
+                        && !tmpUrl.includes(".jpg") 
+                        && !tmpUrl.includes(".mp4") 
+                        && !tmpUrl.includes(".png") 
+                        && !tmpUrl.includes(".gif") 
+                        && !tmpUrl.includes(".webp")) {
+                        //content = content.replace(tmpWord, tmpIframe);
+                    }
+                    else {
+                        // remove link
+                        content = content.replace(tmpWord, "");
+                    }
                 }
                 else {
-                    content = content.replace(tmpWord, "");
+                    // Add url link
+                    content = content.replace(tmpWord, tmpUrl);
                 }
             }
-            else {
-                content = content.replace(tmpWord, tmpUrl);
-            }
-        }
+
     }
+}
 
 
 
 
 
 
-    if(linkUrlText1 != "") linkUrlHTML1 = '<a href="' + linkUrl1 + '" target="_blank">' + linkUrlText1 + '</a>';
-    if(linkUrlText2 != "") linkUrlHTML2 = '<a href="' + linkUrl2 + '" target="_blank">' + linkUrlText2 + '</a>';
-    if(linkUrlText3 != "") linkUrlHTML3 = '<a href="' + linkUrl3 + '" target="_blank">' + linkUrlText3 + '</a>';
-    if(linkUrlText4 != "") linkUrlHTML4 = '<a href="' + linkUrl4 + '" target="_blank">' + linkUrlText4 + '</a>';
-    if(linkUrlText5 != "") linkUrlHTML5 = '<a href="' + linkUrl5 + '" target="_blank">' + linkUrlText5 + '</a>';
+    // Add #r link
+    if(linkUrlText1 != "") linkTagR1 = '<a href="' + linkUrl1 + '" target="_blank">' + linkUrlText1 + '</a>';
+    if(linkUrlText2 != "") linkTagR2 = '<a href="' + linkUrl2 + '" target="_blank">' + linkUrlText2 + '</a>';
+    if(linkUrlText3 != "") linkTagR3 = '<a href="' + linkUrl3 + '" target="_blank">' + linkUrlText3 + '</a>';
+    if(linkUrlText4 != "") linkTagR4 = '<a href="' + linkUrl4 + '" target="_blank">' + linkUrlText4 + '</a>';
+    if(linkUrlText5 != "") linkTagR5 = '<a href="' + linkUrl5 + '" target="_blank">' + linkUrlText5 + '</a>';
+
 
     content = content + 
         linkUrlHTML1 +  
         linkUrlHTML2 +  
         linkUrlHTML3 +  
         linkUrlHTML4 +  
-        linkUrlHTML5;  
+        linkUrlHTML5 +
+        linkTagR1 + 
+        linkTagR2 + 
+        linkTagR3 + 
+        linkTagR4 + 
+        linkTagR5 + 
+        youtubeIdText1;
+        
 
 
 

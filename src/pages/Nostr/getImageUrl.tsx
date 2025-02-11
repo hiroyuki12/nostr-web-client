@@ -46,11 +46,11 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1e09suzmq9mp6nt0ud9ttl03790qjx70wzwlc2pwwghcusvwju54qs0c800') {
+      image = 'https://stok33.github.io/illust/nosicon2.webp'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub17mku6l34ac4cvjm92ykgj3vdtdftv997qmzsf43wq456mzcjjnwsx57f08') {
+      image = 'https://cdn-ak.f.st-hatena.com/images/fotolife/m/milestone/20230205/20230205093403.jpg'
     } 
     else if (npub === 'npub18cag5sj94gyz9szscsk7pvtapl3s63ruag8xppl9tdncs50dqdes9x3zed') {
       image = 'https://sksksketch.net/wp-content/themes/sksksketch2021/images/sksksketch-author-icon-qt.webp'

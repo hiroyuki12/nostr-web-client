@@ -24,6 +24,14 @@ const Test = () => {
 
   let noteCount = 0;
 
+ untilValue = 1688390047;  //music.youtube (normal youtube ok)
+//  untilValue = 1688382329;  //music.youtube (normal youtube ok)
+//  untilValue = 1739008290;  // youtube fix Delete After &
+//  untilValue = 1739012160;  // youtube live Repost ¥n fix
+//  untilValue = 1739114136;  // YouTube fix. nostter ok
+// untilValue = 1739265383;  // youtube hrefが表示される
+  // untilValue = 1739113299;  // YouTube fix. youtube.com
+
   // untilValue = 1739262337;  // Repost先のiconが表示されない
   // untilValue = 1739261908;  // kind:20 http://の表示が消えない。http://がaltにあるため
   // untilValue = 1739258350;  // tag "r" jpg
@@ -44,7 +52,6 @@ const Test = () => {
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
   // untilValue = 1739114201;  // YouTube repost fix. nostter ok
-  // untilValue = 1739113299;  // YouTube fix. youtube.com
   // untilValue = 1739087698;  // Error: hexToBytes NG
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
@@ -643,6 +650,7 @@ const Test = () => {
 
   /////////////////////////////////
   // Add <a href>      
+  // Add <iframe>. YouTube, Spotify, Twitter, etc.
 
       // Add <a href>
       let iframe1 = "";
@@ -657,6 +665,7 @@ const Test = () => {
           tmp = tmp.replace('\\n',' ');
           tmp = tmp.replace('\n',' ');
           tmp = tmp.replace('　',' ');  // zenkaku space
+          tmp = tmp.replace('<a',' ');
         }
         let tmp2 = tmp.split(' ');
         let iframeCount = 0;
@@ -694,6 +703,11 @@ const Test = () => {
               if(id.includes(target)) {
                 id = id.substring(0, id.indexOf(target));
               }
+              // ?si= より前を取得
+              target = '?si='
+              if(id.includes(target)) {
+                id = id.substring(0, id.indexOf(target));
+              }
 
               // contentから削除
               content = content.replace(tmp2[i], "");
@@ -707,7 +721,8 @@ const Test = () => {
 
               iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
               
-              youtubeId = '_[id = ' + id + ']';
+              youtubeId = '_[id = ' + id + '(fromContent)]';
+              // youtubeId = '_[id = ' + tmp2[i] + ']';  // Debug tmp2[i]表示
               //content = content + "<br />id=" + id  // Debug id表示
             }  // youtube
             else if(tmp2[i].includes("open.spotify.com")) {
@@ -941,7 +956,6 @@ export default Test;
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
 //  untilValue = 1739100944;  // client fix
 //  untilValue = 1739099394;  // Repost URL fix
-//  untilValue = 1739114136;  // YouTube fix. nostter ok
 //  untilValue = 1739065989;  // nos_haiku. wip quote_nevent link event id. 42.Channel_Message
 //  untilValue = 1707634026;  // repost icon NG. not display
 //  untilValue = 1700351963;  // NG link
@@ -951,9 +965,7 @@ export default Test;
 //  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1694055016;  // \n\n NG?
-//  untilValue = 1739008290;  // youtube fix Delete After &
 //  untilValue = 1695999820;  // Apple Music OGP. fix.
-//  untilValue = 1739012160;  // youtube live Repost ¥n fix
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix
@@ -1015,8 +1027,6 @@ export default Test;
 //  untilValue = 1688944930;  //threads ogp
 //  untilValue = 1688605603;  //neventt1 (quote) fix
 //  untilValue = 1688395711;  //youtube playlist (normal youtube ok)
-//  untilValue = 1688390047;  //music.youtube (normal youtube ok)
-//  untilValue = 1688382329;  //music.youtube (normal youtube ok)
 //  untilValue = 1688303413;  //https:// search engine
 //  untilValue = 1688289075;  //1,300 active authors 2023/7/2
 //  untilValue = 1688253140;  //iframe 3
