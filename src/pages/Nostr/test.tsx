@@ -11,6 +11,7 @@ import {makeInlineImageHTML} from './makeInlineImageHTML'
 import {makeReplyHTML} from './makeReplyHTML'
 import {makeStatusString} from './makeStatusString'
 import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
+import {makeIframesbyTagHTML} from './makeIframesbyTagHTML'
 
 
 const Test = () => {
@@ -21,13 +22,16 @@ const Test = () => {
 
   let noteCount = 0;
 
+  // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
+  // untilValue = 1739158577;  // NG https_iframe href target="_blank". NHK
+//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1739177954;  // nostr:nvent1 fix quote
-  untilValue = 1739175991;  // nostr:npub1 todo quote
-//  untilValue = 1686933213;  // quote(nostr:note1) fix
+//  untilValue = 1739175991;  // nostr:npub1 fix quote
+//  untilValue = 1686933213;  // nostr:note1 fix quote
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739169439;  // httpが２つ。画像表示NG
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK
-//  untilValue = 1739159139;  // twitter large ok. x.com
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
 //  untilValue = 1739114201;  // YouTube repost NG. nostter ok
 //  untilValue = 1739113299;  // YouTube NG. youtube.com
 //  untilValue = 1739087698;  // Error: hexToBytes NG
@@ -199,11 +203,11 @@ const Test = () => {
       if(!followList.includes(note.pubkey)) {
         // following filter
         follow = " [follow]";
-	// not follow user
+// not follow user
         return;
       }
       else {
-  // follow user
+// follow user
 //        return;
       }
 
@@ -452,116 +456,14 @@ const Test = () => {
       }
 
 
+
+
+      
   /////////////////////////////////
-  // make linkUrl
-
-      let linkUrl1 = "";
-      let linkUrlText1 = "";  // #r 1
-      let linkUrl2 = "";
-      let linkUrlText2 = "";  // #r 2
-      let linkUrl3 = "";
-      let linkUrlText3 = "";  // #r 3
-      let linkUrl4 = "";
-      let linkUrlText4 = "";  // #r 4
-      let linkUrl5 = "";
-      let linkUrlText5 = "";  // #r 5
-
-      for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] === "r") {
-          if(note.tags[i][1].includes("http")) {
-            if(linkUrl1 === "") {
-              linkUrl1 = note.tags[i][1];
-              linkUrlText1 = "__#r";
-              if(!note.tags[i][1].includes("youtu")) {
-                content = content.replace(linkUrl1,"[@1]");
-              }
-            }
-            else if(linkUrl2 === "") {
-              linkUrl2 = note.tags[i][1];
-              linkUrlText2 = "__#r";
-              if(!note.tags[i][1].includes("youtu")) {
-                content = content.replace(linkUrl2,"[@2]");
-              }
-            }
-            else if(linkUrl3 === "") {
-              linkUrl3 = note.tags[i][1];
-              linkUrlText3 = "__#r";
-              if(!note.tags[i][1].includes("youtu")) {
-                content = content.replace(linkUrl2,"[@3]");
-              }
-            }
-            else if(linkUrl4 === "") {
-              linkUrl4 = note.tags[i][1];
-              linkUrlText4 = "__#r";
-            }
-            else if(linkUrl5 === "") {
-              linkUrl5 = note.tags[i][1];
-              linkUrlText5 = "__#r";
-            }
-          }
-        }
-      }
-
-  //////////////////////////////
+  // make linkUrl by tag
   // make iframe, content
-        
-        // make iframe, content
-      for(let i=0; i<note.tags.length; i++) {
-        let tmpWord = "";
-        let tmpIframe = "";
-        let tmpUrl = "";
-        if(i === 0) {
-          tmpWord = "[@1]";
-          tmpUrl = linkUrl1;
-        }
-        else if(i === 1) {
-          tmpWord = "[@2]";
-          tmpUrl = linkUrl2;
-        }
-        else if(i === 2) {
-          tmpWord = "[@3]";
-          tmpUrl = linkUrl3;
-        }
 
-        if(tmpUrl != "") {
-          if(tmpUrl.includes("music.apple.com")) {
-            const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
-            //large tmpIframe = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-            tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-          }
-          else if(tmpUrl.includes("open.spotify.com")) {
-            const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
-            tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
-          }
-          else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
-            //content = content.replace(tmp2[i], "");
-            const id = tmpUrl.replace("x.com","twitter.com"); 
-            tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-          }
-          else if(!tmpUrl.includes("googleusercontent.com/")){
-            tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-          }
-          // text link
-          if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
-            // remove image link OGP
-            if(!tmpUrl.includes(".mov") 
-              && !tmpUrl.includes(".jpeg")  
-              && !tmpUrl.includes(".jpg") 
-              && !tmpUrl.includes(".mp4") 
-              && !tmpUrl.includes(".png") 
-              && !tmpUrl.includes(".gif") 
-              && !tmpUrl.includes(".webp")) {
-              content = content.replace(tmpWord, tmpIframe);
-            }
-            else {
-              content = content.replace(tmpWord, "");
-            }
-          }
-          else {
-            content = content.replace(tmpWord, tmpUrl);
-          }
-        }
-      }
+      content = makeIframesbyTagHTML(content, note);
 
 
 
@@ -765,6 +667,7 @@ const Test = () => {
               content = content.replace(tmp2[i], "");
               const id = tmp2[i]; 
               iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+
               httpLinkUrl1 = tmp2[i];
               httpLinkUrlText1 = '__twitter';
             }
@@ -838,6 +741,10 @@ const Test = () => {
         }
       }
       
+
+
+
+
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
           const emojiURL = note.tags[i][2];
@@ -900,11 +807,6 @@ const Test = () => {
               {tagsLinkUrlText4}
               {tagsLinkUrlText5}
               {tagsLinkUrlText6}
-              <a href={linkUrl1} target="_blank">{linkUrlText1}</a>
-              <a href={linkUrl2} target="_blank">{linkUrlText2}</a>
-              <a href={linkUrl3} target="_blank">{linkUrlText3}</a>
-              <a href={linkUrl4} target="_blank">{linkUrlText4}</a>
-              <a href={linkUrl5} target="_blank">{linkUrlText5}</a>
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
               <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
               {parse(inlineImageHTML)}
@@ -990,11 +892,9 @@ export default Test;
 //  untilValue = 1698731466;  // Invalid byte sequence NG
 //  untilValue = 1697536841;  // NG
 //  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
-//  untilValue = 1697112060;  // #r link? NG
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1694055016;  // \n\n NG?
 //  untilValue = 1739008290;  // youtube fix Delete After &
-//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK
 //  untilValue = 1695999820;  // Apple Music OGP. fix.
 //  untilValue = 1739012160;  // youtube live Repost ¥n fix
 //  untilValue = 1739012160;  // repost ¥n fix

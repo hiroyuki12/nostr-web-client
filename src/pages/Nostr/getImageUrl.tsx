@@ -43,6 +43,30 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === 'npub17qljy3xj0075rex7jqhuep6yhnq6gfd5v6eavpt7xrfv5vf82scqexx0vr') {
+      image = 'https://image.nostr.build/583d7e034f093935f59e5c2e0d171a7b8a1ad5edb7287f0d5f8c351e8d1c5393.jpg'
+    } 
+    else if (npub === 'npub1jl929vxmf9p3znwzd2t5pfhd475fzs2stx2vvgcamwv8evwkht3sj7334t') {
+      image = 'https://s3.fedibird.com/accounts/avatars/109/840/802/093/976/825/original/b0b40bdad26adb88.jpg'
+    } 
+    else if (npub === 'npub15mclg5qgpdjm5aw63trn9ru3e98cx99je392wxw9z6zj52fc3u9s32dfza') {
+      image = 'https://en.gravatar.com/avatar/884be098693425b409d25aaec5091de8?s=150'
+    } 
     else if (npub === 'npub18zw2f9tezxcjvzflg2s2jpux29d4jvgack559dqy6lsk79eg0q5qggvaxw') {
       image = 'https://image.nostr.build/e2e1a8df3582c393398406248a41fcc748c00f8c9bf1b91db6acdf08c0d0faa4.jpg'
     } 
@@ -231,6 +255,7 @@ export const getImageURL = (pubkey) => {
     } 
     else if (npub === 'npub1y6aja0kkc4fdvuxgqjcdv4fx0v7xv2epuqnddey2eyaxquznp9vq0tp75l') {
       image = 'https://monacute.art/_next/image?url=https%3A%2F%2Fimage.monacute.art%2F9a0fd54b-c619-4b3f-952e-d86a7df08ba8.png&w=640&q=75'
+      //image = 'https://monacute.art/_next/image?url=https%3A%2F%2Fimage.monacute.art%2F9a0fd54b-c619-4b3f-952e-d86a7df08ba8.png&w=640&q=75'
     } 
     else if (npub === 'npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49') {
       image = 'https://nostr.download/7a32988f10104771b67f5d50b4f058873a45241a441920b70242fb22f16fd839'
@@ -7796,6 +7821,8 @@ export const getImageURL = (pubkey) => {
              !image.includes('nostrcheck.me') &&
              !image.includes('uneune.one') &&
              !image.includes('imgur.com') &&
+             !image.includes('monacute.art') &&
+     
              !image.includes('cdn.nostrcheck.me')) {
       image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/' + image;
     }
