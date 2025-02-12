@@ -24,49 +24,44 @@ const Test = () => {
 
   let noteCount = 0;
 
-  //  untilValue = 1739159139;  // twitter large ok. x.com (by tag)
 
-  
-
-  // untilValue = 1739262337;  // NG. Repost先のiconが表示されない
-//  untilValue = 1688460571;  //youtube channel. thumbnail NG. lumilumi ok
- // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
-  // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
-  // untilValue = 1739258350;  // tag "r" jpg
-  // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
-  // untilValue = 1739089652;  // inlineImage. tag "r" なし.
-  // untilValue = 1734489831;  // kind:20 not display picture
-  // untilValue = 1732921974;  // kind:20 not display picture
-  // untilValue = 1737563052;  // NG very large html. nostter ok
-  // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
-  // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
-  // untilValue = 1739158577;  // fix https_iframe href target="_blank". NHK
-//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
-//  untilValue = 1739177954;  // nostr:nvent1 fix quote
-//  untilValue = 1739175991;  // nostr:npub1 fix quote
-//  untilValue = 1686933213;  // nostr:note1 fix quote
-//  untilValue = 1739169149;  // userStatus test
-  // untilValue = 1739114201;  // YouTube repost fix. nostter ok
   // untilValue = 1739087698;  // Error: hexToBytes NG
-//  untilValue = 1739008994;  // kind:1111 Commment Re] fix
-//  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
-//  untilValue = 1703568307;  // img threads NG. link切れ
-//  untilValue = 1691662709;  // repost mov NG. nostter ok
-//  untilValue = 1691507297;  // repost mp4 NG. nostter ok
-  untilValue = 1700358511;  // instagram link iframe fix
+  // untilValue = 1737563052;  // NG very large html. nostter ok
+//  untilValue = 1694194192;  // kind:30025 LongForm
+//  untilValue = 1702648801;  // 9735 content empty ng. naddr1
+//  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
+//  untilValue = 1700648893;  // bookmark
+//  untilvalue = 1700654092;  // long-form content
+//  untilValue = 1700351963;  // NG link
+//  untilValue = 1698228483;  // link NG
+//  untilValue = 1698731466;  // Invalid byte sequence NG
+//  untilValue = 1697536841;  // NG
+//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
+//  untilValue = 1696110614;  // url # NG
+//  untilValue = 1694055016;  // \n\n NG?
+
+  // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。NG. 
+  // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。NG
+//  untilValue = 1688460571;  // youtube channel?. thumbnail NG. lumilumi URL ok. This live stream recording is not available.
+//  untilValue = 1691507297;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
+  // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
+  // untilValue = 1739359806;  // tag "r" img ok
+//  untilValue = 1691662709;  // repost mov fix. nostter ok
+ 
   
 
   const sinceValue = untilValue - 1800;  //about 30 minutes 
+  // const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 7200;  //about 120 minutes 
 //  sinceValue = untilValue - 500;  //about 15 minutes 
-//  sinceValue = untilValue - 7200;  //about 120 minutes 
 
 
 
 
   const { events } = useNostrEvents({
     filter: {
-      until: untilValue,  //paging
-//      authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
+     until: untilValue,
+    //  authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
 //      authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
 
 //      kinds: [0],      // 0:Metadata
@@ -84,7 +79,7 @@ const Test = () => {
 //      kinds: [41],     // 41:Channel Metadata
 //      kinds: [42],     // 42:Channel_Message
 //      kinds: [44],     // 44:Channel Mute User
-//      kinds: [1111],     // 1111:Comment
+//      kinds: [1111],   // 1111:Comment
 //      kinds: [1063],   // 1063:File Metadata
 //      kinds: [1311],   // 1311:Live Chat Message
 //      kinds: [1984],   // 1984:Reporting spam
@@ -107,13 +102,14 @@ const Test = () => {
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
 //      kinds: [30315],  // 30315:User Statuses
+    //  kinds: [30402],  // 30402:shopstr?
 //      kinds: [31922],  // 31922:calender
 //      kinds: [31989],  // 31989:Handler recommendation
 //      kinds: [31990],  // 31990:Handler information
-//      since: sinceValue,
+      since: sinceValue,
       //since: dateToUnix(now.current), // all new events from now
       //since: 1679403822, // 1679413822 2023/03/22 0:50
-//      limit: 1000,
+      // limit: 1000,
       limit: 100,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
@@ -588,7 +584,7 @@ const Test = () => {
       for(let i=0; i<wordsNostr.length; i++) {
         let tmp = wordsNostr[i];
         if(tmp.includes("nostr:note1") || 
-          // tmp.includes("nostr:naddr1") || 
+          tmp.includes("nostr:naddr1") || 
           tmp.includes("nostr:nevent1") || 
           // tmp.includes("nostr:nprofile1") || 
           tmp.includes("nostr:npub1")
@@ -652,6 +648,8 @@ const Test = () => {
       let youtubeId = "";
       let httpLinkUrl1 = "";
       let httpLinkUrlText1 = "";  // # https://
+      let httpLinkUrl2 = "";
+      let httpLinkUrlText2 = "";  // # https://
       if(content.includes("https://") || content.includes("youtu.be")) {
         let tmp = content;
         for(let i=0; i<10; i++) {
@@ -743,6 +741,16 @@ const Test = () => {
 
               httpLinkUrl1 = tmp2[i];
               httpLinkUrlText1 = '__Ttwitter(fromContent)';
+            }
+            else if(tmp2[i].includes("targoyle.jp")) {
+              if(httpLinkUrlText1 == '') {
+                httpLinkUrlText1 = '_link[1](fromContent)';
+                httpLinkUrl1 = 'https://targoyle.jp/fanart/';  //debug
+              }
+              else {
+                httpLinkUrlText2 = '_link[2](fromContent)';
+                httpLinkUrl2 = 'https://targoyle.jp/';  //debug
+              }
             }
             //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
             else {
@@ -888,6 +896,7 @@ const Test = () => {
               {tagsLinkUrlText6}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
               <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
+              <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a><br />
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
               <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
@@ -948,6 +957,26 @@ export default Test;
 
 // memo
 
+// untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
+// untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
+// untilValue = 1739258350;  // tag "r" jpg
+// untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
+// untilValue = 1739089652;  // inlineImage. tag "r" なし.
+// untilValue = 1734489831;  // kind:20 not display picture
+// untilValue = 1732921974;  // kind:20 not display picture
+// untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
+// untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
+// untilValue = 1739158577;  // fix https_iframe href target="_blank". NHK
+//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
+//  untilValue = 1739177954;  // nostr:nvent1 fix quote
+//  untilValue = 1739175991;  // nostr:npub1 fix quote
+//  untilValue = 1686933213;  // nostr:note1 fix quote
+//  untilValue = 1739169149;  // userStatus test
+//  untilValue = 1739114201;  // YouTube repost fix. nostter ok
+//  untilValue = 1739008994;  // kind:1111 Commment Re] fix
+//  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
+//  untilValue = 1703568307;  // img threads NG. link切れ
+//  untilValue = 1700358511;  // instagram link iframe fix
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1692963542;  // spotify album. no tag "r"
 //  untilValue = 1695999820;  // Apple Music OGP. fix.
@@ -966,28 +995,17 @@ export default Test;
 //  untilValue = 1739024868;  // kirby OGP Todo nostter ok
 //  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
 //  untilValue = 1739091313;  // repost image size
-// untilValue = 1739163316;  // Repost  fix
+//  untilValue = 1739163316;  // Repost  fix
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
 //  untilValue = 1739100944;  // client fix
 //  untilValue = 1739099394;  // Repost URL fix
 //  untilValue = 1739065989;  // nos_haiku. wip quote_nevent link event id. 42.Channel_Message
-//  untilValue = 1707634026;  // repost icon NG. not display
-//  untilValue = 1700351963;  // NG link
-//  untilValue = 1698228483;  // link NG
-//  untilValue = 1698731466;  // Invalid byte sequence NG
-//  untilValue = 1697536841;  // NG
-//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
-//  untilValue = 1696110614;  // url # NG
-//  untilValue = 1694055016;  // \n\n NG?
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix
 //  untilValue = 1704284862;  // moster cannot open
 //  untilValue = 1704158604;  // cashu sats. noStrudel or snort ok
 //  untilValue = 1704037251;  // lightning invoice 1 sat pay. snort ok
-//  untilValue = 1702648801;  // 9735 content empty ng
-//  untilValue = 1700648893;  // bookmark
-//  untilvalue = 1700654092;  // long-form content
 //  untilValue = 1700282586;  // kind 10005 Channel list?
 //  untilValue = 1699350541;  // Nostrasia Day 1 Summary Nosli
 //  untilValue = 1698636018;  // kind 6666
@@ -1016,7 +1034,6 @@ export default Test;
 //  untilValue = 1694687538;  // zap request
 //  untilValue = 1694359339;  // search kind:30040
 //  untilValue = 1694326407;  // kind:10030
-//  untilValue = 1694194192;  // kind:30025 LongForm
 //  untilValue = 1694003737;  // nostr:naddr1 zap.stream
 //  untilValue = 1693796212;  // #e(reply fix
 //  untilValue = 1693566199;  // generic repost 42.Channel_Message
@@ -1077,7 +1094,7 @@ export default Test;
 //  untilValue = 1686135829;  //U+202E (RTL)
 //  untilValue = 1686051720;  //reverce
 //  untilValue = 1686052701;  //before 1 hour fix
-//untilValue = 1707783206;  // :kubipaka_null: NG
+//  untilValue = 1707783206;  // :kubipaka_null: NG
 
 //  untilValue = 1672000000; // 2022/12/26-1970/1/1
 //  untilValue = 1675000000; // 2023/1/29 22- 2023/1/11 4, 
@@ -1102,7 +1119,7 @@ export default Test;
 //  untilValue = 1676300000; // 2023/2/13 23-2023/2/13 23 +100,000
 //  untilValue = 1676350000; // 2023/2/14 13-2023/2/14 12, +50,000
 //  untilValue = 1676400000; // 2023/2/15 3- 2023/2/15 1,  +50,000
-      //untilValue = 1676470000; // 2023/2/15 23-2023/2/15 20, +10,000
+//  untilValue = 1676470000; // 2023/2/15 23-2023/2/15 20, +10,000
 //      untilValue = 1676480000; // 2023/2/16 1- 2023/2/15 22, +10,000
 //      untilValue = 1676550000; // 2023/2/16 21-2023/2/16 15, +20,000
 //      untilValue = 1676580000; // 2023/2/17 5- 2023/2/16 21, +30,000
@@ -1162,7 +1179,7 @@ export default Test;
 
       //until 1680300000, // 2023/4/1 6- 2023/4/1 2,  +30,000
       //until 1680360000, // 2023/4/1 23- 2023/4/1 21,  +10,000 *
-//      untilValue = 1680370000; // 2023/4/1 - 2023/4/1 ,  +10,000 *
+      //untilValue = 1680370000; // 2023/4/1 - 2023/4/1 ,  +10,000 *
       
       //until: 1684667029, // 2023/5/21 20:03 - 
 

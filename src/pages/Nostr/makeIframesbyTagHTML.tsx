@@ -1,7 +1,8 @@
 export const makeIframesbyTagHTML = (content, note) => {
 
 // make iframe by tag "r" (URL) &  make link #r
-// update content. replace URL to iframe
+
+// update content. delete URL
 // add #r link to content
 
 // return cotent
@@ -110,7 +111,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                     tmpId = tmpId.replace("https://youtu.be/", "");
                     tmpId = tmpId.replace("https://www.youtube.com/watch?v=", "");
                     linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tmpId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-                    youtubeIdText1 = '__[id=' + tmpId + '(fromTag"r")]'
+                    youtubeIdText1 = '__[id=' + tmpId + '](fromTag"r")'
                     content = content.replace(tmpUrl, '');
                 }
                 else {
@@ -133,7 +134,7 @@ export const makeIframesbyTagHTML = (content, note) => {
             else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
                 const id = tmpUrl.replace("x.com","twitter.com"); 
                 linkUrlHTML1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-                youtubeIdText1 = '__Twitter(fromTag"r")'
+                youtubeIdText1 = '__X(Twitter)(fromTag"r")'
                 content = content.replace(tmpUrl, '');
             }
             //else if(tmpUrl.includes("googleusercontent.com/")){

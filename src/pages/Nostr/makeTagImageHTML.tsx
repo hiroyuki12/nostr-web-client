@@ -56,7 +56,6 @@ export const makeTagImageHTML = (content, note) => {
                         textUrl = textUrl.replace("`", "");
                     }
 
-
                     if(linkUrl1 === "") {
                         image1Height = "250";
                         linkUrl1 = textUrl;
@@ -97,6 +96,7 @@ export const makeTagImageHTML = (content, note) => {
 
     let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
         // '[tag"r":' + 'makeTagImageHTML' + ']';
+
 
 
 

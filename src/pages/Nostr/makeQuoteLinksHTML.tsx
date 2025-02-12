@@ -132,14 +132,21 @@ export const makeQuoteLinksHTML = (content) => {
       // todo
       else if(wordsNostr[i].includes("nostr:naddr1")) {
         //content = content.replace(wordsNostr[i],'');
-        quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
         //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-        quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
+        // quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
+        quoteLinkUrl = "https://lumilumi.app/" + wordsNostr[i].replace("nostr:",'')
+        // quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+        
         //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
         //quoteLinkText = "__(nostr:naddr1)";
         //content = content + '[kind:' + note.kind + ']'
-        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
+
+        // content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
+        quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>';
+         
       }
+
+      // todo
       else if(wordsNostr[i].includes("nostr:nprofile1")) {
         quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
         content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:nprofile1)</a>');

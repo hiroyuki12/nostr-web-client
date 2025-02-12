@@ -37,14 +37,14 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1ngqvu962rh9dfnzfykj8tfacnmkm7r325tgr4kgyl3jvmthegm7qmncq69') {
+      image = 'https://nixeneko.info/media/30494669-0559-4b4f-967f-4e3de4d24ff8/20221119_icon_small_3.jpg'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub14uq8s06pad57wej7nwg4ctlay5zqse78msnyp2q0vtjgka5juzdsm4xkmg') {
+      image = 'https://kojira.io/hakane.webp'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1nh5n8zue2r769jwz9xfspw808jtplrkx7ycppzfvvgw59umtaeyqmua85k') {
+      image = 'https://nostrcheck.me/media/9de9338b9950fda2c9c2299300b8ef3c961f8ec6f13010892c621d42f36bee48/2465bf7407080d21c072b349978e7b0bdac0e0419ad0557fb09ffd935221ed96.webp'
     } 
     else if (npub === 'npub1e09suzmq9mp6nt0ud9ttl03790qjx70wzwlc2pwwghcusvwju54qs0c800') {
       image = 'https://stok33.github.io/illust/nosicon2.webp'
@@ -7822,7 +7822,9 @@ export const getImageURL = (pubkey) => {
              !image.includes('uneune.one') &&
              !image.includes('imgur.com') &&
              !image.includes('monacute.art') &&
-     
+             !image.includes('s3.fedibird.com') &&
+             !image.includes('nixeneko.info') &&
+             
              !image.includes('cdn.nostrcheck.me')) {
       image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/' + image;
     }
