@@ -50,7 +50,7 @@ export const makeTagImageHTML = (content, note) => {
                     textUrl.includes("googleusercontent.com/") ||
                     textUrl.includes("grafana.gsn.im/")) {
                         
-                    if(textUrl.includes(""))
+                    if(textUrl.includes("`"))
                     {
                         // googleusercontent
                         textUrl = textUrl.replace("`", "");
@@ -94,7 +94,7 @@ export const makeTagImageHTML = (content, note) => {
 
 
 
-    let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
+    const tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
         // '[tag"r":' + 'makeTagImageHTML' + ']';
 
 

@@ -26,7 +26,7 @@ export const removeTagImageUrl = (content, note) => {
     for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "r") {
             if(note.tags[i][1].includes("http")) {
-                let textUrl = note.tags[i][1];
+                const textUrl = note.tags[i][1];
 
                 if(textUrl.includes(".jpg")  ||
                     textUrl.includes(".jpeg") || 

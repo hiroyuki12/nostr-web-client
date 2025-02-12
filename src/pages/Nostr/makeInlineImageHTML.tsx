@@ -30,13 +30,14 @@ export const makeInlineImageHTML = (content) => {
             tmp = tmp.replace('　',' ');
             tmp = tmp.replace('`',' ');
             tmp = tmp.replace('`',' ');
-            tmp = tmp.replace('https://',' https://');
+            tmp = tmp.replace('https://',' https://');  // httpの前にスペースを追加
             tmp = tmp.replace('http://',' http://');
+            tmp = tmp.replace("`", "");  // googleusercontent
         }
         for(let i=0; i<20; i++) {
             tmp = tmp.replace('\n',' ');
         }
-        let tmp2 = tmp.split(' ');
+        const tmp2 = tmp.split(' ');
 
         let imageCount = 0;
         for(let i=0; i<tmp2.length; i++) {
@@ -91,7 +92,7 @@ export const makeInlineImageHTML = (content) => {
     }
 
     // let inlineImageHTML = '<a href="' + image1Url + '" target="_blank">{inlineImage1Height}</a><br />';
-    let inlineImageHTML = '<a href="' + image1Url + '" target="_blank"><img src="' + image1Url + '" height="' + inlineImage1Height + '" /></a>' +
+    const inlineImageHTML = '<a href="' + image1Url + '" target="_blank"><img src="' + image1Url + '" height="' + inlineImage1Height + '" /></a>' +
             '<a href="' + image2Url + '" target="_blank"><img src="' + image2Url + '" height="' + inlineImage2Height + '" /></a>' +
             '<a href="' + image3Url + '" target="_blank"><img src="' + image3Url + '" height="' + inlineImage3Height + '" /></a>' +
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +

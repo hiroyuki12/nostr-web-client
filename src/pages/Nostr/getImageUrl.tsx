@@ -1,7 +1,7 @@
 import { nip19 } from "nostr-tools";
 
 export const getImageURL = (pubkey) => {
-    let npub = nip19.npubEncode(pubkey)
+    const npub = nip19.npubEncode(pubkey)
     let image =''
 
     if (pubkey === '43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906') {

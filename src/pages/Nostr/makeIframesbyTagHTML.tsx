@@ -39,7 +39,7 @@ export const makeIframesbyTagHTML = (content, note) => {
         if(note.tags[i][0] === "r") {
             if(note.tags[i][1].includes("http")) {
 		        // 全卓スペースで分割。tag rにURLと日本語が入っている場合があるため
-                let value = note.tags[i][1].split('　');
+                const value = note.tags[i][1].split('　');
                 let contentReplace = "";
 
                 let textUrl = "";

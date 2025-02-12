@@ -13,7 +13,7 @@ export const makeQuoteLinksHTML = (content) => {
 
 
 
-  let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+  const wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
   // nostr:note1, nostr:naddr1, nostr:nevent1
   if(content != undefined &&
     (content.includes("nostr:note1") || 
@@ -79,7 +79,7 @@ export const makeQuoteLinksHTML = (content) => {
         wordsNostr[i].includes("nostr:nevent1")) {  
         //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
         //let quoteBaseUrl = "https://snort.social/e/"
-        let quoteBaseUrl = "https://nostter.app/"
+        const quoteBaseUrl = "https://nostter.app/"
 
         if(quoteLinkText === "") {
           //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
@@ -95,7 +95,7 @@ export const makeQuoteLinksHTML = (content) => {
             //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
             //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
             //let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-            let quoteNeventLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+            const quoteNeventLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
             quoteLinkText = "_(quote_nevent1)";
             //content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
             quoteLinkHTML1 = '<a href="' + quoteNeventLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
@@ -156,8 +156,7 @@ export const makeQuoteLinksHTML = (content) => {
 
 
 
-  let quoteLinksHTML = ""; 
-  quoteLinksHTML = quoteLinkHTML1 + quoteLinkHTML2 + quoteLinkHTML3;
+  const quoteLinksHTML = quoteLinkHTML1 + quoteLinkHTML2 + quoteLinkHTML3;
 
 
   return quoteLinksHTML;

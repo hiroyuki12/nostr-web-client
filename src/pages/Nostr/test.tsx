@@ -24,7 +24,9 @@ const Test = () => {
 
   let noteCount = 0;
 
+untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
 
+  // untilValue = 1739373027;  // NG iframe prime video
   // untilValue = 1739087698;  // Error: hexToBytes NG
   // untilValue = 1737563052;  // NG very large html. nostter ok
 //  untilValue = 1694194192;  // kind:30025 LongForm
@@ -50,8 +52,8 @@ const Test = () => {
  
   
 
-  const sinceValue = untilValue - 1800;  //about 30 minutes 
-  // const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 1800;  //about 30 minutes 
+  const sinceValue = untilValue - 3600;  //about 60 minutes 
   // const sinceValue = untilValue - 7200;  //about 120 minutes 
 //  sinceValue = untilValue - 500;  //about 15 minutes 
 
@@ -957,7 +959,6 @@ export default Test;
 
 // memo
 
-// untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
 // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
 // untilValue = 1739258350;  // tag "r" jpg
 // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない

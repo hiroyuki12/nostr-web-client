@@ -193,9 +193,7 @@ export const makeReplyHTML = (note) => {
 
 
 
-    let replyHTML = "" + 
-
-    '<a href="' + channelUrl + '" target="_blank">' + channel + '</a>' +
+    const replyHTML = '<a href="' + channelUrl + '" target="_blank">' + channel + '</a>' +
     reply + " " +
     '<a href="' + replyToUrl1 + '" target="_blank"><img src="' + replyToImageURL1 + '" width="' + replyToImageSize1 + '" height="' + replyToImageSize1 + '" /></a>' +
     '<a href="' + replyToUrl2 + '" target="_blank"><img src="' + replyToImageURL2 + '" width="' + replyToImageSize2 + '" height="' + replyToImageSize2 + '" /></a>' +

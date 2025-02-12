@@ -290,7 +290,7 @@ export const makeStatusString = (note) => {
 
 
 
-    let statusString = status;
+    const statusString = status;
 
     return statusString;
 }
