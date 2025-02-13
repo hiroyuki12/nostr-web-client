@@ -92,13 +92,13 @@ export const makeInlineImageHTML = (content) => {
     }
 
     // let inlineImageHTML = '<a href="' + image1Url + '" target="_blank">{inlineImage1Height}</a><br />';
-    const inlineImageHTML = '<a href="' + image1Url + '" target="_blank"><img src="' + image1Url + '" height="' + inlineImage1Height + '" /></a>' +
+    let inlineImageHTML = '<a href="' + image1Url + '" target="_blank"><img src="' + image1Url + '" height="' + inlineImage1Height + '" /></a>' +
             '<a href="' + image2Url + '" target="_blank"><img src="' + image2Url + '" height="' + inlineImage2Height + '" /></a>' +
             '<a href="' + image3Url + '" target="_blank"><img src="' + image3Url + '" height="' + inlineImage3Height + '" /></a>' +
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +
             '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
     
-
+            if(image1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage'
     
     return inlineImageHTML;
 }

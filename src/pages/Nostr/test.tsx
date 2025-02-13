@@ -24,17 +24,17 @@ const Test = () => {
 
   let noteCount = 0;
 
-untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
-
+// untilValue = 1739446806;  // prime video (iframe from content)
+  // untilValue = 1739446863;  // NG twitter
   // untilValue = 1739373027;  // NG iframe prime video
   // untilValue = 1739087698;  // Error: hexToBytes NG
   // untilValue = 1737563052;  // NG very large html. nostter ok
-//  untilValue = 1694194192;  // kind:30025 LongForm
+  // untilValue = 1694194192;  // kind:30025 LongForm
 //  untilValue = 1702648801;  // 9735 content empty ng. naddr1
 //  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
 //  untilValue = 1700648893;  // bookmark
 //  untilvalue = 1700654092;  // long-form content
-//  untilValue = 1700351963;  // NG link
+//  untilValue = 1700351963;  // NG link. nostter app home ３つ
 //  untilValue = 1698228483;  // link NG
 //  untilValue = 1698731466;  // Invalid byte sequence NG
 //  untilValue = 1697536841;  // NG
@@ -49,6 +49,7 @@ untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1�
   // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
   // untilValue = 1739359806;  // tag "r" img ok
 //  untilValue = 1691662709;  // repost mov fix. nostter ok
+// untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
  
   
 
@@ -471,6 +472,13 @@ untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1�
 
       let inlineImageHTML = makeInlineImageHTML(content);
 
+      //todo conentにjpgなどのURLがある場合は削除 @@
+      const tmpContent = content.split('\n')
+      for(let i=0; i<tmpContent.length; i++) {
+        if(tmpContent[i].includes('http') && tmpContent[i].includes('.jpg')) {
+          content = content.replace(tmpContent[i], '')
+        }
+      }
 
 
 
@@ -644,7 +652,21 @@ untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1�
   // Add <a href>      
   // Add <iframe>. YouTube, Spotify, Twitter, etc.
 
-      // Add <a href>
+  // Add <a href>
+
+
+
+  let iframe1 = "";
+  let iframe2 = "";
+  let youtubeId = "";
+  let httpLinkUrl1 = "";
+  let httpLinkUrlText1 = "";  // # https://
+  let httpLinkUrl2 = "";
+  let httpLinkUrlText2 = "";  // # https://
+
+
+
+  /*
       let iframe1 = "";
       let iframe2 = "";
       let youtubeId = "";
@@ -817,6 +839,8 @@ untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1�
       }
 
 
+
+      */
 
 
 

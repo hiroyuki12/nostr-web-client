@@ -99,6 +99,5 @@ export const makeTagImageHTML = (content, note) => {
 
 
 
-
     return tagImageHTML;
 }

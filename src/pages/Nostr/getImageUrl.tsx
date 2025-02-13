@@ -37,6 +37,21 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === 'npub1fqaxs7cce5e4qzu9pewaklf5tjtvyslnx0p9s6jhkmaruw2q3cjs9cs5m6') {
+      image = 'https://nostrcheck.me/media/83d52b4363d2d1bc5a098de7be67c120bfb7c0cee8efefd8eb6e42372af24689/939a2d5f3208ca3b4137a6536ebf24bf12e805604b56b1b303803fd073482d96.webp'
+    } 
+    else if (npub === 'npub1y60x74a2ngsqeq2wdwv8yxqemhsr3jnqcqushpaktrfsp2mdp5zqe9cll0') {
+      image = 'https://picture-dka.pages.dev/headicon.jpg'
+    } 
     else if (npub === 'npub1ngqvu962rh9dfnzfykj8tfacnmkm7r325tgr4kgyl3jvmthegm7qmncq69') {
       image = 'https://nixeneko.info/media/30494669-0559-4b4f-967f-4e3de4d24ff8/20221119_icon_small_3.jpg'
     } 

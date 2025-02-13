@@ -103,6 +103,7 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
         if(tmpUrl != "") {
+
             // YouTube tag "r"
             if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
                 if(!tmpUrl.includes('@')) {
@@ -154,11 +155,14 @@ export const makeIframesbyTagHTML = (content, note) => {
                         && !tmpUrl.includes(".png") 
                         && !tmpUrl.includes(".gif") 
                         && !tmpUrl.includes(".webp")) {
-                        content = content.replace(tmpWord, tmpIframe);
+                        linkUrlHTML1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                        content = content.replace(tmpUrl, '');
+
                     }
                     else {
                         // remove link
                         content = content.replace(tmpWord, "");
+
                     }
                 }
                 else {
@@ -169,7 +173,6 @@ export const makeIframesbyTagHTML = (content, note) => {
 
     }
 }
-
 
 
 
