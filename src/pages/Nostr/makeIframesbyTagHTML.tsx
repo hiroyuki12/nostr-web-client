@@ -175,7 +175,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                     }
                     else {
                         // remove link
-                        content = content.replace(tmpWord, "");
+                        content = content.replace(tmpWord, '');
 
                     }
                 }

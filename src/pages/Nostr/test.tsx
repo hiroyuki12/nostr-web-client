@@ -15,6 +15,8 @@ import {makeStatusString} from './makeStatusString'
 import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
 import {makeIframesbyTagHTML} from './makeIframesbyTagHTML'
 import {makeIframesbyContentHTML} from './makeIframesbyContentHTML'
+import {makeMarkdownHTML} from './makeMarkdownHTML'
+import {makeTextlinkbyContentHTML} from './makeTextlinkbyContentHTML'
 
 
 const Test = () => {
@@ -25,7 +27,9 @@ const Test = () => {
 
   let noteCount = 0;
 
-  // untilValue = 1739604459;  // 3 images ok
+//  untilValue = 1739078705;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+
+ // untilValue = 1739604459;  // 3 images ok
   // untilValue = 1739602957;  // fix image duplicate
 //  untilValue = 1696316415;  // nevent1 ok
   // untilValue = 1739594870;  // http <username> fix iframe
@@ -52,7 +56,7 @@ const Test = () => {
   // untilValue = 1739373027;  // fix iframe prime video from content
   // untilValue = 1739446863;  // fix twitter iframe from content
   // untilValue = 1739087698;  // Error: hexToBytes NG
-  untilValue = 1737563052;  // NG very large html. nostter ok
+  // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1694194192;  // kind:30025 LongForm
 //  untilValue = 1702648801;  // 9735 content empty . naddr1
 //  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
@@ -78,7 +82,9 @@ const Test = () => {
  
   
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
-  const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 36000;  //about 600 minutes 
+  const sinceValue = untilValue - 999999;  //about 11 days 
   // const sinceValue = untilValue - 7200;  //about 120 minutes 
 //  sinceValue = untilValue - 500;  //about 15 minutes 
 
@@ -91,7 +97,7 @@ const Test = () => {
 
 //      kinds: [0],      // 0:Metadata
 //      kinds: [1],      // 1:Short Text Note
-      kinds: [1,6,20,42,1111],      // 1:Short Text Note ======================
+      kinds: [1,6,20,42,1111,30023],      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -121,7 +127,7 @@ const Test = () => {
 //      kinds: [30003],  // 30003:Bookmark sets
 //      kinds: [30008],  // 30008:Profile Badges
 //      kinds: [30009],  // 30009:Badge definition event
-//      kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
+     kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
 //      kinds: [30025],  // 
 //      kinds: [30030],  // 30030:emoji set 
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
@@ -369,6 +375,10 @@ const Test = () => {
 
 
       let content = note.content;
+      let markdownContent = content;
+
+
+
 
       // parseしてもHTMLタグをそのまま表示するようにcontentの<を置き換え
       for(let i=0; i<1000; i++) {
@@ -376,26 +386,52 @@ const Test = () => {
       }
 
 
+
+
+      // kind:30023 Markdown
+
+      if(note.kind === 30023) { // Markdown
+        // ## , ###, - をMarkdown HTML(<h2>,<h3>,<ol><li>に置き換え
+        markdownContent = makeMarkdownHTML(markdownContent, note)
+      }
+
+      content = markdownContent  // Markdown表示対応前を表示するにはコメントアウト
+
+      // <a href無効化
+      for(let i=0; i<1000; i++) {
+        // content = content.replace('https://','_ttps://');  // <
+      }
+
+      // Markdown化した後のHTMLを表示する時
+      // for(let i=0; i<1000; i++) {
+      //   content = content.replace('<','&lt;');  // <
+      // }
+
+
+
+
+
+
       if(content === "") {
 	      content = "[empty]";
 	    }
       else {
-        let splitConent = content
-        splitConent = splitConent.split(',');  // , でsplit
-        for(let i=0; i<splitConent.length; i++) {
+        let splitContent = content
+        splitContent = splitContent.split(',');  // , でsplit
+        for(let i=0; i<splitContent.length; i++) {
           // Repostのcontentデータをcontentの本文のみに調整
-          if(splitConent[i].includes('"content"')) {
-            let splitConent2 = splitConent[i];
-            // if(splitConent2.includes('{"content"')) {
-              splitConent2 = splitConent2.replace('{"content":"','');
+          if(splitContent[i].includes('"content"')) {
+            let splitContent2 = splitContent[i];
+            // if(splitContent2.includes('{"content"')) {
+              splitContent2 = splitContent2.replace('{"content":"','');
             // }
             
-            splitConent2 = splitConent2.replace('"content":"','');
-            if(splitConent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
-              splitConent2 = splitConent2.slice(0, -1);
+            splitContent2 = splitContent2.replace('"content":"','');
+            if(splitContent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
+              splitContent2 = splitContent2.slice(0, -1);
             }
-            if(splitConent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
-              splitConent2 = splitConent2.slice(0, -1);
+            if(splitContent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
+              splitContent2 = splitContent2.slice(0, -1);
             }
             
             /* // content より後を取得
@@ -408,12 +444,12 @@ const Test = () => {
             }*/
 
             for(let j=0; j<10; j++) {
-              splitConent2 = splitConent2.replace("\\n","\n");   // \\n -> \n
+              splitContent2 = splitContent2.replace("\\n","\n");   // \\n -> \n
             }
             for(let j=0; j<20; j++) {
-              splitConent2 = splitConent2.replace("\\/","/");   // \/ -> /
+              splitContent2 = splitContent2.replace("\\/","/");   // \/ -> /
             }
-            content = splitConent2;
+            content = splitContent2;
           }
 	      }  //for
 
@@ -518,23 +554,25 @@ const Test = () => {
 
 
 
-      let tagUrl = "";  // #t
+      if(!note.kind === 30023) {
+        let tagUrl = "";  // #t
 
-      for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] === "t") {
-          let tag = note.tags[i][1];
-          if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
-          if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
-          if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
-          if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
-      //	  tagUrl = "https://snort.social/t/" + tag;
-          tagUrl = "https://nostrudel.ninja/#/t/" + tag;
+        for(let i=0; i<note.tags.length; i++) {
+          if(note.tags[i][0] === "t") {
+            let tag = note.tags[i][1];
+            if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
+            if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
+            if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
+            if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
+        //	  tagUrl = "https://snort.social/t/" + tag;
+            tagUrl = "https://nostrudel.ninja/#/t/" + tag;
 
-          if(!content.includes("/#" + tag)) {
-            content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
+            if(!content.includes("/#" + tag)) {
+              content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
+            }
           }
         }
-      }
+    }
 
 
 
@@ -671,8 +709,12 @@ const Test = () => {
 
 
 
-      content = makeIframesbyContentHTML(content, note);
-
+      if(!note.kind === 30023) {
+        content = makeIframesbyContentHTML(content, note);
+      }
+      else {
+        content = makeTextlinkbyContentHTML(content, note);
+      }
 
 
 
@@ -836,7 +878,6 @@ export default Test;
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
-//  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1703568307;  // img threads NG. link切れ
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1692963542;  // spotify album. no tag "r"
