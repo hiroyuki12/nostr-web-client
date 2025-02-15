@@ -65,7 +65,7 @@ export const makeInlineImageHTML = (content) => {
                 // tmp2[i].includes("grafana.gsn.im/"))
                 )
             && tmp2[i].includes("http")
-            && !tmp2[i].includes("gifu.jp/")
+            // && !tmp2[i].includes("gifu.jp/")
             )  {
                 if(imageCount===0) {
                     inlineImage1Height = "250";

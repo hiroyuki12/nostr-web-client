@@ -124,10 +124,6 @@ export const makeIframesbyTagHTML = (content, note) => {
                     id = id.substring(id.indexOf(target3) + target3.length, id.length);
                     }
 
-                    // let tmpId = ''
-                    // tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
-                    // tmpId = tmpId.replace("https://youtu.be/", "");
-                    // tmpId = tmpId.replace("https://www.youtube.com/watch?v=", "");
                     linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
                     youtubeIdText1 = '__[id=' + id + '](tagLink)'
                     content = content.replace(tmpUrl, '');

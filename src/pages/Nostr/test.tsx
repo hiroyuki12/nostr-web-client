@@ -25,8 +25,11 @@ const Test = () => {
 
   let noteCount = 0;
 
-  untilValue = 1739594870;  // http <username> NG iframe
-  // untilValue = 1739588299;  //YouTube NG
+  // untilValue = 1739604459;  // 3 images ok
+  // untilValue = 1739602957;  // fix image duplicate
+//  untilValue = 1696316415;  // nevent1 ok
+  // untilValue = 1739594870;  // http <username> fix iframe
+  // untilValue = 1739588223;  //YouTube NG. [id=f79M-DhLPec&t=105](
   // untilValue = 1739582796;  // x.com iframe fix
   // untilValue = 1739585083;  // Youtube target fix.
   //  untilValue = 1739585405;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
@@ -49,7 +52,7 @@ const Test = () => {
   // untilValue = 1739373027;  // fix iframe prime video from content
   // untilValue = 1739446863;  // fix twitter iframe from content
   // untilValue = 1739087698;  // Error: hexToBytes NG
-  // untilValue = 1737563052;  // NG very large html. nostter ok
+  untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1694194192;  // kind:30025 LongForm
 //  untilValue = 1702648801;  // 9735 content empty . naddr1
 //  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
@@ -74,13 +77,10 @@ const Test = () => {
 // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
  
   
-
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
   const sinceValue = untilValue - 3600;  //about 60 minutes 
   // const sinceValue = untilValue - 7200;  //about 120 minutes 
 //  sinceValue = untilValue - 500;  //about 15 minutes 
-
-
 
 
   const { events } = useNostrEvents({
@@ -95,7 +95,7 @@ const Test = () => {
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
-//      kinds: [6],      // 6:Repost
+    //  kinds: [6],      // 6:Repost
 //      kinds: [7],      // 7:Reaction
 //      kinds: [8],      // 8:Badge Award
 //      kinds: [16],     // 16:Generic Repost
@@ -154,34 +154,6 @@ const Test = () => {
 
 
 
-  /*const { data: npub } = nip19.decode(
-    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
-  );*/
-
-  /*const { data: userData, isLoading } = useProfile({
-    //pubkey: npub.toString(),
-    pubkey: "c909252de5546401e9717846a27d3aec0beef9bd8360bcd7cf5480252dd6776d",
-  });*/
-
-  /*const Profile = (npub) => {
-    const { data: userData, isLoading } = useProfile({
-      //pubkey: npub.toString(),
-      //pubkey: "afb18dfa9cdbc569bfe32a50570fa852344325ca8d521dddaee33a0913281dd1",
-      pubkey: npub,
-    });
-    console.log(isLoading);
-    
-    return (
-      <>
-        <p>Name: {userData?.name}</p>
-        <p>Picture: {userData?.picture}</p>
-        <p><img src={userData?.picture} width="60" /></p>
-      </>
-    )
-  }*/
-//  {Profile("bbbe1c012adb049f3c4829bc956d47addd49bb95d94e3dae8c314a5a7b1d90f2")} 
-
-
   // following list
   const { events: events2 } = useNostrEvents({
     filter: {
@@ -198,21 +170,16 @@ const Test = () => {
   });
 
 
-  const onLoadNext = async () => {
-    untilValue = 1688863000;
-    alert("Next");
-    //return;
-  }
 
+////////////////////////////////////////////////
+// renderImageList2
 
   var followList = "";
 
+  // フォローリスト作成
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
       for(let i=0; i<event.tags.length; i++) {
-        /*if(event.tags[i] === undefined) {
-	  break;
-	}*/
         followList = followList + event.tags[i][1] + ",";
       }
       return (
@@ -222,6 +189,8 @@ const Test = () => {
     });
     return posts;
   }
+
+
 
 ////////////////////////////////////////////////
 // renderImageList
@@ -246,13 +215,9 @@ const Test = () => {
 
       if(note.kind === 7        //kind:7:reaction
         || note.kind === 30078  //kind:30078:Application-specific Data
-      ) {  
-        return;
-      }
+      ) { return; }
 
-      if(note.content.includes('#markostr') || note.content.includes('#targoyleTweetGen')) {  
-        return;
-      }
+      if(note.content.includes('#markostr') || note.content.includes('#targoyleTweetGen')) { return; }
 
       // japanese filter
       if(!note.content.match(/^(?=.*[\u3041-\u3096]).*$/) && 
@@ -268,16 +233,11 @@ const Test = () => {
 //        return;
       }
 
-      if(note.pubkey === '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')
-      {
-        return;
-      }
+      if(note.pubkey === '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')  return;
 
       noteCount = noteCount + 1;
 
-      if(minCreateDate > note.created_at) {
-        minCreateDate = note.created_at;
-      }
+      if(minCreateDate > note.created_at) minCreateDate = note.created_at;
 
       const dateTime = new Date(note.created_at * 1000);
       const createdDate = dateTime.toLocaleDateString('ja-JP');
@@ -285,7 +245,7 @@ const Test = () => {
 
       const npub = nip19.npubEncode(note.pubkey)
       //const nostrnpub = "https://nostr.com/" + npub
-      const nostrnpub = "https://yabu.me/" + npub
+      // const nostrnpub = "https://yabu.me/" + npub
       //const userUrl = "https://snort.social/p/" + npub 
       //const userUrl = "https://yabu.me/" + npub 
       //const userUrl = "https://nostter.app/" + npub 
@@ -294,7 +254,7 @@ const Test = () => {
       const userUrl = "https://nostrudel.ninja/#/u/" + npub 
 
       //let imageURL2 = getImageURL(note.pubkey);  // avator
-      let imageURL2 = getImageURL(note.pubkey);  // avator
+      const imageURL2 = getImageURL(note.pubkey);  // avator
 
       //const noteUrl = "https://snort.social/e/" + note.id
       //const noteUrl = "https://iris.to/#/post/" + note.id
@@ -309,8 +269,7 @@ const Test = () => {
             }
             //noteUrl = "https://nostter.app/channels/" 
             //  + nip19.neventEncode({id:note.tags[h][1]})
-            noteUrl = "https://nos-haiku.vercel.app/keyword/" 
-              + nip19.neventEncode({id:note.tags[h][1]})
+            noteUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1]})
           }
 	      }
       }
@@ -326,23 +285,22 @@ const Test = () => {
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
       const noStrudelUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id)
 
-      /*let imageURL = Pictures.pictures.map((picture, index) => {
-        if(note.pubkey === picture.npub) {
-          return picture.pic;
-        }
-      });*/
 
     
 
 
 
 
+      // Re] etc
       let replyHTML = makeReplyHTML(note);
 
 
 
 
 
+
+
+      // make tags[0],  client(-via), proxy, alft, etc
 
 
       let client = "";
@@ -375,7 +333,7 @@ const Test = () => {
           proxyUrl = note.tags[h][1]
         }
         else if(marker === "alt") {  //  alt picture
-          alt = "alt][ " + note.tags[h][1] + "]"
+          alt = "_(alt) " + note.tags[h][1] + ")"
         }
         else if(marker === "streaming") {  //  streaming
           streaming = "-streaming"
@@ -406,12 +364,14 @@ const Test = () => {
 
 
 ////////////////////////////////////////////////
-// contentの調整
+// Repostのcontentの調整
+// Repostのcontentデータをcontentの本文のみに調整
 
 
       let content = note.content;
 
-      for(let i=0; i<10; i++) {
+      // parseしてもHTMLタグをそのまま表示するようにcontentの<を置き換え
+      for(let i=0; i<1000; i++) {
         content = content.replace('<','&lt;');  // <
       }
 
@@ -420,25 +380,22 @@ const Test = () => {
 	      content = "[empty]";
 	    }
       else {
-        let tmp = content
-        tmp = tmp.split(',');  // , でsplit
-        for(let i=0; i<tmp.length; i++) {
+        let splitConent = content
+        splitConent = splitConent.split(',');  // , でsplit
+        for(let i=0; i<splitConent.length; i++) {
           // Repostのcontentデータをcontentの本文のみに調整
-          if(tmp[i].includes('"content"')) {
-            let tmp2 = tmp[i];
-            if(tmp2.includes('{"content"')) {
-              tmp2 = tmp2.replace('{"content":"','');
-            }
+          if(splitConent[i].includes('"content"')) {
+            let splitConent2 = splitConent[i];
+            // if(splitConent2.includes('{"content"')) {
+              splitConent2 = splitConent2.replace('{"content":"','');
+            // }
             
-            /*let first = tmp2.slice(0, 1) 
-            if(first == '{') { // 先頭が{の時は先頭の文字を削除
-            }*/
-            tmp2 = tmp2.replace('"content":"','');
-            if(tmp2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
-                    tmp2 = tmp2.slice(0, -1);
+            splitConent2 = splitConent2.replace('"content":"','');
+            if(splitConent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
+              splitConent2 = splitConent2.slice(0, -1);
             }
-            if(tmp2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
-                    tmp2 = tmp2.slice(0, -1);
+            if(splitConent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
+              splitConent2 = splitConent2.slice(0, -1);
             }
             
             /* // content より後を取得
@@ -451,12 +408,12 @@ const Test = () => {
             }*/
 
             for(let j=0; j<10; j++) {
-              tmp2 = tmp2.replace("\\n","\n");   // \\n -> \n
+              splitConent2 = splitConent2.replace("\\n","\n");   // \\n -> \n
             }
             for(let j=0; j<20; j++) {
-              tmp2= tmp2.replace("\\/","/");   // \/ -> /
+              splitConent2 = splitConent2.replace("\\/","/");   // \/ -> /
             }
-            content = tmp2;
+            content = splitConent2;
           }
 	      }  //for
 
@@ -499,13 +456,13 @@ const Test = () => {
       for(let i=0; i<tmpContent.length; i++) {
         if(tmpContent[i].includes('http') 
           && (tmpContent[i].includes('.jpg') ||
-            tmpContent[i].includes('.webp') ||
             tmpContent[i].includes('.jpeg') ||
             tmpContent[i].includes('.png') ||
             tmpContent[i].includes('.gif') ||
             tmpContent[i].includes('.svg') ||
             tmpContent[i].includes('.ico') ||
             tmpContent[i].includes('.bmp') ||
+            tmpContent[i].includes('.webp') ||
             tmpContent[i].includes('.mp4') ||
             tmpContent[i].includes('.mov')
           )) {
@@ -584,16 +541,26 @@ const Test = () => {
 
 
 
-      // #[0], #[1] (#p)
+      let toLinkUrl1 = ""
+      let toLinkText1 = ""
+
+      let eventLinkUrl1 = ""
+      let eventLinkText1 = ""
+
+      // tag "p", #[0], #[1] (#p)
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "p") {
           const npub = nip19.npubEncode(note.tags[i][1])
           //const toLinkUrl =  "https://nostter.app/" + npub
           const toLinkUrl =  "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
-          content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
-                if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
-                  content = content.replace('#[' + i + ']',"@もちもち");
-                }
+          // toLinkUrl1 = toLinkUrl
+          // toLinkText1 = '_#p'
+
+          // content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
+          
+          /*if(npub === "npub19xm6kcedxef3232d222gj0sxql8vs2tutyg0fq4z6875zfs3d8ascl440n") {
+            content = content.replace('#[' + i + ']',"@もちもち");
+          }
           else if(npub === "npub1823chanrkmyrfgz2v4pwmu22s8fjy0s9ps7vnd68n7xgd8zr9neqlc2e5r") {
                   content = content.replace('#[' + i + ']',"@やぶみちゃん");
           }
@@ -602,15 +569,17 @@ const Test = () => {
           }
           else if(npub === "npub1y0d0eezhwaskpjhc7rvk6vkkwepu9mj42qt5pqjamzjr97amh2yszkevjg") {
                   content = content.replace('#[' + i + ']',"@Yodogawa-Janken");
-          }
+          }*/
         }
-        else {
+        else if(note.tags[i][0] === "e") {
           //const eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
           //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
-          //const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
-          const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
-          //const aa = note.tags[i][1]
-          content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
+          const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
+          // const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
+          eventLinkUrl1 = eventLinkUrl
+          eventLinkText1 = "_#e"
+          // contentの#[0]をa hrefに置き換え
+          // content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
         }
       }
 
@@ -644,17 +613,20 @@ const Test = () => {
       
 
 
-
+      let quoteLinkUrl = ''
+      let quoteLinkText = ''
 
       // nevent1
       if(content.includes("\nnevent1")) {
         let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
         for(let i=0; i<wordsNostr.length; i++) {
           if(wordsNostr[i].includes("nevent1")) {
-            //content = wordsNostr[1]
-            let quoteBaseUrl = "https://snort.social/e/"
+            // let quoteBaseUrl = "https://snort.social/e/"
+            const quoteBaseUrl = "https://nostter.app/"
             quoteLinkUrl = quoteBaseUrl + wordsNostr[i]
-            content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nevent1)</a>');
+            quoteLinkText = '(nevent1)';
+            // contentからnevent1を削除
+            content = content.replace(wordsNostr[i],'');
           }
         }
       }
@@ -688,18 +660,18 @@ const Test = () => {
 
   // Add <a href>
 
-  let iframe1 = "";
-  let iframe2 = "";
-  let youtubeId = "";
-  let httpLinkUrl1 = "";
-  let httpLinkUrlText1 = "";  // # https://
-  let httpLinkUrl2 = "";
-  let httpLinkUrlText2 = "";  // # https://
+      // let iframe1 = "";
+      // let iframe2 = "";
+      // let youtubeId = "";
+      // let httpLinkUrl1 = "";
+      // let httpLinkUrlText1 = "";  // # https://
+      // let httpLinkUrl2 = "";
+      // let httpLinkUrlText2 = "";  // # https://
 
 
 
 
-  content = makeIframesbyContentHTML(content, note);
+      content = makeIframesbyContentHTML(content, note);
 
 
 
@@ -760,7 +732,8 @@ const Test = () => {
 
 
 
-      for(let i=0; i<30; i++) {
+
+      for(let i=0; i<3000; i++) {
         content = content.replace('\n', '<br />');
       }
 
@@ -773,10 +746,11 @@ const Test = () => {
               {statusString}
               {parse(replyHTML)}
               {parse(content)}<br />
-              {youtubeId}
+              {/* {content}<br /> */}
+              {/* {youtubeId} */}
               {follow}
-              {parse(iframe1)}
-              {parse(iframe2)}
+              {/* {parse(iframe1)} */}
+              {/* {parse(iframe2)} */}
               {parse(quoteLinksHTML)}
               {tagsLinkUrlText1}
               {tagsLinkUrlText2}
@@ -785,10 +759,13 @@ const Test = () => {
               {tagsLinkUrlText5}
               {tagsLinkUrlText6}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
-              <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a>
-              <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a>
+              {/* <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a> */}
+              {/* <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a> */}
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
+              <a href={toLinkUrl1} target="_blank">{toLinkText1}</a>
+              <a href={eventLinkUrl1} target="_blank">{eventLinkText1}</a>
+              <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
               {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
         {alt}<br />
               <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
@@ -907,7 +884,6 @@ export default Test;
 //  untilValue = 1696632885;  // Metadata
 //  untilValue = 1696502429;  // jpg OK
 //  untilValue = 1696412926;  // LIVE
-//  untilValue = 1696316415;  // nevent1
 //  untilValue = 1696105738;  // quote_nevent njump fix. quote_nos_haiku ok
 //  untilValue = 1696119569;  // njump.me nevent fix
 //  untilValue = 1695438407;  // to link fix
@@ -1090,3 +1066,42 @@ export default Test;
   chat = 42,
   list = 30000,
 }*/
+
+
+
+  /*const { data: npub } = nip19.decode(
+    "npub1gdjc46gns2lw0harclpkpvf6tmyvygnrtu4j4tfaua0yhvsd4yrq38fkq3"  // maya
+  );*/
+
+  /*const { data: userData, isLoading } = useProfile({
+    //pubkey: npub.toString(),
+    pubkey: "c909252de5546401e9717846a27d3aec0beef9bd8360bcd7cf5480252dd6776d",
+  });*/
+
+  /*const Profile = (npub) => {
+    const { data: userData, isLoading } = useProfile({
+      //pubkey: npub.toString(),
+      //pubkey: "afb18dfa9cdbc569bfe32a50570fa852344325ca8d521dddaee33a0913281dd1",
+      pubkey: npub,
+    });
+    console.log(isLoading);
+    
+    return (
+      <>
+        <p>Name: {userData?.name}</p>
+        <p>Picture: {userData?.picture}</p>
+        <p><img src={userData?.picture} width="60" /></p>
+      </>
+    )
+  }*/
+//  {Profile("bbbe1c012adb049f3c4829bc956d47addd49bb95d94e3dae8c314a5a7b1d90f2")} 
+
+
+
+/*
+  const onLoadNext = async () => {
+    untilValue = 1688863000;
+    alert("Next");
+    //return;
+  }
+*/
