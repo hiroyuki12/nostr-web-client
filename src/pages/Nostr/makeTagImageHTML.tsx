@@ -73,8 +73,10 @@ export const makeTagImageHTML = (content, note) => {
                         linkUrl1 = textUrl;
                     }
                     else if(linkUrl2 === "") {
-                        image2Height = "250";
-                        linkUrl2 = textUrl;
+                        if(linkUrl1 != textUrl) {
+                           image2Height = "250";
+                           linkUrl2 = textUrl;
+                        }
                     }
                     else if(linkUrl3 === "") {
                         image3Height = "250";
@@ -107,7 +109,8 @@ export const makeTagImageHTML = (content, note) => {
 
 
     let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
-    if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_' + linkUrl1
+    // if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_' + linkUrl1  // debug
+    if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_'
 
 
 

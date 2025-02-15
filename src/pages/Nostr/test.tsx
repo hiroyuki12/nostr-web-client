@@ -25,9 +25,10 @@ const Test = () => {
 
   let noteCount = 0;
 
+   untilValue = 1739585405;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  // untilValue = 1739577075;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
   // untilValue = 1739572207;  // nostagawa iframe ok
   // untilValue = 1739577054;  // nostagawa iframe ok
-  // untilValue = 1739577075;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
   // untilValue = 1739577124;  // iframe NG
   // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
   // untilValue = 1734489831;  // kind:20 not display picture
