@@ -50,19 +50,20 @@ export const makeInlineImageHTML = (content) => {
                 tmp2[i].includes(".bmp")  || 
                 tmp2[i].includes(".webp") ||
                 tmp2[i].includes(".mp4") ||
-                tmp2[i].includes(".mov") ||
-                tmp2[i].includes("/img/") ||
-                tmp2[i].includes("/images?") ||
-                tmp2[i].includes("?set=set4") ||
-                tmp2[i].includes("pbs.twimg.com/") ||
-                tmp2[i].includes("robohash.org/") ||
-                tmp2[i].includes("pbs.twimg.com/") ||
-                tmp2[i].includes("/profile/avatar/") ||
-                tmp2[i].includes("/imgproxy.snort.social/") ||
-                tmp2[i].includes("/0.gravatar.com/avatar/") ||
-                tmp2[i].includes("/www.gravatar.com/avatar/") ||
-                tmp2[i].includes("googleusercontent.com/") ||
-                tmp2[i].includes("grafana.gsn.im/"))
+                tmp2[i].includes(".mov") 
+                // tmp2[i].includes("/img/") ||
+                // tmp2[i].includes("/images?") ||
+                // tmp2[i].includes("?set=set4") ||
+                // tmp2[i].includes("pbs.twimg.com/") ||
+                // tmp2[i].includes("robohash.org/") ||
+                // tmp2[i].includes("pbs.twimg.com/") ||
+                // tmp2[i].includes("/profile/avatar/") ||
+                // tmp2[i].includes("/imgproxy.snort.social/") ||
+                // tmp2[i].includes("/0.gravatar.com/avatar/") ||
+                // tmp2[i].includes("/www.gravatar.com/avatar/") ||
+                // tmp2[i].includes("googleusercontent.com/") ||
+                // tmp2[i].includes("grafana.gsn.im/"))
+                )
             && tmp2[i].includes("http")
             && !tmp2[i].includes("gifu.jp/")
             )  {

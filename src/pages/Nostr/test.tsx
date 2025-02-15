@@ -14,6 +14,7 @@ import {makeReplyHTML} from './makeReplyHTML'
 import {makeStatusString} from './makeStatusString'
 import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
 import {makeIframesbyTagHTML} from './makeIframesbyTagHTML'
+import {makeIframesbyContentHTML} from './makeIframesbyContentHTML'
 
 
 const Test = () => {
@@ -24,9 +25,24 @@ const Test = () => {
 
   let noteCount = 0;
 
-// untilValue = 1739446806;  // prime video (iframe from content)
-  // untilValue = 1739446863;  // NG twitter
-  // untilValue = 1739373027;  // NG iframe prime video
+  // untilValue = 1739572207;  // nostagawa iframe ok
+  // untilValue = 1739577054;  // nostagawa iframe ok
+  // untilValue = 1739577075;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  // untilValue = 1739577124;  // iframe NG
+  // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
+  // untilValue = 1734489831;  // kind:20 not display picture
+  // untilValue = 1732921974;  // kind:20 not display picture
+//  untilValue = 1739573404;  // todo: unnerv imeta url png  ok
+  // untilValue = 1739158577;  // fix nhk https_iframe href target="_blank". NHK
+//  untilValue = 1700358511;  // instagram link iframe NG
+//  untilValue = 1688253140;  //iframe 3つ
+//  untilValue = 1686839510;  //nicovideo iframe
+//  untilValue = 1686929129;  //twitter iframe
+  // untilValue = 1739454334;  // fix http content youtube
+  // untilValue = 1739454167;  // NG http content suno
+  // untilValue = 1739454027;  // http content github
+  // untilValue = 1739373027;  // fix iframe prime video from content
+  // untilValue = 1739446863;  // fix twitter iframe from content
   // untilValue = 1739087698;  // Error: hexToBytes NG
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1694194192;  // kind:30025 LongForm
@@ -45,7 +61,8 @@ const Test = () => {
   // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。NG. 
   // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。NG
 //  untilValue = 1688460571;  // youtube channel?. thumbnail NG. lumilumi URL ok. This live stream recording is not available.
-//  untilValue = 1691507297;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
+//  untilValue = 1691507141;  // NG tag "r" があるが、#rが追加されない
+//  untilValue = 1691507141;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
   // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
   // untilValue = 1739359806;  // tag "r" img ok
 //  untilValue = 1691662709;  // repost mov fix. nostter ok
@@ -475,7 +492,18 @@ const Test = () => {
       //todo conentにjpgなどのURLがある場合は削除 @@
       const tmpContent = content.split('\n')
       for(let i=0; i<tmpContent.length; i++) {
-        if(tmpContent[i].includes('http') && tmpContent[i].includes('.jpg')) {
+        if(tmpContent[i].includes('http') 
+          && (tmpContent[i].includes('.jpg') ||
+            tmpContent[i].includes('.webp') ||
+            tmpContent[i].includes('.jpeg') ||
+            tmpContent[i].includes('.png') ||
+            tmpContent[i].includes('.gif') ||
+            tmpContent[i].includes('.svg') ||
+            tmpContent[i].includes('.ico') ||
+            tmpContent[i].includes('.bmp') ||
+            tmpContent[i].includes('.mp4') ||
+            tmpContent[i].includes('.mov')
+          )) {
           content = content.replace(tmpContent[i], '')
         }
       }
@@ -504,21 +532,22 @@ const Test = () => {
 
 
       // kind:20 for picture-first clients.
-      let pictureImage1Height = "0";
-      let pictureImage1Url = "";
+      // let pictureImage1Height = "0";
+      // let pictureImage1Url = "";
 
       if(note.kind === 20) {
         content = "Picture] " + content
-        pictureImage1Height = "250";
-        for(let i=0; i<note.tags.length; i++) {
-          if(note.tags[i][0].includes("imeta")) {
-            for(let j=0; j<note.tags[j].length; j++) {
-              if(note.tags[i][j].includes("url")) {
-                pictureImage1Url = note.tags[i][j].replace('url ', '');
-              }
-            }
-          }
-        }
+        // pictureImage1Height = "250";
+        // for(let i=0; i<note.tags.length; i++) {
+        //   if(note.tags[i][0].includes("imeta")) {
+        //     for(let j=0; j<note.tags[j].length; j++) {
+        //       if(note.tags[i][j].includes("url")) {
+                // pictureImage1Url = note.tags[i][j].replace('url ', '');
+                // makeTagImageHTML で表示. _tagImage
+        //       }
+        //     }
+        //   }
+        // }
       }
 
 
@@ -649,12 +678,10 @@ const Test = () => {
 
 
   /////////////////////////////////
-  // Add <a href>      
+  // Add <a href>       @@
   // Add <iframe>. YouTube, Spotify, Twitter, etc.
 
   // Add <a href>
-
-
 
   let iframe1 = "";
   let iframe2 = "";
@@ -666,181 +693,13 @@ const Test = () => {
 
 
 
-  /*
-      let iframe1 = "";
-      let iframe2 = "";
-      let youtubeId = "";
-      let httpLinkUrl1 = "";
-      let httpLinkUrlText1 = "";  // # https://
-      let httpLinkUrl2 = "";
-      let httpLinkUrlText2 = "";  // # https://
-      if(content.includes("https://") || content.includes("youtu.be")) {
-        let tmp = content;
-        for(let i=0; i<10; i++) {
-          tmp = tmp.replace('\\n\\n',' ');
-          tmp = tmp.replace('\\n',' ');
-          tmp = tmp.replace('\n',' ');
-          tmp = tmp.replace('　',' ');  // zenkaku space
-          tmp = tmp.replace('<a',' ');
-        }
-        let tmp2 = tmp.split(' ');
-        let iframeCount = 0;
-        for(let i=0; i<tmp2.length; i++) {
-          if(!tmp2[i].includes("\"https://") && tmp2[i].includes("https://")) {  // not <a href="https://>
-            if(tmp2[i] == "https://") {
-              tmp2[i] = "";
-            }
-            if(tmp2[i].includes("youtube.com") || tmp2[i].includes("youtu.be/")) {
-              let id = tmp2[i];  // tmp2は' 'でsplit済み, idに入れる
 
-              let target = 'youtube.com/watch?v=';
-              // watch?v= より後を取得
-              if(id.includes(target)) {
-                id = id.substring(id.indexOf(target) + target.length, id.length);
-              }
-              // /live/ より後を取得
-              target = '/live/'
-              if(id.includes(target)) {
-                id = id.substring(id.indexOf(target) + target.length, id.length);
-              }
-              // youtube.be/ より後を取得
-              target = 'youtu.be/'
-              if(id.includes(target)) {
-                id = id.substring(id.indexOf(target) + target.length, id.length);
-              }
-
-              // &より前を取得
-              target = '&'
-              if(id.includes(target)) {
-                id = id.substring(0, id.indexOf(target));
-              }
-              // ","sig より前を取得
-              target = '","sig'
-              if(id.includes(target)) {
-                id = id.substring(0, id.indexOf(target));
-              }
-              // ?si= より前を取得
-              target = '?si='
-              if(id.includes(target)) {
-                id = id.substring(0, id.indexOf(target));
-              }
-
-
-              // httpLink __YouTube
-              httpLinkUrl1 = tmp2[i];
-              // httpLinkUrl1 = 'https://www.youtube.com/@diversesystem';  //debug
-              if(tmp2[i].includes("/live/")) {
-                httpLinkUrl1 = 'https://www.youtube.com/live/' + id;
-              }
-
-              if(!id.includes("@")) {  // youtube channel 以外
-                // contentから削除
-                content = content.replace(tmp2[i], "");
-
-                httpLinkUrlText1 = '__YouTube(fromContent)';
-                iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-                youtubeId = '_[id = ' + id + '(fromContent)]';
-              }
-              else {
-                // content = content + 'https://www.youtube.com/@diversesystem';
-                content = content.replace(id, '<a href="' + id + '" target="_blank">' + id + '</a>');
-              }
-
-              // youtubeId = '_[id = ' + tmp2[i] + ']';  // Debug tmp2[i]表示
-              //content = content + "<br />id=" + id  // Debug id表示
-            }  // youtube
-            else if(tmp2[i].includes("open.spotify.com")) {
-              content = content.replace(tmp2[i], "");
-              const id = tmp2[i].replace("https://open.spotify.com/track/", ""); 
-              iframe1 = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
-
-              httpLinkUrl1 = tmp2[i];
-              httpLinkUrlText1 = '__Spotify(fromContent)';
-            }
-            // else if(tmp2[i].includes("twitter.com") && !tmp2[i].includes("robots")) {
-            else if(tmp2[i].includes("twitter.com") || tmp2[i].includes("x.com")) {
-              content = content.replace(tmp2[i], "");
-              const id = tmp2[i].replace("x.com","twitter.com"); 
-              iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-
-              httpLinkUrl1 = tmp2[i];
-              httpLinkUrlText1 = '__Ttwitter(fromContent)';
-            }
-            else if(tmp2[i].includes("targoyle.jp")) {
-              if(httpLinkUrlText1 == '') {
-                httpLinkUrlText1 = '_link[1](fromContent)';
-                httpLinkUrl1 = 'https://targoyle.jp/fanart/';  //debug
-              }
-              else {
-                httpLinkUrlText2 = '_link[2](fromContent)';
-                httpLinkUrl2 = 'https://targoyle.jp/';  //debug
-              }
-            }
-            //("hatenablog.com")("nicovideo.jp")("nico.ms")("www3.nhk.or.jp")
-            else {
-              iframeCount++;
-              const url = tmp2[i];
-              // text link
-              if(  !tmp2[i].includes("codepen.io")
-                && !tmp2[i].includes("ctoa-") 
-                && !tmp2[i].includes("nostr.cooking") 
-                && !tmp2[i].includes('https://nostr.build/profilepic.php' )
-                //&& tmp2[i] != 'https://nostr.build/profilepic.php' 
-                && tmp2[i].length != 0) {
-                // remove image link
-                if(  tmp2[i].includes(".mp4") 
-                  || tmp2[i].includes("?set=set4") 
-                  || tmp2[i].includes(".png") 
-                  || tmp2[i].includes(".mov") 
-                  || tmp2[i].includes(".jpeg") 
-                  || tmp2[i].includes(".jpg") 
-                  || tmp2[i].includes("@jpeg")  // threads img
-                  || tmp2[i].includes(".webp")) {
-                        content = content.replace(tmp2[i], "");
-                }
-                // OGP hatenablogcard
-                else {
-                  // ryusoku
-                  if(tmp2[i].includes("https://nostr-hotter-site.vercel.app")){
-                    content = content.replace(tmp2[i], '<a href="https://nostr-hotter-site.vercel.app" target="_blank">https://nostr-hotter-site.vercel.app/</a>'); 
-                  }
-                  else {
-                    const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + url + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-                    content = content.replace(tmp2[i], tmpIframe);
-                    httpLinkUrl1 = tmp2[i];
-                    if(httpLinkUrl1.includes("music.apple.com")) {
-                        httpLinkUrlText1 = '__Apple Music(fromContent)';
-                    }
-                    else if(httpLinkUrl1.includes("/x.com/")) {
-                        httpLinkUrlText1 = '__X(fromContent)';
-                    }
-                    else if(httpLinkUrl1.includes("/zenn.dev/")) {
-                        httpLinkUrlText1 = '__Zenn(fromContent)';
-                    }
-                    else if(httpLinkUrl1.includes("/www.instagram.com/")) {
-                        httpLinkUrlText1 = '__Instagram(fromContent)';
-                        // https:// 以降の文字列を取得(https://も含む)
-                        httpLinkUrl1 = httpLinkUrl1.substring(httpLinkUrl1.indexOf('https://'), httpLinkUrl1.length);
-                        // httpLinkUrlText1 = '__Instagram' + '[URL=' + httpLinkUrl1 + ']';  // debug
-                    }
-                    else {
-                      httpLinkUrlText1 = '__https_iframe(fromContent)';
-                    }
-                  }
-                }
-              }
-              else {
-                //content = content.replace(tmp2[i], "");
-                content = content.replace(tmp2[i], '<a href=' + tmp2[i] + ' target="_blank">' + tmp2[i] + '</a>');
-              }
-            }
-          }
-        }
-      }
+  content = makeIframesbyContentHTML(content, note);
 
 
 
-      */
+
+
 
 
 
@@ -925,7 +784,7 @@ const Test = () => {
               <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a><br />
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
-              <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a>
+              {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
         {alt}
               <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
               -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
@@ -983,15 +842,11 @@ export default Test;
 
 // memo
 
-// untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
 // untilValue = 1739258350;  // tag "r" jpg
 // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
 // untilValue = 1739089652;  // inlineImage. tag "r" なし.
-// untilValue = 1734489831;  // kind:20 not display picture
-// untilValue = 1732921974;  // kind:20 not display picture
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
 // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
-// untilValue = 1739158577;  // fix https_iframe href target="_blank". NHK
 //  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1739177954;  // nostr:nvent1 fix quote
 //  untilValue = 1739175991;  // nostr:npub1 fix quote
@@ -1001,7 +856,6 @@ export default Test;
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1739078705;  // kind:30023 LogForm Will. lumilumi ok
 //  untilValue = 1703568307;  // img threads NG. link切れ
-//  untilValue = 1700358511;  // instagram link iframe fix
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1692963542;  // spotify album. no tag "r"
 //  untilValue = 1695999820;  // Apple Music OGP. fix.
@@ -1084,7 +938,6 @@ export default Test;
 //  untilValue = 1688395711;  //youtube playlist (normal youtube ok)
 //  untilValue = 1688303413;  //https:// search engine
 //  untilValue = 1688289075;  //1,300 active authors 2023/7/2
-//  untilValue = 1688253140;  //iframe 3
 //  untilValue = 1688261108;  //zap
 //  untilValue = 1688115603;  //nostr:profile1
 //  untilValue = 1688127866;  //nostr:nprofile1
@@ -1107,8 +960,6 @@ export default Test;
 //  untilValue = 1686949316;  //2 cards fix
 //  untilValue = 1686918544;  //nhk news card
 //  untilValue = 1686918929;  //hatenablog, nicovideo, card
-//  untilValue = 1686839510;  //nicovideo iframe
-//  untilValue = 1686929129;  //twitter iframe
 //  untilValue = 1686241976;  //emoji 13 fix, <img>
 //  untilValue = 1685703268;  //emoji fix
 //  untilValue = 1686199783;  //emoji, tate, <style> fix,

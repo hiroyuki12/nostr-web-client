@@ -18,14 +18,25 @@ export const makeTagImageHTML = (content, note) => {
     let linkUrlHTML4 = ""
     let linkUrlHTML5 = ""
 
-
+    let textUrl = ""
 
 
 
     for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] === "r") {
+        if(note.tags[i][0] === "r" ||
+           note.tags[i][0] === "imeta"
+        ) {
             if(note.tags[i][1].includes("http")) {
-                let textUrl = note.tags[i][1];
+                if(note.tags[i][0] === "r") {
+                    textUrl = note.tags[i][1];
+                }
+                else {  // imeta
+                    for(let j=0; j<note.tags.length; j++) {
+                        if(note.tags[i][j].includes("image")) {
+                            textUrl = note.tags[i][1].replace('url ', '');
+                        }
+                    }
+                }
 
                 if(textUrl.includes(".jpg")  ||
                     textUrl.includes(".jpeg") || 
@@ -36,19 +47,20 @@ export const makeTagImageHTML = (content, note) => {
                     textUrl.includes(".bmp")  || 
                     textUrl.includes(".webp") ||
                     textUrl.includes(".mp4") ||
-                    textUrl.includes(".mov") ||
-                    textUrl.includes("/img/") ||
-                    textUrl.includes("/images?") ||
-                    textUrl.includes("?set=set4") ||
-                    textUrl.includes("pbs.twimg.com/") ||
-                    textUrl.includes("robohash.org/") ||
-                    textUrl.includes("pbs.twimg.com/") ||
-                    textUrl.includes("/profile/avatar/") ||
-                    textUrl.includes("/imgproxy.snort.social/") ||
-                    textUrl.includes("/0.gravatar.com/avatar/") ||
-                    textUrl.includes("/www.gravatar.com/avatar/") ||
-                    textUrl.includes("googleusercontent.com/") ||
-                    textUrl.includes("grafana.gsn.im/")) {
+                    textUrl.includes(".mov") 
+                    // textUrl.includes("/img/") ||
+                    // textUrl.includes("/images?") ||
+                    // textUrl.includes("?set=set4") ||
+                    // textUrl.includes("pbs.twimg.com/") ||
+                    // textUrl.includes("robohash.org/") ||
+                    // textUrl.includes("pbs.twimg.com/") ||
+                    // textUrl.includes("/profile/avatar/") ||
+                    // textUrl.includes("/imgproxy.snort.social/") ||
+                    // textUrl.includes("/0.gravatar.com/avatar/") ||
+                    // textUrl.includes("/www.gravatar.com/avatar/") ||
+                    // textUrl.includes("googleusercontent.com/") ||
+                    // textUrl.includes("grafana.gsn.im/") ||
+                    ) {
                         
                     if(textUrl.includes("`"))
                     {
@@ -94,8 +106,8 @@ export const makeTagImageHTML = (content, note) => {
 
 
 
-    const tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
-        // '[tag"r":' + 'makeTagImageHTML' + ']';
+    let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
+    if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_' + linkUrl1
 
 
 

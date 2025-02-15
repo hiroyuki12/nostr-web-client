@@ -43,8 +43,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1d0edywgyn5qzqyf9g8kpfz8g55fz7ymsxu5en5cx0efaxxeqdzmswur6n8') {
+      image = 'https://image.nostr.build/80cf8e93e176334dc766a6004e6f3bd3e1a8229088aee9eee6e1002ed6821fce.jpg'
     } 
     else if (npub === 'npub1fqaxs7cce5e4qzu9pewaklf5tjtvyslnx0p9s6jhkmaruw2q3cjs9cs5m6') {
       image = 'https://nostrcheck.me/media/83d52b4363d2d1bc5a098de7be67c120bfb7c0cee8efefd8eb6e42372af24689/939a2d5f3208ca3b4137a6536ebf24bf12e805604b56b1b303803fd073482d96.webp'
