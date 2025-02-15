@@ -34,7 +34,7 @@ export const removeTagImageUrl = (content, note) => {
                     textUrl = note.tags[i][1];
                 }
                 else {  // imeta
-                    for(let j=0; j<note.tags.length; j++) {
+                    for(let j=0; j<note.tags[i].length; j++) {
                         if(note.tags[i][j].includes("image")) {
                             textUrl = note.tags[i][1].replace('url ', '');
                         }

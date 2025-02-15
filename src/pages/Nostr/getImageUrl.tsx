@@ -37,10 +37,10 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1ea9jqhhj2qc2g6g33sm0dpew76cqehg6v9h6r6lr327a2mx5a8dqvuqezp') {
+      image = 'https://avatars.githubusercontent.com/u/98054437?s=200&v=4'
     } 
-    else if (npub === '') {
+    else if (npub === 'npub12262qa4uhw7u8gdwlgmntqtv7aye8vdcmvszkqwgs0zchel6mz7s6cgrkj') {
       image = ''
     } 
     else if (npub === 'npub1d0edywgyn5qzqyf9g8kpfz8g55fz7ymsxu5en5cx0efaxxeqdzmswur6n8') {
@@ -5739,7 +5739,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://nostr.build/i/nostr.build_213f2b8efaec3e0d162b077fae1bbd698c658f4ae1535593b8d7868d2fbfe836.jpeg'
     }
     else if (pubkey == '52b4a076bcbbbdc3a1aefa3735816cf74993b1b8db202b01c883c58be7fad8bd') {
-      image = 'https://i.nostrimg.com/prank-enthusiast-willingly.gif'
+      image = ''
     }
     else if (pubkey == 'c7d6c0190fe4bf32f9c36a4dac62fbcb25d7c8b7b39a7784bf2fe2c8caea65e9') {
       image = 'https://pbs.twimg.com/profile_images/1459864233/086c1396-a737-46ce-8fc2-05e8ce6b3089_200x200.png'

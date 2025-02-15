@@ -21,20 +21,15 @@ export const makeIframesbyContentHTML = (content, note) => {
     tmpContent = tmpContent.replace(/<[^>]*>/g, '');  //タグ除去
 
     tmpContent = tmpContent.replace('#idolmaster', '\n')
+    // tmpContent = tmpContent.replace('=', '\n')  //YouTube
+    tmpContent = tmpContent.replace(']', '\n')
     // splitContent = splitContent.replace('- ', '\n')
 
     const splitContent = tmpContent.split('\n');
 
+
+
     for(let i=0; i<splitContent.length; i++) {
-
-
-      // if(splitContent[i] == 'https://github.com/vrtmrz/obsidian-livesync/releases/tag/0.24.11') {
-      //   content = splitContent[i]
-      // }
-      if(splitContent[i].includes('https') && splitContent[i].includes('"https') && splitContent[i].includes('>https')) {
-        // content = content.replace(splitContent[i], '<a href="' + splitContent[i] + '" target="_blank">' + splitContent[i] + '</a>'); 
-      }
-  
 
       // YouTube iframe
       if(splitContent[i].includes("youtube.com") || splitContent[i].includes("youtu.be/")) {
@@ -59,22 +54,24 @@ export const makeIframesbyContentHTML = (content, note) => {
         
         content = content.replace(splitContent[i], iframe1)
         content = content + '_[id = ' + id + ']';
+        // content = content + '_[id = ' + splitContent[i] + ']';  // debug
         content = content + '<a href="' + splitContent[i] + '" target="_blank">__YouTube(fromContent)</a>';
+        // content = 'aa[' + id + ']aa' // debug
       }
 
       // Twitter iframe
-      if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
+      else if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
         const id = splitContent[i].replace("x.com","twitter.com"); 
         iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
-        // content = content.replace(splitContent[i], iframe1);
+        content = content.replace(splitContent[i], iframe1);
 
-        // const httpLinkUrl1 = splitContent[i];  //NG
-        // const httpLinkUrlText1 = '__Ttwitter(fromContent)';
-        // content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
+        const httpLinkUrl1 = splitContent[i];
+        const httpLinkUrlText1 = '__Ttwitter(fromContent)';
+        content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
       }
 
-      // targoyle
+      // targoyle iframe
       else if(splitContent[i].includes("targoyle.jp")) {
         if(httpLinkUrlText1 == '') {
           httpLinkUrlText1 = '_link[1](fromContent)';
@@ -92,35 +89,35 @@ export const makeIframesbyContentHTML = (content, note) => {
 
 
 
-        else if (splitContent[i].includes('http')){ // (instagram etc)
+      // http iframe
+      else if (splitContent[i].includes('http')){ // (instagram etc)
       // else if(!splitContent[i].includes('nostrudel.ninja')  // #t
-        // && splitContent[i].includes('http')
         // && (splitContent[i].includes('media.unnerv.jp') ||
         //  splitContent[i].includes('nostr-hotter-site.vercel.app'))) {
         
-        httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
+        if(!splitContent[i].includes('domain'))  // todo: https://<domain>/.well-known/lnurlp/<username>
+        {
+          httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
 
-        const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-        content = content.replace(splitContent[i], tmpIframe);
+          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+          content = content.replace(splitContent[i], tmpIframe);
+        }
       }
 
 
 
-      else  {
+      /*else  {
         if (splitContent[i].includes('http')) { 
+          httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
 
-        httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
-
-        const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-        content = content.replace(splitContent[i], tmpIframe);
-
-        // content = httpLinkUrl1  // debug
+          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+          content = content.replace(splitContent[i], tmpIframe);
+          // content = httpLinkUrl1  // debug
         }
         else {
           //  content = splitContent[i]
-
         }
-      }
+      }*/
 
 
     }  // for

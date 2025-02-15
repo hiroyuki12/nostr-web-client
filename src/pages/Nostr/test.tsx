@@ -25,39 +25,43 @@ const Test = () => {
 
   let noteCount = 0;
 
-   untilValue = 1739585405;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
-  // untilValue = 1739577075;  // ng. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  untilValue = 1739594870;  // http <username> NG iframe
+  // untilValue = 1739588299;  //YouTube NG
+  // untilValue = 1739582796;  // x.com iframe fix
+  // untilValue = 1739585083;  // Youtube target fix.
+  //  untilValue = 1739585405;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  // untilValue = 1739577075;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
   // untilValue = 1739572207;  // nostagawa iframe ok
   // untilValue = 1739577054;  // nostagawa iframe ok
-  // untilValue = 1739577124;  // iframe NG
+  // untilValue = 1739577124;  // iframe fix
   // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
   // untilValue = 1734489831;  // kind:20 not display picture
   // untilValue = 1732921974;  // kind:20 not display picture
-//  untilValue = 1739573404;  // todo: unnerv imeta url png  ok
+//  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
   // untilValue = 1739158577;  // fix nhk https_iframe href target="_blank". NHK
-//  untilValue = 1700358511;  // instagram link iframe NG
+//  untilValue = 1700358511;  // instagram link iframe fix
 //  untilValue = 1688253140;  //iframe 3つ
 //  untilValue = 1686839510;  //nicovideo iframe
 //  untilValue = 1686929129;  //twitter iframe
   // untilValue = 1739454334;  // fix http content youtube
-  // untilValue = 1739454167;  // NG http content suno
+  // untilValue = 1739454167;  // fix http content suno
   // untilValue = 1739454027;  // http content github
   // untilValue = 1739373027;  // fix iframe prime video from content
   // untilValue = 1739446863;  // fix twitter iframe from content
   // untilValue = 1739087698;  // Error: hexToBytes NG
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1694194192;  // kind:30025 LongForm
-//  untilValue = 1702648801;  // 9735 content empty ng. naddr1
+//  untilValue = 1702648801;  // 9735 content empty . naddr1
 //  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
 //  untilValue = 1700648893;  // bookmark
 //  untilvalue = 1700654092;  // long-form content
-//  untilValue = 1700351963;  // NG link. nostter app home ３つ
-//  untilValue = 1698228483;  // link NG
-//  untilValue = 1698731466;  // Invalid byte sequence NG
+//  untilValue = 1700351963;  // NG link. http nostter app home ３つ
+//  untilValue = 1698228483;  // link NG. http 2つ
+//  untilValue = 1698731466;  // Invalid byte sequence
 //  untilValue = 1697536841;  // NG
-//  untilValue = 1697295574;  // repost NG. id nip19.neventEncode(event: EventPointer) fix
+//  untilValue = 1697295574;  // repost fix. id nip19.neventEncode(event: EventPointer) fix
 //  untilValue = 1696110614;  // url # NG
-//  untilValue = 1694055016;  // \n\n NG?
+//  untilValue = 1694055016;  // \n\n ok
 
   // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。NG. 
   // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。NG
@@ -768,7 +772,7 @@ const Test = () => {
               {contentWarning}{contentWarningText}{contentWarning}
               {statusString}
               {parse(replyHTML)}
-              {parse(content)}
+              {parse(content)}<br />
               {youtubeId}
               {follow}
               {parse(iframe1)}
@@ -781,12 +785,12 @@ const Test = () => {
               {tagsLinkUrlText5}
               {tagsLinkUrlText6}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
-              <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a><br />
-              <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a><br />
+              <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a>
+              <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a>
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
               {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
-        {alt}
+        {alt}<br />
               <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
               -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
               ({noteIdShort}){client}

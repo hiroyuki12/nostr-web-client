@@ -107,17 +107,35 @@ export const makeIframesbyTagHTML = (content, note) => {
             // YouTube tag "r"
             if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
                 if(!tmpUrl.includes('@')) {
-                    let tmpId = ''
-                    tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
-                    tmpId = tmpId.replace("https://youtu.be/", "");
-                    tmpId = tmpId.replace("https://www.youtube.com/watch?v=", "");
-                    linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tmpId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-                    youtubeIdText1 = '__[id=' + tmpId + '](fromTag"r")'
+                    let id = tmpUrl;
+                    // /watch?v= より後を取得
+                    const target = '/watch?v=';
+                    if(id.includes(target)) {
+                    id = id.substring(id.indexOf(target) + target.length, id.length);
+                    }
+                    // /live/ より後を取得
+                    const target2 = '/live/'
+                    if(id.includes(target2)) {
+                    id = id.substring(id.indexOf(target2) + target2.length, id.length);
+                    }
+                    // youtube.be/ より後を取得
+                    const target3 = 'youtu.be/'
+                    if(id.includes(target3)) {
+                    id = id.substring(id.indexOf(target3) + target3.length, id.length);
+                    }
+
+                    // let tmpId = ''
+                    // tmpId = tmpUrl.replace("https://www.youtube.com/live/", "");
+                    // tmpId = tmpId.replace("https://youtu.be/", "");
+                    // tmpId = tmpId.replace("https://www.youtube.com/watch?v=", "");
+                    linkUrlHTML1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+                    youtubeIdText1 = '__[id=' + id + '](tagLink)'
                     content = content.replace(tmpUrl, '');
+                    // content = 'bc'
                 }
                 else {
                     linkUrlHTML1 = tmpUrl;
-                    youtubeIdText1 = '__[YouTubeChannel(fromTag"r")]'
+                    youtubeIdText1 = '__[YouTubeChannel(tagLink)]'
                     content = content.replace(tmpUrl, '');
                 }
             }
@@ -125,7 +143,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
                 //large linkUrlHTML1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
                 linkUrlHTML1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                youtubeIdText1 = '__AppleMusic(fromTag"r")'
+                youtubeIdText1 = '__AppleMusic(tagLink)'
                 content = content.replace(tmpUrl, '');
             }
             else if(tmpUrl.includes("open.spotify.com")) {
@@ -135,13 +153,13 @@ export const makeIframesbyTagHTML = (content, note) => {
             else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
                 const id = tmpUrl.replace("x.com","twitter.com"); 
                 linkUrlHTML1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-                youtubeIdText1 = '__X(Twitter)(fromTag"r")'
+                youtubeIdText1 = '__X(Twitter)(tagLink)'
                 content = content.replace(tmpUrl, '');
             }
             //else if(tmpUrl.includes("googleusercontent.com/")){
             //    let tmpUrl2 = tmpUrl.replace("`", "");
             //    linkUrlHTML1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-            //    youtubeIdText1 = '__googleusercontent(fromTag"r")'
+            //    youtubeIdText1 = '__googleusercontent(tagLink)'
             //}
             else {  // todo
 

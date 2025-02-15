@@ -31,7 +31,7 @@ export const makeTagImageHTML = (content, note) => {
                     textUrl = note.tags[i][1];
                 }
                 else {  // imeta
-                    for(let j=0; j<note.tags.length; j++) {
+                    for(let j=0; j<note.tags[i].length; j++) {
                         if(note.tags[i][j].includes("image")) {
                             textUrl = note.tags[i][1].replace('url ', '');
                         }
@@ -110,7 +110,7 @@ export const makeTagImageHTML = (content, note) => {
 
     let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
     // if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_' + linkUrl1  // debug
-    if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_'
+    if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage'
 
 
 
