@@ -99,7 +99,7 @@ export const makeInlineImageHTML = (content) => {
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +
             '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
     
-            if(image1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage'
+            if(image1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage(c)'
     
     return inlineImageHTML;
 }

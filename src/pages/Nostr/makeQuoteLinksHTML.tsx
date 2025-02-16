@@ -4,11 +4,7 @@ export const makeQuoteLinksHTML = (content) => {
   let quoteLinkUrl = "";
   let quoteLinkText = "";
   let quoteLinkHTML1 = "";
-  let quoteLinkUrl2	 = "";
-  let quoteLinkText2 = "";
   let quoteLinkHTML2 = "";
-  let quoteLinkUrl3	 = "";
-  let quoteLinkText3 = "";
   let quoteLinkHTML3 = "";
 
 
@@ -26,22 +22,22 @@ export const makeQuoteLinksHTML = (content) => {
 
       // fixed
       if(wordsNostr[i].includes("nostr:npub1") && wordsNostr[i].length > 11) {
+
         //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
         //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
         //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
         const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
-        if(quoteLinkText === "") {
-          //content = content.replace(wordsNostr[i], '<a href="' + toLinkUrl + '" target="_blank">(to)</a>');
-          quoteLinkText = "(to1)";
-          quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">(to1)</a>';
+        if(quoteLinkHTML1 === "") {
+          quoteLinkText = "(quote_npub1)";
+          quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
-        else if(quoteLinkText2 === "") {
-          quoteLinkText2 = "(to2)";
-          quoteLinkHTML2 = '<a href="' + toLinkUrl + '" target="_blank">(to2)</a>';
+        else if(quoteLinkHTML1 != "") {
+          quoteLinkText = "(quote2_npub1)";
+          quoteLinkHTML2 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
-        else if(quoteLinkText3 === "") {
-          quoteLinkText3 = "(to3)";
-          quoteLinkHTML3 = '<a href="' + toLinkUrl + '" target="_blank">(to3)</a>';
+        else if(quoteLinkHTML2 != "") {
+          quoteLinkText = "(quote3_npub1)";
+          quoteLinkHTML3 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
         }
 
         //todo
@@ -75,81 +71,100 @@ export const makeQuoteLinksHTML = (content) => {
 
 
       // fixed
-      else if(wordsNostr[i].includes("nostr:note1") || 
-        wordsNostr[i].includes("nostr:nevent1")) {  
+      else if(wordsNostr[i].includes("nostr:note1") || wordsNostr[i].includes("nostr:nevent1")) {  
+
         //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
         //let quoteBaseUrl = "https://snort.social/e/"
         const quoteBaseUrl = "https://nostter.app/"
 
-        if(quoteLinkText === "") {
+        if(quoteLinkHTML1 === "") {
           //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
           //quoteLinkUrl = "https://iris.to/post/" + wordsNostr[i].replace("nostr:",'') 
           //quoteLinkUrl = "https://coracle.social/" + wordsNostr[i].replace("nostr:",'') 
           //quoteLinkUrl = "https://nostr.com/" + wordsNostr[i].replace("nostr:",'') 
           //quoteLinkUrl = "https://primal.net/thread/" + wordsNostr[i].replace("nostr:",'') 
           //quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-          quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+          quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')  
+          quoteLinkText = "_(quote_note1)";
+          quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+          
           if(content.includes("nevent1")) {
-            //quoteLinkText = quoteLinkText + wordsNostr[i];
-            //quoteLinkText = "(quote_nevent1)";
+            //emojis set https://nos-haiku.vercel.app/entry/nevent1qvzq
             //let quoteNeventLinkUrl = "https://njump.me/" + wordsNostr[i].replace("nostr:",'')
             //let quoteNeventLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'')
             //let quoteNeventLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
             const quoteNeventLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
             quoteLinkText = "_(quote_nevent1)";
-            //content = content.replace(wordsNostr[i],'<a href="' + quoteNeventLinkUrl + '" target="_blank">(quote_nevent)</a>');
             quoteLinkHTML1 = '<a href="' + quoteNeventLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
           }
-          else {
-            //content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(quote_note)</a>');
-            quoteLinkText = "_(quote_note1)";
-            quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+        }
+
+        else if(quoteLinkHTML1 != "") {
+          quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "_(quote2_note1)";
+          quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+          
+          if(content.includes("nostr:nevent1")) {
+            quoteLinkText = "_(quote2_nevent1)";
+            quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           }
         }
 
-        else if(quoteLinkText2 === "") {
-          quoteLinkUrl2 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText2 = "_(quote2)";
-          //content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">(quote)</a>');
-          quoteLinkHTML2 = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl2 + '" target="_blank">' + quoteLinkText2 + '</a>'
-          );
+        else if(quoteLinkHTML2 != "") {
+          quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "_(quote3_note1)";
+          quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           if(content.includes("nostr:nevent1")) {
-            //quoteLinkText2 = quoteLinkText2 + wordsNostr[i];
-          }
-        }
-
-        else if(quoteLinkText3 === "") {
-          quoteLinkUrl3 = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText3 = "_(quote3)";
-          //content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl3 + '" target="_blank">(quote)</a>');
-          quoteLinkHTML3 = '<a href="' + quoteLinkUrl3 + '" target="_blank">' + quoteLinkText3 + '</a>'
-          if(content.includes("nostr:nevent1")) {
-            //quoteLinkText3 = quoteLinkText3 + wordsNostr[i];
+            quoteLinkText = "_(quote3_nevent1)";
+            quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+          
           }
         }
       }
 
       // todo
       else if(wordsNostr[i].includes("nostr:naddr1")) {
-        //content = content.replace(wordsNostr[i],'');
-        //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-        // quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
-        quoteLinkUrl = "https://lumilumi.app/" + wordsNostr[i].replace("nostr:",'')
-        // quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-        
-        //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
-        //quoteLinkText = "__(nostr:naddr1)";
-        //content = content + '[kind:' + note.kind + ']'
-
-        // content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>');
-        quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">(nostr:naddr1)</a>';
-         
+        if(quoteLinkHTML1 === "") {
+          //content = content.replace(wordsNostr[i],'');
+          //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
+          // quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
+          // quoteLinkUrl = "https://lumilumi.app/" + wordsNostr[i].replace("nostr:",'')
+          // quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+          //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
+          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "__(quote_naddr1)";
+          quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+        }
+        else if(quoteLinkHTML1 != "") {
+          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "__(quote2_naddr1)";
+          quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+        }
+        else if(quoteLinkHTML2 != "") {
+          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "__(quote3_naddr1)";
+          quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+        }
       }
 
       // todo
       else if(wordsNostr[i].includes("nostr:nprofile1")) {
-        quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-        content = content.replace(wordsNostr[i],'<a href="' + quoteLinkUrl + '" target="_blank">(nostr:nprofile1)</a>');
+        if(quoteLinkHTML1 === "") {
+          quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "_(quote_nprofile1)";
+          quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+        }
+        else if(quoteLinkHTML1 != "") {
+          quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "_(quote2_nprofile1)";
+          quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+        }
+        else if(quoteLinkHTML2 != "") {
+          quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
+          quoteLinkText = "_(quote3_nprofile1)";
+          quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
+        }
+          
       }
     }  // for
   }  // if
@@ -157,6 +172,7 @@ export const makeQuoteLinksHTML = (content) => {
 
 
   const quoteLinksHTML = quoteLinkHTML1 + quoteLinkHTML2 + quoteLinkHTML3;
+  // const quoteLinksHTML = quoteLinkHTML2 ;
 
 
   return quoteLinksHTML;

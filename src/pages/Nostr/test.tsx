@@ -16,75 +16,116 @@ import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
 import {makeIframesbyTagHTML} from './makeIframesbyTagHTML'
 import {makeIframesbyContentHTML} from './makeIframesbyContentHTML'
 import {makeMarkdownHTML} from './makeMarkdownHTML'
-import {makeTextlinkbyContentHTML} from './makeTextlinkbyContentHTML'
+import {makeTextlinkbyMarkdownHTML} from './makeTextlinkbyMarkdownHTML'
+import {youtubebyTagHTML} from './youtubebyTagHTML'
 
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
+  let untilValue = ''
 
-  let untilValue = dateToUnix(now.current);  //all new events from now
-//  untilValue = 1738846859;  //paging
+  untilValue = 1739709978;  //paging
+ 
+  untilValue = dateToUnix(now.current);  //all new events from now
 
   let noteCount = 0;
 
-//  untilValue = 1739078705;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+  // YouTubeを別関数にする(#ry)
 
- // untilValue = 1739604459;  // 3 images ok
+  // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
+
+  // untilValue = 1739707055;  // tag "r" twitter   
+  // untilValue = 1739674153;  // tag "r" (r) nipron iframe fix
+  // untilValue = 1739674961;  // tag "r" (r) amazon iframe fix
+  // untilValue = 1739678550;  // tag "r" link 7個 fix
+//  untilValue = 1686929129;  //twitter iframe content
+//  untilValue = 1700358511;  // instagram link iframe content fix
+  // untilValue = 1739577124;  // content iframe fix
+//  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
+  // untilValue = 1739628240;  // youtube shorts content ok
+  // untilValue = 1739588223;  //YouTube fix. tag "r"
+  // untilValue = 1739585002;  // Youtube target fix. youtu.be content
+//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
+  // untilValue = 1739359806;  // tag "r" img ok
+  //  untilValue = 1739078705;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+// untilValue = 1734489363;  // #t tag
+// untilValue = 1734489831;  // kind:20 not display picture
+// untilValue = 1732921974;  // kind:20 not display picture
+//  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
+
+  // untilValue = 1737563052;  // NG very large html. nostter ok
+  // untilValue = 1700654092;  // long-form content. kind:30023 Markdown
+//  untilValue = 1700351963;  // fix link. http nostter app home 4つ. tag r 4つ
+
+
+//  untilValue = 1686933213;  //quote_note1(nostr:note1) fix
+//  untilValue = 1686933213;  // nostr:note1 fix quote
+//  untilValue = 1692694772;  // nostr:note1 (quote)
+
+// untilValue = 1739177954;  // quote_nevent1(nostr:nvent1) fix
+// untilValue = 1688605603;  //qoote_neventt1, quote2 fix
+//  untilValue = 1696105738;  // quote_nevent1 njump fix. quote_nos_haiku ok
+// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
+
+
+//  untilValue = 1739175991;  // quote_npub1 fix quote
+  // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
+
+//  untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
+// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
+
+// untilValue = 1739628837;  // quote_nprofile1
+
+// untilValue = 1696316415;  // (nevent1) ok
+
+//  untilValue = 1690354019;  //(quote #[0]). content:#[0]. tag "e"
+
+
+
+
+  // untilValue = 1739627342;  // #e 2つ。1つ目がroot
+//  untilValue = 1691507141;  // NG. tag "r" があるが、#rが追加されない?
+// untilValue = 1739613007;  // quote_nprofile1?
+// untilValue = 1739572207;  // nostagawa iframe content ok
+// untilValue = 1739577054;  // nostagawa iframe content ok
+//  untilValue = 1739604459;  // 3 images ok
   // untilValue = 1739602957;  // fix image duplicate
-//  untilValue = 1696316415;  // nevent1 ok
   // untilValue = 1739594870;  // http <username> fix iframe
-  // untilValue = 1739588223;  //YouTube NG. [id=f79M-DhLPec&t=105](
   // untilValue = 1739582796;  // x.com iframe fix
-  // untilValue = 1739585083;  // Youtube target fix.
   //  untilValue = 1739585405;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
   // untilValue = 1739577075;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
-  // untilValue = 1739572207;  // nostagawa iframe ok
-  // untilValue = 1739577054;  // nostagawa iframe ok
-  // untilValue = 1739577124;  // iframe fix
   // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
-  // untilValue = 1734489831;  // kind:20 not display picture
-  // untilValue = 1732921974;  // kind:20 not display picture
-//  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
-  // untilValue = 1739158577;  // fix nhk https_iframe href target="_blank". NHK
-//  untilValue = 1700358511;  // instagram link iframe fix
-//  untilValue = 1688253140;  //iframe 3つ
-//  untilValue = 1686839510;  //nicovideo iframe
-//  untilValue = 1686929129;  //twitter iframe
+  // untilValue = 1739158577;  // fix nhk iframe href target="_blank". NHK
   // untilValue = 1739454334;  // fix http content youtube
   // untilValue = 1739454167;  // fix http content suno
   // untilValue = 1739454027;  // http content github
-  // untilValue = 1739373027;  // fix iframe prime video from content
-  // untilValue = 1739446863;  // fix twitter iframe from content
+  // untilValue = 1739373027;  // fix iframe content prime video
+  // untilValue = 1739446863;  // fix twitter iframe  content
   // untilValue = 1739087698;  // Error: hexToBytes NG
-  // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1694194192;  // kind:30025 LongForm
 //  untilValue = 1702648801;  // 9735 content empty . naddr1
 //  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
 //  untilValue = 1700648893;  // bookmark
-//  untilvalue = 1700654092;  // long-form content
-//  untilValue = 1700351963;  // NG link. http nostter app home ３つ
-//  untilValue = 1698228483;  // link NG. http 2つ
 //  untilValue = 1698731466;  // Invalid byte sequence
 //  untilValue = 1697536841;  // NG
 //  untilValue = 1697295574;  // repost fix. id nip19.neventEncode(event: EventPointer) fix
 //  untilValue = 1696110614;  // url # NG
 //  untilValue = 1694055016;  // \n\n ok
 
-  // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。NG. 
-  // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。NG
+  // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。
+  // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。
 //  untilValue = 1688460571;  // youtube channel?. thumbnail NG. lumilumi URL ok. This live stream recording is not available.
-//  untilValue = 1691507141;  // NG tag "r" があるが、#rが追加されない
 //  untilValue = 1691507141;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
   // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
-  // untilValue = 1739359806;  // tag "r" img ok
 //  untilValue = 1691662709;  // repost mov fix. nostter ok
 // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
  
   
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
   // const sinceValue = untilValue - 3600;  //about 60 minutes 
-  // const sinceValue = untilValue - 36000;  //about 600 minutes 
-  const sinceValue = untilValue - 999999;  //about 11 days 
+  // const sinceValue = untilValue - 36000;  //about 10 hours 
+     const sinceValue = untilValue - 18000;  //about 2 days 
+  // const sinceValue = untilValue - 999999;  //about 11 days 
   // const sinceValue = untilValue - 7200;  //about 120 minutes 
 //  sinceValue = untilValue - 500;  //about 15 minutes 
 
@@ -127,9 +168,9 @@ const Test = () => {
 //      kinds: [30003],  // 30003:Bookmark sets
 //      kinds: [30008],  // 30008:Profile Badges
 //      kinds: [30009],  // 30009:Badge definition event
-     kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
+    //  kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
 //      kinds: [30025],  // 
-//      kinds: [30030],  // 30030:emoji set 
+//      kinds: [30030],  // 30030:emoji set https://nos-haiku.vercel.app/entry/nevent1qvzq
 //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
 //      kinds: [30311],  // 30311:Live Event
 //      kinds: [30315],  // 30315:User Statuses
@@ -398,9 +439,9 @@ const Test = () => {
       content = markdownContent  // Markdown表示対応前を表示するにはコメントアウト
 
       // <a href無効化
-      for(let i=0; i<1000; i++) {
-        // content = content.replace('https://','_ttps://');  // <
-      }
+      // for(let i=0; i<1000; i++) {
+      //   content = content.replace('https://','_ttps://');  // <
+      // }
 
       // Markdown化した後のHTMLを表示する時
       // for(let i=0; i<1000; i++) {
@@ -523,6 +564,10 @@ const Test = () => {
 
       content = makeIframesbyTagHTML(content, note);
 
+      content = youtubebyTagHTML(content, note)
+
+
+
 
 
 
@@ -554,7 +599,7 @@ const Test = () => {
 
 
 
-      if(!note.kind === 30023) {
+      if(note.kind != 30023) {
         let tagUrl = "";  // #t
 
         for(let i=0; i<note.tags.length; i++) {
@@ -584,6 +629,8 @@ const Test = () => {
 
       let eventLinkUrl1 = ""
       let eventLinkText1 = ""
+      let eventLinkUrl2 = ""
+      let eventLinkText2 = ""
 
       // tag "p", #[0], #[1] (#p)
       for(let i=0; i<note.tags.length; i++) {
@@ -614,10 +661,16 @@ const Test = () => {
           //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
           const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
           // const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
-          eventLinkUrl1 = eventLinkUrl
-          eventLinkText1 = "_#e"
-          // contentの#[0]をa hrefに置き換え
-          // content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
+          
+          if(eventLinkUrl1 === '') {
+            eventLinkUrl1 = eventLinkUrl
+            eventLinkText1 = "_#e"
+            // contentの#[0]をa hrefに置き換え
+            // content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
+          } else if(eventLinkUrl1 != '') {
+            eventLinkUrl2 = eventLinkUrl
+            eventLinkText2 = "_#e"
+          }
         }
       }
 
@@ -637,10 +690,10 @@ const Test = () => {
         if(tmp.includes("nostr:note1") || 
           tmp.includes("nostr:naddr1") || 
           tmp.includes("nostr:nevent1") || 
-          // tmp.includes("nostr:nprofile1") || 
+          tmp.includes("nostr:nprofile1") || 
           tmp.includes("nostr:npub1")
         ) {
-            // contentからnostr:note1, nvent1, npub1を削除
+            // contentからnostr:note1, naddr1, nevent1, nprofile1, npub1を削除
             content = content.replace(wordsNostr[i], '');
           }
       }
@@ -654,12 +707,13 @@ const Test = () => {
       let quoteLinkUrl = ''
       let quoteLinkText = ''
 
-      // nevent1
+      // nevent1,  untilValue = 1696316415;
       if(content.includes("\nnevent1")) {
         let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
         for(let i=0; i<wordsNostr.length; i++) {
           if(wordsNostr[i].includes("nevent1")) {
             // let quoteBaseUrl = "https://snort.social/e/"
+            // nevent1qvzqqqqq9gpzq6c2vr8l8m9952e9qhxt8acn8kzzypzuhm6q70fvvxylkzu49e75qqs8fs9sy2ujm9yt220t5q6amhl7aumal5uha382f5eqrk6pheqp5jgv7nmq6
             const quoteBaseUrl = "https://nostter.app/"
             quoteLinkUrl = quoteBaseUrl + wordsNostr[i]
             quoteLinkText = '(nevent1)';
@@ -672,9 +726,11 @@ const Test = () => {
 
 
 
-      let quoteId1 = "";
+      let quoteId = "";
       let quoteUrl1 = ""
       let quoteIdText1 = "";  // #q 1
+      let quoteUrl2 = ""
+      let quoteIdText2 = "";  // #q 2
 
       for(let i=0; i<note.tags.length; i++) {
         //quoteUrl1 = "https://snort.social/e/" + quoteId1;
@@ -683,10 +739,16 @@ const Test = () => {
         //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
         let quoteBaseUrl = "https://nostter.app/"
         if(note.tags[i][0] === "q") {
-          if(quoteId1 === "") {
-            quoteId1 = note.tags[i][1];  // event id
-            quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId1);
+          if(quoteUrl1 === '') {
+            quoteId = note.tags[i][1];  // event id
+            quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);
             quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+          }
+          else if(quoteUrl1 != '') {
+            quoteId = note.tags[i][1];  // event id
+            quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
+            quoteIdText2 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+            
           }
         }
       }
@@ -698,23 +760,17 @@ const Test = () => {
 
   // Add <a href>
 
-      // let iframe1 = "";
-      // let iframe2 = "";
-      // let youtubeId = "";
-      // let httpLinkUrl1 = "";
-      // let httpLinkUrlText1 = "";  // # https://
-      // let httpLinkUrl2 = "";
-      // let httpLinkUrlText2 = "";  // # https://
 
 
 
 
-      if(!note.kind === 30023) {
+      if(note.kind != 30023) {
         content = makeIframesbyContentHTML(content, note);
       }
-      else {
-        content = makeTextlinkbyContentHTML(content, note);
+      else {  // Markdown
+        content = makeTextlinkbyMarkdownHTML(content, note);
       }
+
 
 
 
@@ -735,11 +791,11 @@ const Test = () => {
 
 
 
-
+      //(emoji)
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
           const emojiURL = note.tags[i][2];
-          for(let j=0; j<100; j++) {
+          for(let j=0; j<200; j++) {
                   content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
           }
         }
@@ -801,12 +857,14 @@ const Test = () => {
               {tagsLinkUrlText5}
               {tagsLinkUrlText6}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
+              <a href={quoteUrl2} target="_blank">{quoteIdText2}</a>
               {/* <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a> */}
               {/* <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a> */}
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
               <a href={toLinkUrl1} target="_blank">{toLinkText1}</a>
               <a href={eventLinkUrl1} target="_blank">{eventLinkText1}</a>
+              <a href={eventLinkUrl2} target="_blank">{eventLinkText2}</a>
               <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
               {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
         {alt}<br />
@@ -872,9 +930,6 @@ export default Test;
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
 // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
 //  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
-//  untilValue = 1739177954;  // nostr:nvent1 fix quote
-//  untilValue = 1739175991;  // nostr:npub1 fix quote
-//  untilValue = 1686933213;  // nostr:note1 fix quote
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
@@ -885,7 +940,6 @@ export default Test;
 //  untilValue = 1688390047;  // music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  // music.youtube (normal youtube ok)
 //  untilValue = 1739008290;  // youtube fix Delete After &
-//  untilValue = 1739012160;  // youtube live Repost ¥n fix
 //  untilValue = 1739114136;  // YouTube fix. nostter ok
 //  untilValue = 1739265383;  // youtube hrefが表示される
 //  untilValue = 1739113299;  // YouTube fix. youtube.com
@@ -895,13 +949,11 @@ export default Test;
 //  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
 //  untilValue = 1739015355;  // dare-ai OGP  Todo
 //  untilValue = 1739024868;  // kirby OGP Todo nostter ok
-//  untilValue = 1690354019;  //(quote#). content:#[0]. tags[0]=(e,d03933--)
 //  untilValue = 1739091313;  // repost image size
 //  untilValue = 1739163316;  // Repost  fix
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
 //  untilValue = 1739100944;  // client fix
 //  untilValue = 1739099394;  // Repost URL fix
-//  untilValue = 1739065989;  // nos_haiku. wip quote_nevent link event id. 42.Channel_Message
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix
@@ -925,7 +977,6 @@ export default Test;
 //  untilValue = 1696632885;  // Metadata
 //  untilValue = 1696502429;  // jpg OK
 //  untilValue = 1696412926;  // LIVE
-//  untilValue = 1696105738;  // quote_nevent njump fix. quote_nos_haiku ok
 //  untilValue = 1696119569;  // njump.me nevent fix
 //  untilValue = 1695438407;  // to link fix
 //  untilValue = 1695370850;  // tiktok
@@ -940,7 +991,6 @@ export default Test;
 //  untilValue = 1693566199;  // generic repost 42.Channel_Message
 //  untilValue = 1693300143;  // Channel creation
 //  untilValue = 1692922942;  // nak install
-//  untilValue = 1692694772;  // nostr:note1 (quote)
 //  untilValue = 1692649004;  // mp4
 //  untilValue = 1691665815;  // tag:h nowplaying
 //  untilValue = 1691417549;  // kind:9735 zap memo
@@ -956,7 +1006,6 @@ export default Test;
 //  untilValue = 1689254202;  //repost
 //  untilValue = 1689245113;  //nostr:naddr1 nostter fix
 //  untilValue = 1688944930;  //threads ogp
-//  untilValue = 1688605603;  //neventt1 (quote) fix
 //  untilValue = 1688395711;  //youtube playlist (normal youtube ok)
 //  untilValue = 1688303413;  //https:// search engine
 //  untilValue = 1688289075;  //1,300 active authors 2023/7/2
@@ -976,9 +1025,7 @@ export default Test;
 //  untilValue = 1687575908;  //tag fix
 //  untilValue = 1687194994;  //reply 8
 //  untilValue = 1687333253;  //nostr:naddr1 habla fix relay kind:30022
-//  untilValue = 1686983200;  //naddr1 habla emoji kind:30030 fix
 //  untilValue = 1686985618;  //about nevent relay
-//  untilValue = 1686933213;  //quote(nostr:note1) fix
 //  untilValue = 1686949316;  //2 cards fix
 //  untilValue = 1686918544;  //nhk news card
 //  untilValue = 1686918929;  //hatenablog, nicovideo, card

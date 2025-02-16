@@ -8,6 +8,8 @@ export const makeIframesbyContentHTML = (content, note) => {
 
 
 
+
+
     let iframe1 = "";
     let iframe2 = "";
     let youtubeId = "";
@@ -23,7 +25,8 @@ export const makeIframesbyContentHTML = (content, note) => {
     tmpContent = tmpContent.replace('#idolmaster', '\n')
     // tmpContent = tmpContent.replace('=', '\n')  //YouTube
     tmpContent = tmpContent.replace(']', '\n')
-    // splitContent = splitContent.replace('- ', '\n')
+    tmpContent = tmpContent.replace('? ', '\n')
+    
 
     const splitContent = tmpContent.split('\n');
 
@@ -32,61 +35,65 @@ export const makeIframesbyContentHTML = (content, note) => {
     for(let i=0; i<splitContent.length; i++) {
 
       // YouTube iframe
+      // https://github.com/SnowCait/nostter/blob/be5748cbd2ab1b4423f6fad29c2f4e18d0242edd/web/src/lib/components/content/YouTube.svelte
       if(splitContent[i].includes("youtube.com") || splitContent[i].includes("youtu.be/")) {
-        let id = splitContent[i];
         // /watch?v= より後を取得
-        const target = '/watch?v=';
-        if(id.includes(target)) {
-        id = id.substring(id.indexOf(target) + target.length, id.length);
-        }
-        // /live/ より後を取得
-        const target2 = '/live/'
-        if(id.includes(target2)) {
-        id = id.substring(id.indexOf(target2) + target2.length, id.length);
-        }
+        // const target = '/watch?v=';
+        // if(id.includes(target)) {
+        //   id = id.substring(id.indexOf(target) + target.length, id.length);
+        // }
+        
+
+
+        const tmpUrl = splitContent[i]
+
+        // cannot be parsed as a URL
+        const link = new URL(tmpUrl);
+        let id = tmpUrl;
+        
         // youtube.be/ より後を取得
-        const target3 = 'youtu.be/'
-        if(id.includes(target3)) {
-        id = id.substring(id.indexOf(target3) + target3.length, id.length);
+        if(link.hostname === 'youtu.be') {
+          const target3 = 'youtu.be/'
+          // id = id.substring(id.indexOf(target3) + target3.length, id.length);
+          id = link.pathname.replace('/', '');
+        }
+        else if(link.pathname.startsWith('/live/')) {
+          // /live/ より後を取得
+          // id = id.substring(id.indexOf(target2) + '/live/'.length, id.length);
+          id = link.pathname.replace('/live/', '');
+        }
+        else {
+          const v = link.searchParams.get('v');
+          if (v !== null) {
+            id = v;
+          } else if (link.pathname.includes('shorts')) {
+            const match = link.pathname.match(/\/shorts\/(?<id>\w+)/);
+            id = match?.groups?.id;
+          }
         }
 
-        iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        const tmpIframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
         
-        content = content.replace(splitContent[i], iframe1)
-        content = content + '_[id = ' + id + ']';
-        // content = content + '_[id = ' + splitContent[i] + ']';  // debug
-        content = content + '<a href="' + splitContent[i] + '" target="_blank">__YouTube(fromContent)</a>';
-        // content = 'aa[' + id + ']aa' // debug
+        if(iframe1 === '') {
+          iframe1 = tmpIframe;
+          iframe1 = iframe1 + '_[id =' + id + '](content)';
+          iframe1 = iframe1 + '<a href="' + splitContent[i] + '" target="_blank">__YouTube(content)</a>';
+          content = content.replace(tmpUrl, '');
+        }
       }
+
 
       // Twitter iframe
       else if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
         const id = splitContent[i].replace("x.com","twitter.com"); 
-        iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+        const tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
-        content = content.replace(splitContent[i], iframe1);
+        content = content.replace(splitContent[i], tmpIframe);
 
         const httpLinkUrl1 = splitContent[i];
-        const httpLinkUrlText1 = '__Ttwitter(fromContent)';
+        const httpLinkUrlText1 = '__Ttwitter_X(content)';
         content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
       }
-
-      // targoyle iframe
-      else if(splitContent[i].includes("targoyle.jp")) {
-        if(httpLinkUrlText1 == '') {
-          httpLinkUrlText1 = '_link[1](fromContent)';
-          httpLinkUrl1 = 'https://targoyle.jp/fanart/';  //debug
-          const link = '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
-          content = content.replace(splitContent[i], link);
-        }      
-        else {
-        //   httpLinkUrlText2 = '_link[2](fromContent)';
-        //   httpLinkUrl2 = 'https://targoyle.jp/';  //debug
-        //   const link = '<a href="' + httpLinkUrl2 + '" target="_blank">' + httpLinkUrlText2 + '</a>';
-        //   content = content.replace(splitContent[i], link);
-        }
-      }
-
 
 
       // http iframe
@@ -99,10 +106,15 @@ export const makeIframesbyContentHTML = (content, note) => {
         {
           httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
 
-          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-          content = content.replace(splitContent[i], tmpIframe);
+          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(c)';
+          iframe1 = tmpIframe;
+          // URL 非表示
+          content = content.replace(httpLinkUrl1, '');
+          // (c)_ttp' 表示
+          content = content.replace(httpLinkUrl1, httpLinkUrl1.replace('http', '(c)_ttp'));
         }
       }
+
 
 
 
@@ -121,8 +133,6 @@ export const makeIframesbyContentHTML = (content, note) => {
 
 
     }  // for
-
-    // content = 'def'
 
 
 
@@ -199,9 +209,9 @@ export const makeIframesbyContentHTML = (content, note) => {
                 // contentから削除
                 content = content.replace(tmp2[i], "");
 
-                httpLinkUrlText1 = '__YouTube(fromContent)';
+                httpLinkUrlText1 = '__YouTube(content)';
                 iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-                youtubeId = '_[id = ' + id + '(fromContent)]';
+                youtubeId = '_[id = ' + id + '(content)]';
               }
               else {
                 // content = content + 'https://www.youtube.com/@diversesystem';
@@ -217,15 +227,15 @@ export const makeIframesbyContentHTML = (content, note) => {
               iframe1 = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
 
               httpLinkUrl1 = tmp2[i];
-              httpLinkUrlText1 = '__Spotify(fromContent)';
+              httpLinkUrlText1 = '__Spotify(content)';
             }
             else if(tmp2[i].includes("targoyle.jp")) {
               if(httpLinkUrlText1 == '') {
-                httpLinkUrlText1 = '_link[1](fromContent)';
+                httpLinkUrlText1 = '_link[1](content)';
                 httpLinkUrl1 = 'https://targoyle.jp/fanart/';  //debug
               }
               else {
-                httpLinkUrlText2 = '_link[2](fromContent)';
+                httpLinkUrlText2 = '_link[2](content)';
                 httpLinkUrl2 = 'https://targoyle.jp/';  //debug
               }
             }
@@ -262,22 +272,22 @@ export const makeIframesbyContentHTML = (content, note) => {
                     content = content.replace(tmp2[i], tmpIframe);
                     httpLinkUrl1 = tmp2[i];
                     if(httpLinkUrl1.includes("music.apple.com")) {
-                        httpLinkUrlText1 = '__Apple Music(fromContent)';
+                        httpLinkUrlText1 = '__Apple Music(content)';
                     }
                     else if(httpLinkUrl1.includes("/x.com/")) {
-                        httpLinkUrlText1 = '__X(fromContent)';
+                        httpLinkUrlText1 = '__X(content)';
                     }
                     else if(httpLinkUrl1.includes("/zenn.dev/")) {
-                        httpLinkUrlText1 = '__Zenn(fromContent)';
+                        httpLinkUrlText1 = '__Zenn(content)';
                     }
                     else if(httpLinkUrl1.includes("/www.instagram.com/")) {
-                        httpLinkUrlText1 = '__Instagram(fromContent)';
+                        httpLinkUrlText1 = '__Instagram(content)';
                         // https:// 以降の文字列を取得(https://も含む)
                         httpLinkUrl1 = httpLinkUrl1.substring(httpLinkUrl1.indexOf('https://'), httpLinkUrl1.length);
                         // httpLinkUrlText1 = '__Instagram' + '[URL=' + httpLinkUrl1 + ']';  // debug
                     }
                     else {
-                      httpLinkUrlText1 = '__https_iframe(fromContent)';
+                      httpLinkUrlText1 = '__iframe(content)';
                     }
                   }
                 }
@@ -299,5 +309,6 @@ export const makeIframesbyContentHTML = (content, note) => {
 
 
 
-    return content;
+    return content +
+        iframe1;
 }
