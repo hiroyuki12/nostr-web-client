@@ -43,19 +43,23 @@ export const youtubebyTagHTML = (content, note) => {
 
 
     let tmpUrl = linkUrl1;
+    let id = tmpUrl.replace('"', '');
 
-    if(tmpUrl.includes('http') && !tmpUrl.includes('@')) {
-
-        let id = tmpUrl.replace('"', '');
+    if(tmpUrl.includes('youtu.be')) {
+        id = tmpUrl.replace('https://youtu.be/', '')
+        iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>(r_YouTube)";
+        youtubeIdText1 = '__[id=' + id + ']'
+        content = content.replace(tmpUrl, '');
+    }
+    else if(tmpUrl.includes('http') && !tmpUrl.includes('@')) {
         let link = ""
         
         try {
-            linke = new URL(tmpUrl);
+            link = new URL(tmpUrl);
         } catch(e) {
-            content = content + '[URL-ERROR tempUrl=' + tmpUrl + ']'
+            content = content + '[URL_ERROR_tmpUrl=' + tmpUrl + ']'
+            return content;
         }
-
-        
         
         // YouTube tag "r"
         // https://github.com/SnowCait/nostter/blob/be5748cbd2ab1b4423f6fad29c2f4e18d0242edd/web/src/lib/components/content/YouTube.svelte

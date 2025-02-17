@@ -29,8 +29,9 @@ const Test = () => {
 
   let noteCount = 0;
 
+//  untilValue = 1739790231;  // youtu.be
 //  untilValue = 1739099394;  // Repost Text ok
-  untilValue = 1739784977;  // Repost Text NG.
+  // untilValue = 1739784977;  // Repost Text fix.
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
   // untilValue = 1739782236;  // quote_npub1 
@@ -286,8 +287,7 @@ const Test = () => {
 
 
 
-      // make tags[0],  client(-via), proxy, alft, etc
-
+      // make tags[0],  client(-via), proxy, alt, etc
 
       let client = "";
       //let title = "";

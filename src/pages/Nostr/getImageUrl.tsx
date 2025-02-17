@@ -34,6 +34,21 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === 'npub1dg7n7g8440wrrqkw2kz88gqrvde0nasfnhxxu64l5pc7x6jkn0xquxzskl') {
+      image = 'https://pbs.twimg.com/profile_images/1032084495753781249/vYR3bY34_400x400.jpg'
+    } 
+    else if (npub === 'npub12fen04w43tfm49ntkrk5dnv6s0x278cr2ftrrksxqsh8aylf2f0qug9qsg') {
+      image = 'https://image.nostr.build/7df1743421035ff35b21d8c2a4d0c6f3a9d96dc82565d6c1b2f3ab8bb9e519a9.jpg'
+    } 
     else if (npub === 'npub1t2enfymtdnfahxnlw7cufg3asnr6pr22tz3dmz3c8ux60rf9ns3qu52pcn') {
       image = 'https://nostrcheck.me/media/5ab334936b6cd3db9a7f77b1c4a23d84c7a08d4a58a2dd8a383f0da78d259c22/0a60eeb5bd59a6f4e443674776f23e95c2196f6003877a235040f4a7cf19e052.webp'
     } 
