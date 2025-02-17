@@ -24,19 +24,19 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
   let untilValue = ''
 
-  untilValue = 1739709978;  //paging
- 
+  untilValue = 1739760194;  //paging
   untilValue = dateToUnix(now.current);  //all new events from now
 
   let noteCount = 0;
 
-  // YouTubeを別関数にする(#ry)
-
+//  untilValue = 1739099394;  // Repost Text ok
+  untilValue = 1739784977;  // Repost Text NG.
+  // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
-
+  // untilValue = 1739782236;  // quote_npub1 
   // untilValue = 1739707055;  // tag "r" twitter   
-  // untilValue = 1739674153;  // tag "r" (r) nipron iframe fix
-  // untilValue = 1739674961;  // tag "r" (r) amazon iframe fix
+  // untilValue = 1739674153;  // tag "r" (r) nipron iframe NG. fix text link
+  // untilValue = 1739674961;  // tag "r" (r) amazon iframe NG. fix text link
   // untilValue = 1739678550;  // tag "r" link 7個 fix
 //  untilValue = 1686929129;  //twitter iframe content
 //  untilValue = 1700358511;  // instagram link iframe content fix
@@ -47,79 +47,18 @@ const Test = () => {
   // untilValue = 1739585002;  // Youtube target fix. youtu.be content
 //  untilValue = 1739012160;  // youtube live content Repost ¥n fix
   // untilValue = 1739359806;  // tag "r" img ok
-  //  untilValue = 1739078705;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
-// untilValue = 1734489363;  // #t tag
+  //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+  // untilValue = 1700654092;  // long-form content. kind:30023 Markdown
+  // untilValue = 1734489363;  // #t tag
 // untilValue = 1734489831;  // kind:20 not display picture
 // untilValue = 1732921974;  // kind:20 not display picture
 //  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
-
-  // untilValue = 1737563052;  // NG very large html. nostter ok
-  // untilValue = 1700654092;  // long-form content. kind:30023 Markdown
 //  untilValue = 1700351963;  // fix link. http nostter app home 4つ. tag r 4つ
 
 
-//  untilValue = 1686933213;  //quote_note1(nostr:note1) fix
-//  untilValue = 1686933213;  // nostr:note1 fix quote
-//  untilValue = 1692694772;  // nostr:note1 (quote)
-
-// untilValue = 1739177954;  // quote_nevent1(nostr:nvent1) fix
-// untilValue = 1688605603;  //qoote_neventt1, quote2 fix
-//  untilValue = 1696105738;  // quote_nevent1 njump fix. quote_nos_haiku ok
-// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
-
-
-//  untilValue = 1739175991;  // quote_npub1 fix quote
-  // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
-
-//  untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
-// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
-
-// untilValue = 1739628837;  // quote_nprofile1
-
-// untilValue = 1696316415;  // (nevent1) ok
-
-//  untilValue = 1690354019;  //(quote #[0]). content:#[0]. tag "e"
 
 
 
-
-  // untilValue = 1739627342;  // #e 2つ。1つ目がroot
-//  untilValue = 1691507141;  // NG. tag "r" があるが、#rが追加されない?
-// untilValue = 1739613007;  // quote_nprofile1?
-// untilValue = 1739572207;  // nostagawa iframe content ok
-// untilValue = 1739577054;  // nostagawa iframe content ok
-//  untilValue = 1739604459;  // 3 images ok
-  // untilValue = 1739602957;  // fix image duplicate
-  // untilValue = 1739594870;  // http <username> fix iframe
-  // untilValue = 1739582796;  // x.com iframe fix
-  //  untilValue = 1739585405;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
-  // untilValue = 1739577075;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
-  // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
-  // untilValue = 1739158577;  // fix nhk iframe href target="_blank". NHK
-  // untilValue = 1739454334;  // fix http content youtube
-  // untilValue = 1739454167;  // fix http content suno
-  // untilValue = 1739454027;  // http content github
-  // untilValue = 1739373027;  // fix iframe content prime video
-  // untilValue = 1739446863;  // fix twitter iframe  content
-  // untilValue = 1739087698;  // Error: hexToBytes NG
-  // untilValue = 1694194192;  // kind:30025 LongForm
-//  untilValue = 1702648801;  // 9735 content empty . naddr1
-//  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
-//  untilValue = 1700648893;  // bookmark
-//  untilValue = 1698731466;  // Invalid byte sequence
-//  untilValue = 1697536841;  // NG
-//  untilValue = 1697295574;  // repost fix. id nip19.neventEncode(event: EventPointer) fix
-//  untilValue = 1696110614;  // url # NG
-//  untilValue = 1694055016;  // \n\n ok
-
-  // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。
-  // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。
-//  untilValue = 1688460571;  // youtube channel?. thumbnail NG. lumilumi URL ok. This live stream recording is not available.
-//  untilValue = 1691507141;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
-  // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
-//  untilValue = 1691662709;  // repost mov fix. nostter ok
-// untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
- 
   
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
   // const sinceValue = untilValue - 3600;  //about 60 minutes 
@@ -411,9 +350,7 @@ const Test = () => {
 
 
 ////////////////////////////////////////////////
-// Repostのcontentの調整
-// Repostのcontentデータをcontentの本文のみに調整
-
+// contentの調整
 
       let content = note.content;
       let markdownContent = content;
@@ -452,6 +389,10 @@ const Test = () => {
 
 
 
+
+////////////////////////////////////////////////
+// Repostのcontentの調整
+// Repostのcontentデータをcontentの本文のみに調整
 
       if(content === "") {
 	      content = "[empty]";
@@ -496,6 +437,8 @@ const Test = () => {
 
       }
 
+      
+
 
 
 
@@ -527,23 +470,44 @@ const Test = () => {
 // makeInlineImageHTMLの前に、makeIframesbyTagHTMLを実行すると、複数画像表示がNG
 
       let inlineImageHTML = makeInlineImageHTML(content);
+    
+      // content の画像URLを削除
+      {
+        let tmp = content;
+        for(let i=0; i<20; i++) {
+          tmp = tmp.replace('\\/','/');
+        }
+        for(let i=0; i<5; i++) {
+          tmp = tmp.replace('\n',' ');
+          tmp = tmp.replace('　',' ');
+          tmp = tmp.replace('`',' ');
+          tmp = tmp.replace('`',' ');
+          tmp = tmp.replace('https://',' https://');  // httpの前にスペースを追加
+          tmp = tmp.replace('http://',' http://');
+          tmp = tmp.replace("`", "");  // googleusercontent
+        }
+        for(let i=0; i<20; i++) {
+          tmp = tmp.replace('\n',' ');
+        }
+        const tmpContent = tmp.split(' ');
 
-      //todo conentにjpgなどのURLがある場合は削除 @@
-      const tmpContent = content.split('\n')
-      for(let i=0; i<tmpContent.length; i++) {
-        if(tmpContent[i].includes('http') 
-          && (tmpContent[i].includes('.jpg') ||
-            tmpContent[i].includes('.jpeg') ||
-            tmpContent[i].includes('.png') ||
-            tmpContent[i].includes('.gif') ||
-            tmpContent[i].includes('.svg') ||
-            tmpContent[i].includes('.ico') ||
-            tmpContent[i].includes('.bmp') ||
-            tmpContent[i].includes('.webp') ||
-            tmpContent[i].includes('.mp4') ||
-            tmpContent[i].includes('.mov')
-          )) {
-          content = content.replace(tmpContent[i], '')
+        // conentのjpgなどのURLを削除
+        // const tmpContent = content.split('\n')
+        for(let i=0; i<tmpContent.length; i++) {
+          if(tmpContent[i].includes('http') 
+            && (tmpContent[i].includes('.jpg') ||
+              tmpContent[i].includes('.jpeg') ||
+              tmpContent[i].includes('.png') ||
+              tmpContent[i].includes('.gif') ||
+              tmpContent[i].includes('.svg') ||
+              tmpContent[i].includes('.ico') ||
+              tmpContent[i].includes('.bmp') ||
+              tmpContent[i].includes('.webp') ||
+              tmpContent[i].includes('.mp4') ||
+              tmpContent[i].includes('.mov')
+            )) {
+            content = content.replace(tmpContent[i], '')
+          }
         }
       }
 
@@ -924,6 +888,55 @@ export default Test;
 
 // memo
 
+//  untilValue = 1686933213;  //quote_note1(nostr:note1) fix
+//  untilValue = 1686933213;  // nostr:note1 fix quote
+//  untilValue = 1692694772;  // nostr:note1 (quote)
+// untilValue = 1739177954;  // quote_nevent1(nostr:nvent1) fix
+// untilValue = 1688605603;  //qoote_neventt1, quote2 fix
+//  untilValue = 1696105738;  // quote_nevent1 njump fix. quote_nos_haiku ok
+// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
+//  untilValue = 1739175991;  // quote_npub1 fix quote
+  // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
+//  untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
+// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
+// untilValue = 1739628837;  // quote_nprofile1
+// untilValue = 1696316415;  // (nevent1) ok
+//  untilValue = 1690354019;  //(quote #[0]). content:#[0]. tag "e"
+  // untilValue = 1739627342;  // #e 2つ。1つ目がroot
+//  untilValue = 1691507141;  // NG. tag "r" があるが、#rが追加されない?
+// untilValue = 1739613007;  // quote_nprofile1?
+// untilValue = 1739572207;  // nostagawa iframe content ok
+// untilValue = 1739577054;  // nostagawa iframe content ok
+//  untilValue = 1739604459;  // 3 images ok
+  // untilValue = 1739602957;  // fix image duplicate
+  // untilValue = 1739594870;  // http <username> fix iframe
+  // untilValue = 1739582796;  // x.com iframe fix
+  //  untilValue = 1739585405;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  // untilValue = 1739577075;  // fix. tag"r"とtag"imeta"があるため、画像が２つ表示される
+  // untilValue = 1739261908;  // altにhttps://があるため、kind:20 http://の表示が消えない。
+  // untilValue = 1739158577;  // fix nhk iframe href target="_blank". NHK
+  // untilValue = 1739454334;  // fix http content youtube
+  // untilValue = 1739454167;  // fix http content suno
+  // untilValue = 1739454027;  // http content github
+  // untilValue = 1739373027;  // fix iframe content prime video
+  // untilValue = 1739446863;  // fix twitter iframe  content
+  // untilValue = 1739087698;  // Error: hexToBytes NG
+  // untilValue = 1694194192;  // kind:30025 LongForm
+//  untilValue = 1702648801;  // 9735 content empty . naddr1
+//  untilValue = 1702648782;  // fix nostr:naddr1. link kind:30402
+//  untilValue = 1700648893;  // bookmark
+//  untilValue = 1698731466;  // Invalid byte sequence
+//  untilValue = 1697536841;  // NG
+//  untilValue = 1697295574;  // repost fix. id nip19.neventEncode(event: EventPointer) fix
+//  untilValue = 1696110614;  // url # NG
+//  untilValue = 1694055016;  // \n\n ok
+  // untilValue = 1707634026;  // Repost先のiconが表示されないのは、tagp"がないため。
+  // untilValue = 1739262337;  // Repost先のiconが表示されないのは、tag "p"がないため。
+//  untilValue = 1688460571;  // youtube channel?. thumbnail NG. lumilumi URL ok. This live stream recording is not available.
+//  untilValue = 1691507141;  // repostのcontentにtargoyleのリンクが2つ fix. nostter ok
+  // untilValue = 1739159139;  // x(twitter) large ok. x.com (by tag)
+//  untilValue = 1691662709;  // repost mov fix. nostter ok
+// untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
 // untilValue = 1739258350;  // tag "r" jpg
 // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
 // untilValue = 1739089652;  // inlineImage. tag "r" なし.
@@ -953,7 +966,6 @@ export default Test;
 //  untilValue = 1739163316;  // Repost  fix
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix
 //  untilValue = 1739100944;  // client fix
-//  untilValue = 1739099394;  // Repost URL fix
 //  untilValue = 1739012160;  // repost ¥n fix
 //  untilValue = 1739017185;  // repost 数字 fix
 //  untilValue = 1739011853;  // ryusoku fix

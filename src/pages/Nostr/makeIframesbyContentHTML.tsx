@@ -72,12 +72,12 @@ export const makeIframesbyContentHTML = (content, note) => {
           }
         }
 
-        const tmpIframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        const tmpIframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>(c)";
         
         if(iframe1 === '') {
           iframe1 = tmpIframe;
-          iframe1 = iframe1 + '_[id =' + id + '](content)';
-          iframe1 = iframe1 + '<a href="' + splitContent[i] + '" target="_blank">__YouTube(content)</a>';
+          iframe1 = iframe1 + '_[id =' + id + ']';
+          iframe1 = iframe1 + '<a href="' + splitContent[i] + '" target="_blank">__YouTube</a>';
           content = content.replace(tmpUrl, '');
         }
       }

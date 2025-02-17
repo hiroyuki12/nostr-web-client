@@ -34,8 +34,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1t2enfymtdnfahxnlw7cufg3asnr6pr22tz3dmz3c8ux60rf9ns3qu52pcn') {
+      image = 'https://nostrcheck.me/media/5ab334936b6cd3db9a7f77b1c4a23d84c7a08d4a58a2dd8a383f0da78d259c22/0a60eeb5bd59a6f4e443674776f23e95c2196f6003877a235040f4a7cf19e052.webp'
     } 
     else if (npub === 'npub1ea9jqhhj2qc2g6g33sm0dpew76cqehg6v9h6r6lr327a2mx5a8dqvuqezp') {
       image = 'https://avatars.githubusercontent.com/u/98054437?s=200&v=4'
@@ -831,7 +831,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://pbs.twimg.com/profile_images/1172565293698125824/Sh6V2-ve_400x400.jpg'
     } 
     else if (npub === 'npub1sytget3suf7s5gkx9fnt4upw0a45n3zkd7emrpddnpvzl558umys5apyau') {
-      image = 'https://void.cat/d/K6vpZfhXpG1HicqoQ7z5Vm.webp'
+      image = 'https://m.primal.net/LtFX.jpg'
     } 
     else if (npub === 'npub1cpzpxu5w86mkvvjncl6g4gm723u6vhqv34lj7dxtszsq9ed0nrqqqqsfvr') {
       image = 'https://pbs.twimg.com/profile_images/1179379994239361025/-rSns1ax_400x400.jpg'
