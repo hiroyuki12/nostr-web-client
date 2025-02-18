@@ -37,11 +37,11 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub19ju2u4sduewta4hxl22kke7se8yxm2puytzw47lr6y999pxnpjaqtjjfxj') {
+      image = 'https://image.nostr.build/c4daabdcd23576a0b229c43327e9a18d803e28907190682ee8776779628a317c.png'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1uz5vh467hljwlwag5e0l2ja5xkzcgp8kms96ffj93gjd0ajz692qv3ucfc') {
+      image = 'https://image.nostr.build/e8717290ce0911d9ea9589d36cfd83669875fef5c3d91f6dc47e135da9b6fd21.jpg'
     } 
     else if (npub === 'npub1dg7n7g8440wrrqkw2kz88gqrvde0nasfnhxxu64l5pc7x6jkn0xquxzskl') {
       image = 'https://pbs.twimg.com/profile_images/1032084495753781249/vYR3bY34_400x400.jpg'

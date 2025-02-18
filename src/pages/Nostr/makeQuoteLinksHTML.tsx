@@ -32,11 +32,11 @@ export const makeQuoteLinksHTML = (content) => {
           quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
         else if(quoteLinkHTML1 != "") {
-          quoteLinkText = "(quote2_npub1)";
+          quoteLinkText = "(quote_npub1)";
           quoteLinkHTML2 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
         else if(quoteLinkHTML2 != "") {
-          quoteLinkText = "(quote3_npub1)";
+          quoteLinkText = "(quote_npub1)";
           quoteLinkHTML3 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
         }
 
@@ -122,7 +122,6 @@ export const makeQuoteLinksHTML = (content) => {
         }
       }
 
-      // todo
       else if(wordsNostr[i].includes("nostr:naddr1")) {
         if(quoteLinkHTML1 === "") {
           //content = content.replace(wordsNostr[i],'');
@@ -147,7 +146,6 @@ export const makeQuoteLinksHTML = (content) => {
         }
       }
 
-      // todo
       else if(wordsNostr[i].includes("nostr:nprofile1")) {
         if(quoteLinkHTML1 === "") {
           quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')

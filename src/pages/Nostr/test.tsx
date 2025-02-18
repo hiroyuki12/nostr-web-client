@@ -24,12 +24,20 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
   let untilValue = ''
 
-  untilValue = 1739760194;  //paging
-  untilValue = dateToUnix(now.current);  //all new events from now
+  untilValue = 1739872092;  //paging
+  // untilValue = dateToUnix(now.current);  //all new events from now
 
   let noteCount = 0;
 
-//  untilValue = 1739790231;  // youtu.be
+  // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない NG
+  // untilValue = 1739796967;  // zenn ogp
+//  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
+//  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
+//  untilValue = 1739015355;  // dare-ai OGP  Todo
+//  untilValue = 1739024868;  // kirby OGP Todo nostter ok
+// untilValue = 1739628837;  // quote_nprofile1
+  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
+  //  untilValue = 1739790231;  // youtu.be fix
 //  untilValue = 1739099394;  // Repost Text ok
   // untilValue = 1739784977;  // Repost Text fix.
   // untilValue = 1737563052;  // NG very large html. nostter ok
@@ -787,7 +795,7 @@ const Test = () => {
       bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub
 
       let nozokimado = "-nozoki"
-      //let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+      // let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
       let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + nip19.noteEncode(note.id)
 
 
@@ -809,10 +817,7 @@ const Test = () => {
               {parse(replyHTML)}
               {parse(content)}<br />
               {/* {content}<br /> */}
-              {/* {youtubeId} */}
               {follow}
-              {/* {parse(iframe1)} */}
-              {/* {parse(iframe2)} */}
               {parse(quoteLinksHTML)}
               {tagsLinkUrlText1}
               {tagsLinkUrlText2}
@@ -897,9 +902,7 @@ export default Test;
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
 //  untilValue = 1739175991;  // quote_npub1 fix quote
   // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
-//  untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
 // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
-// untilValue = 1739628837;  // quote_nprofile1
 // untilValue = 1696316415;  // (nevent1) ok
 //  untilValue = 1690354019;  //(quote #[0]). content:#[0]. tag "e"
   // untilValue = 1739627342;  // #e 2つ。1つ目がroot
@@ -958,10 +961,6 @@ export default Test;
 //  untilValue = 1739113299;  // YouTube fix. youtube.com
 //  untilValue = 1739114442;  // あめさん @rain_256
 //  untilValue = 1739011806;  // mostr niji
-//  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
-//  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
-//  untilValue = 1739015355;  // dare-ai OGP  Todo
-//  untilValue = 1739024868;  // kirby OGP Todo nostter ok
 //  untilValue = 1739091313;  // repost image size
 //  untilValue = 1739163316;  // Repost  fix
 //  untilValue = 1739098339;  // #e relay address #e(wss://relay.nostr.band lu) fix

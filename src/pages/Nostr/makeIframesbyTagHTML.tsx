@@ -136,7 +136,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                 iframe1 = '<a href="' + tmpUrl + '" target="_blank">' + tmpUrl.replace('http', '(r)_ttp') + '</a>'
                 content = content.replace(tmpUrl, '')
             }
-            else {  // todo
+            else {
 
                 // update content
                 // if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
@@ -149,9 +149,8 @@ export const makeIframesbyTagHTML = (content, note) => {
                         && !tmpUrl.includes(".gif") 
                         && !tmpUrl.includes(".webp")) {
                             
-                        if(iframe1 == '') {
+                        if(iframe1 == '') 
                             iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        }
                         else if(iframe2 == '')
                             iframe2 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
                         else if(iframe3 == '')

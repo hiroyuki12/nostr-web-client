@@ -94,7 +94,11 @@ export const makeIframesbyContentHTML = (content, note) => {
         const httpLinkUrlText1 = '__Ttwitter_X(content)';
         content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
       }
-
+      // else if (splitContent[i].includes('zenn.dev')) {
+      //   // content = '<span class="embed-block zenn-embedded zenn-embedded-${encodedType}"><iframe id="https://zenn.dev/ryokomy/articles/a2fa332bcfe8d8" src="https://res.cloudinary.com/zenn/image/upload/s--6_cqBvmm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2593%25E3%2581%259D%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AFCode-based%25E3%2581%25AA%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E3%2581%25B9%25E3%2581%258D%25E3%2581%25A0%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E3%2581%259D%25E3%2581%25AE%25E6%2580%259D%25E6%2583%25B3%25E3%2581%25A8%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Komy%2520%257C%2520Kyuzan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjNzZjZTEwNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" data-content="${encodedSrc}" frameborder="0" scrolling="no" loading="lazy"></iframe></span>'
+      //   content = '<span class="embed-block zenn-embedded zenn-embedded-${encodedType}"><iframe id="https://zenn.dev/ryokomy/articles/a2fa332bcfe8d8" src="https://res.cloudinary.com/zenn/image/upload/s--6_cqBvmm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2593%25E3%2581%259D%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AFCode-based%25E3%2581%25AA%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E3%2581%25B9%25E3%2581%258D%25E3%2581%25A0%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E3%2581%259D%25E3%2581%25AE%25E6%2580%259D%25E6%2583%25B3%25E3%2581%25A8%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Komy%2520%257C%2520Kyuzan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjNzZjZTEwNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" data-content="${encodedSrc}" frameborder="0" height=387 width=563 scrolling="no" loading="lazy"></iframe></span>'
+      // }
+      
 
       // http iframe
       else if (splitContent[i].includes('http')){ // (instagram etc)
@@ -106,7 +110,7 @@ export const makeIframesbyContentHTML = (content, note) => {
         {
           httpLinkUrl1 = splitContent[i].substring(splitContent[i].indexOf('https://'), splitContent[i].length);
 
-          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(c)';
+          const tmpIframe = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + httpLinkUrl1 + '" width="300" height="150" frameborder="0" scrolling="no" ></iframe>(c)';
           iframe1 = tmpIframe;
           // URL 非表示
           content = content.replace(httpLinkUrl1, '');
