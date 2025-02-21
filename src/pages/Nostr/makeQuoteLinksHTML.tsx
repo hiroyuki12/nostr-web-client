@@ -31,11 +31,11 @@ export const makeQuoteLinksHTML = (content) => {
           quoteLinkText = "(quote_npub1)";
           quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
-        else if(quoteLinkHTML1 != "") {
+        else if(quoteLinkHTML2 === "") {
           quoteLinkText = "(quote_npub1)";
           quoteLinkHTML2 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';
         }
-        else if(quoteLinkHTML2 != "") {
+        else if(quoteLinkHTML3 === "") {
           quoteLinkText = "(quote_npub1)";
           quoteLinkHTML3 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
         }
@@ -105,17 +105,17 @@ export const makeQuoteLinksHTML = (content) => {
           quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           
           if(content.includes("nostr:nevent1")) {
-            quoteLinkText = "_(quote2_nevent1)";
+            quoteLinkText = "_(quote_nevent1)";
             quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           }
         }
 
         else if(quoteLinkHTML2 != "") {
           quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "_(quote3_note1)";
+          quoteLinkText = "_(quote_note1)";
           quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           if(content.includes("nostr:nevent1")) {
-            quoteLinkText = "_(quote3_nevent1)";
+            quoteLinkText = "_(quote_nevent1)";
             quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           
           }

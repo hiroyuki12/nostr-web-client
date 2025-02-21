@@ -24,12 +24,27 @@ const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
   let untilValue = ''
 
-  untilValue = 1739872092;  //paging
-  // untilValue = dateToUnix(now.current);  //all new events from now
+  untilValue = dateToUnix(now.current);  //all new events from now
+
+  // untilValue = 1740130040;  //paging
 
   let noteCount = 0;
 
-  // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない NG
+  // 配列 tags
+  // untilValue = 1740133406;  // x.com/i/broadcasts NG
+  // untilValue = 1740107126;  // Repost content fix. contentに,あり
+  // untilValue = 1739784977;  // Repost Text fix.
+  // untilValue = 1740062880;  // Thingstr
+  // untilValue = 1734267365;  // 30023   Thingstr
+  // untilValue = 1740054319;  // #t Nostr座談会 fix
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+  // untilValue = 1740048906;  // twitter twitframe.com domain切れ
+  // untilValue = 1739973122;  // amazon iframe NG. fix text link
+  // untilValue = 1739879880;  // x.com iframe fix
+  // untilValue = 1739880840;  // inlineImage ok mov?
+  // untilValue = 1739886588;  // Invalid byte sequence
+  // untilValue = 1739870175;  // twitter iframe fix.
+  // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない fix
   // untilValue = 1739796967;  // zenn ogp
 //  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
 //  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
@@ -39,15 +54,14 @@ const Test = () => {
   // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
   //  untilValue = 1739790231;  // youtu.be fix
 //  untilValue = 1739099394;  // Repost Text ok
-  // untilValue = 1739784977;  // Repost Text fix.
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
   // untilValue = 1739782236;  // quote_npub1 
-  // untilValue = 1739707055;  // tag "r" twitter   
+  // untilValue = 1739707055;  // tag "r" twitter   fix
   // untilValue = 1739674153;  // tag "r" (r) nipron iframe NG. fix text link
   // untilValue = 1739674961;  // tag "r" (r) amazon iframe NG. fix text link
   // untilValue = 1739678550;  // tag "r" link 7個 fix
-//  untilValue = 1686929129;  //twitter iframe content
+//  untilValue = 1686929129;  //twitter iframe tag "r"
 //  untilValue = 1700358511;  // instagram link iframe content fix
   // untilValue = 1739577124;  // content iframe fix
 //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
@@ -85,7 +99,7 @@ const Test = () => {
 //      authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
 
 //      kinds: [0],      // 0:Metadata
-//      kinds: [1],      // 1:Short Text Note
+    //  kinds: [1],      // 1:Short Text Note
       kinds: [1,6,20,42,1111,30023],      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
@@ -405,41 +419,56 @@ const Test = () => {
       if(content === "") {
 	      content = "[empty]";
 	    }
-      else {
+      else if(note.kind === 6) {  //kind:6:repost
         let splitContent = content
-        splitContent = splitContent.split(',');  // , でsplit
+
+
+
+
+        if(!splitContent.includes('",\"content')) {
+          splitContent = splitContent.split(',');  // , でsplit. Repost contentに,があるとNG
+        }
+        else {
+          splitContent = splitContent.split('",');  // ", でsplit  
+        }
         for(let i=0; i<splitContent.length; i++) {
           // Repostのcontentデータをcontentの本文のみに調整
           if(splitContent[i].includes('"content"')) {
             let splitContent2 = splitContent[i];
-            // if(splitContent2.includes('{"content"')) {
-              splitContent2 = splitContent2.replace('{"content":"','');
-            // }
-            
+            splitContent2 = splitContent2.replace('{"content":"','');
             splitContent2 = splitContent2.replace('"content":"','');
-            if(splitContent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
+            
+            if(splitContent2.substr(-1) == '"}') { // 末尾が}の時は最後の文字を削除
               splitContent2 = splitContent2.slice(0, -1);
             }
             if(splitContent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
               splitContent2 = splitContent2.slice(0, -1);
             }
-            
-            /* // content より後を取得
-            if(content.includes("content")) {
-                    //tmp2 = tmp2.substring(content.indexOf('content'),content.length);  
-                  }
+
+             // "content":" より後を取得 NG
+            /*if(splitContent2.includes('"content":"')) {
+              splitContent2 = splitContent2.substring(splitContent2.indexOf('"content":"'),content.length);  
+            }
             // created_at より前を取得
             if(tmp2.includes("created_at")) {
                     //tmp2= tmp2.substring(0,content.indexOf("created_at"));  				      
             }*/
 
-            for(let j=0; j<10; j++) {
+            for(let j=0; j<100; j++) {
               splitContent2 = splitContent2.replace("\\n","\n");   // \\n -> \n
             }
-            for(let j=0; j<20; j++) {
+            for(let j=0; j<100; j++) {
               splitContent2 = splitContent2.replace("\\/","/");   // \/ -> /
             }
+            for(let j=0; j<100; j++) {
+              splitContent2 = splitContent2.replace('\\"','"');   // \" -> "
+            }
+            
             content = splitContent2;
+
+
+
+
           }
 	      }  //for
 
@@ -584,8 +613,9 @@ const Test = () => {
         //	  tagUrl = "https://snort.social/t/" + tag;
             tagUrl = "https://nostrudel.ninja/#/t/" + tag;
 
-            if(!content.includes("/#" + tag)) {
-              content = content.replace('#' + tag, '<a href="' + tagUrl + '" target="_blank">#' + tag + '</a>');
+            if(!content.includes("/#" + tag)) {  // ページ内リンク/#でない時
+              tag = '#' + tag.replace('nostr', 'Nostr')  // tagでは全て小文字になる？
+              content = content.replace(tag, '<a href="' + tagUrl + '" target="_blank">' + tag + '</a>');
             }
           }
         }
@@ -864,8 +894,8 @@ const Test = () => {
     <>
       <div style={{ backgroundColor: "#222222", color: "#DDDDDD" }}>
         <div>
-          <p>now:{dateToUnix(now.current)}</p>
-          <p>untilValue:{untilValue}</p>
+          {/* <p>now:{dateToUnix(now.current)}</p> */}
+          {/* <p>untilValue:{untilValue}</p> */}
           <p>links:</p>
           <a href="https://nostter.app/home" target="_blank">nostter</a>-
           <a href="https://lumilumi.app" target="_blank">lumilumi</a>-
@@ -876,7 +906,9 @@ const Test = () => {
           <a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a>-
           <a href="https://nos.today" target="_blank">nos.today</a>-
           <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
-          <a href="https://flycat.club" target="_blank">flycat</a>
+          <a href="https://flycat.club" target="_blank">flycat</a>-
+          <a href="https://yakihonne.com" target="_blank">yakihonne</a>-
+          <a href="https://web.nostrmo.com" target="_blank">nostrno</a>
         </div>
         <br />
         <ul>{renderImageList2(events2)}</ul>
@@ -950,7 +982,6 @@ export default Test;
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1703568307;  // img threads NG. link切れ
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1692963542;  // spotify album. no tag "r"
 //  untilValue = 1695999820;  // Apple Music OGP. fix.
 //  untilValue = 1688390047;  // music.youtube (normal youtube ok)

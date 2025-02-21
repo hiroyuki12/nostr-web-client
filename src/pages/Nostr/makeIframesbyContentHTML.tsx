@@ -86,7 +86,7 @@ export const makeIframesbyContentHTML = (content, note) => {
       // Twitter iframe
       else if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
         // const id = splitContent[i].replace("x.com","twitter.com"); 
-        // const tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
+        // NG const tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
         const tmp = splitContent[i].split('?')[0]
         const id = tmp.split('/')[5]  //1892199000356655161
@@ -94,7 +94,6 @@ export const makeIframesbyContentHTML = (content, note) => {
             id
           }`;
         const tmpIframe = '<iframe id="' + id + '" border=0 frameborder=0 height=387 width=563 src="' + embedid + '" />'
-
 
         content = content.replace(splitContent[i], tmpIframe);
 

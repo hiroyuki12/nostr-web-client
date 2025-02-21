@@ -37,8 +37,24 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
+    else if (npub === '') {
+      image = ''
+    } 
+    else if (npub === 'npub162mtqyjgtmrdhlras3zyd5nqsysdyhw9fepj242c93uvaxakthzqa7rrj8') {
+      image = 'https://pbs.twimg.com/profile_images/1301092023244476416/3tKIxQ0X_400x400.jpg'
+    } 
+    else if (npub === 'npub1kyfl8h350a8xd9eetyvgtuyx7s5y8qs8adjllxu8ryxpf7ruchkqt82qfc') {
+      image = 'https://r2.cbrx.io/nostr/icon.jpg'
+    } 
+    else if (npub === 'npub123w888juc304m7juft2c4jrfhhldyyxthu03s7c9s4wpenxt5twqmc0w0c') {
+      image = 'https://syobon.net/img/nostr_avatar.webp'
+    } 
+    else if (npub === 'npub1sxam2y8j5mktygw3mumzr83h5c7wyde8jk6vk9r4njxds358nxnq2enjew') {
+      image = 'https://tac-lan.net/.well-known/kame3byawayuki.png'
+    } 
     else if (npub === 'npub19ju2u4sduewta4hxl22kke7se8yxm2puytzw47lr6y999pxnpjaqtjjfxj') {
-      image = 'https://image.nostr.build/c4daabdcd23576a0b229c43327e9a18d803e28907190682ee8776779628a317c.png'
+      image = 'https://www.ivstrook.tech/images/fez.png'
+      // image = 'https://image.nostr.build/c4daabdcd23576a0b229c43327e9a18d803e28907190682ee8776779628a317c.png'
     } 
     else if (npub === 'npub1uz5vh467hljwlwag5e0l2ja5xkzcgp8kms96ffj93gjd0ajz692qv3ucfc') {
       image = 'https://image.nostr.build/e8717290ce0911d9ea9589d36cfd83669875fef5c3d91f6dc47e135da9b6fd21.jpg'
@@ -648,7 +664,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://cdn.nostr.build/i/5e5a228f8cc3218673701adf3e368150e81149e46c253a049bbddace4cdb138d.jpg'
     } 
     else if (npub === 'npub1cq827zsq6q0j783yk2mefv62le4r3drhnye5p4jj5m8e2mvat8jsyesnvh') {
-      image = 'https://cdn.discordapp.com/attachments/742671079318880257/1185549190177239050/a68faa8f-efc6-496a-afcb-97faef36e1a8.png?ex=659003b9&is=657d8eb9&hm=e4e631d7f8d3c88aba20bef6cdc7f3e8a53e262c1d14d7dc86aa5996735d9001&'
+      image = 'https://image.nostr.build/22471dfdccc66cd4294565a27f613e01b09c8ee0c9f4b920bbc678ed73fd7573.jpg'
     } 
     else if (npub === 'npub1yqyygfqun6l7t3mrxerqnrenqvmjl6f4n2d9vgva32w6ywjea5jqhffpuh') {
       image = 'https://image.nostr.build/18c3d732428d108f48ac46beb7a95ea839c5a9d17c5aba60154bf6ff0cafa00f.jpg'

@@ -66,58 +66,58 @@ export const makeReplyHTML = (note) => {
                     replyToUrl1 = replyToUserBaseUrl + replyToHex1
                 }
                 else if(replyToImageSize2 === "0") {
-                replyToHex2 = nip19.npubEncode(note.tags[h][1]);
-                if(replyToHex2 != replyToHex1) {
-                    if(note.kind === 6) {
-                    replyToImageSize2 = "60"
-                    }
-                    else {
-                    replyToImageSize2 = "40"
-                    }
-                    replyToImageURL2 = getImageURL(note.tags[h][1]);  // to user id
-                    replyToUrl2 = replyToUserBaseUrl + replyToHex2
-                }
-                else if(replyToImageSize3 === "0") {
-                    replyToHex3 = nip19.npubEncode(note.tags[h][1]);
-                    if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
-                            if(note.kind === 6) {
-                            replyToImageSize3 = "60"
-                    }
-                    else {
-                            replyToImageSize3 = "40"
-                        }
-                    replyToImageURL3 = getImageURL(note.tags[h][1]);  // to user id
-                    replyToUrl3 = replyToUserBaseUrl + replyToHex3
-                    }
-                }
-                else if(replyToImageSize4 === "0") {
-                    if(note.kind === 6) {
-                    replyToImageSize4 = "60"
-                    }
-                    else {
-                    replyToImageSize4 = "40"
-                    }
-                    replyToHex4 = nip19.npubEncode(note.tags[h][1]);
-                    if(replyToHex4 != replyToHex2 && replyToHex4 != replyToHex1) {
-                    replyToImageURL4 = getImageURL(note.tags[h][1]);  // to user id
-                    replyToUrl4 = replyToUserBaseUrl + replyToHex4
-                    }
-                }
-                else if(replyToImageSize5 === "0") {
-                    replyToHex5 = nip19.npubEncode(note.tags[h][1]);
-                    if(replyToHex5 != replyToHex2 && replyToHex5 != replyToHex1) {
-                            if(note.kind === 6) {
-                            replyToImageSize5 = "60"
-                    }
-                    else {
-                            replyToImageSize5 = "40"
-                    }
-                    replyToImageURL5 = getImageURL(note.tags[h][1]);  // to user id
-                    replyToUrl5 = replyToUserBaseUrl + replyToHex5
-                    }
-                }
+                  replyToHex2 = nip19.npubEncode(note.tags[h][1]);
+                  if(replyToHex2 != replyToHex1) {
+                      if(note.kind === 6) {
+                      replyToImageSize2 = "60"
+                      }
+                      else {
+                      replyToImageSize2 = "40"
+                      }
+                      replyToImageURL2 = getImageURL(note.tags[h][1]);  // to user id
+                      replyToUrl2 = replyToUserBaseUrl + replyToHex2
+                  }
               //}
-            }
+                } 
+                else if(replyToImageSize3 === "0") {
+                  replyToHex3 = nip19.npubEncode(note.tags[h][1]);
+                  if(replyToHex3 != replyToHex2 && replyToHex3 != replyToHex1) {
+                          if(note.kind === 6) {
+                          replyToImageSize3 = "60"
+                  }
+                  else {
+                          replyToImageSize3 = "40"
+                      }
+                  replyToImageURL3 = getImageURL(note.tags[h][1]);  // to user id
+                  replyToUrl3 = replyToUserBaseUrl + replyToHex3
+                  }
+              }
+              else if(replyToImageSize4 === "0") {
+                  if(note.kind === 6) {
+                  replyToImageSize4 = "60"
+                  }
+                  else {
+                  replyToImageSize4 = "40"
+                  }
+                  replyToHex4 = nip19.npubEncode(note.tags[h][1]);
+                  if(replyToHex4 != replyToHex2 && replyToHex4 != replyToHex1) {
+                  replyToImageURL4 = getImageURL(note.tags[h][1]);  // to user id
+                  replyToUrl4 = replyToUserBaseUrl + replyToHex4
+                  }
+              }
+              else if(replyToImageSize5 === "0") {
+                  replyToHex5 = nip19.npubEncode(note.tags[h][1]);
+                  if(replyToHex5 != replyToHex2 && replyToHex5 != replyToHex1) {
+                          if(note.kind === 6) {
+                          replyToImageSize5 = "60"
+                  }
+                  else {
+                          replyToImageSize5 = "40"
+                  }
+                  replyToImageURL5 = getImageURL(note.tags[h][1]);  // to user id
+                  replyToUrl5 = replyToUserBaseUrl + replyToHex5
+                  }
+              }
           }    
           for(let i=0; i<note.tags.length; i++) { 
             //if(note.tags[i][0] === "e" && note.tags[h][1] != note.pubkey) {  // re
