@@ -22,11 +22,13 @@ export const makeInlineImageHTML = (content) => {
     
     if(content.includes("https:") || content.includes("http:")) {
         let tmp = content;
-        for(let i=0; i<20; i++) {
-            tmp = tmp.replace('\\/','/');
+        {
+            const count = tmp.split('\\/').length;
+            for(let i=0; i<count; i++) {
+                tmp = tmp.replace('\\/','/');
+            }
         }
         for(let i=0; i<5; i++) {
-            tmp = tmp.replace('\n',' ');
             tmp = tmp.replace('　',' ');
             tmp = tmp.replace('`',' ');
             tmp = tmp.replace('`',' ');
@@ -34,8 +36,11 @@ export const makeInlineImageHTML = (content) => {
             tmp = tmp.replace('http://',' http://');
             tmp = tmp.replace("`", "");  // googleusercontent
         }
-        for(let i=0; i<20; i++) {
-            tmp = tmp.replace('\n',' ');
+        {
+            const count = tmp.split('\n').length;
+            for(let i=0; i<count; i++) {
+                tmp = tmp.replace('\n',' ');
+            }
         }
         const tmp2 = tmp.split(' ');
 

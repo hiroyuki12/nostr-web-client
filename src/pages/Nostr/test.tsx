@@ -31,6 +31,12 @@ const Test = () => {
   let noteCount = 0;
 
   // 配列 tags
+//  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
+//  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
+// untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
+
+//  untilValue = 1686241976;  //emoji 13 fix, <img>
+  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
   // untilValue = 1740133406;  // x.com/i/broadcasts NG
   // untilValue = 1740107126;  // Repost content fix. contentに,あり
   // untilValue = 1739784977;  // Repost Text fix.
@@ -51,7 +57,6 @@ const Test = () => {
 //  untilValue = 1739015355;  // dare-ai OGP  Todo
 //  untilValue = 1739024868;  // kirby OGP Todo nostter ok
 // untilValue = 1739628837;  // quote_nprofile1
-  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
   //  untilValue = 1739790231;  // youtu.be fix
 //  untilValue = 1739099394;  // Repost Text ok
   // untilValue = 1737563052;  // NG very large html. nostter ok
@@ -219,7 +224,7 @@ const Test = () => {
       }
       else {
 // follow user
-//        return;
+      //  return;
       }
 
       if(note.kind === 7        //kind:7:reaction
@@ -239,7 +244,7 @@ const Test = () => {
 // hiragara filter
 	//follow = "[[en]]";
 	// not japanese
-//        return;
+      //  return;
       }
 
       if(note.pubkey === '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')  return;
@@ -380,10 +385,6 @@ const Test = () => {
 
 
 
-      // parseしてもHTMLタグをそのまま表示するようにcontentの<を置き換え
-      for(let i=0; i<1000; i++) {
-        content = content.replace('<','&lt;');  // <
-      }
 
 
 
@@ -454,25 +455,30 @@ const Test = () => {
                     //tmp2= tmp2.substring(0,content.indexOf("created_at"));  				      
             }*/
 
-            for(let j=0; j<100; j++) {
-              splitContent2 = splitContent2.replace("\\n","\n");   // \\n -> \n
+                    
+            {
+              const count = splitContent2.split('\\n').length;
+              for(let j=0; j<count; j++) {
+                splitContent2 = splitContent2.replace("\\n","\n");   // \\n -> \n
+              }
             }
-            for(let j=0; j<100; j++) {
-              splitContent2 = splitContent2.replace("\\/","/");   // \/ -> /
+            {
+              const count = splitContent2.split('\\/').length;
+              for(let j=0; j<count; j++) {
+                splitContent2 = splitContent2.replace("\\/","/");   // \/ -> /
+              }
             }
-            for(let j=0; j<100; j++) {
-              splitContent2 = splitContent2.replace('\\"','"');   // \" -> "
+            {
+              const count = splitContent2.split('\\"').length;
+              for(let j=0; j<count; j++) {
+                splitContent2 = splitContent2.replace('\\"','"');   // \" -> "
+              }
             }
             
             content = splitContent2;
-
-
-
-
-          }
-	      }  //for
-
-      }
+          }  // if
+	      }  // for
+      }  // if
 
       
 
@@ -511,8 +517,11 @@ const Test = () => {
       // content の画像URLを削除
       {
         let tmp = content;
-        for(let i=0; i<20; i++) {
-          tmp = tmp.replace('\\/','/');
+        {
+          const count = tmp.split('\\/').length;
+          for(let i=0; i<count; i++) {
+            tmp = tmp.replace('\\/','/');
+          }
         }
         for(let i=0; i<5; i++) {
           tmp = tmp.replace('\n',' ');
@@ -523,8 +532,11 @@ const Test = () => {
           tmp = tmp.replace('http://',' http://');
           tmp = tmp.replace("`", "");  // googleusercontent
         }
-        for(let i=0; i<20; i++) {
-          tmp = tmp.replace('\n',' ');
+        {
+          const count = tmp.split('\n').length;
+          for(let i=0; i<count; i++) {
+            tmp = tmp.replace('\n',' ');
+          }
         }
         const tmpContent = tmp.split(' ');
 
@@ -554,18 +566,6 @@ const Test = () => {
 
 
 
-
-  /////////////////////////////////
-
-// make iframe by tag "r" (URL) &  make link #r
-// update content. replace URL to iframe
-// add #r link to content
-
-// update cotent. Add iframe to content
-
-      content = makeIframesbyTagHTML(content, note);
-
-      content = youtubebyTagHTML(content, note)
 
 
 
@@ -600,26 +600,6 @@ const Test = () => {
 
 
 
-      if(note.kind != 30023) {
-        let tagUrl = "";  // #t
-
-        for(let i=0; i<note.tags.length; i++) {
-          if(note.tags[i][0] === "t") {
-            let tag = note.tags[i][1];
-            if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
-            if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
-            if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
-            if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
-        //	  tagUrl = "https://snort.social/t/" + tag;
-            tagUrl = "https://nostrudel.ninja/#/t/" + tag;
-
-            if(!content.includes("/#" + tag)) {  // ページ内リンク/#でない時
-              tag = '#' + tag.replace('nostr', 'Nostr')  // tagでは全て小文字になる？
-              content = content.replace(tag, '<a href="' + tagUrl + '" target="_blank">' + tag + '</a>');
-            }
-          }
-        }
-    }
 
 
 
@@ -679,30 +659,6 @@ const Test = () => {
 
 
 
-
-
-
-      // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
-
-      let quoteLinksHTML = makeQuoteLinksHTML(content);
-      
-      let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
-      for(let i=0; i<wordsNostr.length; i++) {
-        let tmp = wordsNostr[i];
-        if(tmp.includes("nostr:note1") || 
-          tmp.includes("nostr:naddr1") || 
-          tmp.includes("nostr:nevent1") || 
-          tmp.includes("nostr:nprofile1") || 
-          tmp.includes("nostr:npub1")
-        ) {
-            // contentからnostr:note1, naddr1, nevent1, nprofile1, npub1を削除
-            content = content.replace(wordsNostr[i], '');
-          }
-      }
-
-
-
-
       
 
 
@@ -756,22 +712,7 @@ const Test = () => {
       }
 
 
-  /////////////////////////////////
-  // Add <a href>       @@
-  // Add <iframe>. YouTube, Spotify, Twitter, etc.
 
-  // Add <a href>
-
-
-
-
-
-      if(note.kind != 30023) {
-        content = makeIframesbyContentHTML(content, note);
-      }
-      else {  // Markdown
-        content = makeTextlinkbyMarkdownHTML(content, note);
-      }
 
 
 
@@ -797,7 +738,8 @@ const Test = () => {
       for(let i=0; i<note.tags.length; i++) {
         if(note.tags[i][0] === "emoji") {
           const emojiURL = note.tags[i][2];
-          for(let j=0; j<200; j++) {
+          const count = content.split(':' + note.tags[i][1] + ':').length;
+          for(let j=0; j<count; j++) {
                   content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
           }
         }
@@ -832,9 +774,102 @@ const Test = () => {
 
 
 
+/////////////////////////////////
+      {
+        // parseしてもHTMLタグをそのまま表示するようにcontentの<を置き換え
+        const count = content.split('<').length;
+        for(let i=0; i<count; i++) {
+          content = content.replace('<','&lt;');  // <
+        }
+      }
+      // contne への < の追加はここより下に記述
 
-      for(let i=0; i<3000; i++) {
-        content = content.replace('\n', '<br />');
+
+
+
+
+
+
+    /////////////////////////////////
+
+      // make iframe by tag "r" (URL) &  make link #r
+      // update content. replace URL to iframe
+      // add #r link to content
+
+      // update cotent. Add iframe to content
+
+      content = makeIframesbyTagHTML(content, note);
+
+      content = youtubebyTagHTML(content, note)
+
+
+
+
+
+      if(note.kind != 30023) {
+        let tagUrl = "";  // #t
+
+        for(let i=0; i<note.tags.length; i++) {
+          if(note.tags[i][0] === "t") {
+            let tag = note.tags[i][1];
+            if(tag === "nowplaying" && !content.includes("nowplaying")) { tag = "NowPlaying"; }
+            if(tag === "nostrasia" && !content.includes("nostrasia")) { tag = "Nostrasia"; }
+            if(tag === "nostr" && !content.includes("nostr")) { tag = "Nostr"; }
+            if(tag === "bitcoin" && !content.includes("bitcoin")) { tag = "Bitcoin"; }
+        //	  tagUrl = "https://snort.social/t/" + tag;
+            tagUrl = "https://nostrudel.ninja/#/t/" + tag;
+
+            if(!content.includes("/#" + tag)) {  // ページ内リンク/#でない時
+              tag = '#' + tag.replace('nostr', 'Nostr')  // tagでは全て小文字になる？
+              content = content.replace(tag, '<a href="' + tagUrl + '" target="_blank">' + tag + '</a>');
+            }
+          }
+        }
+      }
+
+
+
+
+      // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
+
+      let quoteLinksHTML = makeQuoteLinksHTML(content);
+      
+      let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
+      for(let i=0; i<wordsNostr.length; i++) {
+        let tmp = wordsNostr[i];
+        if(tmp.includes("nostr:note1") || 
+          tmp.includes("nostr:naddr1") || 
+          tmp.includes("nostr:nevent1") || 
+          tmp.includes("nostr:nprofile1") || 
+          tmp.includes("nostr:npub1")
+        ) {
+            // contentからnostr:note1, naddr1, nevent1, nprofile1, npub1を削除
+            content = content.replace(wordsNostr[i], '');
+          }
+      }
+
+
+
+      /////////////////////////////////
+      // Add <a href>       @@
+      // Add <iframe>. YouTube, Spotify, Twitter, etc.
+
+      // Add <a href>
+
+      if(note.kind != 30023) {
+        content = makeIframesbyContentHTML(content, note);
+      }
+      else {  // Markdown
+        content = makeTextlinkbyMarkdownHTML(content, note);
+      }
+
+
+
+      {
+        const count = content.split('\n').length;
+        for(let i=0; i<count; i++) {
+          content = content.replace('\n', '<br />');
+        }
       }
 
       return (
@@ -975,15 +1010,12 @@ export default Test;
 // untilValue = 1739258350;  // tag "r" jpg
 // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
 // untilValue = 1739089652;  // inlineImage. tag "r" なし.
-// untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
 // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
-//  untilValue = 1739151061;  // Apple Music OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1703568307;  // img threads NG. link切れ
 //  untilValue = 1692963542;  // spotify album. no tag "r"
-//  untilValue = 1695999820;  // Apple Music OGP. fix.
 //  untilValue = 1688390047;  // music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  // music.youtube (normal youtube ok)
 //  untilValue = 1739008290;  // youtube fix Delete After &
@@ -1071,7 +1103,6 @@ export default Test;
 //  untilValue = 1686949316;  //2 cards fix
 //  untilValue = 1686918544;  //nhk news card
 //  untilValue = 1686918929;  //hatenablog, nicovideo, card
-//  untilValue = 1686241976;  //emoji 13 fix, <img>
 //  untilValue = 1685703268;  //emoji fix
 //  untilValue = 1686199783;  //emoji, tate, <style> fix,
 //  untilValue = 1686238459;  //#[0] fix, <a href>
