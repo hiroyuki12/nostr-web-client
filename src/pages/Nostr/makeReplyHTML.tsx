@@ -146,38 +146,27 @@ export const makeReplyHTML = (note) => {
               reply = "#e]";
             }
           }
+        }
 
 
 
-          if(channelUrl == "") {
-            //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
-            //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
-            //channelUrl = "https://unyu-house.vercel.app/"
-            //channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
-            if(note.tags[h][1].includes(":")) {  // tag:e
-              return
-            }
+        if(channelUrl == "") {
+          //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
+          //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
+          //channelUrl = "https://unyu-house.vercel.app/"
+          //channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
+
+          if(note.kind === 42 && !note.tags[h][1].includes(":")) {  // tag:e
             //channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
             channelUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1] })  // nos_haiku
+            // channel = 'channel(' + note.tags[h][1]  + ')'  // nos_haiku
+            // channel = 'channel(' + note.kind  + ')'  // nos_haiku
           }
-          //const eventLinkUrl = "https://iris.to/post/" + note.tags[h][1]
-          //const eventLinkUrl = "https://coracle.social/" + nip19.noteEncode(note.tags[h][1])
-          //const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + nip19.noteEncode(note.tags[h][1])
-          //const eventLinkUrl = "https://snort.social/e/" + note.tags[h][1]
-          //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + note.tags[h][1]
-          // ### nip19.noteEncode Error: hexToBytes: received invalid unpadded hex79 (kind:30001)
-          if(note.tags[h][1].includes(":")) {  // tag:e
-            return
-          }
-          //const eventLinkUrl = "https://snort.social/" + nip19.noteEncode(note.tags[h][1])
-          //const eventLinkUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.tags[h][1])
-          const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[h][1])
-          //note.content = note.content + "##" + note.tags[h][1]  //debug
+        } //  if
+    }  // for
+
 
     
-        } //else if L123
-    }  //for
-
     
     // kind:6.repost, kind:16.Generic Repost, kind:4550.Post Approval by moderators
     if(note.kind === 6 || note.kind === 16 || note.kind === 4550) {  
@@ -194,12 +183,12 @@ export const makeReplyHTML = (note) => {
 
 
     const replyHTML = '<a href="' + channelUrl + '" target="_blank">' + channel + '</a>' +
-    reply + " " +
-    '<a href="' + replyToUrl1 + '" target="_blank"><img src="' + replyToImageURL1 + '" width="' + replyToImageSize1 + '" height="' + replyToImageSize1 + '" /></a>' +
-    '<a href="' + replyToUrl2 + '" target="_blank"><img src="' + replyToImageURL2 + '" width="' + replyToImageSize2 + '" height="' + replyToImageSize2 + '" /></a>' +
-    '<a href="' + replyToUrl3 + '" target="_blank"><img src="' + replyToImageURL3 + '" width="' + replyToImageSize3 + '" height="' + replyToImageSize3 + '" /></a>' +
-    '<a href="' + replyToUrl4 + '" target="_blank"><img src="' + replyToImageURL4 + '" width="' + replyToImageSize4 + '" height="' + replyToImageSize4 + '" /></a>' +
-    '<a href="' + replyToUrl5 + '" target="_blank"><img src="' + replyToImageURL5 + '" width="' + replyToImageSize5 + '" height="' + replyToImageSize5 + '" /></a>' ;
+      reply + " " +
+      '<a href="' + replyToUrl1 + '" target="_blank"><img src="' + replyToImageURL1 + '" width="' + replyToImageSize1 + '" height="' + replyToImageSize1 + '" /></a>' +
+      '<a href="' + replyToUrl2 + '" target="_blank"><img src="' + replyToImageURL2 + '" width="' + replyToImageSize2 + '" height="' + replyToImageSize2 + '" /></a>' +
+      '<a href="' + replyToUrl3 + '" target="_blank"><img src="' + replyToImageURL3 + '" width="' + replyToImageSize3 + '" height="' + replyToImageSize3 + '" /></a>' +
+      '<a href="' + replyToUrl4 + '" target="_blank"><img src="' + replyToImageURL4 + '" width="' + replyToImageSize4 + '" height="' + replyToImageSize4 + '" /></a>' +
+      '<a href="' + replyToUrl5 + '" target="_blank"><img src="' + replyToImageURL5 + '" width="' + replyToImageSize5 + '" height="' + replyToImageSize5 + '" /></a>' ;
 
     return replyHTML;
 }
