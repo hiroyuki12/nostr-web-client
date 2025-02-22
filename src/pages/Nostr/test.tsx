@@ -31,17 +31,18 @@ const Test = () => {
   let noteCount = 0;
 
   // 配列 tags
-// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
+ untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+  // untilValue = 1739707055;  // tag "r" twitter   fix
+ // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
+
+  // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
   // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix, lumilumi ok
   // untilValue = 1740192864;  // quote_naddr1 content, 30023 lumilumi ok, nos haiku NG
-
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
   // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
   // untilValue = 1740182551;  // fix mp3 audio
   // untilValue = 1740192495;  // kind:30003 (ブックマーク)
-  // untilValue = 1740193501;  // NG picture
   // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
-  // untilValue = 1740149320; // tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 //  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
@@ -53,7 +54,6 @@ const Test = () => {
   // untilValue = 1740062880;  // Thingstr
   // untilValue = 1734267365;  // 30023   Thingstr
   // untilValue = 1740054319;  // #t Nostr座談会 fix
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
   // untilValue = 1740048906;  // twitter twitframe.com domain切れ
   // untilValue = 1739973122;  // amazon iframe NG. fix text link
   // untilValue = 1739879880;  // x.com iframe fix
@@ -71,7 +71,6 @@ const Test = () => {
   // untilValue = 1737563052;  // NG very large html. nostter ok
   // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
   // untilValue = 1739782236;  // quote_npub1 
-  // untilValue = 1739707055;  // tag "r" twitter   fix
   // untilValue = 1739674153;  // tag "r" (r) nipron iframe NG. fix text link
   // untilValue = 1739674961;  // tag "r" (r) amazon iframe NG. fix text link
   // untilValue = 1739678550;  // tag "r" link 7個 fix

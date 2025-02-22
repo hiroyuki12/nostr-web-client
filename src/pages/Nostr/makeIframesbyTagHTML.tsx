@@ -114,18 +114,18 @@ export const makeIframesbyTagHTML = (content, note) => {
             if(tmpUrl.includes("music.apple.com")) {
                 const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
                 // kickback large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-                iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>(r)'
-                // small iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>(r)'
-                serviceText = '__AppleMusic(r)'
+                iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                // small iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                serviceText = '__AppleMusic'
                 content = content.replace(tmpUrl, '');
             }
             else if(tmpUrl.includes("open.spotify.com")) {
                 const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
-                tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>(r)'
+                tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
             }
             else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
                 // const id = tmpUrl.replace("x.com","twitter.com"); 
-                // NG iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>(r)'
+                // NG iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
                 
                 // iframe1 = '<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 550px; height: 739px; display: block; flex-grow: 1;" title="Twitter Tweet" src="https://platform.twitter.com/embed/Tweet.html?dnt=false&amp;embedId=twitter-widget-0&amp;features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOlsibGlua3RyLmVlIiwidHIuZWUiLCJ0ZXJyYS5jb20uYnIiLCJ3d3cubGlua3RyLmVlIiwid3d3LnRyLmVlIiwid3d3LnRlcnJhLmNvbS5iciJdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2hvcml6b25fdGltZWxpbmVfMTIwMzQiOnsiYnVja2V0IjoidHJlYXRtZW50IiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9lZGl0X2JhY2tlbmQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3JlZnNyY19zZXNzaW9uIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19jaGluX3BpbGxzXzE0NzQxIjp7ImJ1Y2tldCI6ImNvbG9yX2ljb25zIiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9yZXN1bHRfbWlncmF0aW9uXzEzOTc5Ijp7ImJ1Y2tldCI6InR3ZWV0X3Jlc3VsdCIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2Vuc2l0aXZlX21lZGlhX2ludGVyc3RpdGlhbF8xMzk2MyI6eyJidWNrZXQiOiJpbnRlcnN0aXRpYWwiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2V4cGVyaW1lbnRzX2Nvb2tpZV9leHBpcmF0aW9uIjp7ImJ1Y2tldCI6MTIwOTYwMCwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2hvd19ibHVlX3ZlcmlmaWVkX2JhZGdlIjp7ImJ1Y2tldCI6Im9mZiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&amp;frame=false&amp;hideCard=false&amp;hideThread=false&amp;id=1588542297792450561&amp;lang=en&amp;origin=http%3A%2F%2Flocalhost%3A3300%2F&amp;sessionId=0878e9785585cc70e369d3b1f3514a40cb5394bc&amp;theme=dark&amp;widgetsVersion=a3525f077c700%3A1667415560940&amp;width=550px" data-tweet-id="1588542297792450561"></iframe>'
                 
@@ -136,7 +136,10 @@ export const makeIframesbyTagHTML = (content, note) => {
                 const embedid = `https://platform.twitter.com/embed/Tweet.html?dnt=false&embedId=twitter-widget-3&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOlsibGlua3RyLmVlIiwidHIuZWUiLCJ0ZXJyYS5jb20uYnIiLCJ3d3cubGlua3RyLmVlIiwid3d3LnRyLmVlIiwid3d3LnRlcnJhLmNvbS5iciJdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2hvcml6b25fdGltZWxpbmVfMTIwMzQiOnsiYnVja2V0IjoidHJlYXRtZW50IiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9lZGl0X2JhY2tlbmQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3JlZnNyY19zZXNzaW9uIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19jaGluX3BpbGxzXzE0NzQxIjp7ImJ1Y2tldCI6ImNvbG9yX2ljb25zIiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9yZXN1bHRfbWlncmF0aW9uXzEzOTc5Ijp7ImJ1Y2tldCI6InR3ZWV0X3Jlc3VsdCIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2Vuc2l0aXZlX21lZGlhX2ludGVyc3RpdGlhbF8xMzk2MyI6eyJidWNrZXQiOiJpbnRlcnN0aXRpYWwiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2V4cGVyaW1lbnRzX2Nvb2tpZV9leHBpcmF0aW9uIjp7ImJ1Y2tldCI6MTIwOTYwMCwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2hvd19ibHVlX3ZlcmlmaWVkX2JhZGdlIjp7ImJ1Y2tldCI6Im9mZiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideCard=false&hideThread=false&id=${
                     id
                   }`;
-                iframe1 = '<iframe id="' + id + '" border=0 frameborder=0 height=387 width=563 src="' + embedid + '" />'
+                const tmpIframe = '<iframe id="' + id + '" border=0 frameborder=0 height=387 width=563 src="' + embedid + '" />'
+                // if(iframe1 == '')  iframe1 = tmpIframe;
+                // else iframe2 = tmpIframe;
+                iframe7 = tmpIframe;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
 
                 serviceText = '__Twitter_X(r)'
                 content = content.replace(tmpUrl, '');
@@ -144,61 +147,54 @@ export const makeIframesbyTagHTML = (content, note) => {
             //else if(tmpUrl.includes("googleusercontent.com/")){
             //    let tmpUrl2 = tmpUrl.replace("`", "");
             //    iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
-            //    serviceText = '__googleusercontent(r)'
+            //    serviceText = '__googleusercontent'
             //}
             else if(tmpUrl.includes('nipron.co.jp') ||
-                    tmpUrl.includes('amzn.to')) {
-                iframe1 = '<a href="' + tmpUrl + '" target="_blank">' + tmpUrl.replace('http', '(r)_ttp') + '</a>'
+                    // tmpUrl.includes('bsky.app') ||
+                    tmpUrl.includes('amzn.to') ||
+                    tmpUrl.includes('nipron.co.jp')) {
+                const tmpIframe = '<a href="' + tmpUrl + '" target="_blank">' + tmpUrl.replace('http', '(r)_ttp') + '</a>'
+                if(iframe1 == '')  iframe1 = tmpIframe;
+                else iframe2 = tmpIframe;
                 content = content.replace(tmpUrl, '')
             }
             else {
-
-                // update content
-                // if(!tmpUrl.includes("nostr.cooking") && !tmpUrl.includes("codepen.io")) {
-                    // Add iframe, or remove link
-                    if(!tmpUrl.includes(".mov") 
-                        && !tmpUrl.includes(".jpeg")  
-                        && !tmpUrl.includes(".jpg") 
-                        && !tmpUrl.includes(".mp4") 
-                        && !tmpUrl.includes(".png") 
-                        && !tmpUrl.includes(".gif") 
-                        && !tmpUrl.includes(".webp")) {
-                            
-                        if(iframe1 == '') 
-                            iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe2 == '')
-                            iframe2 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe3 == '')
-                            iframe3 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe4 == '')
-                            iframe4 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe5 == '')
-                            iframe5 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe6 == '')
-                            iframe6 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
-                        else if(iframe7 == '')
-                            iframe7 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>(r)';
+                // Add iframe, or remove link
+                if(!tmpUrl.includes(".mov") 
+                    && !tmpUrl.includes(".jpeg")  
+                    && !tmpUrl.includes(".jpg") 
+                    && !tmpUrl.includes(".mp4") 
+                    && !tmpUrl.includes(".png") 
+                    && !tmpUrl.includes(".gif") 
+                    && !tmpUrl.includes(".webp")) {
+                        
+                    if(iframe1 == '') 
+                        iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe2 == '')
+                        iframe2 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe3 == '')
+                        iframe3 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe4 == '')
+                        iframe4 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe5 == '')
+                        iframe5 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe6 == '')
+                        iframe6 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
+                    else if(iframe7 == '')
+                        iframe7 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
 
 
-                        // url表示なし
-                        content = content.replace(tmpUrl, '');
-                        // _(r)ttps 表示
-                        // content = content.replace(tmpUrl, tmpUrl.replace('http', '_(r)ttp'));
+                    // url表示なし
+                    content = content.replace(tmpUrl, '');
+                    // _(r)ttps 表示
+                    // content = content.replace(tmpUrl, tmpUrl.replace('http', '_(r)ttp'));
 
-                    }
-                    else {
-                        // .mov etc remove link
-                        content = content.replace(tmpWord, '');
-                    }
-                // }
-                // else {
-                // if(tmpUrl.includes("nostr.cooking") || tmpUrl.includes("codepen.io")) {
-                //     // Add url link
-                //     content = content.replace(tmpWord, tmpUrl);
-                // }
-
+                }
+                else {
+                    // .mov etc remove link
+                    content = content.replace(tmpWord, '');
+                }
             }
-
         }
     }
 
@@ -215,6 +211,10 @@ export const makeIframesbyTagHTML = (content, note) => {
     if(linkUrl7 != "") link7 = '<a href="' + linkUrl7 + '" target="_blank">' + linkText + '</a>';
 
 
+
+
+    if(iframe1 != "") content = content + "(r)";
+
     content = content + 
         iframe1 +  
         iframe2 +  
@@ -223,7 +223,6 @@ export const makeIframesbyTagHTML = (content, note) => {
         iframe5 +
         iframe5 +
         iframe6 +
-        iframe7 +
         link1 +  // #r
         link2 + 
         link3 + 
@@ -231,7 +230,11 @@ export const makeIframesbyTagHTML = (content, note) => {
         link5 + 
         link6 + 
         link7 + 
-        serviceText;
+        serviceText +
+        iframe7 +   // Twitter以降のiframeや#r, Serviceが表示されないため、最後
+        '';
+
+
 
     return content;
 }
