@@ -23,8 +23,9 @@ const relayUrls = [
 //  "wss://nostr.fediverse.jp",       //jp 
 //  "wss://nostrja-kari.heguro.com",  //jp
 //  "wss://nostr.holybea.com",        //jp
-  "wss://nostr-relay.nokotaro.com", //jp, en 
+  // "wss://nostr-relay.nokotaro.com", //jp, en 
 //  "wss://nrelay.c-stellar.net",
+//  "wss://strelay.c-stellar.net",
 //  "wss://nrelay-jp.c-stellar.net",
 
 //  "wss://relay.nostr.moctane.com",
@@ -45,6 +46,11 @@ const relayUrls = [
 // twitch
  "wss://irc-ws.chat.twitch.tv/",
  "wss://pubsub-edge.twitch.tv/v1 ",
+
+
+
+//  "wss://relay.mostr.pub",
+//  "wss://nostr.h3z.jp",             //en, jp 
 
 /* 
    "wss://nostr.fmt.wiz.biz",

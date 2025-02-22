@@ -27,6 +27,33 @@ export const getImageURL = (pubkey) => {
     // @@ 
     else if (npub === '') {
       image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === '') {
+      image = ''
+    }  
+    else if (npub === 'npub1wp4ts07g3fk4fmwrwdrnyqsg0yrh4ghuj7nyq0722mu40sxhnd4q8mg7ag') {
+      image = ''
+    }  
+    else if (npub === 'npub1tehcg89zc3ynfewfq8xvn69dxxvymtyel27unmj4xzvj3d7y8p7qe783a6') {
+      image = 'https://github.com/mopeneko.png'
+    }  
+    else if (npub === 'npub1uvtgq7rqskqtfmhpatuag7kqr622ylzqda85gaacg3l92y838vkqlghlv6') {
+      image = 'https://nostrcheck.me/media/e3168078608580b4eee1eaf9d47ac01e94a27c406f4f4477b8447e5510f13b2c/6755ad23501191322edea9598dbf0c6b080f5ccf77f8aeaf59cf8bf73ccfe9e9.webp'
     } 
     else if (npub === 'npub10vk9gv50y29p7fgxf5m9thsjl7j52rcqswpw9uwun5qdxajef8ms9jfxkx') {
       image = 'https://image.nostr.build/353cca990e630a5afceb96e8faed3c28f5481eb51fa49633bba47dcaede362d7.jpg'

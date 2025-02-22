@@ -26,11 +26,17 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740200149;  //paging
+  untilValue = 1740221491;  //paging
 
   let noteCount = 0;
 
+  // css
   // 配列 tags
+  // untilValue = 1740221491;  // tags 13個
+  // untilValue = 1740222292;  // 10030 emoji set
+  // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
+// untilValue = 1740213396;  // udio.com
+  // untilValue = 1740207152;  // threads
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
   // untilValue = 1739707055;  // tag "r" twitter   fix
  // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
@@ -278,6 +284,7 @@ const Test = () => {
       let streaming = "";
       let streamingUrl = "";
 
+      let tagsCount = 0;
       for(let h=0; h<note.tags.length; h++)  {
         let marker = "";
         if(note.tags[h][0] != undefined) {
@@ -862,9 +869,19 @@ const Test = () => {
               {contentWarning}{contentWarningText}{contentWarning}
               {statusString}
               {parse(replyHTML)}
-              {parse(content)}<br />
+              {parse(content)}
               {/* {content}<br /> */}
-              {follow}
+              {parse(tagImageHTML)}
+              {parse(inlineImageHTML)}
+
+              <p><font color="orange">{moment(createdTime).fromNow()}</font>
+              -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}
+              {/* ({noteIdShort}) */}
+              {client}<a href={proxyUrl} target="_blank">{proxy}</a><br />
+              {follow}</p>
+
+
+
               {parse(quoteLinksHTML)}
               {tagsLinkUrlText1}
               {tagsLinkUrlText2}
@@ -876,19 +893,14 @@ const Test = () => {
               <a href={quoteUrl2} target="_blank">{quoteIdText2}</a>
               {/* <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a> */}
               {/* <a href={httpLinkUrl2} target="_blank">{httpLinkUrlText2}</a> */}
-              {parse(tagImageHTML)}
-              {parse(inlineImageHTML)}
               <a href={toLinkUrl1} target="_blank">{toLinkText1}</a>
               <a href={eventLinkUrl1} target="_blank">{eventLinkText1}</a>
               <a href={eventLinkUrl2} target="_blank">{eventLinkText2}</a>
               <a href={quoteLinkUrl} target="_blank">{quoteLinkText}</a>
               {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
-        {alt}<br />
-              <font color="orange" size="2">{moment(createdTime).fromNow()}</font>
-              -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}-
-              ({noteIdShort}){client}
-              <a href={proxyUrl} target="_blank">{proxy}</a><br />
-              <a href={freefromUrl} target="_blank">-FreeFrom</a>
+              {alt}
+
+              <p><a href={freefromUrl} target="_blank">-FreeFrom</a>
               <a href={nostterUrl} target="_blank">-nostter</a>
               <a href={lumilumiUrl} target="_blank">-lumilumi</a>
               <a href={nosHaikuUrl} target="_blank">-Nos Haiku</a>
@@ -898,7 +910,7 @@ const Test = () => {
               <a href={snortUrl} target="_blank">-Snort</a>
               <a href={bookmarkUrl} target="_blank">{bookmark}</a>
               <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
-              <a href={streamingUrl} target="_blank">{streaming}</a>
+              <a href={streamingUrl} target="_blank">{streaming}</a></p>
             </div>
           </div>
         </li>

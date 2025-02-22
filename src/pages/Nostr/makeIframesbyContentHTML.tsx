@@ -127,7 +127,8 @@ export const makeIframesbyContentHTML = (content, note) => {
         // && (splitContent[i].includes('media.unnerv.jp') ||
         //  )) {
         
-        if(!splitContent[i].includes('domain') && !splitContent[i].includes('www.amazon.co.jp')
+        if(!splitContent[i].includes('domain') 
+          && !splitContent[i].includes('www.amazon.co.jp')
           && !splitContent[i].includes('nostr-hotter-site.vercel.app') )
           // todo: https://<domain>/.well-known/lnurlp/<username>
         {

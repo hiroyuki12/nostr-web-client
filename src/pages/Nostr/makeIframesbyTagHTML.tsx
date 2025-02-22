@@ -154,6 +154,7 @@ export const makeIframesbyTagHTML = (content, note) => {
             else if(tmpUrl.includes('nipron.co.jp') ||
                     // tmpUrl.includes('bsky.app') ||
                     tmpUrl.includes('amzn.to') ||
+                    tmpUrl.includes('udio.com') ||
                     tmpUrl.includes('nipron.co.jp')) {
                 const tmpIframe = '<a href="' + tmpUrl + '" target="_blank">' + tmpUrl.replace('http', '(r)_ttp') + '</a>'
                 if(iframe1 == '')  iframe1 = tmpIframe;
@@ -215,7 +216,6 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
 
-    if(iframe1 != "") content = content + "(r)";
 
     content = content + 
         iframe1 +  
@@ -224,17 +224,21 @@ export const makeIframesbyTagHTML = (content, note) => {
         iframe4 +  
         iframe5 +
         iframe5 +
-        iframe6 +
-        link1 +  // #r
-        link2 + 
-        link3 + 
-        link4 + 
-        link5 + 
-        link6 + 
-        link7 + 
-        serviceText +
-        iframe7 +   // Twitter以降のiframeや#r, Serviceが表示されないため、最後
-        '';
+        iframe6;
+
+    if(!iframe1.includes('(r)') && (iframe1 != "" || iframe7 != "")) content = content + "(r)";
+
+    content = content + 
+        // link1 +  // #r
+        // link2 + 
+        // link3 + 
+        // link4 + 
+        // link5 + 
+        // link6 + 
+        // link7 + 
+        serviceText;
+
+    content = content + iframe7;   // Twitter以降のiframeや#r, Serviceが表示されないため、最後
 
 
 
