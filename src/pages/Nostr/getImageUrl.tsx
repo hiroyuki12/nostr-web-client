@@ -34,11 +34,11 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1rm7m257e4u8r2d7fxxjxfthmwt0q7pkfgdzu2f9757clc6k2pydqrkzgpj') {
+      image = 'https://cdn.nostrcheck.me/1efdb553d9af0e3537c931a464aefb72de0f06c94345c524bea7b1fc6aca091a/0b04d49c42c5d028542bdcbda6244e0d9d73eda83981e66796813c0dad16693e.webp'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1u5v5qt4dphar6wgffj72nyzpc2s628a53ww7c674usayk40xptnspnj7tr') {
+      image = 'https://cdn.nostrcheck.me/e519402ead0dfa3d39094cbca99041c2a1a51fb48b9dec6bd5e43a4b55e60ae7/2dd56e248b2237457772e1b5468a7693a9e3c34d305d46da3dd0203ab2354cb3.webp'
     } 
     else if (npub === 'npub162mtqyjgtmrdhlras3zyd5nqsysdyhw9fepj242c93uvaxakthzqa7rrj8') {
       image = 'https://pbs.twimg.com/profile_images/1301092023244476416/3tKIxQ0X_400x400.jpg'
