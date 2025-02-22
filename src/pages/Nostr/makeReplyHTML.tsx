@@ -40,7 +40,7 @@ export const makeReplyHTML = (note) => {
     let channel = ""
 
     if(note.kind === 42) {  // kind:42.Channel_Message
-      channel = "42.Channel_Message(nos_haiku_keyword)] ";   // link to ChannelUrl
+      channel = "42.Channel_Message(lumilumi)] ";   // link to ChannelUrl
     }
     if(note.kind === 1311) {  // kind:1311.live chat
       channel = "Live Chat]";   // link to ChannelUrl
@@ -49,6 +49,9 @@ export const makeReplyHTML = (note) => {
 
     // reply(repost) image url, size
     for(let h=0; h<note.tags.length; h++)  {
+
+//////////////////////////
+// tag "p"
         if(note.tags[h][0] === "p") {  // mention
             reply = "To]";
             if(!note.tags[h][1].includes("npub")) {  // not hex
@@ -131,6 +134,7 @@ export const makeReplyHTML = (note) => {
         }
 
 //////////////////////////
+// tag "a"
 
         else if(note.tags[h][0] === "a") {  // live chat message. kind:1311
             //	  channelUrl = "https://zap.stream";
@@ -138,6 +142,7 @@ export const makeReplyHTML = (note) => {
         }
 
 //////////////////////////
+// tag "e"
 
         else if(note.tags[h][0] === "e") {  // NIP-10 kind1
           eventCount = eventCount + 1;
@@ -146,23 +151,20 @@ export const makeReplyHTML = (note) => {
               reply = "#e]";
             }
           }
+
+          // kind:42.Channel_Message かつ、データに:がない時
+          if(note.kind === 42 && !note.tags[h][1].includes(":")) {  // tag:e
+            // channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
+            // channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
+            // channelUrl = "https://unyu-house.vercel.app/"
+            // channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
+            // channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
+            // channelUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1] })  // nos_haiku
+            channelUrl = "https://lumilumi.app/" + nip19.neventEncode({id:note.tags[h][1] })  // lumilumi
+          }
         }
 
 
-
-        if(channelUrl == "") {
-          //channelUrl = "https://garnet.nostrian.net/channels/" + note.tags[h][1]
-          //channelUrl = "https://coracle.social/chat/" + note.tags[h][1]
-          //channelUrl = "https://unyu-house.vercel.app/"
-          //channelUrl = "https://unyu-house.vercel.app/channels/" + note.tags[h][1] 
-
-          if(note.kind === 42 && !note.tags[h][1].includes(":")) {  // tag:e
-            //channelUrl = "https://unyu-house.vercel.app/channels/" + nip19.neventEncode({id:note.tags[h][1] })
-            channelUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1] })  // nos_haiku
-            // channel = 'channel(' + note.tags[h][1]  + ')'  // nos_haiku
-            // channel = 'channel(' + note.kind  + ')'  // nos_haiku
-          }
-        } //  if
     }  // for
 
 

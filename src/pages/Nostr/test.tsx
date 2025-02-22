@@ -35,66 +35,6 @@ const Test = () => {
   // untilValue = 1739707055;  // tag "r" twitter   fix
  // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 
-  // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
-  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix, lumilumi ok
-  // untilValue = 1740192864;  // quote_naddr1 content, 30023 lumilumi ok, nos haiku NG
-// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
-  // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
-  // untilValue = 1740182551;  // fix mp3 audio
-  // untilValue = 1740192495;  // kind:30003 (ブックマーク)
-  // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
-//  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
-//  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
-// untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
-
-//  untilValue = 1686241976;  //emoji 13 fix, <img>
-  // untilValue = 1740133406;  // x.com/i/broadcasts NG
-  // untilValue = 1740107126;  // Repost content fix. contentに,あり
-  // untilValue = 1739784977;  // Repost Text fix.
-  // untilValue = 1740062880;  // Thingstr
-  // untilValue = 1734267365;  // 30023   Thingstr
-  // untilValue = 1740054319;  // #t Nostr座談会 fix
-  // untilValue = 1740048906;  // twitter twitframe.com domain切れ
-  // untilValue = 1739973122;  // amazon iframe NG. fix text link
-  // untilValue = 1739879880;  // x.com iframe fix
-  // untilValue = 1739880840;  // inlineImage ok mov?
-  // untilValue = 1739870175;  // twitter iframe fix.
-  // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない fix
-  // untilValue = 1739796967;  // zenn ogp
-//  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
-//  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
-//  untilValue = 1739015355;  // dare-ai OGP  Todo
-//  untilValue = 1739024868;  // kirby OGP Todo nostter ok
-// untilValue = 1739628837;  // quote_nprofile1
-  //  untilValue = 1739790231;  // youtu.be fix
-//  untilValue = 1739099394;  // Repost Text ok
-  // untilValue = 1737563052;  // NG very large html. nostter ok
-  // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
-  // untilValue = 1739782236;  // quote_npub1 
-  // untilValue = 1739674153;  // tag "r" (r) nipron iframe NG. fix text link
-  // untilValue = 1739674961;  // tag "r" (r) amazon iframe NG. fix text link
-  // untilValue = 1739678550;  // tag "r" link 7個 fix
-//  untilValue = 1686929129;  //twitter iframe tag "r"
-//  untilValue = 1700358511;  // instagram link iframe content fix
-  // untilValue = 1739577124;  // content iframe fix
-//  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
-  // untilValue = 1739628240;  // youtube shorts content ok
-  // untilValue = 1739588223;  //YouTube fix. tag "r"
-  // untilValue = 1739585002;  // Youtube target fix. youtu.be content
-//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
-  // untilValue = 1739359806;  // tag "r" img ok
-  //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
-  // untilValue = 1700654092;  // long-form content. kind:30023 Markdown
-  // untilValue = 1734489363;  // #t tag
-// untilValue = 1734489831;  // kind:20 not display picture
-// untilValue = 1732921974;  // kind:20 not display picture
-//  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
-//  untilValue = 1700351963;  // fix link. http nostter app home 4つ. tag r 4つ
-
-
-
-
-
   
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
   // const sinceValue = untilValue - 3600;  //about 60 minutes 
@@ -1002,6 +942,61 @@ export default Test;
 
 // memo
 
+
+  // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
+  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix, lumilumi ok
+  // untilValue = 1740192864;  // quote_naddr1 content, 30023 lumilumi ok, nos haiku NG
+// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
+  // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
+  // untilValue = 1740182551;  // fix mp3 audio
+  // untilValue = 1740192495;  // kind:30003 (ブックマーク)
+  // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
+//  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
+//  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
+// untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
+//  untilValue = 1686241976;  //emoji 13 fix, <img>
+  // untilValue = 1740133406;  // x.com/i/broadcasts NG
+  // untilValue = 1740107126;  // Repost content fix. contentに,あり
+  // untilValue = 1739784977;  // Repost Text fix.
+  // untilValue = 1740062880;  // Thingstr
+  // untilValue = 1734267365;  // 30023   Thingstr
+  // untilValue = 1740054319;  // #t Nostr座談会 fix
+  // untilValue = 1740048906;  // twitter twitframe.com domain切れ
+  // untilValue = 1739973122;  // amazon iframe NG. fix text link
+  // untilValue = 1739879880;  // x.com iframe fix
+  // untilValue = 1739880840;  // inlineImage ok mov?
+  // untilValue = 1739870175;  // twitter iframe fix.
+  // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない fix
+  // untilValue = 1739796967;  // zenn ogp
+//  untilValue = 1739018108;  // NHK NEW OGP  Todo. nostter ok
+//  untilValue = 1739018724;  // togetter OGP Todo. nostter ok
+//  untilValue = 1739015355;  // dare-ai OGP  Todo
+//  untilValue = 1739024868;  // kirby OGP Todo nostter ok
+// untilValue = 1739628837;  // quote_nprofile1
+  //  untilValue = 1739790231;  // youtu.be fix
+//  untilValue = 1739099394;  // Repost Text ok
+  // untilValue = 1737563052;  // NG very large html. nostter ok
+  // untilValue = 1686839510;  //nicovideo iframe. fix TypeError:  '? '
+  // untilValue = 1739782236;  // quote_npub1 
+  // untilValue = 1739674153;  // tag "r" (r) nipron iframe NG. fix text link
+  // untilValue = 1739674961;  // tag "r" (r) amazon iframe NG. fix text link
+  // untilValue = 1739678550;  // tag "r" link 7個 fix
+//  untilValue = 1686929129;  //twitter iframe tag "r"
+//  untilValue = 1700358511;  // instagram link iframe content fix
+  // untilValue = 1739577124;  // content iframe fix
+//  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
+  // untilValue = 1739628240;  // youtube shorts content ok
+  // untilValue = 1739588223;  //YouTube fix. tag "r"
+  // untilValue = 1739585002;  // Youtube target fix. youtu.be content
+//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
+  // untilValue = 1739359806;  // tag "r" img ok
+  //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+  // untilValue = 1700654092;  // long-form content. kind:30023 Markdown
+  // untilValue = 1734489363;  // #t tag
+// untilValue = 1734489831;  // kind:20 not display picture
+// untilValue = 1732921974;  // kind:20 not display picture
+//  untilValue = 1739573404;  // fix: unnerv imeta url png  ok
+//  untilValue = 1700351963;  // fix link. http nostter app home 4つ. tag r 4つ
 //  untilValue = 1686933213;  //quote_note1(nostr:note1) fix
 //  untilValue = 1686933213;  // nostr:note1 fix quote
 //  untilValue = 1692694772;  // nostr:note1 (quote)
