@@ -26,7 +26,7 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  untilValue = 1740221491;  //paging
+  // untilValue = 1740224405;  //paging
 
   let noteCount = 0;
 
@@ -381,7 +381,7 @@ const Test = () => {
 
 
 
-        if(!splitContent.includes('",\"content')) {
+        if(!splitContent.includes('",\"content') && !splitContent.includes('L,')) {
           splitContent = splitContent.split(',');  // , でsplit. Repost contentに,があるとNG
         }
         else {

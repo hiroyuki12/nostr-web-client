@@ -144,6 +144,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                 iframe7 = tmpIframe;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
 
                 serviceText = '__Twitter_X(r)'
+                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
                 content = content.replace(tmpUrl, '');
             }
             //else if(tmpUrl.includes("googleusercontent.com/")){

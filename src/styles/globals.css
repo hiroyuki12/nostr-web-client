@@ -97,11 +97,21 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.item {
+  margin: 0 auto; /* center the item */
+}
+
+ul {
+  list-style-type: none;
+}
+
 li {
-  margin: 0px 0;
+  /* margin: 0px 0; */
   border: 1px solid #39444d;
-  max-width: 600px;
-  padding: 15px;
+  max-width: 580px;
+  padding: 12px;
+  /* border-radius: 16px; */
+  /* margin-bottom: 10px; */
 }
 
 p {
@@ -114,6 +124,12 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+  /* color: rgb(50, 123, 212); */
+  /* color: rgb(50, 93, 182); */
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
