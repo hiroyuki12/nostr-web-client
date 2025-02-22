@@ -31,7 +31,7 @@ const Test = () => {
   let noteCount = 0;
 
   // 配列 tags
- untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
   // untilValue = 1739707055;  // tag "r" twitter   fix
  // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 
