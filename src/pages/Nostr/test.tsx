@@ -26,11 +26,18 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740130040;  //paging
+  // untilValue = 1740173500;  //paging
 
   let noteCount = 0;
 
   // 配列 tags
+// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
+  // untilValue = 1739886588;  // NG Invalid byte sequence, nip19.noteEncode
+  // untilValue = 1740182551;  // mp3
+  // untilValue = 1740192495;  // kind:30003 (ブックマーク)
+  // untilValue = 1740193501;  // NG picture
+  // untilValue = 1740193143;  // NG Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
+  // untilValue = 1740149320; // tag"r" 2つのうち、2個目が表示されない NG
 //  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
@@ -48,7 +55,6 @@ const Test = () => {
   // untilValue = 1739973122;  // amazon iframe NG. fix text link
   // untilValue = 1739879880;  // x.com iframe fix
   // untilValue = 1739880840;  // inlineImage ok mov?
-  // untilValue = 1739886588;  // Invalid byte sequence
   // untilValue = 1739870175;  // twitter iframe fix.
   // untilValue = 1739873101;  // quote_npub1 3つあるのに2つしか表示されない fix
   // untilValue = 1739796967;  // zenn ogp
@@ -278,12 +284,11 @@ const Test = () => {
         // kind:42.Channel_Message
         if(note.kind === 42) {
           if(note.tags[h][0] == "e") {
-            if(note.tags[h][1].includes(":")) {
-              return
+            if(!note.tags[h][1].includes(":")) {
+              //noteUrl = "https://nostter.app/channels/" 
+              //  + nip19.neventEncode({id:note.tags[h][1]})
+              noteUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1]})
             }
-            //noteUrl = "https://nostter.app/channels/" 
-            //  + nip19.neventEncode({id:note.tags[h][1]})
-            noteUrl = "https://nos-haiku.vercel.app/keyword/" + nip19.neventEncode({id:note.tags[h][1]})
           }
 	      }
       }
@@ -306,7 +311,8 @@ const Test = () => {
 
 
       // Re] etc
-      let replyHTML = makeReplyHTML(note);
+      let replyHTML = '';
+      replyHTML = makeReplyHTML(note);
 
 
 
@@ -492,7 +498,8 @@ const Test = () => {
       
 // make img by tag "r"
       
-      let tagImageHTML = makeTagImageHTML(content, note);
+      let tagImageHTML = '';
+      tagImageHTML = makeTagImageHTML(content, note);
 
 // update cotent. remove tag "r" image URL
 
@@ -512,7 +519,8 @@ const Test = () => {
 
 // makeInlineImageHTMLの前に、makeIframesbyTagHTMLを実行すると、複数画像表示がNG
 
-      let inlineImageHTML = makeInlineImageHTML(content);
+      let inlineImageHTML = '';
+      inlineImageHTML = makeInlineImageHTML(content);
     
       // content の画像URLを削除
       {
@@ -639,19 +647,29 @@ const Test = () => {
           }*/
         }
         else if(note.tags[i][0] === "e") {
-          //const eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
-          //const eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
-          const eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
-          // const eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
-          
+          let eventLinkUrl = ''
+
+          if(!note.tags[i][1].includes(":")) {
+            // eventLinkUrl = "https://nostter.app/search?q=" + note.tags[i][1]
+            // eventLinkUrl = "https://snort.social/e/" + note.tags[i][1]
+            eventLinkUrl = "https://nostter.app/" + nip19.noteEncode(note.tags[i][1])
+            // eventLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.tags[i][1]
+          }
+
           if(eventLinkUrl1 === '') {
             eventLinkUrl1 = eventLinkUrl
             eventLinkText1 = "_#e"
+            if(eventLinkUrl === '') {
+              eventLinkText1 = "_#e(" + note.tags[i][1] + ')'; 
+            }
             // contentの#[0]をa hrefに置き換え
             // content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
           } else if(eventLinkUrl1 != '') {
             eventLinkUrl2 = eventLinkUrl
             eventLinkText2 = "_#e"
+            if(eventLinkUrl === '') {
+              eventLinkText2 = "_#e(" + note.tags[i][1] + ')'; 
+            }
           }
         }
       }
@@ -684,6 +702,12 @@ const Test = () => {
 
 
 
+
+
+
+
+// return;
+
       let quoteId = "";
       let quoteUrl1 = ""
       let quoteIdText1 = "";  // #q 1
@@ -699,19 +723,26 @@ const Test = () => {
         if(note.tags[i][0] === "q") {
           if(quoteUrl1 === '') {
             quoteId = note.tags[i][1];  // event id
-            quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);
-            quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+            if(!quoteId.includes(":")) {  // ex. 30023:xxx
+              quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);  // Error: Invalid byte sequence. 30023:
+              quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+            }
+            else {
+              quoteIdText1 = "__#q(" + quoteId + ")";
+            }
           }
           else if(quoteUrl1 != '') {
             quoteId = note.tags[i][1];  // event id
-            quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
-            quoteIdText2 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
-            
+            if(!quoteId.includes(":")) {  // ex. 30023:xxx
+              quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
+              quoteIdText2 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
+            }
+            else {
+              quoteIdText12= "__#q(" + quoteId + ")";
+            }
           }
         }
       }
-
-
 
 
 
@@ -732,21 +763,6 @@ const Test = () => {
       }
       
 
-
-
-      //(emoji)
-      for(let i=0; i<note.tags.length; i++) {
-        if(note.tags[i][0] === "emoji") {
-          const emojiURL = note.tags[i][2];
-          const count = content.split(':' + note.tags[i][1] + ':').length;
-          for(let j=0; j<count; j++) {
-                  content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
-          }
-        }
-      }
-      for(let j=0; j<10; j++) {
-        content = content.replace(":bow:","🙇");
-      }
 
 
 
@@ -783,6 +799,28 @@ const Test = () => {
         }
       }
       // contne への < の追加はここより下に記述
+
+
+
+
+
+
+
+
+
+      //(emoji)
+      for(let i=0; i<note.tags.length; i++) {
+        if(note.tags[i][0] === "emoji") {
+          const emojiURL = note.tags[i][2];
+          const count = content.split(':' + note.tags[i][1] + ':').length;
+          for(let j=0; j<count; j++) {
+            content = content.replace(":" + note.tags[i][1] + ":",'<img src=' + emojiURL + ' height=40 title="[' + note.tags[i][1] + ']" />');
+          }
+        }
+      }
+      for(let j=0; j<10; j++) {
+        content = content.replace(":bow:","🙇");
+      }
 
 
 
@@ -832,7 +870,8 @@ const Test = () => {
 
       // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
 
-      let quoteLinksHTML = makeQuoteLinksHTML(content);
+      let quoteLinksHTML = '';
+      quoteLinksHTML = makeQuoteLinksHTML(content);
       
       let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       for(let i=0; i<wordsNostr.length; i++) {
@@ -966,7 +1005,6 @@ export default Test;
 // untilValue = 1739177954;  // quote_nevent1(nostr:nvent1) fix
 // untilValue = 1688605603;  //qoote_neventt1, quote2 fix
 //  untilValue = 1696105738;  // quote_nevent1 njump fix. quote_nos_haiku ok
-// untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
 //  untilValue = 1739175991;  // quote_npub1 fix quote
   // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
 // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
