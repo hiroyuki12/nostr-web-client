@@ -31,19 +31,22 @@ const Test = () => {
   let noteCount = 0;
 
   // 配列 tags
+// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
+  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix, lumilumi ok
+  // untilValue = 1740192864;  // quote_naddr1 content, 30023 lumilumi ok, nos haiku NG
+
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
   // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
   // untilValue = 1740182551;  // fix mp3 audio
   // untilValue = 1740192495;  // kind:30003 (ブックマーク)
-  untilValue = 1740193501;  // NG picture
-  // untilValue = 1740193143;  // NG Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
-  // untilValue = 1740149320; // tag"r" 2つのうち、2個目が表示されない NG
+  // untilValue = 1740193501;  // NG picture
+  // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
+  // untilValue = 1740149320; // tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 //  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  // Apple Music OGP. fix. tag 'r'
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
 
 //  untilValue = 1686241976;  //emoji 13 fix, <img>
-  // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix
   // untilValue = 1740133406;  // x.com/i/broadcasts NG
   // untilValue = 1740107126;  // Repost content fix. contentに,あり
   // untilValue = 1739784977;  // Repost Text fix.
@@ -1008,7 +1011,6 @@ export default Test;
 //  untilValue = 1696105738;  // quote_nevent1 njump fix. quote_nos_haiku ok
 //  untilValue = 1739175991;  // quote_npub1 fix quote
   // untilValue = 1698228483;  // quote_npub1, quote2_nevent1.
-// untilValue = 1739617219;  // quote_naddr1 nos-haiku ok
 // untilValue = 1696316415;  // (nevent1) ok
 //  untilValue = 1690354019;  //(quote #[0]). content:#[0]. tag "e"
   // untilValue = 1739627342;  // #e 2つ。1つ目がroot

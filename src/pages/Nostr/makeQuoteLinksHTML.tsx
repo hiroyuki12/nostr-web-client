@@ -101,7 +101,7 @@ export const makeQuoteLinksHTML = (content) => {
 
         else if(quoteLinkHTML1 != "") {
           quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "_(quote2_note1)";
+          quoteLinkText = "_(quote_note1)";
           quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
           
           if(content.includes("nostr:nevent1")) {
@@ -123,26 +123,30 @@ export const makeQuoteLinksHTML = (content) => {
       }
 
       else if(wordsNostr[i].includes("nostr:naddr1")) {
-        if(quoteLinkHTML1 === "") {
-          //content = content.replace(wordsNostr[i],'');
-          //quoteLinkUrl = "https://snort.social/e/" + wordsNostr[i].replace("nostr:",'') 
-          // quoteLinkUrl = "https://habla.news/a/" + wordsNostr[i].replace("nostr:",'')   // kind:30022
-          // quoteLinkUrl = "https://lumilumi.app/" + wordsNostr[i].replace("nostr:",'')
-          // quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-          //quoteLinkUrl = "https://emojis-iota.vercel.app/a/" + wordsNostr[i].replace("nostr:",'')  //kind:30030
-          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "__(quote_naddr1)";
-          quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
-        }
-        else if(quoteLinkHTML1 != "") {
-          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "__(quote2_naddr1)";
-          quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
-        }
-        else if(quoteLinkHTML2 != "") {
-          quoteLinkUrl = "https://nos-haiku.vercel.app/entry/" + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "__(quote3_naddr1)";
-          quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+        // nos-haiku kind:30023 NG
+        // const quoteBaseUrl = "https://nos-haiku.vercel.app/entry/";  // kind:10030 User Emoji List
+        // lumilumi kind:10039 BG
+        const quoteBaseUrl = "https://lumilumi.app/";  // kind:30023, 
+        
+        // const quoteBaseUrl = "https://snort.social/e/" 
+        // const quoteBaseUrl = "https://habla.news/a/"   // kind:30022
+        // const quoteBaseUrl = "https://nostter.app/"
+        // const quoteBaseUrl = "https://emojis-iota.vercel.app/a/"  //kind:30030
+          
+        if(wordsNostr[i].includes(":")) {
+          quoteLinkUrl = quoteBaseUrl + wordsNostr[i].replace("nostr:",'')
+
+          quoteLinkText = "__(quote_naddr1 lumilumi)";
+          
+          if(quoteLinkHTML1 === "") {
+            quoteLinkHTML1 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+          }
+          else if(quoteLinkHTML1 != "") {
+            quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+          }
+          else if(quoteLinkHTML2 != "") {
+            quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>';
+          }
         }
       }
 
@@ -154,12 +158,12 @@ export const makeQuoteLinksHTML = (content) => {
         }
         else if(quoteLinkHTML1 != "") {
           quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "_(quote2_nprofile1)";
+          quoteLinkText = "_(quote_nprofile1)";
           quoteLinkHTML2 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
         }
         else if(quoteLinkHTML2 != "") {
           quoteLinkUrl = "https://nostter.app/" + wordsNostr[i].replace("nostr:",'')
-          quoteLinkText = "_(quote3_nprofile1)";
+          quoteLinkText = "_(quote_nprofile1)";
           quoteLinkHTML3 = '<a href="' + quoteLinkUrl + '" target="_blank">' + quoteLinkText + '</a>'
         }
           
