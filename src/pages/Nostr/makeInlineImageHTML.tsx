@@ -107,10 +107,12 @@ export const makeInlineImageHTML = (content) => {
             '<a href="' + image2Url + '" target="_blank"><img src="' + image2Url + '" height="' + inlineImage2Height + '" /></a>' +
             '<a href="' + image3Url + '" target="_blank"><img src="' + image3Url + '" height="' + inlineImage3Height + '" /></a>' +
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +
-            '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>' +
-            '<audio controls src="' + audio1Url + '" />';
-    
-            if(image1Url != '' || audio1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage(c)'
+            '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
+            ;
+
+    if(audio1Url != '')  inlineImageHTML = inlineImageHTML + '<audio controls src="' + audio1Url + '" />';
+            
+    if(image1Url != '' || audio1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage(c)'
     
     return inlineImageHTML;
 }

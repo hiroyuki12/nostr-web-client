@@ -33,9 +33,9 @@ const Test = () => {
   // 配列 tags
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
   // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
-  untilValue = 1740182551;  // mp3
+  // untilValue = 1740182551;  // fix mp3 audio
   // untilValue = 1740192495;  // kind:30003 (ブックマーク)
-  // untilValue = 1740193501;  // NG picture
+  untilValue = 1740193501;  // NG picture
   // untilValue = 1740193143;  // NG Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
   // untilValue = 1740149320; // tag"r" 2つのうち、2個目が表示されない NG
 //  untilValue = 1739151061;  // Apple Music large OGP. fix. nostrudel large OK (by content)
