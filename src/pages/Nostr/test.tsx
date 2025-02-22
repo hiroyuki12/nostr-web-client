@@ -26,14 +26,14 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740173500;  //paging
+  // untilValue = 1740200149;  //paging
 
   let noteCount = 0;
 
   // 配列 tags
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
-  // untilValue = 1739886588;  // NG Invalid byte sequence, nip19.noteEncode
-  // untilValue = 1740182551;  // mp3
+  // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
+  untilValue = 1740182551;  // mp3
   // untilValue = 1740192495;  // kind:30003 (ブックマーク)
   // untilValue = 1740193501;  // NG picture
   // untilValue = 1740193143;  // NG Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
@@ -122,7 +122,7 @@ const Test = () => {
 //      kinds: [20],     // 20:Picture Events
 //      kinds: [40],     // 40:Channel Creation
 //      kinds: [41],     // 41:Channel Metadata
-//      kinds: [42],     // 42:Channel_Message
+    //  kinds: [42],     // 42:Channel_Message
 //      kinds: [44],     // 44:Channel Mute User
 //      kinds: [1111],   // 1111:Comment
 //      kinds: [1063],   // 1063:File Metadata
@@ -560,6 +560,7 @@ const Test = () => {
               tmpContent[i].includes('.ico') ||
               tmpContent[i].includes('.bmp') ||
               tmpContent[i].includes('.webp') ||
+              tmpContent[i].includes('.mp3') ||
               tmpContent[i].includes('.mp4') ||
               tmpContent[i].includes('.mov')
             )) {

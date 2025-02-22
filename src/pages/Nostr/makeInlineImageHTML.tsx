@@ -14,6 +14,8 @@ export const makeInlineImageHTML = (content) => {
     let image3Url = "";
     let image4Url = "";
     let image5Url = "";
+
+    let audio1Url = "";
     //RegExp
     //let words = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|[a-z0-9]*)/g);
 
@@ -94,6 +96,9 @@ export const makeInlineImageHTML = (content) => {
                 }
                 imageCount = imageCount + 1;
             }
+            else if(tmp2[i].includes(".mp3")){
+                audio1Url = tmp2[i];
+            }
         }
     }
 
@@ -102,9 +107,10 @@ export const makeInlineImageHTML = (content) => {
             '<a href="' + image2Url + '" target="_blank"><img src="' + image2Url + '" height="' + inlineImage2Height + '" /></a>' +
             '<a href="' + image3Url + '" target="_blank"><img src="' + image3Url + '" height="' + inlineImage3Height + '" /></a>' +
             '<a href="' + image4Url + '" target="_blank"><img src="' + image4Url + '" height="' + inlineImage4Height + '" /></a>' +
-            '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>';
+            '<a href="' + image5Url + '" target="_blank"><img src="' + image5Url + '" height="' + inlineImage5Height + '" /></a>' +
+            '<audio controls src="' + audio1Url + '" />';
     
-            if(image1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage(c)'
+            if(image1Url != '' || audio1Url != '')  inlineImageHTML = inlineImageHTML + '_inlineImage(c)'
     
     return inlineImageHTML;
 }
