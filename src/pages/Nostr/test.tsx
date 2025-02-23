@@ -12,7 +12,7 @@ import {removeTagImageUrl} from './removeTagImageUrl'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
 import {makeReplyHTML} from './makeReplyHTML'
 import {makeStatusString} from './makeStatusString'
-import {makeQuoteLinksHTML} from './makeQuoteLinksHTML'
+import {makeQuoteLinksbyContentHTML} from './makeQuoteLinksbyContentHTML'
 import {makeIframesbyTagHTML} from './makeIframesbyTagHTML'
 import {makeIframesbyContentHTML} from './makeIframesbyContentHTML'
 import {makeMarkdownHTML} from './makeMarkdownHTML'
@@ -21,6 +21,7 @@ import {youtubebyTagHTML} from './youtubebyTagHTML'
 import {makeTagsText} from './makeTagsText'
 import {makeRepostContent} from './makeRepostContent'
 import {removeInlineImageURL} from './removeInlineImageURL'
+import {makeQuoteLinksbyTagHTML} from './makeQuoteLinksbyTagHTML'
 
 
 const Test = () => {
@@ -42,7 +43,7 @@ const Test = () => {
   // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
   // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
   // untilValue = 1740242330;  // NG テキスト　はみ出る
-  untilValue = 1740270976;  // kind:1808
+  // untilValue = 1740270976;  // kind:1808
   // untilValue = 1740221491;  // tags 13個
   // untilValue = 1740222292;  // 10030 emoji set
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
@@ -391,7 +392,7 @@ const Test = () => {
       inlineImageHTML = makeInlineImageHTML(content);
     
 
-      
+
 // content の画像URLを削除
 
       content = removeInlineImageURL(content);
@@ -536,41 +537,14 @@ const Test = () => {
 
 // return;
 
-      let quoteId = "";
-      let quoteUrl1 = ""
-      let quoteIdText1 = "";  // #q 1
-      let quoteUrl2 = ""
-      let quoteIdText2 = "";  // #q 2
 
-      for(let i=0; i<note.tags.length; i++) {
-        //quoteUrl1 = "https://snort.social/e/" + quoteId1;
-        //quoteUrl1 = "https://nostr.com/" + quoteId1;
-        //quoteUrl1 = "https://iris.to/post/" + quoteId1;
-        //let quoteBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/"
-        let quoteBaseUrl = "https://nostter.app/"
-        if(note.tags[i][0] === "q") {
-          if(quoteUrl1 === '') {
-            quoteId = note.tags[i][1];  // event id
-            if(!quoteId.includes(":")) {  // ex. 30023:xxx
-              quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);  // Error: Invalid byte sequence. 30023:
-              quoteIdText1 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
-            }
-            else {
-              quoteIdText1 = "__#q(" + quoteId + ")";
-            }
-          }
-          else if(quoteUrl1 != '') {
-            quoteId = note.tags[i][1];  // event id
-            if(!quoteId.includes(":")) {  // ex. 30023:xxx
-              quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
-              quoteIdText2 = "__#q(" + note.tags[i][1].substring(0,2) + ")";
-            }
-            else {
-              quoteIdText12= "__#q(" + quoteId + ")";
-            }
-          }
-        }
-      }
+      
+      const { 
+        quoteUrl1, 
+        quoteIdText1, 
+        quoteUrl2, 
+        quoteIdText2 
+      } = makeQuoteLinksbyTagHTML(note);
 
 
 
@@ -699,7 +673,7 @@ const Test = () => {
       // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
 
       let quoteLinksHTML = '';
-      quoteLinksHTML = makeQuoteLinksHTML(content);
+      quoteLinksHTML = makeQuoteLinksbyContentHTML(content);
       
       let wordsNostr = content.split(/(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g);
       for(let i=0; i<wordsNostr.length; i++) {
@@ -760,13 +734,13 @@ const Test = () => {
 
 
 
-              {parse(quoteLinksHTML)}
               {tagsLinkUrlText1}
               {tagsLinkUrlText2}
               {tagsLinkUrlText3}
               {tagsLinkUrlText4}
               {tagsLinkUrlText5}
               {tagsLinkUrlText6}
+              {parse(quoteLinksHTML)}
               <a href={quoteUrl1} target="_blank">{quoteIdText1}</a>
               <a href={quoteUrl2} target="_blank">{quoteIdText2}</a>
               {/* <a href={httpLinkUrl1} target="_blank">{httpLinkUrlText1}</a> */}
