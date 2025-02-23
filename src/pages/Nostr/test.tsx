@@ -19,7 +19,7 @@ import {makeMarkdownHTML} from './makeMarkdownHTML'
 import {makeTextlinkbyMarkdownHTML} from './makeTextlinkbyMarkdownHTML'
 import {youtubebyTagHTML} from './youtubebyTagHTML'
 import {makeTagsText} from './makeTagsText'
-import {processRepostContent} from './makeRepostContent'
+import {makeRepostContent} from './makeRepostContent'
 
 
 const Test = () => {
@@ -350,7 +350,7 @@ const Test = () => {
       if (content === "") {
         content = "[empty]";
       } else if (note.kind === 6) { // kind:6:repost
-        content = processRepostContent(content);
+        content = makeRepostContent(content);
       }
 
 

@@ -1,6 +1,6 @@
 
 
-export const processRepostContent = (content: string): string => {
+export const makeRepostContent = (content: string): string => {
   let splitContent = content;
 
   if (!splitContent.includes('",\"content') && !splitContent.includes('L,')) {
