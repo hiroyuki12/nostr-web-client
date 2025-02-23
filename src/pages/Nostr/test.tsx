@@ -19,6 +19,7 @@ import {makeMarkdownHTML} from './makeMarkdownHTML'
 import {makeTextlinkbyMarkdownHTML} from './makeTextlinkbyMarkdownHTML'
 import {youtubebyTagHTML} from './youtubebyTagHTML'
 import {makeTagsText} from './makeTagsText'
+import {processRepostContent} from './makeRepostContent'
 
 
 const Test = () => {
@@ -338,75 +339,19 @@ const Test = () => {
 
 
 
+
+
 ////////////////////////////////////////////////
 // Repostのcontentの調整
 // Repostのcontentデータをcontentの本文のみに調整
 
-      if(content === "") {
-	      content = "[empty]";
-	    }
-      else if(note.kind === 6) {  //kind:6:repost
-        let splitContent = content
 
 
-
-
-        if(!splitContent.includes('",\"content') && !splitContent.includes('L,')) {
-          splitContent = splitContent.split(',');  // , でsplit. Repost contentに,があるとNG
-        }
-        else {
-          splitContent = splitContent.split('",');  // ", でsplit  
-        }
-        for(let i=0; i<splitContent.length; i++) {
-          // Repostのcontentデータをcontentの本文のみに調整
-          if(splitContent[i].includes('"content"')) {
-            let splitContent2 = splitContent[i];
-            splitContent2 = splitContent2.replace('{"content":"','');
-            splitContent2 = splitContent2.replace('"content":"','');
-            
-
-             // "content":" より後を取得 NG
-            /*if(splitContent2.includes('"content":"')) {
-              splitContent2 = splitContent2.substring(splitContent2.indexOf('"content":"'),content.length);  
-            }
-            // created_at より前を取得
-            if(tmp2.includes("created_at")) {
-                    //tmp2= tmp2.substring(0,content.indexOf("created_at"));  				      
-            }*/
-
-                    
-            {
-              const count = splitContent2.split('\\n').length;
-              for(let j=0; j<count; j++) {
-                splitContent2 = splitContent2.replace("\\n","\n");   // \\n -> \n
-              }
-            }
-            {
-              const count = splitContent2.split('\\/').length;
-              for(let j=0; j<count; j++) {
-                splitContent2 = splitContent2.replace("\\/","/");   // \/ -> /
-              }
-            }
-            {
-              const count = splitContent2.split('\\"').length;
-              for(let j=0; j<count; j++) {
-                splitContent2 = splitContent2.replace('\\"','"');   // \" -> "
-              }
-            }
-
-            if(splitContent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
-              splitContent2 = splitContent2.slice(0, -1);
-            }
-            if(splitContent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
-              splitContent2 = splitContent2.slice(0, -1);
-            }
-            
-            content = splitContent2;
-          }  // if
-	      }  // for
-      }  // if
-
-      
+      if (content === "") {
+        content = "[empty]";
+      } else if (note.kind === 6) { // kind:6:repost
+        content = processRepostContent(content);
+      }
 
 
 
