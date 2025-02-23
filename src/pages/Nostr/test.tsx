@@ -20,6 +20,7 @@ import {makeTextlinkbyMarkdownHTML} from './makeTextlinkbyMarkdownHTML'
 import {youtubebyTagHTML} from './youtubebyTagHTML'
 import {makeTagsText} from './makeTagsText'
 import {makeRepostContent} from './makeRepostContent'
+import {removeInlineImageURL} from './removeInlineImageURL'
 
 
 const Test = () => {
@@ -38,10 +39,10 @@ const Test = () => {
   // avatar画像　ローカルにキャッシュ
   // css
   // 配列 tags
-  // untilValue = 1740278453;  // fiatjaf 画像 Image optimization /image/width=256/http://origin
-  // untilValue = 1740296791;  // NG 画像はみ出る 横長画像
+  // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
+  // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
   // untilValue = 1740242330;  // NG テキスト　はみ出る
-  // untilValue = 1740270976;  // kind:1808
+  untilValue = 1740270976;  // kind:1808
   // untilValue = 1740221491;  // tags 13個
   // untilValue = 1740222292;  // 10030 emoji set
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
@@ -366,6 +367,8 @@ const Test = () => {
       let tagImageHTML = '';
       tagImageHTML = makeTagImageHTML(content, note);
 
+
+
 // update cotent. remove tag "r" image URL
 
       content = removeTagImageUrl(content, note);
@@ -387,52 +390,11 @@ const Test = () => {
       let inlineImageHTML = '';
       inlineImageHTML = makeInlineImageHTML(content);
     
-      // content の画像URLを削除
-      {
-        let tmp = content;
-        {
-          const count = tmp.split('\\/').length;
-          for(let i=0; i<count; i++) {
-            tmp = tmp.replace('\\/','/');
-          }
-        }
-        for(let i=0; i<5; i++) {
-          tmp = tmp.replace('\n',' ');
-          tmp = tmp.replace('　',' ');
-          tmp = tmp.replace('`',' ');
-          tmp = tmp.replace('`',' ');
-          tmp = tmp.replace('https://',' https://');  // httpの前にスペースを追加
-          tmp = tmp.replace('http://',' http://');
-          tmp = tmp.replace("`", "");  // googleusercontent
-        }
-        {
-          const count = tmp.split('\n').length;
-          for(let i=0; i<count; i++) {
-            tmp = tmp.replace('\n',' ');
-          }
-        }
-        const tmpContent = tmp.split(' ');
 
-        // conentのjpgなどのURLを削除
-        // const tmpContent = content.split('\n')
-        for(let i=0; i<tmpContent.length; i++) {
-          if(tmpContent[i].includes('http') 
-            && (tmpContent[i].includes('.jpg') ||
-              tmpContent[i].includes('.jpeg') ||
-              tmpContent[i].includes('.png') ||
-              tmpContent[i].includes('.gif') ||
-              tmpContent[i].includes('.svg') ||
-              tmpContent[i].includes('.ico') ||
-              tmpContent[i].includes('.bmp') ||
-              tmpContent[i].includes('.webp') ||
-              tmpContent[i].includes('.mp3') ||
-              tmpContent[i].includes('.mp4') ||
-              tmpContent[i].includes('.mov')
-            )) {
-            content = content.replace(tmpContent[i], '')
-          }
-        }
-      }
+      
+// content の画像URLを削除
+
+      content = removeInlineImageURL(content);
 
 
 
