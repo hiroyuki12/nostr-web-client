@@ -26,12 +26,20 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740224405;  //paging
+  // untilValue = 1740311052;  //paging
 
   let noteCount = 0;
 
+  // Image optimization. image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
+  // https://nostr-blog.ocknamo.com/blog/70791a26bcf4debe4a4ee5e118ced1829350d74e28bea3d8a73110fceea1300c
+
+  // avatar画像　ローカルにキャッシュ
   // css
   // 配列 tags
+  // untilValue = 1740278453;  // fiatjaf 画像 Image optimization /image/width=256/http://origin
+  // untilValue = 1740296791;  // NG 画像はみ出る 横長画像
+  // untilValue = 1740242330;  // NG テキスト　はみ出る
+  // untilValue = 1740270976;  // kind:1808
   // untilValue = 1740221491;  // tags 13個
   // untilValue = 1740222292;  // 10030 emoji set
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
@@ -72,6 +80,7 @@ const Test = () => {
 //      kinds: [41],     // 41:Channel Metadata
     //  kinds: [42],     // 42:Channel_Message
 //      kinds: [44],     // 44:Channel Mute User
+    //  kinds: [1808],   // 1808:
 //      kinds: [1111],   // 1111:Comment
 //      kinds: [1063],   // 1063:File Metadata
 //      kinds: [1311],   // 1311:Live Chat Message
@@ -292,12 +301,12 @@ const Test = () => {
         }
 
         if(marker === "client") {  // client gossip 
-          client = "-via " + note.tags[h][1] + "-"
+          client = "-via " + note.tags[h][1]
         }
         else if(marker === "proxy") { 
           //proxy = note.tags[h][2]  // activitypub (misskey.io, p1.a9z.dev, unnerv.jp, fedibird.com, etc)
           let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
-          proxy = "__" + host + "__"
+          proxy = "-" + host
           proxyUrl = note.tags[h][1]
         }
         else if(marker === "alt") {  //  alt picture
@@ -394,12 +403,6 @@ const Test = () => {
             splitContent2 = splitContent2.replace('{"content":"','');
             splitContent2 = splitContent2.replace('"content":"','');
             
-            if(splitContent2.substr(-1) == '"}') { // 末尾が}の時は最後の文字を削除
-              splitContent2 = splitContent2.slice(0, -1);
-            }
-            if(splitContent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
-              splitContent2 = splitContent2.slice(0, -1);
-            }
 
              // "content":" より後を取得 NG
             /*if(splitContent2.includes('"content":"')) {
@@ -428,6 +431,13 @@ const Test = () => {
               for(let j=0; j<count; j++) {
                 splitContent2 = splitContent2.replace('\\"','"');   // \" -> "
               }
+            }
+
+            if(splitContent2.substr(-1) == '}') { // 末尾が}の時は最後の文字を削除
+              splitContent2 = splitContent2.slice(0, -1);
+            }
+            if(splitContent2.substr(-1) == '"') { // 末尾が"の時は最後の文字を削除
+              splitContent2 = splitContent2.slice(0, -1);
             }
             
             content = splitContent2;
@@ -865,7 +875,7 @@ const Test = () => {
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" /></a>
+              <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" class="imgavatar" /></a>
               {contentWarning}{contentWarningText}{contentWarning}
               {statusString}
               {parse(replyHTML)}

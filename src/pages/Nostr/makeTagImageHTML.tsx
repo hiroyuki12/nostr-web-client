@@ -112,11 +112,11 @@ export const makeTagImageHTML = (content, note) => {
 
 
 
-    if(linkUrl1 != "") linkUrlHTML1 = '<a href="' + linkUrl1 + '" target="_blank"><img src="' + linkUrl1 + '" height="' + image1Height + '" /></a>';
-    if(linkUrl2 != "") linkUrlHTML2 = '<a href="' + linkUrl2 + '" target="_blank"><img src="' + linkUrl2 + '" height="' + image2Height + '" /></a>';
-    if(linkUrl3 != "") linkUrlHTML3 = '<a href="' + linkUrl3 + '" target="_blank"><img src="' + linkUrl3 + '" height="' + image3Height + '" /></a>';
-    if(linkUrl4 != "") linkUrlHTML4 = '<a href="' + linkUrl4 + '" target="_blank"><img src="' + linkUrl4 + '" height="' + image4Height + '" /></a>';
-    if(linkUrl5 != "") linkUrlHTML5 = '<a href="' + linkUrl5 + '" target="_blank"><img src="' + linkUrl5 + '" height="' + image5Height + '" /></a>';
+    if(linkUrl1 != "") linkUrlHTML1 = '<a href="' + linkUrl1 + '" target="_blank"><img src="' + linkUrl1 + '" height="' + image1Height + '" class="imgborder" /></a>';
+    if(linkUrl2 != "") linkUrlHTML2 = '<a href="' + linkUrl2 + '" target="_blank"><img src="' + linkUrl2 + '" height="' + image2Height + '" class="imgborder" /></a>';
+    if(linkUrl3 != "") linkUrlHTML3 = '<a href="' + linkUrl3 + '" target="_blank"><img src="' + linkUrl3 + '" height="' + image3Height + '" class="imgborder" /></a>';
+    if(linkUrl4 != "") linkUrlHTML4 = '<a href="' + linkUrl4 + '" target="_blank"><img src="' + linkUrl4 + '" height="' + image4Height + '" class="imgborder" /></a>';
+    if(linkUrl5 != "") linkUrlHTML5 = '<a href="' + linkUrl5 + '" target="_blank"><img src="' + linkUrl5 + '" height="' + image5Height + '" class="imgborder" /></a>';
 
 
 

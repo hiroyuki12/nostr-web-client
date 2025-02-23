@@ -156,6 +156,7 @@ export const makeIframesbyTagHTML = (content, note) => {
                     // tmpUrl.includes('bsky.app') ||
                     tmpUrl.includes('amzn.to') ||
                     tmpUrl.includes('udio.com') ||
+                    tmpUrl.includes('maps.app.goo.gl') ||
                     tmpUrl.includes('nipron.co.jp')) {
                 const tmpIframe = '<a href="' + tmpUrl + '" target="_blank">' + tmpUrl.replace('http', '(r)_ttp') + '</a>'
                 if(iframe1 == '')  iframe1 = tmpIframe;

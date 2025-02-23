@@ -27,10 +27,12 @@ export const makeIframesbyContentHTML = (content, note) => {
     // tmpContent = tmpContent.replace('=', '\n')  //YouTube
     tmpContent = tmpContent.replace(']', '\n')
     tmpContent = tmpContent.replace('? ', '\n')
+    tmpContent = tmpContent.replace('https://', '\nhttps://')
     
-
     const splitContent = tmpContent.split('\n');
 
+
+    
 
 
     for(let i=0; i<splitContent.length; i++) {
@@ -38,17 +40,12 @@ export const makeIframesbyContentHTML = (content, note) => {
       // YouTube iframe
       // https://github.com/SnowCait/nostter/blob/be5748cbd2ab1b4423f6fad29c2f4e18d0242edd/web/src/lib/components/content/YouTube.svelte
       if(splitContent[i].includes("youtube.com") || splitContent[i].includes("youtu.be/")) {
-        // /watch?v= より後を取得
-        // const target = '/watch?v=';
-        // if(id.includes(target)) {
-        //   id = id.substring(id.indexOf(target) + target.length, id.length);
-        // }
-        
-
-
         const tmpUrl = splitContent[i]
 
+        // return content;  // debug
+
         // cannot be parsed as a URL
+        // TypeError: 
         const link = new URL(tmpUrl);
         let id = tmpUrl;
         

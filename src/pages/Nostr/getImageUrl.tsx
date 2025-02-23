@@ -33,18 +33,69 @@ export const getImageURL = (pubkey) => {
     }  
     else if (npub === '') {
       image = ''
-    }  
+    }
     else if (npub === '') {
       image = ''
-    }  
+    }
     else if (npub === '') {
       image = ''
+    }
+    else if (npub === 'npub1kygqhur6pytn3uy4drck0g86r53gquq9hua6vke5n3zugs2qz2ysfa0m5h') {
+      image = 'https://cdn.nostrcheck.me/b1100bf07a091738f09568f167a0fa1d22807005bf3ba65b349c45c441401289/127038c92a7bddc9db301d6bc008fbd1678662e2ddbb3d490b1dffa8f9b14164.webp'
+    }
+    else if (npub === 'npub1eyyj2t0923jqr6t30pr2ylf6as97a7dasdste4702jqz2twkwaks0lguzk') {
+      image = 'https://image.nostr.build/bd71075ec626c7b2756c1a3e19f6538edc9fb6550aa9703f5b2a54815f5029d8.jpg'
+    }
+    else if (npub === 'npub1pqzsz0egcs0j5xhckyl9es93n3h9qkpfw862gz5372kks4jqgjkqspy36j') {
+      image = 'https://gts.files.kalaclista.com/01AS481B9BVHXZS7KK94DZRFPR/attachment/original/01ABPW149HQKHS648PCZNN8RRG.png'
+    }
+    else if (npub === 'npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk') {
+      image = 'https://i.nostr.build/Czutaiv0VZrr8QNr.jpg'
+    }
+    else if (npub === 'npub14jm8vjwey96v5gnrz9j0c2suh8w0q3peszgcaet6skew0fq5t3vqkn38cf') {
+      image = 'https://misskey.omhnc.net/files/webpublic-f8a1079e-2fed-4489-86f7-3b211bc0d480'
     }  
-    else if (npub === '') {
+    else if (npub === 'npub12262qa4uhw7u8gdwlgmntqtv7aye8vdcmvszkqwgs0zchel6mz7s6cgrkj') {
       image = ''
     }  
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1utx00neqgqln72j22kej3ux7803c2k986henvvha4thuwfkper4s7r50e8') {
+      image = 'https://i.nostr.build/6G6wW.gif'
+    }  
+    else if (npub === 'npub10hqkwugj7p027j250qr9gwcuqpkwxftj0rjjk8y6hlmryu8dwp8s2runf2') {
+      image = 'https://raw.githubusercontent.com/invertedtriangle358/images/refs/heads/main/Sankaku/Sankaku_icon.jpg'
+    }  
+    else if (npub === 'npub1zqdnpm5gcfap8hngha7gcp3k363786phvs2etsvxw4nh6x9ydfzsuyk6mn') {
+      image = 'https://github.com/user-attachments/assets/c1086d97-4cc3-44da-9ce5-07d3b05dd94c'
+    }  
+    else if (npub === 'npub1pjd3a8l0wmygkclcvezacvamwamlqfv7cs0xwjmp7n7920mdkrsq9hpeqp') {
+      image = 'https://i.gyazo.com/74c608e1b67f7eec5f03150f53ac1ff5.jpg'
+    }  
+    else if (npub === 'npub1ymvgffzm7agxxj9ejlj34fxa50pmssq9wkhp0gqskx4wdvdmgjlsvgfhq2') {
+      image = 'https://kazeki.net/img/icon.jpg'
+    }  
+    else if (npub === 'npub1xkym0yaewlz0qfghtt7hjtnu28fxaa5rk3wtcek9d3x3ft2ns3lq775few') {
+      image = 'https://image.nostr.build/7c6d912a74ba8ae7cc983f28f1aad8e7a2bc53f0698bc27144641cbaf41e0ab7.jpg'
+    }  
+    else if (npub === 'npub10de6hczu4gzn8e28wrxjygpuqvhw0sfg2qkj64zkp78frfyc22rslyes37') {
+      image = 'https://image.nostr.build/aefbd12fd73b1ef78ff443db4e995d9df13654ed3bfa69a2d9115fbf44b3f2dc.png'
+    }  
+    else if (npub === 'npub1vhjgukfa85knzkjazs79ql3skr3scxcg4utpc436gzdt4x2z9qmqgdxalm') {
+      image = 'https://pbs.twimg.com/profile_images/1364115004/522_400x400.png'
+    }  
+    else if (npub === 'npub1676slrtdwuheq9qn3jnrkl0se45ptv0hmr8reqdm86fgf4889ztq487pwj') {
+      image = 'https://gravatar.com/avatar/f5c4bc5f41ae0e84ec112cc1cd71d418'
+    }  
+    else if (npub === 'npub16zy52r7lmk9v2u38dvvlwruz2ua0fgjwuegaxxhxxs00kwlujqlskuv3t2') {
+      image = 'https://files-p1.a9z.dev/p1/a4b42279-fdc0-41bf-806a-b52c0ba8a026.png'
+    }  
+    else if (npub === 'npub1w7urmgs842v08l909y7g6wmmav27syhfxltezpr8pe80g0m2urjqdguggc') {
+      image = 'https://media.unnerv.jp/accounts/avatars/000/000/001/original/d53dd7b3255a6f46.png'
+    }  
+    else if (npub === 'npub17eps93ad9wh5mzv7e2usnesatwysv8perjrqn5estva5nckkltgssnt9xr') {
+      image = 'https://image.nostr.build/cacaf1edbbf995443df952b92e22f65dca63947ebf15661811c318f3f9a771cc.jpg#m=image%2Fjpeg&dim=253x214&blurhash=%3BgT7f%5EivpykWc%5Bo%7DkqogjuloaJnig4emkDaJjZaKg%24bckXkDicjFenaKbHq%5Bf%2Bb%5Ej%5DZ%7Eembwaeb%5EgifljFjZjYaKjZbbe-ozfkaJjtbcaeg3g3e.giflive.fRa%7BbGf%2Badnhf%2Bfke.bcbHkCf%2Bj%5D&x=56bccaf4a5c0b35486f8cd4855c6d64f6a2047be06707ab607ccb7fea939ea6d'
+    }  
+    else if (npub === 'npub1t6lc6nwpcat3zd7rgheh3uqenpl0skr5ej89pscxvdynw06d07ysyul9n7') {
+      image = 'https://media.misskeyusercontent.com/misskey/webpublic-8093235c-bc71-4fd3-961c-6ca71c4152b8.png'
     }  
     else if (npub === 'npub1wp4ts07g3fk4fmwrwdrnyqsg0yrh4ghuj7nyq0722mu40sxhnd4q8mg7ag') {
       image = ''
@@ -58,8 +109,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === 'npub10vk9gv50y29p7fgxf5m9thsjl7j52rcqswpw9uwun5qdxajef8ms9jfxkx') {
       image = 'https://image.nostr.build/353cca990e630a5afceb96e8faed3c28f5481eb51fa49633bba47dcaede362d7.jpg'
     } 
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub10zeurmg22wc89l8m3npw9cyu45cun0lvs6w3ep69cdpa25pna65s0994qz') {
+      image = 'https://i.nostr.build/E0JJ.webp'
     } 
     else if (npub === 'npub1rm7m257e4u8r2d7fxxjxfthmwt0q7pkfgdzu2f9757clc6k2pydqrkzgpj') {
       image = 'https://cdn.nostrcheck.me/1efdb553d9af0e3537c931a464aefb72de0f06c94345c524bea7b1fc6aca091a/0b04d49c42c5d028542bdcbda6244e0d9d73eda83981e66796813c0dad16693e.webp'
@@ -99,7 +150,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://avatars.githubusercontent.com/u/98054437?s=200&v=4'
     } 
     else if (npub === 'npub12262qa4uhw7u8gdwlgmntqtv7aye8vdcmvszkqwgs0zchel6mz7s6cgrkj') {
-      image = ''
+      image = 'https://i.nostr.build/VZQgCXV4FvIDjx5d.gif'
     } 
     else if (npub === 'npub1d0edywgyn5qzqyf9g8kpfz8g55fz7ymsxu5en5cx0efaxxeqdzmswur6n8') {
       image = 'https://image.nostr.build/80cf8e93e176334dc766a6004e6f3bd3e1a8229088aee9eee6e1002ed6821fce.jpg'
@@ -177,7 +228,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://media.misskeyusercontent.com/io/48777df4-dd04-4503-9140-92d0e45dc947.gif'
     } 
     else if (npub === 'npub107jk7htfv243u0x5ynn43scq9wrxtaasmrwwa8lfu2ydwag6cx2quqncxg') {
-      image = 'https://nostr.download/1aba957814cac9c324c54d94e0ba6606dc50af17f7c08654e9b9f139a9720d6d.jpeg'
+      image = ''
     } 
     else if (npub === 'npub18yew4fklxhun7h3y5qp4g09u8mjmh83wxnm553twjj0z909kqrfs4qhfer') {
       image = 'https://media.misskeyusercontent.com/io/11a2dc43-03cf-484e-8c7a-54c304efad42.webp'
@@ -291,7 +342,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://media.misskeyusercontent.com/misskey/4a12ff3e-8553-4b85-bcd6-5baf3a35a917.jpg'
     } 
     else if (npub === 'npub15tpsv09znjrs0yruynflxj7nlzv4ekrkg0g7wp7x5hkqg5lzyfdq7956cr') {
-      image = 'https://media.misskeyusercontent.com/io/274cc4f7-4674-4db1-9439-9fac08a66aa1.png'
+      image = 'https://media.misskeyusercontent.com/io/webpublic-5e656364-387d-420c-ab31-0a66af07c720.png'
     } 
     else if (npub === 'npub1y6qr0pl5l9g6djm69su4gevpg2kwu8d69cc5ehnhl8pzea2nl53qhdmp7f') {
       image = 'https://cdn.nostrcheck.me/26803787f4f951a6cb7a2c3954658142acee1dba2e314cde77f9c22cf553fd22/cadaa37c1b99411887915fe01436bdd73c58edf7427cd25d4dadf01aa5e05790.webp'
@@ -832,7 +883,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://image.nostr.build/a6935651d3a55a82c4c8fda874a7fc43ceba83655e70247d9ffa5f0119e0982c.png'
     } 
     else if (npub === 'npub1upv4xeydzu0ahflm853vw68sax7hfqjd64zskwl4eq42qccqs0yq2ayw07') {
-      image = 'https://drive.misskey.nokotaro.com/files/b8d5d593-2894-4550-82f5-e05d25f42177.png'
+      image = 'https://drive.misskey.nokotaro.com/files/cf984d22-c347-410b-ba88-15aa8170c3eb.webp'
     } 
     else if (npub === 'npub18p9ksnc3tgqp64gej3qsp6qly45e6zr8dfk25hjrhlqr8qzx4t8qc7547a') {
       image = 'https://ocean-alliance.org/oceanalliance_circle_logo.png'
@@ -7832,7 +7883,7 @@ export const getImageURL = (pubkey) => {
     else if (pubkey == '53bde5f1748546a0c28f1fab8ee18d7229e6ebaaea2df343906de9325333dd3c') {
       // syui
       //image = 'https://imgproxy.iris.to/insecure/plain/https://syui.cf/icon/syui.png'
-  image = 'https://syui.ai/icon/syui.png'
+      image = 'https://syui.ai/icon/syui.png'
     }
     else if (pubkey == 'f1479c160e576934586a7424195dc155a04448d3d71d4090adec95915dd1eba9') {
       // h3y6e
@@ -7869,7 +7920,7 @@ export const getImageURL = (pubkey) => {
     else if (pubkey == '0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0') {
       // shi_on_72
       image = 'https://nostr.build/i/nostr.build_0d82a5e17035a545e37c91def026c542a2fcc967f5a2adda881fe121de4098e2.jpg'
-      image = 'https://i.gyazo.com/74c608e1b67f7eec5f03150f53ac1ff5.jpg'
+      // image = 'https://i.gyazo.com/74c608e1b67f7eec5f03150f53ac1ff5.jpg'
     }
     else if (pubkey == '96203d66276e3214ea93b6c78a577c3c9a7279f9ee7e51b22f3b8c17643a819c') {
       // syusui_s
@@ -7877,8 +7928,9 @@ export const getImageURL = (pubkey) => {
     }
     else if (pubkey == '846b763b1234c5652f1e327e59570dcb6535d2d20589c67c2a9a90b323539eca') {
       // caz0617
-      image = 'https://www.tgkzmdd.help/nostrimg/profile/feelie.jpg'
-      image = 'https://tgkzmdd.help/nostrimg/profile/caz0617_malaysia_800x800.png'
+      image = ''
+      // image = 'https://www.tgkzmdd.help/nostrimg/profile/feelie.jpg'
+      // image = 'https://tgkzmdd.help/nostrimg/profile/caz0617_malaysia_800x800.png'
     }
 
 
@@ -7888,18 +7940,35 @@ export const getImageURL = (pubkey) => {
     if(image == '') {
       image = 'https://robohash.org/' + nip19.npubEncode(pubkey) + '?set=set4'
     }
-    else if (!image.includes('https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png') &&
-             !image.includes('data:image') &&
-             !image.includes('.gif') &&
-             !image.includes('nostrcheck.me') &&
-             !image.includes('uneune.one') &&
-             !image.includes('imgur.com') &&
-             !image.includes('monacute.art') &&
-             !image.includes('s3.fedibird.com') &&
-             !image.includes('nixeneko.info') &&
-             
-             !image.includes('cdn.nostrcheck.me')) {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/' + image;
+    else if (
+      //  !image.includes('https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png') &&
+        //  !image.includes('.gif') &&
+      //  !image.includes('') &&
+        !image.includes('kojira.io') &&  // ocknamo
+        !image.includes('nostr.build') &&
+        //  !image.includes('') &&
+        //  !image.includes('') &&
+        //  !image.includes('') &&
+        //  !image.includes('') &&
+        //  !image.includes('') &&
+      //  !image.includes('nostr.download') &&
+      //  !image.includes('nostrcheck.me') &&
+      //  !image.includes('link.storjshare.io') &&
+      //  !image.includes('tac-lan.net') &&
+      //  !image.includes('pbs.twimg.com') &&
+      //  !image.includes('media.misskeyusercontent.com') &&
+      //  !image.includes('picture-dka.pages.dev') &&
+        
+      //  !image.includes('uneune.one') &&
+      //  !image.includes('imgur.com') &&
+      //  !image.includes('monacute.art') &&
+      //  !image.includes('s3.fedibird.com') &&
+      //  !image.includes('nixeneko.info') &&
+        
+        !image.includes('data:image') 
+      ) {
+      // image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/' + image;
+      // image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
     }
 
 

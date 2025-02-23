@@ -19,11 +19,11 @@ export const makeReplyHTML = (note) => {
     //const replyToUserBaseUrl = "https://astraea.mousedev.page/profile/" 
     const replyToUserBaseUrl = "https://nostrudel.ninja/#/u/" 
     //let replyToUrl1 = replyToUserBaseUrl + npub 
-    let replyToUrl1 = replyToUserBaseUrl
-    let replyToUrl2 = replyToUrl1
-    let replyToUrl3 = replyToUrl1
-    let replyToUrl4 = replyToUrl1
-    let replyToUrl5 = replyToUrl1
+    let replyToUrl1 = ''
+    let replyToUrl2 = ''
+    let replyToUrl3 = ''
+    let replyToUrl4 = ''
+    let replyToUrl5 = ''
     let replyToImageSize1 = "0"
     let replyToImageSize2 = "0"
     let replyToImageSize3 = "0"
@@ -182,15 +182,17 @@ export const makeReplyHTML = (note) => {
     }
 
 
+    
 
 
-    const replyHTML = '<a href="' + channelUrl + '" target="_blank">' + channel + '</a>' +
-      reply + " " +
-      '<a href="' + replyToUrl1 + '" target="_blank"><img src="' + replyToImageURL1 + '" width="' + replyToImageSize1 + '" height="' + replyToImageSize1 + '" /></a>' +
-      '<a href="' + replyToUrl2 + '" target="_blank"><img src="' + replyToImageURL2 + '" width="' + replyToImageSize2 + '" height="' + replyToImageSize2 + '" /></a>' +
-      '<a href="' + replyToUrl3 + '" target="_blank"><img src="' + replyToImageURL3 + '" width="' + replyToImageSize3 + '" height="' + replyToImageSize3 + '" /></a>' +
-      '<a href="' + replyToUrl4 + '" target="_blank"><img src="' + replyToImageURL4 + '" width="' + replyToImageSize4 + '" height="' + replyToImageSize4 + '" /></a>' +
-      '<a href="' + replyToUrl5 + '" target="_blank"><img src="' + replyToImageURL5 + '" width="' + replyToImageSize5 + '" height="' + replyToImageSize5 + '" /></a>' ;
+    let replyHTML = '<a href="' + channelUrl + '" target="_blank">' + channel + '</a>' +
+      reply + " ";
+
+    if(replyToUrl1 != '') replyHTML = replyHTML + '<a href="' + replyToUrl1 + '" target="_blank"><img src="' + replyToImageURL1 + '" width="' + replyToImageSize1 + '" height="' + replyToImageSize1 + '" class="imgavatar" /></a>' ;
+    if(replyToUrl2 != '') replyHTML = replyHTML + '<a href="' + replyToUrl2 + '" target="_blank"><img src="' + replyToImageURL2 + '" width="' + replyToImageSize2 + '" height="' + replyToImageSize2 + '" class="imgavatar" /></a>' ;
+    if(replyToUrl3 != '') replyHTML = replyHTML + '<a href="' + replyToUrl3 + '" target="_blank"><img src="' + replyToImageURL3 + '" width="' + replyToImageSize3 + '" height="' + replyToImageSize3 + '" class="imgavatar" /></a>' ;
+    if(replyToUrl4 != '') replyHTML = replyHTML + '<a href="' + replyToUrl4 + '" target="_blank"><img src="' + replyToImageURL4 + '" width="' + replyToImageSize4 + '" height="' + replyToImageSize4 + '" class="imgavatar" /></a>' ;
+    if(replyToUrl5 != '') replyHTML = replyHTML + '<a href="' + replyToUrl5 + '" target="_blank"><img src="' + replyToImageURL5 + '" width="' + replyToImageSize5 + '" height="' + replyToImageSize5 + '" class="imgavatar" /></a>' ;
 
     return replyHTML;
 }
