@@ -42,6 +42,9 @@ export const makeTagsText = (note) => {
     else {
       if(tagsLinkUrlText1 === "") {
         tagsLinkUrlText1  = "_tags[0](" + marker + ")";  // event id
+        if(marker === "d" && note.tags[h].length > 1) {  //  d
+          tagsLinkUrlText1  = "_tags[0](" + marker + ' ' + note.tags[h][1] + ")";  // d music, etc
+        }
       }
       else if(tagsLinkUrlText2 === "") {
         tagsLinkUrlText2  = "_tags[1](" + marker + ")";

@@ -7,14 +7,16 @@ const relayUrls = [
   "wss://relay-jp.nostr.wirednet.jp",   //jp 
   "wss://yabu.me",                  //jp, (wirednet,heguro,h3z,holybea,ocha,fediverce,c-stellar,kojira,nokotaro) 
   "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
-  "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
-  "wss://relay.snort.social", 
+  // "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
+  // "wss://relay.snort.social", 
+  "wss://relay.damus.io",           //en, jp  Nelly
+  
+  // "wss://nrelay-jp.c-stellar.net",
 
 //  "wss://cagliostr.compile-error.net",  // C++
 //  "wss://nostr.compile-error.net",      // Go
 
 //  "wss://bostr.nokotaro.com",
-
  
 //  "wss://r.kojira.io",
 //  "wss://relay.nostr.wirednet.jp", 
@@ -26,13 +28,11 @@ const relayUrls = [
   // "wss://nostr-relay.nokotaro.com", //jp, en 
 //  "wss://nrelay.c-stellar.net",
 //  "wss://strelay.c-stellar.net",
-//  "wss://nrelay-jp.c-stellar.net",
 
 //  "wss://relay.nostr.moctane.com",
 //  "wss://relay-jp.nostr.moctane.com",
 //  "wss://nostream.ocha.one",
 
-//  "wss://relay.damus.io",           //en, jp  Nelly
 //  "wss://nostr.wine",               //jp en, Vitor, Terry
 //  "wss://purplepag.es",             // kind0
 //  "wss://relayable.org",            //
@@ -44,12 +44,12 @@ const relayUrls = [
 //  "wss://bostr/nokotaro.work",
 
 // twitch
- "wss://irc-ws.chat.twitch.tv/",
- "wss://pubsub-edge.twitch.tv/v1 ",
+//  "wss://irc-ws.chat.twitch.tv/",
+//  "wss://pubsub-edge.twitch.tv/v1 ",
 
 
 
-//  "wss://relay.mostr.pub",
+ "wss://relay.mostr.pub",
 //  "wss://nostr.h3z.jp",             //en, jp 
 
 /* 

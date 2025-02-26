@@ -19,18 +19,19 @@ export const getImageURL = (pubkey) => {
     } 
     else if (pubkey === '548ce7c9f49011f0046fa8f1a22ed1dbe568778bb6d9a4cbcacdf0ccdcc74666') {
       // imageproxy.iris.to 9KB, orignn 200KB.
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_008fc7e6a180c44124c2c1d7e70ae34ab08b87c1e26b2155cb3bfbd73b62346d.jpg'
+      image = 'https://nostr.build/i/nostr.build_008fc7e6a180c44124c2c1d7e70ae34ab08b87c1e26b2155cb3bfbd73b62346d.jpg'
     } 
     
+    //https@://imgproxy.iris.to/insecure/rs:fill:256:256/plain/
 
         
     // @@ 
     else if (npub === '') {
       image = ''
-    }  
+    }
     else if (npub === '') {
       image = ''
-    }  
+    }
     else if (npub === '') {
       image = ''
     }
@@ -38,6 +39,48 @@ export const getImageURL = (pubkey) => {
       image = ''
     }
     else if (npub === '') {
+      image = ''
+    }
+    else if (npub === '') {
+      image = ''
+    }
+    else if (npub === '') {
+      image = ''
+    }
+    else if (npub === '') {
+      image = ''
+    }
+    else if (npub === '') {
+      image = ''
+    }
+    else if (npub === '') {
+      image = ''
+    }
+    else if (npub === 'npub1p92agfqsynk3lv8mturqwaq68wpvat55qsf72e3j97wkrnyy9hhsxczd3x') {
+      image = 'https://shino3.net/salmon_alert.png'
+    }
+    else if (npub === 'npub13y0txj4x7ztqjlduvx3fa0ypvmavmqm9m5u289gnk8lezczv0caq80m4gf') {
+      image = 'https://image.nostr.build/8cfcbf5d8a2d7540ebd58cc7bb4293bf1636306dad008207b0988b835b6d8dc0.png'
+    }
+    else if (npub === 'npub1rarr265r9f9j6ewp960hcm7cvz9zskc7l2ykwul57e7xa60r8css7uf890') {
+      image = 'https://nostr.build/i/nostr.build_472e5de35839285714a8e1a00d011ecc18b10a6cd95e6b7443332938b7351ba2.jpg'
+    }
+    else if (npub === 'npub1vlrdrgw5ndqf98vh06gv257rnxllgvgj2x688snaz5ujal9g7j4qzrx0cf') {
+      image = 'https://oran.ski/files/104ed3b2-f62f-48a1-b863-7a61d8380609'
+    }
+    else if (npub === 'npub1rujuutlpzx205rz9snw3pfca9wcdx3vuwqqv0alxma7mv8clfkdq3fa0e5') {
+      image = 'https://blog.rujuu.com/wp-content/uploads/2023/02/image0-scaled-e1676052189310.jpg'
+    }
+    else if (npub === 'npub1m2mn8k45482th56rsxs3ke6pt8jcnwsvydhpzufcf6k9l5f6w5lsnssk99') {
+      image = 'https://aheahead.com/perm/icon/ninja_icon.png'
+    }  
+    else if (npub === 'npub1c3xutxzwzvwhmjycutv0kaxwrq7tfav4q4tuamhj3rhx2df3385qsdz0hm') {
+      image = 'https://image.nostr.build/149776a9f45994c8445810b833bad646fe4dc04c518cb281bf7c4f7e8e001b88.png'
+    }
+    else if (npub === 'npub19eha7gd5q0s92mx4u70xy0kus6lzl2sky5yjs2nhe402xpnmxt0q6lmsnd') {
+      image = ''
+    }
+    else if (npub === 'npub1y9uju9ncvlvky48gg0trf3n20vprl8qj0xctadrufcvfrtvkzhysr9eya9') {
       image = ''
     }
     else if (npub === 'npub1kygqhur6pytn3uy4drck0g86r53gquq9hua6vke5n3zugs2qz2ysfa0m5h') {
@@ -50,7 +93,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://gts.files.kalaclista.com/01AS481B9BVHXZS7KK94DZRFPR/attachment/original/01ABPW149HQKHS648PCZNN8RRG.png'
     }
     else if (npub === 'npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk') {
-      image = 'https://i.nostr.build/Czutaiv0VZrr8QNr.jpg'
+      image = 'https://image.nostr.build/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
     }
     else if (npub === 'npub14jm8vjwey96v5gnrz9j0c2suh8w0q3peszgcaet6skew0fq5t3vqkn38cf') {
       image = 'https://misskey.omhnc.net/files/webpublic-f8a1079e-2fed-4489-86f7-3b211bc0d480'
@@ -242,7 +285,8 @@ export const getImageURL = (pubkey) => {
     } 
     else if (npub === 'npub1zpq2gsz25wsgun2e4gtks9p63j7fvyfd46weyjzp5tv6yys89zcsjdflcv') {
       // account delete
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://media.h3z.jp/img/profile-img-circle.png'
+      // image = 'https://media.h3z.jp/img/profile-img-circle.png'
+      image = 'https://media.h3z.jp/img/profile-img-circle.png'
     } 
     else if (npub === 'npub178wk5p04nz64yt4ypnecvxl0h32z8cwnhs9l4g6u7phs38vj306q628jla') {
       image = 'https://pbs.twimg.com/profile_images/1485618489494687745/IQhcbmO2_400x400.jpg'
@@ -817,7 +861,7 @@ export const getImageURL = (pubkey) => {
       image = 'https://media.mstdn.jp/accounts/avatars/000/160/720/original/6483013ad0118b6d.jpg'
     } 
     else if (npub === 'npub1fdqyx5udmcv83yz49zytxrqqdev00lksp5v2h3eupjnjp639wzsqwy0y4d') {
-      image = 'https://void.cat/d/Qeno3q3stZFJ5qJM6xadDu.webp'
+      image = 'https://thumb.ac-illust.com/c0/c0395890a48c86285717226181692191_t.jpeg'
     } 
     else if (npub === 'npub1qh3kyju2d60dyqz9axyvduqkn833mu8cwaafmq0g6n26n8ft566scmqe8n') {
       image = 'https://image.nostr.build/5b0d97ce1bda0e894ccc36cd0f233f92608721255ca3e637bbdfdfed8190cb2e.jpg'
@@ -2410,7 +2454,8 @@ export const getImageURL = (pubkey) => {
       image = 'https://cdn.nostr.build/i/ffce36183e1b0c82fed7ac8babc1a4a08d73aae65f1d92eadf84ebdb394569b1.jpg'
     } 
     else if (pubkey === 'e859a7cbde1006f823ee819aa308752d9e1123a1842a98ae2297a1031f5fdf94') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/cccbb293f1af2fdb0603055f056162c868cf0aa95da22c8e9b55a926505f9fb7.jpg'
+      // image = 'https://cdn.nostr.build/i/cccbb293f1af2fdb0603055f056162c868cf0aa95da22c8e9b55a926505f9fb7.jpg'
+      image = 'https://cdn.nostr.build/i/cccbb293f1af2fdb0603055f056162c868cf0aa95da22c8e9b55a926505f9fb7.jpg'
     } 
     else if (pubkey === '41d516e4907a461254f0789960c104dd8265723130c55e0b19e56e5e2bb49c9c') {
       image = 'http://nostr.build/i/2199f8eba49404feac5e081b7d3db8f3e9f79365616cd63c76125ba2e474c3d6.png'
@@ -2447,100 +2492,100 @@ export const getImageURL = (pubkey) => {
       image = 'https://robohash.org/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt?set=set4'
     } 
     else if (pubkey === '180a6d42c7d64f8c3958d9d10dd5a4117eaaacea8e7f980781e9a53136cf5693') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/b15efbca5d14f3221a91bd680530276445bbcb7756eb6f86c8c97b6d7a8b50a7.gif'
+      image = 'https://nostr.build/i/b15efbca5d14f3221a91bd680530276445bbcb7756eb6f86c8c97b6d7a8b50a7.gif'
     } 
     else if (pubkey === 'bd60934e084aa21bbb9e4f195e0e6123b9cc21061735ed77ea356131acada4dd') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/59d3e7276e5d4d4b8b722e49b9c4cf772485617516dd667a7cbfe202da957a9e.jpg'
+      image = 'https://nostr.build/i/59d3e7276e5d4d4b8b722e49b9c4cf772485617516dd667a7cbfe202da957a9e.jpg'
     } 
     else if (pubkey === '1a4c6e98dac3f8ee6fad1aded47e542767792f8318941be1d7177ccf501d06e0') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/e4035ca61d348d3a808ef1a695e75700a02eddabbe5c6f3d07ff3d84759346e8.jpg'
+      image = 'https://nostr.build/i/e4035ca61d348d3a808ef1a695e75700a02eddabbe5c6f3d07ff3d84759346e8.jpg'
     } 
     else if (pubkey === '508f28656b8db436153d5239de5034abc0351b8c90ac33e6b156d1fea64b2960') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/p/89255b2c8c7901f3850b8543e21720ec1c70b717616a07672f8506f61a4399a3.gif'
+      image = 'https://nostr.build/i/p/89255b2c8c7901f3850b8543e21720ec1c70b717616a07672f8506f61a4399a3.gif'
     } 
     else if (pubkey === '022947f785b836141335b246b9788b3d1b3d3d64a5ecfbe37e0d960d235b1711') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/p/94Qv.jpg'
+      image = 'https://cdn.nostr.build/p/94Qv.jpg'
     } 
     else if (pubkey === '9a43f07b5204478ee6d82753aacd28b4bfeaa3a3013e9da3ce440d80b32f2d07') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://void.cat/d/5ikCjBgz5vPosjLU49bQ8G.webp'
+      image = 'https://void.cat/d/5ikCjBgz5vPosjLU49bQ8G.webp'
     } 
     else if (pubkey === '8f44c56131b362668b0e01be8c71b24786598bb68fb909cfd78fabfb058dd0f0') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/7df94d9e137bd8d10baa805ddc4a852ef6c6e12d369f63d93975f4fa2bdf6c7f.jpg'
+      image = 'https://cdn.nostr.build/i/7df94d9e137bd8d10baa805ddc4a852ef6c6e12d369f63d93975f4fa2bdf6c7f.jpg'
     } 
     else if (pubkey === '834034a984a0c1a95de65e0c514a612c7c1a6e4cfb6edbe90c0a139f608aa9a6') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_e5137ace4fbe792169533464c6b32631335301e674b18fa31291321eb009c78d.jpg'
+      image = 'https://nostr.build/i/nostr.build_e5137ace4fbe792169533464c6b32631335301e674b18fa31291321eb009c78d.jpg'
     } 
     else if (pubkey === '4796eb254645a3b0db24e77dd7bae72eadfe18fc4c24f2bc6c4e658c4fec4ed4') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/dd3aa468a41dc62e17867c3396c73b3e5571f3e6e1934863a1be1be33f8f86fa.png'
+      image = 'https://cdn.nostr.build/i/dd3aa468a41dc62e17867c3396c73b3e5571f3e6e1934863a1be1be33f8f86fa.png'
     } 
     else if (pubkey === '2bac48c4c4c8290f0dc7930a3b97026db2ea0ec7e0582b2577caefec1e0b7328') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/04d124e10fc54c28e39564ff7b1d05e428a3775cc25376554b4d272506618f33.jpg'
+      image = 'https://cdn.nostr.build/i/04d124e10fc54c28e39564ff7b1d05e428a3775cc25376554b4d272506618f33.jpg'
     } 
     else if (pubkey === 'ccec23ef54ebcfd3bcbf71c4e28d8c32087addda00710197e72275a04828648e') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/9b5860e61582d63a15af6dbe1958b366a75f97344a9f63bb1b56d9016feab570.png'
+      image = 'https://cdn.nostr.build/i/9b5860e61582d63a15af6dbe1958b366a75f97344a9f63bb1b56d9016feab570.png'
     } 
     else if (pubkey === 'cd0c30bf2e327c8d04433314596cdda5330246eb3df5093ce995ed10e6c2f29a') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/ffce36183e1b0c82fed7ac8babc1a4a08d73aae65f1d92eadf84ebdb394569b1.jpg'
+      image = 'https://nostr.build/i/ffce36183e1b0c82fed7ac8babc1a4a08d73aae65f1d92eadf84ebdb394569b1.jpg'
     } 
     else if (pubkey === 'fed5c0c3c8fe8f51629a0b39951acdf040fd40f53a327ae79ee69991176ba058') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/p/nostr.build_64b2d5dd4ab4a8d8c156be0f47484584d856f12630ba44a0e34876ce2775e04d.jpg'
+      image = 'https://nostr.build/i/p/nostr.build_64b2d5dd4ab4a8d8c156be0f47484584d856f12630ba44a0e34876ce2775e04d.jpg'
     } 
     else if (pubkey === '588b9199e1a56264f98a50dcde1a7798909f8856c54636b3de97e79fc96f0da5') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_7ca1090d761fdc45d2f8c52ac5c721f5d1c862e43b3f109c98ac4e8007f14df8.jpg'
+      image = 'https://nostr.build/i/nostr.build_7ca1090d761fdc45d2f8c52ac5c721f5d1c862e43b3f109c98ac4e8007f14df8.jpg'
     } 
     else if (pubkey === '36bd2bc05fa5c70c0eb158cf5c23e47722077c591e9b49ac8e8f644d81ad7012') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_a4ac587683b833c7695cb8de49b054562a3c9733c15c836b5852f8b49116b926.jpg'
+      image = 'https://nostr.build/i/nostr.build_a4ac587683b833c7695cb8de49b054562a3c9733c15c836b5852f8b49116b926.jpg'
     } 
     else if (pubkey === '0d0b083e3dd393389e725fe42ba58c6f484e57fd708ff7e07d4dc1d3e0d257a4') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_8e6549c218cbbf9d6d8d4c7cd67d39bda01971889b0749dfa1668af1ec2832c6.jpg'
+      image = 'https://nostr.build/i/nostr.build_8e6549c218cbbf9d6d8d4c7cd67d39bda01971889b0749dfa1668af1ec2832c6.jpg'
     } 
     else if (pubkey === '278e6a55a7f88fc015164daa4c5aa44275c4494370e6afc7ed61dfc1a1f5f506') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://void.cat/d/G8ZYegAgiuskEcDbqPFXU1.webp'
+      image = 'https://void.cat/d/G8ZYegAgiuskEcDbqPFXU1.webp'
     } 
     else if (pubkey === '7cebf422b8e17b0cefb1d5819fb0fb5cf79ba52e8b64202f3bb62192ff3019d4') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://i.ibb.co/TK02Ytx/7-EF569-CC-1-BB3-4-F09-92-FD-E0-AAEB0-A3-D79.png'
+      image = 'https://i.ibb.co/TK02Ytx/7-EF569-CC-1-BB3-4-F09-92-FD-E0-AAEB0-A3-D79.png'
     } 
     else if (pubkey === 'dbe792290238ea118b2c77f57dc07a8ecb8b609185bffedbf5d833b9e3540b93') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://pbs.twimg.com/profile_images/1471571444442320897/DE8l8vQ3_400x400.jpg'
+      image = 'https://pbs.twimg.com/profile_images/1471571444442320897/DE8l8vQ3_400x400.jpg'
     } 
     else if (pubkey === 'ad36dd51993d7fa327c9858529ec9be9c41b9ee6d79760b3ee75c0b28251857b') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://i.postimg.cc/YCfDJQZk/photo-2023-03-24-21-18-34.jpg'
+      image = 'https://i.postimg.cc/YCfDJQZk/photo-2023-03-24-21-18-34.jpg'
     } 
     else if (pubkey === 'b6d9f5340650024ff04c3e5a3a19a3654797cd65057bed90a2801fdfe5d167a1') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/27a536f1756afcf27bf0c14c671cdb9196b00c2aa26756ec3e703f1d1ff8a419.jpg'
+      image = 'https://cdn.nostr.build/i/27a536f1756afcf27bf0c14c671cdb9196b00c2aa26756ec3e703f1d1ff8a419.jpg'
     } 
     else if (pubkey === 'd162a032301522b2a5bfdaa7e8630ba76f92a4856430b8e80d7bb0e36cb5412d') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdni.bestporn.pics/460/7/484/75181034/75181034_001_2afd.jpg'
+      image = 'https://cdni.bestporn.pics/460/7/484/75181034/75181034_001_2afd.jpg'
     } 
     else if (pubkey === 'a7e8f6ed28694051e24af6892ac505745d44204adf1bdbf1b31a84aa04cfd240') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/cb34d35789f2d13d34016e9c649e2b307802cbc76c7e3d1d12c5dbd8ef2273b8.jpg'
+      image = 'https://cdn.nostr.build/i/cb34d35789f2d13d34016e9c649e2b307802cbc76c7e3d1d12c5dbd8ef2273b8.jpg'
     } 
     else if (pubkey === '54b2d4f2f653923f408389d6a4d29aa2ad7e104549ce3d452bdbe4a671a60160') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/bcefcd7d20fa20aab3b656eaba292c2e61d3ca9f42602a248f792ba025fcb267.jpg'
+      image = 'https://cdn.nostr.build/i/bcefcd7d20fa20aab3b656eaba292c2e61d3ca9f42602a248f792ba025fcb267.jpg'
     } 
     else if (pubkey === '8e432ad14d3955d0863b975778f0c8817ef88c9f119d626da1a3face584bda73') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/4e825b538008fb9aeeb1ed9fc68b148a2eb4390eabca3733aabf6ece1eaeb8d3.jpg'
+      image = 'https://cdn.nostr.build/i/4e825b538008fb9aeeb1ed9fc68b148a2eb4390eabca3733aabf6ece1eaeb8d3.jpg'
     } 
     else if (pubkey === '5111a0936c7d0fa7c2499fa876ed82c22f93e18578069a4fa261cb42bc2ddc63') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://images.ecency.com/DQmTEJGmGPyD3RZFthLj6sfELfJfBxBPctxh5oqMPbLSGeo/i2ivcgpj_400x400.jpg'
+      image = 'https://images.ecency.com/DQmTEJGmGPyD3RZFthLj6sfELfJfBxBPctxh5oqMPbLSGeo/i2ivcgpj_400x400.jpg'
     } 
     else if (pubkey === '792af24ad73f5ea9f34261e4ab7e21e5fecd6ce8620acfa4a198c1e83cc93aa4') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://markdown.isab.run/avatar/刘宇航.jpg?utm_source=nostr-70b0f2c20b79c66be6aba24a65006b53'
+      image = 'https://markdown.isab.run/avatar/刘宇航.jpg?utm_source=nostr-70b0f2c20b79c66be6aba24a65006b53'
     } 
     else if (pubkey === 'c1a6940f84cb4d32564837d9ae055b036545c8e5f61cdd24f29786876436df8a') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/6933b115492468a726ad512ad091ce582c8abe655409dc22ed4d997f7d184518.png'
+      image = 'https://cdn.nostr.build/i/6933b115492468a726ad512ad091ce582c8abe655409dc22ed4d997f7d184518.png'
     } 
     else if (pubkey === '5d9af2b0d7668fe6a32c0d1fc86ec3fd9a0e60f3c641a0721cda4b142124583a') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.nostr.build/i/p/0cab288b8fdccd66430723062119d93e25de96c8f79e3d4ab7e6e404ea0d56db.png'
+      image = 'https://cdn.nostr.build/i/p/0cab288b8fdccd66430723062119d93e25de96c8f79e3d4ab7e6e404ea0d56db.png'
     } 
     else if (pubkey === 'd4fa523cdf08c8061bbf3e4320648eda40a72f327733d07b8ef7967714a08dfb') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/4a55f9f396ad7774c23ef0deb4f9c1e0ddb5854d6e581b5219e9aaf89d862d5e.jpg'
+      image = 'https://nostr.build/i/4a55f9f396ad7774c23ef0deb4f9c1e0ddb5854d6e581b5219e9aaf89d862d5e.jpg'
     } 
     else if (pubkey === '4e72d83524f4f24acb05691dfbe1a74ba115b9ddfd09d6771401468d21c79007') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.zebedee.io/an/m/zbd.png'
+      image = 'https://cdn.zebedee.io/an/m/zbd.png'
     } 
     else if (pubkey === 'cf473ebe9736ba689c718de3d5ef38909bca57db3c38e3f9de7f5dadfc88ed6f') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://cdn.zebedee.io/zbdgg/social/zbd-pfp-default.png'
+      image = 'https://cdn.zebedee.io/zbdgg/social/zbd-pfp-default.png'
     } 
     else if (pubkey === '669ebbcccf409ee0467a33660ae88fd17e5379e646e41d7c236ff4963f3c36b6') {
       image = 'http://nostr.build/i/f9f6e4173c2a913c916d950576f15ef5c965a90f4301d88720a40b18438577bb.jpg'
@@ -2549,19 +2594,19 @@ export const getImageURL = (pubkey) => {
       image = 'https://cdn.nostr.build/i/271964c571e262461996352e33a0a46e52b0a04474acb65c57c716604ff7f3a5.jpg'
     } 
     else if (pubkey === 'e810fafa1e89cdf80cced8e013938e87e21b699b24c8570537be92aec4b12c18') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/nostr.build_daed838cb5abe911f59db2af8a0ffb1970a1c6770ec01d90686d806e4403e72a.jpeg'
+      image = 'https://nostr.build/i/nostr.build_daed838cb5abe911f59db2af8a0ffb1970a1c6770ec01d90686d806e4403e72a.jpeg'
     } 
     else if (pubkey === '006cbe3ae850f504df1b24139f6262fcc95f597e135239aea8d4b488c0db7de8') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/79c7dcf13f6fa573e4052457b96c919aea20d6ae2b74c33514d179dfc9346d43.jpg'
+      image = 'https://nostr.build/i/79c7dcf13f6fa573e4052457b96c919aea20d6ae2b74c33514d179dfc9346d43.jpg'
     } 
     else if (pubkey === 'fa70d85226067a9a8623ad0e1fced1ad0bd31d65afb73f9739bb75804a25ef41') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/c95023993e5fce039a81e01256e1e88e753465ebf5d844d090432fed6678f009.jpg'
+      image = 'https://nostr.build/i/c95023993e5fce039a81e01256e1e88e753465ebf5d844d090432fed6678f009.jpg'
     } 
     else if (pubkey === 'fd6f1cb5161279c5befc8f76fb5339c2c4c24b42f2d3998c988324f2e4230086') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://akm-img-a-in.tosshub.com/indiatoday/images/story/202303/hotweather-sixteen_nine.jpg'
+      image = 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202303/hotweather-sixteen_nine.jpg'
     } 
     else if (pubkey === '6c8bfb24c5b310b40fed955f1bad28706aa60922e2e9f33b47036ae38d21003d') {
-      image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://nostr.build/i/bb80b5245782fe339ba06484101887e0437c5890a394f5dd6ceac94384beefd4.jpg'
+      image = 'https://nostr.build/i/bb80b5245782fe339ba06484101887e0437c5890a394f5dd6ceac94384beefd4.jpg'
     } 
     else if (pubkey === 'ce88af9782fdaca0508b8f42c948976c4b5055d90220d653e141a3cbec736979') {
       image = 'https://nostr.build/i/nostr.build_09678c74a7742be2f05dbf835d0fff7f48019b4e55b928da974ff4b0a6b921ba.gif'
@@ -7499,7 +7544,7 @@ export const getImageURL = (pubkey) => {
       //wayoさん
       //image = 'https://imgproxy.iris.to/insecure/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/Freest2022/images/icon.png'
       image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
-      //image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
+      //image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
       //image = 'https://nostr.build/i/377697f4bdcbd0648949fb52b31270952a4ef50ab347a9636585ef9a94a43b26.jpg'
     }
     else if (pubkey == '55e15d51e5ea14ee1ee1098263a8579428c8073a9173869853b585dccec5ccde') {
@@ -7805,30 +7850,31 @@ export const getImageURL = (pubkey) => {
     }
     else if (pubkey == 'a2ee3c86c25f22a23e0bd7b8af18631a994b8d67a9fba7b657a9db63560c8c47') {
       // pomcan
-      image = 'https://nostr.build/i/nostr.build_b8a40685d0b7f631bd3efb44c48777ad2a25316c1c3cc38945634c36dc3e220b.jpeg'
+      // image = 'https://nostr.build/i/nostr.build_b8a40685d0b7f631bd3efb44c48777ad2a25316c1c3cc38945634c36dc3e220b.jpeg'
   image = 'https://nostr.build/i/nostr.build_b8a40685d0b7f631bd3efb44c48777ad2a25316c1c3cc38945634c36dc3e220b.jpeg'
     }
     else if (pubkey == 'f40832e26b1d12f8a27717b606996baef68bc4b6b86c4a35ca827f6fbcbf511e') {
       // erechorse
-      image = 'https://i.gyazo.com/0775dc06170f3a9385faf921c50d8d80.jpg'
-      image = 'https://i.gyazo.com/ee480a2fdfa15aae6c9a15d44225489f.jpg'
-  image = 'https://image.nostr.build/3e55ee8d28c338052a1bdc36a59d871f4447fe28c70e192f85230ba2a2ad98db.gif'
+      // image = 'https://i.gyazo.com/0775dc06170f3a9385faf921c50d8d80.jpg'
+      // image = 'https://i.gyazo.com/ee480a2fdfa15aae6c9a15d44225489f.jpg'
+      // image = 'https://image.nostr.build/3e55ee8d28c338052a1bdc36a59d871f4447fe28c70e192f85230ba2a2ad98db.gif'
+      image = 'https://i.gyazo.com/6d3f60681f9cfa93d890faaef0ab3cbb.jpg'
     }
     else if (pubkey == '4c5d5379a066339c88f6e101e3edb1fbaee4ede3eea35ffc6f1c664b3a4383ee') {
       // koteitan
-      image = 'https://koteitan.github.io/img/ni_circlefit.jpg'
-  image = 'https://nostr.build/i/0e2151001b06bb95c6d076ebe185c4df0567103d2d0ef043f2d6f7a16262ac5d.jpg'
-  image = 'https://nostr.build/i/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
+  //     image = 'https://koteitan.github.io/img/ni_circlefit.jpg'
+  // image = 'https://nostr.build/i/0e2151001b06bb95c6d076ebe185c4df0567103d2d0ef043f2d6f7a16262ac5d.jpg'
+  // image = 'https://nostr.build/i/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
   image = 'https://cdn.nostr.build/i/83badd41be2388e3d5bfc3adeee19e24accc7dd1524e1a4b8a62a49ec3634744.jpg'
     }
     else if (pubkey == '6b24da7e8e5236d17307501b73b50326f33060d2ec11ee4b9c42576bd011b895') {
       // pomchan
-      image = 'https://nostr.build/i/nostr.build_a414ec5fb667dd1965c9f70d4e1e4c3ad7be88ba4189bfcfbc80cf1274eb49c0.jpg'
+      // image = 'https://nostr.build/i/nostr.build_a414ec5fb667dd1965c9f70d4e1e4c3ad7be88ba4189bfcfbc80cf1274eb49c0.jpg'
   image = 'https://profilepics.nostur.com/profilepic_v1/5439ea4fc92c3512a999ef08472a6271d23fe51dd0cb38709ec14695227661ef/profilepic.jpg?1685834552'
     }
     else if (pubkey == '5257f6d685301de8792099a0b173c3f57f42750612dd876fa0955aaac90192b1') {
       // takenoko
-      image = 'https://storage.googleapis.com/drive.misskey.nokotaro.com/files/fcef8b90-e0af-445e-b259-49422df0ea86.png'
+      // image = 'https://storage.googleapis.com/drive.misskey.nokotaro.com/files/fcef8b90-e0af-445e-b259-49422df0ea86.png'
   image = 'https://icon.nokotaro.com/kanako_sweetches_512.png'
     }
     else if (pubkey == 'c9a58ba53c4287c4939ed71a7e31cb21bd13d2ff4bbbcc985455f25a7a20e636') {
@@ -7873,7 +7919,7 @@ export const getImageURL = (pubkey) => {
     }
     else if (pubkey == 'af07786197826a2f1ebd71f19d137aeed74eb4c8e56cb32a3efee82f898e2714') {
       // mekamakrd
-      image = 'https://void.cat/d/JWM33EgySUGtsbFL7GCLxx.webp'
+      // image = 'https://void.cat/d/JWM33EgySUGtsbFL7GCLxx.webp'
       image = 'https://nostr.build/i/nostr.build_d72bb9253c94ea74ee7f9f158aa7e26b5c48d51c3070165a5d0039b94df697f4.jpeg'
     }
     else if (pubkey == '26bb2ebed6c552d670c804b0d655267b3c662b21e026d6e48ac93a6070530958') {
@@ -7940,34 +7986,26 @@ export const getImageURL = (pubkey) => {
     if(image == '') {
       image = 'https://robohash.org/' + nip19.npubEncode(pubkey) + '?set=set4'
     }
-    else if (
-      //  !image.includes('https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png') &&
+    else if (  // ocknamo
+        image.includes('c1086d97') || // hakka
+        image.includes('281a460c96e63a7d7665c27d18a8828d9c2fee9b8b0c79e3aedd0970446e0293') ||  // oppa 281a460c
+        image.includes('5293872209822f14da581d958c490a73159a84f9e72072c389f8bc331bc788ed') ||
+        image.includes('headicon') ||
+        image.includes('31fa98722a57f5ca1406bb1a5883fe61c92e9861b564d8adfab458f11045ca03')  // nullpoga
+      ){  
+        image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
+    }
+    else if (image.includes('data:image')) {  // ame
+      ;
+    }
+    else if (  // ocknamo
         //  !image.includes('.gif') &&
-      //  !image.includes('') &&
         !image.includes('kojira.io') &&  // ocknamo
-        !image.includes('nostr.build') &&
         //  !image.includes('') &&
         //  !image.includes('') &&
-        //  !image.includes('') &&
-        //  !image.includes('') &&
-        //  !image.includes('') &&
-      //  !image.includes('nostr.download') &&
-      //  !image.includes('nostrcheck.me') &&
-      //  !image.includes('link.storjshare.io') &&
-      //  !image.includes('tac-lan.net') &&
-      //  !image.includes('pbs.twimg.com') &&
-      //  !image.includes('media.misskeyusercontent.com') &&
-      //  !image.includes('picture-dka.pages.dev') &&
-        
-      //  !image.includes('uneune.one') &&
-      //  !image.includes('imgur.com') &&
-      //  !image.includes('monacute.art') &&
-      //  !image.includes('s3.fedibird.com') &&
-      //  !image.includes('nixeneko.info') &&
-        
-        !image.includes('data:image') 
+        !image.includes('nostr.build')
       ) {
-      // image = 'https://imgproxy.iris.to/insecure/rs:fill:256:256/plain/' + image;
+      // image = '' + image;
       // image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
     }
 

@@ -1,3 +1,4 @@
+import { nip19 } from "nostr-tools";
 
 export const makeQuoteLinksbyTagHTML = (note) => {
   let quoteId = "";

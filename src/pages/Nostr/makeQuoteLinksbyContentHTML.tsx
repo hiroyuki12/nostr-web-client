@@ -173,8 +173,7 @@ export const makeQuoteLinksbyContentHTML = (content) => {
 
 
 
-  const quoteLinksHTML = quoteLinkHTML1 + quoteLinkHTML2 + quoteLinkHTML3;
-  // const quoteLinksHTML = quoteLinkHTML2 ;
+  let quoteLinksHTML = quoteLinkHTML1 + quoteLinkHTML2 + quoteLinkHTML3;
 
 
   return quoteLinksHTML;

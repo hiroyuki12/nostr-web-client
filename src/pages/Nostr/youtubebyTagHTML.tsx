@@ -53,7 +53,6 @@ export const youtubebyTagHTML = (content, note) => {
     }
     else if(tmpUrl.includes('http') && !tmpUrl.includes('@')) {
         let link = ""
-        
         try {
             link = new URL(tmpUrl);
         } catch(e) {

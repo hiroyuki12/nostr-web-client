@@ -3,18 +3,27 @@ import { nip19 } from "nostr-tools";
 export const makeEventLinksbyTagHTML = (note) => {
   let toLinkUrl1 = "";
   let toLinkText1 = "";
+  let toLinkUrl2 = "";
+  let toLinkText2 = "";
 
   let eventLinkUrl1 = "";
   let eventLinkText1 = "";
   let eventLinkUrl2 = "";
   let eventLinkText2 = "";
+  let eventLinkUrl3 = "";
+  let eventLinkText3 = "";
 
   for (let i = 0; i < note.tags.length; i++) {
     if (note.tags[i][0] === "p") {
       const npub = nip19.npubEncode(note.tags[i][1]);
-      const toLinkUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub;
-      // toLinkUrl1 = toLinkUrl;
-      toLinkText1 = '_#p';
+
+      if(toLinkUrl1 === '') {
+        toLinkUrl1 = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub;
+        toLinkText1 = '_#p';
+      } else {  
+        toLinkUrl2 = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub;
+        toLinkText2 = '_#p';
+      }
 
       // content = content.replace('#[' + i + ']', '<a href="' + toLinkUrl + '" target="_blank">#[' + i + ']</a>');
 
@@ -45,11 +54,17 @@ export const makeEventLinksbyTagHTML = (note) => {
         }
         // contentの#[0]をa hrefに置き換え
         // content = content.replace('#[' + i + ']', '<a href="' + eventLinkUrl + '" target="_blank">(quote#)</a>');
-      } else if (eventLinkUrl1 !== "") {
+      } else if (eventLinkUrl2 === "") {
         eventLinkUrl2 = eventLinkUrl;
         eventLinkText2 = "_#e";
         if (eventLinkUrl === "") {
           eventLinkText2 = "_#e(" + note.tags[i][1] + ")";
+        }
+      } else if (eventLinkUrl3 === "") {
+        eventLinkUrl3 = eventLinkUrl;
+        eventLinkText3 = "_#e";
+        if (eventLinkUrl === "") {
+          eventLinkText3 = "_#e(" + note.tags[i][1] + ")";
         }
       }
     }
@@ -58,9 +73,13 @@ export const makeEventLinksbyTagHTML = (note) => {
   return {
     toLinkUrl1,
     toLinkText1,
+    toLinkUrl2,
+    toLinkText2,
     eventLinkUrl1,
     eventLinkText1,
     eventLinkUrl2,
     eventLinkText2,
+    eventLinkUrl3,
+    eventLinkText3,
   };
 };

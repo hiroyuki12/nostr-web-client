@@ -23,12 +23,14 @@ export const makeIframesbyContentHTML = (content, note) => {
     
     tmpContent = tmpContent.replace(/<[^>]*>/g, '');  //タグ除去
 
-    tmpContent = tmpContent.replace('#idolmaster', '\n')
-    // tmpContent = tmpContent.replace('=', '\n')  //YouTube
-    tmpContent = tmpContent.replace(']', '\n')
-    tmpContent = tmpContent.replace('? ', '\n')
-    tmpContent = tmpContent.replace('https://', '\nhttps://')
-    
+    for(let i=0; i<100; i++) {
+      tmpContent = tmpContent.replace('#idolmaster', '\n')
+      // tmpContent = tmpContent.replace('=', '\n')  //YouTube
+      tmpContent = tmpContent.replace(']', '\n')
+      tmpContent = tmpContent.replace('? ', '\n')
+      tmpContent = tmpContent.replace('https://', '\nhttps://')
+      tmpContent = tmpContent.replace(' ', '\n')
+    }
     const splitContent = tmpContent.split('\n');
 
 
@@ -46,8 +48,19 @@ export const makeIframesbyContentHTML = (content, note) => {
 
         // cannot be parsed as a URL
         // TypeError: 
-        const link = new URL(tmpUrl);
+        // const link = new URL(tmpUrl);
+        let link = '';
+        try {
+          link = new URL(tmpUrl);
+        } catch(e) {
+            content = content + '[URL_ERROR_tmpUrl=' + tmpUrl + ']'
+            return content;
+        }
+
+
         let id = tmpUrl;
+
+
         
         // youtube.be/ より後を取得
         if(link.hostname === 'youtu.be') {
@@ -109,7 +122,10 @@ export const makeIframesbyContentHTML = (content, note) => {
         const id = splitContent[i].replace("music.apple.com","embed.music.apple.com"); 
         //large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
         const tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>(content)'
-        serviceText = '__AppleMusic'
+        if(splitContent[i].includes("i=")) {
+          iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+        }
+        serviceText = '__Apple Music'
         serviceText = '<a href="' + splitContent[i] + '" target="_blank">' + serviceText + '</a>';
         content = content.replace(splitContent[i], tmpIframe);
 
