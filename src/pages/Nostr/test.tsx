@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import NextButton from "@/components/NextButton";
@@ -24,22 +24,30 @@ import {removeInlineImageURL} from './removeInlineImageURL'
 import {makeQuoteLinksbyTagHTML} from './makeQuoteLinksbyTagHTML'
 import {makeEventLinksbyTagHTML} from './makeEventLinksbyTagHTML'
 
-
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
   let untilValue = ''
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740549298;  //paging
+  // untilValue = 1740735120;  //paging
+
+
+
 
   let noteCount = 0;
 
+  let lastValue = '';
   // following 配列 req
   // avatar画像　ローカルにキャッシュ
   // css
   // 配列 tags
   // auto load
+  // youtube shorts content
+//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
+  // untilValue = 1739588223;  //YouTube fix. tag "r"
+  // untilValue = 1740735358;  // nikoniko AGP todo
+  // untilValue = 1740668415;  // NG tag "r" image 2つ
   // untilValue = 1676068338;  // NG 30023 # <ol> <li>
   // untilValue = 1680268376;  // repost 2つ avatar
   // untilValue = 1740489426;  // script http NG
@@ -50,7 +58,6 @@ const Test = () => {
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
   // untilValue = 1740364485;  // tag Apple Music tag "r" small
-  // untilValue = 1740363367;  // fix Youtube content
   // untilValue = 1740320393;  // #p link fix
   // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
   // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
@@ -71,7 +78,7 @@ const Test = () => {
 //  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
 
 //  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
-//  untilValue = 1676008379; 
+//  untilValue = 1677499902; 
  
     //  untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
       // untilValue = 1680270000; // 2023/3/31 22- 2023/3/31 20,  +10,000 *
@@ -102,12 +109,14 @@ const Test = () => {
     //  authors: ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'],  // lokuyou
     //  authors: ['3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d'],  // lokuyou
     //  authors: ['3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d'],  // fiatjaf
-     
+    //  authors: ['04317e40be42f3371053e47d63186c1554a362ddafb816ed5df4bee1aad3ed54'],  // kphrx
+        // authors: arrayFollow,
+    
     
 
 //      kinds: [0],      // 0:Metadata
     //  kinds: [1],      // 1:Short Text Note
-      kinds: [1,6,20,42,1111,30023,30315],      // 1:Short Text Note ======================
+      kinds: [1,6,20,22,42,1111,30023,30315],      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -116,6 +125,7 @@ const Test = () => {
 //      kinds: [8],      // 8:Badge Award
 //      kinds: [16],     // 16:Generic Repost
 //      kinds: [20],     // 20:Picture Events
+//      kinds: [22],     // 22:
 //      kinds: [40],     // 40:Channel Creation
 //      kinds: [41],     // 41:Channel Metadata
     //  kinds: [42],     // 42:Channel_Message
@@ -193,12 +203,14 @@ const Test = () => {
 // renderImageList2
 
   var followList = "";
+  let arrayFollow: string[] = []
 
   // フォローリスト作成
   const renderImageList2 = (list) => {
     const posts = list.map((event, index) => {
       for(let i=0; i<event.tags.length; i++) {
         followList = followList + event.tags[i][1] + ",";
+        arrayFollow.push(event.tags[i][1]);
       }
       return (
         <div>
@@ -219,8 +231,17 @@ const Test = () => {
   const renderImageList = (list) => {
     const posts = list.map((note, index) => {
 
+      // let follwing = false;
+      // for(let i=0; arrayFollow.length; i++) {
+      //   if(arrayFollow[i] === note.pubkey) {
+      //     follwing = true;
+      //     break;
+      //   }
+      // }
+
       follow = "";
       if(!followList.includes(note.pubkey)) {
+      // if(!follwing) {
         // following filter
         follow = " [follow]";
 // not follow user
@@ -256,10 +277,13 @@ const Test = () => {
       noteCount = noteCount + 1;
 
       if(minCreateDate > note.created_at) minCreateDate = note.created_at;
+      lastValue = note.created_at;
 
       const dateTime = new Date(note.created_at * 1000);
       const createdDate = dateTime.toLocaleDateString('ja-JP');
       const createdTime = createdDate + ' ' + dateTime.toLocaleTimeString('ja-JP');
+
+
 
       const npub = nip19.npubEncode(note.pubkey)
       //const nostrnpub = "https://nostr.com/" + npub
@@ -291,7 +315,8 @@ const Test = () => {
       }
       const noteIdShort = note.id.substring(0,2)
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
-      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
+      // const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
+      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://search.nos.today/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/'
 
       const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
@@ -818,6 +843,7 @@ const Test = () => {
           <a href="https://nostrends.vercel.app" target="_blank">nostrends</a>-
           <a href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj" target="_blank">bookmark</a>-
           <a href="https://nos.today" target="_blank">nos.today</a>-
+          <a href="https://nosey.vercel.app" target="_blank">nosey</a>-
           <a href="https://nosaray.vercel.app" target="_blank">Nosaray</a>-
           <a href="https://flycat.club" target="_blank">flycat</a>-
           {/* <a href="https://yakihonne.com" target="_blank">yakihonne</a>- */}
@@ -827,11 +853,13 @@ const Test = () => {
           <a href="https://tiltpapa.github.io/zapline-jp/" target="_blank">Zapline</a>-
           <a href="https://snapnostr.app" target="_blank">snapnostr</a>-
           {/* <a href="https://jumble.social" target="_blank">Jumble</a>- */}
-          <a href="https://stats.nostr.band" target="_blank">Nostr Stats</a>
+          <a href="https://stats.nostr.band" target="_blank">Nostr Stats</a>-
+          <a href="https://nchan.vip" target="_blank">nchan</a>
           </div>
         <br />
         <ul>{renderImageList2(events2)}</ul>
         <ul>{renderImageList(events)}</ul>
+        <ul>{lastValue}</ul>
         <ul>{noteCount}</ul>
         End
       </div>
@@ -885,10 +913,7 @@ export default Test;
 //  untilValue = 1700358511;  // instagram link iframe content fix
   // untilValue = 1739577124;  // content iframe fix
 //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
-  // untilValue = 1739628240;  // youtube shorts content ok
-  // untilValue = 1739588223;  //YouTube fix. tag "r"
   // untilValue = 1739585002;  // Youtube target fix. youtu.be content
-//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
   // untilValue = 1739359806;  // tag "r" img ok
   //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
   // untilValue = 1700654092;  // long-form content. kind:30023 Markdown

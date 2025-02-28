@@ -1,3 +1,6 @@
+import { YouTube } from '../../components/content/YouTube';
+import { Nicovideo } from '../../components/content/Nicovideo';
+
 export const makeIframesbyContentHTML = (content, note) => {
 
     // make iframe by content (URL) 
@@ -44,58 +47,15 @@ export const makeIframesbyContentHTML = (content, note) => {
       if(splitContent[i].includes("youtube.com") || splitContent[i].includes("youtu.be/")) {
         const tmpUrl = splitContent[i]
 
-        // return content;  // debug
-
-        // cannot be parsed as a URL
-        // TypeError: 
-        // const link = new URL(tmpUrl);
-        let link = '';
-        try {
-          link = new URL(tmpUrl);
-        } catch(e) {
-            content = content + '[URL_ERROR_tmpUrl=' + tmpUrl + ']'
-            return content;
-        }
-
-
-        let id = tmpUrl;
-
-
-        
-        // youtube.be/ より後を取得
-        if(link.hostname === 'youtu.be') {
-          const target3 = 'youtu.be/'
-          // id = id.substring(id.indexOf(target3) + target3.length, id.length);
-          id = link.pathname.replace('/', '');
-        }
-        else if(link.pathname.startsWith('/live/')) {
-          // /live/ より後を取得
-          // id = id.substring(id.indexOf(target2) + '/live/'.length, id.length);
-          id = link.pathname.replace('/live/', '');
-        }
-        else {
-          const v = link.searchParams.get('v');
-          if (v !== null) {
-            id = v;
-          } else if (link.pathname.includes('shorts')) {
-            const match = link.pathname.match(/\/shorts\/(?<id>\w+)/);
-            id = match?.groups?.id;
-          }
-        }
-
-        const tmpIframe = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>(c)";
-        
-        if(iframe1 === '') {
-          iframe1 = tmpIframe;
-          iframe1 = iframe1 + '_[id =' + id + ']';
-          iframe1 = iframe1 + '<a href="' + splitContent[i] + '" target="_blank">__YouTube</a>';
-          content = content.replace(tmpUrl, '');
-        }
+        const {iframe1, youtubeIdText1, linkc} = YouTube(tmpUrl);
+        // Remove link
+        content = content.replace(tmpUrl, '');
+        return content + iframe1 + youtubeIdText1 + linkc;
       }
 
 
       // Twitter iframe
-      else if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
+       if(splitContent[i].includes("twitter.com") || splitContent[i].includes("x.com")) {
         // const id = splitContent[i].replace("x.com","twitter.com"); 
         // NG const tmpIframe = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
 
@@ -130,7 +90,19 @@ export const makeIframesbyContentHTML = (content, note) => {
         content = content.replace(splitContent[i], tmpIframe);
 
         // content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
-    }
+      }
+
+
+
+      // todo nicovideo 再生できない
+      else if(splitContent[i].includes("www.nicovideo.jp/watch") || splitContent[i].includes("nico.ms")) {
+      
+        const tmpIframe = Nicovideo(splitContent[i]);
+
+        serviceText = '__niconico'
+        serviceText = '<a href="' + splitContent[i] + '" target="_blank">' + serviceText + '</a>';
+        content = content.replace(splitContent[i], tmpIframe);
+      }
 
 
 

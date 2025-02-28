@@ -9,8 +9,8 @@ const relayUrls = [
   "wss://nos.lol",                  // activitypub, en, jp  jack, Will, Nelly, 
   // "wss://relay.mostr.pub",          // nachika, karnage, misskey.io, unnerv.jp, 
   // "wss://relay.snort.social", 
-  "wss://relay.damus.io",           //en, jp  Nelly
-  
+  // "wss://relay.damus.io",           //en, jp  Nelly
+
   // "wss://nrelay-jp.c-stellar.net",
 
 //  "wss://cagliostr.compile-error.net",  // C++
@@ -37,7 +37,7 @@ const relayUrls = [
 //  "wss://purplepag.es",             // kind0
 //  "wss://relayable.org",            //
 
-//  "wss://relay.nostr.band",         //NIP-50 search, kind0, en, jp nachika
+ "wss://relay.nostr.band",         //NIP-50 search, kind0, en, jp nachika, kphrx
       
 //  "nostrja-kari-nip50.heguro.com",   // NIP-50
       

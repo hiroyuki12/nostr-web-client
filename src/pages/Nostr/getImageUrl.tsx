@@ -47,14 +47,14 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     }
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1wdy32zdcutvqssy88ddp8w5c5hg6cwskey5juyrtruhd5vg493fq4s75d5') {
+      image = 'https://pbs.twimg.com/profile_images/1270911698/640_400x400.png'
     }
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub192ndjk967gus6wrua338r8zjw4whh83dh4hsx7xy4zqaewxgetdqfnl4v4') {
+      image = 'https://nostr.build/i/nostr.build_142bf5fd38a8bc2eb170ba2fbcc1f88838a88d19ff5773f76ef122f6a10178c0.jpg'
     }
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub13742zp3msh5fhe6g72q5wfjulzwymhwmxrl3c2prxeq2sevs9vts4vwmk2') {
+      image = 'https://pbs.twimg.com/profile_images/1356578081943687172/0MUNad9__400x400.jpg'
     }
     else if (npub === 'npub1p92agfqsynk3lv8mturqwaq68wpvat55qsf72e3j97wkrnyy9hhsxczd3x') {
       image = 'https://shino3.net/salmon_alert.png'

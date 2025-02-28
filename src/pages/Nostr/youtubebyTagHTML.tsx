@@ -1,3 +1,4 @@
+import { YouTube } from '../../components/content/YouTube';
 
 export const youtubebyTagHTML = (content, note) => {
 
@@ -12,11 +13,7 @@ export const youtubebyTagHTML = (content, note) => {
 // 
     let linkUrl1 = "";
     let linkText1 = "";  // #ry 1
-    let iframe1 = "";
     let linkTagR1 = "";
-
-    let youtubeIdText1 = "";
-
 
 
 
@@ -42,71 +39,27 @@ export const youtubebyTagHTML = (content, note) => {
 
 
 
-    let tmpUrl = linkUrl1;
-    let id = tmpUrl.replace('"', '');
+    if(linkUrl1 === "") return content;
 
-    if(tmpUrl.includes('youtu.be')) {
-        id = tmpUrl.replace('https://youtu.be/', '')
-        iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>(r_YouTube)";
-        youtubeIdText1 = '__[id=' + id + ']'
-        content = content.replace(tmpUrl, '');
-    }
-    else if(tmpUrl.includes('http') && !tmpUrl.includes('@')) {
-        let link = ""
-        try {
-            link = new URL(tmpUrl);
-        } catch(e) {
-            content = content + '[URL_ERROR_tmpUrl=' + tmpUrl + ']'
-            return content;
-        }
-        
-        // YouTube tag "r"
-        // https://github.com/SnowCait/nostter/blob/be5748cbd2ab1b4423f6fad29c2f4e18d0242edd/web/src/lib/components/content/YouTube.svelte
-        if(link.hostname === 'youtu.be') {
-            // const target3 = 'youtu.be/'
-            // youtube.be/ より後を取得
-            // id = id.substring(id.indexOf(target3) + target3.length, id.length);
-            id = link.pathname.replace('/', '');
-        }
-        else if(link.pathname.startsWith('/live/')) {
-            // /live/ より後を取得
-            // id = id.substring(id.indexOf(target2) + '/live/'.length, id.length);
-            id = link.pathname.replace('/live/', '');
-        }
-        else {
-            const v = link.searchParams.get('v');
-            if (v !== null) {
-                id = v;
-            } else if (link.pathname.includes('shorts')) {
-                const match = link.pathname.match(/\/shorts\/(?<id>\w+)/);
-                id = match?.groups?.id;
-            }
-        }
 
-        iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>(r_YouTube)";
-        youtubeIdText1 = '__[id=' + id + ']'
-        content = content.replace(tmpUrl, '');
-    }
-    else if(tmpUrl.includes('@')) {
-        iframe1 = tmpUrl;
-        youtubeIdText1 = '__[YouTubeChannel]'
-        content = content.replace(tmpUrl, '');
-    }
+    
+    // Make iframe, youtubeIdText
+    const {iframe1, youtubeIdText1, linkr} = YouTube(linkUrl1);
+
+    // Remove link
+    content = content.replace(linkUrl1, '');
     
     
 
 
-
-    // Make #ry link
-    if(linkText1 != "") linkTagR1 = '<a href="' + linkUrl1 + '" target="_blank">' + linkText1 + '</a>';
-    
 
 
 
     return content +
-        iframe1 +
-        linkTagR1 + 
 
+        iframe1 +
+        '(r_YouTube)' +
+        linkr +  // #ry link
         youtubeIdText1;
 }
     
