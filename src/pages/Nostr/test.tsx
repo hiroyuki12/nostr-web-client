@@ -22,6 +22,7 @@ import {makeRepostContent} from './makeRepostContent'
 import {removeInlineImageURL} from './removeInlineImageURL'
 import {makeQuoteLinksbyTagHTML} from './makeQuoteLinksbyTagHTML'
 import {makeEventLinksbyTagHTML} from './makeEventLinksbyTagHTML'
+// import {followList2} from './followList2'
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
@@ -29,12 +30,13 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740796469;  //paging
+  // untilValue = 1740816057;  //paging
 
 
 
 
   let noteCount = 0;
+  let skipCount = 0;
 
   let lastValue = '';
   // following 配列 req
@@ -44,18 +46,19 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
- untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+  // untilValue = 1740816421;  // tag "r" image 7個
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
   // untilValue = 1740364485;  // tag Apple Music tag "r" small
-  // untilValue = 1740811263;  // NG https
+  // untilValue = 1740811263;  // fix https
   // untilValue = 1740805610;  // image tag "r"
   // untilValue = 1740801707;  // NG コード表示 空白
   //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
   // untilValue = 1734267337;  //  Repost content
 //  untilValue = 1692963976;  // fix spotify playlist tag "r"
 //  untilValue = 1687906810;  //fix  spotify playlist tag "r"
-//  untilValue = 1692963542;  // NG Repost spotify album. content, 2つ表示される
+//  untilValue = 1692963542;  // fix Repost spotify album. content, 2つ表示される
   // untilValue = 1739707055;  // tag "r" twitter   fix
   //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
 //  untilValue = 1740748496;  // youtube tag "r"
@@ -63,7 +66,7 @@ const Test = () => {
   // untilValue = 1739588223;  //YouTube fix. tag "r"
   // untilValue = 1740735358;  // nikoniko AGP todo
   // untilValue = 1740668415;  // tag "r" image 2つ。同じ画像があるため
-  // untilValue = 1740192864;  // quote_naddr1 content, 30023 lumilumi ok, nos haiku NG
+  // untilValue = 1740192864;  // NG #q(30023: quote_naddr1 content, 30023 lumilumi ok, nos haiku
   // untilValue = 1734267365;  // 30023   Thingstr
   // untilValue = 1676068338;  // fix 30023 fiatjaf
   // untilValue = 1680268376;  // repost 2つ avatar
@@ -82,7 +85,7 @@ const Test = () => {
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
 // untilValue = 1740213396;  // udio.com iframe NG. fix link
   // untilValue = 1740207152;  // threads
- // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
+//  untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない fix
 
 
 
@@ -113,22 +116,79 @@ const Test = () => {
 //  sinceValue = untilValue - 500;  //about 15 minutes 
 
 
+
+  // let arrayFollow0: string[] = []
+  // let arrayFollow1: string[] = ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600']  // lokuyou
+  // let arrayFollow2 =  followList2();
+  // let arrayFollow3 =  ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'];
+  let arrayFollow5: string[] = []
+
+  // let arrayKinds = [1,6,20,22,42,1111,30023,30315]
+
+
+
+
+  // following list
+  const { events: events2 } = useNostrEvents({
+    filter: {
+      kinds: [3],  // 3:following list
+      //kinds: [NostrKind.contacts],  // 3:following list
+      // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+    //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,100 followees
+      authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+//      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
+    //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
+      
+//      limit: 2000,
+    },
+  });
+
+
+
+////////////////////////////////////////////////
+// renderImageList2
+
+  var followList = "";
+  let arrayFollow: string[] = []
+
+  // フォローリスト作成
+  const renderImageList2 = (list) => {
+    const posts = list.map((event, index) => {
+      for(let i=0; i<event.tags.length; i++) {
+        followList = followList + event.tags[i][1] + ",";
+        arrayFollow5.push(event.tags[i][1]);  // 配列に追加
+      }
+      return (
+        <div>
+        </div>
+      );
+    });
+    return posts;
+  }
+
+
+////////////////////////////////////////////////
+
+
   const { events } = useNostrEvents({
     filter: {
-     until: untilValue,
-    //  authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
+      until: untilValue,
+
+
+      authors: arrayFollow5,  // follow list filter
+      
+        //  authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
 //      authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
     //  authors: ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'],  // lokuyou
-    //  authors: ['3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d'],  // lokuyou
-    //  authors: ['3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d'],  // fiatjaf
+    //  authors: ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'],  // fiatjaf
     //  authors: ['04317e40be42f3371053e47d63186c1554a362ddafb816ed5df4bee1aad3ed54'],  // kphrx
-        // authors: arrayFollow,
     
     
 
 //      kinds: [0],      // 0:Metadata
     //  kinds: [1],      // 1:Short Text Note
       kinds: [1,6,20,22,42,1111,30023,30315],      // 1:Short Text Note ======================
+      // kinds: mykinds,      // 1:Short Text Note ======================
 //      kinds: [3],      // 3:Contacts (follow)
 //      kinds: [4],      // 4:Encryped Direct Message(DM)
 //      kinds: [5],      // 5:Event Deletion
@@ -195,43 +255,46 @@ const Test = () => {
 
 
   // following list
-  const { events: events2 } = useNostrEvents({
-    filter: {
-      kinds: [3],  // 3:following list
-      //kinds: [NostrKind.contacts],  // 3:following list
-      // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
-    //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,100 followees
-      authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
-//      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
-    //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
+//   const { events: events2 } = useNostrEvents({
+//     filter: {
+//       kinds: [3],  // 3:following list
+//       //kinds: [NostrKind.contacts],  // 3:following list
+//       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+//     //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,100 followees
+//       authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+// //      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
+//     //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
       
-//      limit: 2000,
-    },
-  });
+// //      limit: 2000,
+//     },
+//   });
 
 
 
-////////////////////////////////////////////////
-// renderImageList2
+// ////////////////////////////////////////////////
+// // renderImageList2
 
-  var followList = "";
-  let arrayFollow: string[] = []
+//   var followList = "";
+//   let arrayFollow: string[] = []
 
-  // フォローリスト作成
-  const renderImageList2 = (list) => {
-    const posts = list.map((event, index) => {
-      for(let i=0; i<event.tags.length; i++) {
-        followList = followList + event.tags[i][1] + ",";
-        arrayFollow.push(event.tags[i][1]);
-      }
-      return (
-        <div>
-        </div>
-      );
-    });
-    return posts;
-  }
+//   // フォローリスト作成
+//   const renderImageList2 = (list) => {
+//     const posts = list.map((event, index) => {
+//       for(let i=0; i<event.tags.length; i++) {
+//         followList = followList + event.tags[i][1] + ",";
+//         arrayFollow.push(event.tags[i][1]);
+//       }
+//       return (
+//         <div>
+//         </div>
+//       );
+//     });
+//     return posts;
+//   }
 
+//   arrayFollow5 = followList.split('','');
+
+  
 
 
 ////////////////////////////////////////////////
@@ -257,6 +320,8 @@ const Test = () => {
         // following filter
         follow = " [follow]";
 // not follow user
+
+        skipCount = skipCount + 1;
         return;
       }
       else {
@@ -286,7 +351,11 @@ const Test = () => {
 
       if(note.pubkey === '1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa')  return;
 
+      // if(noteCount > 10)  return;  // debug
+      
+
       noteCount = noteCount + 1;
+
 
       if(minCreateDate > note.created_at) minCreateDate = note.created_at;
       lastValue = note.created_at;
@@ -836,6 +905,9 @@ const Test = () => {
       }
 
 
+      // content = followList;  // debug
+      // content = arrayFollow2[0];  // debug
+
       return (
         <li className="item" key={index}>
           <div className="card-container">
@@ -951,6 +1023,7 @@ const Test = () => {
         <ul>{renderImageList(events)}</ul>
         <ul>{lastValue}</ul>
         <ul>{noteCount}</ul>
+        <ul>{skipCount} skip</ul>
         End
       </div>
     </>
