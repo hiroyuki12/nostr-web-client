@@ -2,6 +2,7 @@ import { YouTube } from '../../components/content/YouTube';
 import { Nicovideo } from '../../components/content/Nicovideo';
 import { AppleMusic } from '../../components/content/AppleMusic';
 import { Twitter } from '../../components/content/Twitter';
+import { Spotify } from '../../components/content/Spotify';
 
 export const makeIframesbyContentHTML = (content, note) => {
 
@@ -9,7 +10,9 @@ export const makeIframesbyContentHTML = (content, note) => {
     
     // update content. delete URL
     
-    // return cotent
+    // return content +
+    //   iframe1 +
+    //   serviceText;
 
 
 
@@ -36,6 +39,7 @@ export const makeIframesbyContentHTML = (content, note) => {
       tmpContent = tmpContent.replace('https://', '\nhttps://')
       tmpContent = tmpContent.replace(' ', '\n')
     }
+
     const splitContent = tmpContent.split('\n');
 
 
@@ -57,39 +61,34 @@ export const makeIframesbyContentHTML = (content, note) => {
       }
 
 
-      // Twitter iframe
        if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
         const {out_iframe1, out_twitterIdText1, out_linkc} = Twitter(tmpUrl);
         // Remove link
         content = content.replace(tmpUrl, '');  // 最後にTwitter iframeを追加するため削除
-
-        content = content + out_linkc + out_twitterIdText1 + out_iframe1;  // 最後にTwitter iframeを追加
+        return content + out_linkc + out_twitterIdText1 + out_iframe1;  // 最後にTwitter iframeを追加
       }
       
 
       else if(tmpUrl.includes("music.apple.com")) {
         const {out_iframe1, out_appleMusicIdText1, out_linkc} = AppleMusic(tmpUrl);
-        const tmpIframe = out_iframe1
         serviceText = out_linkc
         // Remove link
-        content = content.replace(tmpUrl, tmpIframe + out_appleMusicIdText1);
+        content = content.replace(tmpUrl, '');
+        return content + out_iframe1 + out_appleMusicIdText1 + out_linkc;
       }
 
 
       else if(tmpUrl.includes("open.spotify.com") && !tmpUrl.includes("playlist")) {
-        const id = tmpUrl.replace("https://open.spotify.com/", ""); 
-        const tmpIframe = '<iframe src="https://open.spotify.com/embed/' + id + '" width="560" height="580" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
-        if(iframe1 == '')  iframe1 = tmpIframe;
-        else iframe2 = tmpIframe;
-        serviceText = '__Spotify(r)'
-        serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
-        content = content.replace(tmpUrl, tmpIframe)
-    }
+        const {out_iframe1, out_spotifyIdText1, out_linkc} = Spotify(tmpUrl);
+        serviceText = out_linkc
+        // Remove link
+        content = content.replace(tmpUrl, '');
+        return content + out_iframe1 + out_spotifyIdText1 + out_linkc;
+      }
 
 
       // todo nicovideo 再生できない
       else if(tmpUrl.includes("www.nicovideo.jp/watch") || tmpUrl.includes("nico.ms")) {
-      
         const tmpIframe = Nicovideo(tmpUrl);
 
         serviceText = '__niconico'
@@ -106,7 +105,7 @@ export const makeIframesbyContentHTML = (content, note) => {
 
 
       // http iframe
-      else if (tmpUrl.includes('http')){ // (instagram etc)
+      else if (tmpUrl.includes('https://')){ // (instagram etc)
       // else if(!tmpUrl.includes('nostrudel.ninja')  // #t
         // && (tmpUrl.includes('media.unnerv.jp') ||
         //  )) {
