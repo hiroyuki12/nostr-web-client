@@ -1,5 +1,6 @@
 import { YouTube } from '../../components/content/YouTube';
 import { Twitter } from '../../components/content/Twitter';
+import { AppleMusic } from '../../components/content/AppleMusic';
 // import Tweets from "@/pages/Nostr/Twitter";
 
 export const makeIframesbyTagHTML = (content, note) => {
@@ -43,6 +44,7 @@ export const makeIframesbyTagHTML = (content, note) => {
     let linkr = "";
     let youtubeIdText1 = "";
     let twitterIdText1 = "";
+    let appleMusicIdText1 = "";
 
 
 
@@ -92,13 +94,11 @@ export const makeIframesbyTagHTML = (content, note) => {
         if(tmpUrl != "") {
 
             if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
-                // Make iframe, youtubeIdText
                 const {out_iframe1, out_youtubeIdText1, out_linkr} = YouTube(tmpUrl);
                 iframe1 = out_iframe1;
                 youtubeIdText1 = out_youtubeIdText1;
                 linkr = out_linkr;
                 serviceText = out_linkr
-
                 // Remove link
                 content = content.replace(tmpUrl, '');
             }
@@ -109,23 +109,17 @@ export const makeIframesbyTagHTML = (content, note) => {
                 iframe6 = out_iframe1;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
                 twitterIdText1 = out_twitterIdText1;
                 serviceText = out_linkr;
-
                 // Remove link
                 content = content.replace(tmpUrl, '');
             }
 
 
             else if(tmpUrl.includes("music.apple.com")) {
-                const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
-                // kickback large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-                // large
-                iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                if(tmpUrl.includes("i=")) {  // small
-                    iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                }
-                serviceText = '__Apple Music(r)'
-                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
-
+                const {out_iframe1, out_appleMusicIdText1, out_linkr} = AppleMusic(tmpUrl);
+                iframe1 = out_iframe1
+                appleMusicIdText1 = out_appleMusicIdText1;
+                serviceText = out_linkr;
+                // Remove link
                 content = content.replace(tmpUrl, '');
             }
 
@@ -232,7 +226,7 @@ export const makeIframesbyTagHTML = (content, note) => {
     const out_link5 = link5;
     const out_link6 = link6;
     // const out_link7 = link7 + serviceText + linkr + youtubeIdText1;
-    const out_link7 = link7 + serviceText + youtubeIdText1 + twitterIdText1;
+    const out_link7 = link7 + serviceText + youtubeIdText1 + twitterIdText1 + appleMusicIdText1;
 
     return { out_content, out_iframe1, out_iframe2, out_iframe3, 
         out_iframe4, out_iframe5, out_iframe6,

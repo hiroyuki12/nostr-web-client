@@ -44,6 +44,10 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
+ untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
+//  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
+  // untilValue = 1740364485;  // tag Apple Music tag "r" small
   // untilValue = 1740811263;  // NG https
   // untilValue = 1740805610;  // image tag "r"
   // untilValue = 1740801707;  // NG コード表示 空白
@@ -53,7 +57,6 @@ const Test = () => {
 //  untilValue = 1687906810;  //fix  spotify playlist tag "r"
 //  untilValue = 1692963542;  // NG Repost spotify album. content, 2つ表示される
   // untilValue = 1739707055;  // tag "r" twitter   fix
-  // untilValue = 1740364485;  // tag Apple Music tag "r" small
   //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
 //  untilValue = 1740748496;  // youtube tag "r"
 //  untilValue = 1739012160;  // youtube live content Repost ¥n fix
@@ -65,12 +68,10 @@ const Test = () => {
   // untilValue = 1676068338;  // fix 30023 fiatjaf
   // untilValue = 1680268376;  // repost 2つ avatar
   // untilValue = 1740489426;  // script http NG
-  // untilValue = 1740489507;  // twitter NG
+  // untilValue = 1740489507;  // twitter content NG
+  // untilValue = 1740366714;  // Twitter large tag "r"
   // untilValue = 1740368841;  // oppa avatar large
   // untilValue = 1740366217;  // avatar large
-  // untilValue = 1740366714;  // Twitter large
-//  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
-//  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
   // untilValue = 1740320393;  // #p link fix
   // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
   // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
@@ -81,7 +82,6 @@ const Test = () => {
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
 // untilValue = 1740213396;  // udio.com iframe NG. fix link
   // untilValue = 1740207152;  // threads
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
  // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 
 
