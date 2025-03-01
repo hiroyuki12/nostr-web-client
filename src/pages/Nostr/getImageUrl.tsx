@@ -44,8 +44,29 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     }
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1j8y6tcdfw3q3f3h794s6un0gyc5742s0k5h5s2yqj0r70cpklqeqjavrvg') {
+      image = 'https://image.nostr.build/3ebaa681cb7ce54895d5bfa59d34ef28c50817490329b949ae5f010c6442da06.gif'
+    }
+    else if (npub === 'npub1qqqqqhu87ep5rssjejfadsnxcqaww5kqyesw0znd59py77c9c3cqfec28r') {
+      image = ''  // none
+    }
+    else if (npub === 'npub14twsqzjpsvvk4tu06w9gedt4jctwqxt74jwutm4f3qhhf3rznmzqfufqc5') {
+      image = 'https://imgur.io/1uEArUG.png'
+    }
+    else if (npub === 'npub1cmmswlckn82se7f2jeftl6ll4szlc6zzh8hrjyyfm9vm3t2afr7svqlr6f') {
+      image = 'https://image.nostr.build/e7f0d9fe86cb9123ac0de29a6e55fd3f8ea02f7491a979b4de5c536bbce793d2.jpg'
+    }
+    else if (npub === 'npub1sk5x080cwgqz5fcpmyleprvl5swc9352g2398hd4k6wr3qdd8ugqwqsr7m') {
+      image = 'https://m.primal.net/NnJg.jpg'
+    }
+    else if (npub === 'npub1lzpct9mf05ezdy58334aju9fzq53hnqq0wzu4dhwz6aq27knuaaq0l02n4') {
+      image = 'https://nostr.build/i/nostr.build_6463c3ea8e2cb222f5d588e1520a2543a785e978675649c4e58d41a33535a6d4.jpg'
+    }
+    else if (npub === 'npub1w2xjjgjsfhwej79h6a8qhuynnq0xy5t5ddlae95mxvmyrtymx6dqct5vex') {
+      image = 'https://favity.dev/img/avator.png'
+    }
+    else if (npub === 'npub1nctaqr6wc64l5cslqlxwseej38dsu69l50xxglltdspyzf0p2qmqc0e5v2') {
+      image = 'https://image.nostr.build/1218813b942c52ef0ca0ee44cdd54571848cef06f2768c30b35d49e49c0fdfa6.jpg'
     }
     else if (npub === 'npub1wdy32zdcutvqssy88ddp8w5c5hg6cwskey5juyrtruhd5vg493fq4s75d5') {
       image = 'https://pbs.twimg.com/profile_images/1270911698/640_400x400.png'

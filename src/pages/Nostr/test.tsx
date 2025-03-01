@@ -30,7 +30,7 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740816057;  //paging
+  untilValue = 1740833587;  //paging
 
 
 
@@ -46,6 +46,9 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
+  // untilValue = 1740833587;  // 画像たくさん 17
+  // untilValue = 1677589855;  // #3〜#13
+  // untilValue = 1675699195;  // #[0] Repost NG
   // untilValue = 1740816421;  // tag "r" image 7個
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
@@ -93,10 +96,11 @@ const Test = () => {
 //  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
 
 //  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
-//  untilValue = 1677499902; 
+//  untilValue = 1676198362; 
  
     //  untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
       // untilValue = 1680270000; // 2023/3/31 22- 2023/3/31 20,  +10,000 *
+      
       // untilValue = 1684667029; // 2023/5/21 20:03 - 
 
 
@@ -770,13 +774,7 @@ const Test = () => {
       let iframe4 = '';
       let iframe5 = '';
       let iframe6 = '';
-      let link1 = '';
-      let link2 = '';
-      let link3 = '';
-      let link4 = '';
-      let link5 = '';
-      let link6 = '';
-      let link7 = '';
+      let linkHTML = '';
 
       {
         // content = makeIframesbyTagHTML(content, note);
@@ -788,13 +786,7 @@ const Test = () => {
           out_iframe4, 
           out_iframe5, 
           out_iframe6,
-          out_link1,
-          out_link2,
-          out_link3,
-          out_link4,
-          out_link5,
-          out_link6,
-          out_link7 } = makeIframesbyTagHTML(content, note);
+          out_linkHTML, } = makeIframesbyTagHTML(content, note);
 
         content = out_content
 
@@ -804,13 +796,7 @@ const Test = () => {
         iframe4 = out_iframe4
         iframe5 = out_iframe5
         iframe6 = out_iframe6
-        link1 = out_link1
-        link2 = out_link2
-        link3 = out_link3
-        link4 = out_link4
-        link5 = out_link5
-        link6 = out_link6
-        link7 = out_link7
+        linkHTML = out_linkHTML
       }
       
       
@@ -929,13 +915,7 @@ const Test = () => {
               {parse(iframe6)}
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
-              {parse(link1)}
-              {parse(link2)}
-              {parse(link3)}
-              {parse(link4)}
-              {parse(link5)}
-              {parse(link6)}
-              {parse(link7)}
+              {parse(linkHTML)}
 
               <p><font color="orange">{moment(createdTime).fromNow()}</font>
               -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}

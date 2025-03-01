@@ -17,6 +17,8 @@ export const makeIframesbyTagHTML = (content, note) => {
 //     };
 
 
+    let arrayLinkUrl: string[] = []
+    let linkUrl = ""
 
 
     const linkText = '__#r';  // #r 1
@@ -68,29 +70,35 @@ export const makeIframesbyTagHTML = (content, note) => {
                 }
 
 
-                if(linkUrl1 === "") linkUrl1 = textUrl;
-                else if(linkUrl2 === "")  linkUrl2 = textUrl;
-                else if(linkUrl3 === "")  linkUrl3 = textUrl;
-                else if(linkUrl4 === "")  linkUrl4 = textUrl;
-                else if(linkUrl5 === "")  linkUrl5 = textUrl;
-                else if(linkUrl6 === "")  linkUrl6 = textUrl;
-                else if(linkUrl7 === "")  linkUrl7 = textUrl;
+                if(!arrayLinkUrl.includes(textUrl))  arrayLinkUrl.push(textUrl);
+
+                // if(linkUrl1 === "") linkUrl1 = textUrl;
+                // else if(linkUrl2 === "")  linkUrl2 = textUrl;
+                // else if(linkUrl3 === "")  linkUrl3 = textUrl;
+                // else if(linkUrl4 === "")  linkUrl4 = textUrl;
+                // else if(linkUrl5 === "")  linkUrl5 = textUrl;
+                // else if(linkUrl6 === "")  linkUrl6 = textUrl;
+                // else if(linkUrl7 === "")  linkUrl7 = textUrl;
             }
         }
     }
 
     // update content.
-    for(let i=0; i<note.tags.length; i++) {
+    // for(let i=0; i<note.tags.length; i++) {
+    for(let i=0; i<arrayLinkUrl.length; i++) {
         let tmpWord = "";
         let tmpIframe = "";
         let tmpUrl = "";
-        if(i === 0)  tmpUrl = linkUrl1;
-        else if(i === 1)  tmpUrl = linkUrl2;
-        else if(i === 2)  tmpUrl = linkUrl3;
-        else if(i === 3)  tmpUrl = linkUrl4;
-        else if(i === 4)  tmpUrl = linkUrl5;
-        else if(i === 5)  tmpUrl = linkUrl6;
-        else if(i === 6)  tmpUrl = linkUrl7;
+
+        tmpUrl = arrayLinkUrl[i]
+
+        // if(i === 0)  tmpUrl = linkUrl1;
+        // else if(i === 1)  tmpUrl = linkUrl2;
+        // else if(i === 2)  tmpUrl = linkUrl3;
+        // else if(i === 3)  tmpUrl = linkUrl4;
+        // else if(i === 4)  tmpUrl = linkUrl5;
+        // else if(i === 5)  tmpUrl = linkUrl6;
+        // else if(i === 6)  tmpUrl = linkUrl7;
 
         
         // youtube 他
@@ -160,13 +168,16 @@ export const makeIframesbyTagHTML = (content, note) => {
             
             else {
                 // Add iframe, or remove link
-                if(!tmpUrl.includes(".mov") 
+                if(!tmpUrl.includes(".jpg")  
                     && !tmpUrl.includes(".jpeg")  
-                    && !tmpUrl.includes(".jpg") 
+                    && !tmpUrl.includes(".png")   
+                    && !tmpUrl.includes(".gif")   
+                    && !tmpUrl.includes(".svg")   
+                    && !tmpUrl.includes(".ico")   
+                    && !tmpUrl.includes(".bmp")   
+                    && !tmpUrl.includes(".webp") 
                     && !tmpUrl.includes(".mp4") 
-                    && !tmpUrl.includes(".png") 
-                    && !tmpUrl.includes(".gif") 
-                    && !tmpUrl.includes(".webp")) {
+                    && !tmpUrl.includes(".mov")) {
                         
                     if(iframe1 == '') 
                         iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
@@ -202,13 +213,10 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
     // Make #r link
-    if(linkUrl1 != "") link1 = '<a href="' + linkUrl1 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl2 != "") link2 = '<a href="' + linkUrl2 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl3 != "") link3 = '<a href="' + linkUrl3 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl4 != "") link4 = '<a href="' + linkUrl4 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl5 != "") link5 = '<a href="' + linkUrl5 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl6 != "") link6 = '<a href="' + linkUrl6 + '" target="_blank">' + linkText + '</a>';
-    if(linkUrl7 != "") link7 = '<a href="' + linkUrl7 + '" target="_blank">' + linkText + '</a>';
+    let linkUrlHTML = "";
+    for(let i=0; i < arrayLinkUrl.length; i++) {
+        linkUrlHTML = linkUrlHTML + '<a href="' + arrayLinkUrl[i] + '" target="_blank">' + linkText  +'</a>';
+    }
 
 
 
@@ -221,18 +229,13 @@ export const makeIframesbyTagHTML = (content, note) => {
     const out_iframe4 = iframe4;
     const out_iframe5 = iframe5;
     const out_iframe6 = iframe6;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
-    const out_link1 = link1;  // #r link
-    const out_link2 = link2;
-    const out_link3 = link3;
-    const out_link4 = link4;
-    const out_link5 = link5;
-    const out_link6 = link6;
-    const out_link7 = link7 + serviceText + youtubeIdText1 + twitterIdText1 + appleMusicIdText1 + spotifyIdText1;
+
+    let out_linkHTML = linkUrlHTML;  // #r link
+    out_linkHTML = out_linkHTML + serviceText + youtubeIdText1 + twitterIdText1 + appleMusicIdText1 + spotifyIdText1;
 
     return { out_content, out_iframe1, out_iframe2, out_iframe3, 
         out_iframe4, out_iframe5, out_iframe6,
-        out_link1, out_link2, out_link3, out_link4,
-        out_link5, out_link6, out_link7 
+        out_linkHTML
         };
 
 
