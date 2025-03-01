@@ -1,4 +1,5 @@
 import { YouTube } from '../../components/content/YouTube';
+import { Twitter } from '../../components/content/Twitter';
 // import Tweets from "@/pages/Nostr/Twitter";
 
 export const makeIframesbyTagHTML = (content, note) => {
@@ -41,6 +42,7 @@ export const makeIframesbyTagHTML = (content, note) => {
     let link7 = "";
     let linkr = "";
     let youtubeIdText1 = "";
+    let twitterIdText1 = "";
 
 
 
@@ -90,24 +92,12 @@ export const makeIframesbyTagHTML = (content, note) => {
         if(tmpUrl != "") {
 
             if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
-                // 全卓スペースで分割。tag rにURLと日本語が入っている場合があるため
-                const value = tmpUrl.split('　');
-
-                let textUrl = "";
-                for(let j=0; j<value.length; j++) {
-                    if(value[j].includes("http"))  textUrl = value[j];
-                    linkUrl1 = textUrl.replace('`','');
-                    // linkText1 = "__#ry";
-                    break;
-                }
-
                 // Make iframe, youtubeIdText
-                const {out_iframe1, out_youtubeIdText1, out_linkr} = YouTube(linkUrl1);
+                const {out_iframe1, out_youtubeIdText1, out_linkr} = YouTube(tmpUrl);
                 iframe1 = out_iframe1;
                 youtubeIdText1 = out_youtubeIdText1;
                 linkr = out_linkr;
-
-                serviceText = '__YouTube(r)'
+                serviceText = out_linkr
 
                 // Remove link
                 content = content.replace(tmpUrl, '');
@@ -115,25 +105,12 @@ export const makeIframesbyTagHTML = (content, note) => {
             
             
             else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
-                // const id = tmpUrl.replace("x.com","twitter.com"); 
-                // NG iframe1 = '<iframe border=0 frameborder=0 height=387 width=563 src="https://twitframe.com/show?url=' + id + '"></iframe>'
-                
-                // iframe1 = '<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 550px; height: 739px; display: block; flex-grow: 1;" title="Twitter Tweet" src="https://platform.twitter.com/embed/Tweet.html?dnt=false&amp;embedId=twitter-widget-0&amp;features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOlsibGlua3RyLmVlIiwidHIuZWUiLCJ0ZXJyYS5jb20uYnIiLCJ3d3cubGlua3RyLmVlIiwid3d3LnRyLmVlIiwid3d3LnRlcnJhLmNvbS5iciJdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2hvcml6b25fdGltZWxpbmVfMTIwMzQiOnsiYnVja2V0IjoidHJlYXRtZW50IiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9lZGl0X2JhY2tlbmQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3JlZnNyY19zZXNzaW9uIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19jaGluX3BpbGxzXzE0NzQxIjp7ImJ1Y2tldCI6ImNvbG9yX2ljb25zIiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9yZXN1bHRfbWlncmF0aW9uXzEzOTc5Ijp7ImJ1Y2tldCI6InR3ZWV0X3Jlc3VsdCIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2Vuc2l0aXZlX21lZGlhX2ludGVyc3RpdGlhbF8xMzk2MyI6eyJidWNrZXQiOiJpbnRlcnN0aXRpYWwiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2V4cGVyaW1lbnRzX2Nvb2tpZV9leHBpcmF0aW9uIjp7ImJ1Y2tldCI6MTIwOTYwMCwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2hvd19ibHVlX3ZlcmlmaWVkX2JhZGdlIjp7ImJ1Y2tldCI6Im9mZiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&amp;frame=false&amp;hideCard=false&amp;hideThread=false&amp;id=1588542297792450561&amp;lang=en&amp;origin=http%3A%2F%2Flocalhost%3A3300%2F&amp;sessionId=0878e9785585cc70e369d3b1f3514a40cb5394bc&amp;theme=dark&amp;widgetsVersion=a3525f077c700%3A1667415560940&amp;width=550px" data-tweet-id="1588542297792450561"></iframe>'
-                
-                //[object Object] iframe1 = <Tweets block={tmpUrl} />
+                const {out_iframe1, out_twitterIdText1, out_linkr} = Twitter(tmpUrl);
+                iframe6 = out_iframe1;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
+                twitterIdText1 = out_twitterIdText1;
+                serviceText = out_linkr;
 
-                const tmp = tmpUrl.split('?')[0]
-                const id = tmp.split('/')[5]  //1892199000356655161
-                const embedid = `https://platform.twitter.com/embed/Tweet.html?dnt=false&embedId=twitter-widget-3&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOlsibGlua3RyLmVlIiwidHIuZWUiLCJ0ZXJyYS5jb20uYnIiLCJ3d3cubGlua3RyLmVlIiwid3d3LnRyLmVlIiwid3d3LnRlcnJhLmNvbS5iciJdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2hvcml6b25fdGltZWxpbmVfMTIwMzQiOnsiYnVja2V0IjoidHJlYXRtZW50IiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9lZGl0X2JhY2tlbmQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3JlZnNyY19zZXNzaW9uIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19jaGluX3BpbGxzXzE0NzQxIjp7ImJ1Y2tldCI6ImNvbG9yX2ljb25zIiwidmVyc2lvbiI6bnVsbH0sInRmd190d2VldF9yZXN1bHRfbWlncmF0aW9uXzEzOTc5Ijp7ImJ1Y2tldCI6InR3ZWV0X3Jlc3VsdCIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2Vuc2l0aXZlX21lZGlhX2ludGVyc3RpdGlhbF8xMzk2MyI6eyJidWNrZXQiOiJpbnRlcnN0aXRpYWwiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2V4cGVyaW1lbnRzX2Nvb2tpZV9leHBpcmF0aW9uIjp7ImJ1Y2tldCI6MTIwOTYwMCwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0Zndfc2hvd19ibHVlX3ZlcmlmaWVkX2JhZGdlIjp7ImJ1Y2tldCI6Im9mZiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideCard=false&hideThread=false&id=${
-                    id
-                  }`;
-                const tmpIframe = '<iframe id="' + id + '" border=0 frameborder=0 height=487 width=563 src="' + embedid + '" />'
-                // if(iframe1 == '')  iframe1 = tmpIframe;
-                // else iframe2 = tmpIframe;
-                iframe6 = tmpIframe;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
-
-                serviceText = '__Twitter_X(r)'
-                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
+                // Remove link
                 content = content.replace(tmpUrl, '');
             }
 
@@ -255,7 +232,7 @@ export const makeIframesbyTagHTML = (content, note) => {
     const out_link5 = link5;
     const out_link6 = link6;
     // const out_link7 = link7 + serviceText + linkr + youtubeIdText1;
-    const out_link7 = link7 + serviceText + youtubeIdText1;
+    const out_link7 = link7 + serviceText + youtubeIdText1 + twitterIdText1;
 
     return { out_content, out_iframe1, out_iframe2, out_iframe3, 
         out_iframe4, out_iframe5, out_iframe6,

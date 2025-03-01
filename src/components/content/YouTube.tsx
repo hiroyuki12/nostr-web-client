@@ -4,16 +4,29 @@ export const YouTube = (tmpUrl) => {
     let out_iframe1 = '';
     let out_youtubeIdText1 = '';
 
-    // let id = tmpUrl.replace('"', '');
+    let linkUrl = ''
     let id = '';
 
 
-    if(tmpUrl.includes('http') && !tmpUrl.includes('@')) {
+    // 全卓スペースで分割。tag rにURLと日本語が入っている場合があるため
+    const value = tmpUrl.split('　');
+
+    for(let j=0; j<value.length; j++) {
+        if(value[j].includes("http"))  {
+            linkUrl = value[j];
+            for(let i = 0; i<10; i++)  linkUrl = linkUrl.replace('`','');
+            break;
+        }
+    }
+
+
+
+    if(linkUrl.includes('http') && !linkUrl.includes('@')) {
         let link = ""
         try {
-            link = new URL(tmpUrl);
+            link = new URL(linkUrl);
         } catch(e) {
-            return '[URL_ERROR_tmpUrl=' + tmpUrl + ']'
+            return '[URL_ERROR_tmpUrl=' + linkUrl + ']'
         }
         
         // YouTube
@@ -44,8 +57,8 @@ export const YouTube = (tmpUrl) => {
     }
 
 
-    if(tmpUrl.includes('@')) {
-        out_iframe1 = '<a href="' + tmpUrl + '" target="_blank">@YouTube</a>';;
+    if(linkUrl.includes('@')) {
+        out_iframe1 = '<a href="' + linkUrl + '" target="_blank">@YouTube</a>';;
         out_youtubeIdText1 = '__[YouTubeChannel]'
     }
 
@@ -53,9 +66,9 @@ export const YouTube = (tmpUrl) => {
 
 
     // Make #ry link by tag
-    const out_linkr = '<a href="' + tmpUrl + '" target="_blank">__#ry</a>';
+    const out_linkr = '<a href="' + linkUrl + '" target="_blank">__YouTube(r)</a>';
     // Make (c_YouTube) link by content
-    const out_linkc = '<a href="' + tmpUrl + '" target="_blank">__(c_YouTube)</a>';
+    const out_linkc = '<a href="' + linkUrl + '" target="_blank">__(c_YouTube)</a>';
     
 
     return { out_iframe1, out_youtubeIdText1, out_linkr, out_linkc };
