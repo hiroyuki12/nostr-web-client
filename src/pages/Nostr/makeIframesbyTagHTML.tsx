@@ -61,31 +61,13 @@ export const makeIframesbyTagHTML = (content, note) => {
                 }
 
 
-                if(linkUrl1 === "") {
-                    // youtube以外
-                    // if(!textUrl.includes("youtube.com/") && !textUrl.includes("youtu.be/")) {
-                    //     linkUrl1 = textUrl;
-                    // }
-                    linkUrl1 = textUrl;
-                }
-                else if(linkUrl2 === "") {
-                    linkUrl2 = textUrl;
-                }
-                else if(linkUrl3 === "") {
-                    linkUrl3 = textUrl;
-                }
-                else if(linkUrl4 === "") {
-                    linkUrl4 = textUrl;
-                }
-                else if(linkUrl5 === "") {
-                    linkUrl5 = textUrl;
-                }
-                else if(linkUrl6 === "") {
-                    linkUrl6 = textUrl;
-                }
-                else if(linkUrl7 === "") {
-                    linkUrl7 = textUrl;
-                }
+                if(linkUrl1 === "") linkUrl1 = textUrl;
+                else if(linkUrl2 === "")  linkUrl2 = textUrl;
+                else if(linkUrl3 === "")  linkUrl3 = textUrl;
+                else if(linkUrl4 === "")  linkUrl4 = textUrl;
+                else if(linkUrl5 === "")  linkUrl5 = textUrl;
+                else if(linkUrl6 === "")  linkUrl6 = textUrl;
+                else if(linkUrl7 === "")  linkUrl7 = textUrl;
             }
         }
     }
@@ -95,55 +77,21 @@ export const makeIframesbyTagHTML = (content, note) => {
         let tmpWord = "";
         let tmpIframe = "";
         let tmpUrl = "";
-        if(i === 0) {
-            tmpUrl = linkUrl1;
-        }
-        else if(i === 1) {
-            tmpUrl = linkUrl2;
-        }
-        else if(i === 2) {
-            tmpUrl = linkUrl3;
-        }
-        else if(i === 3) {
-            tmpUrl = linkUrl4;
-        }
-        else if(i === 4) {
-            tmpUrl = linkUrl5;
-        }
-        else if(i === 5) {
-            tmpUrl = linkUrl6;
-        }
-        else if(i === 6) {
-            tmpUrl = linkUrl7;
-        }
+        if(i === 0)  tmpUrl = linkUrl1;
+        else if(i === 1)  tmpUrl = linkUrl2;
+        else if(i === 2)  tmpUrl = linkUrl3;
+        else if(i === 3)  tmpUrl = linkUrl4;
+        else if(i === 4)  tmpUrl = linkUrl5;
+        else if(i === 5)  tmpUrl = linkUrl6;
+        else if(i === 6)  tmpUrl = linkUrl7;
 
         
         // youtube 他
         if(tmpUrl != "") {
 
-
-
-
-
-            if(tmpUrl.includes("music.apple.com")) {
-                const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
-                // kickback large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
-                // large
-                iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                if(tmpUrl.includes("i=")) {  // small
-                    iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
-                }
-                serviceText = '__Apple Music'
-                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
-
-                content = content.replace(tmpUrl, '');
-            }
-            
-            
-
-            else if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
+            if(tmpUrl.includes("youtube.com/") || tmpUrl.includes("youtu.be/")) {
                 // 全卓スペースで分割。tag rにURLと日本語が入っている場合があるため
-                const value = note.tags[i][1].split('　');
+                const value = tmpUrl.split('　');
 
                 let textUrl = "";
                 for(let j=0; j<value.length; j++) {
@@ -159,17 +107,10 @@ export const makeIframesbyTagHTML = (content, note) => {
                 youtubeIdText1 = out_youtubeIdText1;
                 linkr = out_linkr;
 
-                serviceText = '__(r_YouTube)'
+                serviceText = '__YouTube(r)'
 
                 // Remove link
                 content = content.replace(tmpUrl, '');
-
-
-            }
-
-            else if(tmpUrl.includes("open.spotify.com")) {
-                const id = tmpUrl.replace("https://open.spotify.com/track/", ""); 
-                tmpIframe = '<iframe src="https://open.spotify.com/embed/track/' + id + '" width="560" height="232" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
             }
             
             
@@ -189,12 +130,40 @@ export const makeIframesbyTagHTML = (content, note) => {
                 const tmpIframe = '<iframe id="' + id + '" border=0 frameborder=0 height=487 width=563 src="' + embedid + '" />'
                 // if(iframe1 == '')  iframe1 = tmpIframe;
                 // else iframe2 = tmpIframe;
-                iframe7 = tmpIframe;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
+                iframe6 = tmpIframe;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
 
                 serviceText = '__Twitter_X(r)'
                 serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
                 content = content.replace(tmpUrl, '');
             }
+
+
+            else if(tmpUrl.includes("music.apple.com")) {
+                const id = tmpUrl.replace("music.apple.com","embed.music.apple.com"); 
+                // kickback large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
+                // large
+                iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                if(tmpUrl.includes("i=")) {  // small
+                    iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
+                }
+                serviceText = '__Apple Music(r)'
+                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
+
+                content = content.replace(tmpUrl, '');
+            }
+
+
+            else if(tmpUrl.includes("open.spotify.com")) {
+                const id = tmpUrl.replace("https://open.spotify.com/", ""); 
+                tmpIframe = '<iframe src="https://open.spotify.com/embed/' + id + '" width="560" height="580" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+                if(iframe1 == '')  iframe1 = tmpIframe;
+                else iframe2 = tmpIframe;
+                serviceText = '__Spotify(r)'
+                serviceText = '<a href="' + tmpUrl + '" target="_blank">' + serviceText + '</a>';
+                content = content.replace(tmpUrl, '')
+            }
+
+
             //else if(tmpUrl.includes("googleusercontent.com/")){
             //    let tmpUrl2 = tmpUrl.replace("`", "");
             //    iframe1 = '<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:580px;" title="【ブログタイトル】" src="https://hatenablog-parts.com/embed?url=' + tmpUrl + '" width="300" height="150" frameborder="0" scrolling="no"></iframe>';
@@ -273,36 +242,26 @@ export const makeIframesbyTagHTML = (content, note) => {
 
 
     const out_content = content;
-    const out_iframe1 = iframe1 + serviceText + linkr + youtubeIdText1;
+    const out_iframe1 = iframe1;
+    const out_iframe2 = iframe2;
+    const out_iframe3 = iframe3;
+    const out_iframe4 = iframe4;
+    const out_iframe5 = iframe5;
+    const out_iframe6 = iframe6;  // Twitter以降のiframeや#r, Serviceが表示されないため、最後
+    const out_link1 = link1;
+    const out_link2 = link2;
+    const out_link3 = link3;
+    const out_link4 = link4;
+    const out_link5 = link5;
+    const out_link6 = link6;
+    const out_link7 = link7 + serviceText + linkr + youtubeIdText1;
 
-    return { out_content, out_iframe1 };
+    return { out_content, out_iframe1, out_iframe2, out_iframe3, 
+        out_iframe4, out_iframe5, out_iframe6,
+        out_link1, out_link2, out_link3, out_link4,
+        out_link5, out_link6, out_link7 
+        };
 
-
-    content = content + 
-        iframe1 +  
-        iframe2 +  
-        iframe3 +  
-        iframe4 +  
-        iframe5 +
-        iframe5 +
-        iframe6;
 
     if(!iframe1.includes('(r)') && (iframe1 != "" || iframe7 != "")) content = content + "(r)";
-
-    content = content + 
-        link1 +  // #r
-        link2 + 
-        link3 + 
-        link4 + 
-        link5 + 
-        link6 + 
-        link7 + 
-        serviceText;
-
-    content = content + iframe7;   // Twitter以降のiframeや#r, Serviceが表示されないため、最後
-
-
-    const content2 = content;
-
-    return { content2, iframe1 } ;
 }

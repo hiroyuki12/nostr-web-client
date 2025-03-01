@@ -80,7 +80,7 @@ export const makeIframesbyContentHTML = (content, note) => {
       
       else if(splitContent[i].includes("music.apple.com")) {
         const id = splitContent[i].replace("music.apple.com","embed.music.apple.com"); 
-        //large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
+        // large iframe1 = '<iframe height="450" width="100%" title="メディアプレイヤー" src="https://embed.music.apple.com/us/album/kick-back-single/1648272179?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1648272179&amp;theme=auto" id="embedPlayer" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>'
         const tmpIframe = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="455" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>(content)'
         if(splitContent[i].includes("i=")) {
           iframe1 = '<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + id + '"></iframe>'
@@ -92,6 +92,16 @@ export const makeIframesbyContentHTML = (content, note) => {
         // content = content + '<a href="' + httpLinkUrl1 + '" target="_blank">' + httpLinkUrlText1 + '</a>';
       }
 
+
+      else if(splitContent[i].includes("open.spotify.com") && !splitContent[i].includes("playlist")) {
+        const id = splitContent[i].replace("https://open.spotify.com/", ""); 
+        const tmpIframe = '<iframe src="https://open.spotify.com/embed/' + id + '" width="560" height="580" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+        if(iframe1 == '')  iframe1 = tmpIframe;
+        else iframe2 = tmpIframe;
+        serviceText = '__Spotify(r)'
+        serviceText = '<a href="' + splitContent[i] + '" target="_blank">' + serviceText + '</a>';
+        content = content.replace(splitContent[i], tmpIframe)
+    }
 
 
       // todo nicovideo 再生できない

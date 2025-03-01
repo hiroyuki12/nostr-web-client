@@ -29,7 +29,7 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  untilValue = 1740748496;  //paging
+  // untilValue = 1740748496;  //paging
 
 
 
@@ -43,6 +43,14 @@ const Test = () => {
   // 配列 tags
   // auto load
   // youtube shorts content
+
+//  untilValue = 1692963976;  // fix spotify playlist tag "r"
+//  untilValue = 1687906810;  //fix  spotify playlist tag "r"
+//  untilValue = 1692963542;  // NG Repost spotify album. content, 2つ表示される
+  // untilValue = 1739707055;  // tag "r" twitter   fix
+  // untilValue = 1740364485;  // tag Apple Music tag "r" small
+  //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
+//  untilValue = 1740748496;  // youtube tag "r"
 //  untilValue = 1739012160;  // youtube live content Repost ¥n fix
   // untilValue = 1739588223;  //YouTube fix. tag "r"
   // untilValue = 1740735358;  // nikoniko AGP todo
@@ -56,7 +64,6 @@ const Test = () => {
   // untilValue = 1740366714;  // Twitter large
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
-  // untilValue = 1740364485;  // tag Apple Music tag "r" small
   // untilValue = 1740320393;  // #p link fix
   // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
   // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
@@ -68,7 +75,6 @@ const Test = () => {
 // untilValue = 1740213396;  // udio.com iframe NG. fix link
   // untilValue = 1740207152;  // threads
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
-  // untilValue = 1739707055;  // tag "r" twitter   fix
  // untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない NG
 
 
@@ -675,13 +681,52 @@ const Test = () => {
 
 
       let iframe1 = '';
+      let iframe2 = '';
+      let iframe3 = '';
+      let iframe4 = '';
+      let iframe5 = '';
+      let iframe6 = '';
+      let link1 = '';
+      let link2 = '';
+      let link3 = '';
+      let link4 = '';
+      let link5 = '';
+      let link6 = '';
+      let link7 = '';
 
       {
         // content = makeIframesbyTagHTML(content, note);
 
-        const { out_content, out_iframe1 } = makeIframesbyTagHTML(content, note);
+        const { out_content, 
+          out_iframe1, 
+          out_iframe2, 
+          out_iframe3, 
+          out_iframe4, 
+          out_iframe5, 
+          out_iframe6,
+          out_link1,
+          out_link2,
+          out_link3,
+          out_link4,
+          out_link5,
+          out_link6,
+          out_link7 } = makeIframesbyTagHTML(content, note);
+
         content = out_content
+
         iframe1 = out_iframe1
+        iframe2 = out_iframe2
+        iframe3 = out_iframe3
+        iframe4 = out_iframe4
+        iframe5 = out_iframe5
+        iframe6 = out_iframe6
+        link1 = out_link1
+        link2 = out_link2
+        link3 = out_link3
+        link4 = out_link4
+        link5 = out_link5
+        link6 = out_link6
+        link7 = out_link7
       }
       
       
@@ -789,6 +834,18 @@ const Test = () => {
               {/* {content}<br /> */}
 
               {parse(iframe1)}
+              {parse(iframe2)}
+              {parse(iframe3)}
+              {parse(iframe4)}
+              {parse(iframe5)}
+              {parse(iframe6)}
+              {parse(link1)}
+              {parse(link2)}
+              {parse(link3)}
+              {parse(link4)}
+              {parse(link5)}
+              {parse(link6)}
+              {parse(link7)}
               {parse(tagImageHTML)}
               {parse(inlineImageHTML)}
 
@@ -927,7 +984,6 @@ export default Test;
 //  untilValue = 1686929129;  //twitter iframe tag "r"
 //  untilValue = 1700358511;  // instagram link iframe content fix
   // untilValue = 1739577124;  // content iframe fix
-//  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
   // untilValue = 1739585002;  // Youtube target fix. youtu.be content
   // untilValue = 1739359806;  // tag "r" img ok
   //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
@@ -990,7 +1046,6 @@ export default Test;
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
 //  untilValue = 1739008994;  // kind:1111 Commment Re] fix
 //  untilValue = 1703568307;  // img threads NG. link切れ
-//  untilValue = 1692963542;  // spotify album. no tag "r"
 //  untilValue = 1688390047;  // music.youtube (normal youtube ok)
 //  untilValue = 1688382329;  // music.youtube (normal youtube ok)
 //  untilValue = 1739008290;  // youtube fix Delete After &
@@ -1063,8 +1118,6 @@ export default Test;
 //  untilValue = 1688127866;  //nostr:nprofile1
 //  untilValue = 1688084234;  //live_chat kind:1311 will
 //  untilValue = 1675550855;  //https://
-//  untilValue = 1692963976;  // spotify playlist
-//  untilValue = 1687906810;  //https:// spotify playlist
 //  untilValue = 1687865289;  //emoji
 //  untilValue = 1686896097;  //https://  same url
 //  untilValue = 1687689358;  //https://
