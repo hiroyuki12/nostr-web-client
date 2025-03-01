@@ -254,7 +254,8 @@ export const makeIframesbyTagHTML = (content, note) => {
     const out_link4 = link4;
     const out_link5 = link5;
     const out_link6 = link6;
-    const out_link7 = link7 + serviceText + linkr + youtubeIdText1;
+    // const out_link7 = link7 + serviceText + linkr + youtubeIdText1;
+    const out_link7 = link7 + serviceText + youtubeIdText1;
 
     return { out_content, out_iframe1, out_iframe2, out_iframe3, 
         out_iframe4, out_iframe5, out_iframe6,

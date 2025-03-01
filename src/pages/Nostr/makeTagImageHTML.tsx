@@ -121,7 +121,7 @@ export const makeTagImageHTML = (content, note) => {
 
 
     let tagImageHTML = linkUrlHTML1 + linkUrlHTML2 + linkUrlHTML3 + linkUrlHTML4 + linkUrlHTML5;
-    // if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage_' + linkUrl1  // debug
+    // if(linkUrl1 != "") tagImageHTML = image3Height;  // debug
     if(linkUrl1 != "") tagImageHTML = tagImageHTML + '_tagImage(r)'
 
 

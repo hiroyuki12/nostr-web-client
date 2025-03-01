@@ -114,6 +114,27 @@ li {
   /* margin-bottom: 10px; */
 }
 
+/* 数字を消す、間隔を狭く、枠線を消す、箇条書き、右にずらす markdown */
+ol li {
+  list-style: none; 
+  padding: 5px;
+  border: 0px solid #39444d;
+  list-style-type: disc;
+  margin-left: 18px;
+  /* padding-left: 0.5em; */ /* 左寄せ */
+}
+
+/* グラデーション線追加 markdown */
+h1, h2 {
+  background: linear-gradient(90deg, #16b5dd 0%, #d815d8 100%);
+  margin-top: 18px;
+}
+/* グラデーション線追加 markdown */
+h3 {
+  border-bottom: 1px dashed;
+  margin-top: 10px;
+}
+
 p {
   margin-top: 13px;
   /* margin: 11px 0; */
@@ -143,6 +164,7 @@ img {
   /* max-width: 100%; */
   /* height:auto; */
 }
+
 
 a {
   color: inherit;
