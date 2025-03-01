@@ -1,8 +1,8 @@
 
 export const YouTube = (tmpUrl) => {
 
-    let iframe1 = '';
-    let youtubeIdText1 = '';
+    let out_iframe1 = '';
+    let out_youtubeIdText1 = '';
 
     // let id = tmpUrl.replace('"', '');
     let id = '';
@@ -39,24 +39,24 @@ export const YouTube = (tmpUrl) => {
             }
         }
 
-        iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-        youtubeIdText1 = '__[id=' + id + ']'
+        out_iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        out_youtubeIdText1 = '__[id=' + id + ']'
     }
 
 
     if(tmpUrl.includes('@')) {
-        iframe1 = '<a href="' + tmpUrl + '" target="_blank">@YouTube</a>';;
-        youtubeIdText1 = '__[YouTubeChannel]'
+        out_iframe1 = '<a href="' + tmpUrl + '" target="_blank">@YouTube</a>';;
+        out_youtubeIdText1 = '__[YouTubeChannel]'
     }
 
 
 
 
     // Make #ry link by tag
-    const linkr = '<a href="' + tmpUrl + '" target="_blank">__#ry</a>';
+    const out_linkr = '<a href="' + tmpUrl + '" target="_blank">__#ry</a>';
     // Make (c_YouTube) link by content
-    const linkc = '<a href="' + tmpUrl + '" target="_blank">__(c_YouTube)</a>';
+    const out_linkc = '<a href="' + tmpUrl + '" target="_blank">__(c_YouTube)</a>';
     
 
-    return { iframe1, youtubeIdText1, linkr, linkc };
+    return { out_iframe1, out_youtubeIdText1, out_linkr, out_linkc };
 }

@@ -47,10 +47,10 @@ export const makeIframesbyContentHTML = (content, note) => {
       if(splitContent[i].includes("youtube.com") || splitContent[i].includes("youtu.be/")) {
         const tmpUrl = splitContent[i]
 
-        const {iframe1, youtubeIdText1, linkc} = YouTube(tmpUrl);
+        const {out_iframe1, out_youtubeIdText1, out_linkc} = YouTube(tmpUrl);
         // Remove link
         content = content.replace(tmpUrl, '');
-        return content + iframe1 + youtubeIdText1 + linkc;
+        return content + out_iframe1 + out_youtubeIdText1 + out_linkc;
       }
 
 
