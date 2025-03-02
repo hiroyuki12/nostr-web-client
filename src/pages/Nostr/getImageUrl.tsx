@@ -35,8 +35,8 @@ export const getImageURL = (pubkey) => {
     else if (npub === '') {
       image = ''
     }
-    else if (npub === '') {
-      image = ''
+    else if (npub === 'npub1t2kvlhfwmr69avxlhx5822ls65rh02t445jydrc5m4zhuarutjgqq9asfq') {
+      image = 'https://convergence-lab.github.io/nostr_avator/PXL_20240317_070406776.PORTRAIT.jpg'
     }
     else if (npub === 'npub1gr47sshq8895l5lap94maj9haus90tq9yz8pf2nvccyp5eep7axs09zlts') {
       image = 'https://image.nostr.build/7bb3d9da70ada36b04bbfdda623e61f8c304bffd6baa43fce3d9dd275cf3c0e1.jpg'
@@ -7565,7 +7565,6 @@ export const getImageURL = (pubkey) => {
       //wayoさん
       //image = 'https://imgproxy.iris.to/insecure/plain/https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/Freest2022/images/icon.png'
       image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
-      //image = 'https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png'
       //image = 'https://nostr.build/i/377697f4bdcbd0648949fb52b31270952a4ef50ab347a9636585ef9a94a43b26.jpg'
     }
     else if (pubkey == '55e15d51e5ea14ee1ee1098263a8579428c8073a9173869853b585dccec5ccde') {

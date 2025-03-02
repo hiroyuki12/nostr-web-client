@@ -66,7 +66,9 @@ export const YouTube = (tmpUrl) => {
 
 
     // Make #ry link by tag
-    const out_linkr = '<a href="' + linkUrl + '" target="_blank">__YouTube(r)</a>';
+    let linkText = '__YouTube(r)'
+    if(linkUrl.includes('playlist'))  linkText = '__YouTube_playlist(r)'
+    const out_linkr = '<a href="' + linkUrl + '" target="_blank">' + linkText + '</a>';
     // Make (c_YouTube) link by content
     const out_linkc = '<a href="' + linkUrl + '" target="_blank">__(c_YouTube)</a>';
     

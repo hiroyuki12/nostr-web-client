@@ -6,7 +6,8 @@ import { nip19 } from "nostr-tools";
 import moment from 'moment';
 import parse from 'html-react-parser';
 import Pictures from './Pictures';
-import {getImageURL} from './getImageURL'
+// import {getImageURL} from './getImageURL'
+import {getImageUrlDic} from './getImageUrlDic'
 import {makeTagImageHTML} from './makeTagImageHTML'
 import {removeTagImageUrl} from './removeTagImageUrl'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
@@ -30,7 +31,7 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740891602;  //paging
+  // untilValue = 1740914960;  //paging
 
 
   let noteCount = 0;
@@ -44,6 +45,7 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
+  // untilValue = 1740922206;  // youtube playlist NG
   // untilValue = 1740192864;  // NG #q(30023: quote_naddr1 content, 30023 lumilumi ok, nos haiku
   // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
   // untilValue = 1740896171;  // NG YouTube Channel @nostrasia/videos 
@@ -76,8 +78,8 @@ const Test = () => {
 //  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
 // untilValue = 1675672293;
 
-//  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
-//  untilValue = 1676198362; 
+ untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
+ untilValue = 1676195786; 
  
     //  untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
       // untilValue = 1680270000; // 2023/3/31 22- 2023/3/31 20,  +10,000 *
@@ -281,6 +283,10 @@ const Test = () => {
 // renderImageList
 
 
+const { out_npubImageUrlDic, out_pukeyImageUrlDic } = getImageUrlDic();  // avatar
+let pubkeyImageUrlDic = out_pukeyImageUrlDic
+let npubImageUrlDic = out_npubImageUrlDic
+
   var follow = "";
   var minCreateDate = 9999999999;
   const renderImageList = (list) => {
@@ -356,7 +362,24 @@ const Test = () => {
       //const userUrl = "https://astraea.mousedev.page/profile/" + npub 
       const userUrl = "https://nostrudel.ninja/#/u/" + npub 
 
-      const imageURL2 = getImageURL(note.pubkey);  // avatar
+
+
+      // const imageURL2_old = getImageURL(note.pubkey);  // avatar old
+
+      const npubkey = nip19.npubEncode(note.pubkey);
+
+      let imageURL2 = npubImageUrlDic[npubkey];
+      if(imageURL2 == undefined || imageURL2 == '') {
+        imageURL2 = pubkeyImageUrlDic[note.pubkey];
+        if(imageURL2 == undefined || imageURL2 == '') {
+          // imageURL2 = 'https://robohash.org/npub1p06l4uzzu7q4n98gcdwq9kas0rh26dur2qvfveszhzmphhfg262s6m7el6?set=set4'
+          imageURL2 = 'https://robohash.org/' + npubkey + '?set=set4'
+        }
+      }
+      
+      // if(imageURL3 === imageURL2)  imageURL2 = ''
+
+
 
       //const noteUrl = "https://snort.social/e/" + note.id
       //const noteUrl = "https://iris.to/#/post/" + note.id
@@ -377,7 +400,7 @@ const Test = () => {
       const noteIdShort = note.id.substring(0,2)
       //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
       // const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
-      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://search.nos.today/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/'
+      const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://search.nos.today/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;wss://relay.nostr.band/'
 
       const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
       const freefromUrl = "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id
@@ -875,7 +898,8 @@ const Test = () => {
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <a href={userUrl} target="_blank"><img src={imageURL2} width="60" height="60" class="imgavatar" /></a>
+              <a href={userUrl} target="_blank">
+              <img src={imageURL2} width="60" height="60" class="imgavatar" /></a>
 
               {contentWarning}{contentWarningText}{contentWarning}
               {statusString}
