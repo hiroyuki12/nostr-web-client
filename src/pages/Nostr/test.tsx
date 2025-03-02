@@ -30,9 +30,7 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  untilValue = 1740833587;  //paging
-
-
+  // untilValue = 1740891602;  //paging
 
 
   let noteCount = 0;
@@ -46,54 +44,37 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
-  // untilValue = 1740833587;  // 画像たくさん 17
-  // untilValue = 1677589855;  // #3〜#13
-  // untilValue = 1675699195;  // #[0] Repost NG
-  // untilValue = 1740816421;  // tag "r" image 7個
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
-//  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
-//  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
-  // untilValue = 1740364485;  // tag Apple Music tag "r" small
-  // untilValue = 1740811263;  // fix https
-  // untilValue = 1740805610;  // image tag "r"
-  // untilValue = 1740801707;  // NG コード表示 空白
-  //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
-  // untilValue = 1734267337;  //  Repost content
-//  untilValue = 1692963976;  // fix spotify playlist tag "r"
-//  untilValue = 1687906810;  //fix  spotify playlist tag "r"
-//  untilValue = 1692963542;  // fix Repost spotify album. content, 2つ表示される
-  // untilValue = 1739707055;  // tag "r" twitter   fix
-  //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
-//  untilValue = 1740748496;  // youtube tag "r"
-//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
-  // untilValue = 1739588223;  //YouTube fix. tag "r"
-  // untilValue = 1740735358;  // nikoniko AGP todo
-  // untilValue = 1740668415;  // tag "r" image 2つ。同じ画像があるため
   // untilValue = 1740192864;  // NG #q(30023: quote_naddr1 content, 30023 lumilumi ok, nos haiku
-  // untilValue = 1734267365;  // 30023   Thingstr
-  // untilValue = 1676068338;  // fix 30023 fiatjaf
-  // untilValue = 1680268376;  // repost 2つ avatar
+  // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
+  // untilValue = 1740896171;  // NG YouTube Channel @nostrasia/videos 
+  // untilValue = 1740895678;  // NG Repost content 短い ,kugiri
+  // untilValue = 1740877806;  // NG Repost content 短い
+  // untilValue = 1677589855;  // NG #3〜#13
+  // untilValue = 1675699195;  // #[0] Repost NG
+  // untilValue = 1740801707;  // NG コード表示 空白
   // untilValue = 1740489426;  // script http NG
   // untilValue = 1740489507;  // twitter content NG
-  // untilValue = 1740366714;  // Twitter large tag "r"
-  // untilValue = 1740368841;  // oppa avatar large
-  // untilValue = 1740366217;  // avatar large
-  // untilValue = 1740320393;  // #p link fix
-  // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
-  // untilValue = 1740296791;  // NG 画像はみ出る 横長画像 tag Image
+  // untilValue = 1740296791;  // fix 画像はみ出る 横長画像 tag Image
   // untilValue = 1740242330;  // NG テキスト　はみ出る
-  // untilValue = 1740270976;  // kind:1808
-  // untilValue = 1740221491;  // tags 13個
-  // untilValue = 1740222292;  // 10030 emoji set
+  // untilValue = 1734267365;  // 30023   Thingstr
   // untilValue = 1740216152;  // amazon.co.jp iframe NG. fix link
 // untilValue = 1740213396;  // udio.com iframe NG. fix link
-  // untilValue = 1740207152;  // threads
-//  untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない fix
+// untilValue = 1740833587;  // fix 画像たくさん 17 image
 
 
 
-//  untilValue = 1675000000; // 2023/1/29 22- 2023/1/11 4, 
+// untilValue = 1640953592;  // 2021/12/31  fiatfaj first post
+// untilValue = 1650053582;  // 2022/4/16   Will first post
+// untilValue = 1670984287;  // 2022/12/14  jack first post
+
+// untilValue = 1650953592;  // 2022/4/26  Will
+// untilValue = 1660953592;  // 2022/8/20  Will
+// untilValue = 1670953592;  // 2022/12/14 fiatfaj,Will
+// untilValue = 1670990442;  // 2022/12/14 jack
+
+//  untilValue = 1675000000; // 2023/1/29 22- 2023/1/29 17, 
 //  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
+// untilValue = 1675672293;
 
 //  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
 //  untilValue = 1676198362; 
@@ -104,16 +85,11 @@ const Test = () => {
       // untilValue = 1684667029; // 2023/5/21 20:03 - 
 
 
-  // Image optimization. image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
-  // https://nostr-blog.ocknamo.com/blog/70791a26bcf4debe4a4ee5e118ced1829350d74e28bea3d8a73110fceea1300c
-
-  // imgproxy\.yabu\.me
-  // https://github.com/ikuradon/yabume-api
 
   
   // const sinceValue = untilValue - 1800;  //about 30 minutes 
-  // const sinceValue = untilValue - 3600;  //about 60 minutes 
-  const sinceValue = untilValue - 36000;  //about 10 hours 
+  const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 36000;  //about 10 hours 
     //  const sinceValue = untilValue - 18000;  //about 2 days 
   // const sinceValue = untilValue - 999999;  //about 11 days 
   // const sinceValue = untilValue - 7200;  //about 120 minutes 
@@ -413,6 +389,7 @@ const Test = () => {
       const yakihonneUrl = "https://yakihonne.com/notes/" + nip19.noteEncode(note.id)
       const primalUrl = "https://primal.net/e/" + nip19.noteEncode(note.id)
       const jumbleUrl = "https://jumble.social/notes/" + nip19.noteEncode(note.id)
+      const nostrBandUrl = "https://nostr.band/" + nip19.noteEncode(note.id)
       const translateUrl = "https://translate.google.com/?sl=auto&tl=ja&text=" + note.content;
       const deepLUrl = "https://www.deepl.com/ja/translator#en/ja/" + note.content;
 
@@ -954,7 +931,7 @@ const Test = () => {
               <a href={yakihonneUrl} target="_blank">-YakiHonne</a>
               <a href={primalUrl} target="_blank">-Primal</a>
               <a href={jumbleUrl} target="_blank">-Jumble</a>
-              <a href={jumbleUrl} target="_blank">-Jumble</a>
+              <a href={nostrBandUrl} target="_blank">-Nostr.Band</a>
               <a href={translateUrl} target="_blank">-GoogleTrans</a>
               <a href={deepLUrl} target="_blank">-DeepL</a>
               {/* <a href={snortUrl} target="_blank">-Snort</a> */}
@@ -1016,13 +993,45 @@ export default Test;
 // memo
 
 
+
+// untilValue = 1739089652;  // inlineImage. tag "r" なし.
+  // untilValue = 1740816421;  // tag "r" image 7個
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+//  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
+//  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
+  // untilValue = 1740364485;  // tag Apple Music tag "r" small
+  // untilValue = 1740811263;  // fix https
+  // untilValue = 1740805610;  // image tag "r"
+  //  untilValue = 1739046056;  // kind:30023 LogForm Will. Makdown syntax. lumilumi ok
+  // untilValue = 1734267337;  //  Repost content
+//  untilValue = 1692963976;  // fix spotify playlist tag "r"
+//  untilValue = 1687906810;  //fix  spotify playlist tag "r"
+//  untilValue = 1692963542;  // fix Repost spotify album. content, 2つ表示される
+  // untilValue = 1739707055;  // tag "r" twitter   fix
+  //  untilValue = 1688253140;  //iframe 3つ tag "r". contentにもhttp
+//  untilValue = 1740748496;  // youtube tag "r"
+//  untilValue = 1739012160;  // youtube live content Repost ¥n fix
+  // untilValue = 1739588223;  //YouTube fix. tag "r"
+  // untilValue = 1740735358;  // nikoniko AGP todo
+  // untilValue = 1740668415;  // tag "r" image 2つ。同じ画像があるため
+  // untilValue = 1676068338;  // fix 30023 fiatjaf
+  // untilValue = 1680268376;  // repost 2つ avatar
+  // untilValue = 1740366714;  // Twitter large tag "r"
+  // untilValue = 1740368841;  // oppa avatar large
+  // untilValue = 1740366217;  // avatar large
+  // untilValue = 1740320393;  // #p link fix
+  // untilValue = 1740278453;  // fiatjaf avatar 画像 Image optimization /image/width=256/http://origin
+  // untilValue = 1740270976;  // kind:1808
+  // untilValue = 1740221491;  // tags 13個
+  // untilValue = 1740222292;  // 10030 emoji set
+  // untilValue = 1740207152;  // threads
+//  untilValue = 1740149320; // twitterのiframe以降が表示されない。tag"r" 2つのうち、2個目のbsky linkが表示されない fix
   // untilValue = 1739617219;  // quote_naddr1 nos-haiku ok kind:10030? lumilumi NG
   // untilValue = 1686983200;  // quote_naddr1. nos-haiku emoji set kind:30030 fix, lumilumi ok
 // untilValue = 1739065989;  // quote_nevent1. nos_haiku. 42.Channel_Message
   // untilValue = 1739886588;  // fix Invalid byte sequence, nip19.noteEncode
   // untilValue = 1740182551;  // fix mp3 audio
   // untilValue = 1740192495;  // kind:30003 (ブックマーク)
-  // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
 // untilValue = 1739169439;  // httpが２つ。画像表示 fix. jpg(fron content)
 //  untilValue = 1686241976;  //emoji 13 fix, <img>
   // untilValue = 1740133406;  // x.com/i/broadcasts NG
@@ -1108,7 +1117,6 @@ export default Test;
 // untilValue = 1703564079;  // googleusercontent.com/ img fix. contentに"`"が1つ残る理由は、"r"には'が1つ、contentには2つのため。
 // untilValue = 1739258350;  // tag "r" jpg
 // untilValue = 1739256506;  // fix. 2個目、３個目の画像が表示されない
-// untilValue = 1739089652;  // inlineImage. tag "r" なし.
 // untilValue = 1697112060;  // #r link fix. tag "r"を全卓スペースで分割してURLを取得。tag rにURLと日本語が入っている場合があるため
 //  untilValue = 1739169149;  // userStatus test
 //  untilValue = 1739114201;  // YouTube repost fix. nostter ok
@@ -1362,3 +1370,11 @@ export default Test;
     //return;
   }
 */
+
+
+
+  // Image optimization. image = 'https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/' + image;
+  // https://nostr-blog.ocknamo.com/blog/70791a26bcf4debe4a4ee5e118ced1829350d74e28bea3d8a73110fceea1300c
+
+  // imgproxy\.yabu\.me
+  // https://github.com/ikuradon/yabume-api

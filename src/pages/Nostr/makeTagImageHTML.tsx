@@ -6,6 +6,7 @@ export const makeTagImageHTML = (content, note) => {
     let imageUrl = ""
 
     let image1Height = "250";
+    let image1Width = "500";
 
 
 
@@ -69,7 +70,8 @@ export const makeTagImageHTML = (content, note) => {
 
     let linkUrlHTML = "";
     for(let i=0; i < arrayLinkUrl.length; i++) {
-        linkUrlHTML = linkUrlHTML + '<a href="' + arrayLinkUrl[i] + '" target="_blank"><img src="' + arrayLinkUrl[i] + '" height="' + image1Height + '" class="imgborder" /></a>';
+        // linkUrlHTML = linkUrlHTML + '<a href="' + arrayLinkUrl[i] + '" target="_blank"><img src="' + arrayLinkUrl[i] + '" height="' + image1Height + '" class="imgborder" /></a>';
+        linkUrlHTML = linkUrlHTML + '<a href="' + arrayLinkUrl[i] + '" target="_blank"><img src="' + arrayLinkUrl[i] + '" width="' + image1Width + '" class="imgborder" /></a>';
     }
 
 

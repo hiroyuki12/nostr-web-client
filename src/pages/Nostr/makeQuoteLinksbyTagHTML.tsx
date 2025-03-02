@@ -10,23 +10,27 @@ export const makeQuoteLinksbyTagHTML = (note) => {
   for (let i = 0; i < note.tags.length; i++) {
     let quoteBaseUrl = "https://nostter.app/";
     if (note.tags[i][0] === "q") {
-      if (quoteUrl1 === '') {
+      // if (quoteUrl1 === '') {
         quoteId = note.tags[i][1];  // event id
-        if (!quoteId.includes(":")) {  // ex. 30023:xxx
+        if (!quoteId.includes(":")) {  
           quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);  // Error: Invalid byte sequence. 30023:
           quoteIdText1 = "__#q(" + note.tags[i][1].substring(0, 2) + ")";
-        } else {
-          quoteIdText1 = "__#q(" + quoteId + ")";
+        } else {  // ex. 30023:xxx
+          quoteId = quoteId.split(':')[1];  // event id
+          quoteUrl1 = quoteBaseUrl + nip19.noteEncode(quoteId);  // Error: Invalid byte sequence. 30023:
+          quoteIdText1 = "__x#q(" + note.tags[i][1].split(':')[0] + ":)";
+          // quoteIdText1 = "__#q(" + quoteUrl1;  // debug
         }
-      } else if (quoteUrl1 != '') {
-        quoteId = note.tags[i][1];  // event id
-        if (!quoteId.includes(":")) {  // ex. 30023:xxx
-          quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
-          quoteIdText2 = "__#q(" + note.tags[i][1].substring(0, 2) + ")";
-        } else {
-          quoteIdText2 = "__#q(" + quoteId + ")";
-        }
-      }
+      // }
+      // else if (quoteUrl1 != '') {
+      //   quoteId = note.tags[i][1];  // event id
+      //   if (!quoteId.includes(":")) {  
+      //     quoteUrl2 = quoteBaseUrl + nip19.noteEncode(quoteId);
+      //     quoteIdText2 = "__#q(" + note.tags[i][1].substring(0, 2) + ")";
+      //   } else {// ex. 30023:xxx
+      //     quoteIdText2 = "__#q(" + quoteId.split(':')[0] + ":)";
+      //   }
+      // }
     }
   }
 
