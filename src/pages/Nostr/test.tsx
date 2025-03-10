@@ -7,7 +7,7 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 import Pictures from './Pictures';
 // import {getImageURL} from './getImageURL'
-import {getImageUrlDic} from './getImageUrlDic'
+import {getImageUrl2} from './getImageUrl2'
 import {makeTagImageHTML} from './makeTagImageHTML'
 import {removeTagImageUrl} from './removeTagImageUrl'
 import {makeInlineImageHTML} from './makeInlineImageHTML'
@@ -31,7 +31,20 @@ const Test = () => {
 
   untilValue = dateToUnix(now.current);  //all new events from now
 
-  // untilValue = 1740914960;  //paging
+    untilValue = 1741592302;  //paging
+  // untilValue = 1675696012;  //paging  Repost image test nachika
+  // untilValue = 1675635362;  //avatar リンクぎれ確認
+  
+  // untilValue = untilValue - 31536000  // 1年前
+  //  untilValue = 1709543364
+  // untilValue = untilValue - 31536000 * 0.5  // 半年前
+  //  untilValue = 1725414989
+  // untilValue = untilValue - 31536000 * 1.5  // 1.5年前
+  // untilValue = 1693949858
+  //  untilValue = untilValue - 31536000 * 2  // 2年前
+  //  untilValue = 1678351152
+
+
 
 
   let noteCount = 0;
@@ -45,6 +58,21 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
+
+//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
+  // untilValue = 1678362909;  // Twitter ok content
+
+  // untilValue = 1741533291;  // 特殊文字
+  // untilValue = 1678351582;  // NG dropboxがc_Twitterと表示
+  // untilValue = 1678100231;  // バッジまとめ
+  // untilValue = 1709549855;  // quote npub
+  // untilValue = 1741076218;  // quote_npub1
+  // untilValue = 1677987932;  // NG Twitter content  ?t
+  // untilValue = 1709499298;  // NG Apple Music
+  // untilValue = 1740997233;  // NG Twitter tag "r"
+  // untilValue = 1677850677;  // NG 複数3つ Twitter content
+  // untilValue = 1677851103;  // NG 複数2つ Twitter content
+  // untilValue = 1675697898;  // fix spotify track
   // untilValue = 1740922206;  // youtube playlist NG
   // untilValue = 1740192864;  // NG #q(30023: quote_naddr1 content, 30023 lumilumi ok, nos haiku
   // untilValue = 1740193143;  // fix Error: Invalid byte sequence,  nip19.noteEncode(quoteId)
@@ -52,6 +80,7 @@ const Test = () => {
   // untilValue = 1740895678;  // NG Repost content 短い ,kugiri
   // untilValue = 1740877806;  // NG Repost content 短い
   // untilValue = 1677589855;  // NG #3〜#13
+  // untilValue = 1677890462;  // NR Re [1]
   // untilValue = 1675699195;  // #[0] Repost NG
   // untilValue = 1740801707;  // NG コード表示 空白
   // untilValue = 1740489426;  // script http NG
@@ -65,6 +94,8 @@ const Test = () => {
 
 
 
+// untilValue = 1675696829;  // 2023/2/7 nostr client base github
+
 // untilValue = 1640953592;  // 2021/12/31  fiatfaj first post
 // untilValue = 1650053582;  // 2022/4/16   Will first post
 // untilValue = 1670984287;  // 2022/12/14  jack first post
@@ -76,10 +107,10 @@ const Test = () => {
 
 //  untilValue = 1675000000; // 2023/1/29 22- 2023/1/29 17, 
 //  untilValue = 1675700000; // 2023/2/7 1-  2023/2/7 0,    +5,000
-// untilValue = 1675672293;
+// untilValue = 1675698353;
 
- untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
- untilValue = 1676195786; 
+//  untilValue = 1676200000; // 2023/2/12-   2023/2/12,   +200,000 nosaray
+//  untilValue = 1675696120; 
  
     //  untilValue = 1677590000; // 2023/2/28 22-2023/2/28 15  +10,000 nosaray
       // untilValue = 1680270000; // 2023/3/31 22- 2023/3/31 20,  +10,000 *
@@ -89,8 +120,9 @@ const Test = () => {
 
 
   
-  // const sinceValue = untilValue - 1800;  //about 30 minutes 
-  const sinceValue = untilValue - 3600;  //about 60 minutes 
+  // const sinceValue = untilValue - 600;  //about 10 minutes 
+  const sinceValue = untilValue - 1800;  //about 30 minutes 
+  // const sinceValue = untilValue - 3600;  //about 60 minutes 
   // const sinceValue = untilValue - 36000;  //about 10 hours 
     //  const sinceValue = untilValue - 18000;  //about 2 days 
   // const sinceValue = untilValue - 999999;  //about 11 days 
@@ -116,7 +148,22 @@ const Test = () => {
       kinds: [3],  // 3:following list
       //kinds: [NostrKind.contacts],  // 3:following list
       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
-    //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,100 followees
+     authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,581 followees
+      // authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+//      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
+    //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
+      
+//      limit: 2000,
+    },
+  });
+
+  // following list2
+  const { events: events3 } = useNostrEvents({
+    filter: {
+      kinds: [3],  // 3:following list
+      //kinds: [NostrKind.contacts],  // 3:following list
+      // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
+    //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,581 followees
       authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
 //      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
     //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
@@ -126,19 +173,38 @@ const Test = () => {
   });
 
 
-
 ////////////////////////////////////////////////
-// renderImageList2
+// renderImageList2, renderImageList3
 
   var followList = "";
   let arrayFollow: string[] = []
+  let ngUser = ''
 
   // フォローリスト作成
-  const renderImageList2 = (list) => {
+  const renderImageList2 = (list) => {  // event2 shion
     const posts = list.map((event, index) => {
       for(let i=0; i<event.tags.length; i++) {
-        followList = followList + event.tags[i][1] + ",";
-        arrayFollow5.push(event.tags[i][1]);  // 配列に追加
+        if(event.tags[i][1].length == 64) {
+          // followList = followList + event.tags[i][1] + ",";
+          arrayFollow5.push(event.tags[i][1]);  // 配列に追加
+        }
+      }
+      return (
+        <div>
+        </div>
+      );
+    });
+    return posts;
+  }
+  
+  // フォローリスト作成2
+  const renderImageList3 = (list) => {  // event3 1j
+    const posts = list.map((event, index) => {
+      for(let i=0; i<event.tags.length; i++) {
+        if(event.tags[i][1].length == 64) {
+          followList = followList + event.tags[i][1] + ",";
+          arrayFollow5.push(event.tags[i][1]);  // 配列に追加
+        }
       }
       return (
         <div>
@@ -283,9 +349,6 @@ const Test = () => {
 // renderImageList
 
 
-const { out_npubImageUrlDic, out_pukeyImageUrlDic } = getImageUrlDic();  // avatar
-let pubkeyImageUrlDic = out_pukeyImageUrlDic
-let npubImageUrlDic = out_npubImageUrlDic
 
   var follow = "";
   var minCreateDate = 9999999999;
@@ -305,10 +368,10 @@ let npubImageUrlDic = out_npubImageUrlDic
       // if(!follwing) {
         // following filter
         follow = " [follow]";
-// not follow user
+// not 1j follow user( followList )
 
         skipCount = skipCount + 1;
-        return;
+        // return;  //no skip
       }
       else {
 // follow user
@@ -364,19 +427,8 @@ let npubImageUrlDic = out_npubImageUrlDic
 
 
 
-      // const imageURL2_old = getImageURL(note.pubkey);  // avatar old
-
-      const npubkey = nip19.npubEncode(note.pubkey);
-
-      let imageURL2 = npubImageUrlDic[npubkey];
-      if(imageURL2 == undefined || imageURL2 == '') {
-        imageURL2 = pubkeyImageUrlDic[note.pubkey];
-        if(imageURL2 == undefined || imageURL2 == '') {
-          // imageURL2 = 'https://robohash.org/npub1p06l4uzzu7q4n98gcdwq9kas0rh26dur2qvfveszhzmphhfg262s6m7el6?set=set4'
-          imageURL2 = 'https://robohash.org/' + npubkey + '?set=set4'
-        }
-      }
-      
+      // const imageURL3 = getImageURL(note.pubkey);  // avatar old
+      const imageURL2 = getImageUrl2(note.pubkey);  // avatar old
       // if(imageURL3 === imageURL2)  imageURL2 = ''
 
 
@@ -408,6 +460,7 @@ let npubImageUrlDic = out_npubImageUrlDic
       const nosHaikuUrl = "https://nos-haiku.vercel.app/entry/" + nip19.neventEncode({id:note.id})
       const irisUrl = "https://iris.to/" + nip19.noteEncode(note.id)
       const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id)
+      const damusUrl = "https://damus.io/" + nip19.noteEncode(note.id)
       const noStrudelUrl = "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id)
       const yakihonneUrl = "https://yakihonne.com/notes/" + nip19.noteEncode(note.id)
       const primalUrl = "https://primal.net/e/" + nip19.noteEncode(note.id)
@@ -898,7 +951,7 @@ let npubImageUrlDic = out_npubImageUrlDic
         <li className="item" key={index}>
           <div className="card-container">
             <div className="card-text">
-              <a href={userUrl} target="_blank">
+              {follow}<a href={userUrl} target="_blank">
               <img src={imageURL2} width="60" height="60" class="imgavatar" /></a>
 
               {contentWarning}{contentWarningText}{contentWarning}
@@ -922,7 +975,7 @@ let npubImageUrlDic = out_npubImageUrlDic
               -<a href={noteUrl} target="_blank">{createdTime}</a>-{note.created_at}
               {/* ({noteIdShort}) */}
               {client}<a href={proxyUrl} target="_blank">{proxy}</a><br />
-              {follow}</p>
+              </p>
 
 
 
@@ -952,13 +1005,14 @@ let npubImageUrlDic = out_npubImageUrlDic
               <a href={noStrudelUrl} target="_blank">-noStrudel</a>
               <a href={checkerUrl} target="_blank">-checker</a>
               <a href={freefromUrl} target="_blank">-FreeFrom</a>
-              <a href={yakihonneUrl} target="_blank">-YakiHonne</a>
-              <a href={primalUrl} target="_blank">-Primal</a>
-              <a href={jumbleUrl} target="_blank">-Jumble</a>
               <a href={nostrBandUrl} target="_blank">-Nostr.Band</a>
               <a href={translateUrl} target="_blank">-GoogleTrans</a>
               <a href={deepLUrl} target="_blank">-DeepL</a>
-              {/* <a href={snortUrl} target="_blank">-Snort</a> */}
+              <a href={yakihonneUrl} target="_blank">-YakiHonne</a>
+              <a href={primalUrl} target="_blank">-Primal</a>
+              <a href={jumbleUrl} target="_blank">-Jumble</a>
+              <a href={snortUrl} target="_blank">-Snort</a>
+              <a href={damusUrl} target="_blank">-Damus</a>
               <a href={bookmarkUrl} target="_blank">{bookmark}</a>
               <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
               <a href={streamingUrl} target="_blank">{streaming}</a>
@@ -977,7 +1031,7 @@ let npubImageUrlDic = out_npubImageUrlDic
         <div>
           {/* <p>now:{dateToUnix(now.current)}</p> */}
           {/* <p>untilValue:{untilValue}</p> */}
-          <p>links:</p>
+          <p>linksss:</p>
           <a href="https://nostter.app/home" target="_blank">nostter</a>-
           {/* <a href="https://lumilumi.app" target="_blank">lumilumi</a>- */}
           {/* <a href="https://nos-haiku.vercel.app" target="_blank">Nos Haiku</a>- */}
@@ -1001,10 +1055,11 @@ let npubImageUrlDic = out_npubImageUrlDic
           </div>
         <br />
         <ul>{renderImageList2(events2)}</ul>
+        <ul>{renderImageList3(events3)}</ul>
         <ul>{renderImageList(events)}</ul>
         <ul>{lastValue}</ul>
         <ul>{noteCount}</ul>
-        <ul>{skipCount} skip</ul>
+        <ul>{skipCount} posts (not follow)</ul>
         End
       </div>
     </>
@@ -1020,7 +1075,6 @@ export default Test;
 
 // untilValue = 1739089652;  // inlineImage. tag "r" なし.
   // untilValue = 1740816421;  // tag "r" image 7個
-//  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
 //  untilValue = 1695999820;  //  tag Apple Music OGP. fix. tag 'r' small
   // untilValue = 1740364485;  // tag Apple Music tag "r" small

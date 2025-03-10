@@ -61,7 +61,7 @@ export const makeIframesbyContentHTML = (content, note) => {
       }
 
 
-       if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
+      else if(tmpUrl.includes("twitter.com") || tmpUrl.includes("x.com")) {
         const {out_iframe1, out_twitterIdText1, out_linkc} = Twitter(tmpUrl);
         // Remove link
         content = content.replace(tmpUrl, '');  // 最後にTwitter iframeを追加するため削除
@@ -122,7 +122,7 @@ export const makeIframesbyContentHTML = (content, note) => {
           // URL 非表示
           content = content.replace(httpLinkUrl1, '');
           // (c)_ttp' 表示
-          content = content.replace(httpLinkUrl1, httpLinkUrl1.replace('http', '(c)_ttp'));
+          // content = content.replace(httpLinkUrl1, httpLinkUrl1.replace('http', '(c)_ttp'));
         }
         else {
           httpLinkUrl1 = tmpUrl.substring(tmpUrl.indexOf('https://'), tmpUrl.length);

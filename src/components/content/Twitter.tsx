@@ -33,6 +33,7 @@ export const Twitter = (tmpUrl) => {
             }`;
         out_iframe1 = '<iframe id="' + id + '" border=0 frameborder=0 height=487 width=563 src="' + embedid + '" />'
         out_twitterIdText1 = '__[id=' + id + ']';
+        if(id == undefined)  out_iframe1 = '__' + tmpUrl
     }
 
 

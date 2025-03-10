@@ -13,6 +13,10 @@ export const Spotify = (tmpUrl) => {
         
         const id = tmpUrl.replace("https://open.spotify.com/", ""); 
         out_iframe1 = '<iframe src="https://open.spotify.com/embed/' + id + '" width="560" height="580" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+
+        if(id.includes('track'))  
+            out_iframe1 = '<iframe src="https://open.spotify.com/embed/' + id + '" width="560" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>'
+
         out_spotifyIdText1 =  '__[id=' + id + ']';
 
     }
