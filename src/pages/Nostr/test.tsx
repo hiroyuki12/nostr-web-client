@@ -30,8 +30,8 @@ const Test = () => {
   let untilValue = ''
 
   untilValue = dateToUnix(now.current);  //all new events from now
+        untilValue = 1742965912;  //paging
 
-    untilValue = 1741592302;  //paging
   // untilValue = 1675696012;  //paging  Repost image test nachika
   // untilValue = 1675635362;  //avatar リンクぎれ確認
   
@@ -41,8 +41,8 @@ const Test = () => {
   //  untilValue = 1725414989
   // untilValue = untilValue - 31536000 * 1.5  // 1.5年前
   // untilValue = 1693949858
-  //  untilValue = untilValue - 31536000 * 2  // 2年前
-  //  untilValue = 1678351152
+    // untilValue = untilValue - 31536000 * 2  // 2年前
+  //  untilValue = 1679036480
 
 
 
@@ -58,10 +58,14 @@ const Test = () => {
   // auto load
   // youtube shorts content
 
-
+// untilValue = 1742212592;  // #3, #4 ノストレカまとめ
 //  untilValue = 1739151041;  // Twitter OGP. nostter large OK (by content)
   // untilValue = 1678362909;  // Twitter ok content
 
+  // untilValue = 1742964890;  // NG mp4
+  // untilValue = 1742969245;  // spotify
+  // untilValue = 1742908206;  // NIP-21 link
+        // untilValue = 1742466396;  //NG SVG
   // untilValue = 1741533291;  // 特殊文字
   // untilValue = 1678351582;  // NG dropboxがc_Twitterと表示
   // untilValue = 1678100231;  // バッジまとめ
@@ -148,8 +152,8 @@ const Test = () => {
       kinds: [3],  // 3:following list
       //kinds: [NostrKind.contacts],  // 3:following list
       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
-     authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,581 followees
-      // authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
+    //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,581 followees
+      authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
 //      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
     //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
       
@@ -1007,12 +1011,12 @@ const Test = () => {
               <a href={freefromUrl} target="_blank">-FreeFrom</a>
               <a href={nostrBandUrl} target="_blank">-Nostr.Band</a>
               <a href={translateUrl} target="_blank">-GoogleTrans</a>
-              <a href={deepLUrl} target="_blank">-DeepL</a>
-              <a href={yakihonneUrl} target="_blank">-YakiHonne</a>
-              <a href={primalUrl} target="_blank">-Primal</a>
-              <a href={jumbleUrl} target="_blank">-Jumble</a>
-              <a href={snortUrl} target="_blank">-Snort</a>
-              <a href={damusUrl} target="_blank">-Damus</a>
+              {/* <a href={deepLUrl} target="_blank">-DeepL</a> */}
+              {/* <a href={yakihonneUrl} target="_blank">-YakiHonne</a> */}
+              {/* <a href={primalUrl} target="_blank">-Primal</a> */}
+              {/* <a href={jumbleUrl} target="_blank">-Jumble</a> */}
+              {/* <a href={snortUrl} target="_blank">-Snort</a> */}
+              {/* <a href={damusUrl} target="_blank">-Damus</a> */}
               <a href={bookmarkUrl} target="_blank">{bookmark}</a>
               <a href={nozokimadoUrl} target="_blank">{nozokimado}</a>
               <a href={streamingUrl} target="_blank">{streaming}</a>
@@ -1051,7 +1055,8 @@ const Test = () => {
           <a href="https://snapnostr.app" target="_blank">snapnostr</a>-
           {/* <a href="https://jumble.social" target="_blank">Jumble</a>- */}
           <a href="https://stats.nostr.band" target="_blank">Nostr Stats</a>-
-          <a href="https://nchan.vip" target="_blank">nchan</a>
+          <a href="https://nchan.vip" target="_blank">nchan</a>-
+          <a href="https://ntrends.app" target="_blank">ntrends</a>
           </div>
         <br />
         <ul>{renderImageList2(events2)}</ul>

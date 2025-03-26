@@ -67,7 +67,13 @@ export const YouTube = (tmpUrl) => {
 
     // Make #ry link by tag
     let linkText = '__YouTube(r)'
-    if(linkUrl.includes('playlist'))  linkText = '__YouTube(playlist)(r)'
+    if(linkUrl.includes('playlist')) {
+        linkText = '__YouTube(playlist)(r)'
+        id = tmpUrl.replace('https://youtube.com/','')
+        out_youtubeIdText1 = '__[id=' + id + ']'
+        out_iframe1 = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + id + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+    }  
+
     const out_linkr = '<a href="' + linkUrl + '" target="_blank">' + linkText + '</a>';
     // Make (c_YouTube) link by content
     const out_linkc = '<a href="' + linkUrl + '" target="_blank">__(c_YouTube)</a>';

@@ -107,8 +107,8 @@ ul {
 
 li {
   /* margin: 0px 0; */
-  border: 1px solid #39444d;
-  max-width: 580px;
+  border-bottom: 1px solid #39444d;
+  max-width: 600px;
   padding: 12px;
   /* border-radius: 16px; */
   /* margin-bottom: 10px; */
