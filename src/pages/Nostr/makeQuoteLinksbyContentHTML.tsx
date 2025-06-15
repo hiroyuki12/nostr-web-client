@@ -26,7 +26,7 @@ export const makeQuoteLinksbyContentHTML = (content) => {
         //const toLinkUrl = 'https://nostter.app/' + wordsNostr[i].replace('nostr:','');
         //const toLinkUrl = "https://nostter.app/" + wordsNostr[i].replace('nostr:',''); 
         //const toLinkUrl = "https://snort.social/p/" + wordsNostr[i].replace('nostr:',''); 
-        const toLinkUrl = "https://nostrudel.ninja/#/u/" + wordsNostr[i].replace('nostr:',''); 
+        const toLinkUrl = "https://nostrudel.ninja/u/" + wordsNostr[i].replace('nostr:',''); 
         if(quoteLinkHTML1 === "") {
           quoteLinkText = "(quote_npub1)";
           quoteLinkHTML1 = '<a href="' + toLinkUrl + '" target="_blank">' + quoteLinkText +'</a>';

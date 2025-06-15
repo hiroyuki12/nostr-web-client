@@ -15,7 +15,7 @@ export const makeReplyHTML = (note) => {
   //let replyToUserBaseUrl = "https://yabu.me/" 
   //const replyToUserBaseUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" 
   //const replyToUserBaseUrl = "https://astraea.mousedev.page/profile/" 
-  const replyToUserBaseUrl = "https://nostrudel.ninja/#/u/" 
+  const replyToUserBaseUrl = "https://nostrudel.ninja/u/" 
 
   let channelUrl = "";
   let eventCount = 0;
