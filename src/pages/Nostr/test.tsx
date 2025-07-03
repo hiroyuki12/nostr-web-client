@@ -30,9 +30,9 @@ const Test = () => {
   let untilValue = "";
 
   untilValue = dateToUnix(now.current); //all new events from now
-  // untilValue = 1750683997; //paging
+  // untilValue = 1751276725; //paging
 
-  let maxNum = 1500; // OK <= 1,500
+  let maxNum = 1580; // OK <= 1,580
 
   // kind 39701 social bookmark
 
@@ -136,82 +136,82 @@ const Test = () => {
   // let arrayFollow1: string[] = ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600']  // lokuyou
   // let arrayFollow2 =  followList2();
   // let arrayFollow3 =  ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600','ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'];
-  let arrayFollow5: string[] = [];
+  let mergedFollowList: string[] = [];
 
   // let arrayKinds = [1,6,20,22,42,1111,30023,30315]
 
-  // following list (many)
-  const { events: events2 } = useNostrEvents({
+  // following list2 (1j) (main)
+  const { events: mainEvent } = useNostrEvents({
+    filter: {
+      kinds: [3], // 3:following list
+      authors: [
+        // shion
+        // "0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
+        // my jp
+        // "efd0c54be5718d038609bcf70cee2d84c390dd7bad0978f3aaea2e50a01ea3c7",
+        // 1j
+        "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
+      ],
+    },
+  });
+
+  // following list (many) (add)
+  const { events: addEvent } = useNostrEvents({
     filter: {
       kinds: [3], // 3:following list
       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       authors: [
+        // shion  1,632 followees
         "0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
-      ], // shion 1,598 followees
-      //      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
-      //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
-    },
-  });
-
-  // following list2 (1j)
-  const { events: events3 } = useNostrEvents({
-    filter: {
-      kinds: [3], // 3:following list
-      authors: [
-        "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
-      ], // 1j
+        // 1j
+        // "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
+      ],
     },
   });
 
   ////////////////////////////////////////////////
-  // renderImageList2, renderImageList3
+  // addFollowingList, makeFollowingCsv([follow]表示のため)
 
   var followList = "";
-  let arrayFollow: string[] = [];
   let ngUser = "";
 
-  // フォローリスト作成(all)
-  const renderImageList2 = (list) => {
+  // mergedフォローリスト作成(all)
+  const addFollowingList = (list) => {
     // event2 shion
     const posts = list.map((event, index) => {
+      let eventCount = event.tags.length;
       for (let i = 0; i < event.tags.length; i++) {
         if (
           event.tags[i][1] !=
-            "6c07be7937364b05723012b57778768a422b84a7bbe4ae40ab3bd128c3efefd8" && // NG
-          // && event.tags[i][1] != '0f38afb23cec30570ee64f9a4aa099229395ec3371c5fe867e09c9111480015d'  // OK
-          event.tags[i][1] !=
-            "47e1e8056a02521352847afac1792e9cec2846d31c72f754606e72ed02a8abb2" && // NG
-          event.tags[i][1] !=
-            "5eeaf28af19a593720c3f611a7be1312aa8ce6298937aa656029562d56c0603d" && // NG
-          event.tags[i][1] !=
-            "36e451bb5b2c238ad1ebdce58af58da62124b7935278a238fdb775d3163e8ffa" && // NG
-          event.tags[i][1] !=
-            "ca55de60561aacee9c31f57c95bdac016b5b534a52823358c6d18bea2ce66257" // NG
+          "xxxca55de60561aacee9c31f57c95bdac016b5b534a52823358c6d18bea2ce66257" // NG
         ) {
           if (event.tags[i][1].length == 64) {
             if (i < maxNum) {
               // OK <= 1,400
-              arrayFollow5.push(event.tags[i][1]); // 配列に追加
+              mergedFollowList.push(event.tags[i][1]); // 配列に追加
             } else ngUser = ngUser + String(i) + ":" + event.tags[i][1] + "-";
           }
         }
       }
-      return <div></div>;
+      let mergedCount = mergedFollowList.length;
+
+      return <div key={index}>mergedCount: {mergedCount}</div>;
     });
     return posts;
   };
 
-  // フォローリスト作成2(my)
-  const renderImageList3 = (list) => {
+  // フォローリスト作成2(my) [follow]表示のために必要
+  const makeFollowingCsv = (list) => {
     // event3 1j
     const posts = list.map((event, index) => {
+      let mainCount = event.tags.length;
       for (let i = 0; i < event.tags.length; i++) {
         if (event.tags[i][1].length == 64) {
           followList = followList + event.tags[i][1] + ",";
-          arrayFollow5.push(event.tags[i][1]); // 配列に追加
+          mergedFollowList.push(event.tags[i][1]); // 配列に追加
         }
       }
-      return <div></div>;
+      return <div key={index}>mainCount: {mainCount}</div>;
     });
     return posts;
   };
@@ -222,7 +222,7 @@ const Test = () => {
     filter: {
       until: untilValue,
 
-      authors: arrayFollow5, // follow list filter
+      authors: mergedFollowList, // follow list filter
 
       //  authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
       //      authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
@@ -297,50 +297,12 @@ const Test = () => {
     },
   });
 
-  // following list
-  //   const { events: events2 } = useNostrEvents({
-  //     filter: {
-  //       kinds: [3],  // 3:following list
-  //       //kinds: [NostrKind.contacts],  // 3:following list
-  //       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
-  //  authors: ["0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0"],  // shion 1,100 followees
-  //       authors: ["91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877"],  // 1j
-  // //      authors: ["5610a26cefa76ec4bcf777aa0778681da960336ffe217a3dd4d3b3feeb9e03cc"],  // iris
-  //     //  authors: ["087c51f1926f8d3cb4ff45f53a8ee2a8511cfe113527ab0e87f9c5821201a61e"],  // jp user bot
-
-  // //      limit: 2000,
-  //     },
-  //   });
-
-  // ////////////////////////////////////////////////
-  // // renderImageList2
-
-  //   var followList = "";
-  //   let arrayFollow: string[] = []
-
-  //   // フォローリスト作成
-  //   const renderImageList2 = (list) => {
-  //     const posts = list.map((event, index) => {
-  //       for(let i=0; i<event.tags.length; i++) {
-  //         followList = followList + event.tags[i][1] + ",";
-  //         arrayFollow.push(event.tags[i][1]);
-  //       }
-  //       return (
-  //         <div>
-  //         </div>
-  //       );
-  //     });
-  //     return posts;
-  //   }
-
-  //   arrayFollow5 = followList.split('','');
-
   ////////////////////////////////////////////////
-  // renderImageList
+  // renderContentList
 
   var follow = "";
   var minCreateDate = 9999999999;
-  const renderImageList = (list) => {
+  const renderContentList = (list) => {
     const posts = list.map((note, index) => {
       // let follwing = false;
       // for(let i=0; arrayFollow.length; i++) {
@@ -361,7 +323,7 @@ const Test = () => {
         // return;  //no skip
       } else {
         // follow user
-        //  return;
+        // return;
       }
 
       if (
@@ -395,7 +357,7 @@ const Test = () => {
         // hiragara filter
         //follow = "[[en]]";
         // not japanese
-        //  return;
+        // return;
       }
 
       if (
@@ -410,7 +372,7 @@ const Test = () => {
 
       if (minCreateDate > note.created_at) minCreateDate = note.created_at;
       lastValue = note.created_at;
-      // lastValue = arrayFollow5.length  // @@ 4,231 ok
+      // lastValue = mergedFollowList.length  // @@ 4,231 ok
       // lastValue = ngUser  //
 
       const dateTime = new Date(note.created_at * 1000);
@@ -420,13 +382,12 @@ const Test = () => {
 
       const npub = nip19.npubEncode(note.pubkey);
       //const nostrnpub = "https://nostr.com/" + npub
-      // const nostrnpub = "https://yabu.me/" + npub
       //const userUrl = "https://snort.social/p/" + npub
       //const userUrl = "https://yabu.me/" + npub
-      //const userUrl = "https://nostter.app/" + npub
       //const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
       //const userUrl = "https://astraea.mousedev.page/profile/" + npub
-      const userUrl = "https://nostrudel.ninja/u/" + npub;
+      // const userUrl = "https://nostrudel.ninja/u/" + npub;
+      const userUrl = "https://nostter.app/" + npub;
 
       // const imageURL3 = getImageURL(note.pubkey);  // avatar old
       const imageURL2 = getImageUrl2(note.pubkey); // avatar old
@@ -933,7 +894,7 @@ const Test = () => {
       ); // return
     }); // list.map
     return posts;
-  }; // renderImageList
+  }; // renderContentList
 
   return (
     <>
@@ -1016,9 +977,9 @@ const Test = () => {
           </a>
         </div>
         <br />
-        <ul>{renderImageList2(events2)}</ul>
-        <ul>{renderImageList3(events3)}</ul>
-        <ul>{renderImageList(events)}</ul>
+        <ul>{addFollowingList(addEvent)}</ul>
+        <ul>{makeFollowingCsv(mainEvent)}</ul>
+        <ul>{renderContentList(events)}</ul>
         <ul>{lastValue}</ul>
         <ul>{noteCount}</ul>
         <ul>{skipCount} posts (not follow)</ul>

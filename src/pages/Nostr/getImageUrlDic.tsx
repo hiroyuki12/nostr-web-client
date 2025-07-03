@@ -8,7 +8,8 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
+    npub19y60va68t4ugpjlw9cwegahv5z6vsyylselk9nr3pzrv4fwryzjshxjy5r:
+      "https://image.nostr.build/7b9eeb3ef2f898d420610fc37f63fe9ee0fabeab2dacd93c9ea73cf99610ca48.jpg",
     npub1ecxns5jjwvaasnq7nnna0nd4wvacqgdmpvm5pjzdrpzcp06q863s0w23y6:
       "https://i.gyazo.com/852c94929f06142d739a989d2a31675b.png",
     npub1shnjrjegvfp48heaw43qgsz44f4uffk50pe4cq73xj5fcmd4qydqy3r4l6:
