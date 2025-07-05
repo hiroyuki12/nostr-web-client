@@ -32,7 +32,8 @@ const Test = () => {
   untilValue = dateToUnix(now.current); //all new events from now
   // untilValue = 1751276725; //paging
 
-  let maxNum = 1580; // OK <= 1,580
+  // let maxNum = 1,580; // OK <= 1,580 1j808 main
+  let maxNum = 700; // OK <= 700, shion main
 
   // kind 39701 social bookmark
 
@@ -146,11 +147,11 @@ const Test = () => {
       kinds: [3], // 3:following list
       authors: [
         // shion
-        // "0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
+        "0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
         // my jp
         // "efd0c54be5718d038609bcf70cee2d84c390dd7bad0978f3aaea2e50a01ea3c7",
         // 1j
-        "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
+        //"91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
       ],
     },
   });
@@ -162,9 +163,9 @@ const Test = () => {
       // authors: ["43658ae91382bee7dfa3c7c360b13a5ec8c222635f2b2aad3de75e4bb20da906"],  // maya
       authors: [
         // shion  1,632 followees
-        "0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
+        //"0c9b1e9fef76c88b63f86645dc33bb7777f0259ec41e674b61f4fc553f6db0e0",
         // 1j
-        // "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
+        "91de7fc2c96cc03354b16ca1f38bd370880c9bab0ce4d23adf6cc08bdbcdb877",
       ],
     },
   });
@@ -175,7 +176,23 @@ const Test = () => {
   var followList = "";
   let ngUser = "";
 
-  // mergedフォローリスト作成(all)
+  // Mainフォローリスト作成. [follow]表示のために必要. push mergedFollowList. mainEvent
+  const makeFollowingCsv = (list) => {
+    // event3 1j
+    const posts = list.map((event, index) => {
+      for (let i = 0; i < event.tags.length; i++) {
+        if (event.tags[i][1].length == 64) {
+          // followList = followList + event.tags[i][1] + ",";
+          mergedFollowList.push(event.tags[i][1]); // 配列に追加
+        }
+      }
+      let mainCount = event.tags.length;
+      return <div key={index}>mainCount: {mainCount}</div>;
+    });
+    return posts;
+  };
+
+  // mergedフォローリスト作成(all). addEvent
   const addFollowingList = (list) => {
     // event2 shion
     const posts = list.map((event, index) => {
@@ -188,30 +205,14 @@ const Test = () => {
           if (event.tags[i][1].length == 64) {
             if (i < maxNum) {
               // OK <= 1,400
+              followList = followList + event.tags[i][1] + ",";
               mergedFollowList.push(event.tags[i][1]); // 配列に追加
             } else ngUser = ngUser + String(i) + ":" + event.tags[i][1] + "-";
           }
         }
       }
       let mergedCount = mergedFollowList.length;
-
       return <div key={index}>mergedCount: {mergedCount}</div>;
-    });
-    return posts;
-  };
-
-  // フォローリスト作成2(my) [follow]表示のために必要
-  const makeFollowingCsv = (list) => {
-    // event3 1j
-    const posts = list.map((event, index) => {
-      let mainCount = event.tags.length;
-      for (let i = 0; i < event.tags.length; i++) {
-        if (event.tags[i][1].length == 64) {
-          followList = followList + event.tags[i][1] + ",";
-          mergedFollowList.push(event.tags[i][1]); // 配列に追加
-        }
-      }
-      return <div key={index}>mainCount: {mainCount}</div>;
     });
     return posts;
   };
@@ -981,8 +982,8 @@ const Test = () => {
           </a>
         </div>
         <br />
-        <ul>{addFollowingList(addEvent)}</ul>
         <ul>{makeFollowingCsv(mainEvent)}</ul>
+        <ul>{addFollowingList(addEvent)}</ul>
         <ul>{renderContentList(events)}</ul>
         <ul>{lastValue}</ul>
         <ul>{noteCount}</ul>

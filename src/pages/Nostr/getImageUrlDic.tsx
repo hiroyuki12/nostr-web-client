@@ -8,6 +8,22 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    npub18wzfqvcy56vfnh2fzd0p5zgszxx5swkzc6x9n0wq7y73h3qtngps9zqhzm:
+      "https://cdn.nostrcheck.me/3b84903304a69899dd49135e1a0910118d483ac2c68c59bdc0f13d1bc40b9a03/96103953be97737c527be09a8c8e14eeac5bbb8e2336077a70d63354708521f4.webp",
+    npub18na495jsuyfz05juxzenq300c2gsz7efhc4rh9mnkkeclr4g26gq0jtk29:
+      "https://pubimgs.c-stellar.net/where_is_typhoon.webp",
+    npub13tsmyvx8rvhg93fc74pagq8ar4ss8vx346d6njfp0swxwlutsmqqczp0pd:
+      "https://c.24242.io/f17/629/f17629d76ed4837c83bd9be165a99c2680e9e0928a7b1e8cdcc6b4a514612448.png",
+    npub1mpt8xgm33ev3pw40q0sj0m4p3kqc4d4xnlx24cn2cqhf8p4ujucq57j3vz:
+      "https://nostrcheck.me/media/d8567323718e5910baaf03e127eea18d818ab6a69fccaae26ac02e9386bc9730/58a94e13277e64d0602acd325079c6b8710e524224ccee29573530b26b084f70.webp",
     npub1xgcsn9lkkdake4stk9dz36dpfwkam7lssad8mcjvdyfr5rq7vnxqq2sgy4:
       "https://showhyuga.pages.dev/nostricon/07_idol_honey.jpg",
     npub1a9v3g2yp867kj9nndjyth9vegjt0v37klemfa7zgx6t74wxsf5ksql2wh9:
