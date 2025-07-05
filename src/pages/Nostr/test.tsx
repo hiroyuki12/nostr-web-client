@@ -5,25 +5,25 @@ import NextButton from "@/components/NextButton";
 import { nip19 } from "nostr-tools";
 import moment from "moment";
 import parse from "html-react-parser";
-import Pictures from "./Pictures";
+import Pictures from "../../components/Pictures";
 // import {getImageURL} from './getImageURL'
-import { getImageUrl2 } from "./getImageUrl2";
-import { makeTagImageHTML } from "./makeTagImageHTML";
-import { removeTagImageUrl } from "./removeTagImageUrl";
-import { makeInlineImageHTML } from "./makeInlineImageHTML";
-import { makeReplyHTML } from "./makeReplyHTML";
-import { makeStatusString } from "./makeStatusString";
-import { makeQuoteLinksbyContentHTML } from "./makeQuoteLinksbyContentHTML";
-import { makeIframesbyTagHTML } from "./makeIframesbyTagHTML";
-import { makeIframesbyContentHTML } from "./makeIframesbyContentHTML";
-import { makeMarkdownHTML } from "./makeMarkdownHTML";
-import { makeTextlinkbyMarkdownHTML } from "./makeTextlinkbyMarkdownHTML";
-import { makeTagsText } from "./makeTagsText";
-import { makeRepostContent } from "./makeRepostContent";
-import { removeInlineImageURL } from "./removeInlineImageURL";
-import { makeQuoteLinksbyTagHTML } from "./makeQuoteLinksbyTagHTML";
-import { makeEventLinksbyTagHTML } from "./makeEventLinksbyTagHTML";
-// import {followList2} from './followList2'
+import { getImageUrl2 } from "../../components/getImageUrl2";
+import { makeTagImageHTML } from "../../components/makeTagImageHTML";
+import { removeTagImageUrl } from "../../components/removeTagImageUrl";
+import { makeInlineImageHTML } from "../../components/makeInlineImageHTML";
+import { makeReplyHTML } from "../../components/makeReplyHTML";
+import { makeStatusString } from "../../components/makeStatusString";
+import { makeQuoteLinksbyContentHTML } from "../../components/makeQuoteLinksbyContentHTML";
+import { makeIframesbyTagHTML } from "../../components/makeIframesbyTagHTML";
+import { makeIframesbyContentHTML } from "../../components/makeIframesbyContentHTML";
+import { makeMarkdownHTML } from "../../components/makeMarkdownHTML";
+import { makeTextlinkbyMarkdownHTML } from "../../components/makeTextlinkbyMarkdownHTML";
+import { makeTagsText } from "../../components/makeTagsText";
+import { makeRepostContent } from "../../components/makeRepostContent";
+import { removeInlineImageURL } from "../../components/removeInlineImageURL";
+import { makeQuoteLinksbyTagHTML } from "../../components/makeQuoteLinksbyTagHTML";
+import { makeEventLinksbyTagHTML } from "../../components/makeEventLinksbyTagHTML";
+// import {followList2} from '../../components/followList2'
 
 const Test = () => {
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
