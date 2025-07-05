@@ -16,8 +16,24 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
+    npub13uwl9qn8yag9l4gvhdrsl2t0hda5cpeed6ppxsw4tfzajzeqk4qq86vuqt:
+      "https://cdn.bsky.app/img/avatar/plain/did:plc:kzx3wiefwfxmcm6prgsgh5ae/bafkreigbhonacg25ouaiy6kkujsy7hyso5mhuwen3zezcldwsldmqiothe@jpeg",
+    npub1r0hvae2ld84u9zgyqdsx7294ar4m4v3ayfnnpcftf0mk955ay93qejel3w:
+      "https://cdn.nostrcheck.me/1beecee55f69ebc2890403606f28b5e8ebbab23d226730e12b4bf762d29d2162/0c485cbf8db44882b730926366e545d211145cf1fee8b19909fa192e0e6d0443.webp",
+    npub1njty7prjt49kju6c3mjjlxvm0hjymf5s2qlfcyjqg5e0k8kftp3s4dpsn5:
+      "https://image.nostr.build/90deab617688e4bc1a02eae1c3d4b3e1cd7f5e9103d4aa2674abd88e1e634cee.png",
     npub18wzfqvcy56vfnh2fzd0p5zgszxx5swkzc6x9n0wq7y73h3qtngps9zqhzm:
       "https://cdn.nostrcheck.me/3b84903304a69899dd49135e1a0910118d483ac2c68c59bdc0f13d1bc40b9a03/96103953be97737c527be09a8c8e14eeac5bbb8e2336077a70d63354708521f4.webp",
+    npub1k92vaugkezzfx7shtxjyxj9m3q6pdz5w7q9ph7fzkq0kflweepjqd3h5kr:
+      "https://image.nostr.build/dd568e7ea9b9fb5504de9c2d6a709eeefe2cb804b199c99a2984322be3d0e306.jpg",
+    npub12egp0pvh2f0fp6sk5nt6ncehqzkz8zsma8dl8agf8p3f98v6resqku4w26:
+      "https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/oknm.png",
+    npub1x30ynxmgy3d3fdpxgq3c2gsx7lw6fs6j9lc2sfss8mprk487pytss7nhjm:
+      "https://image.nostr.build/adaaa3d80d4ed4f85a4820ba135bbd26438adc6b429c3985d87edc3aa1a16ddd.jpg",
+    npub1kllau6nfktk8rkpjaje9nahr2ylkrm5u22ux9l46zncsc5aax8hsr79jnd:
+      "https://image.nostr.build/27669ced032d3f9d118ac48c8394f28f04397fb9e70c4f26bc3421b91aeabb8b.jpg",
+    npub1wgpfshr7xjnur3ytj0vg922nc5jceu3xyp8vjklvanvrvrre995s5lrecv:
+      "https://robohash.org/npub1wgpfshr7xjnur3ytj0vg922nc5jceu3xyp8vjklvanvrvrre995s5lrecv?set=set4",
     npub18na495jsuyfz05juxzenq300c2gsz7efhc4rh9mnkkeclr4g26gq0jtk29:
       "https://pubimgs.c-stellar.net/where_is_typhoon.webp",
     npub13tsmyvx8rvhg93fc74pagq8ar4ss8vx346d6njfp0swxwlutsmqqczp0pd:

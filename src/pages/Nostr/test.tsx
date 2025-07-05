@@ -367,13 +367,10 @@ const Test = () => {
       )
         return;
 
-      // if(noteCount > 10)  return;  // debug
-
       noteCount = noteCount + 1;
 
       if (minCreateDate > note.created_at) minCreateDate = note.created_at;
       lastValue = note.created_at;
-      // lastValue = mergedFollowList.length  // @@ 4,231 ok
       // lastValue = ngUser  //
 
       const dateTime = new Date(note.created_at * 1000);
@@ -391,8 +388,7 @@ const Test = () => {
       const userUrl = "https://nostter.app/" + npub;
 
       // const imageURL3 = getImageURL(note.pubkey);  // avatar old
-      const imageURL2 = getImageUrl2(note.pubkey); // avatar old
-      // if(imageURL3 === imageURL2)  imageURL2 = ''
+      const imageURL2 = getImageUrl2(note.pubkey); // avatar
 
       //const noteUrl = "https://snort.social/e/" + note.id
       //const noteUrl = "https://iris.to/#/post/" + note.id
