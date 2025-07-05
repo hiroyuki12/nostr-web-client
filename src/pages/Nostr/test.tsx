@@ -975,6 +975,10 @@ const Test = () => {
           <a href="https://ntrends.app" target="_blank">
             ntrends
           </a>
+          -
+          <a href="https://kuchiyose.vercel.app" target="_blank">
+            KUCHIYOSE
+          </a>
         </div>
         <br />
         <ul>{addFollowingList(addEvent)}</ul>

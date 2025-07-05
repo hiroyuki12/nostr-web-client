@@ -8,6 +8,14 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
+    npub1xgcsn9lkkdake4stk9dz36dpfwkam7lssad8mcjvdyfr5rq7vnxqq2sgy4:
+      "https://showhyuga.pages.dev/nostricon/07_idol_honey.jpg",
+    npub1a9v3g2yp867kj9nndjyth9vegjt0v37klemfa7zgx6t74wxsf5ksql2wh9:
+      "https://nostrcheck.me/media/e9591428813ebd6916736c88bb95994496f647d6fe769ef8483697eab8d04d2d/76f6e9d9fa24a4e600851ebfbd017cef10557990e015c8d85495a3a49d2f58bb.webp",
+    npub16u6jx85wavk5n0kw5r46ma7dunupsp7acmtn3xys7keqvlsfjxpsar5q5c:
+      "https://image.nostr.build/237df180f9739c452af621b0ea6869603da645d32364f0792def0d3d35ceaa54.jpg",
+    npub15glt4tgyt9e6nw2fllwahrwg5xqrzfn3ta64m0zud07sqftkx69sgak87e:
+      "https://cdn.nostrcheck.me/a23ebaad045973a9b949ffdddb8dc8a1803126715f755dbc5c6bfd002576368b/829199092958b0ce3a0f7753500e821caf738ea58a25166041bcef8a8fb70958.webp",
     npub19y60va68t4ugpjlw9cwegahv5z6vsyylselk9nr3pzrv4fwryzjshxjy5r:
       "https://image.nostr.build/7b9eeb3ef2f898d420610fc37f63fe9ee0fabeab2dacd93c9ea73cf99610ca48.jpg",
     npub1ecxns5jjwvaasnq7nnna0nd4wvacqgdmpvm5pjzdrpzcp06q863s0w23y6:
