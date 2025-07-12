@@ -16,6 +16,48 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
+    // :'',
+    // :'',
+    npub1kamad0sd3gq8lqzdzpsht7yv7tetarwznvjceeymhecagwtr93tsq7yzx6:
+      "https://image.nostr.build/c1ad38f3558b7d47322d31737338462fb51cb7d1d0a0fcf1663be8d079108004.jpg",
+    npub1mk8snrd9039re0s0l8h6ke26npq0wk0w4h2vx6huqxqda8w9d7hs6h4jg8:
+      "https://nikolat.github.io/avatar/makibishi.png",
+    npub1kcys6ksn6dmw6uaundws2zu46d0dkc9wyn940pas04chx7shgmfssne6sr:
+      "https://nikolat.github.io/avatar/kuchiyose.png",
+    npub1dp5du55x9cn787ztmk5sh94fqg07vs47w86sam2ceykswsjp3e3svcfyk6:
+      "https://image.nostr.build/4ebdd2ed86f1b3930b6153a1f2563eeb6cb5a560f1d4bdb5e94c50afc30091c0.jpg",
+    npub1fqfxhhf9jkez7pc2qyd5l7vkew870kst7rzrjxne5sk8yvthwwts4rdg45:
+      "https://image.nostr.build/b145edb6cb9acb72bfa22e37aa991d167335ff4a7262faabe670973f2333c404.jpg",
+    npub1qv5mrtrlv5n58f693yt54ssuzfjtc3maqdr0gua8x5mf8pktpluqznm02r:
+      "https://image.nostr.build/fe8741f10cde81ee87be822c71fae85fb1489045519f9bf317ff4384f22cada2.jpg",
+    npub1503k6jatw82tde7kfu3tpkzjzu9mjkdy9wtdc9nafpe7z7ejg8dqla6xt4:
+      "https://image.nostr.build/843b410d8ea93cd95185ebdadf6edc0ee164135103cffad0bf811e959b4f8fa6.jpg",
+    npub1z6utwycf0fgrfpwlydherqw9u0x3ejw2wr2gv4mzn048vuahyuuqx22g8q:
+      "https://media-file.makibisskey.work/mofumofusky/9a64d574-b7c4-46de-96c8-3a461970f6d3.webp",
+    npub1rsqcx9np6vgnmn2hercqagfstvr5jptluszc79tp3jwry8hkz92q2drhg6:
+      "https://i.gyazo.com/53570e8e52076eb4625ea3e9768e26ed.jpg",
+    npub1ca8npjwghjuv2j7jq0mkngmcyz0evldrtu8uxefyc0cyektye7mqvnhxqh:
+      "https://image.nostr.build/5b1ab08c66a4423003a9522e23389d58b76acbd1c00ca73ff8814f767a3f673a.jpg",
+    npub1puu2lv3uasc9wrhxf7dy4gyey2fetmpnw8zlapn7p8y3z9yqq9wsve28r2:
+      "https://raw.githubusercontent.com/lkjsxc/mono/refs/heads/main/media/icon_0512.png",
+    npub120hur8kpufu44h6qll50ywaesxk2qxvek295hm4x0ur7cgqj8jvq7pqksp:
+      "https://image.nostr.build/0bca914ad8d1c92806f1ea910b355efb3a017852d56e480c1936596ae71c0517.jpg",
+    npub1a7y7u324paehw2zdx8jfl3t72ue0ls4etfalxhg0z2gad738savqhxfdm2:
+      "https://robohash.org/npub1a7y7u324paehw2zdx8jfl3t72ue0ls4etfalxhg0z2gad738savqhxfdm2?set=set4",
+    npub14xt3rsmqclca3w07gq9nfa0tt42zlzvuu86dn3l6fph9fczwe7qs40yje2:
+      "https://image.nostr.build/066ff0ab62bd66a41440ea8dc6378bdce12c029c40dd3158695605a13023da56.jpg",
+    npub1tm409zh3nfvnwgxr7cg600snz24gee3f3ym65etq99tz64kqvq7s3uwcva:
+      "https://image.nostr.build/d8838f89e26b9cf2fbefe65c2d52b8420118a43e54d7d43de1c5edb926523400.jpg",
+    npub100nz2hajkwjr3xpjx8melv6nszw2p89yzp48khnt6aplyqkfs76qvw3k7j:
+      "https://cdn.nostrcheck.me/7be6255fb2b3a438983231f79fb353809ca09ca4106a7b5e6bd743f202c987b4/c8183468412ab7423f1367cfe25454e0de93f4db27c58cfcec412bb646aaeef1.webp",
+    npub1llugvtulhs3wswxf65dts0sxd28fvvxf80xddu6c2jedddyyscjqqaupeq:
+      "https://m.primal.net/PzMN.jpg",
+    npub19qe9896nte5dwe54tqvupytwpla9yzzg45en2lneh37wullc63lqqavvh7:
+      "https://image.nostr.build/d6f38afee6025fbe4a9458a9433f7a37d2bfcf03023bf6ca6b75ac4f1ae94dd8.jpg",
+    npub1aa0k5xg5k709g6f3vqxdujpzewvl6a3q070dtne29khahzwjdl2q4lsp7l:
+      "https://image.nostr.build/97bacf5752a2726e2657719681486ef5c41857de1201c49269450c6769a65ee4.jpg",
+    npub16cn8nl5t29hk30w73rc0ekta58nh7vvz4l2cgrzc3nnllk09g4fqrd6edq:
+      "https://pbs.twimg.com/profile_images/1640640191714197505/CBYVhZSd_400x400.jpg",
     npub13uwl9qn8yag9l4gvhdrsl2t0hda5cpeed6ppxsw4tfzajzeqk4qq86vuqt:
       "https://cdn.bsky.app/img/avatar/plain/did:plc:kzx3wiefwfxmcm6prgsgh5ae/bafkreigbhonacg25ouaiy6kkujsy7hyso5mhuwen3zezcldwsldmqiothe@jpeg",
     npub1r0hvae2ld84u9zgyqdsx7294ar4m4v3ayfnnpcftf0mk955ay93qejel3w:
