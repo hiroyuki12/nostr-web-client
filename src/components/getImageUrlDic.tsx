@@ -13,11 +13,16 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
-    // :'',
-    // :'',
-    // :'',
-    // :'',
+    npub1mp58vq7857elr6luhl4efrqcs7v3utn4lys9yzn8m308x5lnz59swxkz4r:
+      "https://media.mstdn.jp/accounts/avatars/000/008/144/original/2b745490474704c0.png",
+    npub1m90vuzv5tmkx0jrqmy0wer73kv59xrk0wzuma2nmw7rta7mk76tsp9vh75:
+      "https://s3-mstdn.maud.io/accounts/avatars/000/097/323/original/16c89981eb9.png",
+    npub18gs5pf5r2r28jrysmalclacw7nf0qfghzmrd8sjqt62dqg9sljhsq2jzy9:
+      "https://rss-mstdn.studiofreesia.com/file/accounts/avatars/110/999/681/027/747/727/original/2ff3c417502b5f29.png",
+    npub1jw6x4mvj9vcxf650tgp2uw35hyl37grpgrvrqh9uh72tc5yg23rsjxjdy8:
+      "https://image.nostr.build/3a3e5fdbcdcd1c8dacd8a90b1d1701ddd62fc039bf8ef825cd9e272d627916c9.jpg",
+    npub1kvc86eq773lnnzyy5u0hapwrgjknen74v7kt5xu48eq3uacygldqvtwk5v:
+      "https://axis.blue/ti.jpg",
     npub1kamad0sd3gq8lqzdzpsht7yv7tetarwznvjceeymhecagwtr93tsq7yzx6:
       "https://image.nostr.build/c1ad38f3558b7d47322d31737338462fb51cb7d1d0a0fcf1663be8d079108004.jpg",
     npub1mk8snrd9039re0s0l8h6ke26npq0wk0w4h2vx6huqxqda8w9d7hs6h4jg8:

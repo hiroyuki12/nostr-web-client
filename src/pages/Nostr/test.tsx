@@ -281,7 +281,7 @@ const Test = () => {
       //since: 1679403822, // 1679413822 2023/03/22 0:50
       // limit: 1000,
       // limit: 200,
-      limit: 100,
+      limit: 50,
       //"#t": ["nostter"],
       //"#t": ["foodstr"],
       //"#t": ["illust"],
