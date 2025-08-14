@@ -9,10 +9,14 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
-    // :'',
-    // :'',
-    // :'',
+    npub178takzd7kyxec2drcnjczxhvkpx2yry0dvraaj7ydf3xv0m4wqpspgnjhp:
+      "https://cdn.nostrcheck.me/5af96c669103cdda2ff7ca489bbdcd5e574de8126826b8d6908cdb41a9b943da.jpeg",
+    npub1ya9zaph357ktgkcp72gzsj358sjgewgnvaa584lhv9d4zvv5mzcq67kj0m:
+      "https://image.nostr.build/ae11732e3e5f2dec0504a4acdd1899968fbd9d44947db4d7953929510c510bf4.jpg",
+    npub19dzc9d3wjsat98t50j5vua7ztvhz3z8j8l2dvv47juu8kayw3v7sh4jy4f:
+      "https://cdn.nostrcheck.me/2b4582b62e943ab29d747ca8ce77c25b2e2888f23fd4d632be97387b748e8b3d/91599b13cb2300fbb9bce83bdfbb2023fa880538c8218e9dcabfc16ea18c3b55.webp",
+    npub1qjmwc6gcl00r4x5nh58ll4yvrc5a2fq23rac8syx2xrhg4tqnf3q87j6v3:
+      "https://image.nostr.build/cb13b154acef8446963c991993b3a2e67daa14da12995a80951dbc9da1d5e72b.jpg",
     npub1mp58vq7857elr6luhl4efrqcs7v3utn4lys9yzn8m308x5lnz59swxkz4r:
       "https://media.mstdn.jp/accounts/avatars/000/008/144/original/2b745490474704c0.png",
     npub1m90vuzv5tmkx0jrqmy0wer73kv59xrk0wzuma2nmw7rta7mk76tsp9vh75:
@@ -344,8 +348,7 @@ export const getImageUrlDic = () => {
       "data:image/png;base64,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:
       "https://nostr.build/i/4388eca83f6cad96d0233c80eb2b0b3b39661dbbb8b6b2eba22e64f3642b2193.jpg",
-    npub1y3gdwpxzqcz6udqz8ujrekv23x4svlsk0czxuzky5ejlsz8vzhcqpechsk:
-      "https://nostr.build/i/0e7f0b7f07ab028e166a3bca72b2d493fb0b35ec1ac0cadfec3d33dbbeb81f88.jpg",
+    // duplicate removed: npub1y3gdwpxzqcz6udqz8ujrekv23x4svlsk0czxuzky5ejlsz8vzhcqpechsk
     npub1ml7nllp64d3fxx5vkz8s52jg3kn5wq7s35w7lyux3t3s7kk700ss548cua:
       "https://nostrcheck.me/media/public/281a460c96e63a7d7665c27d18a8828d9c2fee9b8b0c79e3aedd0970446e0293.webp",
     npub1le3lf7zqcv89mt4asw7mqj82uqy9sd6t0uzvdqqvd3ya9zappuyspt5l8y:
@@ -376,14 +379,11 @@ export const getImageUrlDic = () => {
       "https://i.gyazo.com/5d38eb6b55fbacfa81f836eb191b1a76.jpg",
     npub1yvu4hns6rrl9ladau9fle4r7e5wdvmngv6zdl5k0e0vl4lfstjesxtv74p:
       "https://nostr.build/i/ae39c3c07f6b40096b6bd05a8ac0f024d911c6a3425dfe4beec468e427989707.jpg",
-    npub15w7wp9wdp6p53vy5eysph5xryu82ltmc7am9zl6pqyexmt6ukllst6ddy2:
-      "https://image.nostr.build/f21f4997b4bc0d04c03371da493e733fa62e1cc0e550fc8ecc72552e835d1f9a.jpg",
+    // duplicate removed: npub15w7wp9wdp6p53vy5eysph5xryu82ltmc7am9zl6pqyexmt6ukllst6ddy2
     npub1sjcvg64knxkrt6ev52rywzu9uzqakgy8ehhk8yezxmpewsthst6sw3jqcw:
-      "https://raw.githubusercontent.com/TsukemonoGit/TsukemonoGit.github.io/main/img/ojo04.png",
+      "https://share.yabu.me/84b0c46ab699ac35eb2ca286470b85e081db2087cdef63932236c397417782f5/3e66581491d7b404d4149362b19ac7ea09d52031cb73a25d13113bdef00124b8.webp",
     npub1p06l4uzzu7q4n98gcdwq9kas0rh26dur2qvfveszhzmphhfg262s6m7el6:
       "https://shigepon.net/shige128.png",
-    npub1gvsp8zj0uwhrvnmdx4zmelne0uke9y88mygnyx5mce67phfyzv0q9tlpsx:
-      "https://omae.dev/img/profile_icon_1KiB.avif",
     npub1t2kvlhfwmr69avxlhx5822ls65rh02t445jydrc5m4zhuarutjgqq9asfq:
       "https://convergence-lab.github.io/nostr_avator/PXL_20240317_070406776.PORTRAIT.jpg",
     npub1gr47sshq8895l5lap94maj9haus90tq9yz8pf2nvccyp5eep7axs09zlts:
@@ -809,8 +809,6 @@ export const getImageUrlDic = () => {
       "https://image.nostr.build/ad80f0474486205e50db59de0efd55c19608d9ba291825c9129d0a7ddc2552ff.jpg",
     npub1qs9dsslqqn9d3rfs5ljhnma0dzrnzcesmwvvragjgchwu95jqqus9mcxwh:
       "https://rinokurata.com/damus/S__56262660.jpg",
-    npub10zeurmg22wc89l8m3npw9cyu45cun0lvs6w3ep69cdpa25pna65s0994qz:
-      "https://i.nostr.build/E0JJ.webp",
     npub1x3azxuysp5vmfer4vgs4jn5tmfcx4ew8sh0qnev7gczljxsr7jwqa3g4el:
       "https://image.nostr.build/30df7e4bc9e7b2b8a79f2c72bc45db596b952ccf1da5388e5bce04119a195c6b.jpg",
     npub1ea3ww4qkdvt3q47wdyxf0d44643pnm7qm9hcavydt0qgeqgvr3rq8as9uj:
@@ -922,8 +920,7 @@ export const getImageUrlDic = () => {
       "https://image.nostr.build/7d5d18555d62ebe075a14ca25e17e3e7c7023f04a41ba2dfa29feba1bd3d4722.jpg",
     npub1jhwf4lasurcst4jyaj9cugv7nlaxud04twatrpmwswjptkmqw3mqc0zdse:
       "https://nostr.build/i/p/nostr.build_998a1a5c794cf42603e6fd5c9a7a30a5f19b6a80e3246693acf1631bfd4474e2.png",
-    npub1uppfkelag8szx027wm35yxtvl75an99qt65g6w3tta34gk5k06xqk6txt7:
-      "https://nostrcheck.me/media/public/nostrcheck.me_6561238173496372431699702077.webp",
+    // duplicate removed: npub1uppfkelag8szx027wm35yxtvl75an99qt65g6w3tta34gk5k06xqk6txt7
     npub1uppfkelag8szx027wm35yxtvl75an99qt65g6w3tta34gk5k06xqk6txt7:
       "https://nostrcheck.me/media/public/nostrcheck.me_6561238173496372431699702077.webp",
     npub1m78s5eqv8l7snc5nnxdvlgue6pt5epgplndtem99quhwyptas7jss2qx53:
@@ -4106,8 +4103,7 @@ export const getImageUrlDic = () => {
       "https://awayuki.net/resource/bot1-avatar.png",
     b06e337d77fe68c0742de266822b8c97626d8f8ab6943641dedf8b88a3da4465:
       "https://www.gravatar.com/avatar/432c2f8b29e49f8cde472c4115871770?s=300",
-    "13e033a79ed39e58a37c3795ddd3b8d93eada2c0a303790e4e366e26b343fb96":
-      "https://i.imgur.com/o5H14XH.png",
+    // duplicate removed: 13e033a79ed39e58a37c3795ddd3b8d93eada2c0a303790e4e366e26b343fb96
     "6bee48034b01214acd4caadbc50aea4ab3ea1ed22b4754851860a21847e768b7":
       "https://i.gyazo.com/67215b59801192db1da599072bf09e4d.png",
     d307643547703537dfdef811c3dea96f1f9e84c8249e200353425924a9908cf8:
@@ -4498,8 +4494,7 @@ export const getImageUrlDic = () => {
       "https://void.cat/d/QQgTv9ZfJ7weZzsSMuFXmk",
     "046284c5d3cc859f58b1ff58d2bdbf22eb6f41a633e97f503a569cc1fe886322":
       "https://github.com/Neos21.png",
-    "2fda8cd83101180a1493b5f51bf6d40ced22b8b2dcf5e15f633242f992250eff":
-      "https://nostr.build/i/nostr.build_86453ce1d2ad2073c06f9414ae1405a617dd212b52f49905092c37dcde5ad6c8.jpeg",
+    // duplicate removed: 2fda8cd83101180a1493b5f51bf6d40ced22b8b2dcf5e15f633242f992250eff
     "547d7343b4dc254014c7140ad5b395a8045521d8fddafa28fa0bed6b36ae2645":
       "https://moe-illust.com/image/blog/main/thumbnail/18.jpg",
     "9490ecff7eb52bc52150fcc7ed76063bbd32448b69252fed2769364d7a7fe661":
@@ -4526,8 +4521,7 @@ export const getImageUrlDic = () => {
       "https://i.imgur.com/GNYlrYW.jpg",
     "06254fc786d0478b879a439c97ae4543fb2ed98f1484c2d3feb5c8c9443763a7":
       "https://pbs.twimg.com/profile_images/1621979587935870976/QHNvTxQH_400x400.jpg",
-    "0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a":
-      "https://profile-picture-pi.vercel.app/mitene5e4ea579-54a8-455d-9593-bea33c726fd1%20-%20コピー%20(2).jpg",
+    // duplicate removed: 0a2f19dc1a185792c3b0376f1d7f9971295e8932966c397935a5dddd1451a25a
     "2a825cda6197a195929c5e62442bc5293cafb50132659a485a69804db9d0545e":
       "https://innocent40life.site/wp-content/uploads/2022/08/screenshot-opensea.io-2022.11.22-19_24_29.png",
     "4fa2a4ddc81ffe91d28fb99262f8af383c687b12035ace73415fd705262c60af":
@@ -4548,8 +4542,7 @@ export const getImageUrlDic = () => {
       "https://github.com/shioncha.png",
     "871b65190ac85c80df13753462385ccfb77854e03041a5098ded09444229780f":
       "https://holybea.com/wp-content/uploads/2023/02/gravater_icon.png",
-    afb18dfa9cdbc569bfe32a50570fa852344325ca8d521dddaee33a0913281dd1:
-      "https://avatars.githubusercontent.com/u/18186312",
+    // duplicate removed: afb18dfa9cdbc569bfe32a50570fa852344325ca8d521dddaee33a0913281dd1
     afb18dfa9cdbc569bfe32a50570fa852344325ca8d521dddaee33a0913281dd1:
       "https://avatars.githubusercontent.com/u/18186312",
     "9b57e55a0a14a4b51d412960794ad9ae29f7f0860a4cad25bd8435d529ac9d98":
@@ -4639,8 +4632,7 @@ export const getImageUrlDic = () => {
     "21ac29561b5de90cdc21995fc0707525cd78c8a52d87721ab681d3d609d1e2df":
       "https://pbs.twimg.com/profile_images/1563860073625051136/lsXjXGwA.jpg",
     // Moonlotus
-    "510e0096e4e622e9f2877af7e7af979ac2fdf50702b9cd77021658344d1a682c":
-      "https://imgproxy.iris.to/insecure/plain/https://nostr.build/i/nostr.build_bb16b1cd4cb050fa586426e0f7b2371eee1946512ce135d99ff98a61a73dfa52.png",
+    // duplicate removed: 510e0096e4e622e9f2877af7e7af979ac2fdf50702b9cd77021658344d1a682c
     // yutaro
     "75f457569d7027f819de92e8bb13795c0febe9750dc3fb1b5c42aeb502d0841d":
       "https://pbs.twimg.com/profile_images/1389106045058838528/aZRGqdwI_400x400.jpg",

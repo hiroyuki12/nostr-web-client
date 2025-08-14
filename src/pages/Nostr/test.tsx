@@ -418,7 +418,7 @@ const Test = () => {
         "&kind=" +
         note.kind +
         // "&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://search.nos.today/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;wss://relay.nostr.band/;";
-        "&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://relay.barine.co/;wss://search.nos.today/;wss://relay.nostr.band/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;";
+        "&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://relay.barine.co/;wss://search.nos.today/;wss://relay.nostr.band/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;wss://r.kojira.io/";
 
       const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id);
       const freefromUrl =
