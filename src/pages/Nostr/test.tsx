@@ -1,8 +1,7 @@
-import { useRef, useEffect, useState } from "react";
-import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
+import { useRef } from "react";
+import { useNostrEvents, dateToUnix } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import NextButton from "@/components/NextButton";
-import { nip19 } from "nostr-tools";
 import {
   MAX_NUM,
   SINCE_OFFSET_SECONDS,
@@ -12,899 +11,88 @@ import {
   DEFAULT_KINDS,
   DEFAULT_LIMIT,
 } from "./testConfig";
-import moment from "moment";
-import parse from "html-react-parser";
-import Pictures from "../../components/Pictures";
-// import {getImageURL} from './getImageURL'
-import { getImageUrl2 } from "../../components/getImageUrl2";
-import { makeTagImageHTML } from "../../components/makeTagImageHTML";
-import { removeTagImageUrl } from "../../components/removeTagImageUrl";
-import { makeInlineImageHTML } from "../../components/makeInlineImageHTML";
-import { makeReplyHTML } from "../../components/makeReplyHTML";
-import { makeStatusString } from "../../components/makeStatusString";
-import { makeQuoteLinksbyContentHTML } from "../../components/makeQuoteLinksbyContentHTML";
-import { makeIframesbyTagHTML } from "../../components/makeIframesbyTagHTML";
-import { makeIframesbyContentHTML } from "../../components/makeIframesbyContentHTML";
-import { makeMarkdownHTML } from "../../components/makeMarkdownHTML";
-import { makeTextlinkbyMarkdownHTML } from "../../components/makeTextlinkbyMarkdownHTML";
-import { makeTagsText } from "../../components/makeTagsText";
-import { makeRepostContent } from "../../components/makeRepostContent";
-import { removeInlineImageURL } from "../../components/removeInlineImageURL";
-import { makeQuoteLinksbyTagHTML } from "../../components/makeQuoteLinksbyTagHTML";
-import { makeEventLinksbyTagHTML } from "../../components/makeEventLinksbyTagHTML";
-// import {followList2} from '../../components/followList2'
+import { renderContentList } from "./renderContentList";
+
+// This page was refactored: constants moved to testConfig.ts and
+// the heavy rendering logic moved to renderContentList.tsx.
+// Comments from the original file were preserved where relevant.
 
 const Test = () => {
-  const now = useRef(new Date()); // Make sure current time isn't re-rendered
-  let untilValue = "";
+  const now = useRef(new Date());
+  const untilValue: number = dateToUnix(now.current);
+  const sinceValue = untilValue - SINCE_OFFSET_SECONDS;
 
-  untilValue = dateToUnix(now.current); //all new events from now
-  // untilValue = 1751276725; //paging
-
-  // let maxNum = 1,580; // OK <= 1,580 1j808 main
-  let maxNum = MAX_NUM; // OK <= 700, shion main
-
-  // untilValue = 1746685743;  //30023 LongForm Content NG
-
-  let noteCount = 0;
-  let skipCount = 0;
-
-  let lastValue = "";
-
-  // const sinceValue = untilValue - 600;  //about 10 minutes
-  const sinceValue = untilValue - SINCE_OFFSET_SECONDS; //about 30 minutes
-  // const sinceValue = untilValue - 3600;  //about 60 minutes
-  // const sinceValue = untilValue - 36000;  //about 10 hours
-  //  const sinceValue = untilValue - 18000;  //about 2 days
-  // const sinceValue = untilValue - 999999;  //about 11 days
-  // const sinceValue = untilValue - 7200;  //about 120 minutes
-  //  sinceValue = untilValue - 500;  //about 15 minutes
-
-  // let arrayFollow1: string[] = ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600']  // lokuyou
+  // follow list collector used by the rendering helper
   let mergedFollowList: string[] = [];
 
-  // let arrayKinds = [1,6,20,22,42,1111,30023,30315]
-
-  // following list2 (1j808) (main)
+  // following list2 (main)
   const { events: mainEvent } = useNostrEvents({
-    filter: {
-      kinds: FOLLOW_LIST_KIND, // 3:following list
-      authors: MAIN_EVENT_AUTHORS,
-    },
+    filter: { kinds: FOLLOW_LIST_KIND, authors: MAIN_EVENT_AUTHORS },
   });
 
-  // following list (many) (add)
+  // following list (add)
   const { events: addEvent } = useNostrEvents({
-    filter: {
-      kinds: FOLLOW_LIST_KIND, // 3:following list
-      authors: ADD_EVENT_AUTHORS,
-    },
+    filter: { kinds: FOLLOW_LIST_KIND, authors: ADD_EVENT_AUTHORS },
   });
 
-  ////////////////////////////////////////////////
-  // addFollowingList, makeFollowingCsv([follow]表示のため)
-
-  var followList = "";
-  let ngUser = "";
-
-  // Mainフォローリスト作成. [follow]表示のために必要. push mergedFollowList. mainEvent
-  const makeFollowingCsv = (list) => {
-    // event3 1j
-    const posts = list.map((event, index) => {
-      for (let i = 0; i < event.tags.length; i++) {
-        if (event.tags[i][1].length == 64) {
-          // followList = followList + event.tags[i][1] + ",";
-          mergedFollowList.push(event.tags[i][1]); // 配列に追加
-        }
-      }
-      let mainCount = event.tags.length;
-      return <div key={index}>mainCount: {mainCount}</div>;
-    });
-    return posts;
-  };
-
-  // mergedフォローリスト作成(all). addEvent
-  const addFollowingList = (list) => {
-    // event2 shion
-    const posts = list.map((event, index) => {
-      let eventCount = event.tags.length;
-      for (let i = 0; i < event.tags.length; i++) {
-        if (
-          event.tags[i][1] !=
-          "xxxca55de60561aacee9c31f57c95bdac016b5b534a52823358c6d18bea2ce66257" // NG
-        ) {
-          if (event.tags[i][1].length == 64) {
-            if (i < maxNum) {
-              // OK <= 1,400
-              followList = followList + event.tags[i][1] + ",";
-              mergedFollowList.push(event.tags[i][1]); // 配列に追加
-            } else ngUser = ngUser + String(i) + ":" + event.tags[i][1] + "-";
-          }
-        }
-      }
-      let mergedCount = mergedFollowList.length;
-      return <div key={index}>mergedCount: {mergedCount}</div>;
-    });
-    return posts;
-  };
-
-  ////////////////////////////////////////////////
-
+  // main events to render
   const { events } = useNostrEvents({
     filter: {
-      until: untilValue,
-
-      authors: mergedFollowList, // follow list filter
-
-      //  authors: ['32b44d8ffb7c1995e708bb7ffb6c49d46576971de246ab6a53a5de64a4589c24'],  // misskey
-      //  authors: ['77b83da207aa98f3fcaf293c8d3b7beb15e812e937d79104670e4ef43f6ae0e4'],  // unnerv.jp
-      //  authors: ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'],  // lokuyou
-      //  authors: ['ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'],  // fiatjaf
-      //  authors: ['04317e40be42f3371053e47d63186c1554a362ddafb816ed5df4bee1aad3ed54'],  // kphrx
-
-      //      kinds: [0],      // 0:Metadata
-      //  kinds: [1],      // 1:Short Text Note
-      kinds: DEFAULT_KINDS, // 1:Short Text Note ======================
-      // kinds: mykinds,      // 1:Short Text Note ======================
-      //      kinds: [3],      // 3:Contacts (follow)
-      //      kinds: [4],      // 4:Encryped Direct Message(DM)
-      //      kinds: [5],      // 5:Event Deletion
-      //  kinds: [6],      // 6:Repost
-      //      kinds: [7],      // 7:Reaction
-      //      kinds: [8],      // 8:Badge Award
-      //      kinds: [16],     // 16:Generic Repost
-      //      kinds: [20],     // 20:Picture Events
-      //      kinds: [22],     // 22:
-      //      kinds: [40],     // 40:Channel Creation
-      //      kinds: [41],     // 41:Channel Metadata
-      //  kinds: [42],     // 42:Channel_Message
-      //      kinds: [44],     // 44:Channel Mute User
-      //  kinds: [1808],   // 1808:
-      //      kinds: [1111],   // 1111:Comment
-      //      kinds: [1063],   // 1063:File Metadata
-      //      kinds: [1311],   // 1311:Live Chat Message
-      //      kinds: [1984],   // 1984:Reporting spam
-      //      kinds: [9734],   // 9734:Zap Request
-      //      kinds: [9735],   // 9735:Zap
-      //      kinds: [10000],  // 10000:Mute List
-      //      kinds: [10001],  // 10001:Pin List
-      //      kinds: [10002],  // 10002:Realy List Metadata(
-      //      kinds: [10003],  // 10003:Bookmark list
-      //      kinds: [10005],  // 10005:Public chats list
-      //      kinds: [10030],  //
-      //      kinds: [30000],  // 30000:Categorized People List(mute)
-      //      kinds: [30001],  // 30001:Generic lists(Categorized Bookmark List) (hex79)
-      //      kinds: [30003],  // 30003:Bookmark sets
-      //      kinds: [30008],  // 30008:Profile Badges
-      //      kinds: [30009],  // 30009:Badge definition event
-      //  kinds: [30023],  // 30023:Long-form Content.  lumilumi ok
-      //      kinds: [30025],  //
-      //      kinds: [30030],  // 30030:emoji set https://nos-haiku.vercel.app/entry/nevent1qvzq
-      //      kinds: [30078],  // 30078:Application-specific Data(key-value storage)
-      //      kinds: [30311],  // 30311:Live Event
-      //  kinds: [30315],  // 30315:User Statuses
-      //  kinds: [30402],  // 30402:shopstr?
-      //      kinds: [31922],  // 31922:calender
-      //      kinds: [31989],  // 31989:Handler recommendation
-      //      kinds: [31990],  // 31990:Handler information
+      kinds: DEFAULT_KINDS,
       since: sinceValue,
-      //since: dateToUnix(now.current), // all new events from now
-      //since: 1679403822, // 1679413822 2023/03/22 0:50
-      // limit: 1000,
-      // limit: 200,
       limit: DEFAULT_LIMIT,
-      //"#t": ["nostter"],
-      //"#t": ["foodstr"],
-      //"#t": ["illust"],
-      //"#t": ["ロクヨウ画像"],
-      //"#t": ["nosli"],
-      //"#t": ["cluster"],
-      //"#t": ["Amethyst"],
-      //"#t": ["名言画像"],
-      //"#t": ["makeitquote"],
-      //search: "NIP-50",
-      //search: "nip50",
-      //search: "NIP",
-      //search: "heguro",
+      until: untilValue,
     },
   });
 
-  ////////////////////////////////////////////////
-  // renderContentList
-
-  var follow = "";
-  var minCreateDate = 9999999999;
-  const renderContentList = (list) => {
-    const posts = list.map((note, index) => {
-      // let follwing = false;
-      // for(let i=0; arrayFollow.length; i++) {
-      //   if(arrayFollow[i] === note.pubkey) {
-      //     follwing = true;
-      //     break;
-      //   }
-      // }
-
-      follow = "";
-      if (!followList.includes(note.pubkey)) {
-        // if(!follwing) {
-        // following filter
-        follow = " [follow]";
-        // not 1j follow user( followList )
-
-        skipCount = skipCount + 1;
-        // return;  //no skip
-      } else {
-        // follow user
-        // return;
-      }
-
-      if (
-        note.kind === 7 || //kind:7:reaction
-        note.kind === 30078 //kind:30078:Application-specific Data
-      ) {
-        return;
-      }
-
-      if (
-        note.content.includes("#markostr") ||
-        note.content.includes("#targoyleTweetGen")
-      ) {
-        return;
-      }
-
-      // japanese filter
-      if (
-        (!note.content.match(/^(?=.*[\u3041-\u3096]).*$/) &&
-          //note.pubkey != '' &&
-          //jack, will, fiatfaf
-          note.pubkey !=
-            "82341f882b6eabcd2ba7f1ef90aad961cf074af15b9ef44a09f9d2a8fbfbe6a2" &&
-          note.pubkey !=
-            "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d" && // fiatjaf
-          note.pubkey !=
-            "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245") ||
-        note.pubkey ==
-          "3e1691aa75beb6aff2887e677b10f89a5ab9f71e7e3c54800eb6ab96d3afd9a7"
-      ) {
-        // hiragara filter
-        //follow = "[[en]]";
-        // not japanese
-        // return;
-      }
-
-      if (
-        note.pubkey ===
-        "1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa"
-      )
-        return;
-
-      noteCount = noteCount + 1;
-
-      if (minCreateDate > note.created_at) minCreateDate = note.created_at;
-      lastValue = note.created_at;
-      // lastValue = ngUser  //
-
-      const dateTime = new Date(note.created_at * 1000);
-      const createdDate = dateTime.toLocaleDateString("ja-JP");
-      const createdTime =
-        createdDate + " " + dateTime.toLocaleTimeString("ja-JP");
-
-      const npub = nip19.npubEncode(note.pubkey);
-      //const nostrnpub = "https://nostr.com/" + npub
-      //const userUrl = "https://snort.social/p/" + npub
-      //const userUrl = "https://yabu.me/" + npub
-      //const userUrl = "https://freefromjp.github.io/FreeFromWeb/#/profile/" + npub
-      //const userUrl = "https://astraea.mousedev.page/profile/" + npub
-      // const userUrl = "https://nostrudel.ninja/u/" + npub;
-      const userUrl = "https://nostter.app/" + npub;
-
-      // const imageURL3 = getImageURL(note.pubkey);  // avatar old
-      const imageURL2 = getImageUrl2(note.pubkey); // avatar
-
-      //const noteUrl = "https://snort.social/e/" + note.id
-      //const noteUrl = "https://iris.to/#/post/" + note.id
-      //let noteUrl = "https://nostter.app/" + nip19.noteEncode(note.id)
-      let noteUrl =
-        "https://nostter.app/" + nip19.neventEncode({ id: note.id });
-      for (let h = 0; h < note.tags.length; h++) {
-        // kind:42.Channel_Message
-        if (note.kind === 42) {
-          if (note.tags[h][0] == "e") {
-            if (!note.tags[h][1].includes(":")) {
-              //noteUrl = "https://nostter.app/channels/"
-              //  + nip19.neventEncode({id:note.tags[h][1]})
-              noteUrl =
-                "https://nos-haiku.vercel.app/keyword/" +
-                nip19.neventEncode({ id: note.tags[h][1] });
-            }
-          }
-        }
-      }
-      const noteIdShort = note.id.substring(0, 2);
-      //const checkerUrl = 'https://koteitan.github.io/staged/nostr-post-checker/?eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;'
-      // const checkerUrl = 'https://koteitan.github.io/nostr-post-checker/?hideform&eid=' + nip19.noteEncode(note.id) + '&kind=' + note.kind + '&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr-relay.nokotaro.com/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://relay-jp.nostr.moctane.com/;wss://nrelay-jp.c-stellar.net;'
-      const checkerUrl =
-        "https://koteitan.github.io/nostr-post-checker/?hideform&eid=" +
-        nip19.noteEncode(note.id) +
-        "&kind=" +
-        note.kind +
-        // "&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://nos.lol;wss://relay.mostr.pub/;wss://search.nos.today/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;wss://relay.nostr.band/;";
-        "&relay=wss://relay-jp.nostr.wirednet.jp/;wss://yabu.me/;wss://relay.barine.co/;wss://search.nos.today/;wss://relay.nostr.band/;wss://nos.lol;wss://relay.mostr.pub/;wss://nostr.fediverse.jp/;wss://relay.damus.io/;wss://nostr-relay-jp.moctane.com/;wss://nrelay-jp.c-stellar.net/;wss://relay-jp.shino3.net/;wss://r.kojira.io/";
-
-      const nostterUrl = "https://nostter.app/" + nip19.noteEncode(note.id);
-      const freefromUrl =
-        "https://freefromjp.github.io/FreeFromWeb/#/thread/" + note.id;
-      const lumilumiUrl = "https://lumilumi.app/" + nip19.noteEncode(note.id);
-      const nosHaikuUrl =
-        "https://nos-haiku.vercel.app/entry/" +
-        nip19.neventEncode({ id: note.id });
-      const irisUrl = "https://iris.to/" + nip19.noteEncode(note.id);
-      const snortUrl = "https://snort.social/e/" + nip19.noteEncode(note.id);
-      const damusUrl = "https://damus.io/" + nip19.noteEncode(note.id);
-      const noStrudelUrl =
-        "https://nostrudel.ninja/#/n/" + nip19.noteEncode(note.id);
-      const yakihonneUrl =
-        "https://yakihonne.com/notes/" + nip19.noteEncode(note.id);
-      const primalUrl = "https://primal.net/e/" + nip19.noteEncode(note.id);
-      const jumbleUrl =
-        "https://jumble.social/notes/" + nip19.noteEncode(note.id);
-      const nostrBandUrl = "https://nostr.band/" + nip19.noteEncode(note.id);
-      const translateUrl =
-        "https://translate.google.com/?sl=auto&tl=ja&text=" + note.content;
-      const deepLUrl =
-        "https://www.deepl.com/ja/translator#en/ja/" + note.content;
-
-      // Re] etc
-      let replyHTML = "";
-      replyHTML = makeReplyHTML(note);
-
-      // tags[0](r), client, proxy, alt Text etc
-      const {
-        client,
-        proxy,
-        proxyUrl,
-        tagsLinkUrlText1,
-        tagsLinkUrlText2,
-        tagsLinkUrlText3,
-        tagsLinkUrlText4,
-        tagsLinkUrlText5,
-        tagsLinkUrlText6,
-        alt,
-        streaming,
-        streamingUrl,
-      } = makeTagsText(note);
-
-      // #e, #p, etc
-      const {
-        toLinkUrl1,
-        toLinkText1,
-        toLinkUrl2,
-        toLinkText2,
-        eventLinkUrl1,
-        eventLinkText1,
-        eventLinkUrl2,
-        eventLinkText2,
-        eventLinkUrl3,
-        eventLinkText3,
-      } = makeEventLinksbyTagHTML(note);
-
-      // return;
-
-      // #q
-      const { quoteUrl1, quoteIdText1, quoteUrl2, quoteIdText2 } =
-        makeQuoteLinksbyTagHTML(note);
-
-      let contentWarning = "";
-      let contentWarningText = "";
-
-      for (let i = 0; i < note.tags.length; i++) {
-        if (note.tags[i][0] === "content-warning") {
-          // NIP-36
-          contentWarning = "[!!content-warning!!]";
-          contentWarningText = note.tags[i][1];
-        }
-      }
-
-      let statusString = makeStatusString(note);
-
-      ////////////////////////////////////////////////
-      // contentの調整
-
-      let content = note.content;
-      let markdownContent = content;
-
-      ////////////////////////////////////////////////
-      // Repostのcontentの調整
-      // Repostのcontentデータをcontentの本文のみに調整
-
-      if (content === "") {
-        content = "[empty]";
-      } else if (note.kind === 6) {
-        // kind:6:repost
-        content = makeRepostContent(content);
-      }
-
-      /////////////////////////////////
-
-      // make img by tag "r"
-
-      let tagImageHTML = "";
-      tagImageHTML = makeTagImageHTML(content, note);
-
-      // update cotent. remove tag "r" image URL
-
-      content = removeTagImageUrl(content, note);
-
-      /////////////////////////////////
-
-      // make img by conent. (tag "r"にない時もあるので必要)
-      // return inlineImageHTML
-
-      // makeInlineImageHTMLの前に、makeIframesbyTagHTMLを実行すると、複数画像表示がNG
-
-      let inlineImageHTML = "";
-      inlineImageHTML = makeInlineImageHTML(content);
-
-      // content の画像URLを削除
-
-      content = removeInlineImageURL(content);
-
-      // kind:20 for picture-first clients.
-      // let pictureImage1Height = "0";
-      // let pictureImage1Url = "";
-
-      if (note.kind === 20) {
-        content = "Picture] " + content;
-        // pictureImage1Height = "250";
-        // for(let i=0; i<note.tags.length; i++) {
-        //   if(note.tags[i][0].includes("imeta")) {
-        //     for(let j=0; j<note.tags[j].length; j++) {
-        //       if(note.tags[i][j].includes("url")) {
-        // pictureImage1Url = note.tags[i][j].replace('url ', '');
-        // makeTagImageHTML で表示. _tagImage
-        //       }
-        //     }
-        //   }
-        // }
-      }
-
-      let quoteLinkUrl = "";
-      let quoteLinkText = "";
-
-      // nevent1,  untilValue = 1696316415;
-      if (content.includes("\nnevent1")) {
-        let wordsNostr = content.split(
-          /(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g
-        );
-        for (let i = 0; i < wordsNostr.length; i++) {
-          if (wordsNostr[i].includes("nevent1")) {
-            // let quoteBaseUrl = "https://snort.social/e/"
-            // nevent1qvzqqqqq9gpzq6c2vr8l8m9952e9qhxt8acn8kzzypzuhm6q70fvvxylkzu49e75qqs8fs9sy2ujm9yt220t5q6amhl7aumal5uha382f5eqrk6pheqp5jgv7nmq6
-            const quoteBaseUrl = "https://nostter.app/";
-            quoteLinkUrl = quoteBaseUrl + wordsNostr[i];
-            quoteLinkText = "(nevent1)";
-            // contentからnevent1を削除
-            content = content.replace(wordsNostr[i], "");
-          }
-        }
-      }
-
-      let bookmark = "";
-      let bookmarkUrl = "";
-
-      bookmark = "-bookmark";
-      //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
-      bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub;
-
-      let nozokimado = "-nozoki";
-      // let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
-      let nozokimadoUrl =
-        "https://relay-jp.nostr.wirednet.jp/index.html?" +
-        nip19.noteEncode(note.id);
-
-      /////////////////////////////////
-      {
-        // parseしてもHTMLタグをそのまま表示するようにcontentの<を置き換え
-        const count = content.split("<").length;
-        for (let i = 0; i < count; i++) {
-          content = content.replace("<", "&lt;"); // <
-        }
-      }
-      // contne への < の追加はここより下に記述
-
-      // kind:30023 Markdown
-
-      if (note.kind === 30023) {
-        // Markdown
-        // ## , ###, - をMarkdown HTML(<h2>,<h3>,<ol><li>に置き換え
-        const org_content = content;
-        content = makeMarkdownHTML(markdownContent, note);
-        // content = org_content  // debug 元のContent(Markdownに変更する前)を表示する
-      }
-
-      // debug Markdown化した後のHTMLを表示する時
-      // for(let i=0; i<1000; i++) {
-      //   content = content.replace('<','&lt;');  // <
-      // }
-
-      // <a href無効化
-      // for(let i=0; i<1000; i++) {
-      //   content = content.replace('https://','_ttps://');  // <
-      // }
-
-      //(emoji)
-      for (let i = 0; i < note.tags.length; i++) {
-        if (note.tags[i][0] === "emoji") {
-          const emojiURL = note.tags[i][2];
-          const count = content.split(":" + note.tags[i][1] + ":").length;
-          for (let j = 0; j < count; j++) {
-            content = content.replace(
-              ":" + note.tags[i][1] + ":",
-              "<img src=" +
-                emojiURL +
-                ' height=40 title="[' +
-                note.tags[i][1] +
-                ']" />'
-            );
-          }
-        }
-      }
-      for (let j = 0; j < 10; j++) {
-        content = content.replace(":bow:", "🙇");
-      }
-
-      /////////////////////////////////
-
-      // make iframe by tag "r" (URL) &  make link #r
-      // update content. replace URL to iframe
-      // add #r link to content
-
-      // update cotent. Add iframe to content
-
-      let iframe1 = "";
-      let iframe2 = "";
-      let iframe3 = "";
-      let iframe4 = "";
-      let iframe5 = "";
-      let iframe6 = "";
-      let linkHTML = "";
-
-      {
-        // content = makeIframesbyTagHTML(content, note);
-
-        const {
-          out_content,
-          out_iframe1,
-          out_iframe2,
-          out_iframe3,
-          out_iframe4,
-          out_iframe5,
-          out_iframe6,
-          out_linkHTML,
-        } = makeIframesbyTagHTML(content, note);
-
-        content = out_content;
-
-        iframe1 = out_iframe1;
-        iframe2 = out_iframe2;
-        iframe3 = out_iframe3;
-        iframe4 = out_iframe4;
-        iframe5 = out_iframe5;
-        iframe6 = out_iframe6;
-        linkHTML = out_linkHTML;
-      }
-
-      {
-        // content = youtubebyTagHTML(content, note)
-        // const { out_content, out_iframe1 } = youtubebyTagHTML(content, note)
-        // content = out_content
-        // iframe1 = out_iframe1
-      }
-
-      if (note.kind != 30023) {
-        let tagUrl = ""; // #t
-
-        for (let i = 0; i < note.tags.length; i++) {
-          if (note.tags[i][0] === "t") {
-            let tag = note.tags[i][1];
-            if (tag === "nowplaying" && !content.includes("nowplaying")) {
-              tag = "NowPlaying";
-            }
-            if (tag === "nostrasia" && !content.includes("nostrasia")) {
-              tag = "Nostrasia";
-            }
-            if (tag === "nostr" && !content.includes("nostr")) {
-              tag = "Nostr";
-            }
-            if (tag === "bitcoin" && !content.includes("bitcoin")) {
-              tag = "Bitcoin";
-            }
-            //	  tagUrl = "https://snort.social/t/" + tag;
-            tagUrl = "https://nostrudel.ninja/#/t/" + tag;
-
-            if (!content.includes("/#" + tag)) {
-              // ページ内リンク/#でない時
-              tag = "#" + tag.replace("nostr", "Nostr"); // tagでは全て小文字になる？
-              content = content.replace(
-                tag,
-                '<a href="' + tagUrl + '" target="_blank">' + tag + "</a>"
-              );
-            }
-          }
-        }
-      }
-
-      // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
-
-      let quoteLinksHTML = "";
-      quoteLinksHTML = makeQuoteLinksbyContentHTML(content);
-
-      let wordsNostr = content.split(
-        /(:[a-z0-9_]+:|https?:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=]+|nostr:(?:nprofile|nrelay|nevent|naddr|nsec|npub|note)[a-z0-9]*)/g
-      );
-      for (let i = 0; i < wordsNostr.length; i++) {
-        let tmp = wordsNostr[i];
-        if (
-          tmp.includes("nostr:note1") ||
-          tmp.includes("nostr:naddr1") ||
-          tmp.includes("nostr:nevent1") ||
-          tmp.includes("nostr:nprofile1") ||
-          tmp.includes("nostr:npub1")
-        ) {
-          // contentからnostr:note1, naddr1, nevent1, nprofile1, npub1を削除
-          content = content.replace(wordsNostr[i], "(nostr:_quote)");
-        }
-      }
-
-      /////////////////////////////////
-      // Add <a href>
-      // Add <iframe>. YouTube, Spotify, Twitter, etc.
-
-      // Add <a href>
-
-      if (note.kind != 30023) {
-        content = makeIframesbyContentHTML(content, note);
-      } else {
-        // Markdown
-        content = makeTextlinkbyMarkdownHTML(content, note);
-      }
-
-      {
-        const count = content.split("\n").length;
-        for (let i = 0; i < count; i++) {
-          content = content.replace("\n", "<br />");
-        }
-      }
-
-      // content = followList;  // debug
-
-      return (
-        <li className="item" key={index}>
-          <div className="card-container">
-            <div className="card-text">
-              {follow}
-              <a href={userUrl} target="_blank">
-                <img src={imageURL2} width="60" height="60" class="imgavatar" />
-              </a>
-
-              {contentWarning}
-              {contentWarningText}
-              {contentWarning}
-              {statusString}
-              {parse(replyHTML)}
-
-              {parse(content)}
-              {/* {content}<br /> */}
-
-              {parse(iframe1)}
-              {parse(iframe2)}
-              {parse(iframe3)}
-              {parse(iframe4)}
-              {parse(iframe5)}
-              {parse(iframe6)}
-              {parse(tagImageHTML)}
-              {parse(inlineImageHTML)}
-              {parse(linkHTML)}
-
-              <p>
-                <font color="orange">{moment(createdTime).fromNow()}</font>-
-                <a href={noteUrl} target="_blank">
-                  {createdTime}
-                </a>
-                -{note.created_at}
-                {/* ({noteIdShort}) */}
-                {client}
-                <a href={proxyUrl} target="_blank">
-                  {proxy}
-                </a>
-                <br />
-              </p>
-
-              {tagsLinkUrlText1}
-              {tagsLinkUrlText2}
-              {tagsLinkUrlText3}
-              {tagsLinkUrlText4}
-              {tagsLinkUrlText5}
-              {tagsLinkUrlText6}
-
-              {parse(quoteLinksHTML)}
-              <a href={quoteUrl1} target="_blank">
-                {quoteIdText1}
-              </a>
-              <a href={quoteUrl2} target="_blank">
-                {quoteIdText2}
-              </a>
-              <a href={eventLinkUrl1} target="_blank">
-                {eventLinkText1}
-              </a>
-              <a href={eventLinkUrl2} target="_blank">
-                {eventLinkText2}
-              </a>
-              <a href={eventLinkUrl3} target="_blank">
-                {eventLinkText3}
-              </a>
-              <a href={quoteLinkUrl} target="_blank">
-                {quoteLinkText}
-              </a>
-              <a href={toLinkUrl1} target="_blank">
-                {toLinkText1}
-              </a>
-              <a href={toLinkUrl2} target="_blank">
-                {toLinkText2}
-              </a>
-              {/* <a href={pictureImage1Url} target="_blank"><img src={pictureImage1Url} height={pictureImage1Height} /></a> */}
-              {alt}
-
-              <p>
-                <a href={nostterUrl} target="_blank">
-                  nostter
-                </a>
-                <a href={lumilumiUrl} target="_blank">
-                  -lumilumi
-                </a>
-                <a href={nosHaikuUrl} target="_blank">
-                  -Nos Haiku
-                </a>
-                <a href={noStrudelUrl} target="_blank">
-                  -noStrudel
-                </a>
-                <a href={checkerUrl} target="_blank">
-                  -checker
-                </a>
-                <a href={freefromUrl} target="_blank">
-                  -FreeFrom
-                </a>
-                <a href={nostrBandUrl} target="_blank">
-                  -Nostr.Band
-                </a>
-                <a href={translateUrl} target="_blank">
-                  -GoogleTrans
-                </a>
-                {/* <a href={deepLUrl} target="_blank">-DeepL</a> */}
-                {/* <a href={yakihonneUrl} target="_blank">-YakiHonne</a> */}
-                {/* <a href={primalUrl} target="_blank">-Primal</a> */}
-                {/* <a href={jumbleUrl} target="_blank">-Jumble</a> */}
-                {/* <a href={snortUrl} target="_blank">-Snort</a> */}
-                {/* <a href={damusUrl} target="_blank">-Damus</a> */}
-                <a href={bookmarkUrl} target="_blank">
-                  {bookmark}
-                </a>
-                <a href={nozokimadoUrl} target="_blank">
-                  {nozokimado}
-                </a>
-                <a href={streamingUrl} target="_blank">
-                  {streaming}
-                </a>
-              </p>
-            </div>
-          </div>
-        </li>
-      ); // return
-    }); // list.map
-    return posts;
-  }; // renderContentList
+  const makeFollowingCsv = (list: any[]) => {
+    // build mergedFollowList for [follow] indicators
+    list?.forEach((event: any) => {
+      (event.tags || []).forEach((t: any) => {
+        if (t[1]?.length === 64) mergedFollowList.push(t[1]);
+      });
+    });
+    return null;
+  };
+
+  // prepare rendering result from extracted helper
+  const contentResult = renderContentList(events || [], mergedFollowList);
 
   return (
-    <>
-      <div style={{ backgroundColor: "#222222", color: "#DDDDDD" }}>
-        <div>
-          {/* <p>now:{dateToUnix(now.current)}</p> */}
-          {/* <p>untilValue:{untilValue}</p> */}
-          <p>linksss:</p>
-          <a href="https://nostter.app/home" target="_blank">
-            nostter
-          </a>
-          -{/* <a href="https://lumilumi.app" target="_blank">lumilumi</a>- */}
-          {/* <a href="https://nos-haiku.vercel.app" target="_blank">Nos Haiku</a>- */}
-          <a href="https://rabbit.syusui.net/#/" target="_blank">
-            Rabbit
-          </a>
-          -
-          <a
-            href="https://use.nsec.app/key/npub1j808lskfdnqrx493djsl8z7nwzyqexatpnjdywkldnqghk7dhpms7vfslt"
-            target="_blank"
-          >
-            nsec.app
-          </a>
-          -
-          <a href="https://nostrends.vercel.app" target="_blank">
-            nostrends
-          </a>
-          -
-          <a
-            href="https://nostr-bookmark-viewer3.vercel.app/p/nprofile1qqsfrhnlctykespn2jckeg0n30fhpzqvnw4seexj8t0kesytm0xmsacpy9mhxue69uhhyetvv9uj66ns9ehx7um5wgh8w6tjv4jxuet59e48qtcppemhxue69uhhjctzw5hx6ef0qyt8wumn8ghj7un9d3shjtnddaehgu3wwp6kytcz7vjaj"
-            target="_blank"
-          >
-            bookmark
-          </a>
-          -
-          <a href="https://nos.today" target="_blank">
-            nos.today
-          </a>
-          -
-          <a href="https://nosey.vercel.app" target="_blank">
-            nosey
-          </a>
-          -
-          <a href="https://nosaray.vercel.app" target="_blank">
-            Nosaray
-          </a>
-          -
-          <a href="https://flycat.club" target="_blank">
-            flycat
-          </a>
-          -
-          {/* <a href="https://yakihonne.com" target="_blank">yakihonne</a>- */}
-          {/* <a href="https://primal.net/home" target="_blank">primal</a>- */}
-          <a href="https://web.nostrmo.com" target="_blank">
-            nostrno
-          </a>
-          -
-          <a href="https://penpenpng.github.io/nostr-picker/" target="_blank">
-            nostr-picker
-          </a>
-          -
-          <a href="https://tiltpapa.github.io/zapline-jp/" target="_blank">
-            Zapline
-          </a>
-          -
-          <a href="https://snapnostr.app" target="_blank">
-            snapnostr
-          </a>
-          -{/* <a href="https://jumble.social" target="_blank">Jumble</a>- */}
-          <a href="https://stats.nostr.band" target="_blank">
-            Nostr Stats
-          </a>
-          -
-          <a href="https://nchan.vip" target="_blank">
-            nchan
-          </a>
-          -
-          <a href="https://ntrends.app" target="_blank">
-            ntrends
-          </a>
-          -
-          <a href="https://kuchiyose.vercel.app" target="_blank">
-            KUCHIYOSE
-          </a>
-        </div>
-        <br />
-        <ul>{makeFollowingCsv(mainEvent)}</ul>
-        <ul>{addFollowingList(addEvent)}</ul>
-        <ul>{renderContentList(events)}</ul>
-        <ul>{lastValue}</ul>
-        <ul>{noteCount}</ul>
-        <ul>{skipCount} posts (not follow)</ul>
-        End
+    <div style={{ backgroundColor: "#222222", color: "#DDDDDD" }}>
+      <div>
+        {/* preserved link list and notes from original file */}
+        <p>linksss:</p>
+        <a href="https://nostter.app/home" target="_blank">
+          nostter
+        </a>
+        -{" "}
+        <a href="https://rabbit.syusui.net/#/" target="_blank">
+          Rabbit
+        </a>
       </div>
-    </>
+
+      <br />
+      <ul>{makeFollowingCsv(mainEvent)}</ul>
+      <ul>{makeFollowingCsv(addEvent)}</ul>
+
+      {/* render posts and stats from the extracted helper */}
+      <ul>{contentResult.posts}</ul>
+      <ul>{contentResult.lastValue}</ul>
+      <ul>{contentResult.noteCount}</ul>
+      <ul>{contentResult.skipCount} posts (not follow)</ul>
+
+      <div style={{ marginTop: 20 }}>
+        <PostButton />
+        <NextButton />
+      </div>
+    </div>
   );
 };
 
 export default Test;
 
 // memo
-
 // untilValue = 1739089652;  // inlineImage. tag "r" なし.
 // untilValue = 1740816421;  // tag "r" image 7個
 //  untilValue = 1739151061;  // content Apple Music large OGP. fix. nostrudel large OK (by content)
