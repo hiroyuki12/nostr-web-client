@@ -19,7 +19,6 @@ import { makeQuoteLinksbyTagHTML } from "../../components/makeQuoteLinksbyTagHTM
 import { makeEventLinksbyTagHTML } from "../../components/makeEventLinksbyTagHTML";
 
 // renderContentList を別ファイルに分割しました。
-// コメントは消さないでください。
 
 export function renderContentList(list: any[], followList: string[]) {
   // list から JSX の配列(posts)を作成して返します。
