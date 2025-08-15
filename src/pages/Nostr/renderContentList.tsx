@@ -45,9 +45,13 @@ export function renderContentList(list: any[], followList: string[]) {
     )
       return null;
 
-    // japanese filter (preserved comment)
-    // ...original logic kept
+    // japanese filter: only show posts containing hiragana or katakana
+    // Check the raw note content (before HTML/markdown processing).
+    const rawContent = note.content || "";
+    const kanaRegex = /[\u3040-\u309F\u30A0-\u30FF\uFF66-\uFF9D]/;
+    if (!kanaRegex.test(rawContent)) return null;
 
+    // keep original exclusion by pubkey
     if (
       note.pubkey ===
       "1f617e368ce633acef348a2f755dd0a459e56e394766699524ae5d0ee66e9caa"
