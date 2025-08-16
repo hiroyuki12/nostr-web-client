@@ -96,6 +96,21 @@ export function renderContentList(list: any[], followList: string[]) {
     const nosHaikuUrl =
       "https://nos-haiku.vercel.app/entry/" +
       nip19.neventEncode({ id: note.id });
+    const nostrBandUrl = "https://nostr.band/" + nip19.noteEncode(note.id);
+    const translateUrl =
+      "https://translate.google.com/?sl=auto&tl=ja&text=" + note.content;
+
+    let bookmark = "";
+    let bookmarkUrl = "";
+    bookmark = "-bookmark";
+    //bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + nprofile
+    bookmarkUrl = "https://nostr-bookmark-viewer3.vercel.app/p/" + npub;
+
+    let nozokimado = "-nozoki";
+    // let nozokimadoUrl = "https://relay-jp.nostr.wirednet.jp/index.html?" + npub
+    let nozokimadoUrl =
+      "https://relay-jp.nostr.wirednet.jp/index.html?" +
+      nip19.noteEncode(note.id);
 
     let replyHTML = makeReplyHTML(note);
 
@@ -271,6 +286,33 @@ export function renderContentList(list: any[], followList: string[]) {
               <a href={nosHaikuUrl} target="_blank">
                 -Nos Haiku
               </a>
+              <a href={checkerUrl} target="_blank">
+                -checker
+              </a>
+              {/* <a href={freefromUrl} target="_blank">
+                -FreeFrom
+              </a> */}
+              {/* <a href={nostrBandUrl} target="_blank">
+                -Nostr.Band
+              </a> */}
+              <a href={translateUrl} target="_blank">
+                -GoogleTrans
+              </a>
+              {/* <a href={deepLUrl} target="_blank">-DeepL</a> */}
+              {/* <a href={yakihonneUrl} target="_blank">-YakiHonne</a> */}
+              {/* <a href={primalUrl} target="_blank">-Primal</a> */}
+              {/* <a href={jumbleUrl} target="_blank">-Jumble</a> */}
+              {/* <a href={snortUrl} target="_blank">-Snort</a> */}
+              {/* <a href={damusUrl} target="_blank">-Damus</a> */}
+              <a href={bookmarkUrl} target="_blank">
+                {bookmark}
+              </a>
+              <a href={nozokimadoUrl} target="_blank">
+                {nozokimado}
+              </a>
+              {/* <a href={streamingUrl} target="_blank">
+                {streaming}
+              </a> */}
             </p>
           </div>
         </div>
