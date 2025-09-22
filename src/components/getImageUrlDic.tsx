@@ -9,6 +9,24 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    // :'',
+    npub1ef2auczkr2kwa8p3747ft0dvq944k56222prxkxx6x975t8xvfts8l6e8d:
+      "https://cdn.nostrcheck.me/ca55de60561aacee9c31f57c95bdac016b5b534a52823358c6d18bea2ce66257/fdee37b8222ade268e17b82f32cb1e58f2e546e92916fbf84146c511a7eba851.webp",
+    npub1nrzk3myz2rwss03ltjk7cp44kmeyew7qx5w9ms00p6qtnzzh4dmsanykhn:
+      "https://narazaka.net/icons/narazaka.webp",
+    npub1qsrtrwa7wnavn4xyk3jdm53k7stxstyqel65e6qfv3z6nuudc9hqldv767:
+      "https://cdn.nostrcheck.me/0406b1bbbe74fac9d4c4b464ddd236f416682c80cff54ce8096445a9f38dc16e/adb827b529ccb5f164fd0d872810a5408ae828805c3a402be6e25f83e734f941.webp",
     npub178takzd7kyxec2drcnjczxhvkpx2yry0dvraaj7ydf3xv0m4wqpspgnjhp:
       "https://cdn.nostrcheck.me/5af96c669103cdda2ff7ca489bbdcd5e574de8126826b8d6908cdb41a9b943da.jpeg",
     npub1ya9zaph357ktgkcp72gzsj358sjgewgnvaa584lhv9d4zvv5mzcq67kj0m:
