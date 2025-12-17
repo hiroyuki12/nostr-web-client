@@ -42,7 +42,7 @@ const PostButton = () => {
     publish(event);
   };
 
-  return <button onClick={onPost}>Post a message!</button>;
+  return <button className="btn" onClick={onPost}>Post a message!</button>;
 };
 
 export default PostButton;

@@ -16,7 +16,7 @@ const NextButton = () => {
     return;
   };
 
-  return <button onClick={onPost}>Load Next Post!</button>;
+  return <button className="btn btn-secondary" onClick={onPost}>Load Next Post!</button>;
 };
 
 export default NextButton;

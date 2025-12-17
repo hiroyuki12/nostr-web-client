@@ -1,184 +1,171 @@
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-color: #0f172a; /* Slate 900 */
+  --card-bg: #1e293b; /* Slate 800 */
+  --text-primary: #f1f5f9; /* Slate 100 */
+  --text-secondary: #94a3b8; /* Slate 400 */
+  --accent-color: #3b82f6; /* Blue 500 */
+  --accent-hover: #2563eb; /* Blue 600 */
+  --border-color: #334155; /* Slate 700 */
+  --success-color: #10b981;
+  --danger-color: #ef4444;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
-}
-
+/* Reset & Base */
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
+  padding: 0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
 }
 
-.item {
-  margin: 0 auto; /* center the item */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Layout */
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Components */
+button {
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+/* Card / List Item Styles */
 ul {
-  list-style-type: none;
+  list-style: none;
+  padding: 0;
 }
 
 li {
-  /* margin: 0px 0; */
-  border-bottom: 1px solid #39444d;
-  max-width: 600px;
-  padding: 12px;
-  /* border-radius: 16px; */
-  /* margin-bottom: 10px; */
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-/* 数字を消す、間隔を狭く、枠線を消す、箇条書き、右にずらす markdown */
-ol li {
-  list-style: none; 
-  padding: 5px;
-  border: 0px solid #39444d;
-  list-style-type: disc;
-  margin-left: 18px;
-  /* padding-left: 0.5em; */ /* 左寄せ */
+li:hover {
+  /* transform: translateY(-2px); */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-color);
 }
 
-/* グラデーション線追加 markdown */
-h1, h2 {
-  background: linear-gradient(90deg, #16b5dd 0%, #d815d8 100%);
-  margin-top: 18px;
-}
-/* グラデーション線追加 markdown */
-h3 {
-  border-bottom: 1px dashed;
-  margin-top: 10px;
-}
-
+/* Markdown / Content Styles */
 p {
-  margin-top: 13px;
-  /* margin: 11px 0; */
-  padding: 0px;
-  font-size: 12px;
+  margin-bottom: 12px;
 }
 
+h1, h2, h3 {
+  color: var(--text-primary);
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
 
 img {
-  margin-right: 5px;
-  /* border: 1px solid #90a3b3; */
-  /* border-radius: 30px; */
+  max-width: 100%;
+  border-radius: 8px;
 }
 
+/* Specific elements from previous CSS kept for compatibility */
 .imgavatar {
-  margin-right: 5px;
-  /* border: 1px solid #90a3b3; */
-  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  vertical-align: middle;
 }
 
 .imgborder {
   margin-top: 10px;
-  margin-right: 10px;
-  border: 1px solid #90a3b3;
-  border-radius: 6px;
-  /* margin-bottom: 10px; */
-  /* max-width: 100%; */
-  /* height:auto; */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
 }
 
+details {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+}
 
-a {
-  color: inherit;
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color); 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color); 
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
   text-decoration: none;
-  /* color: rgb(50, 123, 212); */
-  /* color: rgb(50, 93, 182); */
 }
 
-a:hover {
-  text-decoration: underline;
+.btn-secondary {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  border-color: var(--text-secondary);
 }
+

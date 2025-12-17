@@ -236,7 +236,7 @@ export function renderContentList(list: any[], followList: string[]) {
             {parse(linkHTML)}
 
             <p>
-              <span style={{ color: "orange" }}>
+              <span style={{ color: "var(--accent-color)" }}>
                 {moment(createdTime).fromNow()}
               </span>
               -

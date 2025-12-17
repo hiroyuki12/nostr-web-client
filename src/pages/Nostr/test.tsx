@@ -60,40 +60,42 @@ const Test = () => {
   const contentResult = renderContentList(events || [], mergedFollowList);
 
   return (
-    <div style={{ backgroundColor: "#222222", color: "#DDDDDD" }}>
-      <div>
-        {/* preserved link list and notes from original file */}
-        <p>linksss:</p>
-        <a href="https://nostter.app/home" target="_blank">
-          nostter
-        </a>
-        -{" "}
-        <a href="https://rabbit.syusui.net/#/" target="_blank">
-          Rabbit
-        </a>
-      </div>
+    <div className="container">
+      <header style={{ marginBottom: '2rem' }}>
+        <h1 style={{ marginBottom: '1rem', background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Nostr Client</h1>
+        <div style={{ display: 'flex', gap: '1rem', fontSize: '0.9rem' }}>
+          <a href="https://nostter.app/home" target="_blank">
+            nostter
+          </a>
+          <span>•</span>
+          <a href="https://rabbit.syusui.net/#/" target="_blank">
+            Rabbit
+          </a>
+        </div>
+      </header>
 
-      <br />
-      <br />
       <details>
         <summary>Follow List ({mergedFollowList.length})</summary>
-        <ul style={{ maxHeight: "200px", overflowY: "auto" }}>
+        <ul style={{ maxHeight: "200px", overflowY: "auto", marginTop: '10px' }}>
           {mergedFollowList.map((pubkey, index) => (
-            <li key={index} style={{ fontSize: "10px" }}>
+            <li key={index} style={{ fontSize: "12px", padding: '8px', marginBottom: '8px' }}>
               {pubkey}
             </li>
           ))}
         </ul>
       </details>
-      {/* <ul>{makeFollowingCsv(addEvent)}</ul> */}
 
-      {/* render posts and stats from the extracted helper */}
-      <ul>{contentResult.posts}</ul>
-      <ul>{contentResult.lastValue}</ul>
-      <ul>{contentResult.noteCount}</ul>
-      <ul>{contentResult.skipCount} posts (not follow)</ul>
+      <main style={{ marginTop: '2rem' }}>
+        <ul>{contentResult.posts}</ul>
+        
+        <div style={{ marginTop: '2rem', padding: '1rem', background: 'var(--card-bg)', borderRadius: '8px' }}>
+          <p>Last Event: {contentResult.lastValue}</p>
+          <p>Total Notes: {contentResult.noteCount}</p>
+          <p>Skipped: {contentResult.skipCount} posts (not follow)</p>
+        </div>
+      </main>
 
-      <div style={{ marginTop: 20 }}>
+      <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
         <PostButton />
         <NextButton />
       </div>
