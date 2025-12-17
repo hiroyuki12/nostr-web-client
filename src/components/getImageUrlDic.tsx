@@ -18,7 +18,7 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
+    npub1hgsrc67xavwvxr26qu30axmedgtcca0gdtj8qe7e0zh09267agzqh967t0:'https://image.nostr.build/578201335e5d7738ff881168b5bbc0efd40d44766086e6b6816f94038dd3a055.png',
     npub1863ppjnhz724yy6s7h8780p66cqecqmfwe4mxg7w3965cnganyys2fkrev:'https://image.nostr.build/bcf126d2858033c1bca7b13705fa3fd119ac97d53e766dda04cd19c287424dc6.jpg',
     npub1l5pnen6xrmykw0f0h0k8jvsmealgee7hvjljdhssctv8qazrtxvq6dtzkq:
       "https://cdn.nostrcheck.me/fd033ccf461ec9673d2fbbec79321bcf7e8ce7d764bf26de10c2d87074435998/dd35d5729c5d5605f29944ae28d388993a3f4976c6fe82cdf7263e50819db3d0.webp",

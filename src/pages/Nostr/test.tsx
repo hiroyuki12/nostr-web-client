@@ -49,13 +49,14 @@ const Test = () => {
     // build mergedFollowList for [follow] indicators
     list?.forEach((event: any) => {
       (event.tags || []).forEach((t: any) => {
-        // if (t[1]?.length === 64) mergedFollowList.push(t[1]);
+        if (t[1]?.length === 64) mergedFollowList.push(t[1]);
       });
     });
     return null;
   };
 
   // prepare rendering result from extracted helper
+  makeFollowingCsv(mainEvent);
   const contentResult = renderContentList(events || [], mergedFollowList);
 
   return (
@@ -73,7 +74,17 @@ const Test = () => {
       </div>
 
       <br />
-      <ul>{makeFollowingCsv(mainEvent)}</ul>
+      <br />
+      <details>
+        <summary>Follow List ({mergedFollowList.length})</summary>
+        <ul style={{ maxHeight: "200px", overflowY: "auto" }}>
+          {mergedFollowList.map((pubkey, index) => (
+            <li key={index} style={{ fontSize: "10px" }}>
+              {pubkey}
+            </li>
+          ))}
+        </ul>
+      </details>
       {/* <ul>{makeFollowingCsv(addEvent)}</ul> */}
 
       {/* render posts and stats from the extracted helper */}
