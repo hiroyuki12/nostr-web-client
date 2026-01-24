@@ -19,9 +19,12 @@ import { renderContentList } from "./renderContentList";
 
 const Test = () => {
   const now = useRef(new Date());
+  const untilValue: number = dateToUnix(now.current);
+  const sinceValue = untilValue - SINCE_OFFSET_SECONDS;
   
   // State for pagination
   const [paginationUntil, setPaginationUntil] = useState<number>(dateToUnix(now.current));
+  const [paginationSince, setPaginationSince] = useState<number>(sinceValue);
   const [accumulatedEvents, setAccumulatedEvents] = useState<any[]>([]);
 
   // follow list collector used by the rendering helper
@@ -41,6 +44,7 @@ const Test = () => {
   const { events: newEvents } = useNostrEvents({
     filter: {
       kinds: DEFAULT_KINDS,
+      since: sinceValue,
       limit: DEFAULT_LIMIT,
       until: paginationUntil,
       // Removed since to allow fetching older posts freely based on limit
@@ -81,6 +85,7 @@ const Test = () => {
       const oldestEvent = accumulatedEvents[accumulatedEvents.length - 1];
       // Set until to the oldest event's timestamp minus 1 to fetch older
       setPaginationUntil(oldestEvent.created_at - 1);
+      setPaginationSince(oldestEvent.created_at - SINCE_OFFSET_SECONDS);
     }
   };
 
