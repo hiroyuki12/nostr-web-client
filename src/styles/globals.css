@@ -28,7 +28,7 @@ body {
 }
 
 a {
-  color: var(--accent-color);
+  color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.2s;
 }
