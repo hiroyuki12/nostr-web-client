@@ -16,10 +16,14 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
-    // :'',
-    npub1hgsrc67xavwvxr26qu30axmedgtcca0gdtj8qe7e0zh09267agzqh967t0:'https://image.nostr.build/578201335e5d7738ff881168b5bbc0efd40d44766086e6b6816f94038dd3a055.png',
-    npub1863ppjnhz724yy6s7h8780p66cqecqmfwe4mxg7w3965cnganyys2fkrev:'https://image.nostr.build/bcf126d2858033c1bca7b13705fa3fd119ac97d53e766dda04cd19c287424dc6.jpg',
+    npub1yha8amtp3cdyechgma0e89gjmqxnhr9mm2wuspvnnkrftn9tzsvsh29zsv:
+      "https://nostrcheck.me/media/public/99c099041b54d21ed406ca318857685d459809d50e161f6dc713fc5fb73883d9.webp",
+    npub1xr4jdgh7htsuraq8y34pufv3kc5mz2h9h0r9lv9a9t0xeuctvp6smrfyy8:
+      "https://image.nostr.build/96de185986ce585a34eebba89bd8e4d7af55b19f71cb9fab5fca5bb5a2bae421.jpg",
+    npub1hgsrc67xavwvxr26qu30axmedgtcca0gdtj8qe7e0zh09267agzqh967t0:
+      "https://image.nostr.build/578201335e5d7738ff881168b5bbc0efd40d44766086e6b6816f94038dd3a055.png",
+    npub1863ppjnhz724yy6s7h8780p66cqecqmfwe4mxg7w3965cnganyys2fkrev:
+      "https://image.nostr.build/bcf126d2858033c1bca7b13705fa3fd119ac97d53e766dda04cd19c287424dc6.jpg",
     npub1l5pnen6xrmykw0f0h0k8jvsmealgee7hvjljdhssctv8qazrtxvq6dtzkq:
       "https://cdn.nostrcheck.me/fd033ccf461ec9673d2fbbec79321bcf7e8ce7d764bf26de10c2d87074435998/dd35d5729c5d5605f29944ae28d388993a3f4976c6fe82cdf7263e50819db3d0.webp",
     npub1ef2auczkr2kwa8p3747ft0dvq944k56222prxkxx6x975t8xvfts8l6e8d:
@@ -66,8 +70,6 @@ export const getImageUrlDic = () => {
       "https://i.gyazo.com/53570e8e52076eb4625ea3e9768e26ed.jpg",
     npub1ca8npjwghjuv2j7jq0mkngmcyz0evldrtu8uxefyc0cyektye7mqvnhxqh:
       "https://image.nostr.build/5b1ab08c66a4423003a9522e23389d58b76acbd1c00ca73ff8814f767a3f673a.jpg",
-    npub1puu2lv3uasc9wrhxf7dy4gyey2fetmpnw8zlapn7p8y3z9yqq9wsve28r2:
-      "https://raw.githubusercontent.com/lkjsxc/mono/refs/heads/main/media/icon_0512.png",
     npub120hur8kpufu44h6qll50ywaesxk2qxvek295hm4x0ur7cgqj8jvq7pqksp:
       "https://image.nostr.build/0bca914ad8d1c92806f1ea910b355efb3a017852d56e480c1936596ae71c0517.jpg",
     npub1a7y7u324paehw2zdx8jfl3t72ue0ls4etfalxhg0z2gad738savqhxfdm2:

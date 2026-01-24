@@ -236,14 +236,14 @@ export function renderContentList(list: any[], followList: string[]) {
             {parse(linkHTML)}
 
             <p>
-              <span style={{ color: "var(--accent-color)" }}>
+              <span style={{ color: "#ffb74d" }}>
                 {moment(createdTime).fromNow()}
               </span>
               -
               <a href={noteUrl} target="_blank">
                 {createdTime}
               </a>
-              -{note.created_at}
+              {/* -{note.created_at} */}
             </p>
 
             {tagsText.tagsLinkUrlText1}
@@ -277,7 +277,7 @@ export function renderContentList(list: any[], followList: string[]) {
             </a>
 
             <p>
-              <a href={nostterUrl} target="_blank">
+              {/* <a href={nostterUrl} target="_blank">
                 nostter
               </a>
               <a href={lumilumiUrl} target="_blank">
@@ -288,7 +288,7 @@ export function renderContentList(list: any[], followList: string[]) {
               </a>
               <a href={checkerUrl} target="_blank">
                 -checker
-              </a>
+              </a> */}
               {/* <a href={freefromUrl} target="_blank">
                 -FreeFrom
               </a> */}
@@ -296,7 +296,7 @@ export function renderContentList(list: any[], followList: string[]) {
                 -Nostr.Band
               </a> */}
               <a href={translateUrl} target="_blank">
-                -GoogleTrans
+                GoogleTrans
               </a>
               {/* <a href={deepLUrl} target="_blank">-DeepL</a> */}
               {/* <a href={yakihonneUrl} target="_blank">-YakiHonne</a> */}
@@ -304,12 +304,12 @@ export function renderContentList(list: any[], followList: string[]) {
               {/* <a href={jumbleUrl} target="_blank">-Jumble</a> */}
               {/* <a href={snortUrl} target="_blank">-Snort</a> */}
               {/* <a href={damusUrl} target="_blank">-Damus</a> */}
-              <a href={bookmarkUrl} target="_blank">
+              {/* <a href={bookmarkUrl} target="_blank">
                 {bookmark}
               </a>
               <a href={nozokimadoUrl} target="_blank">
                 {nozokimado}
-              </a>
+              </a> */}
               {/* <a href={streamingUrl} target="_blank">
                 {streaming}
               </a> */}

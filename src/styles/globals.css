@@ -66,11 +66,16 @@ li {
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-li:hover {
-  /* transform: translateY(-2px); */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border-color: var(--accent-color);
+
+li {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  /* transition removed */
 }
+
 
 /* Markdown / Content Styles */
 p {
@@ -154,7 +159,6 @@ details[open] summary {
 
 .btn:hover {
   background-color: var(--accent-hover);
-  transform: translateY(-1px);
   text-decoration: none;
 }
 
