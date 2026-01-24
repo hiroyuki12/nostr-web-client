@@ -14,8 +14,8 @@ export const getImageUrlDic = () => {
     // :'',
     // :'',
     // :'',
-    // :'',
-    // :'',
+    npub1nl5772lf0jlwe3mwgwu05mf2p6yf6nvqunj69thvjkw8juhad6ys4c64gx:'https://cdn.nostrcheck.me/9fe9ef2be97cbeecc76e43b8fa6d2a0e889d4d80e4e5a2aeec959c7972fd6e89/119aa5b87bca68e5e2c26376ada5848f6141b22baf30f80def0b511c67c18ba9.webp',
+    npub10aqksspnl4serwfk8nm5k0yceva34hy4uyrmsgjzfh70vhf4gulq9segp0:'https://pbs.twimg.com/profile_images/1377588193969598468/reX2rPTi.jpg',
     npub1yha8amtp3cdyechgma0e89gjmqxnhr9mm2wuspvnnkrftn9tzsvsh29zsv:
       "https://nostrcheck.me/media/public/99c099041b54d21ed406ca318857685d459809d50e161f6dc713fc5fb73883d9.webp",
     npub1xr4jdgh7htsuraq8y34pufv3kc5mz2h9h0r9lv9a9t0xeuctvp6smrfyy8:

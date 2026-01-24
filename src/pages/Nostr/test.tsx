@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNostrEvents, dateToUnix } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import NextButton from "@/components/NextButton";
@@ -19,8 +19,10 @@ import { renderContentList } from "./renderContentList";
 
 const Test = () => {
   const now = useRef(new Date());
-  const untilValue: number = dateToUnix(now.current);
-  const sinceValue = untilValue - SINCE_OFFSET_SECONDS;
+  
+  // State for pagination
+  const [paginationUntil, setPaginationUntil] = useState<number>(dateToUnix(now.current));
+  const [accumulatedEvents, setAccumulatedEvents] = useState<any[]>([]);
 
   // follow list collector used by the rendering helper
   let mergedFollowList: string[] = [];
@@ -35,15 +37,29 @@ const Test = () => {
     filter: { kinds: FOLLOW_LIST_KIND, authors: ADD_EVENT_AUTHORS },
   });
 
-  // main events to render
-  const { events } = useNostrEvents({
+  // main events to render (fetch current batch)
+  const { events: newEvents } = useNostrEvents({
     filter: {
       kinds: DEFAULT_KINDS,
-      since: sinceValue,
       limit: DEFAULT_LIMIT,
-      until: untilValue,
+      until: paginationUntil,
+      // Removed since to allow fetching older posts freely based on limit
     },
   });
+
+  // Accumulate events
+  useEffect(() => {
+    if (newEvents && newEvents.length > 0) {
+      setAccumulatedEvents((prev: any[]) => {
+        const combined = [...prev, ...newEvents];
+        // Deduplicate keying by event id
+        const uniqueMap = new Map();
+        combined.forEach(evt => uniqueMap.set(evt.id, evt));
+        // Sort by created_at desc
+        return Array.from(uniqueMap.values()).sort((a, b) => b.created_at - a.created_at);
+      });
+    }
+  }, [newEvents]);
 
   const makeFollowingCsv = (list: any[]) => {
     // build mergedFollowList for [follow] indicators
@@ -57,7 +73,16 @@ const Test = () => {
 
   // prepare rendering result from extracted helper
   makeFollowingCsv(mainEvent);
-  const contentResult = renderContentList(events || [], mergedFollowList);
+  // Use accumulatedEvents for rendering
+  const contentResult = renderContentList(accumulatedEvents, mergedFollowList);
+
+  const handleNext = () => {
+    if (accumulatedEvents.length > 0) {
+      const oldestEvent = accumulatedEvents[accumulatedEvents.length - 1];
+      // Set until to the oldest event's timestamp minus 1 to fetch older
+      setPaginationUntil(oldestEvent.created_at - 1);
+    }
+  };
 
   return (
     <div className="container">
@@ -92,12 +117,14 @@ const Test = () => {
           <p>Last Event: {contentResult.lastValue}</p>
           <p>Total Notes: {contentResult.noteCount}</p>
           <p>Skipped: {contentResult.skipCount} posts (not follow)</p>
+          {/* Debug info */}
+          <p style={{ fontSize: '0.8rem', color: '#666' }}>Current Until: {paginationUntil}</p>
         </div>
       </main>
 
       <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
         <PostButton />
-        <NextButton />
+        <NextButton onClick={handleNext} />
       </div>
     </div>
   );
