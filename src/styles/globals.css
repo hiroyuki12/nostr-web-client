@@ -96,8 +96,6 @@ img {
 
 /* Specific elements from previous CSS kept for compatibility */
 .imgavatar {
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 12px;

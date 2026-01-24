@@ -212,8 +212,8 @@ export function renderContentList(list: any[], followList: string[]) {
             <a href={userUrl} target="_blank">
               <img
                 src={imageURL2}
-                width="60"
-                height="60"
+                width="70"
+                height="70"
                 className="imgavatar"
               />
             </a>
