@@ -113,7 +113,7 @@ export const DEFAULT_KINDS: number[] = [1, 6, 20, 22, 42, 1111, 30023, 30315]; /
 export const FOLLOW_LIST_KIND: number[] = [3];
 
 // Default limit for event queries
-export const DEFAULT_LIMIT = 50;
+export const DEFAULT_LIMIT = 200;
 
 // Export other small defaults here if needed in future
 
