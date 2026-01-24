@@ -24,7 +24,6 @@ const Test = () => {
   
   // State for pagination
   const [paginationUntil, setPaginationUntil] = useState<number>(dateToUnix(now.current));
-  const [paginationSince, setPaginationSince] = useState<number>(sinceValue);
   const [accumulatedEvents, setAccumulatedEvents] = useState<any[]>([]);
 
   // follow list collector used by the rendering helper
@@ -44,7 +43,7 @@ const Test = () => {
   const { events: newEvents } = useNostrEvents({
     filter: {
       kinds: DEFAULT_KINDS,
-      since: sinceValue,
+      // since: sinceValue,
       limit: DEFAULT_LIMIT,
       until: paginationUntil,
       // Removed since to allow fetching older posts freely based on limit
@@ -60,7 +59,19 @@ const Test = () => {
         const uniqueMap = new Map();
         combined.forEach(evt => uniqueMap.set(evt.id, evt));
         // Sort by created_at desc
-        return Array.from(uniqueMap.values()).sort((a, b) => b.created_at - a.created_at);
+        const sorted = Array.from(uniqueMap.values()).sort((a, b) => b.created_at - a.created_at);
+
+        const filtered: any[] = [];
+        if (sorted.length > 0) {
+          filtered.push(sorted[0]);
+          for (let i = 1; i < sorted.length; i++) {
+            const previous = filtered[filtered.length - 1];
+            if (previous.created_at - sorted[i].created_at < 1800) {
+              filtered.push(sorted[i]);
+            }
+          }
+        }
+        return filtered;
       });
     }
   }, [newEvents]);
@@ -85,7 +96,6 @@ const Test = () => {
       const oldestEvent = accumulatedEvents[accumulatedEvents.length - 1];
       // Set until to the oldest event's timestamp minus 1 to fetch older
       setPaginationUntil(oldestEvent.created_at - 1);
-      setPaginationSince(oldestEvent.created_at - SINCE_OFFSET_SECONDS);
     }
   };
 
