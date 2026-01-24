@@ -33,8 +33,9 @@ a {
   transition: color 0.2s;
 }
 
-a:hover {
-  color: var(--accent-hover);
+a:hover,
+a:active {
+  color: #64748b;
   text-decoration: underline;
 }
 
