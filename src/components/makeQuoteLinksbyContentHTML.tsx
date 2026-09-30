@@ -1,4 +1,4 @@
-export const makeQuoteLinksbyContentHTML = (content) => {
+export const makeQuoteLinksbyContentHTML = (content: string) => {
 
   // (to), (quote)  nostr:npub1, nostr:note1, nostr:nevent1
   let quoteLinkUrl = "";

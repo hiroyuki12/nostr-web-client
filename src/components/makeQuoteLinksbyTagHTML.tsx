@@ -1,6 +1,7 @@
 import { nip19 } from "nostr-tools";
+import type { Event as NostrEvent } from "nostr-tools";
 
-export const makeQuoteLinksbyTagHTML = (note) => {
+export const makeQuoteLinksbyTagHTML = (note: NostrEvent) => {
   let quoteId = "";
   let quoteUrl1 = "";
   let quoteIdText1 = "";  // #q 1

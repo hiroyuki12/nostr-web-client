@@ -1,8 +1,9 @@
 import { nip19 } from "nostr-tools";
 // import {getImageURL} from './getImageURL'
 import {getImageUrl2} from './getImageUrl2'
+import type { Event as NostrEvent } from "nostr-tools";
 
-export const makeReplyHTML = (note) => {
+export const makeReplyHTML = (note: NostrEvent) => {
 
   let arrayImageUrl: string[] = []
   let arrayLinkUrl: string[] = []

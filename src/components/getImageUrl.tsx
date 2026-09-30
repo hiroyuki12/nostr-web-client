@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { nip19 } from "nostr-tools";
 
-export const getImageURL = (pubkey) => {
+export const getImageURL = (pubkey: string) => {
     const npub = nip19.npubEncode(pubkey)
     let image =''
 

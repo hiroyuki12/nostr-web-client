@@ -1,13 +1,9 @@
 
 
 export const makeRepostContent = (content: string): string => {
-  let splitContent = content;
-
-  if (!splitContent.includes('",\"content') && !splitContent.includes('L,')) {
-    splitContent = splitContent.split(','); // , でsplit. Repost contentに,があるとNG
-  } else {
-    splitContent = splitContent.split('",'); // ", でsplit
-  }
+  const splitContent = !content.includes('",\"content') && !content.includes('L,')
+    ? content.split(',') // , でsplit. Repost contentに,があるとNG
+    : content.split('",'); // ", でsplit
 
   for (let i = 0; i < splitContent.length; i++) {
     // Repostのcontentデータをcontentの本文のみに調整

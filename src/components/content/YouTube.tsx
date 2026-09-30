@@ -1,5 +1,5 @@
 
-export const YouTube = (tmpUrl) => {
+export const YouTube = (tmpUrl: string) => {
 
     let out_iframe1 = '';
     let out_youtubeIdText1 = '';
@@ -22,11 +22,16 @@ export const YouTube = (tmpUrl) => {
 
 
     if(linkUrl.includes('http') && !linkUrl.includes('@')) {
-        let link = ""
+        let link: URL
         try {
             link = new URL(linkUrl);
         } catch(e) {
-            return '[URL_ERROR_tmpUrl=' + linkUrl + ']'
+              return {
+                  out_iframe1: '[URL_ERROR_tmpUrl=' + linkUrl + ']',
+                  out_youtubeIdText1: '',
+                  out_linkr: '',
+                  out_linkc: '',
+              };
         }
         
         // YouTube
@@ -48,7 +53,7 @@ export const YouTube = (tmpUrl) => {
                 id = v;
             } else if (link.pathname.includes('shorts')) {
                 const match = link.pathname.match(/\/shorts\/(?<id>\w+)/);
-                id = match?.groups?.id;
+                id = match?.groups?.id ?? "";
             }
         }
 

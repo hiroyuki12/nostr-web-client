@@ -5,7 +5,6 @@ let arrayFollow4 = ['5b3d817bb4806d85379d5263e452d471e961d1a5ea02724adbc045ca2e0
 
 // const list2 = 'ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600,ec42c765418b3db9c85abff3a88f4a3bbe57535eebbdc54522041fa5328c0600'
 
-arrayFollow4 = arrayFollow4.split('','');
 
 
     return arrayFollow4;

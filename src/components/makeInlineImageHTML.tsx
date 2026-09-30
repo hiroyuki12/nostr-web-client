@@ -1,4 +1,4 @@
-export const makeInlineImageHTML = (content) => {
+export const makeInlineImageHTML = (content: string) => {
 
 // make img by conent
 

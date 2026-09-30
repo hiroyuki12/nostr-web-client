@@ -1,4 +1,4 @@
-export const Twitter = (tmpUrl) => {
+export const Twitter = (tmpUrl: string) => {
 
     let out_iframe1 = '';
     let out_twitterIdText1 = '';

@@ -1,5 +1,5 @@
 export const getImageUrlDic = () => {
-  let out_npubImageUrlDic = {
+  let out_npubImageUrlDic: Record<string, string | number> = {
     // imgproxy.iris.to
     // https://nostr-image-optimizer.ocknamo.com/image/width=128,format=webp/https://
 
@@ -1460,7 +1460,7 @@ export const getImageUrlDic = () => {
     grape: 40,
   };
 
-  let out_pukeyImageUrlDic = {
+  let out_pukeyImageUrlDic: Record<string, string | number> = {
     b33ab1f5cbca4659785b9bf7cb9106b5129efbf1a720f02da9e522f9acc8fe33:
       "https://nostrcheck.me/media/public/db704f89184becdcc6ad8ef10402e0dda227172051e5641f57231f0ee8fa9152.webp",
     c2b2006172dfe76e4c5160b6686d60eb228e0c21a84ab83c505eac3224eb149a:

@@ -1,6 +1,11 @@
 
-export const makeStatusString = (note) => {
+import { nip19 } from "nostr-tools";
+import type { Event as NostrEvent } from "nostr-tools";
 
+export const makeStatusString = (note: NostrEvent) => {
+
+    let content = "";
+    const npub = nip19.npubEncode(note.pubkey);
 
     let status = "";
 
@@ -35,7 +40,7 @@ export const makeStatusString = (note) => {
     }
     else if(note.kind === 4) {  // kind:4:Encrypted Direct Message
         status = "[4 DM]_"
-        ontent = ' Direct Message. This message is not for you.'
+        content = ' Direct Message. This message is not for you.'
     }
     else if(note.kind === 5) {  // kind:5:Event Deletion
         status = "[5 Delete]"
