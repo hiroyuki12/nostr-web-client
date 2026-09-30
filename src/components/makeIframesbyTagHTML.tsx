@@ -2,8 +2,9 @@ import { YouTube } from "./content/YouTube";
 import { Twitter } from "./content/Twitter";
 import { AppleMusic } from "./content/AppleMusic";
 import { Spotify } from "./content/Spotify";
+import type { Event as NostrEvent } from "nostr-tools";
 
-export const makeIframesbyTagHTML = (content, note) => {
+export const makeIframesbyTagHTML = (content: string, note: NostrEvent) => {
   // make iframe by tag "r" (URL) &  make link #r
 
   // update content. delete URL

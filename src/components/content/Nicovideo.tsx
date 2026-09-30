@@ -1,4 +1,4 @@
-export const Nicovideo = (url) => {
+export const Nicovideo = (url: string) => {
 
     let id = url.replace("https://www.nicovideo.jp/watch/",""); 
     id = id.replace("https://nico.ms/",""); 

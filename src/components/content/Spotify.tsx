@@ -1,4 +1,4 @@
-export const Spotify = (tmpUrl) => {
+export const Spotify = (tmpUrl: string) => {
 
     let out_iframe1 = '';
     let out_spotifyIdText1 = '';

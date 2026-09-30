@@ -1,4 +1,6 @@
-export const removeTagImageUrl = (content, note) => {
+import type { Event as NostrEvent } from "nostr-tools";
+
+export const removeTagImageUrl = (content: string, note: NostrEvent) => {
 
 
     let arrayLinkUrl: string[] = []

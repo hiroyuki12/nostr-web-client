@@ -3,10 +3,13 @@ import { useNostrEvents, dateToUnix, useProfile } from "nostr-react";
 import PostButton from "@/components/PostButton";
 import { nip19 } from "nostr-tools";
 import moment from 'moment';
-import Students from "./Students";
-import Pictures from "./Pictures";
+import Students from "./Students.json";
+import Pictures from "./Pictures.json";
 
 const Test = () => {
+  type Student = { name: string; age: string; department: string; rollno: string };
+  type Picture = { npub: string; pic: string };
+
   const now = useRef(new Date()); // Make sure current time isn't re-rendered
 
   const { events } = useNostrEvents({
@@ -27,10 +30,10 @@ const Test = () => {
   console.log(dateToUnix(now.current));
   //console.log({event.pubkey});
 
-  const renderImageList = (list) => {
-    const posts = Students.students.map((event, index) => {
+  const renderImageList = () => {
+    const posts = Students.students.map((event: Student, index: number) => {
       //const tmp = event.tags[0][1];  //hex
-      const pic = Pictures.pictures.map((event2, index2) => {
+      const pic = Pictures.pictures.map((event2: Picture, index2: number) => {
         if(event.name == event2.npub) {
           return event2.pic;
         }
@@ -51,10 +54,10 @@ const Test = () => {
     return posts;
   }
 
-  const renderImageList2 = (list) => {
-    const followList = events.tags;  // event[0].tags
+  const renderImageList2 = (list: { tags: string[][] }) => {
+    const followList = events[0]?.tags ?? [];
     const followList2 = list.tags;  // list[0].tags
-    const posts = events.map((event, index) => {
+    const posts = events.map((event: { tags: string[][] }, index: number) => {
       //const tmp = event.tags[0][1];  //hex
       return (
         <li className="item" key={index}>
@@ -83,7 +86,7 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
-        <ul>{renderImageList(events)}</ul>
+        <ul>{renderImageList()}</ul>
       </div>
     </>
   );

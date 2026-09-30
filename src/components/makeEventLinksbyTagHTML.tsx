@@ -1,6 +1,7 @@
 import { nip19 } from "nostr-tools";
+import type { Event as NostrEvent } from "nostr-tools";
 
-export const makeEventLinksbyTagHTML = (note) => {
+export const makeEventLinksbyTagHTML = (note: NostrEvent) => {
   let toLinkUrl1 = "";
   let toLinkText1 = "";
   let toLinkUrl2 = "";

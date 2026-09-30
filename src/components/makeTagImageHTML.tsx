@@ -1,4 +1,4 @@
-export const makeTagImageHTML = (content, note) => {
+export const makeTagImageHTML = (content: string, note: NostrEvent) => {
 
 // make img by tag "r"
     
@@ -83,3 +83,4 @@ export const makeTagImageHTML = (content, note) => {
 
     return tagImageHTML;
 }
+import type { Event as NostrEvent } from "nostr-tools";

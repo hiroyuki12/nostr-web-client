@@ -1,4 +1,4 @@
-export const AppleMusic = (tmpUrl) => {
+export const AppleMusic = (tmpUrl: string) => {
 
     let out_iframe1 = '';
     let out_appleMusicIdText1 = '';

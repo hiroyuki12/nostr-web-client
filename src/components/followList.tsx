@@ -33,7 +33,7 @@ const Test = () => {
   console.log(dateToUnix(now.current));
   //console.log({event.pubkey});
 
-  const renderImageList = (list) => {
+  const renderImageList = () => {
     const posts = events.map((event, index) => {
       return (
         <li className="item" key={index}>
@@ -61,7 +61,7 @@ const Test = () => {
         <div>
           <PostButton />
         </div>
-        <ul>{renderImageList(events)}</ul>
+        <ul>{renderImageList()}</ul>
       </div>
     </>
   );

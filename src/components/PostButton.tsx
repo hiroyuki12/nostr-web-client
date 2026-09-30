@@ -1,10 +1,7 @@
 import { useNostr, dateToUnix } from "nostr-react";
 
 import {
-  type Event as NostrEvent,
-  getEventHash,
-  getPublicKey,
-  signEvent,
+  finalizeEvent,
   nip19,
 } from "nostr-tools";
 
@@ -26,18 +23,18 @@ const PostButton = () => {
       return;
     }
 
-    const { data: nsec } = nip19.decode(privKey);
+    const decodedKey = nip19.decode(privKey);
+    if (decodedKey.type !== "nsec") {
+      alert("invalid private key");
+      return;
+    }
 
-    const event: NostrEvent = {
+    const event = finalizeEvent({
       content: message,
       kind: 1,
       tags: [],
       created_at: dateToUnix(),
-      pubkey: getPublicKey(nsec.toString()),
-    };
-
-    event.id = getEventHash(event);
-    event.sig = signEvent(event, nsec.toString());
+    }, decodedKey.data);
 
     publish(event);
   };

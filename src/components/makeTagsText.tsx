@@ -3,7 +3,9 @@
 
 // make tags[0],  client(-via), proxy, alt, etc
 
-export const makeTagsText = (note) => {
+import type { Event as NostrEvent } from "nostr-tools";
+
+export const makeTagsText = (note: NostrEvent) => {
   let client = "";
   let proxy = "";
   let proxyUrl = "";
@@ -28,7 +30,7 @@ export const makeTagsText = (note) => {
     }
     else if(marker === "proxy") { 
     //proxy = note.tags[h][2]  // activitypub (misskey.io, p1.a9z.dev, unnerv.jp, fedibird.com, etc)
-    let host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+    const host = note.tags[h][1].match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)?.[1] ?? "";
       proxy = "-" + host
       proxyUrl = note.tags[h][1]
     }
@@ -81,4 +83,3 @@ export const makeTagsText = (note) => {
 
   
 };
-

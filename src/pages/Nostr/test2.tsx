@@ -1,16 +1,13 @@
-import { useSubscribe } from 'nostr-hooks';
+import { useNostrEvents } from "nostr-react";
 
 const Test2 = () => {
-  const { events, eose, invalidate } = useSubscribe({
-    relays: ['wss://relay-jp.nostr.wirednet.jp'],
-    filters: [{ kinds: [1], limit: 20, }],
+  const { events } = useNostrEvents({
+    filter: { kinds: [1], limit: 20 },
   });
-
-  if (!events && !eose) return <p>Loading...</p>;
 
   return (
     <ul>
-      {events.map((event) => (
+      {events.map((event: { id?: string; content: string }) => (
         <li key={event.id}>
           <p>{event.content}</p>
         </li>

@@ -1,4 +1,6 @@
-export const makeMarkdownHTML = (content, note) => {
+import type { Event as NostrEvent } from "nostr-tools";
+
+export const makeMarkdownHTML = (content: string, note: NostrEvent) => {
 
     let newContent = ''
     let li = false;

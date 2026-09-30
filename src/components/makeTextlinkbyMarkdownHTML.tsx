@@ -1,4 +1,6 @@
-export const makeTextlinkbyMarkdownHTML = (content, note) => {
+import type { Event as NostrEvent } from "nostr-tools";
+
+export const makeTextlinkbyMarkdownHTML = (content: string, note: NostrEvent) => {
     // for Markdown
 
     let newContent = ''

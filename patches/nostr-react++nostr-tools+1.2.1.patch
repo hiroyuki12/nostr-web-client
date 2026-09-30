@@ -1,0 +1,13 @@
+diff --git a/node_modules/nostr-react/node_modules/nostr-tools/event.ts b/node_modules/nostr-react/node_modules/nostr-tools/event.ts
+index 6e4b538..e03322e 100644
+--- a/node_modules/nostr-react/node_modules/nostr-tools/event.ts
++++ b/node_modules/nostr-react/node_modules/nostr-tools/event.ts
+@@ -31,7 +31,7 @@ export type Event = {
+ 
+ export function getBlankEvent(): Event {
+   return {
+-    kind: 255,
++    kind: 255 as Kind,
+     pubkey: '',
+     content: '',
+     tags: [],

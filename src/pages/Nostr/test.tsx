@@ -10,8 +10,8 @@ import {
   FOLLOW_LIST_KIND,
   DEFAULT_KINDS,
   DEFAULT_LIMIT,
-} from "./testConfig";
-import { renderContentList } from "./renderContentList";
+} from "@/lib/Nostr/testConfig";
+import { renderContentList } from "@/lib/Nostr/renderContentList";
 
 // This page was refactored: constants moved to testConfig.ts and
 // the heavy rendering logic moved to renderContentList.tsx.
@@ -57,9 +57,12 @@ const Test = () => {
         const combined = [...prev, ...newEvents];
         // Deduplicate keying by event id
         const uniqueMap = new Map();
-        combined.forEach(evt => uniqueMap.set(evt.id, evt));
+        combined.forEach((evt: { id?: string }) => uniqueMap.set(evt.id, evt));
         // Sort by created_at desc
-        const sorted = Array.from(uniqueMap.values()).sort((a, b) => b.created_at - a.created_at);
+        const sorted = Array.from(uniqueMap.values()).sort(
+          (a: { created_at: number }, b: { created_at: number }) =>
+            b.created_at - a.created_at
+        );
 
         const filtered: any[] = [];
         if (sorted.length > 0) {
@@ -117,7 +120,7 @@ const Test = () => {
       <details>
         <summary>Follow List ({mergedFollowList.length})</summary>
         <ul style={{ maxHeight: "200px", overflowY: "auto", marginTop: '10px' }}>
-          {mergedFollowList.map((pubkey, index) => (
+          {mergedFollowList.map((pubkey: string, index: number) => (
             <li key={index} style={{ fontSize: "12px", padding: '8px', marginBottom: '8px' }}>
               {pubkey}
             </li>

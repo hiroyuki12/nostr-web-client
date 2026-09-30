@@ -3,8 +3,9 @@ import { Nicovideo } from "./content/Nicovideo";
 import { AppleMusic } from "./content/AppleMusic";
 import { Twitter } from "./content/Twitter";
 import { Spotify } from "./content/Spotify";
+import type { Event as NostrEvent } from "nostr-tools";
 
-export const makeIframesbyContentHTML = (content, note) => {
+export const makeIframesbyContentHTML = (content: string, note: NostrEvent) => {
   // make iframe by content (URL)
 
   // update content. delete URL
